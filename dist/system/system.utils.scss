@@ -1,3 +1,4 @@
+
 $color-gorse: rgb(255, 223, 41);
 $color-soft-green-light: rgb(112, 194, 116);
 $color-cinnabar-dark: rgb(211, 67, 23);
@@ -40,9 +41,9 @@ $size-l: 20px;
 $size-m: 16px;
 $size-s: 13px;
 $size-xs: 10px;
-$font-heading: "Montserrat", sans-serif;
-$font-heading-secondary: "Roboto Slab", serif;
-$font-text: "Roboto", sans-serif;
+$font-heading: 'Montserrat', sans-serif;
+$font-heading-secondary: 'Roboto Slab', serif;
+$font-text: 'Roboto', sans-serif;
 $weight-bold: 700;
 $weight-semi-bold: 600;
 $weight-medium: 500;
@@ -81,39 +82,19 @@ $z-index-header: 10000;
 $z-index-top-line: 9999;
 $z-index-notification: 10001;
 $z-index-overlay: 10002;
-$media-query-s-down: (
-  max-width: 479px,
-);
-$media-query-s: (
-  min-width: 480px,
-);
-$media-query-m-down: (
-  max-width: 767px,
-);
-$media-query-xl: (
-  min-width: 1200px,
-);
-$media-query-l-down: (
-  max-width: 1023px,
-);
-$media-query-xxl-down: (
-  max-width: 1439px,
-);
-$media-query-l: (
-  min-width: 1024px,
-);
-$media-query-xxl: (
-  min-width: 1440px,
-);
-$media-query-m: (
-  min-width: 768px,
-);
-$media-query-xl-down: (
-  max-width: 1199px,
-);
+$media-query-s-down: (max-width: 479px);
+$media-query-s: (min-width: 480px);
+$media-query-m-down: (max-width: 767px);
+$media-query-xl: (min-width: 1200px);
+$media-query-l-down: (max-width: 1023px);
+$media-query-xxl-down: (max-width: 1439px);
+$media-query-l: (min-width: 1024px);
+$media-query-xxl: (min-width: 1440px);
+$media-query-m: (min-width: 768px);
+$media-query-xl-down: (max-width: 1199px);
 $shadow-l: 0 3px 12px rgba(0, 0, 0, 0.33);
 $shadow-m: 0 3px 6px rgba(0, 0, 0, 0.16);
-$shadow-s: 0 0 0 1px rgba(92, 106, 196, 0.1);
+$shadow-s: 0 0 0 1px rgba(92,106,196,.1);
 $spacing-m: 0.4px;
 $radius-xl: 10px;
 $radius-l: 8px;
