@@ -1,164 +1,86 @@
 {
   "aliases": {
-    "vermilion": {
-      "value": "7, 83%"
-    },
-    "ucla_gold": {
-      "value": "43, 100%"
-    },
-    "bleu_de_france": {
-      "value": "210, 86%"
-    },
-    "oxford_blue": {
-      "value": "210, 100%"
-    },
-    "rich_black": {
-      "value": "#001123"
-    },
-    "white": {
-      "value": "#fff"
+    "black": {
+      "value": "0, 0%"
     }
   },
   "props": {
-    "color_ucla_gold": {
-      "type": "color",
-      "category": "color_group_2",
-      "value": "rgb(255, 186, 10)",
-      "originalValue": "hsla({!ucla_gold}, 52%, 1)",
-      "name": "color_ucla_gold"
-    },
-    "color_ucla_gold_darker": {
-      "type": "color",
-      "category": "color_group_2",
-      "value": "rgb(179, 128, 0)",
-      "originalValue": "hsla({!ucla_gold}, 35%, 1)",
-      "name": "color_ucla_gold_darker"
-    },
-    "color_vermilion_lighter": {
+    "color_black": {
       "type": "color",
       "category": "color_group_1",
-      "value": "rgb(244, 151, 138)",
-      "originalValue": "hsla({!vermilion}, 75%, 1)",
-      "name": "color_vermilion_lighter"
+      "value": "rgb(0, 0, 0)",
+      "originalValue": "hsla({!black}, 0%, 1)",
+      "name": "color_black"
     },
-    "color_vermilion_darker": {
+    "color_gray_darker": {
       "type": "color",
       "category": "color_group_1",
-      "value": "rgb(154, 31, 14)",
-      "originalValue": "hsla({!vermilion}, 33%, 1)",
-      "name": "color_vermilion_darker"
+      "value": "rgb(51, 51, 51)",
+      "originalValue": "hsla({!black}, 20%, 1)",
+      "name": "color_gray_darker"
     },
-    "color_ucla_gold_lighter": {
+    "color_gray_lighter": {
       "type": "color",
-      "category": "color_group_2",
-      "value": "rgb(255, 219, 128)",
-      "originalValue": "hsla({!ucla_gold}, 75%, 1)",
-      "name": "color_ucla_gold_lighter"
-    },
-    "color_bleu_de_france_dark": {
-      "type": "color",
-      "category": "color_group_3",
-      "value": "rgb(16, 112, 209)",
-      "originalValue": "hsla({!bleu_de_france}, 44%, 1)",
-      "name": "color_bleu_de_france_dark"
-    },
-    "color_bleu_de_france_light": {
-      "type": "color",
-      "category": "color_group_3",
-      "value": "rgb(84, 163, 242)",
-      "originalValue": "hsla({!bleu_de_france}, 64%, 1)",
-      "name": "color_bleu_de_france_light"
-    },
-    "color_silver": {
-      "type": "color",
-      "category": "color_group_4",
-      "value": "rgb(127, 136, 145)",
-      "originalValue": "#7F8891",
-      "name": "color_silver"
+      "category": "color_group_1",
+      "value": "rgb(204, 204, 204)",
+      "originalValue": "hsla({!black}, 80%, 1)",
+      "name": "color_gray_lighter"
     },
     "color_white": {
       "type": "color",
-      "category": "color_group_4",
+      "category": "color_group_1",
       "value": "rgb(255, 255, 255)",
-      "originalValue": "{!white}",
+      "originalValue": "hsla({!black}, 100%, 1)",
       "name": "color_white"
     },
-    "color_bleu_de_france": {
-      "type": "color",
-      "category": "color_group_3",
-      "value": "rgb(37, 138, 239)",
-      "originalValue": "hsla({!bleu_de_france}, 54%, 1)",
-      "name": "color_bleu_de_france"
-    },
-    "color_bleu_de_france_darker": {
-      "type": "color",
-      "category": "color_group_3",
-      "value": "rgb(12, 87, 161)",
-      "originalValue": "hsla({!bleu_de_france}, 34%, 1)",
-      "name": "color_bleu_de_france_darker"
-    },
-    "color_bleu_de_france_lighter": {
-      "type": "color",
-      "category": "color_group_3",
-      "value": "rgb(132, 189, 246)",
-      "originalValue": "hsla({!bleu_de_france}, 74%, 1)",
-      "name": "color_bleu_de_france_lighter"
-    },
-    "color_ucla_gold_dark": {
-      "type": "color",
-      "category": "color_group_2",
-      "value": "rgb(230, 164, 0)",
-      "originalValue": "hsla({!ucla_gold}, 45%, 1)",
-      "name": "color_ucla_gold_dark"
-    },
-    "color_vermilion_light": {
+    "color_gray_lightest": {
       "type": "color",
       "category": "color_group_1",
-      "value": "rgb(239, 101, 82)",
-      "originalValue": "hsla({!vermilion}, 63%, 1)",
-      "name": "color_vermilion_light"
+      "value": "rgb(230, 230, 230)",
+      "originalValue": "hsla({!black}, 90%, 1)",
+      "name": "color_gray_lightest"
     },
-    "color_vermilion_dark": {
+    "color_gray_darkest": {
       "type": "color",
       "category": "color_group_1",
-      "value": "rgb(201, 40, 19)",
-      "originalValue": "hsla({!vermilion}, 43%, 1)",
-      "name": "color_vermilion_dark"
+      "value": "rgb(26, 26, 26)",
+      "originalValue": "hsla({!black}, 10%, 1)",
+      "name": "color_gray_darkest"
     },
-    "color_ucla_gold_light": {
-      "type": "color",
-      "category": "color_group_2",
-      "value": "rgb(255, 204, 77)",
-      "originalValue": "hsla({!ucla_gold}, 65%, 1)",
-      "name": "color_ucla_gold_light"
-    },
-    "color_rich_black": {
-      "type": "color",
-      "category": "color_group_4",
-      "value": "rgb(0, 17, 35)",
-      "originalValue": "{!rich_black}",
-      "name": "color_rich_black"
-    },
-    "color_cloud": {
-      "type": "color",
-      "category": "color_group_4",
-      "value": "rgb(233, 243, 253)",
-      "originalValue": "#E9F3FD",
-      "name": "color_cloud"
-    },
-    "color_oxford_blue": {
-      "type": "color",
-      "category": "color_group_4",
-      "value": "rgb(0, 38, 77)",
-      "originalValue": "hsla({!oxford_blue}, 15%, 1)",
-      "name": "color_oxford_blue"
-    },
-    "color_vermilion": {
+    "color_gray_dark": {
       "type": "color",
       "category": "color_group_1",
-      "value": "rgb(235, 59, 36)",
-      "originalValue": "hsla({!vermilion}, 53%, 1)",
-      "name": "color_vermilion"
+      "value": "rgb(102, 102, 102)",
+      "originalValue": "hsla({!black}, 40%, 1)",
+      "name": "color_gray_dark"
+    },
+    "color_gray_light": {
+      "type": "color",
+      "category": "color_group_1",
+      "value": "rgb(153, 153, 153)",
+      "originalValue": "hsla({!black}, 60%, 1)",
+      "name": "color_gray_light"
+    },
+    "color_gray_darken": {
+      "type": "color",
+      "category": "color_group_1",
+      "value": "rgb(77, 77, 77)",
+      "originalValue": "hsla({!black}, 30%, 1)",
+      "name": "color_gray_darken"
+    },
+    "color_gray_lighten": {
+      "type": "color",
+      "category": "color_group_1",
+      "value": "rgb(179, 179, 179)",
+      "originalValue": "hsla({!black}, 70%, 1)",
+      "name": "color_gray_lighten"
+    },
+    "color_gray": {
+      "type": "color",
+      "category": "color_group_1",
+      "value": "rgb(128, 128, 128)",
+      "originalValue": "hsla({!black}, 50%, 1)",
+      "name": "color_gray"
     },
     "size_xxxl": {
       "type": "number",
