@@ -2,10 +2,10 @@
  * These are style overrides for Vue Styleguidist
  * (the odd formatting hence most of the classes are dynamic)
  */
-
 @import "../src/assets/tokens/tokens.scss";
 @import "./docs.tokens.scss";
 @import "../src/styles/styles.scss";
+@import "~normalize.css/normalize";
 
 /* LOCAL DESIGN TOKENS
 --------------------------------------------- */
@@ -20,6 +20,27 @@ $docs-color-text: shade($color-silver, 70%);
 
 /* BASE
 --------------------------------------------- */
+
+html {
+  //position: relative;
+  box-sizing: border-box;
+  //-webkit-tap-highlight-color: fade-out($color-main, .7);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -ms-overflow-style: scrollbar;
+  -ms-text-size-adjust: 100%;
+  min-width: 1200px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
 
 // Background of page
 div.rsg--root-1 {
@@ -260,6 +281,7 @@ div[class^="rsg--search"] input {
 
 // Sets sidebar background
 div[class^="rsg--sidebar"] {
+  z-index: 1000;
   background: mix($color-bleu-de-france, $color-rich-black, 5%);
   border: 0;
   @media (max-width: #{$docs-breakpoint}) {
@@ -359,6 +381,7 @@ div[class^="rsg--preview"] {
   width: 100%;
   border-top-left-radius: $radius-default;
   border-top-right-radius: $radius-default;
+  overflow: auto;
 }
 
 // If you edit the component categories, you have to edit

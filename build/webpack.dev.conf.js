@@ -84,7 +84,7 @@ module.exports = new Promise((resolve, reject) => {
           compilationSuccessInfo: {
             messages: [
               `Design System Docs: http://${devWebpackConfig.devServer.host}:6060 \n`,
-              `Vue.js App: http://${devWebpackConfig.devServer.host}:${port} \n`,
+              // `Vue.js App: http://${devWebpackConfig.devServer.host}:${port} \n`,
             ],
           },
           onErrors: config.dev.notifyOnErrors ? utils.createNotifierCallback() : undefined,

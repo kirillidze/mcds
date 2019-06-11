@@ -8,42 +8,152 @@
 #
 
 aliases:
-  black:
+  gray:
     value: "0, 0%"
+  red:
+    value: "0, 89%"
+  cinnabar:
+    value: "14, 80%"
+  gorse:
+    value: "51, 100%"
+  mantis:
+    value: "102, 74%"
+  soft_green:
+    value: "123, 40%"
+  bright_turquoise:
+    value: "173, 100%"
+  aqua:
+    value: "186, 100%"
+  bermuda_gray:
+    value: "200, 15%"
+  navy_blue:
+    value: "217, 89%"
+  dodger_blue:
+    value: "225, 100%"
+  dark_orchid:
+    value: "272, 55%"
+  razzle_dazzle_rose:
+    value: "302, 90%"
 props:
-  color_black:
-    value: "hsla({!black}, 0%, 1)"
-    category: color_group_1
   color_gray_darkest:
-    value: "hsla({!black}, 10%, 1)"
+    value: "hsla({!gray}, 13%, 1)"
     category: color_group_1
   color_gray_darker:
-    value: "hsla({!black}, 20%, 1)"
+    value: "hsla({!gray}, 20%, 1)"
     category: color_group_1
   color_gray_darken:
-    value: "hsla({!black}, 30%, 1)"
+    value: "hsla({!gray}, 30%, 1)"
     category: color_group_1
   color_gray_dark:
-    value: "hsla({!black}, 40%, 1)"
+    value: "hsla({!gray}, 40%, 1)"
     category: color_group_1
   color_gray:
-    value: "hsla({!black}, 50%, 1)"
+    value: "hsla({!gray}, 50%, 1)"
     category: color_group_1
   color_gray_light:
-    value: "hsla({!black}, 60%, 1)"
+    value: "hsla({!gray}, 60%, 1)"
     category: color_group_1
   color_gray_lighten:
-    value: "hsla({!black}, 70%, 1)"
+    value: "hsla({!gray}, 76%, 1)"
     category: color_group_1
   color_gray_lighter:
-    value: "hsla({!black}, 80%, 1)"
+    value: "hsla({!gray}, 80%, 1)"
     category: color_group_1
   color_gray_lightest:
-    value: "hsla({!black}, 90%, 1)"
+    value: "hsla({!gray}, 93%, 1)"
     category: color_group_1
+
+  color_red_light:
+    value: "hsla({!red}, 61%, 1)"
+    category: color_group_5
+
+  color_cinnabar_dark:
+    value: "hsla({!cinnabar}, 46%, 1)"
+    category: color_group_10
+  color_cinnabar:
+    value: "hsla({!cinnabar}, 50%, 1)"
+    category: color_group_10
+
+  color_gorse:
+    value: "hsla({!gorse}, 58%, 1)"
+    category: color_group_15
+
+  color_mantis_dark:
+    value: "hsla({!mantis}, 47%, 1)"
+    category: color_group_20
+
+  color_soft_green_dark:
+    value: "hsla({!soft_green}, 40%, 1)"
+    category: color_group_21
+
+  color_soft_green_light:
+    value: "hsla({!soft_green}, 60%, 1)"
+    category: color_group_21
+
+  color_bright_turquoise_darker:
+    value: "hsla({!bright_turquoise}, 24%, 1)"
+    category: color_group_25
+
+  color_aqua_darken:
+    value: "hsla({!aqua}, 33%, 1)"
+    category: color_group_30
+
+  color_bermuda_gray:
+    value: "hsla({!bermuda_gray}, 54%, 1)"
+    category: color_group_35
+
+  color_navy_blue_light:
+    value: "hsla({!navy_blue}, 61%, 1)"
+    category: color_group_40
+
+  color_dodger_blue_light:
+    value: "hsla({!dodger_blue}, 60%, 1)"
+    category: color_group_45
+
+  color_dodger_blue_lighten:
+    value: "hsla({!dodger_blue}, 70%, 1)"
+    category: color_group_45
+
+  color_dodger_blue_lighter:
+    value: "hsla({!dodger_blue}, 80%, 1)"
+    category: color_group_45
+
+  color_dark_orchid:
+    value: "hsla({!dark_orchid}, 51%, 1)"
+    category: color_group_50
+
+  color_razzle_dazzle_rose_light:
+    value: "hsla({!razzle_dazzle_rose}, 68%, 1)"
+    category: color_group_55
+
   color_white:
-    value: "hsla({!black}, 100%, 1)"
-    category: color_group_1
+    value: "hsla({!gray}, 100%, 1)"
+    category: color_group_60
+  color_black:
+    value: "hsla({!gray}, 0%, 1)"
+    category: color_group_60
+
+  color_primary:
+    value: "hsla({!navy_blue}, 61%, 1)"
+    category: color_group_65
+  color_secondary:
+    value: "hsla({!cinnabar}, 50%, 1)"
+    category: color_group_65
+  color_danger:
+    value: "hsla({!red}, 61%, 1)"
+    category: color_group_65
+  color_success:
+    value: "hsla({!soft_green}, 60%, 1)"
+    category: color_group_65
+  color_placeholder:
+    value: "hsla({!gray}, 90%, 1)"
+    category: color_group_65
+  color_text:
+    value: "hsla({!gray}, 13%, 1)"
+    category: color_group_65
+  color_border:
+    value: "hsla({!gray}, 90%, 1)"
+    category: color_group_65
 global:
   type: color
   category: color

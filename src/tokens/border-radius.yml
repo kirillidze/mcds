@@ -4,8 +4,15 @@
 #
 
 props:
-  radius_default:
-    value: "3px"
+  radius_xl:
+    value: "10px"
+  radius_l:
+    value: "8px"
+  radius_m:
+    value: "4px"
+  radius_s:
+    value: "2px"
+
   radius_circle:
     value: "50%"
 global:

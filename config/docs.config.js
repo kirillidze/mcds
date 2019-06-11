@@ -146,7 +146,7 @@ module.exports = {
       meta: [
         {
           name: "viewport",
-          content: "width=device-width,initial-scale=1.0",
+          content: "width=1200,initial-scale=1.0",
         },
         {
           name: "format-detection",

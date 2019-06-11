@@ -4,10 +4,20 @@
 #
 
 props:
+  z_index_dropdown:
+    value: "100"
   z_index_modal:
     value: "9999"
   z_index_sticky:
     value: "100"
+  z_index_header:
+    value: "10000"
+  z_index_top_line:
+    value: "9999"
+  z_index_notification:
+    value: "10001"
+  z_index_overlay:
+    value: "10002"
 global:
   type: number
   category: z-index

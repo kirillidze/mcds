@@ -18,6 +18,8 @@ props:
     value: "8px"
   space_xxs:
     value: "4px"
+  space_xxxs:
+    value: "2px"
 global:
   type: number
   category: space

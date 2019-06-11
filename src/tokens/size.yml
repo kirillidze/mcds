@@ -6,8 +6,50 @@
 props:
   height_footer:
     value: "64px"
-  tappable_square:
-    value: "44px"
+  height_auth:
+    value: "665px"
+
+  tappable_element_xl:
+    value: "72px"
+  tappable_element_l:
+    value: "48px"
+  tappable_element_m:
+    value: "40px"
+  tappable_element_s:
+    value: "32px"
+  tappable_element_xs:
+    value: "24px"
+  tappable_element_xxs:
+    value: "16px"
+
+  avatar_xs:
+    value: "24px"
+  avatar_s:
+    value: "32px"
+  avatar_m:
+    value: "42px"
+  avatar_l:
+    value: "56px"
+  avatar_xl:
+    value: "92px"
+
+  separator_xs:
+    value: "2px"
+
+  panel_xl:
+    value: "500px"
+  panel_l:
+    value: "380px"
+  panel_m:
+    value: "320px"
+
+  container_m:
+    value: "1064px"
+  container_s:
+    value: "810px"
+
+  site_width_m:
+    value: "1200px"
 global:
   type: number
   category: size

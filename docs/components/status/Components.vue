@@ -2,19 +2,19 @@
   <div class="component-status">
     <ul class="status-list">
       <li>
-        <Icon name="ready" fill="#7cb518" size="small" />
+        <McSvgIcon name="ready" size="xxs" fill="#7cb518" />
         <p>Ready</p>
       </li>
       <li>
-        <Icon name="review" :fill="tokens.color_ucla_gold.value" size="small" />
+        <McSvgIcon name="review" size="xxs" fill="rgb(255, 186, 10)" />
         <p>Under review</p>
       </li>
       <li>
-        <Icon name="deprecated" :fill="tokens.color_vermilion.value" size="small" />
+        <McSvgIcon name="deprecated" size="xxs" fill="rgb(235, 59, 36)" />
         <p>Deprecated</p>
       </li>
       <li>
-        <Icon name="prototype" :fill="tokens.color_bleu_de_france.value" size="small" />
+        <McSvgIcon name="prototype" size="xxs" fill="rgb(37, 138, 239)" />
         <p>Prototype</p>
       </li>
       <li>
@@ -42,24 +42,24 @@
           <td v-if="component.release">{{ component.release }}</td>
           <td v-else>N/A</td>
           <td v-if="component.status">
-            <Icon v-if="component.status === 'ready'" name="ready" fill="#7cb518" size="small" />
-            <Icon
+            <McSvgIcon v-if="component.status === 'ready'" name="ready" size="xxs" fill="#7cb518" />
+            <McSvgIcon
               v-if="component.status === 'under-review' || component.status === 'review'"
               name="review"
-              :fill="tokens.color_ucla_gold.value"
-              size="small"
+              size="xxs"
+              fill="rgb(255, 186, 10)"
             />
-            <Icon
+            <McSvgIcon
               v-if="component.status === 'prototype'"
               name="prototype"
-              :fill="tokens.color_bleu_de_france.value"
-              size="small"
+              size="xxs"
+              fill="rgb(37, 138, 239)"
             />
-            <Icon
+            <McSvgIcon
               v-if="component.status === 'deprecated'"
               name="deprecated"
-              :fill="tokens.color_vermilion.value"
-              size="small"
+              size="xxs"
+              fill="rgb(235, 59, 36)"
             />
           </td>
           <td v-else>—</td>

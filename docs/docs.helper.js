@@ -8,9 +8,13 @@ import statusLabels from "./utils/statusLabels"
 import activeNav from "./utils/activeNav"
 import filterSearch from "./utils/filterSearch"
 import "codemirror/mode/jsx/jsx"
+import VueLazyload from "vue-lazyload"
+import VueMoment from "vue-moment"
 
 Vue.config.productionTip = false
 Vue.mixin(statusLabels)
+Vue.use(VueLazyload)
+Vue.use(VueMoment)
 
 document.addEventListener("DOMContentLoaded", () => {
   filterSearch.methods.init()

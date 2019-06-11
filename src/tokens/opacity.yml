@@ -5,7 +5,11 @@
 
 props:
   opacity_disabled:
-    value: "0.5"
+    value: "0.6"
+  opacity_active:
+    value: "0.7"
+  opacity_hover:
+    value: "0.8"
 global:
   type: number
   category: opacity

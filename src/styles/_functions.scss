@@ -133,3 +133,25 @@
 
   @return $output;
 }
+
+/**
+ * Преобразование пикселей в em на основе переменной с базовым размером шрифта
+ * (указывается в px) проекта.
+ * @param  {number} $px Число без единиц измерения, кол-во пикселей
+ * @param  {string} $font-size Число пикселей, размер конт. шрифта на проекте
+ * @return {string} Результат преобразования $px в em на основе $font-size
+ */
+
+@function px-to-em($px, $font-size: $font-size) {
+  @return (($px * 100 / ($font-size / 1px)) / 100) * 1em;
+}
+
+/**
+ * Преобразование пикселей в множитель
+ * @param  {number} $line-height Число без единиц измерения, высота строки
+ * @param  {number} $font-size Число без единиц измерения, размер шрифта
+ * @return {number} Результат преобразования $line-height в множитель на основе $font-size
+ */
+@function line-height($line-height, $font-size) {
+  @return round(($line-height / $font-size) * 100) / 100;
+}

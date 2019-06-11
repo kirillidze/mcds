@@ -1,44 +1,124 @@
-
+$color-gorse: rgb(255, 223, 41);
+$color-soft-green-light: rgb(112, 194, 116);
+$color-cinnabar-dark: rgb(211, 67, 23);
+$color-dodger-blue-lighten: rgb(102, 140, 255);
 $color-black: rgb(0, 0, 0);
 $color-gray-darker: rgb(51, 51, 51);
 $color-gray-lighter: rgb(204, 204, 204);
+$color-dodger-blue-lighter: rgb(153, 179, 255);
+$color-primary: rgb(67, 135, 244);
+$color-aqua-darken: rgb(0, 151, 168);
+$color-success: rgb(112, 194, 116);
+$color-border: rgb(230, 230, 230);
+$color-text: rgb(33, 33, 33);
+$color-bermuda-gray: rgb(120, 144, 155);
+$color-bright-turquoise-darker: rgb(0, 122, 108);
+$color-soft-green-dark: rgb(61, 143, 65);
+$color-red-light: rgb(244, 67, 67);
 $color-white: rgb(255, 255, 255);
-$color-gray-lightest: rgb(230, 230, 230);
-$color-gray-darkest: rgb(26, 26, 26);
+$color-dark-orchid: rgb(135, 61, 199);
+$color-gray-lightest: rgb(237, 237, 237);
+$color-gray-darkest: rgb(33, 33, 33);
+$color-cinnabar: rgb(230, 73, 25);
+$color-razzle-dazzle-rose-light: rgb(247, 100, 242);
+$color-mantis-dark: rgb(84, 209, 31);
 $color-gray-dark: rgb(102, 102, 102);
 $color-gray-light: rgb(153, 153, 153);
+$color-placeholder: rgb(230, 230, 230);
+$color-secondary: rgb(230, 73, 25);
+$color-dodger-blue-light: rgb(51, 102, 255);
+$color-navy-blue-light: rgb(67, 135, 244);
 $color-gray-darken: rgb(77, 77, 77);
-$color-gray-lighten: rgb(179, 179, 179);
+$color-gray-lighten: rgb(194, 194, 194);
 $color-gray: rgb(128, 128, 128);
-$size-xxxl: 64px;
+$color-danger: rgb(244, 67, 67);
+$size-xxxxl: 64px;
+$size-xxxl: 56px;
 $size-xxl: 48px;
-$size-xl: 36px;
-$size-l: 24px;
+$size-xl: 34px;
+$size-l: 20px;
 $size-m: 16px;
 $size-s: 13px;
-$size-xs: 11px;
-$font-heading: 'Fira Sans', Helvetica, Arial, sans-serif;
-$font-text: 'Fira Sans', Helvetica, Arial, sans-serif;
+$size-xs: 10px;
+$font-heading: "Montserrat", sans-serif;
+$font-heading-secondary: "Roboto Slab", serif;
+$font-text: "Roboto", sans-serif;
 $weight-bold: 700;
 $weight-semi-bold: 600;
+$weight-medium: 500;
 $weight-normal: 400;
 $weight-light: 300;
-$opacity-disabled: 0.5;
+$opacity-disabled: 0.6;
+$opacity-active: 0.7;
+$opacity-hover: 0.8;
+$height-auth: 665px;
+$avatar-xs: 24px;
+$avatar-l: 56px;
+$avatar-m: 42px;
+$avatar-s: 32px;
+$container-m: 1064px;
+$tappable-element-xl: 72px;
+$panel-xl: 500px;
+$panel-l: 380px;
+$tappable-element-l: 48px;
+$panel-m: 320px;
+$tappable-element-m: 40px;
 $height-footer: 64px;
-$tappable-square: 44px;
-$duration-quickly: 0.08s;
+$container-s: 810px;
+$separator-xs: 2px;
+$tappable-element-xs: 24px;
+$tappable-element-xxs: 16px;
+$tappable-element-s: 32px;
+$avatar-xl: 92px;
+$site-width-m: 1200px;
+$duration-quickly: 0.15s;
+$duration-standart: 0.3s;
 $duration-slowly: 0.5s;
+$z-index-dropdown: 100;
 $z-index-modal: 9999;
 $z-index-sticky: 100;
-$media-query-m: (min-width: 768px);
-$media-query-l: (min-width: 1024px);
-$shadow-s: 0 0 0 1px rgba(92,106,196,.1);
-$spacing-xl: 2px;
-$spacing-l: 1px;
-$spacing-m: 0;
-$spacing-s: -0.5px;
-$spacing-xs: -1px;
-$radius-default: 3px;
+$z-index-header: 10000;
+$z-index-top-line: 9999;
+$z-index-notification: 10001;
+$z-index-overlay: 10002;
+$media-query-s-down: (
+  max-width: 479px,
+);
+$media-query-s: (
+  min-width: 480px,
+);
+$media-query-m-down: (
+  max-width: 767px,
+);
+$media-query-xl: (
+  min-width: 1200px,
+);
+$media-query-l-down: (
+  max-width: 1023px,
+);
+$media-query-xxl-down: (
+  max-width: 1439px,
+);
+$media-query-l: (
+  min-width: 1024px,
+);
+$media-query-xxl: (
+  min-width: 1440px,
+);
+$media-query-m: (
+  min-width: 768px,
+);
+$media-query-xl-down: (
+  max-width: 1199px,
+);
+$shadow-l: 0 3px 12px rgba(0, 0, 0, 0.33);
+$shadow-m: 0 3px 6px rgba(0, 0, 0, 0.16);
+$shadow-s: 0 0 0 1px rgba(92, 106, 196, 0.1);
+$spacing-m: 0.4px;
+$radius-xl: 10px;
+$radius-l: 8px;
+$radius-m: 4px;
+$radius-s: 2px;
 $radius-circle: 50%;
 $space-xxl: 128px;
 $space-xl: 64px;
@@ -47,14 +127,17 @@ $space-m: 24px;
 $space-s: 16px;
 $space-xs: 8px;
 $space-xxs: 4px;
+$space-xxxs: 2px;
 $line-height-m: 1.6;
 $line-height-s: 1.3;
 $line-height-xs: 1;
+$gradient-notification: linear-gradient(to right, hsl(205, 93%, 54%) 0%, hsl(192, 100%, 46%) 100%);
+$gradient-auth: linear-gradient(-42deg, #391c5f 0%, #5b2770 100%);
 
 /* VUE DESIGN SYSTEM SPACING HELPERS
 --------------------------------------------- */
 
-$spacing-ratio: 1.7;
+$spacing-ratio: $line-height-m;
 
 /*
   INSET-SPACE: For interface containers.
@@ -96,6 +179,8 @@ $spacing-ratio: 1.7;
     margin-right: 0;
   }
 }
+
+@import "~bourbon/core/bourbon";
 
 /* GLOBAL MIXINS
 --------------------------------------------- */
@@ -143,33 +228,302 @@ $spacing-ratio: 1.7;
   margin: 0;
 }
 
-// Used to prevent text selection on an element
-@mixin prevent-user-select {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-/// Used to hide an element visually, but keeping it accessible for
-/// accessibility tools.
-@mixin visually-hidden {
-  // Need to make sure we override any existing styles.
-  position: absolute !important;
-  top: 0;
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  overflow: hidden !important;
-  height: 1px !important;
-  width: 1px !important;
-  padding: 0 !important;
-  border: 0 !important;
-}
-
 /// To be used on flex items. Resolves some common layout issues, such as
 /// text truncation not respecting padding or breaking out of container.
 /// https://css-tricks.com/flexbox-truncated-text/
 @mixin layout-flex-fix {
   min-width: 0;
   max-width: 100%;
+}
+
+@mixin align($vertical: true, $horizontal: false, $position: relative) {
+  @if $position {
+    position: $position;
+  }
+  @if $vertical {
+    top: 50%;
+  }
+  @if $horizontal {
+    left: 50%;
+  }
+
+  @if $vertical and $horizontal {
+    transform: translateX(-50%) translateY(-50%);
+  } @else if $vertical {
+    transform: translateY(-50%);
+  } @else {
+    transform: translateX(-50%);
+  }
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+@mixin hardware($backface: true, $perspective: 1000) {
+  @if $backface {
+    backface-visibility: hidden;
+  }
+
+  perspective: $perspective;
+}
+
+@mixin pos($pos, $t, $r, $b, $l, $z: false, $hardware: true) {
+  @if $pos == fixed and $hardware {
+    @include hardware;
+  }
+  @if $pos {
+    position: $pos;
+  }
+  @if $t {
+    top: $t;
+  }
+  @if $r {
+    right: $r;
+  }
+  @if $b {
+    bottom: $b;
+  }
+  @if $l {
+    left: $l;
+  }
+  @if $z {
+    z-index: $z;
+  }
+}
+
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
+  content: $content;
+  display: $display;
+  position: $pos;
+}
+
+/*
+	Responsive ratio
+	Used for creating scalable elements that maintain the same ratio
+	example:
+	.element {
+		@include responsive-ratio(400, 300);
+	}
+*/
+
+@mixin responsive-ratio($x, $y, $pseudo: false) {
+  $padding: unquote(($y / $x) * 100 + "%");
+
+  @if $pseudo {
+    &::before {
+      @include pseudo($pos: relative);
+      width: 100%;
+      padding-top: $padding;
+    }
+  } @else {
+    padding-top: $padding;
+  }
+}
+
+/*
+	Form input placeholder text
+
+	example:
+
+	input,
+	textarea {
+		@include input-placeholder {
+			color: $grey;
+		}
+	}
+*/
+
+@mixin input-placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+@mixin selection {
+  ::-moz-selection {
+    @content;
+  }
+  ::selection {
+    @content;
+  }
+}
+
+@mixin reset-text-indents() {
+  font-size: 0;
+  line-height: 0;
+}
+
+// Выпилить всё, что ниже
+
+// Reset btn styles
+
+@mixin reset-btn() {
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  background-image: none;
+  cursor: pointer;
+  outline: 0;
+  font-size: 0;
+  line-height: 0;
+  font-family: inherit;
+  -webkit-appearance: none;
+  -webkit-text-fill-color: currentColor;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+@mixin interplay-link($color: $color-cinnabar) {
+  &:hover,
+  &:focus {
+    color: $color;
+  }
+
+  &:active {
+    color: darken($color, 8%);
+  }
+}
+
+@mixin field-error() {
+  color: #e73232;
+  font-size: 13px;
+  line-height: line-height(16, 13);
+  display: block;
+  margin-top: 5px;
+}
+
+@mixin custom-scroll() {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    transition: background 0.3s;
+  }
+
+  ::-webkit-scrollbar-track {
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #c9c9c9;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #c1c1c1;
+  }
+  ::-webkit-scrollbar-thumb:active {
+  }
+}
+
+@mixin box($max-width: 1360px) {
+  //padding-left: 20px;
+  //padding-right: 20px;
+  //margin-left: auto;
+  //margin-right: auto;
+  //max-width: $max-width;
+  //
+  //@media (min-width: $screen-md-up) {
+  //    padding-left: 30px;
+  //    padding-right: 30px;
+  //}
+  //
+  //@media (min-width: $screen-xl-up) {
+  //    padding-left: 60px;
+  //    padding-right: 60px;
+  //}
+}
+
+@mixin img-ofi() {
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  //content: '';
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@mixin indent-top($size: "middle", $indent-type: "padding") {
+  @if ($size == "small") {
+    #{$indent-type}-top: 30px;
+  }
+
+  @if ($size == "middle") {
+    #{$indent-type}-top: 30px;
+  }
+
+  @if ($size == "large") {
+    #{$indent-type}-top: 30px;
+  }
+}
+
+@mixin indent-bottom($size: "middle", $indent-type: "padding") {
+  @if ($size == "small") {
+    #{$indent-type}-bottom: 30px;
+  }
+
+  @if ($size == "middle") {
+    #{$indent-type}-bottom: 30px;
+  }
+
+  @if ($size == "large") {
+    #{$indent-type}-bottom: 30px;
+  }
+}
+
+@mixin input-placeholder {
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+
+@mixin interplay() {
+  &:hover,
+  &:focus {
+    background-color: $link-bg-color;
+  }
+
+  &:active {
+    background-color: $link-bg-color--active;
+  }
 }
 
 /* GLOBAL FUNCTIONS
@@ -306,4 +660,26 @@ $spacing-ratio: 1.7;
   }
 
   @return $output;
+}
+
+/**
+ * Преобразование пикселей в em на основе переменной с базовым размером шрифта
+ * (указывается в px) проекта.
+ * @param  {number} $px Число без единиц измерения, кол-во пикселей
+ * @param  {string} $font-size Число пикселей, размер конт. шрифта на проекте
+ * @return {string} Результат преобразования $px в em на основе $font-size
+ */
+
+@function px-to-em($px, $font-size: $font-size) {
+  @return (($px * 100 / ($font-size / 1px)) / 100) * 1em;
+}
+
+/**
+ * Преобразование пикселей в множитель
+ * @param  {number} $line-height Число без единиц измерения, высота строки
+ * @param  {number} $font-size Число без единиц измерения, размер шрифта
+ * @return {number} Результат преобразования $line-height в множитель на основе $font-size
+ */
+@function line-height($line-height, $font-size) {
+  @return round(($line-height / $font-size) * 100) / 100;
 }
