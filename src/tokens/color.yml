@@ -1,0 +1,49 @@
+#
+# COLOR TOKENS
+# Use these tokens to set a color.
+# For reference, see http://hslpicker.com/
+#
+# To make things a little simpler for your team,
+# utilize both global & local tokens for colors.
+#
+
+aliases:
+  black:
+    value: "0, 0%"
+props:
+  color_black:
+    value: "hsla({!black}, 0%, 1)"
+    category: color_group_1
+  color_gray_darkest:
+    value: "hsla({!black}, 10%, 1)"
+    category: color_group_1
+  color_gray_darker:
+    value: "hsla({!black}, 20%, 1)"
+    category: color_group_1
+  color_gray_darken:
+    value: "hsla({!black}, 30%, 1)"
+    category: color_group_1
+  color_gray_dark:
+    value: "hsla({!black}, 40%, 1)"
+    category: color_group_1
+  color_gray:
+    value: "hsla({!black}, 50%, 1)"
+    category: color_group_1
+  color_gray_light:
+    value: "hsla({!black}, 60%, 1)"
+    category: color_group_1
+  color_gray_lighten:
+    value: "hsla({!black}, 70%, 1)"
+    category: color_group_1
+  color_gray_lighter:
+    value: "hsla({!black}, 80%, 1)"
+    category: color_group_1
+  color_gray_lightest:
+    value: "hsla({!black}, 90%, 1)"
+    category: color_group_1
+  color_white:
+    value: "hsla({!black}, 100%, 1)"
+    category: color_group_1
+global:
+  type: color
+  category: color
