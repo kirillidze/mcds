@@ -84,9 +84,9 @@ export default {
     ```jsx
     <div>
         <mc-grid-row>
-            <mc-grid-col :span="1" :span-xs="2" style="background: aqua">1</mc-grid-col>
-            <mc-grid-col :span="2" style="background: red">2</mc-grid-col>
-            <mc-grid-col :span="3" :push="2" style="background: blue">2</mc-grid-col>
+            <mc-grid-col :span="1" :span-xs="2" style="background: #e74c3c">1</mc-grid-col>
+            <mc-grid-col :span="2" style="background: #1abc9c">2</mc-grid-col>
+            <mc-grid-col :span="3" :push="2" style="background: #9b59b6">3</mc-grid-col>
         </mc-grid-row>
     </div>
     ```
