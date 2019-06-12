@@ -6,6 +6,7 @@
 
 <script>
 import McGridCol from "./McGridCol"
+
 export default {
   name: "McGridRow",
   components: { McGridCol },
@@ -49,10 +50,18 @@ export default {
         : {}
     },
   },
+  watch: {
+    gutter() {
+      this.updateGutter()
+    },
+  },
   methods: {
     updateGutter() {
       this.$children.forEach(children => {
-        children.gutter = this.gutter
+        let componentName = children.$options.name
+        if (componentName === "McGridCol") {
+          children.gutter = this.gutter
+        }
       })
     },
   },
