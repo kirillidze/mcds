@@ -79,23 +79,23 @@ export default {
 
   @mixin generate-col($viewport: "") {
     @for $i from 1 through $cols {
-      &--span#{$viewport}-#{$i} {
+      &--span-#{$viewport}-#{$i} {
         width: percentage($i / $cols);
       }
 
-      &--push#{$viewport}-#{$i} {
+      &--push-#{$viewport}-#{$i} {
         left: percentage($i / $cols);
       }
 
-      &--pull#{$viewport}-#{$i} {
+      &--pull-#{$viewport}-#{$i} {
         right: percentage($i / $cols);
       }
 
-      &--offset#{$viewport}-#{$i} {
+      &--offset-#{$viewport}-#{$i} {
         margin-left: percentage($i / $cols);
       }
 
-      &--order#{$viewport}-#{$i} {
+      &--order-#{$viewport}-#{$i} {
         order: #{$i};
       }
     }
