@@ -5,21 +5,21 @@
 </template>
 
 <script>
+import _upperFirst from "lodash/upperFirst"
+const values = ["span", "order", "offset", "push", "pull"]
+const sizes = ["xs", "sm", "md", "lg"]
+const props = {}
+values.forEach(value => {
+  props[`${value}`] = { type: Number }
+  sizes.forEach(size => {
+    props[`${value}-${size}`] = { type: Number }
+  })
+})
 export default {
   name: "McGridCol",
   status: "ready",
   release: "0.0.1",
-  props: {
-    span: { type: Number },
-    order: { type: Number },
-    offset: { type: Number },
-    push: { type: Number },
-    pull: { type: Number },
-    xs: { type: Number },
-    sm: { type: Number },
-    md: { type: Number },
-    lg: { type: Number },
-  },
+  props,
   data() {
     return {
       gutter: 0,
@@ -27,16 +27,14 @@ export default {
   },
   computed: {
     classes() {
-      let list = {
-        [`mc-grid-col--span-${this.span}`]: this.span,
-        [`mc-grid-col--order-${this.order}`]: this.order,
-        [`mc-grid-col--offset-${this.offset}`]: this.offset,
-        [`mc-grid-col--push-${this.push}`]: this.push,
-        [`mc-grid-col--pull-${this.pull}`]: this.pull,
-      }
-      let viewports = ["xs", "sm", "md", "lg"]
-      viewports.forEach(viewport => {
-        list[`mc-grid-col--span-${viewport}-${this[viewport]}`] = this.viewport
+      const list = {}
+      console.log(this["span-xs"])
+      values.forEach(value => {
+        list[`mc-grid-col--${value}-${this[value]}`] = this[value]
+        sizes.forEach(size => {
+          const sizeValue = this[`${value}${_upperFirst(size)}`]
+          list[`mc-grid-col--${value}-${size}-${sizeValue}`] = sizeValue
+        })
       })
       return list
     },
