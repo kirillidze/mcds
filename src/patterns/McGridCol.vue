@@ -59,27 +59,27 @@ export default {
 .mc-grid-col {
   $block-name: &;
 
-  $grid-col: 12;
+  $cols: 12;
 
   display: block;
   position: relative;
 
   @mixin generate-col($viewport: "") {
-    @for $i from 1 through $grid-col {
+    @for $i from 1 through $cols {
       &--span#{$viewport}-#{$i} {
-        width: percentage($i / $grid-col);
+        width: percentage($i / $cols);
       }
 
       &--push#{$viewport}-#{$i} {
-        left: percentage($i / $grid-col);
+        left: percentage($i / $cols);
       }
 
       &--pull#{$viewport}-#{$i} {
-        right: percentage($i / $grid-col);
+        right: percentage($i / $cols);
       }
 
       &--offset#{$viewport}-#{$i} {
-        margin-left: percentage($i / $grid-col);
+        margin-left: percentage($i / $cols);
       }
 
       &--order#{$viewport}-#{$i} {
