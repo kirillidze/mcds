@@ -49,28 +49,6 @@ export default {
 </script>
 
 <style lang="scss">
-$colors: (
-  "color-red-light": $color-red-light,
-  "color-dodger-blue-light": $color-dodger-blue-light,
-  "color-dodger-blue-lighten": $color-dodger-blue-lighten,
-  "color-dodger-blue-lighter": $color-dodger-blue-lighter,
-  "color-mantis-dark": $color-mantis-dark,
-  "color-gorse": $color-gorse,
-  "color-gray-dark": $color-gray-dark,
-  "color-gray-lighter": $color-gray-lighter,
-  "color-black": $color-black,
-  "color-dark-orchid": $color-dark-orchid,
-  "color-bright-turquoise-darker": $color-bright-turquoise-darker,
-  "color-aqua-darken": $color-aqua-darken,
-  "color-cinnabar-dark": $color-cinnabar-dark,
-  "color-bermuda-gray": $color-bermuda-gray,
-  "color-green": $color-green,
-  "color-purple": $color-purple,
-  "color-blue": $color-blue,
-  "color-orange": $color-orange,
-  "color-azure": $color-azure,
-  "color-red": $color-red,
-);
 .mc-chip {
   $block-name: &;
 
@@ -138,7 +116,7 @@ $colors: (
     }
   }
   &--color {
-    @each $color, $value in $colors {
+    @each $color, $value in $token-colors {
       &-#{$color} {
         #{$block-name} {
           &__name {
@@ -156,7 +134,7 @@ $colors: (
   ```jsx
   <div>
     <McChip>Владилен</McChip>
-    <McChip color="color-dodger-blue-light" type="2">Максим</McChip>
+    <McChip color="dodger-blue-light" type="2">Максим</McChip>
     <McChip type="2">Егор</McChip>
   </div>
   ```

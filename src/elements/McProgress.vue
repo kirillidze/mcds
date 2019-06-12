@@ -31,22 +31,6 @@ export default {
 </script>
 
 <style lang="scss">
-$colors: (
-  "red-light": $color-red-light,
-  "dodger-blue-light": $color-dodger-blue-light,
-  "dodger-blue-lighten": $color-dodger-blue-lighten,
-  "dodger-blue-lighter": $color-dodger-blue-lighter,
-  "mantis-dark": $color-mantis-dark,
-  "gorse": $color-gorse,
-  "gray-dark": $color-gray-dark,
-  "gray-lighter": $color-gray-lighter,
-  "black": $color-black,
-  "dark-orchid": $color-dark-orchid,
-  "bright-turquoise-darker": $color-bright-turquoise-darker,
-  "aqua-darken": $color-aqua-darken,
-  "cinnabar-dark": $color-cinnabar-dark,
-  "bermuda-gray": $color-bermuda-gray,
-);
 .mc-progress {
   $block-name: &;
 
@@ -60,7 +44,7 @@ $colors: (
   &__line {
     height: 100%;
     background-color: $color-gray-dark;
-    @each $color, $value in $colors {
+    @each $color, $value in $token-colors {
       &--color-#{$color} {
         background-color: $value;
       }
