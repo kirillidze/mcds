@@ -72,23 +72,23 @@ export default {
 
   @mixin generate-col($viewport: "") {
     @for $i from 1 through $cols {
-      &--span#{$viewport}-#{$i} {
+      &--span-#{$viewport}-#{$i} {
         width: percentage($i / $cols);
       }
 
-      &--push#{$viewport}-#{$i} {
+      &--push-#{$viewport}-#{$i} {
         left: percentage($i / $cols);
       }
 
-      &--pull#{$viewport}-#{$i} {
+      &--pull-#{$viewport}-#{$i} {
         right: percentage($i / $cols);
       }
 
-      &--offset#{$viewport}-#{$i} {
+      &--offset-#{$viewport}-#{$i} {
         margin-left: percentage($i / $cols);
       }
 
-      &--order#{$viewport}-#{$i} {
+      &--order-#{$viewport}-#{$i} {
         order: #{$i};
       }
     }
@@ -96,19 +96,19 @@ export default {
 
   @include generate-col("");
   @media (max-width: 768px) {
-    @include generate-col("-xs");
+    @include generate-col("xs");
   }
 
   @media (min-width: 768px) {
-    @include generate-col("-sm");
+    @include generate-col("sm");
   }
 
   @media (min-width: 992px) {
-    @include generate-col("-md");
+    @include generate-col("md");
   }
 
   @media (min-width: 1200px) {
-    @include generate-col("-lg");
+    @include generate-col("lg");
   }
 }
 </style>

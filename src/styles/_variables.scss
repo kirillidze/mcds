@@ -136,3 +136,26 @@ $tabble-head-height: 45px;
 $tabble-first-col-width: 250px;
 
 $filter-search-input-height: 54px;
+
+$token-colors: (
+  "red-light": $color-red-light,
+  "dodger-blue-light": $color-dodger-blue-light,
+  "dodger-blue-lighten": $color-dodger-blue-lighten,
+  "dodger-blue-lighter": $color-dodger-blue-lighter,
+  "mantis-dark": $color-mantis-dark,
+  "gorse": $color-gorse,
+  "gray-dark": $color-gray-dark,
+  "gray-lighter": $color-gray-lighter,
+  "black": $color-black,
+  "dark-orchid": $color-dark-orchid,
+  "bright-turquoise-darker": $color-bright-turquoise-darker,
+  "aqua-darken": $color-aqua-darken,
+  "cinnabar-dark": $color-cinnabar-dark,
+  "bermuda-gray": $color-bermuda-gray,
+  "green": $color-green,
+  "purple": $color-purple,
+  "blue": $color-blue,
+  "orange": $color-orange,
+  "azure": $color-azure,
+  "red": $color-red,
+);
