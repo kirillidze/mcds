@@ -201,30 +201,6 @@ pre {
   //}
 }
 
-.tooltip {
-  z-index: 10003;
-  &-inner {
-    padding: 8px 15px;
-    background: #222;
-    color: #fff;
-    border-radius: 10px;
-  }
-  &-arrow {
-    border-width: 0 5px 5px;
-    border-color: #222;
-    border-left-color: transparent !important;
-    border-right-color: transparent !important;
-    border-top-color: transparent !important;
-    top: -5px;
-    margin-top: 0;
-    margin-bottom: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    position: absolute;
-  }
-}
-
 .g-top-line {
   $block-name: &; // #{$block-name}__element
 
