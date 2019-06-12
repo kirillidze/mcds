@@ -44,6 +44,7 @@ export default {
   &__line {
     height: 100%;
     background-color: $color-gray-dark;
+    border-radius: 20px;
     @each $color, $value in $token-colors {
       &--color-#{$color} {
         background-color: $value;
