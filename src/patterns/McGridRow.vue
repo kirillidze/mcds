@@ -102,6 +102,18 @@ export default {
             <mc-grid-col :span="3" :push="2">
                 <div style="background: #9b59b6">3</div>
             </mc-grid-col>
+            <mc-grid-col>
+                <div style="background: #f1c40f">4</div>
+            </mc-grid-col>
+        </mc-grid-row>
+        <br>
+        <mc-grid-row>
+            <mc-grid-col>
+                <div style="background: #e74c3c">1</div>
+            </mc-grid-col>
+            <mc-grid-col>
+                <div style="background: #f1c40f">4</div>
+            </mc-grid-col>
         </mc-grid-row>
     </div>
     ```

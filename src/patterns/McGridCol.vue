@@ -10,7 +10,6 @@ const values = ["span", "order", "offset", "push", "pull"]
 const sizes = ["xs", "sm", "md", "lg"]
 const props = {}
 values.forEach(value => {
-  props[`${value}`] = { type: Number }
   sizes.forEach(size => {
     props[`${value}-${size}`] = { type: Number }
   })
@@ -19,7 +18,14 @@ export default {
   name: "McGridCol",
   status: "ready",
   release: "0.0.1",
-  props,
+  props: {
+    span: { type: Number },
+    order: { type: Number },
+    offset: { type: Number },
+    push: { type: Number },
+    pull: { type: Number },
+    ...props,
+  },
   data() {
     return {
       gutter: 0,
@@ -28,7 +34,6 @@ export default {
   computed: {
     classes() {
       const list = {}
-      console.log(this["span-xs"])
       values.forEach(value => {
         list[`mc-grid-col--${value}-${this[value]}`] = this[value]
         sizes.forEach(size => {
@@ -63,6 +68,7 @@ export default {
 
   display: block;
   position: relative;
+  flex: 1;
 
   @mixin generate-col($viewport: "") {
     @for $i from 1 through $cols {
