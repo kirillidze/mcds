@@ -23,7 +23,7 @@ export default {
   computed: {
     classes() {
       return {
-        [`mc-progress__line--${this.color}`]: this.color,
+        [`mc-progress__line--color-${this.color}`]: this.color,
       }
     },
   },
@@ -32,20 +32,20 @@ export default {
 
 <style lang="scss">
 $colors: (
-  "color-red-light": $color-red-light,
-  "color-dodger-blue-light": $color-dodger-blue-light,
-  "color-dodger-blue-lighten": $color-dodger-blue-lighten,
-  "color-dodger-blue-lighter": $color-dodger-blue-lighter,
-  "color-mantis-dark": $color-mantis-dark,
-  "color-gorse": $color-gorse,
-  "color-gray-dark": $color-gray-dark,
-  "color-gray-lighter": $color-gray-lighter,
-  "color-black": $color-black,
-  "color-dark-orchid": $color-dark-orchid,
-  "color-bright-turquoise-darker": $color-bright-turquoise-darker,
-  "color-aqua-darken": $color-aqua-darken,
-  "color-cinnabar-dark": $color-cinnabar-dark,
-  "color-bermuda-gray": $color-bermuda-gray,
+  "red-light": $color-red-light,
+  "dodger-blue-light": $color-dodger-blue-light,
+  "dodger-blue-lighten": $color-dodger-blue-lighten,
+  "dodger-blue-lighter": $color-dodger-blue-lighter,
+  "mantis-dark": $color-mantis-dark,
+  "gorse": $color-gorse,
+  "gray-dark": $color-gray-dark,
+  "gray-lighter": $color-gray-lighter,
+  "black": $color-black,
+  "dark-orchid": $color-dark-orchid,
+  "bright-turquoise-darker": $color-bright-turquoise-darker,
+  "aqua-darken": $color-aqua-darken,
+  "cinnabar-dark": $color-cinnabar-dark,
+  "bermuda-gray": $color-bermuda-gray,
 );
 .mc-progress {
   $block-name: &;
@@ -61,7 +61,7 @@ $colors: (
     height: 100%;
     background-color: $color-gray-dark;
     @each $color, $value in $colors {
-      &--#{$color} {
+      &--color-#{$color} {
         background-color: $value;
       }
     }
@@ -74,7 +74,7 @@ $colors: (
   <div>
     <McProgress :percent="20" />
     <br>
-    <McProgress :percent="60" color="color-dodger-blue-lighter" />
+    <McProgress :percent="60" color="dodger-blue-lighter" />
   </div>
   ```
 </docs>
