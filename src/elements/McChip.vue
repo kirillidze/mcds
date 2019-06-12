@@ -64,6 +64,12 @@ $colors: (
   "color-aqua-darken": $color-aqua-darken,
   "color-cinnabar-dark": $color-cinnabar-dark,
   "color-bermuda-gray": $color-bermuda-gray,
+  "color-green": $color-green,
+  "color-purple": $color-purple,
+  "color-blue": $color-blue,
+  "color-orange": $color-orange,
+  "color-azure": $color-azure,
+  "color-red": $color-red,
 );
 .mc-chip {
   $block-name: &;
