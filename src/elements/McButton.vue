@@ -23,7 +23,7 @@ import McSvgIcon from "./McSvgIcon"
 export default {
   name: "McButton",
   status: "ready",
-  release: "0.0.1",
+  release: "1.0.0",
   components: {
     McSvgIcon,
     "btn-loader": BallClipRotateMultipleLoader,
