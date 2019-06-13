@@ -119,16 +119,6 @@ export default {
       }
     }
   }
-
-  .mc-svg-icon {
-    &:first-child {
-      margin-right: $space_s;
-    }
-
-    &:last-child {
-      margin-left: $space_s;
-    }
-  }
 }
 </style>
 
