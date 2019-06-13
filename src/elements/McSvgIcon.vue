@@ -21,7 +21,7 @@ export default {
      */
     name: {
       type: String,
-      default: "settings",
+      required: true,
     },
     /**
      * Цвет заливки
@@ -73,7 +73,9 @@ export default {
   ```jsx
   let icons = require('@/utils/load-icons').default;
   <div>
-    <McSvgIcon v-for="(icon, index) in icons" :key="index" :name="icon" size="m"/>
+    <div v-for="(icon, index) in icons" :key="index">
+      <McSvgIcon :name="icon" size="m"/> {{ icon }}
+    </div>
   </div>
   ```
 </docs>

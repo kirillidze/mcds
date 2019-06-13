@@ -1,10 +1,8 @@
 <template>
   <component :is="tag" class="mc-title" :class="classObject">
-    <slot name="prepend"></slot>
     <div class="mc-title__text">
       <slot></slot>
     </div>
-    <slot name="append"></slot>
   </component>
 </template>
 
@@ -40,7 +38,6 @@ export default {
       type: String,
     },
   },
-
   computed: {
     tag() {
       return this.tagName ? this.tagName : "h" + this.level
@@ -68,62 +65,53 @@ export default {
   font-family: $font-heading;
   line-height: $line-height-s;
   font-weight: $weight-normal;
-
-  .mc-svg-icon {
-    &:first-child {
-      margin-right: $space_s;
-    }
-
-    &:last-child {
-      margin-left: $space_s;
-    }
+  &__text {
+    display: flex;
+    align-items: center;
   }
-
   &--size-xs {
     font-size: $size-xs;
   }
-
   &--size-s {
     font-size: $size-s;
   }
-
   &--size-m {
     font-size: $size-m;
   }
-
   &--size-l {
     font-size: $size-l;
     font-weight: $weight-medium;
   }
-
   &--size-xl {
     font-size: $size-xl;
   }
-
   &--size-xxl {
     font-size: $size-xxl;
   }
-
   &--size-xxxl {
     font-size: $size-xxxl;
   }
-
   &--size-xxxxl {
     font-size: $size-xxxxl;
   }
-
   &--ellipsis {
     @include ellipsis();
   }
-
   &--font-heading {
   }
-
   &--color {
     @each $color, $value in $token-colors {
       &-#{$color} {
         color: $value;
       }
+    }
+  }
+  .mc-svg-icon {
+    &:first-child {
+      margin-right: $space_xxs;
+    }
+    &:last-child {
+      margin-left: $space_xxs;
     }
   }
 }
@@ -141,17 +129,13 @@ export default {
     <McTitle size="xxxl">Заголовок</McTitle>
     <McTitle size="xxxxl">Заголовок</McTitle>
     <McTitle size="xxxxl" color="dodger-blue-light">
-      <template slot="prepend">
-        <McSvgIcon size="xl"/>
-      </template>
+      <McSvgIcon size="xl"/>
       Заголовок
     </McTitle>
 
     <McTitle tag-name="div" size="xxxxl" color="dark-orchid">
       Заголовок
-      <template slot="append">
-        <McSvgIcon size="xl"/>
-      </template>
+      <McSvgIcon size="xl"/>
     </McTitle>
   </div>
   ```

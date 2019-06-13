@@ -4,9 +4,6 @@
       {{ title }}
     </span>
     <span class="mc-field-text__input-wrap">
-      <span class="mc-field-text__input-prepend" v-if="$slots.prepend">
-        <slot name="prepend" />
-      </span>
       <span class="mc-field-text__input-inner">
         <flat-pickr
           v-if="type === 'date'"
@@ -31,15 +28,43 @@
           v-else
           class="mc-field-text__input"
           :disabled="disabled"
-          :type="type"
+          :type="type !== 'password' ? type : passwordVisibility"
           :placeholder="placeholder"
           :value="value"
           @input="$event => handleInput($event.target.value)"
           :name="name"
           ref="input"
         />
-        <span class="mc-field-text__input-append" v-if="$slots.append">
-          <slot name="append" />
+
+        <template v-if="type === 'password'">
+          <button
+            tabindex="-1"
+            type="button"
+            class="mc-field-text__input-btn-eye"
+            @click.prevent="togglePasswordVisibility"
+          >
+            <McSvgIcon
+              width="24"
+              height="24"
+              class="mc-field-text__input-btn-eye-icon"
+              :name="icon"
+            />
+          </button>
+        </template>
+
+        <McSvgIcon
+          v-if="addon && addon !== 'search' && addon !== 'password' && !addonText"
+          class="mc-field-text__input-addon"
+          :name="addon"
+          width="24"
+          height="24"
+          :type="addonType"
+        />
+        <span v-if="addonText" class="mc-field-text__input-addon mc-field-text__input-addon--text">
+          {{ addon }}
+        </span>
+        <span class="mc-field-text__buttons" v-if="$slots['buttons']">
+          <slot name="buttons"></slot>
         </span>
       </span>
       <span v-if="errorText" class="mc-field-text__help-text">{{ errorText }}</span>
@@ -48,14 +73,34 @@
 </template>
 
 <script>
+import McSvgIcon from "./McSvgIcon"
+
 export default {
-  name: "McFieldText",
+  name: "McFieldTextOld",
   status: "deprecated",
   release: "3.5.0",
+  components: { McSvgIcon },
+  data() {
+    return {
+      isShowPassword: false,
+    }
+  },
   props: {
     type: {
       type: String,
       default: "text",
+    },
+    addon: {
+      type: String,
+      default: null,
+    },
+    addonText: {
+      type: Boolean,
+      default: false,
+    },
+    addonType: {
+      type: String,
+      default: null,
     },
     title: {
       type: String,
@@ -91,6 +136,19 @@ export default {
   },
   methods: {
     handleInput(value) {
+      this.emitInput(value)
+    },
+    clearField() {
+      this.emitInput(null)
+      this.$refs.input.focus()
+    },
+    togglePasswordVisibility() {
+      this.isShowPassword = !this.isShowPassword
+    },
+    handleSearch() {
+      this.value ? this.$emit("handleSearch") : ""
+    },
+    emitInput(value) {
       this.$emit("input", value)
     },
   },
@@ -98,9 +156,21 @@ export default {
     modifier() {
       return {
         "mc-field-text--error": this.errorText,
-        [`mc-field-text--${this.design}`]: this.design,
+        "mc-field-text--addon": this.addon,
+        "mc-field-text--search": this.addon === "search",
+        "mc-field-text--password": this.addon === "password",
+        "mc-field-text--show-search-close": this.type === "search",
+        "mc-field-text--simple": this.design === "simple",
+        "mc-field-text--total": this.design === "total",
         "mc-field-text--light": this.theme === "light",
+        "mc-field-text--with-buttons": this.$slots["buttons"],
       }
+    },
+    icon() {
+      return this.isShowPassword ? "visibility_off" : "visibility"
+    },
+    passwordVisibility() {
+      return this.isShowPassword ? "text" : "password"
     },
     errorText() {
       if (this.errors == null || this.errors.length == 0) return null
@@ -118,25 +188,6 @@ export default {
 
   &__input-wrap {
     display: block;
-    position: relative;
-  }
-
-  &__input-prepend,
-  &__input-append {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-  &__input-prepend {
-    left: 0;
-    padding-left: 6px;
-  }
-  &__input-append {
-    right: 0;
-    padding-right: 6px;
   }
 
   &__title {
@@ -183,6 +234,11 @@ export default {
       border-color: transparent !important;
     }
 
+    &[type="search"]::-webkit-search-cancel-button,
+    &[type="search"]::-webkit-search-decoration {
+      -webkit-appearance: none;
+    }
+
     &[type="number"]::-webkit-inner-spin-button,
     &[type="number"]::-webkit-outer-spin-button {
       // height: auto;
@@ -211,6 +267,81 @@ export default {
     }
   }
 
+  &--search {
+    #{$block-name} {
+      &__input-inner {
+        position: relative;
+      }
+
+      &__input {
+        padding: 5px 10px;
+        height: 32px;
+        padding-right: 30px !important;
+        padding-left: 32px;
+      }
+
+      &__input-btn-search,
+      &__input-btn-close {
+        @include reset-btn();
+
+        position: absolute;
+        z-index: 2;
+        right: 0;
+        top: 0;
+        width: 32px;
+        height: 32px;
+        font-size: 17px;
+        color: $color-gray-darken;
+        overflow: hidden;
+        transition: $duration-quickly;
+
+        svg {
+          fill: $color-gray-darken;
+          transition: $duration-quickly;
+        }
+
+        &:hover,
+        &:focus {
+          color: fade-out($color-gray-darken, 0.2);
+
+          svg {
+            fill: fade-out($color-gray-darken, 0.2);
+          }
+        }
+
+        &:active {
+          color: fade-out($color-black, 0.2);
+
+          svg {
+            fill: fade-out($color-black, 0.2);
+          }
+        }
+      }
+
+      &__input-btn-search {
+        left: 0;
+      }
+
+      &__input-btn-close {
+        right: 0;
+        display: none;
+      }
+
+      &__input-btn-search-icon {
+        width: 24px;
+        height: 24px;
+      }
+
+      &__input-btn-close-icon {
+        position: relative;
+        top: 0;
+        width: 22px;
+        height: 22px;
+        fill: hsl(0, 0%, 13%);
+      }
+    }
+  }
+
   &--error {
     #{$block-name} {
       &__input {
@@ -226,6 +357,14 @@ export default {
             //color: $color-gray-light !important;
           }
         }
+      }
+    }
+  }
+
+  &--show-search-close {
+    #{$block-name} {
+      &__input-btn-close {
+        display: block;
       }
     }
   }
@@ -280,6 +419,64 @@ export default {
     }
   }
 
+  &--addon {
+    #{$block-name} {
+      &__input {
+        padding-right: 35px;
+      }
+
+      &__input-addon {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translate3d(0, -50%, 0);
+        font-size: 14px;
+        color: $color-gray-darker;
+        width: 20px;
+        height: 20px;
+
+        &--text {
+          font-size: 20px;
+          height: auto;
+          display: block;
+          text-align: center;
+        }
+      }
+
+      &__input-inner {
+        position: relative;
+      }
+    }
+  }
+
+  &--password {
+    #{$block-name} {
+      &__input-inner {
+        position: relative;
+      }
+
+      &__input {
+        padding-right: 45px;
+      }
+
+      &__input-btn-eye {
+        @include reset-btn();
+        position: absolute;
+        right: 0;
+        top: 0;
+        font-size: 16px;
+        width: 36px;
+        height: 34px;
+      }
+
+      &__input-btn-eye-icon {
+        position: relative;
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
   &--total {
     #{$block-name} {
       &__input {
@@ -295,40 +492,66 @@ export default {
       }
     }
   }
+
+  &--with-buttons {
+    #{$block-name} {
+      &__input-inner {
+        position: relative;
+      }
+
+      &__input {
+        padding-right: 150px;
+      }
+
+      &__input[disabled] + .mc-field-text__buttons {
+        pointer-events: none;
+      }
+
+      &__buttons {
+        display: flex;
+        flex-wrap: nowrap;
+        position: absolute;
+        right: 5px;
+        height: 34px;
+        top: 0;
+
+        .el-link {
+          padding: 8px;
+          color: hsl(0, 0%, 45%);
+
+          @include interplay-link($color: $color-cinnabar);
+        }
+
+        &:empty {
+          display: none;
+        }
+      }
+    }
+  }
 }
 </style>
 
 <docs>
     ```jsx
     let text = null
+    let number = null
     <div>
-        <McFieldText
+        <McFieldTextOld
                 v-model="text"
                 theme="light"
                 type="text"
                 design="simple"
-        >
-            <template slot="prepend">
-                <McSvgIcon name="face"/>
-            </template>
-            <template slot="append">
-                <McSvgIcon name="face"/>
-            </template>
-        </McFieldText>
+        />
         <br>
-        <McFieldText
-                v-model="text"
+        <McFieldTextOld
+                v-model="number"
+                type="number"
                 theme="light"
-                type="text"
                 design="simple"
-        >
-            <template slot="prepend">
-                @
-            </template>
-            <template slot="append">
-                $
-            </template>
-        </McFieldText>
+                addon="%"
+                addon-type="a"
+                :addon-text="true"
+        />
     </div>
     ```
 </docs>
