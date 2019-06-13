@@ -1,6 +1,6 @@
 <template>
   <section class="mc-avatar-status" :class="classes">
-    <McAvatar :size="size" :src="src" rounded />
+    <McAvatar :size="size" :src="src" :lazy="lazy" rounded />
   </section>
 </template>
 
@@ -44,6 +44,14 @@ export default {
     dotColor: {
       type: String,
       default: "transparent",
+    },
+    /**
+     *  Отложенная подгрузка
+     *
+     */
+    lazy: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -137,11 +145,11 @@ $dot-colors: $token-colors;
 <docs>
   ```jsx
   <div>
-    <McAvatarStatus size="xs" border-color="dodger-blue-light" dot-color="green"/>
-    <McAvatarStatus size="s" border-color="dodger-blue-light" dot-color="green"/>
-    <McAvatarStatus size="m" border-color="dodger-blue-light" dot-color="green"/>
-    <McAvatarStatus size="l" border-color="dodger-blue-light" dot-color="green"/>
-    <McAvatarStatus size="xl" border-color="dodger-blue-light" dot-color="green"/>
+    <McAvatarStatus size="xs" border-color="dodger-blue-light" dot-color="green" lazy/>
+    <McAvatarStatus size="s" border-color="dodger-blue-light" dot-color="green" lazy/>
+    <McAvatarStatus size="m" border-color="dodger-blue-light" dot-color="green" lazy/>
+    <McAvatarStatus size="l" border-color="dodger-blue-light" dot-color="green" lazy/>
+    <McAvatarStatus size="xl" border-color="dodger-blue-light" dot-color="green" lazy/>
   </div>
   ```
 </docs>

@@ -1,6 +1,8 @@
 <template>
   <component :is="tag" class="mc-title" :class="classObject">
-    <slot></slot>
+    <div class="mc-title__text">
+      <slot></slot>
+    </div>
   </component>
 </template>
 
@@ -63,6 +65,7 @@ export default {
   margin-bottom: 0;
   font-family: $font-heading;
   line-height: $line-height-s;
+  font-weight: $weight-normal;
 
   &--size-xs {
     font-size: $size-xs;
