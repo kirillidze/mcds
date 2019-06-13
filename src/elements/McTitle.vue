@@ -67,6 +67,11 @@ export default {
   line-height: $line-height-s;
   font-weight: $weight-normal;
 
+  &__text {
+    display: flex;
+    align-items: center;
+  }
+
   &--size-xs {
     font-size: $size-xs;
   }
@@ -139,17 +144,13 @@ export default {
     <McTitle size="xxxl">Заголовок</McTitle>
     <McTitle size="xxxxl">Заголовок</McTitle>
     <McTitle size="xxxxl" color="dodger-blue-light">
-      <template slot="prepend">
         <McSvgIcon size="xl"/>
-      </template>
       Заголовок
     </McTitle>
 
     <McTitle tag-name="div" size="xxxxl" color="dark-orchid">
       Заголовок
-      <template slot="append">
         <McSvgIcon size="xl"/>
-      </template>
     </McTitle>
   </div>
   ```
