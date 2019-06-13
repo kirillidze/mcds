@@ -67,6 +67,7 @@ export default {
   margin-bottom: 0;
   font-family: $font-heading;
   line-height: $line-height-s;
+  font-weight: $weight-normal;
 
   &--size-xs {
     font-size: $size-xs;
