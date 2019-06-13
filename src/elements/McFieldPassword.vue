@@ -10,17 +10,11 @@
     :name="name"
     :placeholder="placeholder"
   >
+    <slot name="prepend" slot="prepend" />
     <template slot="append">
+      <slot name="append"></slot>
       <McSvgIcon
-        v-if="type === 'password'"
-        name="visibility"
-        type="a"
-        href="#"
-        @click.native.prevent="handleToggleClick"
-      />
-      <McSvgIcon
-        v-else
-        name="visibility_off"
+        :name="type === 'password' ? 'visibility' : 'visibility_off'"
         type="a"
         href="#"
         @click.native.prevent="handleToggleClick"
