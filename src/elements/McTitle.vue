@@ -1,12 +1,16 @@
 <template>
   <component :is="tag" class="mc-title" :class="classObject">
+    <slot name="prepend"></slot>
     <slot></slot>
+    <slot name="append"></slot>
   </component>
 </template>
 
 <script>
+import McSvgIcon from "./McSvgIcon"
 export default {
   name: "McTitle",
+  components: { McSvgIcon },
   status: "ready",
   release: "1.0.0",
   props: {
@@ -30,11 +34,14 @@ export default {
       type: String,
       default: "black",
     },
+    tagName: {
+      type: String,
+    },
   },
 
   computed: {
     tag() {
-      return "h" + this.level
+      return this.tagName ? this.tagName : "h" + this.level
     },
     classObject() {
       return {
@@ -51,7 +58,9 @@ export default {
 <style lang="scss">
 .mc-title {
   $block-name: &;
-
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   margin-top: 0;
   margin-bottom: 0;
   font-family: $font-heading;
@@ -100,13 +109,18 @@ export default {
   &--color {
     @each $color, $value in $token-colors {
       &-#{$color} {
-        #{$block-name} {
-          &__name {
-            color: $color-white;
-          }
-        }
-        background-color: $value;
+        color: $value;
       }
+    }
+  }
+
+  .mc-svg-icon {
+    &:first-child {
+      margin-right: $space_s;
+    }
+
+    &:last-child {
+      margin-left: $space_s;
     }
   }
 }
@@ -123,6 +137,19 @@ export default {
     <McTitle size="xxl">Заголовок</McTitle>
     <McTitle size="xxxl">Заголовок</McTitle>
     <McTitle size="xxxxl">Заголовок</McTitle>
+    <McTitle size="xxxxl" color="dodger-blue-light">
+      <template slot="prepend">
+        <McSvgIcon size="xl"/>
+      </template>
+      Заголовок
+    </McTitle>
+
+    <McTitle tag-name="div" size="xxxxl" color="dark-orchid">
+      Заголовок
+      <template slot="append">
+        <McSvgIcon size="xl"/>
+      </template>
+    </McTitle>
   </div>
   ```
 </docs>

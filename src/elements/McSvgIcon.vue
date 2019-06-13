@@ -20,7 +20,7 @@ export default {
      * Название
      */
     name: {
-      required: true,
+      type: String,
       default: "settings",
     },
     /**
