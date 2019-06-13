@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import McButton from "../elements/McButtonOld"
+import McButton from "../elements/McButton"
 import McModal from "./McModal"
 export default {
   name: "McFormModal",

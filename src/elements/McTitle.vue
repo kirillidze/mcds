@@ -1,7 +1,9 @@
 <template>
   <component :is="tag" class="mc-title" :class="classObject">
     <slot name="prepend"></slot>
-    <slot></slot>
+    <div class="mc-title__text">
+      <slot></slot>
+    </div>
     <slot name="append"></slot>
   </component>
 </template>
