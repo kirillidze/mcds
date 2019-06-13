@@ -1,47 +1,80 @@
 <template>
   <section class="mc-chip" :class="classes">
-    <div class="mc-chip__name">
+    <slot name="icon" />
+    <div class="mc-chip__title">
       <slot></slot>
     </div>
-    <button v-if="closeBtn && !type" @click.prevent="handleClick" class="mc-chip__btn">
-      <McSvgIcon class="mc-chip__btn-icon" size="xxs" name="cancel" />
+    <div v-if="counter" class="mc-chip__counter">
+      {{ counter }}
+    </div>
+    <button v-if="closable" class="mc-chip__button" v-on="$listeners">
+      <McSvgIcon size="xxs" name="cancel" />
     </button>
   </section>
 </template>
 
 <script>
 import McSvgIcon from "./McSvgIcon"
+import McCounter from "./McCounter"
 export default {
   name: "McChip",
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
-  components: { McSvgIcon },
+  components: { McCounter, McSvgIcon },
   props: {
-    closeBtn: {
+    /**
+     *  Отключенное состояние
+     *
+     */
+    disabled: {
       type: Boolean,
-      default: true,
+      default: false,
     },
-    type: {
-      type: String,
-      default: null,
+    /**
+     *  Кнопка закрытия
+     *
+     */
+    closable: {
+      type: Boolean,
+      default: false,
     },
-    color: {
+    /**
+     *  Дизайн:
+     *  `primary, primary-invert т.д.`
+     */
+    variation: {
       type: String,
+      default: "transparent",
+    },
+    /**
+     *  Размеры:
+     *  `s, m, l и т.д.`
+     */
+    size: {
+      type: String,
+      default: "m",
+    },
+    /**
+     *  Счетчик
+     *
+     */
+    counter: {
+      type: Number,
       default: null,
     },
   },
+
   methods: {
-    handleClick() {
-      this.$emit("remove")
-    },
+    handleClick() {},
   },
 
   computed: {
     classes() {
       return {
-        "mc-chip--without-close": !this.closeBtn,
-        [`mc-chip--without-close mc-chip--type-${this.type}`]: this.type,
-        [`mc-chip--color-${this.color}`]: this.color,
+        [`mc-chip--variation-${this.variation}`]: this.variation,
+        [`mc-chip--size-${this.size}`]: this.size,
+
+        "mc-chip--disabled": this.disabled,
       }
     },
   },
@@ -49,81 +82,112 @@ export default {
 </script>
 
 <style lang="scss">
+$colors: (
+  "primary": $color-primary,
+  "gray-darkest": $color-gray-darkest,
+);
+
 .mc-chip {
   $block-name: &;
 
-  border-radius: 12px;
-  background-color: hsl(0, 0%, 84%);
-  position: relative;
-  font-size: 0;
-  line-height: 0;
-  height: 23px;
-  padding: 4px 28px 4px 11px;
+  color: $color-text;
   font-family: $font-text;
+  font-size: $size-m - 1;
+  line-height: $line-height-s;
+  font-weight: $weight-normal;
   display: inline-flex;
+  max-width: 100%;
+  align-items: center;
+  height: $tappable-element-s;
+  padding-left: $space-xs;
+  padding-right: $space-xs;
+  border-radius: $radius-xxxxl;
+  vertical-align: middle;
 
-  &__name {
+  &__title {
     @include ellipsis();
+    @include layout-flex-fix();
+    margin-right: $space_xxs;
+    margin-left: $space_xxs;
 
-    color: hsl(0, 0%, 27%);
-    font-size: 14px;
-    font-weight: 500;
-    line-height: line-height(17, 14);
+    &:empty {
+      display: none;
+    }
   }
 
-  &__btn {
-    @include reset-btn();
-    position: absolute;
-    right: 4px;
-    top: 3px;
-    color: hsl(0, 0%, 53%);
-    transition: color $duration-quickly;
+  &__counter {
+    flex: 0 0 auto;
+    font-family: $font-heading;
+    font-size: 13px;
+    margin-right: $space_xxs;
+    margin-left: $space_xxs;
+    color: $color-gray-dark;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__button {
+    @include size($tappable-element-xxs);
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    border-radius: 0;
+    vertical-align: middle;
+    user-select: none;
+    text-decoration: none;
+    text-transform: none;
+    background-color: transparent;
+    background-image: none;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    transition: all $duration-quickly;
+    flex-wrap: nowrap;
+    -webkit-appearance: none;
+    -webkit-text-fill-color: currentColor;
+    color: $color-primary;
+    margin-left: $space_xxs;
 
     &:hover,
     &:focus {
-      color: $color-navy-blue-light;
+      color: darken($color-danger, 10%);
     }
 
     &:active {
-      color: darken($color-navy-blue-light, 8%);
+      color: darken($color-danger, 15%);
     }
   }
 
-  &__btn-icon {
-    height: 17px;
-    width: 17px;
-  }
+  @each $color, $value in $colors {
+    &--variation-#{$color} {
+      background-color: $value;
+      color: $color-white;
 
-  &--without-close {
-    padding-right: 11px;
-  }
+      #{$block-name} {
+        &__button {
+          color: $color-white;
 
-  &--type-2 {
-    border-radius: 4px;
-    background-color: $color-white;
-    padding: 2px 8px;
-    height: 16px;
+          &:hover,
+          &:focus {
+            color: fade-out($color-white, 1 - $opacity_hover);
+          }
 
-    #{$block-name} {
-      &__name {
-        color: hsl(0, 0%, 13%);
-        font-family: $font-heading-secondary;
-        font-size: 10px;
-        line-height: line-height(13, 10);
-        font-weight: 500;
-        text-transform: uppercase;
-      }
-    }
-  }
-  &--color {
-    @each $color, $value in $token-colors {
-      &-#{$color} {
-        #{$block-name} {
-          &__name {
-            color: $color-white;
+          &:active {
+            color: fade-out($color-white, 1 - $opacity_active);
           }
         }
-        background-color: $value;
+
+        &__counter {
+          color: fade-out($color-white, 0.5);
+        }
+      }
+
+      &-invert {
+        background-color: fade-out($value, 0.9);
       }
     }
   }
@@ -132,10 +196,26 @@ export default {
 
 <docs>
   ```jsx
+  let eventTest = (val) => alert(val)
   <div>
-    <McChip>Владилен</McChip>
-    <McChip color="dodger-blue-light" type="2">Максим</McChip>
-    <McChip type="2">Егор</McChip>
+    <McChip variation="gray-darkest-invert" closable @click="eventTest('close')">
+      Чипс
+    </McChip>
+    <McChip variation="gray-darkest-invert">
+      <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
+      Чипс c иконкой
+    </McChip>
+    <McChip variation="primary-invert" closable @click="eventTest('close')">
+      <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
+      Чипс c иконкой и кнопкой
+    </McChip>
+    <McChip :counter="15" variation="primary" closable @click="eventTest('close')">
+      <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
+      Чипс c иконкой, кнопкой и счетчкиком
+    </McChip>
+    <McChip :counter="15">
+      Чипс cо счетчкиком
+    </McChip>
   </div>
   ```
 </docs>

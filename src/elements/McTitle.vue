@@ -69,6 +69,16 @@ export default {
   line-height: $line-height-s;
   font-weight: $weight-normal;
 
+  .mc-svg-icon {
+    &:first-child {
+      margin-right: $space_s;
+    }
+
+    &:last-child {
+      margin-left: $space_s;
+    }
+  }
+
   &--size-xs {
     font-size: $size-xs;
   }
@@ -114,16 +124,6 @@ export default {
       &-#{$color} {
         color: $value;
       }
-    }
-  }
-
-  .mc-svg-icon {
-    &:first-child {
-      margin-right: $space_s;
-    }
-
-    &:last-child {
-      margin-left: $space_s;
     }
   }
 }
