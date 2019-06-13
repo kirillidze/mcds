@@ -147,9 +147,7 @@ export default {
 
     <McTitle tag-name="div" size="xxxxl" color="dark-orchid">
       Заголовок
-      <template slot="append">
-        <McSvgIcon size="xl"/>
-      </template>
+      <McSvgIcon size="xl"/>
     </McTitle>
   </div>
   ```
