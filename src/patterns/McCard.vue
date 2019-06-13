@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import McGridRow from "./McGridRow"
+import McGridRow from "./McGrid/McGridRow"
 import McTwoLines from "./McTwoLines"
 export default {
   name: "McCard",
   components: { McTwoLines, McGridRow },
-  status: "ready",
+  status: "deprecated",
   release: "1.0.0",
 }
 </script>

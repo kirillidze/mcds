@@ -23,7 +23,7 @@
       <template slot="singleLabel" slot-scope="props">
         <div v-if="avatar" class="mc-field-select__avatar-wrap">
           <div class="mc-field-select__avatar">
-            <ElAvatar size="ex-small" :src="avatar" />
+            <!--<ElAvatar size="ex-small" :src="avatar" />-->
           </div>
           <div class="mc-field-select__avatar-text">
             {{ props.option ? props.option.name : this.placeholder }}
@@ -45,10 +45,9 @@
 
 <script>
 import Multiselect from "vue-multiselect"
-import ElAvatar from "./McAvatarOld"
 export default {
   name: "McFieldSelect",
-  components: { ElAvatar, Multiselect },
+  components: { Multiselect },
   status: "deprecated",
   release: "1.0.0",
   props: {

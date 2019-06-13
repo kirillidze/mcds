@@ -12,10 +12,12 @@ export default {
   components: { McGridCol },
   status: "ready",
   release: "0.0.1",
+
   props: {
     gutter: {
       type: Number,
     },
+
     justify: {
       type: String,
       default: "start",
@@ -23,6 +25,7 @@ export default {
         return ["start", "end", "center", "space-around", "space-between"].indexOf(value) !== -1
       },
     },
+
     align: {
       type: String,
       default: "top",
@@ -31,16 +34,19 @@ export default {
       },
     },
   },
+
   data() {
     return {}
   },
+
   computed: {
     classes() {
       return {
-        [`mc-grid-row__justify-${this.justify}`]: this.justify,
-        [`mc-grid-row__align-${this.align}`]: this.align,
+        [`mc-grid-row--justify-${this.justify}`]: this.justify,
+        [`mc-grid-row--align-${this.align}`]: this.align,
       }
     },
+
     styles() {
       return this.gutter !== 0
         ? {
@@ -92,8 +98,8 @@ export default {
 <docs>
     ```jsx
     <div>
-        <mc-grid-row :gutter="15">
-            <mc-grid-col :span="1" :span-xs="2">
+        <mc-grid-row :gutter="30">
+            <mc-grid-col :span="1" :span-s="2">
                 <div style="background: #e74c3c">1</div>
             </mc-grid-col>
             <mc-grid-col :span="2">

@@ -7,17 +7,20 @@
 <script>
 import _upperFirst from "lodash/upperFirst"
 const values = ["span", "order", "offset", "push", "pull"]
-const sizes = ["xs", "sm", "md", "lg"]
+const sizes = ["s", "m", "l", "xl", "xxl"]
 const props = {}
+
 values.forEach(value => {
   sizes.forEach(size => {
     props[`${value}-${size}`] = { type: Number }
   })
 })
+
 export default {
   name: "McGridCol",
   status: "ready",
   release: "0.0.1",
+
   props: {
     span: { type: Number },
     order: { type: Number },
@@ -26,11 +29,13 @@ export default {
     pull: { type: Number },
     ...props,
   },
+
   data() {
     return {
       gutter: 0,
     }
   },
+
   computed: {
     classes() {
       const list = {}
@@ -43,6 +48,7 @@ export default {
       })
       return list
     },
+
     styles() {
       let colStyle =
         this.gutter !== 0
@@ -54,6 +60,7 @@ export default {
       return this.order ? { ...colStyle, order: this.order } : colStyle
     },
   },
+
   mounted() {
     this.$parent.updateGutter()
   },
@@ -95,20 +102,25 @@ export default {
   }
 
   @include generate-col("");
-  @media (max-width: 768px) {
-    @include generate-col("xs");
+
+  @media #{$media-query-s} {
+    @include generate-col("-s");
   }
 
-  @media (min-width: 768px) {
-    @include generate-col("sm");
+  @media #{$media-query-m} {
+    @include generate-col("-m");
   }
 
-  @media (min-width: 992px) {
-    @include generate-col("md");
+  @media #{$media-query-l} {
+    @include generate-col("-l");
   }
 
-  @media (min-width: 1200px) {
-    @include generate-col("lg");
+  @media #{$media-query-xl} {
+    @include generate-col("-xl");
+  }
+
+  @media #{$media-query-xxl} {
+    @include generate-col("-xxl");
   }
 }
 </style>

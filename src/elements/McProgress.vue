@@ -7,7 +7,7 @@
 <script>
 export default {
   name: "McProgress",
-  status: "ready",
+  status: "deprecated",
   release: "1.0.0",
   props: {
     percent: {

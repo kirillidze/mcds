@@ -8,8 +8,8 @@
 import { VTooltip } from "v-tooltip"
 export default {
   name: "McTooltip",
-  status: "ready",
-  release: "0.0.1",
+  status: "deprecated",
+  release: "1.0.0",
   props: {
     /**
      *  Тектс подсказки:

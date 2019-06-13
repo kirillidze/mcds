@@ -11,7 +11,7 @@
 export default {
   name: "McLogo",
   status: "ready",
-  release: "0.0.1",
+  release: "1.0.0",
   props: {
     /**
      *  Название сервиса
