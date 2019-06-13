@@ -26,6 +26,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    color: {
+      type: String,
+      default: "black",
+    },
   },
 
   computed: {
@@ -37,6 +41,7 @@ export default {
         [`mc-title--size-${this.size}`]: this.size,
         [`mc-title--font-${this.font}`]: this.font,
         ["mc-title--ellipsis"]: this.ellipsis,
+        [`mc-title--color-${this.color}`]: this.color,
       }
     },
   },
@@ -90,6 +95,19 @@ export default {
   }
 
   &--font-heading {
+  }
+
+  &--color {
+    @each $color, $value in $token-colors {
+      &-#{$color} {
+        #{$block-name} {
+          &__name {
+            color: $color-white;
+          }
+        }
+        background-color: $value;
+      }
+    }
   }
 }
 </style>

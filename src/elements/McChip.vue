@@ -4,7 +4,7 @@
       <slot></slot>
     </div>
     <button v-if="closeBtn && !type" @click.prevent="handleClick" class="mc-chip__btn">
-      <McSvgIcon class="mc-chip__btn-icon" :width="17" :height="17" name="cancel" />
+      <McSvgIcon class="mc-chip__btn-icon" size="xxs" name="cancel" />
     </button>
   </section>
 </template>
