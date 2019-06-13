@@ -67,6 +67,11 @@ export default {
   line-height: $line-height-s;
   font-weight: $weight-normal;
 
+  &__text {
+    display: flex;
+    align-items: center;
+  }
+
   &--size-xs {
     font-size: $size-xs;
   }
@@ -117,11 +122,11 @@ export default {
 
   .mc-svg-icon {
     &:first-child {
-      margin-right: $space_s;
+      margin-right: $space_xxs;
     }
 
     &:last-child {
-      margin-left: $space_s;
+      margin-left: $space_xxs;
     }
   }
 }
@@ -139,15 +144,13 @@ export default {
     <McTitle size="xxxl">Заголовок</McTitle>
     <McTitle size="xxxxl">Заголовок</McTitle>
     <McTitle size="xxxxl" color="dodger-blue-light">
-      <template slot="prepend">
         <McSvgIcon size="xl"/>
-      </template>
       Заголовок
     </McTitle>
 
     <McTitle tag-name="div" size="xxxxl" color="dark-orchid">
       Заголовок
-      <McSvgIcon size="xl"/>
+        <McSvgIcon size="xl"/>
     </McTitle>
   </div>
   ```
