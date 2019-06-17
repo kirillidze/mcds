@@ -7,8 +7,8 @@
     height="auto"
     width="100%"
     :maxWidth="510"
-    @before-open="beforeOpen"
-    @before-close="beforeClose"
+    @before-open="event => $emit('beforeOpen', event)"
+    @before-close="event => $emit('beforeClose', event)"
     @closed="event => $emit('closed', event)"
     @opened="event => $emit('opened', event)"
   >
@@ -45,12 +45,6 @@ export default {
     },
   },
   methods: {
-    beforeOpen(event) {
-      this.$emit("beforeOpen", event)
-    },
-    beforeClose(event) {
-      this.$emit("beforeClose", event)
-    },
     close() {
       this.$modal.hide(this.name)
     },
@@ -170,7 +164,7 @@ export default {
       display: none;
     }
 
-    .el-link {
+    .mc-button {
       margin-left: 3px;
       margin-right: 3px;
     }
