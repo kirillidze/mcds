@@ -13,7 +13,7 @@ import Tabs from "vue-tabs-component/src/components/Tabs"
 
 export default {
   name: "McTabs",
-  status: "ready",
+  status: "deprecated",
   release: "0.0.1",
   props: {
     cacheLifetime: {

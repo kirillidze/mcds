@@ -720,6 +720,13 @@
       "originalValue": "0.4px",
       "name": "spacing_m"
     },
+    "radius_xxxxl": {
+      "type": "number",
+      "category": "border-radius",
+      "value": "60px",
+      "originalValue": "60px",
+      "name": "radius_xxxxl"
+    },
     "radius_xl": {
       "type": "number",
       "category": "border-radius",

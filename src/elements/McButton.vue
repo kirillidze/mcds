@@ -492,6 +492,7 @@ $colors: (
   ```jsx
   let variations = [
     'primary',
+    'link',
     'soft-green-dark-invert',
     'danger-outline',
     'gray-darkest-flat',
@@ -504,6 +505,10 @@ $colors: (
       <McButton :variation="variation" class="mc-button--is-active" size="s">
         <McSvgIcon slot="icon-prepend" name="assessment"/>
         Активная
+      </McButton>
+
+      <McButton :variation="variation">
+        Без отступов
       </McButton>
 
       <McButton :variation="variation" size="s">
