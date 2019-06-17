@@ -10,11 +10,13 @@ import filterSearch from "./utils/filterSearch"
 import "codemirror/mode/jsx/jsx"
 import VueLazyload from "vue-lazyload"
 import VueMoment from "vue-moment"
+import VModal from "vue-js-modal"
 
 Vue.config.productionTip = false
 Vue.mixin(statusLabels)
 Vue.use(VueLazyload)
 Vue.use(VueMoment)
+Vue.use(VModal)
 
 document.addEventListener("DOMContentLoaded", () => {
   filterSearch.methods.init()

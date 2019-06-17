@@ -7,12 +7,13 @@
     height="auto"
     width="100%"
     :maxWidth="510"
-    @before-open="beforeOpen"
-    @before-close="beforeClose"
+    @before-open="event => $emit('beforeOpen', event)"
+    @before-close="event => $emit('beforeClose', event)"
     @closed="event => $emit('closed', event)"
+    @opened="event => $emit('opened', event)"
   >
     <div class="mc-modal__inner">
-      <div class="mc-modal__header">
+      <div class="mc-modal__header" v-if="$slots.title">
         <div class="mc-modal__title">
           <slot name="title"></slot>
         </div>
@@ -20,16 +21,11 @@
       <div class="mc-modal__body">
         <slot></slot>
       </div>
-      <div class="mc-modal__control">
+      <div class="mc-modal__control" v-if="$slots.footer">
         <slot name="footer"></slot>
       </div>
       <button type="button" class="mc-modal__btn-close" @click.prevent="close">
-        <McSvgIcon
-          class="mc-modal__icon-close"
-          width="24"
-          height="24"
-          name="baseline-clear-24px"
-        ></McSvgIcon>
+        <McSvgIcon class="mc-modal__icon-close" width="24" height="24" name="clear" />
       </button>
     </div>
   </modal>
@@ -37,9 +33,10 @@
 
 <script>
 import McSvgIcon from "../elements/McSvgIcon"
+import McButton from "../elements/McButton"
 export default {
   name: "McModal",
-  components: { McSvgIcon },
+  components: { McButton, McSvgIcon },
   status: "deprecated",
   release: "1.0.0",
   props: {
@@ -48,12 +45,6 @@ export default {
     },
   },
   methods: {
-    beforeOpen(event) {
-      this.$emit("beforeOpen", event)
-    },
-    beforeClose(event) {
-      this.$emit("beforeClose", event)
-    },
     close() {
       this.$modal.hide(this.name)
     },
@@ -173,10 +164,20 @@ export default {
       display: none;
     }
 
-    .el-link {
+    .mc-button {
       margin-left: 3px;
       margin-right: 3px;
     }
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  <McButton @click.prevent="$modal.show('testModal')">Open</McButton>
+  <McModal name="testModal">
+    <template slot="title">Заголовок</template>
+    Контент
+  </McModal>
+  ```
+</docs>
