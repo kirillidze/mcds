@@ -23,7 +23,7 @@
 <script>
 import McButton from "../../../elements/McButton"
 import McSvgIcon from "../../../elements/McSvgIcon"
-import McAvatar from "../../../elements/McAvatar"
+import McAvatar from "../../../elements/McAvatar/McAvatar"
 export default {
   name: "McHeaderSearchItem",
   components: { McAvatar, McSvgIcon, McButton },

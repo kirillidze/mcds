@@ -110,7 +110,7 @@ import McDropdown from "../../McDropdown"
 import McButton from "../../../elements/McButton"
 import McSvgIcon from "../../../elements/McSvgIcon"
 import McPanel from "../../McPanel"
-import McAvatar from "../../../elements/McAvatar"
+import McAvatar from "../../../elements/McAvatar/McAvatar"
 import McUser from "../../../elements/McUser"
 import McSeparator from "../../McSeparator"
 export default {
