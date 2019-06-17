@@ -426,6 +426,32 @@ $colors: (
             background-color: fade-out($value, 0.85);
           }
         }
+
+        &-link {
+          color: $value;
+          padding: 0;
+          height: auto;
+          width: auto;
+          border: none;
+
+          &:hover,
+          &:focus {
+            color: darken($value, 12%);
+          }
+
+          &:active {
+            color: darken($value, 16%);
+          }
+
+          &#{$block-name} {
+            &--disabled {
+              opacity: $opacity-disabled;
+              background-color: transparent !important;
+              color: $value !important;
+              border-color: transparent !important;
+            }
+          }
+        }
       }
     }
   }
@@ -509,6 +535,7 @@ $colors: (
     'gray-darkest-flat',
     'white',
     'white-flat',
+    'primary-link',
   ]
 
   <div style="text-align: center">
@@ -516,10 +543,6 @@ $colors: (
       <McButton :variation="variation" class="mc-button--is-active" size="s">
         <McSvgIcon slot="icon-prepend" name="assessment"/>
         Активная
-      </McButton>
-
-      <McButton :variation="variation" no-padding>
-        Без отступов
       </McButton>
 
       <McButton :variation="variation" size="s">
