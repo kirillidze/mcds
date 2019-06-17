@@ -540,6 +540,9 @@ $colors: (
 
   <div style="text-align: center">
     <div v-for="(variation, index) in variations" :key="index">
+
+      <h3 style="margin: 0">{{ variation }}</h3>
+
       <McButton :variation="variation" class="mc-button--is-active" size="s">
         <McSvgIcon slot="icon-prepend" name="assessment"/>
         Активная
