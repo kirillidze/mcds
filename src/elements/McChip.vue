@@ -15,12 +15,11 @@
 
 <script>
 import McSvgIcon from "./McSvgIcon"
-import McCounter from "./McCounter"
 export default {
   name: "McChip",
   status: "ready",
   release: "1.0.0",
-  components: { McCounter, McSvgIcon },
+  components: { McSvgIcon },
   props: {
     /**
      *  Отключенное состояние

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import McAvatar from "./McAvatar"
+import McAvatar from "./McAvatar/McAvatar"
 import McTitle from "./McTitle"
 export default {
   name: "McUser",

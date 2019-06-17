@@ -1,3 +1,5 @@
+// ↓↓↓ Этих переменных не будет, не используйте их нигде. Они временные, чтобы поддерживать работу стилей старого медиакуба. ↓↓↓
+
 $black: hsl(0, 0%, 0%);
 $gray-darkest: hsl(0, 0%, 10%);
 $gray-darker: hsl(0, 0%, 20%);
@@ -137,6 +139,8 @@ $tabble-first-col-width: 250px;
 
 $filter-search-input-height: 54px;
 
+// ↑↑↑ Этих переменных не будет, не используйте их нигде. Они временные, чтобы поддерживать работу стилей старого медиакуба. ↑↑↑
+
 $token-colors: (
   "red-light": $color-red-light,
   "dodger-blue-light": $color-dodger-blue-light,
@@ -152,10 +156,5 @@ $token-colors: (
   "aqua-darken": $color-aqua-darken,
   "cinnabar-dark": $color-cinnabar-dark,
   "bermuda-gray": $color-bermuda-gray,
-  "green": $color-green,
-  "purple": $color-purple,
-  "blue": $color-blue,
-  "orange": $color-orange,
-  "azure": $color-azure,
-  "red": $color-red,
+  "gray-darkest": $color-gray-darkest,
 );
