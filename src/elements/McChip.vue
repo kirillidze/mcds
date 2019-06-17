@@ -82,11 +82,6 @@ export default {
 </script>
 
 <style lang="scss">
-$colors: (
-  "primary": $color-primary,
-  "gray-darkest": $color-gray-darkest,
-);
-
 .mc-chip {
   $block-name: &;
 
@@ -162,7 +157,7 @@ $colors: (
     }
   }
 
-  @each $color, $value in $colors {
+  @each $color, $value in $token-colors {
     &--variation-#{$color} {
       background-color: $value;
       color: $color-white;
@@ -201,7 +196,7 @@ $colors: (
     <McChip variation="gray-darkest-invert" closable @click="eventTest('close')">
       Чипс
     </McChip>
-    <McChip variation="gray-darkest-invert">
+    <McChip variation="dark-orchid">
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
       Чипс c иконкой
     </McChip>
