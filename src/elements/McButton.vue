@@ -92,13 +92,6 @@ export default {
       default: "m",
     },
     /**
-     *  Убрать паддинг
-     */
-    noPadding: {
-      type: Boolean,
-      default: false,
-    },
-    /**
      *  Круглая
      *
      */
@@ -152,7 +145,6 @@ export default {
         "mc-button--disabled": this.disabled,
         "mc-button--rounded": this.rounded,
         "mc-button--full-width": this.fullWidth,
-        "mc-button--no-padding": this.noPadding,
       }
     },
     defaultTag() {
@@ -446,10 +438,6 @@ $colors: (
     width: 100%;
   }
 
-  &--no-padding {
-    padding: 0;
-  }
-
   &--text-align {
     &-left {
       #{$block-name} {
@@ -504,6 +492,7 @@ $colors: (
   ```jsx
   let variations = [
     'primary',
+    'link',
     'soft-green-dark-invert',
     'danger-outline',
     'gray-darkest-flat',
@@ -518,7 +507,7 @@ $colors: (
         Активная
       </McButton>
 
-      <McButton :variation="variation" no-padding>
+      <McButton :variation="variation">
         Без отступов
       </McButton>
 
