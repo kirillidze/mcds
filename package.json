@@ -30,7 +30,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
-      "pre-push" : "npm run build:system npm run build:docs"
+      "pre-push" : "npm run build:system"
     }
   },
   "babel": {
