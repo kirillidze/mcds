@@ -92,6 +92,13 @@ export default {
       default: "m",
     },
     /**
+     *  Убрать паддинг
+     */
+    noPadding: {
+      type: Boolean,
+      default: false,
+    },
+    /**
      *  Круглая
      *
      */
@@ -145,6 +152,7 @@ export default {
         "mc-button--disabled": this.disabled,
         "mc-button--rounded": this.rounded,
         "mc-button--full-width": this.fullWidth,
+        "mc-button--no-padding": this.noPadding,
       }
     },
     defaultTag() {
@@ -438,6 +446,10 @@ $colors: (
     width: 100%;
   }
 
+  &--no-padding {
+    padding: 0;
+  }
+
   &--text-align {
     &-left {
       #{$block-name} {
@@ -504,6 +516,10 @@ $colors: (
       <McButton :variation="variation" class="mc-button--is-active" size="s">
         <McSvgIcon slot="icon-prepend" name="assessment"/>
         Активная
+      </McButton>
+
+      <McButton :variation="variation" no-padding>
+        Без отступов
       </McButton>
 
       <McButton :variation="variation" size="s">
