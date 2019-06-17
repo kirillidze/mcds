@@ -92,6 +92,13 @@ export default {
       default: "m",
     },
     /**
+     *  Убрать паддинг
+     */
+    noPadding: {
+      type: Boolean,
+      default: false,
+    },
+    /**
      *  Круглая
      *
      */
@@ -145,6 +152,7 @@ export default {
         "mc-button--disabled": this.disabled,
         "mc-button--rounded": this.rounded,
         "mc-button--full-width": this.fullWidth,
+        "mc-button--no-padding": this.noPadding,
       }
     },
     defaultTag() {
@@ -418,6 +426,32 @@ $colors: (
             background-color: fade-out($value, 0.85);
           }
         }
+
+        &-link {
+          color: $value;
+          padding: 0;
+          height: auto;
+          width: auto;
+          border: none;
+
+          &:hover,
+          &:focus {
+            color: darken($value, 12%);
+          }
+
+          &:active {
+            color: darken($value, 16%);
+          }
+
+          &#{$block-name} {
+            &--disabled {
+              opacity: $opacity-disabled;
+              background-color: transparent !important;
+              color: $value !important;
+              border-color: transparent !important;
+            }
+          }
+        }
       }
     }
   }
@@ -436,6 +470,10 @@ $colors: (
 
   &--full-width {
     width: 100%;
+  }
+
+  &--no-padding {
+    padding: 0;
   }
 
   &--text-align {
@@ -492,12 +530,12 @@ $colors: (
   ```jsx
   let variations = [
     'primary',
-    'link',
     'soft-green-dark-invert',
     'danger-outline',
     'gray-darkest-flat',
     'white',
     'white-flat',
+    'primary-link',
   ]
 
   <div style="text-align: center">
@@ -505,10 +543,6 @@ $colors: (
       <McButton :variation="variation" class="mc-button--is-active" size="s">
         <McSvgIcon slot="icon-prepend" name="assessment"/>
         Активная
-      </McButton>
-
-      <McButton :variation="variation">
-        Без отступов
       </McButton>
 
       <McButton :variation="variation" size="s">
