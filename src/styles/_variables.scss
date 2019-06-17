@@ -142,6 +142,8 @@ $filter-search-input-height: 54px;
 // ↑↑↑ Этих переменных не будет, не используйте их нигде. Они временные, чтобы поддерживать работу стилей старого медиакуба. ↑↑↑
 
 $token-colors: (
+  "primary": $color-primary,
+  "white": $color-white,
   "red-light": $color-red-light,
   "dodger-blue-light": $color-dodger-blue-light,
   "dodger-blue-lighten": $color-dodger-blue-lighten,

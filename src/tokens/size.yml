@@ -42,6 +42,8 @@ props:
     value: "380px"
   panel_m:
     value: "320px"
+  panel_s:
+    value: "250px"
 
   container_m:
     value: "1064px"

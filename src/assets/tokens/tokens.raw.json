@@ -524,6 +524,13 @@
       "originalValue": "24px",
       "name": "tappable_element_xs"
     },
+    "panel_s": {
+      "type": "number",
+      "category": "size",
+      "value": "250px",
+      "originalValue": "250px",
+      "name": "panel_s"
+    },
     "tappable_element_xxs": {
       "type": "number",
       "category": "size",
