@@ -29,7 +29,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged build:system build:docs"
+      "pre-commit": "pretty-quick --staged",
+      "pre-push" : "npm run build:system npm run build:docs"
     }
   },
   "babel": {
