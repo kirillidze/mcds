@@ -92,13 +92,6 @@ export default {
       default: "m",
     },
     /**
-     *  Убрать паддинг
-     */
-    noPadding: {
-      type: Boolean,
-      default: false,
-    },
-    /**
      *  Круглая
      *
      */
@@ -152,7 +145,6 @@ export default {
         "mc-button--disabled": this.disabled,
         "mc-button--rounded": this.rounded,
         "mc-button--full-width": this.fullWidth,
-        "mc-button--no-padding": this.noPadding,
       }
     },
     defaultTag() {
@@ -470,10 +462,6 @@ $colors: (
 
   &--full-width {
     width: 100%;
-  }
-
-  &--no-padding {
-    padding: 0;
   }
 
   &--text-align {
