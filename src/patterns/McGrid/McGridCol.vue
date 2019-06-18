@@ -22,10 +22,25 @@ export default {
   release: "0.0.1",
 
   props: {
+    /**
+     *  Кол-во колонок (всего 12)
+     */
     span: { type: Number },
+    /**
+     *  Очерёдность
+     */
     order: { type: Number },
+    /**
+     *  Отступ (margin-left)
+     */
     offset: { type: Number },
+    /**
+     *  Отступ (left)
+     */
     push: { type: Number },
+    /**
+     *  Отступ (right)
+     */
     pull: { type: Number },
     ...props,
   },
@@ -76,26 +91,28 @@ export default {
   display: block;
   position: relative;
   flex: 1;
+  max-width: 100%;
 
   @mixin generate-col($viewport: "") {
     @for $i from 1 through $cols {
-      &--span-#{$viewport}-#{$i} {
-        width: percentage($i / $cols);
+      &--span#{$viewport}-#{$i} {
+        flex: 0 0 percentage($i / $cols);
+        max-width: percentage($i / $cols);
       }
 
-      &--push-#{$viewport}-#{$i} {
+      &--push#{$viewport}-#{$i} {
         left: percentage($i / $cols);
       }
 
-      &--pull-#{$viewport}-#{$i} {
+      &--pull#{$viewport}-#{$i} {
         right: percentage($i / $cols);
       }
 
-      &--offset-#{$viewport}-#{$i} {
+      &--offset#{$viewport}-#{$i} {
         margin-left: percentage($i / $cols);
       }
 
-      &--order-#{$viewport}-#{$i} {
+      &--order#{$viewport}-#{$i} {
         order: #{$i};
       }
     }
@@ -124,3 +141,11 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  <div>
+    Смотреть McGridRow
+  </div>
+  ```
+</docs>

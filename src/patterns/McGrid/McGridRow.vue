@@ -14,10 +14,16 @@ export default {
   release: "0.0.1",
 
   props: {
+    /**
+     *  Расстояние между колонками
+     */
     gutter: {
       type: Number,
     },
 
+    /**
+     *  Выравнивание по горизонтали
+     */
     justify: {
       type: String,
       default: "start",
@@ -26,6 +32,9 @@ export default {
       },
     },
 
+    /**
+     *  Выравнивание по вертикали
+     */
     align: {
       type: String,
       default: "top",
@@ -99,23 +108,28 @@ export default {
     ```jsx
     <div>
         <mc-grid-row :gutter="30">
-            <mc-grid-col :span="1" :span-s="2">
+            <mc-grid-col :span="12" :span-xl="1">
                 <div style="background: #e74c3c">1</div>
             </mc-grid-col>
-            <mc-grid-col :span="2">
+            <mc-grid-col :span="12" :span-xl="2">
                 <div style="background: #1abc9c">2</div>
             </mc-grid-col>
-            <mc-grid-col :span="3" :push="2">
+            <mc-grid-col :span="12" :span-xl="3">
                 <div style="background: #9b59b6">3</div>
+            </mc-grid-col>
+            <mc-grid-col :span="12" :span-xl="6">
+                <div style="background: #f1c40f">6</div>
+            </mc-grid-col>
+        </mc-grid-row>
+
+        <br>
+
+        <mc-grid-row :gutter="30">
+            <mc-grid-col>
+                <div style="background: #e74c3c">4</div>
             </mc-grid-col>
             <mc-grid-col>
                 <div style="background: #f1c40f">4</div>
-            </mc-grid-col>
-        </mc-grid-row>
-        <br>
-        <mc-grid-row>
-            <mc-grid-col>
-                <div style="background: #e74c3c">1</div>
             </mc-grid-col>
             <mc-grid-col>
                 <div style="background: #f1c40f">4</div>

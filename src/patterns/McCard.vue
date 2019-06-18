@@ -11,10 +11,12 @@
 
 <script>
 import McGridRow from "./McGrid/McGridRow"
-import McTwoLines from "./McTwoLines"
+import McTwoLines from "../elements/McTwoLines"
+import McAvatar from "../elements/McAvatar/McAvatar"
+import McGridCol from "./McGrid/McGridCol"
 export default {
   name: "McCard",
-  components: { McTwoLines, McGridRow },
+  components: { McGridCol, McAvatar, McTwoLines, McGridRow },
   status: "deprecated",
   release: "1.0.0",
 }
@@ -27,9 +29,11 @@ export default {
   border-radius: 8px;
   border: 2px solid $border-color;
   background: $color-white;
+
   &__content {
     padding: $size-m;
   }
+
   &__header {
     padding: $size-m;
     border-bottom: 2px solid $border-color;
@@ -47,23 +51,23 @@ export default {
                 <McAvatar size="m" rounded/>
                 <span style="margin-left: 10px">Заголовок карточки</span>
             </template>
-            <mc-grid-row>
-                <mc-grid-col>
+            <McGridRow :gutter="20">
+                <McGridCol :span="4">
                     <McTwoLines title="Бюджет">
                         1 200 $
                     </McTwoLines>
-                </mc-grid-col>
-                <mc-grid-col>
-                    <McTwoLines title="Бюджет">
-                        1 200 $
+                </McGridCol>
+                <McGridCol :span="4">
+                    <McTwoLines title="Блогеров">
+                        129
                     </McTwoLines>
-                </mc-grid-col>
-                <mc-grid-col>
-                    <McTwoLines title="Бюджет">
-                        1 200 $
+                </McGridCol>
+                <McGridCol :span="4">
+                    <McTwoLines title="Дедлайн">
+                        01.11.2018
                     </McTwoLines>
-                </mc-grid-col>
-            </mc-grid-row>
+                </McGridCol>
+            </McGridRow>
         </McCard>
     </div>
     ```

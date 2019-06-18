@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import McAvatar from "./McAvatar/McAvatar"
-import McTitle from "./McTitle"
+import McAvatar from "../elements/McAvatar/McAvatar"
+import McTitle from "../elements/McTitle"
 export default {
   name: "McUser",
   components: { McTitle, McAvatar },

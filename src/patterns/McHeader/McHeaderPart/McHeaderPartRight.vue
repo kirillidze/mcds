@@ -111,8 +111,8 @@ import McButton from "../../../elements/McButton"
 import McSvgIcon from "../../../elements/McSvgIcon"
 import McPanel from "../../McPanel"
 import McAvatar from "../../../elements/McAvatar/McAvatar"
-import McUser from "../../../elements/McUser"
-import McSeparator from "../../McSeparator"
+import McUser from "../../McUser"
+import McSeparator from "../../../elements/McSeparator"
 export default {
   name: "McHeaderPartRight",
   status: "ready",

@@ -8,13 +8,19 @@
 export default {
   name: "McSeparator",
   status: "ready",
-  release: "0.0.1",
+  release: "1.0.0",
 
   props: {
+    /**
+     * Отступ сверху
+     */
     indentTop: {
       type: String,
       default: null,
     },
+    /**
+     * Отступ снизу
+     */
     indentBottom: {
       type: String,
       default: null,
@@ -49,3 +55,11 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  <div>
+    <McSeparator indent-top="xs" indent-bottom="xs"/>
+  </div>
+  ```
+</docs>

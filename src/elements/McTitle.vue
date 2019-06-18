@@ -16,22 +16,37 @@ export default {
   status: "ready",
   release: "1.0.0",
   props: {
+    /**
+     * Уровень: `h1`, `h2` и т.д.
+     */
     level: {
       type: Number,
       default: 2,
     },
+    /**
+     * Размер: `xs`, `s` и т.д.
+     */
     size: {
       type: String,
       default: "m",
     },
+    /**
+     * В одну строку с точками в конце, если не вмещается
+     */
     ellipsis: {
       type: Boolean,
       default: true,
     },
+    /**
+     * Цвет
+     */
     color: {
       type: String,
       default: "black",
     },
+    /**
+     * Если нужен другой тэг
+     */
     tagName: {
       type: String,
     },
@@ -57,8 +72,8 @@ export default {
   margin-top: 0;
   margin-bottom: 0;
   font-family: $font-heading;
-  line-height: $line-height-s;
-  font-weight: $weight-normal;
+  line-height: $line-height-xs;
+  font-weight: $weight-medium;
   display: inline-flex;
   max-width: 100%;
 
@@ -67,15 +82,14 @@ export default {
 
   .mc-svg-icon {
     font-size: inherit;
-    width: 0.75em;
-    height: 0.75em;
-    margin-top: 0.25em;
+    width: 1em;
+    height: 1em;
 
     &:first-child {
-      margin-right: 0.25em;
+      margin-right: 0.3em;
     }
     &:last-child {
-      margin-left: 0.25em;
+      margin-left: 0.3em;
     }
   }
 
@@ -120,10 +134,6 @@ export default {
         @include layout-flex-fix();
       }
     }
-
-    .mc-svg-icon {
-      margin-top: 0;
-    }
   }
 
   &--color {
@@ -140,50 +150,61 @@ export default {
   ```jsx
   <div>
     <McTitle size="s">
-      <McSvgIcon slot="icon-prepend" name="add"/>
+      <McSvgIcon slot="icon-prepend" name="ready"/>
       Заголовок
-    </McTitle><br>
-    <McTitle size="s">
-      <McSvgIcon slot="icon-prepend" name="apps"/>
-      Заголовок
-    </McTitle><br>
-    <McTitle size="m">
-      <McSvgIcon slot="icon-prepend" name="check"/>
-      Заголовок
-    </McTitle><br>
-    <McTitle size="l">
-      <McSvgIcon slot="icon-prepend" name="error"/>
-      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
-    </McTitle><br>
-    <McTitle size="xl">
-      <McSvgIcon slot="icon-prepend" name="comment"/>
-      Заголовок
-    </McTitle><br>
-    <McTitle size="xxl">
-      <McSvgIcon slot="icon-prepend" name="get_app"/>
-      Заголовок
-      <McSvgIcon slot="icon-append" name="group"/>
-    </McTitle><br>
-    <McTitle size="xxxl">
-      <McSvgIcon slot="icon-prepend" name="help"/>
-      Заголовок
-      <McSvgIcon slot="icon-append" name="public"/>
-    </McTitle><br>
-    <McTitle size="xxxxl">
-      <McSvgIcon slot="icon-prepend" name="language"/>
-      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
-      <McSvgIcon slot="icon-append" name="settings"/>
-    </McTitle><br>
-    <McTitle :ellipsis="false" size="xxxxl" color="dodger-blue-light">
-      <McSvgIcon slot="icon-prepend" name="live_help"/>
-      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
-      <McSvgIcon slot="icon-append" name="settings"/>
-    </McTitle><br>
+    </McTitle>
 
-    <McTitle tag-name="div" size="xxxxl" color="dark-orchid">
-      <McSvgIcon slot="icon-prepend" name="messenger"/>
+    <br><br>
+
+    <McTitle size="s">
+      <McSvgIcon slot="icon-prepend" name="ready"/>
       Заголовок
-      <McSvgIcon slot="icon-append" name="public"/>
+      <McSvgIcon slot="icon-append" name="error"/>
+    </McTitle>
+
+    <br><br>
+
+    <McTitle size="m">
+      <McSvgIcon slot="icon-prepend" name="ready"/>
+      Заголовок
+      <McSvgIcon slot="icon-append" name="error"/>
+    </McTitle>
+
+    <br><br>
+
+    <McTitle size="l">
+      <McSvgIcon slot="icon-prepend" name="ready"/>
+      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
+      <McSvgIcon slot="icon-append" name="error"/>
+    </McTitle>
+
+    <br><br>
+
+    <McTitle :ellipsis="false" size="xl">
+      <McSvgIcon slot="icon-prepend" name="ready"/>
+      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
+      <McSvgIcon slot="icon-append" name="error"/>
+    </McTitle>
+
+    <br><br>
+
+    <McTitle size="xxl">
+      <McSvgIcon slot="icon-prepend" name="ready"/>
+      Заголовок
+    </McTitle>
+
+    <br><br>
+
+    <McTitle size="xxxl">
+      <McSvgIcon slot="icon-prepend" name="ready"/>
+      Заголовок
+    </McTitle>
+
+    <br><br>
+
+    <McTitle size="xxxxl" color="primary">
+      <McSvgIcon slot="icon-prepend" name="ready"/>
+      Заголовок
     </McTitle>
   </div>
   ```

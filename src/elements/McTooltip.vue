@@ -243,7 +243,7 @@ export default {
     </McTooltip>
     <br>
     <br>
-    <McTooltip color="white" content="А если текста реально очень очень много, например как сейчас?">
+    <McTooltip color="primary" content="А если текста реально очень очень много, например как сейчас?">
       <McSvgIcon name="face"/>
     </McTooltip>
     <br>
