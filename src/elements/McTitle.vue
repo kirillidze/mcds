@@ -26,7 +26,7 @@ export default {
     },
     ellipsis: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     color: {
       type: String,
@@ -61,7 +61,6 @@ export default {
   font-weight: $weight-normal;
   display: inline-flex;
   max-width: 100%;
-  // align-items: center;
 
   &__text {
   }
@@ -70,7 +69,7 @@ export default {
     font-size: inherit;
     width: 0.75em;
     height: 0.75em;
-    margin-top: 0.3em;
+    margin-top: 0.25em;
 
     &:first-child {
       margin-right: 0.25em;
@@ -113,11 +112,17 @@ export default {
   }
 
   &--ellipsis {
+    align-items: center;
+
     #{$block-name} {
       &__text {
         @include ellipsis($display: inline-block);
         @include layout-flex-fix();
       }
+    }
+
+    .mc-svg-icon {
+      margin-top: 0;
     }
   }
 
@@ -166,12 +171,12 @@ export default {
     </McTitle><br>
     <McTitle size="xxxxl">
       <McSvgIcon slot="icon-prepend" name="language"/>
-      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
+      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
       <McSvgIcon slot="icon-append" name="settings"/>
     </McTitle><br>
-    <McTitle ellipsis size="xxxxl" color="dodger-blue-light">
+    <McTitle :ellipsis="false" size="xxxxl" color="dodger-blue-light">
       <McSvgIcon slot="icon-prepend" name="live_help"/>
-      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
+      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
       <McSvgIcon slot="icon-append" name="settings"/>
     </McTitle><br>
 
