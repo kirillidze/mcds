@@ -865,8 +865,7 @@ pre {
   flex-wrap: nowrap;
   align-items: center;
   justify-content: space-between;
-  margin-left: 16px;
-  margin-right: 16px;
+  margin: -5px 16px 10px 16px;
 }
 </style>
 
