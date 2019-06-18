@@ -1,7 +1,7 @@
 <template>
   <div class="mc-two-lines">
-    <div class="mc-two-lines__title" v-if="title">
-      {{ title }}
+    <div class="mc-two-lines__title">
+      <slot name="title">{{ title }}</slot>
     </div>
     <div class="mc-two-lines__content">
       <slot></slot>
