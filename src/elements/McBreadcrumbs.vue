@@ -1,7 +1,7 @@
 <template>
   <ol class="mc-breadcrumbs">
     <li class="mc-breadcrumbs__item" v-for="(item, index) in items" :key="index">
-      <component :is="tag" :to="item.to" :href="item.href" class="mc-breadcrumbs__link">
+      <component :is="tag" :to="item.to" :href="item.href || '#'" class="mc-breadcrumbs__link">
         {{ item.title }}
       </component>
     </li>

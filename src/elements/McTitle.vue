@@ -1,8 +1,10 @@
 <template>
   <component :is="tag" class="mc-title" :class="classObject">
+    <slot name="icon-prepend" />
     <div class="mc-title__text">
       <slot></slot>
     </div>
+    <slot name="icon-append" />
   </component>
 </template>
 
@@ -22,13 +24,9 @@ export default {
       type: String,
       default: "m",
     },
-    font: {
-      type: String,
-      default: "heading",
-    },
     ellipsis: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     color: {
       type: String,
@@ -45,7 +43,6 @@ export default {
     classObject() {
       return {
         [`mc-title--size-${this.size}`]: this.size,
-        [`mc-title--font-${this.font}`]: this.font,
         ["mc-title--ellipsis"]: this.ellipsis,
         [`mc-title--color-${this.color}`]: this.color,
       }
@@ -57,61 +54,83 @@ export default {
 <style lang="scss">
 .mc-title {
   $block-name: &;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
   margin-top: 0;
   margin-bottom: 0;
   font-family: $font-heading;
   line-height: $line-height-s;
   font-weight: $weight-normal;
+  display: inline-flex;
+  max-width: 100%;
+
   &__text {
-    display: flex;
-    align-items: center;
   }
+
+  .mc-svg-icon {
+    font-size: inherit;
+    width: 0.75em;
+    height: 0.75em;
+    margin-top: 0.25em;
+
+    &:first-child {
+      margin-right: 0.25em;
+    }
+    &:last-child {
+      margin-left: 0.25em;
+    }
+  }
+
   &--size-xs {
     font-size: $size-xs;
   }
+
   &--size-s {
     font-size: $size-s;
   }
+
   &--size-m {
     font-size: $size-m;
   }
+
   &--size-l {
     font-size: $size-l;
-    font-weight: $weight-medium;
   }
+
   &--size-xl {
     font-size: $size-xl;
   }
+
   &--size-xxl {
     font-size: $size-xxl;
   }
+
   &--size-xxxl {
     font-size: $size-xxxl;
   }
+
   &--size-xxxxl {
     font-size: $size-xxxxl;
   }
+
   &--ellipsis {
-    @include ellipsis();
+    align-items: center;
+
+    #{$block-name} {
+      &__text {
+        @include ellipsis($display: inline-block);
+        @include layout-flex-fix();
+      }
+    }
+
+    .mc-svg-icon {
+      margin-top: 0;
+    }
   }
-  &--font-heading {
-  }
+
   &--color {
     @each $color, $value in $token-colors {
       &-#{$color} {
         color: $value;
       }
-    }
-  }
-  .mc-svg-icon {
-    &:first-child {
-      margin-right: $space_xxs;
-    }
-    &:last-child {
-      margin-left: $space_xxs;
     }
   }
 }
@@ -120,22 +139,51 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McTitle size="xs">Заголовок</McTitle>
-    <McTitle size="s">Заголовок</McTitle>
-    <McTitle size="m">Заголовок</McTitle>
-    <McTitle size="l">Заголовок</McTitle>
-    <McTitle size="xl">Заголовок</McTitle>
-    <McTitle size="xxl">Заголовок</McTitle>
-    <McTitle size="xxxl">Заголовок</McTitle>
-    <McTitle size="xxxxl">Заголовок</McTitle>
-    <McTitle size="xxxxl" color="dodger-blue-light">
-      <McSvgIcon size="xl"/>
+    <McTitle size="s">
+      <McSvgIcon slot="icon-prepend" name="add"/>
       Заголовок
-    </McTitle>
+    </McTitle><br>
+    <McTitle size="s">
+      <McSvgIcon slot="icon-prepend" name="apps"/>
+      Заголовок
+    </McTitle><br>
+    <McTitle size="m">
+      <McSvgIcon slot="icon-prepend" name="check"/>
+      Заголовок
+    </McTitle><br>
+    <McTitle size="l">
+      <McSvgIcon slot="icon-prepend" name="error"/>
+      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
+    </McTitle><br>
+    <McTitle size="xl">
+      <McSvgIcon slot="icon-prepend" name="comment"/>
+      Заголовок
+    </McTitle><br>
+    <McTitle size="xxl">
+      <McSvgIcon slot="icon-prepend" name="get_app"/>
+      Заголовок
+      <McSvgIcon slot="icon-append" name="group"/>
+    </McTitle><br>
+    <McTitle size="xxxl">
+      <McSvgIcon slot="icon-prepend" name="help"/>
+      Заголовок
+      <McSvgIcon slot="icon-append" name="public"/>
+    </McTitle><br>
+    <McTitle size="xxxxl">
+      <McSvgIcon slot="icon-prepend" name="language"/>
+      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
+      <McSvgIcon slot="icon-append" name="settings"/>
+    </McTitle><br>
+    <McTitle :ellipsis="false" size="xxxxl" color="dodger-blue-light">
+      <McSvgIcon slot="icon-prepend" name="live_help"/>
+      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
+      <McSvgIcon slot="icon-append" name="settings"/>
+    </McTitle><br>
 
     <McTitle tag-name="div" size="xxxxl" color="dark-orchid">
+      <McSvgIcon slot="icon-prepend" name="messenger"/>
       Заголовок
-      <McSvgIcon size="xl"/>
+      <McSvgIcon slot="icon-append" name="public"/>
     </McTitle>
   </div>
   ```

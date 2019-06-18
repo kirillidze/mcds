@@ -35,13 +35,32 @@ export default {
       type: String,
       default: "default",
     },
+    /**
+     *  Максимальная ширина
+     */
+    maxWidth: {
+      type: String,
+      default: "s",
+    },
+    /**
+     *  Отключить стрелку
+     */
+    arrowDisabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   directives: {
     tooltip: VTooltip,
   },
   computed: {
     tooltipClasses() {
-      return ["mc-tooltip", `mc-tooltip--color-${this.color}`]
+      return [
+        "mc-tooltip",
+        `mc-tooltip--color-${this.color}`,
+        `mc-tooltip--width-${this.maxWidth}`,
+        this.arrowDisabled ? "mc-tooltip--arrow-disabled" : "",
+      ]
     },
   },
 }
@@ -52,111 +71,144 @@ export default {
   display: inline-flex;
 }
 
-.mc-tooltip.tooltip {
+.mc-tooltip {
   $arrow-size: $space-xs;
 
-  display: block !important;
-  z-index: 10000;
-  max-width: $panel-s;
+  &.tooltip {
+    display: block !important;
+    z-index: 10000;
 
-  .tooltip-inner {
-    @include inset-squish-space($space-m);
-    background: $color-text;
-    color: $color-white;
-    border-radius: $radius-l;
-    font-family: $font-family--headings-2;
-    font-weight: $weight-medium;
-    letter-spacing: $spacing-m;
-    line-height: $line-height-s;
-    font-size: $size-m;
-    box-shadow: $shadow-l;
-  }
-
-  .tooltip-arrow {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    position: absolute;
-    margin: $arrow-size;
-    border-color: $color-text;
-    z-index: 1;
-  }
-
-  &[x-placement^="top"] {
-    margin-bottom: $arrow-size;
+    .tooltip-inner {
+      @include inset-squish-space($space-m);
+      background: $color-text;
+      color: $color-white;
+      border-radius: $radius-l;
+      font-family: $font-family--headings-2;
+      font-weight: $weight-medium;
+      letter-spacing: $spacing-m;
+      line-height: $line-height-s;
+      font-size: $size-m;
+      box-shadow: $shadow-l;
+    }
 
     .tooltip-arrow {
-      border-width: $arrow-size $arrow-size 0 $arrow-size;
-      border-left-color: transparent !important;
-      border-right-color: transparent !important;
-      border-bottom-color: transparent !important;
-      bottom: -$arrow-size;
-      left: calc(50% - #{$arrow-size});
-      margin-top: 0;
-      margin-bottom: 0;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      position: absolute;
+      margin: $arrow-size;
+      border-color: $color-text;
+      z-index: 1;
+    }
+
+    &[x-placement^="top"] {
+      margin-bottom: $arrow-size;
+
+      .tooltip-arrow {
+        border-width: $arrow-size $arrow-size 0 $arrow-size;
+        border-left-color: transparent !important;
+        border-right-color: transparent !important;
+        border-bottom-color: transparent !important;
+        bottom: -$arrow-size;
+        left: calc(50% - #{$arrow-size});
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    &[x-placement^="bottom"] {
+      margin-top: $arrow-size;
+
+      .tooltip-arrow {
+        border-width: 0 $arrow-size $arrow-size $arrow-size;
+        border-left-color: transparent !important;
+        border-right-color: transparent !important;
+        border-top-color: transparent !important;
+        top: -$arrow-size;
+        left: calc(50% - #{$arrow-size});
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    }
+
+    &[x-placement^="right"] {
+      margin-left: $arrow-size;
+
+      .tooltip-arrow {
+        border-width: $arrow-size $arrow-size $arrow-size 0;
+        border-left-color: transparent !important;
+        border-top-color: transparent !important;
+        border-bottom-color: transparent !important;
+        left: -$arrow-size;
+        top: calc(50% - #{$arrow-size});
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    &[x-placement^="left"] {
+      margin-right: $arrow-size;
+
+      .tooltip-arrow {
+        border-width: $arrow-size 0 $arrow-size $arrow-size;
+        border-top-color: transparent !important;
+        border-right-color: transparent !important;
+        border-bottom-color: transparent !important;
+        right: -$arrow-size;
+        top: calc(50% - #{$arrow-size});
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+
+    &[aria-hidden="true"] {
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity $duration-quickly, visibility $duration-quickly;
+    }
+
+    &[aria-hidden="false"] {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity $duration-quickly;
     }
   }
 
-  &[x-placement^="bottom"] {
-    margin-top: $arrow-size;
-
-    .tooltip-arrow {
-      border-width: 0 $arrow-size $arrow-size $arrow-size;
-      border-left-color: transparent !important;
-      border-right-color: transparent !important;
-      border-top-color: transparent !important;
-      top: -$arrow-size;
-      left: calc(50% - #{$arrow-size});
-      margin-top: 0;
-      margin-bottom: 0;
+  &--width-s {
+    &.tooltip {
+      max-width: $panel-s;
     }
   }
 
-  &[x-placement^="right"] {
-    margin-left: $arrow-size;
-
-    .tooltip-arrow {
-      border-width: $arrow-size $arrow-size $arrow-size 0;
-      border-left-color: transparent !important;
-      border-top-color: transparent !important;
-      border-bottom-color: transparent !important;
-      left: -$arrow-size;
-      top: calc(50% - #{$arrow-size});
-      margin-left: 0;
-      margin-right: 0;
+  &--width-m {
+    &.tooltip {
+      max-width: $panel-m;
     }
   }
 
-  &[x-placement^="left"] {
-    margin-right: $arrow-size;
-
-    .tooltip-arrow {
-      border-width: $arrow-size 0 $arrow-size $arrow-size;
-      border-top-color: transparent !important;
-      border-right-color: transparent !important;
-      border-bottom-color: transparent !important;
-      right: -$arrow-size;
-      top: calc(50% - #{$arrow-size});
-      margin-left: 0;
-      margin-right: 0;
+  &--width-l {
+    &.tooltip {
+      max-width: $panel-l;
     }
   }
 
-  &[aria-hidden="true"] {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity $duration-quickly, visibility $duration-quickly;
+  &--width-xl {
+    &.tooltip {
+      max-width: $panel-xl;
+    }
   }
 
-  &[aria-hidden="false"] {
-    visibility: visible;
-    opacity: 1;
-    transition: opacity $duration-quickly;
-  }
-}
+  &--arrow-disabled {
+    &.tooltip {
+      max-width: $panel-xl;
 
-@each $color, $value in $token-colors {
-  .mc-tooltip {
+      .tooltip-arrow {
+        display: none;
+      }
+    }
+  }
+
+  @each $color, $value in $token-colors {
     &--color-#{$color} {
       @if $color == "white" {
         &.tooltip {
@@ -186,7 +238,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McTooltip color="gray-darkest" placement="right" content="А если текста реально очень очень много, например как сейчас?">
+    <McTooltip color="gray-darkest" placement="top" content="А если текста реально очень очень много, например как сейчас?">
       <McButton>Тултип</McButton>
     </McTooltip>
     <br>
@@ -196,7 +248,7 @@ export default {
     </McTooltip>
     <br>
     <br>
-    <McTooltip color="primary" placement="top" content="А если текста реально очень очень много, например как сейчас?">
+    <McTooltip arrow-disabled color="white" placement="right" max-width="xl" content="Вывод экспресс платежей облагается комиссией в 1%. Это условие наших партнеров, и мы на этом не зарабатываем.Если вы не хотите платить комиссию – не снимайте кредитные средства со своего счета, пока они не перейдут в обычные средства.">
       Тултип
     </McTooltip>
     <br>
