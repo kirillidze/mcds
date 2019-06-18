@@ -145,11 +145,11 @@ $dot-colors: $token-colors;
 <docs>
   ```jsx
   <div>
-    <McAvatarStatus size="xs" border-color="dodger-blue-light" dot-color="green" lazy/>
-    <McAvatarStatus size="s" border-color="dodger-blue-light" dot-color="green" lazy/>
-    <McAvatarStatus size="m" border-color="dodger-blue-light" dot-color="green" lazy/>
-    <McAvatarStatus size="l" border-color="dodger-blue-light" dot-color="green" lazy/>
-    <McAvatarStatus size="xl" border-color="dodger-blue-light" dot-color="green" lazy/>
+    <McAvatarStatus size="xs" border-color="dodger-blue-light" dot-color="gorse" lazy/>
+    <McAvatarStatus size="s" border-color="dodger-blue-light" dot-color="gorse" lazy/>
+    <McAvatarStatus size="m" border-color="dodger-blue-light" dot-color="gorse" lazy/>
+    <McAvatarStatus size="l" border-color="dodger-blue-light" dot-color="gorse" lazy/>
+    <McAvatarStatus size="xl" border-color="dodger-blue-light" dot-color="gorse" lazy/>
   </div>
   ```
 </docs>

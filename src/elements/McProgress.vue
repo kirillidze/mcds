@@ -7,13 +7,21 @@
 <script>
 export default {
   name: "McProgress",
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
   props: {
+    /**
+     *  Процент
+     *
+     */
     percent: {
       type: Number,
       default: 0,
     },
+    /**
+     *  Цвет
+     *
+     */
     color: {
       type: String,
       default: null,
@@ -35,16 +43,17 @@ export default {
   $block-name: &;
 
   position: relative;
-  border-radius: 20px;
-  height: 8px;
-  background-color: #e8e8e8;
+  border-radius: $radius-m;
+  height: $space-xs;
+  background-color: $color-gray-lightest;
   width: 100%;
-  overflow: hidden;
 
   &__line {
     height: 100%;
     background-color: $color-gray-dark;
-    border-radius: 20px;
+    border-radius: $radius-m;
+    max-width: 100%;
+
     @each $color, $value in $token-colors {
       &--color-#{$color} {
         background-color: $value;
@@ -59,7 +68,7 @@ export default {
   <div>
     <McProgress :percent="20" />
     <br>
-    <McProgress :percent="60" color="dodger-blue-lighter" />
+    <McProgress :percent="90" color="dodger-blue-lighter" />
   </div>
   ```
 </docs>
