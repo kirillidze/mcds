@@ -849,6 +849,25 @@ pre {
     margin-top: 22px;
   }
 }
+
+.breadcrumbs {
+  $block-name: &;
+
+  position: sticky;
+  top: 65px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 9999;
+  border-bottom: 2px solid #d9d9d9;
+  height: 31px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 16px;
+  margin-right: 16px;
+}
 </style>
 
 <docs>
