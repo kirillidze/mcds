@@ -11,12 +11,12 @@
 
 <script>
 import McGridRow from "./McGrid/McGridRow"
-import McTwoLines from "../elements/McTwoLines"
+import McLines from "../elements/McLines"
 import McAvatar from "../elements/McAvatar/McAvatar"
 import McGridCol from "./McGrid/McGridCol"
 export default {
   name: "McCard",
-  components: { McGridCol, McAvatar, McTwoLines, McGridRow },
+  components: { McGridCol, McAvatar, McLines, McGridRow },
   status: "deprecated",
   release: "1.0.0",
 }
@@ -53,19 +53,19 @@ export default {
             </template>
             <McGridRow :gutter="20">
                 <McGridCol :span="4">
-                    <McTwoLines title="Бюджет">
+                    <McLines title="Бюджет">
                         1 200 $
-                    </McTwoLines>
+                    </McLines>
                 </McGridCol>
                 <McGridCol :span="4">
-                    <McTwoLines title="Блогеров">
+                    <McLines title="Блогеров">
                         129
-                    </McTwoLines>
+                    </McLines>
                 </McGridCol>
                 <McGridCol :span="4">
-                    <McTwoLines title="Дедлайн">
+                    <McLines title="Дедлайн">
                         01.11.2018
-                    </McTwoLines>
+                    </McLines>
                 </McGridCol>
             </McGridRow>
         </McCard>

@@ -50,6 +50,13 @@ export default {
     tagName: {
       type: String,
     },
+    /**
+     * Uppercase
+     */
+    uppercase: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     tag() {
@@ -60,6 +67,7 @@ export default {
         [`mc-title--size-${this.size}`]: this.size,
         ["mc-title--ellipsis"]: this.ellipsis,
         [`mc-title--color-${this.color}`]: this.color,
+        "mc-title--uppercase": this.uppercase,
       }
     },
   },
@@ -134,6 +142,10 @@ export default {
         @include layout-flex-fix();
       }
     }
+  }
+
+  &--uppercase {
+    text-transform: uppercase;
   }
 
   &--color {
