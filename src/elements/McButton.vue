@@ -421,8 +421,6 @@ $colors: (
 
         &-link {
           color: $value;
-          padding: $space-xxs;
-          margin: -$space-xxs;
           height: auto;
           width: auto;
           border: none;
