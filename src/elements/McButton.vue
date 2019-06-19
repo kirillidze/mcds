@@ -421,6 +421,7 @@ $colors: (
 
         &-link {
           color: $value;
+          padding: 0;
           height: auto;
           width: auto;
           border: none;
