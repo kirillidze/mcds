@@ -53,6 +53,10 @@ export default {
       padding-right: $space_s;
     }
   }
+
+  .mc-preview {
+    padding: $space-s;
+  }
 }
 </style>
 

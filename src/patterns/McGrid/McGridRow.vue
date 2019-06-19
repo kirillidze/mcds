@@ -15,9 +15,16 @@ export default {
 
   props: {
     /**
-     *  Расстояние между колонками
+     *  Расстояние между колонками по горизонтали
      */
-    gutter: {
+    gutterG: {
+      type: Number,
+    },
+
+    /**
+     *  Расстояние между колонками по вертикали
+     */
+    gutterV: {
       type: Number,
     },
 
@@ -26,9 +33,9 @@ export default {
      */
     justify: {
       type: String,
-      default: "start",
+      default: "left",
       validator: function(value) {
-        return ["start", "end", "center", "space-around", "space-between"].indexOf(value) !== -1
+        return ["left", "right", "center", "around", "between"].indexOf(value) !== -1
       },
     },
 
@@ -42,6 +49,14 @@ export default {
         return ["top", "middle", "bottom"].indexOf(value) !== -1
       },
     },
+
+    /**
+     *  Автоматически тянущиеся колонки
+     */
+    stretch: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -53,20 +68,31 @@ export default {
       return {
         [`mc-grid-row--justify-${this.justify}`]: this.justify,
         [`mc-grid-row--align-${this.align}`]: this.align,
+        ["mc-grid-row--stretch"]: this.stretch,
       }
     },
 
     styles() {
-      return this.gutter !== 0
-        ? {
-            "margin-left": `${-this.gutter / 2}px`,
-            "margin-right": `${-this.gutter / 2}px`,
-          }
-        : {}
+      let result = {}
+
+      if (this.gutterG !== 0) {
+        result["margin-left"] = `${-this.gutterG / 2}px`
+        result["margin-right"] = `${-this.gutterG / 2}px`
+      }
+
+      if (this.gutterV !== 0) {
+        result["margin-top"] = `${-this.gutterV / 2}px`
+        result["margin-bottom"] = `${-this.gutterV / 2}px`
+      }
+
+      return result
     },
   },
   watch: {
-    gutter() {
+    gutterG() {
+      this.updateGutter()
+    },
+    gutterV() {
       this.updateGutter()
     },
   },
@@ -75,7 +101,8 @@ export default {
       this.$children.forEach(children => {
         let componentName = children.$options.name
         if (componentName === "McGridCol") {
-          children.gutter = this.gutter
+          children.gutterG = this.gutterG
+          children.gutterV = this.gutterV
         }
       })
     },
@@ -91,14 +118,29 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 
-  @each $justify in ("start", "end", "center", "space-around", "space-between") {
-    .mc-grid-row--justify-#{$justify} {
-      justify-content: #{$justify};
+  @each $key,
+    $value
+      in (
+        "left": "flex-start",
+        "right": "flex-end",
+        "center": "center",
+        "around": "space-around",
+        "between": "space-between"
+      )
+  {
+    &.mc-grid-row--justify-#{$key} {
+      justify-content: #{$value};
     }
   }
   @each $key, $value in ("top": "flex-start", "middle": "center", "bottom": "flex-end") {
-    .mc-grid-row--align-#{$key} {
+    &.mc-grid-row--align-#{$key} {
       align-items: #{$value};
+    }
+  }
+
+  &--stretch {
+    .mc-grid-col {
+      flex: 1;
     }
   }
 }
@@ -107,7 +149,7 @@ export default {
 <docs>
     ```jsx
     <div>
-        <mc-grid-row :gutter="30">
+        <mc-grid-row :gutter-g="30" :gutter-v="10">
             <mc-grid-col :span="12" :span-xl="1">
                 <div style="background: #e74c3c">1</div>
             </mc-grid-col>
@@ -124,17 +166,46 @@ export default {
 
         <br>
 
-        <mc-grid-row :gutter="30">
+        <mc-grid-row stretch :gutter-g="30">
             <mc-grid-col>
-                <div style="background: #e74c3c">4</div>
+                <div style="background: #e74c3c">Автоматическая ширина на всё свободное простанство</div>
             </mc-grid-col>
             <mc-grid-col>
-                <div style="background: #f1c40f">4</div>
+                <div style="background: #f1c40f">Автоматическая ширина на всё свободное простанство</div>
             </mc-grid-col>
             <mc-grid-col>
-                <div style="background: #f1c40f">4</div>
+                <div style="background: cornflowerblue">Автоматическая ширина на всё свободное простанство</div>
             </mc-grid-col>
         </mc-grid-row>
+
+        <br>
+
+        <mc-grid-row justify="center" align="middle" :gutter-g="30">
+            <mc-grid-col>
+                <div style="background: #e74c3c">Автоматическая ширина</div>
+            </mc-grid-col>
+            <mc-grid-col>
+                <div style="background: #f1c40f">Автоматическая ширина</div>
+            </mc-grid-col>
+            <mc-grid-col>
+                <div style="background: cornflowerblue">Автоматическая ширина</div>
+            </mc-grid-col>
+        </mc-grid-row>
+
+        <br>
+
+        <mc-grid-row justify="right" align="middle" :gutter-g="30">
+            <mc-grid-col>
+                <div style="background: #e74c3c">Автоматическая ширина</div>
+            </mc-grid-col>
+            <mc-grid-col>
+                <div style="background: #f1c40f">Автоматическая ширина</div>
+            </mc-grid-col>
+            <mc-grid-col>
+                <div style="background: cornflowerblue">Автоматическая ширина</div>
+            </mc-grid-col>
+        </mc-grid-row>
+
     </div>
     ```
 </docs>

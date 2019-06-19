@@ -208,6 +208,7 @@ export default {
       Чипс c иконкой, кнопкой и счетчкиком
     </McChip>
     <McChip :counter="15">
+      <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
       Чипс cо счетчкиком
     </McChip>
   </div>

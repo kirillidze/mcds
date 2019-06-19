@@ -20,11 +20,13 @@
 import "vue-loaders/dist/vue-loaders.css"
 import { BallClipRotateMultipleLoader } from "vue-loaders"
 import McSvgIcon from "./McSvgIcon"
+import McTitle from "./McTitle"
 export default {
   name: "McButton",
   status: "ready",
   release: "1.0.0",
   components: {
+    McTitle,
     McSvgIcon,
     "btn-loader": BallClipRotateMultipleLoader,
   },
@@ -131,6 +133,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * Uppercase
+     */
+    uppercase: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -145,6 +154,7 @@ export default {
         "mc-button--disabled": this.disabled,
         "mc-button--rounded": this.rounded,
         "mc-button--full-width": this.fullWidth,
+        "mc-button--uppercase": this.uppercase,
       }
     },
     defaultTag() {
@@ -448,6 +458,10 @@ $colors: (
     }
   }
 
+  &--uppercase {
+    text-transform: uppercase;
+  }
+
   &--is-active,
   &.nuxt-link-active {
     color: $color-primary;
@@ -529,7 +543,7 @@ $colors: (
   <div style="text-align: center">
     <div v-for="(variation, index) in variations" :key="index">
 
-      <h3 style="margin: 0">{{ variation }}</h3>
+      <McTitle style="margin-bottom: 20px;" size="l" uppercase>{{ variation }}</McTitle> <br>
 
       <McButton :variation="variation" class="mc-button--is-active" size="s">
         <McSvgIcon slot="icon-prepend" name="assessment"/>
@@ -537,6 +551,11 @@ $colors: (
       </McButton>
 
       <McButton :variation="variation" size="s">
+        <McSvgIcon slot="icon-prepend" name="people"/>
+        Маленькая
+      </McButton>
+
+      <McButton uppercase :variation="variation" size="s">
         <McSvgIcon slot="icon-prepend" name="people"/>
         Маленькая
       </McButton>

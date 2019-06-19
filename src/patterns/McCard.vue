@@ -11,12 +11,15 @@
 
 <script>
 import McGridRow from "./McGrid/McGridRow"
-import McLines from "../elements/McLines"
+import McLines from "./McLines"
 import McAvatar from "../elements/McAvatar/McAvatar"
 import McGridCol from "./McGrid/McGridCol"
+import McPreview from "./McPreview"
+import McTitle from "../elements/McTitle"
+import McSvgIcon from "../elements/McSvgIcon"
 export default {
   name: "McCard",
-  components: { McGridCol, McAvatar, McLines, McGridRow },
+  components: { McSvgIcon, McTitle, McPreview, McGridCol, McAvatar, McLines, McGridRow },
   status: "deprecated",
   release: "1.0.0",
 }
@@ -26,7 +29,7 @@ export default {
 .mc-card {
   position: relative;
   display: block;
-  border-radius: 8px;
+  border-radius: $radius-l;
   border: 2px solid $border-color;
   background: $color-white;
 
@@ -45,13 +48,17 @@ export default {
 
 <docs>
     ```jsx
-    <div>
+    <div style="max-width: 600px">
         <McCard>
             <template slot="header">
-                <McAvatar size="m" rounded/>
-                <span style="margin-left: 10px">Заголовок карточки</span>
+                <McPreview>
+                    <McAvatar rounded slot="left" />
+                    <McTitle :level="3" size="m" slot="top">
+                       WG_Global
+                    </McTitle>
+                </McPreview>
             </template>
-            <McGridRow :gutter="20">
+            <McGridRow :gutter-g="20">
                 <McGridCol :span="4">
                     <McLines title="Бюджет">
                         1 200 $
@@ -68,6 +75,82 @@ export default {
                     </McLines>
                 </McGridCol>
             </McGridRow>
+        </McCard>
+
+        <br>
+
+        <McCard>
+            <McGridRow :gutter-g="30" :gutter-v="10">
+                <McGridCol>
+                    <McLines title="Доля сети">
+                        1 200 $
+                    </McLines>
+                </McGridCol>
+                <McGridCol>
+                    <McLines title="Доля орг.">
+                        129 $
+                    </McLines>
+                </McGridCol>
+                <McGridCol>
+                    <McLines title="Мин. доля канала">
+                        1 200 $
+                    </McLines>
+                </McGridCol>
+                <McGridCol>
+                    <McLines title="Макс. доля канала">
+                        1 20000 $
+                    </McLines>
+                </McGridCol>
+                <McGridCol>
+                    <McLines title="Макс. срок контракта">
+                        1 20000 $
+                    </McLines>
+                </McGridCol>
+            </McGridRow>
+        </McCard>
+
+        <br>
+
+        <McCard>
+            <McPreview>
+                <McAvatar rounded slot="left"/>
+                <McTitle slot="top">Facebook</McTitle>
+                <McGridRow slot="bottom" :gutter-g="10" :gutter-v="6">
+                    <McGridCol>
+                        <McTitle size="s">
+                            <McSvgIcon slot="icon-prepend" name="copyright"/>
+                            Агентство 2, Агентство 3
+                        </McTitle>
+                    </McGridCol>
+                    <McGridCol>
+                        <McTitle size="s">
+                            <McSvgIcon slot="icon-prepend" name="location_on"/>
+                            United States
+                        </McTitle>
+                    </McGridCol>
+                </McGridRow>
+            </McPreview>
+        </McCard>
+
+        <br>
+
+        <McCard>
+            <McPreview>
+                <McAvatar rounded slot="left"/>
+                <McTitle slot="top">Алена Товстик</McTitle>
+                <McTitle color="gray" size="s" slot="bottom">
+                    Основной владелец
+                </McTitle>
+            </McPreview>
+        </McCard>
+
+        <br>
+
+        <McCard>
+            <McPreview>
+                <McAvatar src="//i.ytimg.com/vi/If1sbtliqQk/default.jpg" slot="left"/>
+                <McTitle :ellipsis="false" slot="top">Official Video: Nike Currant Song | Jassi Gill | Neha Kakkar | Sukh-E Muzical Doctorz | Jaani</McTitle>
+            </McPreview>
         </McCard>
     </div>
     ```

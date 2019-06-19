@@ -48,7 +48,15 @@
             <McAvatar :src="user ? user.avatar : null" size="m" rounded />
           </McButton>
           <McPanel>
-            <McUser v-if="user" :user="user" />
+            <McPreview v-if="user">
+              <McAvatar :src="user.avatar" rounded slot="left" />
+              <McTitle :level="3" size="l" slot="top">
+                {{ user.first_name }} {{ user.last_name }}
+              </McTitle>
+              <McTitle color="gray" size="m" slot="bottom">
+                {{ user.email }}
+              </McTitle>
+            </McPreview>
             <McSeparator v-if="user" indent-bottom="xs" indent-top="xs" />
             <McButton
               v-for="(menuProfileItem, index) in menuProfile"
@@ -111,15 +119,17 @@ import McButton from "../../../elements/McButton"
 import McSvgIcon from "../../../elements/McSvgIcon"
 import McPanel from "../../McPanel"
 import McAvatar from "../../../elements/McAvatar/McAvatar"
-import McUser from "../../McUser"
 import McSeparator from "../../../elements/McSeparator"
+import McPreview from "../../McPreview"
+import McTitle from "../../../elements/McTitle"
 export default {
   name: "McHeaderPartRight",
   status: "ready",
   release: "0.0.1",
   components: {
+    McTitle,
+    McPreview,
     McSeparator,
-    McUser,
     McAvatar,
     McPanel,
     McSvgIcon,

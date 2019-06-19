@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import McTitle from "./McTitle"
+import McTitle from "../elements/McTitle"
 export default {
   name: "McLines",
   components: { McTitle },
@@ -33,6 +33,12 @@ export default {
     margin-bottom: $space-xxxs;
   }
   &__content {
+    display: flex;
+    flex-direction: column;
+
+    > *:not(:first-child) {
+      margin-top: $space-xxs;
+    }
   }
 }
 </style>
@@ -43,6 +49,17 @@ export default {
         <McLines title="Бюджет">
             <McTitle tag-name="p" size="m">
                 30 000 $
+            </McTitle>
+        </McLines>
+
+        <br>
+
+        <McLines title="Бюджет">
+            <McTitle tag-name="p" size="m">
+                30 000 $
+            </McTitle>
+            <McTitle size="xs" uppercase>
+                app/aug
             </McTitle>
         </McLines>
 

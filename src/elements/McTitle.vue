@@ -162,7 +162,7 @@ export default {
   ```jsx
   <div>
     <McTitle size="s">
-      <McSvgIcon slot="icon-prepend" name="ready"/>
+      <McSvgIcon slot="icon-prepend" name="copyright"/>
       Заголовок
     </McTitle>
 
@@ -200,7 +200,7 @@ export default {
 
     <br><br>
 
-    <McTitle size="xxl">
+    <McTitle uppercase size="xxl">
       <McSvgIcon slot="icon-prepend" name="ready"/>
       Заголовок
     </McTitle>

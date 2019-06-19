@@ -26,28 +26,34 @@ export default {
      *  Кол-во колонок (всего 12)
      */
     span: { type: Number },
+
     /**
      *  Очерёдность
      */
     order: { type: Number },
+
     /**
      *  Отступ (margin-left)
      */
     offset: { type: Number },
+
     /**
      *  Отступ (left)
      */
     push: { type: Number },
+
     /**
      *  Отступ (right)
      */
     pull: { type: Number },
+
     ...props,
   },
 
   data() {
     return {
-      gutter: 0,
+      gutterG: 0,
+      gutterV: 0,
     }
   },
 
@@ -65,13 +71,18 @@ export default {
     },
 
     styles() {
-      let colStyle =
-        this.gutter !== 0
-          ? {
-              "padding-left": `${this.gutter / 2}px`,
-              "padding-right": `${this.gutter / 2}px`,
-            }
-          : {}
+      let colStyle = {}
+
+      if (this.gutterG !== 0) {
+        colStyle["padding-left"] = `${this.gutterG / 2}px`
+        colStyle["padding-right"] = `${this.gutterG / 2}px`
+      }
+
+      if (this.gutterV !== 0) {
+        colStyle["padding-top"] = `${this.gutterV / 2}px`
+        colStyle["padding-bottom"] = `${this.gutterV / 2}px`
+      }
+
       return this.order ? { ...colStyle, order: this.order } : colStyle
     },
   },
@@ -90,7 +101,6 @@ export default {
 
   display: block;
   position: relative;
-  flex: 1;
   max-width: 100%;
 
   @mixin generate-col($viewport: "") {
