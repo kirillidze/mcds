@@ -61,7 +61,7 @@ export default {
   }
 
   &__bottom {
-    margin-top: $space-xxs;
+    margin-top: $space-xxs + 2;
     &:empty {
       display: none;
     }

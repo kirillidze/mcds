@@ -31,14 +31,14 @@ export default {
 .mc-lines {
   @include reset-text-indents();
   &__title {
-    margin-bottom: $space-xxs;
+    margin-bottom: $space-xxs + 2;
   }
   &__content {
     display: flex;
     flex-direction: column;
 
     > *:not(:first-child) {
-      margin-top: $space-xxs;
+      margin-top: $space-xxs + 2;
     }
   }
 }
