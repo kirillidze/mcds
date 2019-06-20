@@ -17,14 +17,14 @@ export default {
     /**
      *  Расстояние между колонками по горизонтали
      */
-    gutterG: {
+    gutterX: {
       type: Number,
     },
 
     /**
      *  Расстояние между колонками по вертикали
      */
-    gutterV: {
+    gutterY: {
       type: Number,
     },
 
@@ -75,24 +75,24 @@ export default {
     styles() {
       let result = {}
 
-      if (this.gutterG !== 0) {
-        result["margin-left"] = `${-this.gutterG / 2}px`
-        result["margin-right"] = `${-this.gutterG / 2}px`
+      if (this.gutterX !== 0) {
+        result["margin-left"] = `${-this.gutterX / 2}px`
+        result["margin-right"] = `${-this.gutterX / 2}px`
       }
 
-      if (this.gutterV !== 0) {
-        result["margin-top"] = `${-this.gutterV / 2}px`
-        result["margin-bottom"] = `${-this.gutterV / 2}px`
+      if (this.gutterY !== 0) {
+        result["margin-top"] = `${-this.gutterY / 2}px`
+        result["margin-bottom"] = `${-this.gutterY / 2}px`
       }
 
       return result
     },
   },
   watch: {
-    gutterG() {
+    gutterX() {
       this.updateGutter()
     },
-    gutterV() {
+    gutterY() {
       this.updateGutter()
     },
   },
@@ -101,8 +101,8 @@ export default {
       this.$children.forEach(children => {
         let componentName = children.$options.name
         if (componentName === "McGridCol") {
-          children.gutterG = this.gutterG
-          children.gutterV = this.gutterV
+          children.gutterX = this.gutterX
+          children.gutterY = this.gutterY
         }
       })
     },
@@ -149,7 +149,7 @@ export default {
 <docs>
     ```jsx
     <div>
-        <mc-grid-row :gutter-g="30" :gutter-v="10">
+        <mc-grid-row :gutter-x="30" :gutter-y="10">
             <mc-grid-col :span="12" :span-xl="1">
                 <div style="background: #e74c3c">1</div>
             </mc-grid-col>
@@ -166,7 +166,7 @@ export default {
 
         <br>
 
-        <mc-grid-row stretch :gutter-g="30">
+        <mc-grid-row stretch :gutter-x="30">
             <mc-grid-col>
                 <div style="background: #e74c3c">Автоматическая ширина на всё свободное простанство</div>
             </mc-grid-col>
@@ -180,7 +180,7 @@ export default {
 
         <br>
 
-        <mc-grid-row justify="center" align="middle" :gutter-g="30">
+        <mc-grid-row justify="center" align="middle" :gutter-x="30">
             <mc-grid-col>
                 <div style="background: #e74c3c">Автоматическая ширина</div>
             </mc-grid-col>
@@ -194,7 +194,7 @@ export default {
 
         <br>
 
-        <mc-grid-row justify="right" align="middle" :gutter-g="30">
+        <mc-grid-row justify="right" align="middle" :gutter-x="30">
             <mc-grid-col>
                 <div style="background: #e74c3c">Автоматическая ширина</div>
             </mc-grid-col>
