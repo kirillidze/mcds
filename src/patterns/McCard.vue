@@ -48,6 +48,14 @@ export default {
       type: Boolean,
       default: true,
     },
+    /**
+     *  target
+     *
+     */
+    target: {
+      type: String,
+      default: "_self",
+    },
   },
 
   computed: {
@@ -56,24 +64,23 @@ export default {
         "mc-card--has-link": this.isLink,
       }
     },
+
     isLink() {
       return this.to || this.href
     },
+
     tag() {
       let link = this.nuxt ? "nuxt-link" : "router-link"
 
       return this.to ? link : "a"
     },
+
     tagBind() {
-      const result = {}
-
-      if (this.to) {
-        result.to = this.to
-      } else if (this.href) {
-        result.href = this.href
+      return {
+        target: this.target,
+        to: this.to,
+        href: this.href,
       }
-
-      return result
     },
   },
 }
@@ -121,42 +128,78 @@ export default {
 
 <docs>
     ```jsx
-    <div style="max-width: 600px">
+    <div style="max-width: 700px">
         <McCard href="javascript:void(0)">
-            <template slot="header">
-                <McPreview>
-                    <McAvatar rounded slot="left" />
-                    <McTitle :level="3" size="m" slot="top">
-                       WG_Global
-                    </McTitle>
-                    <McGridRow slot="right" :gutter-x="5" :gutter-y="5">
-                        <McGridCol>
-                            <McButton variation="primary-invert" size="s-compact">
-                                <McSvgIcon slot="icon-append" name="create"/>
-                            </McButton>
-                        </McGridCol>
-                        <McGridCol>
-                            <McButton variation="danger-invert" size="s-compact">
-                                <McSvgIcon slot="icon-append" name="delete"/>
-                            </McButton>
-                        </McGridCol>
-                    </McGridRow>
-                </McPreview>
-            </template>
+            <McPreview slot="header">
+                <McAvatar rounded slot="left" />
+                <McTitle :level="3" size="m" slot="top">
+                   WG_Global
+                </McTitle>
+                <McGridRow slot="right" :gutter-x="5" :gutter-y="5">
+                    <McGridCol>
+                        <McButton variation="primary-invert" size="s-compact">
+                            <McSvgIcon slot="icon-append" name="create"/>
+                        </McButton>
+                    </McGridCol>
+                    <McGridCol>
+                        <McButton variation="danger-invert" size="s-compact">
+                            <McSvgIcon slot="icon-append" name="delete"/>
+                        </McButton>
+                    </McGridCol>
+                </McGridRow>
+            </McPreview>
             <McGridRow :gutter-x="20">
                 <McGridCol :span="4">
                     <McLines title="Бюджет">
-                        1 200 $
+                        <McTitle tag-name="p" size="m">
+                            1 200 $
+                        </McTitle>
                     </McLines>
                 </McGridCol>
                 <McGridCol :span="4">
                     <McLines title="Блогеров">
-                        129
+                        <McTitle tag-name="p" size="m">
+                            129
+                        </McTitle>
                     </McLines>
                 </McGridCol>
                 <McGridCol :span="4">
                     <McLines title="Дедлайн">
-                        01.11.2018
+                        <McTitle tag-name="p" size="m">
+                            01.11.2018
+                        </McTitle>
+                    </McLines>
+                </McGridCol>
+            </McGridRow>
+        </McCard>
+
+        <br>
+
+        <McCard href="#" target="_blank">
+            <McPreview slot="header">
+                <McAvatar rounded slot="left" />
+                <McTitle :level="3" size="m" slot="top">
+                    Gukie
+                </McTitle>
+            </McPreview>
+            <McGridRow :gutter-x="20">
+                <McGridCol :span="6">
+                    <McLines title="Основной владелец">
+                        <McTitle tag-name="p" size="m">
+                            Eugene Solonovich
+                        </McTitle>
+                    </McLines>
+                </McGridCol>
+                <McGridCol :span="6">
+                    <McLines title="Владельцы">
+                        <McGridRow :gutter-x="5" :gutter-y="5">
+                            <McGridCol>
+                                <McButton size="s">Roman Kolodko</McButton>
+                            </McGridCol>
+                            <McGridCol>
+                                <McButton size="s">Dasha</McButton>
+                            </McGridCol>
+                        </McGridRow>
                     </McLines>
                 </McGridCol>
             </McGridRow>
@@ -168,27 +211,37 @@ export default {
             <McGridRow :gutter-x="30" :gutter-y="10">
                 <McGridCol>
                     <McLines title="Доля сети">
-                        1 200 $
+                        <McTitle tag-name="p" size="m">
+                            1 200 $
+                        </McTitle>
                     </McLines>
                 </McGridCol>
                 <McGridCol>
                     <McLines title="Доля орг.">
-                        129 $
+                        <McTitle tag-name="p" size="m">
+                            129 $
+                        </McTitle>
                     </McLines>
                 </McGridCol>
                 <McGridCol>
                     <McLines title="Мин. доля канала">
-                        1 200 $
+                        <McTitle tag-name="p" size="m">
+                            1 200 $
+                        </McTitle>
                     </McLines>
                 </McGridCol>
                 <McGridCol>
                     <McLines title="Макс. доля канала">
-                        1 20000 $
+                        <McTitle tag-name="p" size="m">
+                            1 20000
+                        </McTitle>$
                     </McLines>
                 </McGridCol>
                 <McGridCol>
                     <McLines title="Макс. срок контракта">
-                        1 20000 $
+                        <McTitle tag-name="p" size="m">
+                            1 20000 $
+                        </McTitle>
                     </McLines>
                 </McGridCol>
             </McGridRow>

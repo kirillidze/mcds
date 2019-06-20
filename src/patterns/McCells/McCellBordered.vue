@@ -40,12 +40,21 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Градиент
+     *
+     */
+    gradient: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
     classes() {
       return {
         [`${this.rootClassName}--border-color-${this.borderColor}`]: this.borderColor,
+        [`${this.rootClassName}--border-gradient`]: this.gradient,
         [`${this.rootClassName}--tappable`]: this.isTappable,
         [`${this.rootClassName}--is-active`]: this.isActive,
         [`${this.rootClassName}--is-disable`]: this.disabled,
@@ -89,7 +98,7 @@ export default {
   border: 1px solid $color-gray-lighter;
   border-radius: $radius-m;
   min-height: $tappable-element-xl;
-  padding: $space-xs $space-m / 2;
+  padding: $space-m / 2;
   transition: all $duration-quickly;
 
   &::after {
@@ -136,6 +145,12 @@ export default {
 
           &:active {
             background-color: darken(fade-out($value, 0.85), 15%);
+          }
+        }
+
+        &--border-gradient {
+          &::after {
+            background-image: linear-gradient($value, adjust_hue($value, -45));
           }
         }
       }
@@ -187,7 +202,7 @@ export default {
 
     <br>
 
-    <McCellBordered border-color="gorse" @click>
+    <McCellBordered gradient border-color="gorse" @click>
       <McLines>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации

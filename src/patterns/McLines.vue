@@ -29,8 +29,9 @@ export default {
 
 <style lang="scss">
 .mc-lines {
+  @include reset-text-indents();
   &__title {
-    margin-bottom: $space-xxxs;
+    margin-bottom: $space-xxs;
   }
   &__content {
     display: flex;
