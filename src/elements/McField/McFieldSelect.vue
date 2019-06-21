@@ -166,7 +166,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~vue-multiselect/dist/vue-multiselect.min";
+@import "../../../node_modules/vue-multiselect/dist/vue-multiselect.min.css";
 $colors: (
   "color-red-light": $color-red-light,
   "color-dodger-blue-light": $color-dodger-blue-light,
