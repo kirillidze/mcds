@@ -25,7 +25,7 @@
 
 <script>
 import McFieldText from "./McFieldText"
-import McSvgIcon from "./McSvgIcon"
+import McSvgIcon from "../McSvgIcon"
 
 export default {
   name: "McFieldPassword",

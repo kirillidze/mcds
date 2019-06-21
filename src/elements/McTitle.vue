@@ -86,6 +86,8 @@ export default {
   max-width: 100%;
 
   &__text {
+    padding-bottom: 1px; // fix overflow
+    margin-bottom: -1px; // fix overflow
   }
 
   .mc-svg-icon {

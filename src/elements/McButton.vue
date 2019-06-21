@@ -94,6 +94,22 @@ export default {
       default: "m",
     },
     /**
+     *  Радиус:
+     *  `s, m, l, и т.д.`
+     */
+    radius: {
+      type: String,
+      default: "m",
+    },
+    /**
+     *  Тень
+     *
+     */
+    shadow: {
+      type: Boolean,
+      default: false,
+    },
+    /**
      *  Круглая
      *
      */
@@ -148,6 +164,7 @@ export default {
         [`mc-button--variation-${this.variation}`]: this.variation,
         [`mc-button--size-${this.size}`]: this.size,
         [`mc-button--text-align-${this.textAlign}`]: this.textAlign,
+        [`mc-button--radius-${this.radius}`]: this.radius,
 
         "mc-button--loading": this.loading,
         "mc-button--is-active": this.isActive,
@@ -155,6 +172,7 @@ export default {
         "mc-button--rounded": this.rounded,
         "mc-button--full-width": this.fullWidth,
         "mc-button--uppercase": this.uppercase,
+        "mc-button--shadow": this.shadow,
       }
     },
     defaultTag() {
@@ -231,7 +249,6 @@ $colors: (
   max-width: 100%;
   align-items: center;
   color: $color-text;
-  -webkit-appearance: none;
   -webkit-appearance: none;
   -webkit-text-fill-color: currentColor;
 
@@ -386,6 +403,12 @@ $colors: (
           background-color: darken($value, 15%);
         }
 
+        &#{$block-name} {
+          &--shadow {
+            box-shadow: 0 3px 10px fade-out($value, 0.8);
+          }
+        }
+
         &-invert {
           background-color: fade-out($value, 0.9);
           color: $value;
@@ -397,6 +420,12 @@ $colors: (
 
           &:active {
             background-color: fade-out($value, 0.75);
+          }
+
+          &#{$block-name} {
+            &--shadow {
+              box-shadow: 0 3px 10px fade-out($value, 0.8);
+            }
           }
         }
 
@@ -414,6 +443,12 @@ $colors: (
             border-color: darken($value, 15%);
             background-color: darken($value, 15%);
           }
+
+          &#{$block-name} {
+            &--shadow {
+              box-shadow: 0 3px 10px fade-out($value, 0.8);
+            }
+          }
         }
 
         &-flat {
@@ -426,6 +461,12 @@ $colors: (
 
           &:active {
             background-color: fade-out($value, 0.85);
+          }
+
+          &#{$block-name} {
+            &--shadow {
+              box-shadow: 0 3px 10px fade-out($value, 0.8);
+            }
           }
         }
 
@@ -472,6 +513,15 @@ $colors: (
 
   &--rounded {
     border-radius: $radius-circle;
+  }
+
+  &--radius {
+    &-m {
+      border-radius: $radius-m;
+    }
+    &-l {
+      border-radius: $radius-l * 3;
+    }
   }
 
   &--full-width {
@@ -555,7 +605,7 @@ $colors: (
         Маленькая
       </McButton>
 
-      <McButton uppercase :variation="variation" size="s">
+      <McButton :variation="variation" size="s">
         <McSvgIcon slot="icon-prepend" name="people"/>
         Маленькая
       </McButton>
@@ -577,6 +627,11 @@ $colors: (
         <McSvgIcon slot="icon-prepend" name="create"/>
         Большая
         <McSvgIcon slot="icon-append" name="copyright"/>
+      </McButton>
+
+      <McButton uppercase shadow radius="l" :variation="variation" size="l">
+        <McSvgIcon fill="#3d8f41" slot="icon-prepend" name="add"/>
+        Добавить
       </McButton>
 
       <McButton :variation="variation" size="l-compact">

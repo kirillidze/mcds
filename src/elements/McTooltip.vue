@@ -49,6 +49,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Размеры:
+     *  `s, m, l`
+     */
+    size: {
+      type: String,
+      default: "m",
+    },
   },
   directives: {
     tooltip: VTooltip,
@@ -59,6 +67,7 @@ export default {
         "mc-tooltip",
         `mc-tooltip--color-${this.color}`,
         `mc-tooltip--width-${this.maxWidth}`,
+        `mc-tooltip--size-${this.size}`,
         this.arrowDisabled ? "mc-tooltip--arrow-disabled" : "",
       ]
     },
@@ -72,7 +81,7 @@ export default {
 }
 
 .mc-tooltip {
-  $arrow-size: $space-xs;
+  $arrow-size: $space-xs - 1;
 
   &.tooltip {
     display: block !important;
@@ -198,6 +207,24 @@ export default {
     }
   }
 
+  &--size-s {
+    &.tooltip {
+      .tooltip-inner {
+        @include inset-squish-space($space-s);
+        font-size: $size-s;
+      }
+    }
+  }
+
+  &--size-m {
+    &.tooltip {
+      .tooltip-inner {
+        @include inset-squish-space($space-m);
+        font-size: $size-m;
+      }
+    }
+  }
+
   &--arrow-disabled {
     &.tooltip {
       max-width: $panel-xl;
@@ -243,7 +270,7 @@ export default {
     </McTooltip>
     <br>
     <br>
-    <McTooltip color="primary" content="А если текста реально очень очень много, например как сейчас?">
+    <McTooltip size="s" color="primary" content="А если текста реально очень очень много, например как сейчас?">
       <McSvgIcon name="face"/>
     </McTooltip>
     <br>

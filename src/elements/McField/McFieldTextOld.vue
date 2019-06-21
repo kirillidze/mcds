@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import McSvgIcon from "./McSvgIcon"
+import McSvgIcon from "../McSvgIcon"
 
 export default {
   name: "McFieldTextOld",

@@ -152,6 +152,7 @@ $token-colors: (
   "mantis-dark": $color-mantis-dark,
   "gorse": $color-gorse,
   "gray": $color-gray,
+  "gray-light": $color-gray-light,
   "gray-dark": $color-gray-dark,
   "gray-lighter": $color-gray-lighter,
   "black": $color-black,
@@ -162,4 +163,9 @@ $token-colors: (
   "bermuda-gray": $color-bermuda-gray,
   "gray-darkest": $color-gray-darkest,
   "soft-green-dark": $color-soft-green-dark,
+  "soft-green-light": $color-soft-green-light,
+);
+
+$token-colors-2: (
+  "gray-darkest": $color-gray-darkest,
 );
