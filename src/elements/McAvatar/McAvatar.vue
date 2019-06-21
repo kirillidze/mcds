@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import tokens from "@/assets/tokens/tokens"
+// import tokens from "@/assets/tokens/tokens"
 
 export default {
   name: "McAvatar",
