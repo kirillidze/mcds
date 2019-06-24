@@ -39,6 +39,7 @@ import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
 import McFieldText from "../../elements/McField/McFieldText"
 export default {
+  name: "McChatForm",
   components: { McFieldText, McButton, McSvgIcon, McAvatar },
   props: {
     value: {
