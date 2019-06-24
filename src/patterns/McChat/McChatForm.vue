@@ -37,7 +37,7 @@
 import McAvatar from "../../elements/McAvatar/McAvatar"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
-import McFieldText from "../../elements/McFieldText"
+import McFieldText from "../../elements/McField/McFieldText"
 export default {
   components: { McFieldText, McButton, McSvgIcon, McAvatar },
   props: {
