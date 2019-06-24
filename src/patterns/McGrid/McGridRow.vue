@@ -139,7 +139,7 @@ export default {
   }
 
   &--stretch {
-    .mc-grid-col {
+    > .mc-grid-col {
       flex: 1;
     }
   }

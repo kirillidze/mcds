@@ -19,9 +19,20 @@ import McPreview from "./McPreview"
 import McTitle from "../elements/McTitle"
 import McSvgIcon from "../elements/McSvgIcon"
 import McButton from "../elements/McButton"
+import McTooltip from "../elements/McTooltip"
 export default {
   name: "McCard",
-  components: { McButton, McSvgIcon, McTitle, McPreview, McGridCol, McAvatar, McLines, McGridRow },
+  components: {
+    McTooltip,
+    McButton,
+    McSvgIcon,
+    McTitle,
+    McPreview,
+    McGridCol,
+    McAvatar,
+    McLines,
+    McGridRow,
+  },
   status: "ready",
   release: "1.0.0",
 
@@ -137,14 +148,18 @@ export default {
                 </McTitle>
                 <McGridRow slot="right" :gutter-x="5" :gutter-y="5">
                     <McGridCol>
-                        <McButton variation="primary-invert" size="s-compact">
-                            <McSvgIcon slot="icon-append" name="create"/>
-                        </McButton>
+                        <McTooltip size="s" placement="top" content="Редактировать">
+                            <McButton variation="primary-invert" size="s-compact">
+                                <McSvgIcon slot="icon-append" name="create"/>
+                            </McButton>
+                        </McTooltip>
                     </McGridCol>
                     <McGridCol>
-                        <McButton variation="danger-invert" size="s-compact">
-                            <McSvgIcon slot="icon-append" name="delete"/>
-                        </McButton>
+                        <McTooltip size="s" placement="top" content="Удалить">
+                            <McButton variation="danger-invert" size="s-compact">
+                                <McSvgIcon slot="icon-append" name="delete"/>
+                            </McButton>
+                        </McTooltip>
                     </McGridCol>
                 </McGridRow>
             </McPreview>
@@ -200,6 +215,109 @@ export default {
                                 <McButton size="s">Dasha</McButton>
                             </McGridCol>
                         </McGridRow>
+                    </McLines>
+                </McGridCol>
+            </McGridRow>
+        </McCard>
+
+        <br>
+
+        <McCard>
+            <McGridRow justify="between" slot="header" :gutter-x="30" :gutter-y="10">
+                <McGridCol>
+                    <McGridRow :gutter-x="10" :gutter-y="6">
+                        <McGridCol>
+                            <McTitle size="s">
+                                <McSvgIcon slot="icon-prepend" name="shopping_cart"/>
+                                Агентство 2
+                            </McTitle>
+                        </McGridCol>
+                        <McGridCol>
+                            <McTitle uppercase size="s">
+                                <McSvgIcon slot="icon-prepend" name="event"/>
+                                Сегодня, в 16:24
+                            </McTitle>
+                        </McGridCol>
+                    </McGridRow>
+                </McGridCol>
+                <McGridCol>
+                    <McGridRow :gutter-x="5" :gutter-y="5">
+                        <McGridCol>
+                            <McTooltip size="s" placement="top" content="Редактировать">
+                                <McButton variation="primary-invert" size="s-compact">
+                                    <McSvgIcon slot="icon-append" name="create"/>
+                                </McButton>
+                            </McTooltip>
+                        </McGridCol>
+                        <McGridCol>
+                            <McTooltip size="s" placement="top" content="Удалить">
+                                <McButton variation="danger-invert" size="s-compact">
+                                    <McSvgIcon slot="icon-append" name="delete"/>
+                                </McButton>
+                            </McTooltip>
+                        </McGridCol>
+                    </McGridRow>
+                </McGridCol>
+            </McGridRow>
+            <McGridRow stretch :gutter-x="30" :gutter-y="10">
+                <McGridCol>
+                    <McLines title="Преролл">
+                        <McTitle tag-name="p" size="l">
+                            10$
+                        </McTitle>
+                        <McTitle tag-name="p" size="s">
+                            <McTitle tag-name="span" color="soft-green-light" size="s">
+                                10$
+                            </McTitle>
+                            <McTitle color="gray-light" tag-name="span" size="s">
+                                (2%)
+                            </McTitle>
+                        </McTitle>
+                    </McLines>
+                </McGridCol>
+                <McGridCol>
+                    <McLines title="Нативка">
+                        <McTitle tag-name="p" size="l">
+                            12$
+                        </McTitle>
+                        <McTitle tag-name="p" size="s">
+                            <McTitle tag-name="span" color="soft-green-light" size="s">
+                                12$
+                            </McTitle>
+                            <McTitle color="gray-light" tag-name="span" size="s">
+                                (4%)
+                            </McTitle>
+                        </McTitle>
+                    </McLines>
+                </McGridCol>
+                <McGridCol>
+                    <McLines title="Интеграция">
+                        <McTitle tag-name="p" size="l">
+                            12$
+                        </McTitle>
+                        <McTitle tag-name="p" size="s">
+                            <McTitle tag-name="span" color="soft-green-light" size="s">
+                                12$
+                            </McTitle>
+                            <McTitle color="gray-light" tag-name="span" size="s">
+                                (4%)
+                            </McTitle>
+                        </McTitle>
+                    </McLines>
+                </McGridCol>
+                <McGridCol>
+                    <McLines title="Эксклюзив">
+                        <McTitle tag-name="p" size="l">
+                            12$
+                        </McTitle>
+                        <McTitle tag-name="p" size="s">
+                            <McTitle tag-name="span" color="soft-green-light" size="s">
+                                17$
+                            </McTitle>
+                            <McTitle color="gray-light" tag-name="span" size="s">
+                                (43%)
+                            </McTitle>
+                        </McTitle>
                     </McLines>
                 </McGridCol>
             </McGridRow>

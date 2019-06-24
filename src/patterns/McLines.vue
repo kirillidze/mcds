@@ -30,15 +30,17 @@ export default {
 <style lang="scss">
 .mc-lines {
   @include reset-text-indents();
+
   &__title {
-    margin-bottom: $space-xxs + 2;
+    margin-bottom: $space-xxs;
   }
+
   &__content {
     display: flex;
     flex-direction: column;
 
     > *:not(:first-child) {
-      margin-top: $space-xxs + 2;
+      margin-top: $space-xxs;
     }
   }
 }

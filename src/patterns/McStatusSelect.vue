@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import McFieldSelect from "../elements/McFieldSelect"
+import McFieldSelect from "../elements/McField/McFieldSelect"
 export default {
   name: "McStatusSelect",
   components: { McFieldSelect },
