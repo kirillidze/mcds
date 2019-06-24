@@ -21,6 +21,7 @@
         ></flat-pickr>
         <textarea
           v-else-if="type === 'textarea'"
+          v-autosize
           class="mc-field-text__input"
           :style="inputStyles"
           :placeholder="placeholder"
@@ -28,7 +29,7 @@
           :name="name"
           @input="$event => handleInput($event.target.value)"
           :disabled="disabled"
-        ></textarea>
+        />
         <input
           v-else
           class="mc-field-text__input"
@@ -129,6 +130,7 @@ export default {
       this.appendWidth = this.calculateSlotPadding("append")
     },
     calculateSlotPadding(name) {
+      if (this.$slots[name] == null) return 0
       return this.$slots[name].reduce((acc, cur) => {
         const $el = cur.elm ? cur.elm : cur
         return acc + $el.getBoundingClientRect().width
@@ -358,6 +360,12 @@ export default {
             <template slot="append">
                 <span>$</span>
             </template>
+        </McFieldText>
+        <br>
+        <McFieldText
+                v-model="text"
+                type="textarea"
+        >
         </McFieldText>
     </div>
     ```
