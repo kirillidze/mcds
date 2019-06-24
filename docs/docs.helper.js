@@ -11,7 +11,7 @@ import "codemirror/mode/jsx/jsx"
 import VueLazyload from "vue-lazyload"
 import VueMoment from "vue-moment"
 import VModal from "vue-js-modal"
-import VueAutosize from "vue-autosize/src/index"
+import VueAutosize from "vue-autosize"
 
 Vue.config.productionTip = false
 Vue.mixin(statusLabels)
