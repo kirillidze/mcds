@@ -60,7 +60,7 @@ export default {
   },
   computed: {
     tag() {
-      return this.tagName ? this.tagName : "h" + this.level
+      return this.tagName ? this.tagName : `h${this.level}`
     },
     classObject() {
       return {

@@ -11,6 +11,7 @@
         <flat-pickr
           v-if="type === 'date'"
           class="mc-field-text__input"
+          :style="inputStyles"
           :placeholder="placeholder"
           :value="value"
           @input="value => handleInput(value)"
@@ -21,6 +22,7 @@
         <textarea
           v-else-if="type === 'textarea'"
           class="mc-field-text__input"
+          :style="inputStyles"
           :placeholder="placeholder"
           :value="value"
           :name="name"
@@ -30,6 +32,7 @@
         <input
           v-else
           class="mc-field-text__input"
+          :style="inputStyles"
           :disabled="disabled"
           :type="type"
           :placeholder="placeholder"
@@ -89,10 +92,14 @@ export default {
       default: null,
     },
   },
-  methods: {
-    handleInput(value) {
-      this.$emit("input", value)
-    },
+  data() {
+    return {
+      prependWidth: 0,
+      appendWidth: 0,
+    }
+  },
+  mounted() {
+    this.calculatePadding()
   },
   computed: {
     modifier() {
@@ -105,6 +112,27 @@ export default {
     errorText() {
       if (this.errors == null || this.errors.length == 0) return null
       return this.errors.join(", ")
+    },
+    inputStyles() {
+      return {
+        paddingLeft: `${this.prependWidth ? this.prependWidth + 12 : 0}px`,
+        paddingRight: `${this.appendWidth ? this.appendWidth + 12 : 0}px`,
+      }
+    },
+  },
+  methods: {
+    handleInput(value) {
+      this.$emit("input", value)
+    },
+    calculatePadding() {
+      this.prependWidth = this.calculateSlotPadding("prepend")
+      this.appendWidth = this.calculateSlotPadding("append")
+    },
+    calculateSlotPadding(name) {
+      return this.$slots[name].reduce((acc, cur) => {
+        const $el = cur.elm ? cur.elm : cur
+        return acc + $el.getBoundingClientRect().width
+      }, 0)
     },
   },
 }
@@ -130,10 +158,12 @@ export default {
     display: flex;
     align-items: center;
   }
+
   &__input-prepend {
     left: 0;
     padding-left: 6px;
   }
+
   &__input-append {
     right: 0;
     padding-right: 6px;
@@ -323,10 +353,10 @@ export default {
                 design="simple"
         >
             <template slot="prepend">
-                @
+                <span>@</span>
             </template>
             <template slot="append">
-                $
+                <span>$</span>
             </template>
         </McFieldText>
     </div>
