@@ -41,25 +41,6 @@ export default {
 <style lang="scss">
 .mc-tappable {
   $block-name: &;
-
-  position: relative;
-  border-radius: $radius-m;
-  height: $space-xs;
-  background-color: $color-gray-lightest;
-  width: 100%;
-
-  &__line {
-    height: 100%;
-    background-color: $color-gray-dark;
-    border-radius: $radius-m;
-    max-width: 100%;
-
-    @each $color, $value in $token-colors {
-      &--color-#{$color} {
-        background-color: $value;
-      }
-    }
-  }
 }
 </style>
 
