@@ -4,9 +4,10 @@
       <McFieldText
         type="textarea"
         class="channel-chat-form__input"
-        @input="value => $emit('input', value)"
+        @input="handleInput"
         :value="value"
         :errors="errors.content"
+        :placeholder="placeholder"
         @keyup.ctrl.enter.native="handleSubmit"
         @keyup.shift.enter.native="handleSubmit"
       >
@@ -15,7 +16,7 @@
           rounded
           class="channel-chat-form__avatar"
           size="xs"
-          :src="user ? user.avatar : null"
+          :src="avatar"
         />
         <McButton
           variation="primary-link"
@@ -39,14 +40,15 @@ import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
 import McFieldText from "../../elements/McField/McFieldText"
 export default {
+  name: "McChatForm",
   components: { McFieldText, McButton, McSvgIcon, McAvatar },
   props: {
     value: {
       type: String,
       required: true,
     },
-    user: {
-      type: Object,
+    avatar: {
+      type: String,
       default: null,
     },
     loading: {
@@ -59,13 +61,16 @@ export default {
         return {}
       },
     },
-    textareaPlaceholder: {
+    placeholder: {
       type: String,
       default: null,
     },
   },
 
   methods: {
+    handleInput(value) {
+      this.$emit("input", value)
+    },
     handleSubmit() {
       this.$emit("submit")
     },

@@ -92,6 +92,7 @@ export default {
   font-weight: $weight-medium;
   display: inline-flex;
   max-width: 100%;
+  width: 100%;
 
   &__text {
     padding-bottom: 1px; // fix overflow

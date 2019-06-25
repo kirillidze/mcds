@@ -17,9 +17,9 @@
           :placeholder="placeholder"
           :value="value"
           @input="value => handleInput(value)"
+          :name="name"
           ref="input"
           :disabled="disabled"
-          :name="name"
           :id="name"
         ></flat-pickr>
         <textarea
