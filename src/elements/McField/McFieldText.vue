@@ -1,110 +1,214 @@
 <template>
-  <div class="mc-field-text" :class="modifier">
-    <span v-if="title" class="mc-field-text__title">
-      {{ title }}
-    </span>
-    <span class="mc-field-text__input-wrap">
-      <span class="mc-field-text__input-prepend" v-if="$slots.prepend">
+  <div class="mc-field-text" :class="classes">
+    <label :for="name" class="mc-field-text__header">
+      <slot name="header">
+        <McTitle :ellipsis="false" v-if="title" :level="4">{{ title }}</McTitle>
+      </slot>
+    </label>
+    <div class="mc-field-text__main">
+      <div class="mc-field-text__prepend">
         <slot name="prepend" />
-      </span>
-      <span class="mc-field-text__input-inner">
+      </div>
+      <div class="mc-field-text__input-wrapper">
         <flat-pickr
-          v-if="type === 'date'"
+          v-if="isDate"
           class="mc-field-text__input"
+          :style="inputStyles"
           :placeholder="placeholder"
           :value="value"
           @input="value => handleInput(value)"
-          :name="name"
           ref="input"
           :disabled="disabled"
+          :name="name"
+          :id="name"
         ></flat-pickr>
         <textarea
-          v-else-if="type === 'textarea'"
+          v-else-if="isTextarea"
           class="mc-field-text__input"
+          :style="inputStyles"
           :placeholder="placeholder"
           :value="value"
-          :name="name"
           @input="$event => handleInput($event.target.value)"
           :disabled="disabled"
+          :name="name"
+          :id="name"
         ></textarea>
         <input
           v-else
           class="mc-field-text__input"
+          :style="inputStyles"
           :disabled="disabled"
           :type="type"
           :placeholder="placeholder"
           :value="value"
           @input="$event => handleInput($event.target.value)"
-          :name="name"
           ref="input"
+          :name="name"
+          :id="name"
         />
-        <span class="mc-field-text__input-append" v-if="$slots.append">
-          <slot name="append" />
-        </span>
-      </span>
-      <span v-if="errorText" class="mc-field-text__help-text">{{ errorText }}</span>
-    </span>
+      </div>
+      <div class="mc-field-text__append">
+        <slot name="append" />
+      </div>
+    </div>
+    <div class="mc-field-text__footer">
+      <McTitle tag-name="div" :ellipsis="false" color="danger" size="s" v-if="errorText">
+        {{ errorText }}
+      </McTitle>
+      <br v-if="errorText" />
+      <slot name="footer">
+        <McTitle tag-name="div" :ellipsis="false" size="s" v-if="helpText">{{ helpText }}</McTitle>
+      </slot>
+    </div>
   </div>
 </template>
 
 <script>
+import tokens from "../../assets/tokens/tokens"
+import flatPickr from "vue-flatpickr-component"
+
+import McTitle from "../McTitle"
+import McSvgIcon from "../McSvgIcon"
+import McButton from "../McButton"
+import McTooltip from "../McTooltip"
 export default {
   name: "McFieldText",
-  status: "deprecated",
-  release: "3.5.0",
+  components: { McTooltip, McButton, McSvgIcon, McTitle, flatPickr },
+  status: "ready",
+  release: "1.0.0",
   props: {
+    /**
+     *  Тип:
+     * `text, password, email и т.д.`
+     */
     type: {
       type: String,
       default: "text",
     },
+
+    /**
+     *  Заголовок поля:
+     *
+     */
     title: {
       type: String,
       default: null,
     },
-    design: {
+
+    /**
+     *  Вспомогательный текст под инпутом:
+     *
+     */
+    helpText: {
       type: String,
       default: null,
     },
-    theme: {
-      type: String,
-      default: null,
-    },
+
+    /**
+     *  Отключенное состояние
+     *
+     */
     disabled: {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Значение
+     *
+     */
     value: {
       default: null,
     },
+
+    /**
+     *  Ошибки
+     *
+     */
     errors: {
       type: Array,
       default: null,
     },
-    name: {
-      type: String,
-      default: null,
-    },
+
+    /**
+     *  Placeholder
+     *
+     */
     placeholder: {
       type: String,
       default: null,
     },
+
+    /**
+     *  Name
+     *
+     */
+    name: {
+      type: String,
+      required: true,
+    },
   },
+
+  data() {
+    return {
+      prependWidth: 0,
+      appendWidth: 0,
+    }
+  },
+
+  mounted() {
+    this.calculatePadding()
+  },
+
+  computed: {
+    classes() {
+      return {
+        "mc-field-text--error": this.errorText,
+        "mc-field-text--textarea": this.isTextarea,
+        "mc-field-text--date": this.isDate,
+        "mc-field-text--disabled": this.disabled,
+      }
+    },
+
+    isTextarea() {
+      return this.type === "textarea"
+    },
+
+    isDate() {
+      return this.type === "date"
+    },
+
+    errorText() {
+      if (this.errors == null || this.errors.length === 0) return null
+      return this.errors.join(", ")
+    },
+
+    inputStyles() {
+      return {
+        paddingLeft: this.prependWidth && `${this.prependWidth + parseInt(tokens.space_m)}px`,
+        paddingRight: this.appendWidth && `${this.appendWidth + parseInt(tokens.space_m)}px`,
+      }
+    },
+  },
+
   methods: {
     handleInput(value) {
       this.$emit("input", value)
     },
-  },
-  computed: {
-    modifier() {
-      return {
-        "mc-field-text--error": this.errorText,
-        [`mc-field-text--${this.design}`]: this.design,
-        "mc-field-text--light": this.theme === "light",
-      }
+
+    calculatePadding() {
+      this.prependWidth = this.calculateSlotPadding("prepend")
+      this.appendWidth = this.calculateSlotPadding("append")
     },
-    errorText() {
-      if (this.errors == null || this.errors.length == 0) return null
-      return this.errors.join(", ")
+
+    calculateSlotPadding(name) {
+      return (
+        this.$slots[name] &&
+        this.$slots[name].reduce((acc, cur) => {
+          const $el = cur.elm ? cur.elm : cur
+          return acc + $el.getBoundingClientRect().width
+        }, 0)
+      )
     },
   },
 }
@@ -116,96 +220,105 @@ export default {
 
   display: block;
 
-  &__input-wrap {
+  &__header {
+    @include reset-text-indents();
     display: block;
+    margin-bottom: $space-xs;
+
+    &:empty {
+      display: none;
+    }
+  }
+
+  &__main {
     position: relative;
   }
 
-  &__input-prepend,
-  &__input-append {
+  &__prepend,
+  &__append {
+    @include reset-text-indents();
     position: absolute;
     top: 0;
-    bottom: 0;
-    height: 100%;
     display: flex;
     align-items: center;
-  }
-  &__input-prepend {
-    left: 0;
-    padding-left: 6px;
-  }
-  &__input-append {
-    right: 0;
-    padding-right: 6px;
+    justify-content: center;
+    padding-left: $space-xs;
+    padding-right: $space-xs;
+    min-width: $tappable-element-m;
+    height: 100%;
+    margin-left: -$space-xxxs;
+    margin-right: -$space-xxxs;
+    padding-top: $space-xxs + 2;
+    padding-bottom: $space-xxs + 2;
+
+    &:empty {
+      display: none;
+    }
+
+    > * {
+      margin-left: $space-xxxs;
+      margin-right: $space-xxxs;
+    }
   }
 
-  &__title {
-    display: block;
-    margin-bottom: 7px;
-    color: hsl(0, 0%, 13%);
-    font-size: 16px;
-    font-weight: 500;
-    line-height: line-height(19, 16);
-    font-family: $font-heading-secondary;
+  &__prepend {
+    left: 0;
+  }
+
+  &__append {
+    right: 0;
+  }
+
+  &__input-wrapper {
   }
 
   &__input {
+    font-family: $font-heading;
     display: inline-block;
     vertical-align: middle;
     width: 100%;
-    padding: px-to-em(10, 16px) 0;
-    height: 40px;
+    min-height: $tappable-element-m;
     margin: 0;
-    font-family: $font-text;
-    background-color: hsl(0, 0%, 93%);
-    outline: none;
-    border-radius: 4px;
+    border: 1px solid $color-gray-lighter;
+    border-radius: $radius-m;
+    padding: ($space-s / 2) + 1 $space-s;
+    line-height: $line-height-s;
+    font-size: $size-m;
+    background-color: $color-white;
+    -moz-appearance: textfield;
     appearance: textfield;
-    color: $color-gray-darken;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: line-height(19, 16);
-    transition: box-shadow $duration-quickly;
-    border: none;
+    transition: background-color $transition-time-fast, border-color $transition-time-fast;
+    color: $color-text;
 
     &:focus {
-      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.24);
-      outline: none;
-
-      &::placeholder {
-        //color: $color-gray-darken !important;
-      }
+      outline: 0;
+      border-color: $color-primary;
     }
 
-    &[disabled] {
-      cursor: default !important;
-      background-color: hsl(0, 0%, 93%) !important;
-      border-color: transparent !important;
+    &::-webkit-search-cancel-button,
+    &::-webkit-search-decoration,
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
     }
 
-    &[type="number"]::-webkit-inner-spin-button,
-    &[type="number"]::-webkit-outer-spin-button {
-      // height: auto;
-    }
-
-    &[type="color"] {
-      // max-width: 100px;
-      //padding: 0;
-    }
-
-    &::placeholder {
-      color: $color-gray;
-      transition: color $duration-quickly;
+    @include input-placeholder() {
+      color: $color-gray-dark;
     }
   }
 
-  &__input-inner {
-    display: block;
+  textarea#{$block-name} {
+    &__input {
+      $textarea-height: 94px;
+
+      height: auto;
+      min-height: calc(#{$textarea-height} + 2px);
+      resize: vertical;
+    }
   }
 
-  &__help-text {
-    @include field-error();
-
+  &__footer {
+    margin-top: $space-xxxs;
     &:empty {
       display: none;
     }
@@ -214,84 +327,26 @@ export default {
   &--error {
     #{$block-name} {
       &__input {
-        //border-bottom-color: #e73232;
-
-        &::placeholder {
-          //color: #e73232 !important;
-        }
-
-        &:focus {
-          //border-bottom-color: $text-color;
-          &::placeholder {
-            //color: $color-gray-light !important;
-          }
-        }
+        border-color: $color-danger;
       }
     }
   }
 
-  &--simple {
+  &--textarea {
     #{$block-name} {
-      &__input {
-        font-family: $font-heading-secondary;
-        background-color: transparent;
-        color: hsl(0, 0%, 13%);
-        font-size: 16px;
-        line-height: line-height(19, 16);
-        font-weight: 400;
-        padding: 4px 13px 5px 13px;
-        border: 1px solid $color-gray-darker;
-        height: 34px;
-        border-radius: 4px;
-
-        &:focus {
-          box-shadow: none;
-          outline: none;
-          border-color: $color-navy-blue-light;
-        }
-
-        &::placeholder {
-          color: #b3b3b3;
-        }
-      }
-    }
-
-    textarea#{$block-name} {
-      &__input {
-        $textarea-height: 150px;
-
-        padding: 11px 13px;
-        height: auto;
-        min-height: calc(#{$textarea-height} + 2px);
-        resize: vertical;
+      &__append,
+      &__prepend {
+        align-items: flex-start;
       }
     }
   }
 
-  &--light {
+  &--disabled {
     #{$block-name} {
       &__input {
-        border-color: #b8b8b8;
-
-        &::placeholder {
-          color: hsl(0, 0%, 13%);
-        }
-      }
-    }
-  }
-
-  &--total {
-    #{$block-name} {
-      &__input {
-        color: hsl(0, 0%, 100%);
-        font-size: 34px;
-        line-height: line-height(37, 34);
-        font-weight: 500;
-        height: 59px;
-        letter-spacing: 0.01px;
-        font-family: $font-heading-secondary;
-        padding: 4px 13px 5px 13px;
-        background-image: linear-gradient(80deg, hsl(352, 89%, 65%) 0%, hsl(294, 93%, 78%) 100%);
+        cursor: not-allowed;
+        background-color: $color-gray-lightest;
+        border-color: $color-gray-lightest;
       }
     }
   }
@@ -301,34 +356,63 @@ export default {
 <docs>
     ```jsx
     let text = null
-    <div>
+    <div style="max-width: 700px">
         <McFieldText
-                v-model="text"
-                theme="light"
-                type="text"
-                design="simple"
+                placeholder="Введите сообщение"
+                name="login"
+                help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
         >
-            <template slot="prepend">
-                <McSvgIcon name="face"/>
-            </template>
-            <template slot="append">
-                <McSvgIcon name="face"/>
-            </template>
+            <McTitle :ellipsis="false" :level="4" slot="header">
+                <McTooltip placement="right" slot="icon-append" size="s" content="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube.">
+                    <McSvgIcon name="help"/>
+                </McTooltip>
+                Электронная почта
+            </McTitle>
+            <McSvgIcon slot="prepend" name="face"/>
+            <McSvgIcon slot="prepend" name="access_time"/>
+            <McSvgIcon slot="append" name="attach_money"/>
+
+            <McTooltip slot="append" size="s" content="Вывести все средства">
+                <McButton uppercase variation="gray-darkest-invert" size="s">
+                    Все
+                </McButton>
+            </McTooltip>
+            <McButton slot="append" uppercase variation="gray-darkest-invert" size="s">
+                Фонды
+            </McButton>
         </McFieldText>
+
         <br>
+
         <McFieldText
-                v-model="text"
-                theme="light"
-                type="text"
-                design="simple"
+                placeholder="Disabled"
+                disabled
+                name="pass"
+                title="Заголовок"
+                help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
+        />
+
+        <br>
+
+        <McFieldText
+                :errors="['Имя пользователя и пароль не совпадают', 'Поле обязательно для заполнения.']"
+                name="message"
+                type="textarea"
+                placeholder="Введите сообщение"
+                title="Textarea"
         >
-            <template slot="prepend">
-                @
-            </template>
-            <template slot="append">
-                $
-            </template>
+            <McButton
+                    variation="primary-link"
+                    slot="append"
+                    size="s-compact"
+            >
+                <McSvgIcon slot="icon-append" name="send" />
+            </McButton>
         </McFieldText>
+
+        <br>
+
+        <McFieldText title="Флэтпицкер" name="date" type="date" placeholder="Дата"></McFieldText>
     </div>
     ```
 </docs>

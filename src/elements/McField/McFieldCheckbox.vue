@@ -1,8 +1,14 @@
 <template>
   <div class="mc-field-checkbox" :class="classes">
+    <div class="mc-field-text__header">
+      <slot name="header">
+        <McTitle :ellipsis="false" v-if="title" :level="4">{{ title }}</McTitle>
+      </slot>
+    </div>
     <div class="mc-field-checkbox__input-wrap">
       <label class="mc-field-checkbox__name">
         <input
+          :disabled="disabled"
           class="mc-field-checkbox__input"
           type="checkbox"
           :name="name"
@@ -10,59 +16,132 @@
           @change="handleChange"
         />
         <span class="mc-field-checkbox__name-text">
-          <slot></slot>
+          <slot>
+            <McTitle tag-name="div" :ellipsis="false" v-if="mainText">
+              {{ mainText }}
+            </McTitle>
+          </slot>
         </span>
       </label>
-      <div class="mc-field-checkbox__help-text-wrap">
-        <div class="mc-field-checkbox__help-text">
+      <div class="mc-field-checkbox__footer">
+        <McTitle tag-name="div" :ellipsis="false" color="danger" size="s" v-if="errorText">
           {{ errorText }}
-        </div>
+        </McTitle>
+        <br v-if="errorText" />
+        <slot name="footer">
+          <McTitle tag-name="div" :ellipsis="false" size="s" v-if="helpText">
+            {{ helpText }}
+          </McTitle>
+        </slot>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import McTitle from "../McTitle"
 export default {
   name: "McFieldCheckbox",
-  status: "deprecated",
+  components: { McTitle },
+  status: "ready",
   release: "1.0.0",
   props: {
+    /**
+     *  Значение
+     *
+     */
     value: {
       default: null,
     },
+
+    /**
+     *  Name
+     *
+     */
     name: {
       type: String,
       default: null,
     },
+
+    /**
+     *  Выбранное значение
+     *
+     */
     checkedValue: {
       default: true,
     },
+
+    /**
+     *  Невыбранное значение
+     *
+     */
     uncheckedValue: {
       default: false,
     },
-    type: {
-      type: Number,
-      default: 0,
-    },
+
+    /**
+     *  Ошибки
+     *
+     */
     errors: {
       type: Array,
       default: null,
     },
+
+    /**
+     *  Плейсхолдер
+     *
+     */
     placeholder: {
       type: String,
       default: null,
+    },
+
+    /**
+     *  Вспомогательный текст под инпутом:
+     *
+     */
+    helpText: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     *  Подпись чекбокса:
+     *
+     */
+    mainText: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     *  Заголовок поля:
+     *
+     */
+    title: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     *  Отключенное состояние
+     *
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
     classes() {
       return {
         "mc-field-checkbox--error": this.errors,
-        [`mc-field-checkbox--type-${this.type}`]: this.type,
+        "mc-field-checkbox--disabled": this.disabled,
       }
     },
     errorText() {
-      if (this.errors == null || this.errors.length == 0) return null
+      if (this.errors == null || this.errors.length === 0) return null
       return this.errors.join(", ")
     },
   },
@@ -83,215 +162,97 @@ export default {
 
   $block-name: &;
 
-  &__title {
+  &__header {
+    @include reset-text-indents();
     display: block;
-  }
-
-  &__input-wrap {
-    & + & {
-      margin-top: 1rem;
-    }
-  }
-
-  &__name {
-    position: relative;
-    display: inline-block;
-    padding-left: 27px;
-    font-weight: 400;
-    line-height: 16px;
-    cursor: pointer;
-  }
-
-  &__name-text {
-    display: inline-block;
-    line-height: 18px;
-    user-select: none;
-    color: $color-gray-light;
-    font-family: $font-heading-secondary;
-    font-size: 16px;
-    font-weight: 500;
-    // свой чекбокс без картинок
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 17px;
-      height: 17px;
-      border: 1px solid currentColor;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .mc-field-checkbox__input:focus ~ &:before {
-    }
-    &:after {
-      cursor: pointer;
-      content: "";
-      position: absolute;
-      top: 1px;
-      left: 4px;
-      width: 15px;
-      height: 7px;
-      opacity: 0;
-      border-left: 2px solid currentColor;
-      border-bottom: 2px solid currentColor;
-      transform: rotate(-45deg);
-      //transition: opacity $duration-quickly;
-      box-shadow: 1px 2px 0 #fff, inset 0 -2px 0 #fff;
-      .mc-field-checkbox__input:checked ~ & {
-        opacity: 1;
-      }
-    }
-  }
-
-  &__input {
-    position: absolute;
-    top: 0.7em;
-    left: 0;
-    padding: 0;
-    margin: 0;
-    transform: translateY(-50%);
-    &:focus,
-    &:active {
-    }
-    // сокрытие инпута в случае использования своего чекбокса
-    opacity: 0;
-  }
-
-  &__help-text-wrap {
-    padding-left: 27px;
-  }
-
-  &__help-text {
-    @include field-error();
-    margin-top: 2px;
+    margin-bottom: $space-xs;
 
     &:empty {
       display: none;
     }
   }
 
-  &--type-2 {
+  &__input-wrap {
+    & + & {
+      margin-top: $space-xs;
+    }
+  }
+
+  &__name {
+    display: inline-block;
+    position: relative;
+    padding-left: $space-m;
+    margin-right: $space-xs;
+  }
+
+  &__name-text {
+    display: inline-block;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: $tappable-element-xxs + 2;
+      height: $tappable-element-xxs + 2;
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBkPSJNMTYuOTg0IDFxLjc5NyAwIDEuNDA2LjYxLjYxLjYxLjYxIDEuNDA0djEzLjk3cTAgLjc5Ny0uNjEgMS40MDYtLjYxLjYxLTEuNDA2LjYxSDMuMDE0cS0uNzk2IDAtMS40MDUtLjYxUTEgMTcuNzggMSAxNi45ODRWMy4wMTRxMC0uNzk2LjYxLTEuNDA0UTIuMjIgMSAzLjAxNCAxaDEzLjk3em0wIDIuMDE2SDMuMDE0djEzLjk3aDEzLjk3VjMuMDE2eiIgZmlsbD0iIzk5OTk5OSIvPjwvc3ZnPg==");
+      background-size: 100%;
+    }
+    @at-root input:checked ~ &:before {
+      background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBkPSJNNy45ODQgMTUuMDE3bDktOS0xLjQwNi0xLjQ1NC03LjU5NCA3LjU5NUw0LjQyIDguNTk0IDMuMDE4IDEwem05LTE0LjAxN3EuODQ0IDAgMS40My42MVQxOSAzLjAxNHYxMy45N3EwIC43OTctLjU4NiAxLjQwNi0uNTg2LjYxLTEuNDMuNjFIMy4wMTRxLS44NDMgMC0xLjQzLS42MVQxIDE2Ljk4NFYzLjAxNHEwLS43OTYuNTg1LTEuNDA0UTIuMTcgMSAzLjAxNSAxaDEzLjk3eiIgZmlsbD0iIzQyODVmNCIvPjwvc3ZnPg==");
+    }
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__footer {
+    padding-left: $space-m;
+    margin-top: $space-xxxs;
+    &:empty {
+      display: none;
+    }
+  }
+
+  &--disabled {
     #{$block-name} {
       &__name-text {
-        color: hsl(0, 0%, 13%);
-        font-family: $font-text;
-        font-size: 16px;
-        line-height: line-height(19, 16);
-        font-weight: 400;
-
         &:before {
-          border-color: $color-gray-light;
-        }
-
-        &:after {
-          border-left-color: $color-gray-light;
-          border-bottom-color: $color-gray-light;
+          background-image: none;
+          border-radius: $radius-s;
+          background-color: $color-gray-lighten;
         }
       }
     }
-  }
-
-  &--type-3 {
-    #{$block-name} {
-      &__name-text {
-        color: hsl(0, 0%, 13%);
-        font-family: $font-heading-secondary;
-        font-size: 11px;
-        line-height: line-height(14, 11);
-        font-weight: 500;
-        cursor: default;
-
-        &:before {
-          border-color: #999999;
-        }
-
-        &:after {
-          border-left-color: #999999;
-          border-bottom-color: #999999;
-        }
-
-        a {
-          color: $color-navy-blue-light;
-          transition: color $duration-quickly;
-          text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-  }
-
-  &--type-4 {
-    #{$block-name} {
-      &__name-text {
-        color: hsl(0, 0%, 13%);
-        font-family: $font-heading-secondary;
-        font-size: 13px;
-        line-height: line-height(14, 11);
-        font-weight: 500;
-        cursor: default;
-
-        &:before {
-          border-color: #999999;
-        }
-
-        &:after {
-          border-left-color: #999999;
-          border-bottom-color: #999999;
-        }
-
-        a {
-          color: $color-navy-blue-light;
-          transition: color $duration-quickly;
-          text-decoration: none;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-  }
-
-  &--error {
-    .mc-field-checkbox__help-text {
-      //color: $color-navy-blue-light;
-    }
-    .mc-field-checkbox__help-text {
-      display: block;
-    }
-  }
-  &--small-indent {
-    margin-bottom: 20px;
   }
 }
 </style>
 
 <docs>
   ```jsx
-  let test = null
-  let test2 = null
-  let test3 = null
-  let test4 = null
+  let toggler = null
+  let toggler2 = null
   <div>
-    <McFieldCheckbox v-model="test4">
-      Владилен
-    </McFieldCheckbox>
+    <McFieldCheckbox
+            :errors="['Имя пользователя и пароль не совпадают', 'Поле обязательно для заполнения.']"
+            name="check"
+            title="Заголовок"
+            help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
+            v-model="toggler"
+            main-text="Чекбокс"
+    />
 
-    <McFieldCheckbox v-model="test" :type="2">
-      Владилен
-    </McFieldCheckbox>
+    <br>
 
-    <McFieldCheckbox v-model="test3" :type="3">
-      Владилен
-    </McFieldCheckbox>
-
-    <mc-field-checkbox v-model="test2" :type="4">
-      Владилен
-    </mc-field-checkbox>
+    <McFieldCheckbox
+            disabled
+            name="check2"
+            title="Заголовок"
+            help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
+            v-model="toggler2"
+            main-text="Чекбокс неактивный"
+    />
   </div>
   ```
 </docs>

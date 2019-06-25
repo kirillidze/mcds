@@ -33,7 +33,7 @@
 <script>
 import _capitalize from "lodash/capitalize"
 
-import McFieldSelect from "../elements/McField/McFieldSelect"
+import McFieldSelect from "../elements/McField/McFieldSelectOld"
 
 export default {
   name: "McDateSeparated",

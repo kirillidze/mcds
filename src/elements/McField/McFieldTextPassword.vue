@@ -4,67 +4,95 @@
     :value="value"
     @input="handleInput"
     :title="title"
-    :design="design"
-    :theme="theme"
     :disabled="disabled"
     :name="name"
     :placeholder="placeholder"
   >
-    <slot name="prepend" slot="prepend" />
-    <template slot="append">
-      <slot name="append"></slot>
-      <McSvgIcon
-        :name="type === 'password' ? 'visibility' : 'visibility_off'"
-        type="a"
-        href="#"
-        @click.native.prevent="handleToggleClick"
-      />
-    </template>
+    <McButton
+      variation="gray-darker-link"
+      slot="append"
+      size="s-compact"
+      @click.prevent="handleToggleClick"
+    >
+      <McSvgIcon slot="icon-append" :name="type === 'password' ? 'visibility' : 'visibility_off'" />
+    </McButton>
   </McFieldText>
 </template>
 
 <script>
 import McFieldText from "./McFieldText"
 import McSvgIcon from "../McSvgIcon"
+import McButton from "../McButton"
 
 export default {
   name: "McFieldPassword",
-  components: { McSvgIcon, McFieldText },
-  status: "deprecated",
-  release: "3.5.0",
+  components: { McButton, McSvgIcon, McFieldText },
+  status: "ready",
+  release: "1.0.0",
   props: {
+    /**
+     *  Заголовок поля:
+     *
+     */
     title: {
       type: String,
       default: null,
     },
-    design: {
+
+    /**
+     *  Вспомогательный текст в конце поля:
+     *
+     */
+    helpText: {
       type: String,
       default: null,
     },
-    theme: {
-      type: String,
-      default: null,
-    },
+
+    /**
+     *  Отключенное состояние
+     *
+     */
     disabled: {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Значение
+     *
+     */
     value: {
       default: null,
     },
+
+    /**
+     *  Ошибки
+     *
+     */
     errors: {
       type: Array,
       default: null,
     },
-    name: {
-      type: String,
-      default: null,
-    },
+
+    /**
+     *  Placeholder
+     *
+     */
     placeholder: {
       type: String,
       default: null,
     },
+
+    /**
+     *  Name
+     *
+     */
+    name: {
+      type: String,
+      required: true,
+    },
   },
+
   data() {
     return {
       type: "password",
@@ -83,13 +111,13 @@ export default {
 
 <docs>
     ```jsx
-    let text = null
-    <div>
+    let text = 'lalala'
+    <div style="max-width: 700px;">
         <McFieldPassword
+                placeholder="Введите пароль"
                 v-model="text"
-                theme="light"
-                type="text"
-                design="simple"
+                type="password"
+                name="password"
         />
     </div>
     ```

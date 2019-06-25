@@ -210,14 +210,7 @@ export default {
 </script>
 
 <style lang="scss">
-$colors: (
-  "primary": $color-primary,
-  "secondary": $color-secondary,
-  "danger": $color-danger,
-  "soft-green-dark": $color-soft-green-dark,
-  "gray-darkest": $color-gray-darkest,
-  "white": $color-white,
-);
+$colors: $token-colors;
 
 .mc-button {
   $block-name: &;
@@ -261,7 +254,7 @@ $colors: (
   }
 
   &__text {
-    @include ellipsis($display: inline-flex);
+    @include ellipsis($display: inline-block);
     @include layout-flex-fix();
 
     &:empty {

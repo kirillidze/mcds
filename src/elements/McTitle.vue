@@ -45,6 +45,13 @@ export default {
       default: "black",
     },
     /**
+     * Family
+     */
+    family: {
+      type: String,
+      default: "heading",
+    },
+    /**
      * Если нужен другой тэг
      */
     tagName: {
@@ -60,11 +67,12 @@ export default {
   },
   computed: {
     tag() {
-      return this.tagName ? this.tagName : "h" + this.level
+      return this.tagName ? this.tagName : `h${this.level}`
     },
     classObject() {
       return {
         [`mc-title--size-${this.size}`]: this.size,
+        [`mc-title--family-${this.family}`]: this.family,
         ["mc-title--ellipsis"]: this.ellipsis,
         [`mc-title--color-${this.color}`]: this.color,
         "mc-title--uppercase": this.uppercase,
@@ -94,7 +102,10 @@ export default {
     font-size: inherit;
     width: 1em;
     height: 1em;
+  }
 
+  > .mc-svg-icon,
+  .mc-tooltip-target {
     &:first-child {
       margin-right: 0.3em;
     }
@@ -156,6 +167,14 @@ export default {
         color: $value;
       }
     }
+  }
+
+  &--family-heading {
+    font-family: $font-heading;
+  }
+
+  &--family-text {
+    font-family: $font-text;
   }
 }
 </style>

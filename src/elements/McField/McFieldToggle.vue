@@ -1,22 +1,22 @@
 <template>
-  <label class="mc-toggle" :class="classes">
-    <span class="mc-toggle__text"> <slot></slot> </span>
-    <span class="mc-toggle__wrapper">
+  <label class="mc-field-toggle" :class="classes">
+    <span class="mc-field-toggle__text"> <slot></slot> </span>
+    <span class="mc-field-toggle__wrapper">
       <input
-        class="mc-toggle__field"
+        class="mc-field-toggle__field"
         type="checkbox"
         :checked="_value"
         :disabled="disabled"
         @input="e => change(e.target.checked)"
       />
-      <span class="mc-toggle__slider"></span>
+      <span class="mc-field-toggle__slider"></span>
     </span>
   </label>
 </template>
 
 <script>
 export default {
-  name: "McToggle",
+  name: "McFieldToggle",
   status: "deprecated",
   release: "1.0.0",
   props: {
@@ -43,7 +43,7 @@ export default {
     },
     classes() {
       return {
-        "mc-toggle--checked": this._value,
+        "mc-field-toggle--checked": this._value,
       }
     },
   },
@@ -55,17 +55,8 @@ export default {
 }
 </script>
 
-<docs>
-  ```jsx
-  let test = null
-  <div>
-    <McToggle v-model="test">Тогглер</McToggle>
-  </div>
-  ```
-</docs>
-
 <style lang="scss">
-.mc-toggle {
+.mc-field-toggle {
   $block-name: &;
 
   display: flex;
@@ -82,7 +73,7 @@ export default {
   }
 
   &--checked {
-    .mc-toggle__text {
+    .mc-field-toggle__text {
       color: $color-navy-blue-light;
     }
   }
@@ -92,12 +83,12 @@ export default {
     display: inline-block;
     width: 42px;
     height: 20px;
-    & > .mc-toggle__field {
+    & > .mc-field-toggle__field {
       opacity: 0;
       width: 0;
       height: 0;
 
-      &:checked + .mc-toggle__slider {
+      &:checked + .mc-field-toggle__slider {
         background-color: $color-navy-blue-light;
 
         &:before {
@@ -106,7 +97,7 @@ export default {
       }
     }
 
-    .mc-toggle__slider {
+    .mc-field-toggle__slider {
       position: absolute;
       top: 0;
       left: 0;
@@ -131,3 +122,12 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  let toggler = null
+  <div>
+    <McFieldToggle v-model="toggler">Тогглер</McFieldToggle>
+  </div>
+  ```
+</docs>
