@@ -1,8 +1,6 @@
 <template>
   <div class="mc-filter">
-    <pre>Текущее: {{ currentValues }}</pre>
-    <pre>Пресеты: {{ presets }}</pre>
-    <McPanel style="padding: 0; width: 100%; max-width: none">
+    <McPanel style="padding: 0; width: 100%; max-width: none; max-height: 500px; overflow-y: auto">
       <McTitle class="mc-filter__title">
         <slot name="title">Фильтры</slot>
       </McTitle>
