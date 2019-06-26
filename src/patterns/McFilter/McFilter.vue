@@ -11,6 +11,12 @@
           <McTab name="Все">
             <div class="mc-filter__tab">
               <template v-for="filter in filters">
+                <McFilterTypeText
+                  v-if="filter.type === 'text'"
+                  :filter="filter"
+                  :value="currentValues[filter.value] || ''"
+                  @input="value => handleInput(filter, value)"
+                />
                 <McFilterTypeRelation
                   v-if="filter.type === 'relation'"
                   :filter="filter"
@@ -46,8 +52,8 @@
       </div>
       <div class="mc-filter__footer">
         <McButton :disabled="!Object.keys(currentValues).length" @click="savePreset"
-          >Сохранить пресет</McButton
-        >
+          >Сохранить пресет
+        </McButton>
         <McButton :disabled="!canSubmit" @click="submit">Применить</McButton>
       </div>
     </McPanel>
@@ -63,6 +69,7 @@ import McTab from "../McTabs/McTab"
 import McCollapse from "../McCollapse"
 import McFilterTypeRelation from "./McFilterTypeRelation"
 import McChip from "../../elements/McChip"
+import McFilterTypeText from "./McFilterTypeText"
 import McFilterTypeRange from "./McFilterTypeRange"
 import McButton from "../../elements/McButton"
 import McFilterPresetValue from "./McFilterPresetValue"
@@ -72,8 +79,9 @@ export default {
   components: {
     McFilterPresetValue,
     McButton,
-    McFilterTypeRange,
     McChip,
+    McFilterTypeText,
+    McFilterTypeRange,
     McFilterTypeRelation,
     McCollapse,
     McTab,
@@ -117,13 +125,12 @@ export default {
   },
   methods: {
     handleInput(filter, value) {
-      console.log(filter, value)
       const values = {
         ...this.currentValues,
         [filter.value]: value,
       }
       Object.keys(values).forEach(key => {
-        if (!Object.keys(values[key]).length) {
+        if (values[key] == null || !Object.keys(values[key]).length) {
           delete values[key]
         }
       })
@@ -168,9 +175,15 @@ export default {
     },
     users: {
     is: [1],
-    }
+    },
+    q: 'asd',
     }
     const filters = [
+    {
+    name: 'Поиск',
+    value: 'q',
+    type: 'text'
+    },
     {
     name: 'Страна',
     value: 'countries',

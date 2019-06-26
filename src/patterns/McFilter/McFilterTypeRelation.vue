@@ -59,13 +59,12 @@ import McFieldSelect from "../../elements/McField/McFieldSelect"
 import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
 import McButton from "../../elements/McButton"
-import McChip from "../../elements/McChip"
 import McCollapse from "../../patterns/McCollapse"
 import McFilterChip from "./McFilterChip"
 
 export default {
   name: "McFilterTypeRelation",
-  components: { McFilterChip, McButton, McGridCol, McGridRow, McFieldSelect, McChip, McCollapse },
+  components: { McFilterChip, McButton, McGridCol, McGridRow, McFieldSelect, McCollapse },
   props: {
     value: {
       type: Object,

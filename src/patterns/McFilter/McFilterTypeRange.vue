@@ -14,7 +14,7 @@
         @click="handleInput(name)"
         style="margin-left: 10px"
       />
-      <div class="mc-filter-type-number">
+      <div class="mc-filter-type-range">
         <McGridRow :gutter-x="10">
           <McGridCol :span="6">
             <McFieldText
@@ -44,14 +44,13 @@
 import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
 import McButton from "../../elements/McButton"
-import McChip from "../../elements/McChip"
 import McCollapse from "../../patterns/McCollapse"
 import McFieldText from "../../elements/McField/McFieldText"
 import McFilterChip from "./McFilterChip"
 
 export default {
   name: "McFilterTypeRange",
-  components: { McFilterChip, McFieldText, McButton, McGridCol, McGridRow, McChip, McCollapse },
+  components: { McFilterChip, McFieldText, McButton, McGridCol, McGridRow, McCollapse },
   props: {
     value: {
       type: Object,

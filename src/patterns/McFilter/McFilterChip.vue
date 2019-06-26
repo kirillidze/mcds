@@ -29,7 +29,9 @@ export default {
   },
   computed: {
     text() {
-      if (this.type === "relation") {
+      if (this.type === "text") {
+        return this.value
+      } else if (this.type === "relation") {
         if (this.name === "is") {
           return `Это: ${this.value.length}`
         } else if (this.name === "not_is") {
