@@ -16,13 +16,13 @@
                   @input="value => handleInput(filter, value)"
                 />
                 <McFilterTypeRelation
-                  v-if="filter.type === 'relation'"
+                  v-else-if="filter.type === 'relation'"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
                   @input="value => handleInput(filter, value)"
                 />
                 <McFilterTypeRange
-                  v-if="filter.type === 'number' || filter.type === 'date'"
+                  v-else-if="filter.type === 'number' || filter.type === 'date'"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
                   @input="value => handleInput(filter, value)"
