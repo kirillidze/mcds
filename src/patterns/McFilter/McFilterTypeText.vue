@@ -36,7 +36,7 @@ export default {
       required: true,
     },
     realValue: {
-      type: Object,
+      type: String,
       required: true,
     },
     filter: {
