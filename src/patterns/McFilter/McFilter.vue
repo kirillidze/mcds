@@ -41,7 +41,7 @@
                   :filters="filters"
                   style="margin-bottom: 10px"
                 />
-                <McButton size="s" @click="applyPreset(preset)">Применить</McButton>
+                <McButton size="s" @click="emitInput(preset)">Применить</McButton>
                 <hr />
               </div>
             </div>
@@ -61,6 +61,7 @@
 
 <script>
 import _isEqual from "lodash/isEqual"
+import _cloneDeep from "lodash/cloneDeep"
 import McPanel from "../McPanel"
 import McTitle from "../../elements/McTitle"
 import McTabs from "../McTabs/McTabs"
@@ -124,28 +125,28 @@ export default {
   },
   methods: {
     handleInput(filter, value) {
-      const values = {
+      this.currentValues = {
         ...this.currentValues,
-        [filter.value]: value,
+        [filter.value]: _cloneDeep(value),
       }
+    },
+    reset() {
+      this.emitInput({})
+    },
+    submit() {
+      this.emitInput(this.currentValues)
+    },
+    savePreset() {
+      this.$emit("preset-save", this.currentValues)
+    },
+    emitInput(value) {
+      const values = _cloneDeep(value)
       Object.keys(values).forEach(key => {
         if (values[key] == null || !Object.keys(values[key]).length) {
           delete values[key]
         }
       })
-      this.currentValues = values
-    },
-    reset() {
-      this.$emit("input", {})
-    },
-    submit() {
-      this.$emit("input", this.currentValues)
-    },
-    savePreset() {
-      this.$emit("preset-save", this.currentValues)
-    },
-    applyPreset(preset) {
-      this.$emit("input", preset)
+      this.$emit("input", values)
     },
   },
 }
