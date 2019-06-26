@@ -84,6 +84,7 @@ export default {
 
   &__header {
     font-family: $font-heading-secondary;
+    font-size: 16px;
     position: relative;
     padding: 8px 16px;
     padding-right: 45px;
