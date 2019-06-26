@@ -22,14 +22,18 @@
             <McFieldText
               :value="value.more || ''"
               @input="value => handleInput('more', value)"
+              :type="filter.type === 'date' ? 'date' : 'text'"
               placeholder="От"
+              name="more"
             />
           </McGridCol>
           <McGridCol :span="6">
             <McFieldText
               :value="value.less || ''"
               @input="value => handleInput('less', value)"
+              :type="filter.type === 'date' ? 'date' : 'text'"
               placeholder="До"
+              name="less"
             />
           </McGridCol>
         </McGridRow>
@@ -47,7 +51,7 @@ import McCollapse from "../../patterns/McCollapse"
 import McFieldText from "../../elements/McField/McFieldText"
 
 export default {
-  name: "McFilterTypeNumber",
+  name: "McFilterTypeRange",
   components: { McFieldText, McButton, McGridCol, McGridRow, McChip, McCollapse },
   props: {
     value: {
@@ -81,7 +85,7 @@ export default {
     handleInput(type, value) {
       const currentValue = { ...this.value }
       if (value) {
-        currentValue[type] = +value
+        currentValue[type] = this.filter.type === "date" ? value : +value
       } else {
         delete currentValue[type]
       }

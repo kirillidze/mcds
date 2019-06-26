@@ -14,11 +14,11 @@
         style="margin-left: 10px"
       >
         <template v-if="chip.type === 'is'"
-          >Это:</template
-        >
+          >Это:
+        </template>
         <template v-else-if="chip.type === 'not_is'"
-          >Это не:</template
-        >
+          >Это не:
+        </template>
         {{ chip.value }}
       </McChip>
       <div class="mc-filter-type-relation">
@@ -46,7 +46,7 @@
         </McGridRow>
         <McFieldSelect
           v-if="selectTypes.indexOf(type) !== -1"
-          :options="options"
+          :options="computedOptions"
           :multiple="true"
           :value="currentValue"
           @input="handleInput"
@@ -60,6 +60,8 @@
 </template>
 
 <script>
+import _uniqBy from "lodash/uniqBy"
+
 import McFieldSelect from "../../elements/McField/McFieldSelect"
 import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
@@ -85,6 +87,7 @@ export default {
     return {
       selectTypes,
       type: selectTypes[0],
+      ajaxShowOptions: [],
       ajaxOptions: [],
     }
   },
@@ -99,8 +102,9 @@ export default {
     isAjax() {
       return typeof this.filter.ajax === "function"
     },
-    options() {
-      return this.isAjax ? this.ajaxOptions : this.filter.values || []
+    computedOptions() {
+      const result = this.isAjax ? this.ajaxOptions : this.filter.values || []
+      return _uniqBy([...this.ajaxShowOptions, ...result], "value")
     },
     currentValue() {
       return this.value[this.type] || []
@@ -125,6 +129,9 @@ export default {
       })
       return result
     },
+  },
+  mounted() {
+    this.loadAjaxOptions()
   },
   methods: {
     handleInput(value) {
@@ -164,6 +171,15 @@ export default {
       if (!this.isAjax) return
       this.filter.ajax(value).then(result => {
         this.ajaxOptions = result
+      })
+    },
+    loadAjaxOptions() {
+      if (!this.isAjax) return
+      if (!this.currentValue.length) return
+      this.currentValue.forEach(value => {
+        this.filter.ajaxShow(value).then(result => {
+          this.ajaxShowOptions.push(result)
+        })
       })
     },
   },
