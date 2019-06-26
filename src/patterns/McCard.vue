@@ -12,7 +12,7 @@
 
 <script>
 import McGridRow from "./McGrid/McGridRow"
-import McLines from "./McLines"
+import McCell from "./McCells/McCell"
 import McAvatar from "../elements/McAvatar/McAvatar"
 import McGridCol from "./McGrid/McGridCol"
 import McPreview from "./McPreview"
@@ -30,7 +30,7 @@ export default {
     McPreview,
     McGridCol,
     McAvatar,
-    McLines,
+    McCell,
     McGridRow,
   },
   status: "ready",
@@ -165,25 +165,25 @@ export default {
             </McPreview>
             <McGridRow :gutter-x="20">
                 <McGridCol :span="4">
-                    <McLines title="Бюджет">
+                    <McCell title="Бюджет">
                         <McTitle tag-name="p" size="m">
                             1 200 $
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol :span="4">
-                    <McLines title="Блогеров">
+                    <McCell title="Блогеров">
                         <McTitle tag-name="p" size="m">
                             129
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol :span="4">
-                    <McLines title="Дедлайн">
+                    <McCell title="Дедлайн">
                         <McTitle tag-name="p" size="m">
                             01.11.2018
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
             </McGridRow>
         </McCard>
@@ -199,14 +199,14 @@ export default {
             </McPreview>
             <McGridRow :gutter-x="20">
                 <McGridCol :span="6">
-                    <McLines title="Основной владелец">
+                    <McCell title="Основной владелец">
                         <McTitle tag-name="p" size="m">
                             Eugene Solonovich
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol :span="6">
-                    <McLines title="Владельцы">
+                    <McCell title="Владельцы">
                         <McGridRow :gutter-x="5" :gutter-y="5">
                             <McGridCol>
                                 <McButton size="s">Roman Kolodko</McButton>
@@ -215,7 +215,7 @@ export default {
                                 <McButton size="s">Dasha</McButton>
                             </McGridCol>
                         </McGridRow>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
             </McGridRow>
         </McCard>
@@ -261,7 +261,7 @@ export default {
             </McGridRow>
             <McGridRow stretch :gutter-x="30" :gutter-y="10">
                 <McGridCol>
-                    <McLines title="Преролл">
+                    <McCell title="Преролл">
                         <McTitle tag-name="p" size="l">
                             10$
                         </McTitle>
@@ -273,10 +273,10 @@ export default {
                                 (2%)
                             </McTitle>
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol>
-                    <McLines title="Нативка">
+                    <McCell title="Нативка">
                         <McTitle tag-name="p" size="l">
                             12$
                         </McTitle>
@@ -288,10 +288,10 @@ export default {
                                 (4%)
                             </McTitle>
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol>
-                    <McLines title="Интеграция">
+                    <McCell title="Интеграция">
                         <McTitle tag-name="p" size="l">
                             12$
                         </McTitle>
@@ -303,10 +303,10 @@ export default {
                                 (4%)
                             </McTitle>
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol>
-                    <McLines title="Эксклюзив">
+                    <McCell title="Эксклюзив">
                         <McTitle tag-name="p" size="l">
                             12$
                         </McTitle>
@@ -318,7 +318,7 @@ export default {
                                 (43%)
                             </McTitle>
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
             </McGridRow>
         </McCard>
@@ -328,39 +328,39 @@ export default {
         <McCard>
             <McGridRow :gutter-x="30" :gutter-y="10">
                 <McGridCol>
-                    <McLines title="Доля сети">
+                    <McCell title="Доля сети">
                         <McTitle tag-name="p" size="m">
                             1 200 $
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol>
-                    <McLines title="Доля орг.">
+                    <McCell title="Доля орг.">
                         <McTitle tag-name="p" size="m">
                             129 $
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol>
-                    <McLines title="Мин. доля канала">
+                    <McCell title="Мин. доля канала">
                         <McTitle tag-name="p" size="m">
                             1 200 $
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol>
-                    <McLines title="Макс. доля канала">
+                    <McCell title="Макс. доля канала">
                         <McTitle tag-name="p" size="m">
                             1 20000
                         </McTitle>$
-                    </McLines>
+                    </McCell>
                 </McGridCol>
                 <McGridCol>
-                    <McLines title="Макс. срок контракта">
+                    <McCell title="Макс. срок контракта">
                         <McTitle tag-name="p" size="m">
                             1 20000 $
                         </McTitle>
-                    </McLines>
+                    </McCell>
                 </McGridCol>
             </McGridRow>
         </McCard>

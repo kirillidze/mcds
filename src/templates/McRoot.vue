@@ -27,7 +27,6 @@ export default {
 
 // Временные
 @import "~vue-snotify/styles/material";
-@import "~vue-multiselect/dist/vue-multiselect.min";
 @import "~flatpickr/dist/flatpickr";
 
 html {

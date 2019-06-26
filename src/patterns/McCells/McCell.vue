@@ -1,22 +1,22 @@
 <template>
-  <section class="mc-lines">
-    <div class="mc-lines__title">
+  <section class="mc-cell">
+    <div class="mc-cell__title">
       <slot name="title">
         <McTitle size="xs" uppercase>{{ title }}</McTitle>
       </slot>
     </div>
-    <div class="mc-lines__content">
+    <div class="mc-cell__content">
       <slot></slot>
     </div>
   </section>
 </template>
 
 <script>
-import McTitle from "../elements/McTitle"
+import McTitle from "../../elements/McTitle"
 export default {
-  name: "McLines",
+  name: "McCell",
   components: { McTitle },
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
   props: {
     title: {
@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
-.mc-lines {
+.mc-cell {
   @include reset-text-indents();
 
   &__title {
@@ -49,44 +49,44 @@ export default {
 <docs>
     ```jsx
     <div>
-        <McLines title="Бюджет">
+        <McCell title="Бюджет">
             <McTitle tag-name="p" size="m">
                 30 000 $
             </McTitle>
-        </McLines>
+        </McCell>
 
         <br>
 
-        <McLines title="Бюджет">
+        <McCell title="Бюджет">
             <McTitle tag-name="p" size="m">
                 30 000 $
             </McTitle>
             <McTitle size="xs" uppercase>
                 app/aug
             </McTitle>
-        </McLines>
+        </McCell>
 
         <br>
 
-        <McLines>
+        <McCell>
             <McTitle uppercase slot="title" size="s">
                 Имя Фамилия
             </McTitle>
             <McTitle tag-name="p" size="l">
                 MediaCube Network
             </McTitle>
-        </McLines>
+        </McCell>
 
         <br>
 
-        <McLines>
+        <McCell>
             <McTitle uppercase color="primary" slot="title" size="m">
                 Имя Фамилия
             </McTitle>
             <McTitle tag-name="p" size="xl">
                 MediaCube Network
             </McTitle>
-        </McLines>
+        </McCell>
     </div>
     ```
 </docs>

@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import McLines from "../McLines"
+import McCell from "../McCells/McCell"
 import McTitle from "../../elements/McTitle"
 export default {
   name: "McCellBordered",
-  components: { McTitle, McLines },
+  components: { McTitle, McCell },
   status: "ready",
   release: "1.0.0",
   data() {
@@ -111,7 +111,7 @@ export default {
     background-color: transparent;
   }
 
-  .mc-lines {
+  .mc-cell {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -164,66 +164,66 @@ export default {
   let eventTest = (val) => alert(val)
   <div>
     <McCellBordered>
-      <McLines>
+      <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
         </McTitle>
         <McTitle tag-name="p" size="l">
           140 873 $
         </McTitle>
-      </McLines>
+      </McCell>
     </McCellBordered>
 
     <br>
 
     <McCellBordered border-color="red-light">
-      <McLines>
+      <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
         </McTitle>
         <McTitle tag-name="p" size="l">
           140 873 $
         </McTitle>
-      </McLines>
+      </McCell>
     </McCellBordered>
 
     <br>
 
     <McCellBordered border-color="primary" @click>
-      <McLines>
+      <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
         </McTitle>
         <McTitle tag-name="p" size="l">
           140 873 $
         </McTitle>
-      </McLines>
+      </McCell>
     </McCellBordered>
 
     <br>
 
     <McCellBordered gradient border-color="gorse" @click>
-      <McLines>
+      <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
         </McTitle>
         <McTitle tag-name="p" size="l">
           140 873 $
         </McTitle>
-      </McLines>
+      </McCell>
     </McCellBordered>
 
     <br>
 
     <McCellBordered disabled border-color="bright-turquoise-darker" @click>
-      <McLines>
+      <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
         </McTitle>
         <McTitle tag-name="p" size="l">
           140 873 $
         </McTitle>
-      </McLines>
+      </McCell>
     </McCellBordered>
   </div>
   ```

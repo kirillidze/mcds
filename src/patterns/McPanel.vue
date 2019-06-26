@@ -63,7 +63,7 @@ export default {
 <docs>
   ```jsx
 
-  let tokens = require('@/assets/tokens/tokens')
+  let tokens = require('../assets/tokens/tokens')
   let stylesPanel = {
     marginRight: tokens.space_s,
     marginBottom: tokens.space_s
