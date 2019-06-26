@@ -231,7 +231,7 @@ export default {
     },
     ]
     let presets = [
-        {q: 'asd'},
+        {q: 'asd', views_count: {more: 10}},
     ]
     const savePreset = values => presets.push(values)
     <McFilter v-model="value" :filters="filters" :presets="presets" @preset-save="savePreset" style="width: 500px"/>

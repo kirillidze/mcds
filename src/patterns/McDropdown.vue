@@ -1,5 +1,5 @@
 <template>
-  <div class="mc-dropdown" :class="dropdownClasses" v-click-outside="closeDropdown">
+  <div class="mc-dropdown" :class="dropdownClasses" v-click-outside="handleClickOutside">
     <div class="mc-dropdown__toggler" tabindex="0" @keyup.esc="closeDropdown">
       <slot name="activator" />
     </div>
@@ -59,6 +59,10 @@ export default {
   methods: {
     toggleDropdown() {
       this.$emit("input", !this.value)
+    },
+    handleClickOutside(e) {
+      if (!document.body.contains(e.target)) return
+      this.closeDropdown()
     },
     closeDropdown() {
       this.$emit("input", false)
