@@ -3,7 +3,7 @@
     <McFilterChip
       v-if="value != null && value !== ''"
       :type="filter.type"
-      :name="value"
+      :name="'' + value"
       :value="value"
       :closable="true"
       @click="handleInput(null)"
