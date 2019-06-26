@@ -20,14 +20,14 @@
                   v-else-if="filter.type === 'relation'"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || ''"
+                  :real-value="value[filter.value] || {}"
                   @input="value => handleInput(filter, value)"
                 />
                 <McFilterTypeRange
                   v-else-if="filter.type === 'number' || filter.type === 'date'"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || ''"
+                  :real-value="value[filter.value] || {}"
                   @input="value => handleInput(filter, value)"
                 />
               </template>
