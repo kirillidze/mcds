@@ -1,8 +1,5 @@
 <template>
-  <section
-    class="mc-collapse"
-    :class="{ 'mc-collapse--is-open': isCollapsed, 'mc-collapse--is-disabled': isDisabled }"
-  >
+  <section class="mc-collapse" :class="classes">
     <div class="mc-collapse__header">
       <template v-if="!isDisabled">
         <a class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
@@ -41,6 +38,20 @@ export default {
       type: Boolean,
       default: false,
     },
+    noBorder: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  computed: {
+    classes() {
+      return {
+        "mc-collapse--is-open": this.isCollapsed,
+        "mc-collapse--is-disabled": this.isDisabled,
+        "mc-collapse--no-border": this.noBorder,
+      }
+    },
   },
 
   methods: {
@@ -58,11 +69,24 @@ export default {
   border-radius: 4px;
   border: 1px solid #b7b7b7;
 
+  &--no-border {
+    border: none;
+    #{$block-name} {
+      &__header {
+        padding: 8px 0px;
+        padding-right: 29px;
+      }
+      &__icon {
+        right: 0;
+      }
+    }
+  }
+
   &__header {
     font-family: $font-heading-secondary;
     position: relative;
     padding: 8px 16px;
-    padding-left: 45px;
+    padding-right: 45px;
     min-height: 48px;
     display: flex;
     align-items: center;
@@ -86,7 +110,7 @@ export default {
     height: 30px;
     transition: all $duration-quickly;
     position: absolute;
-    left: 10px;
+    right: 10px;
     top: 50%;
     margin-top: -15px;
   }
