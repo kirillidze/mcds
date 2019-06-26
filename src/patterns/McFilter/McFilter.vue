@@ -52,6 +52,7 @@
         <McButton :disabled="!Object.keys(currentValues).length" @click="savePreset"
           >Сохранить пресет
         </McButton>
+        <McButton :disabled="!Object.keys(currentValues).length" @click="reset">Сбросить</McButton>
         <McButton :disabled="!canSubmit" @click="submit">Применить</McButton>
       </div>
     </McPanel>
@@ -133,6 +134,9 @@ export default {
         }
       })
       this.currentValues = values
+    },
+    reset() {
+      this.$emit("input", {})
     },
     submit() {
       this.$emit("input", this.currentValues)
