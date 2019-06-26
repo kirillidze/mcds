@@ -230,7 +230,9 @@ export default {
     type: 'date',
     },
     ]
-    let presets = []
+    let presets = [
+        {q: 'asd'},
+    ]
     const savePreset = values => presets.push(values)
     <McFilter v-model="value" :filters="filters" :presets="presets" @preset-save="savePreset" style="width: 500px"/>
     <br>

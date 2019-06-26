@@ -3,6 +3,15 @@
     <McTitle>
       {{ filter.name }}:
       <McFilterChip
+        v-if="filter.type === 'text'"
+        :type="filter.type"
+        :name="value"
+        :value="'' + value"
+        :closable="false"
+        style="margin-right: 10px"
+      />
+      <McFilterChip
+        v-else
         v-for="(values, valueName) in value"
         :key="valueName"
         :type="filter.type"
