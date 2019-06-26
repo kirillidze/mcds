@@ -1,10 +1,10 @@
 <template>
   <div>
     <McFilterChip
-      v-if="value != null && value !== ''"
+      v-if="realValue != null && realValue !== ''"
       :type="filter.type"
-      :name="'' + value"
-      :value="value"
+      :name="'' + realValue"
+      :value="realValue"
       :closable="true"
       @click="handleInput(null)"
       style="margin-right: 10px"
@@ -33,6 +33,10 @@ export default {
   props: {
     value: {
       type: String,
+      required: true,
+    },
+    realValue: {
+      type: Object,
       required: true,
     },
     filter: {

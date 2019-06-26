@@ -1,7 +1,7 @@
 <template>
   <div>
     <McFilterChip
-      v-for="(values, name) in value"
+      v-for="(values, name) in realValue"
       :key="name"
       :type="filter.type"
       :name="name"
@@ -69,6 +69,10 @@ export default {
   components: { McFilterChip, McButton, McGridCol, McGridRow, McFieldSelect, McCollapse },
   props: {
     value: {
+      type: Object,
+      required: true,
+    },
+    realValue: {
       type: Object,
       required: true,
     },
