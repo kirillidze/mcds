@@ -137,16 +137,19 @@ export default {
       this.emitInput(this.currentValues)
     },
     savePreset() {
-      this.$emit("preset-save", this.currentValues)
+      this.$emit("preset-save", this.clearEmpty(this.currentValues))
     },
-    emitInput(value) {
+    clearEmpty(value) {
       const values = _cloneDeep(value)
       Object.keys(values).forEach(key => {
         if (values[key] == null || !Object.keys(values[key]).length) {
           delete values[key]
         }
       })
-      this.$emit("input", values)
+      return values
+    },
+    emitInput(value) {
+      this.$emit("input", this.clearEmpty(value))
     },
   },
 }
