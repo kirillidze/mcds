@@ -4,23 +4,16 @@
       {{ filter.name }}
     </template>
     <template slot="body">
-      <McChip
-        v-for="(chip, index) in chips"
-        :key="index"
-        variation="gray-darkest-invert"
-        size="s"
-        closable
-        @click="handleChipClick(chip)"
+      <McFilterChip
+        v-for="(values, name) in value"
+        :key="name"
+        :type="filter.type"
+        :name="name"
+        :value="values"
+        :closable="true"
+        @click="setValue(name, [])"
         style="margin-left: 10px"
-      >
-        <template v-if="chip.type === 'is'"
-          >Это:
-        </template>
-        <template v-else-if="chip.type === 'not_is'"
-          >Это не:
-        </template>
-        {{ chip.value }}
-      </McChip>
+      />
       <div class="mc-filter-type-relation">
         <McGridRow :gutter-x="10" style="margin-bottom: 10px">
           <McGridCol v-for="selectType in selectTypes" :key="selectType" :span="3">
@@ -68,10 +61,11 @@ import McGridCol from "../McGrid/McGridCol"
 import McButton from "../../elements/McButton"
 import McChip from "../../elements/McChip"
 import McCollapse from "../../patterns/McCollapse"
+import McFilterChip from "./McFilterChip"
 
 export default {
   name: "McFilterTypeRelation",
-  components: { McButton, McGridCol, McGridRow, McFieldSelect, McChip, McCollapse },
+  components: { McFilterChip, McButton, McGridCol, McGridRow, McFieldSelect, McChip, McCollapse },
   props: {
     value: {
       type: Object,
@@ -151,9 +145,6 @@ export default {
         }
         this.setValue(type, currentTypeValue)
       }
-    },
-    handleChipClick(chip) {
-      this.setValue(chip.type, [])
     },
     setValue(type, value) {
       const currentValue = { ...this.value }

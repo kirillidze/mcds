@@ -4,18 +4,16 @@
       {{ filter.name }}
     </template>
     <template slot="body">
-      <McChip
-        v-for="(chip, index) in chips"
-        :key="index"
-        variation="gray-darkest-invert"
-        size="s"
-        closable
-        @click="handleChipClick(chip)"
+      <McFilterChip
+        v-for="(values, name) in value"
+        :key="name"
+        :type="filter.type"
+        :name="name"
+        :value="values"
+        :closable="true"
+        @click="handleInput(name)"
         style="margin-left: 10px"
-      >
-        {{ chip.type === "more" ? "От " : "До " }}
-        {{ chip.value }}
-      </McChip>
+      />
       <div class="mc-filter-type-number">
         <McGridRow :gutter-x="10">
           <McGridCol :span="6">
@@ -49,10 +47,11 @@ import McButton from "../../elements/McButton"
 import McChip from "../../elements/McChip"
 import McCollapse from "../../patterns/McCollapse"
 import McFieldText from "../../elements/McField/McFieldText"
+import McFilterChip from "./McFilterChip"
 
 export default {
   name: "McFilterTypeRange",
-  components: { McFieldText, McButton, McGridCol, McGridRow, McChip, McCollapse },
+  components: { McFilterChip, McFieldText, McButton, McGridCol, McGridRow, McChip, McCollapse },
   props: {
     value: {
       type: Object,
@@ -61,24 +60,6 @@ export default {
     filter: {
       type: Object,
       required: true,
-    },
-  },
-  computed: {
-    chips() {
-      const result = []
-      if (this.value.more) {
-        result.push({
-          type: "more",
-          value: this.value.more,
-        })
-      }
-      if (this.value.less) {
-        result.push({
-          type: "less",
-          value: this.value.less,
-        })
-      }
-      return result
     },
   },
   methods: {
@@ -90,9 +71,6 @@ export default {
         delete currentValue[type]
       }
       this.emitInput(currentValue)
-    },
-    handleChipClick(chip) {
-      this.handleInput(chip.type, null)
     },
     emitInput(value) {
       this.$emit("input", value)

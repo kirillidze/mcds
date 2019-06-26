@@ -1,6 +1,7 @@
 <template>
   <div class="mc-filter">
-    <pre>{{ currentValues }}</pre>
+    <pre>Текущее: {{ currentValues }}</pre>
+    <pre>Пресеты: {{ presets }}</pre>
     <McPanel style="padding: 0; width: 100%; max-width: none">
       <McTitle class="mc-filter__title">
         <slot name="title">Фильтры</slot>
@@ -26,13 +27,27 @@
             </div>
           </McTab>
           <McTab name="Пресеты">
-            <div class="mc-filter__tab">
-              Пресеты
+            <div class="mc-filter__tab" v-for="(preset, index) in presets" :key="index">
+              <div>
+                <McFilterPresetValue
+                  v-for="(presetValue, presetName) in preset"
+                  :key="presetName"
+                  :name="presetName"
+                  :value="presetValue"
+                  :filters="filters"
+                  style="margin-bottom: 10px"
+                />
+                <McButton size="s" @click="applyPreset(preset)">Применить</McButton>
+                <hr />
+              </div>
             </div>
           </McTab>
         </McTabs>
       </div>
       <div class="mc-filter__footer">
+        <McButton :disabled="!Object.keys(currentValues).length" @click="savePreset"
+          >Сохранить пресет</McButton
+        >
         <McButton :disabled="!canSubmit" @click="submit">Применить</McButton>
       </div>
     </McPanel>
@@ -50,10 +65,12 @@ import McFilterTypeRelation from "./McFilterTypeRelation"
 import McChip from "../../elements/McChip"
 import McFilterTypeRange from "./McFilterTypeRange"
 import McButton from "../../elements/McButton"
+import McFilterPresetValue from "./McFilterPresetValue"
 
 export default {
   name: "McFilter",
   components: {
+    McFilterPresetValue,
     McButton,
     McFilterTypeRange,
     McChip,
@@ -72,6 +89,12 @@ export default {
     filters: {
       type: Array,
       required: true,
+    },
+    presets: {
+      type: Array,
+      default() {
+        return []
+      },
     },
   },
   data() {
@@ -108,6 +131,12 @@ export default {
     },
     submit() {
       this.$emit("input", this.currentValues)
+    },
+    savePreset() {
+      this.$emit("preset-save", this.currentValues)
+    },
+    applyPreset(preset) {
+      this.$emit("input", preset)
     },
   },
 }
@@ -186,7 +215,9 @@ export default {
     type: 'date',
     },
     ]
-    <McFilter v-model="value" :filters="filters" style="width: 500px"/>
+    let presets = []
+    const savePreset = values => presets.push(values)
+    <McFilter v-model="value" :filters="filters" :presets="presets" @preset-save="savePreset" style="width: 500px"/>
     <br>
     <br>
     <br>
