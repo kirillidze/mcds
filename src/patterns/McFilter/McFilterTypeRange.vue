@@ -1,43 +1,45 @@
 <template>
-  <McCollapse no-border>
-    <template>
-      {{ filter.name }}
-    </template>
-    <template slot="body">
-      <McFilterChip
-        v-for="(values, name) in value"
-        :key="name"
-        :type="filter.type"
-        :name="name"
-        :value="values"
-        :closable="true"
-        @click="handleInput(name)"
-        style="margin-left: 10px"
-      />
-      <div class="mc-filter-type-range">
-        <McGridRow :gutter-x="10">
-          <McGridCol :span="6">
-            <McFieldText
-              :value="value.more || ''"
-              @input="value => handleInput('more', value)"
-              :type="filter.type === 'date' ? 'date' : 'text'"
-              placeholder="От"
-              name="more"
-            />
-          </McGridCol>
-          <McGridCol :span="6">
-            <McFieldText
-              :value="value.less || ''"
-              @input="value => handleInput('less', value)"
-              :type="filter.type === 'date' ? 'date' : 'text'"
-              placeholder="До"
-              name="less"
-            />
-          </McGridCol>
-        </McGridRow>
-      </div>
-    </template>
-  </McCollapse>
+  <div>
+    <McFilterChip
+      v-for="(values, name) in value"
+      :key="name"
+      :type="filter.type"
+      :name="name"
+      :value="values"
+      :closable="true"
+      @click="handleInput(name)"
+      style="margin-right: 10px"
+    />
+    <McCollapse no-border>
+      <template>
+        {{ filter.name }}
+      </template>
+      <template slot="body">
+        <div class="mc-filter-type-range">
+          <McGridRow :gutter-x="10">
+            <McGridCol :span="6">
+              <McFieldText
+                :value="value.more || ''"
+                @input="value => handleInput('more', value)"
+                :type="filter.type === 'date' ? 'date' : 'text'"
+                placeholder="От"
+                name="more"
+              />
+            </McGridCol>
+            <McGridCol :span="6">
+              <McFieldText
+                :value="value.less || ''"
+                @input="value => handleInput('less', value)"
+                :type="filter.type === 'date' ? 'date' : 'text'"
+                placeholder="До"
+                name="less"
+              />
+            </McGridCol>
+          </McGridRow>
+        </div>
+      </template>
+    </McCollapse>
+  </div>
 </template>
 
 <script>

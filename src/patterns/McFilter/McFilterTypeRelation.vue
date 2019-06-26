@@ -1,55 +1,57 @@
 <template>
-  <McCollapse no-border>
-    <template>
-      {{ filter.name }}
-    </template>
-    <template slot="body">
-      <McFilterChip
-        v-for="(values, name) in value"
-        :key="name"
-        :type="filter.type"
-        :name="name"
-        :value="values"
-        :closable="true"
-        @click="setValue(name, [])"
-        style="margin-left: 10px"
-      />
-      <div class="mc-filter-type-relation">
-        <McGridRow :gutter-x="10" style="margin-bottom: 10px">
-          <McGridCol v-for="selectType in selectTypes" :key="selectType" :span="3">
-            <McButton
-              v-bind="buttonBind"
-              :is-active="selectType === type"
-              @click.prevent="handleClick(selectType)"
-            >
-              {{ selectType === "is" ? "Это" : "Это не" }}
-            </McButton>
-          </McGridCol>
-          <McGridCol v-for="v in [1, 0]" :key="v" :span="3" full-width>
-            <McButton
-              v-bind="buttonBind"
-              :variation="
-                (value.exists || []).indexOf(v) === -1 ? 'primary' : 'soft-green-dark-invert'
-              "
-              @click.prevent="handleClick('exists', v)"
-            >
-              {{ v === 0 ? "Пустое" : "Не пустое" }}
-            </McButton>
-          </McGridCol>
-        </McGridRow>
-        <McFieldSelect
-          v-if="selectTypes.indexOf(type) !== -1"
-          :options="computedOptions"
-          :multiple="true"
-          :value="currentValue"
-          @input="handleInput"
-          :allow-empty="true"
-          :internal-search="!isAjax"
-          @search-change="handleSearchChange"
-        />
-      </div>
-    </template>
-  </McCollapse>
+  <div>
+    <McFilterChip
+      v-for="(values, name) in value"
+      :key="name"
+      :type="filter.type"
+      :name="name"
+      :value="values"
+      :closable="true"
+      @click="setValue(name, [])"
+      style="margin-right: 10px"
+    />
+    <McCollapse no-border>
+      <template>
+        {{ filter.name }}
+      </template>
+      <template slot="body">
+        <div class="mc-filter-type-relation">
+          <McGridRow :gutter-x="10" style="margin-bottom: 10px">
+            <McGridCol v-for="selectType in selectTypes" :key="selectType" :span="3">
+              <McButton
+                v-bind="buttonBind"
+                :is-active="selectType === type"
+                @click.prevent="handleClick(selectType)"
+              >
+                {{ selectType === "is" ? "Это" : "Это не" }}
+              </McButton>
+            </McGridCol>
+            <McGridCol v-for="v in [1, 0]" :key="v" :span="3" full-width>
+              <McButton
+                v-bind="buttonBind"
+                :variation="
+                  (value.exists || []).indexOf(v) === -1 ? 'primary' : 'soft-green-dark-invert'
+                "
+                @click.prevent="handleClick('exists', v)"
+              >
+                {{ v === 0 ? "Пустое" : "Не пустое" }}
+              </McButton>
+            </McGridCol>
+          </McGridRow>
+          <McFieldSelect
+            v-if="selectTypes.indexOf(type) !== -1"
+            :options="computedOptions"
+            :multiple="true"
+            :value="currentValue"
+            @input="handleInput"
+            :allow-empty="true"
+            :internal-search="!isAjax"
+            @search-change="handleSearchChange"
+          />
+        </div>
+      </template>
+    </McCollapse>
+  </div>
 </template>
 
 <script>

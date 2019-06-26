@@ -1,23 +1,25 @@
 <template>
-  <McCollapse no-border>
-    <template>
-      {{ filter.name }}
-    </template>
-    <template slot="body">
-      <McFilterChip
-        v-if="value != null && value !== ''"
-        :type="filter.type"
-        :name="value"
-        :value="value"
-        :closable="true"
-        @click="handleInput(null)"
-        style="margin-left: 10px"
-      />
-      <div class="mc-filter-type-text">
-        <McFieldText :name="filter.name" :value="value" @input="handleInput"></McFieldText>
-      </div>
-    </template>
-  </McCollapse>
+  <div>
+    <McFilterChip
+      v-if="value != null && value !== ''"
+      :type="filter.type"
+      :name="value"
+      :value="value"
+      :closable="true"
+      @click="handleInput(null)"
+      style="margin-right: 10px"
+    />
+    <McCollapse no-border>
+      <template>
+        {{ filter.name }}
+      </template>
+      <template slot="body">
+        <div class="mc-filter-type-text">
+          <McFieldText :name="filter.name" :value="value" @input="handleInput"></McFieldText>
+        </div>
+      </template>
+    </McCollapse>
+  </div>
 </template>
 
 <script>
