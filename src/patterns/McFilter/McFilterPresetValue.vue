@@ -38,7 +38,7 @@ export default {
       required: true,
     },
     value: {
-      type: Object,
+      type: [String, Object],
       required: true,
     },
     filters: {
