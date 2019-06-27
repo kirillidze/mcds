@@ -1,9 +1,10 @@
 <script>
 import McAvatar from "../McAvatar/McAvatar"
 import McChip from "../McChip"
+import McStackCounter from "./McStackCounter"
 export default {
   name: "McStack",
-  components: { McChip, McAvatar },
+  components: { McChip, McAvatar, McStackCounter },
   status: "ready",
   release: "1.0.0",
 
