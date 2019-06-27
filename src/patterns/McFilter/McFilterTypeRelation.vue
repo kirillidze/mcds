@@ -188,11 +188,9 @@ export default {
     },
     async loadAjaxOptions() {
       if (!this.isAjax) return
-      const ajax = []
-      this.currentValue.forEach(value => {
-        ajax.push(this.filter.ajaxShow(value))
-      })
-      this.ajaxShowOptions = await Promise.all(ajax)
+      this.ajaxShowOptions = await Promise.all(
+        this.currentValue.map(value => this.filter.ajaxShow(value))
+      )
     },
     handleRelationChipClick(type, value) {
       const currentValue = [...this.value[type]]
