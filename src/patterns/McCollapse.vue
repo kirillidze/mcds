@@ -66,7 +66,7 @@ export default {
 
   methods: {
     open() {
-      this.isCollapsed = false
+      this.isCollapsed = true
     },
     close() {
       this.isCollapsed = false
