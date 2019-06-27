@@ -72,6 +72,10 @@ export default {
   @import "vue-slider-component/theme/default.css";
   $block-name: &;
 
+  .vue-slider-dot-tooltip-inner {
+    line-height: 1;
+  }
+
   @each $color, $value in $token-colors {
     &--color-#{$color} {
       .vue-slider-process {
