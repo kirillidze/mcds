@@ -1,5 +1,5 @@
 <template>
-  <McCollapse no-border>
+  <McCollapse @open="handleOpen" no-border>
     {{ filter.name }}
     <McChip
       slot="title"
@@ -72,7 +72,7 @@ import McGridCol from "../McGrid/McGridCol"
 import McButton from "../../elements/McButton"
 import McCollapse from "../../patterns/McCollapse"
 import McChip from "../../elements/McChip"
-import McFilterTypeRelationChip from "./McFilterRelationChip"
+import McFilterTypeRelationChip from "./McFilterTypeRelationChip"
 
 export default {
   name: "McFilterTypeRelation",
@@ -146,10 +146,10 @@ export default {
       return Object.keys(this.value).reduce((acc, cur) => acc + this.value[cur].length, 0)
     },
   },
-  mounted() {
-    this.loadAjaxOptions()
-  },
   methods: {
+    handleOpen() {
+      this.loadAjaxOptions()
+    },
     handleInput(value) {
       this.setValue(this.type, [...this.currentValue, value])
     },
@@ -186,14 +186,13 @@ export default {
         this.ajaxOptions = result
       })
     },
-    loadAjaxOptions() {
+    async loadAjaxOptions() {
       if (!this.isAjax) return
-      if (!this.currentValue.length) return
+      const ajax = []
       this.currentValue.forEach(value => {
-        this.filter.ajaxShow(value).then(result => {
-          this.ajaxShowOptions.push(result)
-        })
+        ajax.push(this.filter.ajaxShow(value))
       })
+      this.ajaxShowOptions = await Promise.all(ajax)
     },
     handleRelationChipClick(type, value) {
       const currentValue = [...this.value[type]]
