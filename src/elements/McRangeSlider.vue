@@ -94,6 +94,9 @@ export default {
   let value = 10
   let value2 = [100, 500]
   <McRangeSlider :min="0" :max="100" v-model="value" :step="2" />
+  <br>
+  <McRangeSlider :min="0" :max="100" v-model="value" :step="2" color="mantis-dark" />
+  <br>
   <McRangeSlider :min="0" :max="1000" v-model="value2" :step="100" />
   ```
 </docs>
