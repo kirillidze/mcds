@@ -17,19 +17,21 @@
           <McGridCol :span="6">
             <McFieldText
               :value="value.more || ''"
-              @input="value => handleInput('more', value)"
               :type="filter.type === 'date' ? 'date' : 'text'"
               :placeholder="tRangeMore"
               name="more"
+              @input="value => handleInput('more', value)"
+              @keypress.enter="submit"
             />
           </McGridCol>
           <McGridCol :span="6">
             <McFieldText
               :value="value.less || ''"
-              @input="value => handleInput('less', value)"
               :type="filter.type === 'date' ? 'date' : 'text'"
               :placeholder="tRangeLess"
               name="less"
+              @input="value => handleInput('less', value)"
+              @keypress.enter="submit"
             />
           </McGridCol>
         </McGridRow>
@@ -126,6 +128,9 @@ export default {
     },
     emitInput(value) {
       this.$emit("input", this.clearValue(value))
+    },
+    submit() {
+      this.$emit("submit")
     },
   },
 }

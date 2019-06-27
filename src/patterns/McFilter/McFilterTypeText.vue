@@ -13,7 +13,12 @@
     </McChip>
     <template slot="body">
       <div class="mc-filter-type-text">
-        <McFieldText :name="filter.name" :value="value" @input="handleInput"></McFieldText>
+        <McFieldText
+          :name="filter.name"
+          :value="value"
+          @input="handleInput"
+          @keypress.enter="submit"
+        ></McFieldText>
       </div>
     </template>
   </McCollapse>
@@ -47,6 +52,9 @@ export default {
     },
     emitInput(value) {
       this.$emit("input", value)
+    },
+    submit() {
+      this.$emit("submit")
     },
   },
 }

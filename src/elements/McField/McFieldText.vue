@@ -16,11 +16,12 @@
           :style="inputStyles"
           :placeholder="placeholder"
           :value="value"
-          @input="value => handleInput(value)"
           :name="name"
           ref="input"
           :disabled="disabled"
           :id="name"
+          v-on="listeners"
+          @input="value => handleInput(value)"
         ></flat-pickr>
         <textarea
           v-else-if="isTextarea"
@@ -28,10 +29,11 @@
           :style="inputStyles"
           :placeholder="placeholder"
           :value="value"
-          @input="$event => handleInput($event.target.value)"
           :disabled="disabled"
           :name="name"
           :id="name"
+          v-on="listeners"
+          @input="$event => handleInput($event.target.value)"
         ></textarea>
         <input
           v-else
@@ -41,10 +43,11 @@
           :type="type"
           :placeholder="placeholder"
           :value="value"
-          @input="$event => handleInput($event.target.value)"
           ref="input"
           :name="name"
           :id="name"
+          v-on="listeners"
+          @input="$event => handleInput($event.target.value)"
         />
       </div>
       <div class="mc-field-text__append">
@@ -64,6 +67,8 @@
 </template>
 
 <script>
+import _omit from "lodash/omit"
+
 import tokens from "../../assets/tokens/tokens"
 import flatPickr from "vue-flatpickr-component"
 
@@ -71,6 +76,7 @@ import McTitle from "../McTitle"
 import McSvgIcon from "../McSvgIcon"
 import McButton from "../McButton"
 import McTooltip from "../McTooltip"
+
 export default {
   name: "McFieldText",
   components: { McTooltip, McButton, McSvgIcon, McTitle, flatPickr },
@@ -188,6 +194,10 @@ export default {
         paddingLeft: this.prependWidth && `${this.prependWidth + parseInt(tokens.space_m)}px`,
         paddingRight: this.appendWidth && `${this.appendWidth + parseInt(tokens.space_m)}px`,
       }
+    },
+
+    listeners() {
+      return _omit(this.$listeners, "input")
     },
   },
 
@@ -319,6 +329,7 @@ export default {
 
   &__footer {
     margin-top: $space-xxxs;
+
     &:empty {
       display: none;
     }
@@ -363,7 +374,8 @@ export default {
                 help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
         >
             <McTitle :ellipsis="false" :level="4" slot="header">
-                <McTooltip placement="right" slot="icon-append" size="s" content="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube.">
+                <McTooltip placement="right" slot="icon-append" size="s"
+                           content="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube.">
                     <McSvgIcon name="help"/>
                 </McTooltip>
                 Электронная почта
@@ -406,7 +418,7 @@ export default {
                     slot="append"
                     size="s-compact"
             >
-                <McSvgIcon slot="icon-append" name="send" />
+                <McSvgIcon slot="icon-append" name="send"/>
             </McButton>
         </McFieldText>
 

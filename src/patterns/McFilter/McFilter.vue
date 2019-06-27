@@ -16,6 +16,7 @@
                     :value="currentValues[filter.value] || ''"
                     :real-value="value[filter.value] || ''"
                     @input="value => handleInput(filter, value)"
+                    @submit="submit"
                     style="margin-bottom: 10px"
                   />
                   <McFilterTypeRelation
@@ -24,6 +25,7 @@
                     :value="currentValues[filter.value] || {}"
                     :real-value="value[filter.value] || {}"
                     @input="value => handleInput(filter, value)"
+                    @submit="submit"
                     :t-relation-is="tRelationIs"
                     :t-relation-not-is="tRelationNotIs"
                     :t-relation-exists="tRelationExists"
@@ -36,6 +38,7 @@
                     :value="currentValues[filter.value] || {}"
                     :real-value="value[filter.value] || {}"
                     @input="value => handleInput(filter, value)"
+                    @submit="submit"
                     :t-range-more="tRangeMore"
                     :t-range-less="tRangeLess"
                     style="margin-bottom: 10px"
