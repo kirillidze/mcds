@@ -8,35 +8,40 @@
         <McTabs>
           <McTab name="Все">
             <div class="mc-filter__tab">
-              <template v-for="filter in filters">
-                <McFilterTypeText
-                  v-if="filter.type === 'text'"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || ''"
-                  :real-value="value[filter.value] || ''"
-                  @input="value => handleInput(filter, value)"
-                />
-                <McFilterTypeRelation
-                  v-else-if="filter.type === 'relation'"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || {}"
-                  @input="value => handleInput(filter, value)"
-                  :t-relation-is="tRelationIs"
-                  :t-relation-not-is="tRelationNotIs"
-                  :t-relation-exists="tRelationExists"
-                  :t-relation-not-exists="tRelationNotExists"
-                />
-                <McFilterTypeRange
-                  v-else-if="filter.type === 'number' || filter.type === 'date'"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || {}"
-                  @input="value => handleInput(filter, value)"
-                  :t-range-more="tRangeMore"
-                  :t-range-less="tRangeLess"
-                />
-              </template>
+              <McAccordion>
+                <template v-for="filter in filters">
+                  <McFilterTypeText
+                    v-if="filter.type === 'text'"
+                    :filter="filter"
+                    :value="currentValues[filter.value] || ''"
+                    :real-value="value[filter.value] || ''"
+                    @input="value => handleInput(filter, value)"
+                    style="margin-bottom: 10px"
+                  />
+                  <McFilterTypeRelation
+                    v-else-if="filter.type === 'relation'"
+                    :filter="filter"
+                    :value="currentValues[filter.value] || {}"
+                    :real-value="value[filter.value] || {}"
+                    @input="value => handleInput(filter, value)"
+                    :t-relation-is="tRelationIs"
+                    :t-relation-not-is="tRelationNotIs"
+                    :t-relation-exists="tRelationExists"
+                    :t-relation-not-exists="tRelationNotExists"
+                    style="margin-bottom: 10px"
+                  />
+                  <McFilterTypeRange
+                    v-else-if="filter.type === 'number' || filter.type === 'date'"
+                    :filter="filter"
+                    :value="currentValues[filter.value] || {}"
+                    :real-value="value[filter.value] || {}"
+                    @input="value => handleInput(filter, value)"
+                    :t-range-more="tRangeMore"
+                    :t-range-less="tRangeLess"
+                    style="margin-bottom: 10px"
+                  />
+                </template>
+              </McAccordion>
             </div>
           </McTab>
           <McTab name="Пресеты">
@@ -85,24 +90,22 @@ import McPanel from "../McPanel"
 import McTitle from "../../elements/McTitle"
 import McTabs from "../McTabs/McTabs"
 import McTab from "../McTabs/McTab"
-import McCollapse from "../McCollapse"
 import McFilterTypeRelation from "./McFilterTypeRelation"
-import McChip from "../../elements/McChip"
 import McFilterTypeText from "./McFilterTypeText"
 import McFilterTypeRange from "./McFilterTypeRange"
 import McButton from "../../elements/McButton"
 import McFilterPresetValue from "./McFilterPresetValue"
+import McAccordion from "../McAccordion"
 
 export default {
   name: "McFilter",
   components: {
+    McAccordion,
     McFilterPresetValue,
     McButton,
-    McChip,
     McFilterTypeText,
     McFilterTypeRange,
     McFilterTypeRelation,
-    McCollapse,
     McTab,
     McTabs,
     McTitle,
@@ -270,6 +273,9 @@ export default {
     name: 'Просмотры',
     value: 'views_count',
     type: 'number',
+    min: 0,
+    max: 10000,
+    step: 10,
     },
     {
     name: 'Дата создания',

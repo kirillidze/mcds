@@ -31,13 +31,11 @@
 </template>
 
 <script>
-import McButton from "../../elements/McButton"
 import McTitle from "../../elements/McTitle"
-import McChip from "../../elements/McChip"
 import McFilterChip from "./McFilterChip"
 export default {
   name: "McFilterPresetValue",
-  components: { McFilterChip, McChip, McTitle, McButton },
+  components: { McFilterChip, McTitle },
   props: {
     name: {
       type: String,

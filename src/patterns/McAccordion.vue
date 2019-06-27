@@ -20,11 +20,19 @@ export default {
   methods: {
     handleToggle({ value, component }) {
       if (value === false) return
-      this.$children.forEach($collapse => {
-        if ($collapse.$options.name === "McCollapse") {
-          if (component !== $collapse) {
-            $collapse.close()
-          }
+      this.$children.forEach($child => {
+        let $collapse = null
+        if ($child.$options.name === "McCollapse") {
+          $collapse = $child
+        } else {
+          $child.$children.forEach($ch => {
+            if ($ch.$options.name === "McCollapse") {
+              $collapse = $ch
+            }
+          })
+        }
+        if ($collapse && component !== $collapse) {
+          $collapse.close()
         }
       })
     },

@@ -1,61 +1,66 @@
 <template>
-  <div>
-    <McFilterChip
-      v-for="(values, name) in value"
-      :key="name"
-      :type="filter.type"
-      :name="name"
-      :value="values"
+  <McCollapse no-border>
+    {{ filter.name }}
+    <McChip
+      slot="title"
+      v-if="chipCount"
+      variation="gray-darkest-invert"
+      size="s"
       :closable="true"
-      @click="setValue(name, [])"
-      style="margin-right: 10px"
-      :t-relation-is="tRelationIs"
-      :t-relation-not-is="tRelationNotIs"
-      :t-relation-exists="tRelationExists"
-      :t-relation-not-exists="tRelationNotExists"
-    />
-    <McCollapse no-border>
-      <template>
-        {{ filter.name }}
-      </template>
-      <template slot="body">
-        <div class="mc-filter-type-relation">
-          <McGridRow :gutter-x="10" style="margin-bottom: 10px">
-            <McGridCol v-for="selectType in selectTypes" :key="selectType" :span="3">
-              <McButton
-                v-bind="buttonBind"
-                :is-active="selectType === type"
-                @click.prevent="handleClick(selectType)"
-              >
-                {{ selectType === "is" ? tRelationIs : tRelationNotIs }}
-              </McButton>
-            </McGridCol>
-            <McGridCol v-for="v in [1, 0]" :key="v" :span="3" full-width>
-              <McButton
-                v-bind="buttonBind"
-                :variation="
-                  (value.exists || []).indexOf(v) === -1 ? 'primary' : 'soft-green-dark-invert'
-                "
-                @click.prevent="handleClick('exists', v)"
-              >
-                {{ v === 0 ? tRelationNotIs : tRelationNotExists }}
-              </McButton>
-            </McGridCol>
-          </McGridRow>
-          <McFieldSelect
-            v-if="selectTypes.indexOf(type) !== -1"
-            :options="computedOptions"
-            :multiple="true"
-            :value="currentValue"
-            @input="handleInput"
-            :allow-empty="true"
-            :internal-search="!isAjax"
-            @search-change="handleSearchChange"
-          />
+      @click="emitInput({})"
+    >
+      {{ chipCount }}
+    </McChip>
+    <template slot="body">
+      <div class="mc-filter-type-relation">
+        <McGridRow :gutter-x="10" style="margin-bottom: 10px">
+          <McGridCol v-for="selectType in selectTypes" :key="selectType" :span="3">
+            <McButton
+              v-bind="buttonBind"
+              :is-active="selectType === type"
+              @click.prevent="handleClick(selectType)"
+            >
+              {{ selectType === "is" ? tRelationIs : tRelationNotIs }}
+            </McButton>
+          </McGridCol>
+          <McGridCol v-for="v in [1, 0]" :key="v" :span="3" full-width>
+            <McButton
+              v-bind="buttonBind"
+              :variation="
+                (value.exists || []).indexOf(v) === -1 ? 'primary' : 'soft-green-dark-invert'
+              "
+              @click.prevent="handleClick('exists', v)"
+            >
+              {{ v === 0 ? tRelationNotIs : tRelationNotExists }}
+            </McButton>
+          </McGridCol>
+        </McGridRow>
+        <McFieldSelect
+          v-if="selectTypes.indexOf(type) !== -1"
+          :options="computedOptions"
+          @input="handleInput"
+          :allow-empty="true"
+          :internal-search="!isAjax"
+          @search-change="handleSearchChange"
+        />
+        <div>
+          <template v-for="(chips, type) in value || {}" v-if="selectTypes.indexOf(type) !== -1">
+            <McFilterTypeRelationChip
+              v-for="chip in chips"
+              :key="chip"
+              :type="type"
+              :value="chip"
+              :options="computedOptions"
+              :t-relation-is="tRelationIs"
+              :t-relation-not-is="tRelationNotIs"
+              style="margin-top: 10px; margin-right: 10px"
+              @click="handleRelationChipClick(type, chip)"
+            />
+          </template>
         </div>
-      </template>
-    </McCollapse>
-  </div>
+      </div>
+    </template>
+  </McCollapse>
 </template>
 
 <script>
@@ -66,11 +71,20 @@ import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
 import McButton from "../../elements/McButton"
 import McCollapse from "../../patterns/McCollapse"
-import McFilterChip from "./McFilterChip"
+import McChip from "../../elements/McChip"
+import McFilterTypeRelationChip from "./McFilterRelationChip"
 
 export default {
   name: "McFilterTypeRelation",
-  components: { McFilterChip, McButton, McGridCol, McGridRow, McFieldSelect, McCollapse },
+  components: {
+    McFilterTypeRelationChip,
+    McChip,
+    McButton,
+    McGridCol,
+    McGridRow,
+    McFieldSelect,
+    McCollapse,
+  },
   props: {
     value: {
       type: Object,
@@ -128,25 +142,8 @@ export default {
     currentValue() {
       return this.value[this.type] || []
     },
-    chips() {
-      const result = []
-      ;["is", "not_is", "exists"].forEach(type => {
-        const typeValues = this.value[type] || []
-        if (type === "exists") {
-          typeValues.forEach(typeValue => {
-            result.push({
-              type,
-              value: typeValue === 1 ? "Не пустое" : "Пустое",
-            })
-          })
-        } else if (typeValues.length) {
-          result.push({
-            type,
-            value: typeValues.length,
-          })
-        }
-      })
-      return result
+    chipCount() {
+      return Object.keys(this.value).reduce((acc, cur) => acc + this.value[cur].length, 0)
     },
   },
   mounted() {
@@ -154,7 +151,7 @@ export default {
   },
   methods: {
     handleInput(value) {
-      this.setValue(this.type, value)
+      this.setValue(this.type, [...this.currentValue, value])
     },
     handleClick(type, value) {
       const currentValue = { ...this.value }
@@ -197,6 +194,14 @@ export default {
           this.ajaxShowOptions.push(result)
         })
       })
+    },
+    handleRelationChipClick(type, value) {
+      const currentValue = [...this.value[type]]
+      const index = currentValue.indexOf(value)
+      if (index !== -1) {
+        currentValue.splice(index, 1)
+      }
+      this.setValue(type, currentValue)
     },
   },
 }

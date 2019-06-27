@@ -1,60 +1,61 @@
 <template>
-  <div>
-    <McFilterChip
-      v-for="(values, name) in value"
-      :key="name"
-      :type="filter.type"
-      :name="name"
-      :value="values"
+  <McCollapse no-border>
+    {{ filter.name }}
+    <McChip
+      slot="title"
+      v-if="chipCount"
+      variation="gray-darkest-invert"
+      size="s"
       :closable="true"
-      @click="handleInput(name)"
-      style="margin-right: 10px"
-      :t-range-more="tRangeMore"
-      :t-range-less="tRangeLess"
-    />
-    <McCollapse no-border>
-      <template>
-        {{ filter.name }}
-      </template>
-      <template slot="body">
-        <div class="mc-filter-type-range">
-          <McGridRow :gutter-x="10">
-            <McGridCol :span="6">
-              <McFieldText
-                :value="value.more || ''"
-                @input="value => handleInput('more', value)"
-                :type="filter.type === 'date' ? 'date' : 'text'"
-                :placeholder="tRangeMore"
-                name="more"
-              />
-            </McGridCol>
-            <McGridCol :span="6">
-              <McFieldText
-                :value="value.less || ''"
-                @input="value => handleInput('less', value)"
-                :type="filter.type === 'date' ? 'date' : 'text'"
-                :placeholder="tRangeLess"
-                name="less"
-              />
-            </McGridCol>
-          </McGridRow>
-        </div>
-      </template>
-    </McCollapse>
-  </div>
+      @click="emitInput(null)"
+    >
+      {{ chipCount }}
+    </McChip>
+    <template slot="body">
+      <div class="mc-filter-type-range">
+        <McGridRow :gutter-x="10">
+          <McGridCol :span="6">
+            <McFieldText
+              :value="value.more || ''"
+              @input="value => handleInput('more', value)"
+              :type="filter.type === 'date' ? 'date' : 'text'"
+              :placeholder="tRangeMore"
+              name="more"
+            />
+          </McGridCol>
+          <McGridCol :span="6">
+            <McFieldText
+              :value="value.less || ''"
+              @input="value => handleInput('less', value)"
+              :type="filter.type === 'date' ? 'date' : 'text'"
+              :placeholder="tRangeLess"
+              name="less"
+            />
+          </McGridCol>
+        </McGridRow>
+        <McRangeSlider
+          v-if="canRange"
+          :min="filter.min"
+          :max="filter.max"
+          :step="filter.step || 1"
+          v-model="rangeValue"
+        />
+      </div>
+    </template>
+  </McCollapse>
 </template>
 
 <script>
 import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
-import McButton from "../../elements/McButton"
 import McCollapse from "../../patterns/McCollapse"
 import McFieldText from "../../elements/McField/McFieldText"
-import McFilterChip from "./McFilterChip"
+import McRangeSlider from "../../elements/McRangeSlider"
+import McChip from "../../elements/McChip"
 
 export default {
   name: "McFilterTypeRange",
-  components: { McFilterChip, McFieldText, McButton, McGridCol, McGridRow, McCollapse },
+  components: { McChip, McRangeSlider, McFieldText, McGridCol, McGridRow, McCollapse },
   props: {
     value: {
       type: Object,
@@ -77,18 +78,54 @@ export default {
       required: true,
     },
   },
+  computed: {
+    chipCount() {
+      let count = 0
+      if (this.value.more != null) count++
+      if (this.value.less != null) count++
+      return count
+    },
+    canRange() {
+      return this.filter.min != null && this.filter.max != null && this.filter.type === "number"
+    },
+    rangeValue: {
+      get() {
+        if (!this.canRange) return []
+        return [
+          this.value.more == null ? this.filter.min : this.value.more,
+          this.value.less == null ? this.filter.max : this.value.less,
+        ]
+      },
+      set(value) {
+        if (!this.canRange) return
+        const newVal = { ...this.value }
+        newVal["more"] = value[0] === this.filter.min ? null : value[0]
+        newVal["less"] = value[1] === this.filter.max ? null : value[1]
+        this.emitInput(newVal)
+      },
+    },
+  },
   methods: {
     handleInput(type, value) {
-      const currentValue = { ...this.value }
-      if (value) {
-        currentValue[type] = this.filter.type === "date" ? value : +value
-      } else {
-        delete currentValue[type]
-      }
+      const currentValue = value == null ? {} : { ...this.value }
+      currentValue[type] = this.filter.type === "date" ? value : value == null ? null : +value
       this.emitInput(currentValue)
     },
+    clearValue(val) {
+      if (val == null) return {}
+      const newVal = { ...val }
+      Object.keys(newVal).forEach(type => {
+        const value = newVal[type]
+        if (value != null && value !== "") {
+          newVal[type] = this.filter.type === "date" ? value : +value
+        } else {
+          delete newVal[type]
+        }
+      })
+      return newVal
+    },
     emitInput(value) {
-      this.$emit("input", value)
+      this.$emit("input", this.clearValue(value))
     },
   },
 }

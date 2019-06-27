@@ -1,11 +1,20 @@
 <template>
   <section class="mc-collapse" :class="classes">
     <div class="mc-collapse__header">
-      <template v-if="!isDisabled">
-        <a class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
-        <McSvgIcon class="mc-collapse__icon" :width="30" :height="30" name="arrow_drop_down" />
-      </template>
-      <slot></slot>
+      <div style="display: flex; width: 100%">
+        <div style="position: relative">
+          <slot />
+          <a v-if="!isDisabled" class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
+        </div>
+        <div v-if="$slots.title" style="padding: 0 10px">
+          <slot name="title" />
+        </div>
+        <div v-if="!isDisabled" style="position: relative; margin-left: auto; flex: 1 1 auto">
+          <a class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
+          <McSvgIcon class="mc-collapse__icon" :width="30" :height="30" name="arrow_drop_down" />
+        </div>
+      </div>
+      <template> </template>
     </div>
     <slide-up-down
       v-if="!isDisabled"
@@ -58,8 +67,14 @@ export default {
     isCollapsed(value) {
       this.$emit("toggle", value)
       this.$emit(value ? "open" : "close")
+      let $parent = null
       if (this.$parent.$options.name === "McAccordion") {
-        this.$parent.$emit("toggle", { value, component: this })
+        $parent = this.$parent
+      } else if (this.$parent.$parent.$options.name === "McAccordion") {
+        $parent = this.$parent.$parent
+      }
+      if ($parent) {
+        $parent.$emit("toggle", { value, component: this })
       }
     },
   },
@@ -91,7 +106,6 @@ export default {
     #{$block-name} {
       &__header {
         padding: 8px 0px;
-        padding-right: 29px;
       }
 
       &__icon {
@@ -105,7 +119,6 @@ export default {
     font-size: 16px;
     position: relative;
     padding: 8px 16px;
-    padding-right: 45px;
     min-height: 48px;
     display: flex;
     align-items: center;
@@ -116,6 +129,7 @@ export default {
   }
 
   &__link {
+    display: block;
     position: absolute;
     right: 0;
     top: 0;
@@ -129,7 +143,6 @@ export default {
     height: 30px;
     transition: all $duration-quickly;
     position: absolute;
-    right: 10px;
     top: 50%;
     margin-top: -15px;
   }

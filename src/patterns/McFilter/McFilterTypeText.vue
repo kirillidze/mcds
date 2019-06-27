@@ -1,35 +1,32 @@
 <template>
-  <div>
-    <McFilterChip
+  <McCollapse no-border>
+    {{ filter.name }}
+    <McChip
+      slot="title"
       v-if="value != null && value !== ''"
-      :type="filter.type"
-      :name="'' + value"
-      :value="value"
+      variation="gray-darkest-invert"
+      size="s"
       :closable="true"
       @click="handleInput(null)"
-      style="margin-right: 10px"
-    />
-    <McCollapse no-border>
-      <template>
-        {{ filter.name }}
-      </template>
-      <template slot="body">
-        <div class="mc-filter-type-text">
-          <McFieldText :name="filter.name" :value="value" @input="handleInput"></McFieldText>
-        </div>
-      </template>
-    </McCollapse>
-  </div>
+    >
+      1
+    </McChip>
+    <template slot="body">
+      <div class="mc-filter-type-text">
+        <McFieldText :name="filter.name" :value="value" @input="handleInput"></McFieldText>
+      </div>
+    </template>
+  </McCollapse>
 </template>
 
 <script>
 import McCollapse from "../../patterns/McCollapse"
 import McFieldText from "../../elements/McField/McFieldText"
-import McFilterChip from "./McFilterChip"
+import McChip from "../../elements/McChip"
 
 export default {
   name: "McFilterTypeText",
-  components: { McFilterChip, McFieldText, McCollapse },
+  components: { McChip, McFieldText, McCollapse },
   props: {
     value: {
       type: String,
