@@ -1,6 +1,8 @@
 <template>
   <McCollapse @open="handleOpen" no-border>
-    {{ filter.name }}
+    <template>
+      {{ filter.name }} <McSvgIcon v-if="isAjax" name="search" />
+    </template>
     <McChip
       slot="title"
       v-if="chipCount"
@@ -74,10 +76,12 @@ import McButton from "../../elements/McButton"
 import McCollapse from "../../patterns/McCollapse"
 import McChip from "../../elements/McChip"
 import McFilterTypeRelationChip from "./McFilterTypeRelationChip"
+import McSvgIcon from "../../elements/McSvgIcon"
 
 export default {
   name: "McFilterTypeRelation",
   components: {
+    McSvgIcon,
     McFilterTypeRelationChip,
     McChip,
     McButton,
