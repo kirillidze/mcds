@@ -47,10 +47,10 @@
           <template v-for="(chips, type) in value || {}" v-if="selectTypes.indexOf(type) !== -1">
             <McFilterTypeRelationChip
               v-for="chip in chips"
-              :key="chip"
+              :key="type + '-' + chip"
               :type="type"
               :value="chip"
-              :options="computedOptions"
+              :options="options"
               :t-relation-is="tRelationIs"
               :t-relation-not-is="tRelationNotIs"
               style="margin-top: 10px; margin-right: 10px"
@@ -64,6 +64,7 @@
 </template>
 
 <script>
+import _uniq from "lodash/uniq"
 import _uniqBy from "lodash/uniqBy"
 
 import McFieldSelect from "../../elements/McField/McFieldSelect"
@@ -135,9 +136,12 @@ export default {
     isAjax() {
       return typeof this.filter.ajax === "function"
     },
-    computedOptions() {
+    options() {
       const result = this.isAjax ? this.ajaxOptions : this.filter.values || []
       return _uniqBy([...this.ajaxShowOptions, ...result], "value")
+    },
+    computedOptions() {
+      return this.options.filter(v => this.currentValue.indexOf(v.value) === -1)
     },
     currentValue() {
       return this.value[this.type] || []
@@ -171,7 +175,7 @@ export default {
     setValue(type, value) {
       const currentValue = { ...this.value }
       if (value.length) {
-        currentValue[type] = value
+        currentValue[type] = _uniq(value)
       } else {
         delete currentValue[type]
       }
