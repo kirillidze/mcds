@@ -22,6 +22,10 @@
                   :value="currentValues[filter.value] || {}"
                   :real-value="value[filter.value] || {}"
                   @input="value => handleInput(filter, value)"
+                  :t-relation-is="tRelationIs"
+                  :t-relation-not-is="tRelationNotIs"
+                  :t-relation-exists="tRelationExists"
+                  :t-relation-not-exists="tRelationNotExists"
                 />
                 <McFilterTypeRange
                   v-else-if="filter.type === 'number' || filter.type === 'date'"
@@ -29,6 +33,8 @@
                   :value="currentValues[filter.value] || {}"
                   :real-value="value[filter.value] || {}"
                   @input="value => handleInput(filter, value)"
+                  :t-range-more="tRangeMore"
+                  :t-range-less="tRangeLess"
                 />
               </template>
             </div>
@@ -43,6 +49,12 @@
                   :value="presetValue"
                   :filters="filters"
                   style="margin-bottom: 10px"
+                  :t-relation-is="tRelationIs"
+                  :t-relation-not-is="tRelationNotIs"
+                  :t-relation-exists="tRelationExists"
+                  :t-relation-not-exists="tRelationNotExists"
+                  :t-range-more="tRangeMore"
+                  :t-range-less="tRangeLess"
                 />
                 <McButton size="s" @click="emitInput(preset)">Применить</McButton>
                 <hr />
@@ -52,11 +64,15 @@
         </McTabs>
       </div>
       <div class="mc-filter__footer">
-        <McButton :disabled="!Object.keys(currentValues).length" @click="savePreset"
-          >Сохранить пресет
+        <McButton :disabled="!Object.keys(currentValues).length" @click="savePreset">
+          <slot name="button-save-preset">Сохранить пресет</slot>
         </McButton>
-        <McButton :disabled="!Object.keys(currentValues).length" @click="reset">Сбросить</McButton>
-        <McButton :disabled="!canSubmit" @click="submit">Применить</McButton>
+        <McButton :disabled="!Object.keys(currentValues).length" @click="reset">
+          <slot name="reset">Сбросить</slot>
+        </McButton>
+        <McButton :disabled="!canSubmit" @click="submit">
+          <slot name="submit">Применить</slot>
+        </McButton>
       </div>
     </McPanel>
   </div>
@@ -106,6 +122,30 @@ export default {
       default() {
         return []
       },
+    },
+    tRelationIs: {
+      type: String,
+      default: "Это",
+    },
+    tRelationNotIs: {
+      type: String,
+      default: "Это не",
+    },
+    tRelationExists: {
+      type: String,
+      default: "Не пустое",
+    },
+    tRelationNotExists: {
+      type: String,
+      default: "Пустое",
+    },
+    tRangeMore: {
+      type: String,
+      default: "Больше",
+    },
+    tRangeLess: {
+      type: String,
+      default: "Меньше",
     },
   },
   data() {
@@ -241,7 +281,19 @@ export default {
     {q: 'asd', views_count: {more: 10}},
     ]
     const savePreset = values => presets.push(values)
-    <McFilter v-model="value" :filters="filters" :presets="presets" @preset-save="savePreset" style="width: 500px"/>
+    <McFilter
+            v-model="value"
+            :filters="filters"
+            :presets="presets"
+            @preset-save="savePreset"
+            style="width: 500px"
+            t-relation-is="тест Это"
+            t-relation-not-is="тест Это не"
+            t-relation-exists="тест Не пустое"
+            t-relation-not-exists="тест Пустое"
+            t-range-more="тест Больше"
+            t-range-less="тест Меньше"
+    />
     <br>
     <br>
     <br>
