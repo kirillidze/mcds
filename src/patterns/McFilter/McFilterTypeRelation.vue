@@ -134,7 +134,7 @@ export default {
       }
     },
     isAjax() {
-      return typeof this.filter.ajax === "function"
+      return typeof this.filter.ajax === "function" && typeof this.filter.ajaxShow === "function"
     },
     options() {
       const result = this.isAjax ? this.ajaxOptions : this.filter.values || []
