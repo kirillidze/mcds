@@ -1,7 +1,7 @@
 <template>
   <div>
     <McFilterChip
-      v-for="(values, name) in realValue"
+      v-for="(values, name) in value"
       :key="name"
       :type="filter.type"
       :name="name"

@@ -1,10 +1,10 @@
 <template>
   <div>
     <McFilterChip
-      v-if="realValue != null && realValue !== ''"
+      v-if="value != null && value !== ''"
       :type="filter.type"
-      :name="'' + realValue"
-      :value="realValue"
+      :name="'' + value"
+      :value="value"
       :closable="true"
       @click="handleInput(null)"
       style="margin-right: 10px"
