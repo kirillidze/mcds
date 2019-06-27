@@ -2,14 +2,17 @@
   <section class="mc-collapse" :class="classes">
     <div class="mc-collapse__header">
       <div style="display: flex; width: 100%">
-        <div style="position: relative">
+        <div style="position: relative; line-height: 1;">
           <slot />
           <a v-if="!isDisabled" class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
         </div>
-        <div v-if="$slots.title" style="padding: 0 10px">
+        <div v-if="$slots.title" style="padding: 0 10px; line-height: 1;">
           <slot name="title" />
         </div>
-        <div v-if="!isDisabled" style="position: relative; margin-left: auto; flex: 1 1 auto">
+        <div
+          v-if="!isDisabled"
+          style="position: relative;; line-height: 1; margin-left: auto; flex: 1 1 auto"
+        >
           <a class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
           <McSvgIcon class="mc-collapse__icon" :width="30" :height="30" name="arrow_drop_down" />
         </div>
