@@ -140,8 +140,16 @@ export default {
       const result = this.isAjax ? this.ajaxOptions : this.filter.values || []
       return _uniqBy([...this.ajaxShowOptions, ...result], "value")
     },
+    chosenOptions() {
+      let result = []
+      this.selectTypes.forEach(type => {
+        result = [...result, ...(this.value[type] || [])]
+      })
+      return result
+    },
     computedOptions() {
-      return this.options.filter(v => this.currentValue.indexOf(v.value) === -1)
+      const except = []
+      return this.options.filter(v => this.chosenOptions.indexOf(v.value) === -1)
     },
     currentValue() {
       return this.value[this.type] || []
