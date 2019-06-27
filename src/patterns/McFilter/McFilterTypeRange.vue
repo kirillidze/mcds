@@ -9,6 +9,8 @@
       :closable="true"
       @click="handleInput(name)"
       style="margin-right: 10px"
+      :t-range-more="tRangeMore"
+      :t-range-less="tRangeLess"
     />
     <McCollapse no-border>
       <template>
@@ -22,7 +24,7 @@
                 :value="value.more || ''"
                 @input="value => handleInput('more', value)"
                 :type="filter.type === 'date' ? 'date' : 'text'"
-                placeholder="От"
+                :placeholder="tRangeMore"
                 name="more"
               />
             </McGridCol>
@@ -31,7 +33,7 @@
                 :value="value.less || ''"
                 @input="value => handleInput('less', value)"
                 :type="filter.type === 'date' ? 'date' : 'text'"
-                placeholder="До"
+                :placeholder="tRangeLess"
                 name="less"
               />
             </McGridCol>
@@ -64,6 +66,14 @@ export default {
     },
     filter: {
       type: Object,
+      required: true,
+    },
+    tRangeMore: {
+      type: String,
+      required: true,
+    },
+    tRangeLess: {
+      type: String,
       required: true,
     },
   },

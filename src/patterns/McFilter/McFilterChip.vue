@@ -26,6 +26,30 @@ export default {
       type: Boolean,
       default: false,
     },
+    tRelationIs: {
+      type: String,
+      default: "Это",
+    },
+    tRelationNotIs: {
+      type: String,
+      default: "Это не",
+    },
+    tRelationExists: {
+      type: String,
+      default: "Не пустое",
+    },
+    tRelationNotExists: {
+      type: String,
+      default: "Пустое",
+    },
+    tRangeMore: {
+      type: String,
+      default: "Больше",
+    },
+    tRangeLess: {
+      type: String,
+      default: "Меньше",
+    },
   },
   computed: {
     text() {
@@ -33,20 +57,20 @@ export default {
         return this.value
       } else if (this.type === "relation") {
         if (this.name === "is") {
-          return `Это: ${this.value.length}`
+          return `${this.tRelationIs}: ${this.value.length}`
         } else if (this.name === "not_is") {
-          return `Это не: ${this.value.length}`
+          return `${this.tRelationNotIs}: ${this.value.length}`
         } else if (this.name === "exists") {
-          return this.value.indexOf(1) === -1 ? "Пустое" : "Не пустое"
+          return this.value.indexOf(1) === -1 ? this.tRelationNotExists : this.tRelationExists
         }
       } else if (this.type === "number" || this.type === "date") {
         if (this.name === "more") {
-          return `Больше ${this.value}`
+          return `${this.tRangeMore} ${this.value}`
         } else if (this.name === "less") {
-          return `Меньше ${this.value}`
+          return `${this.tRangeLess} ${this.value}`
         }
       }
-      return "Неизвестно"
+      return "Unknown"
     },
   },
   methods: {

@@ -11,7 +11,7 @@
     <form @submit.prevent="handleSubmit">
       <slot></slot>
     </form>
-    <template slot="footer">
+    <template v-if="visibleFooter" slot="footer">
       <mc-button
         v-if="!hideCancel"
         @click="$modal.hide(name)"
@@ -66,6 +66,10 @@ export default {
     },
     submitText: {
       type: String,
+    },
+    visibleFooter: {
+      type: Boolean,
+      default: true,
     },
   },
   methods: {

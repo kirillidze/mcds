@@ -9,6 +9,10 @@
       :closable="true"
       @click="setValue(name, [])"
       style="margin-right: 10px"
+      :t-relation-is="tRelationIs"
+      :t-relation-not-is="tRelationNotIs"
+      :t-relation-exists="tRelationExists"
+      :t-relation-not-exists="tRelationNotExists"
     />
     <McCollapse no-border>
       <template>
@@ -23,7 +27,7 @@
                 :is-active="selectType === type"
                 @click.prevent="handleClick(selectType)"
               >
-                {{ selectType === "is" ? "Это" : "Это не" }}
+                {{ selectType === "is" ? tRelationIs : tRelationNotIs }}
               </McButton>
             </McGridCol>
             <McGridCol v-for="v in [1, 0]" :key="v" :span="3" full-width>
@@ -34,7 +38,7 @@
                 "
                 @click.prevent="handleClick('exists', v)"
               >
-                {{ v === 0 ? "Пустое" : "Не пустое" }}
+                {{ v === 0 ? tRelationNotIs : tRelationNotExists }}
               </McButton>
             </McGridCol>
           </McGridRow>
@@ -78,6 +82,22 @@ export default {
     },
     filter: {
       type: Object,
+      required: true,
+    },
+    tRelationIs: {
+      type: String,
+      required: true,
+    },
+    tRelationNotIs: {
+      type: String,
+      required: true,
+    },
+    tRelationExists: {
+      type: String,
+      required: true,
+    },
+    tRelationNotExists: {
+      type: String,
       required: true,
     },
   },

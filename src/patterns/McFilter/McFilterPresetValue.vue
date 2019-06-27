@@ -19,6 +19,12 @@
         :value="values"
         :closable="false"
         style="margin-right: 10px"
+        :t-relation-is="tRelationIs"
+        :t-relation-not-is="tRelationNotIs"
+        :t-relation-exists="tRelationExists"
+        :t-relation-not-exists="tRelationNotExists"
+        :t-range-more="tRangeMore"
+        :t-range-less="tRangeLess"
       />
     </McTitle>
   </div>
@@ -43,6 +49,30 @@ export default {
     },
     filters: {
       type: Array,
+      required: true,
+    },
+    tRelationIs: {
+      type: String,
+      required: true,
+    },
+    tRelationNotIs: {
+      type: String,
+      required: true,
+    },
+    tRelationExists: {
+      type: String,
+      required: true,
+    },
+    tRelationNotExists: {
+      type: String,
+      required: true,
+    },
+    tRangeMore: {
+      type: String,
+      required: true,
+    },
+    tRangeLess: {
+      type: String,
       required: true,
     },
   },
