@@ -9,11 +9,13 @@
     :max="max"
     :disabled="disabled"
     :lazy="lazy"
+    :tooltip-formatter="tooltip"
   />
 </template>
 
 <script>
 import VueSlider from "vue-slider-component"
+
 export default {
   name: "McRangeSlider",
   status: "ready",
@@ -63,6 +65,10 @@ export default {
     handleInput(value) {
       this.$emit("input", value)
     },
+    tooltip(value) {
+      if (+value != value) return value
+      return ("" + value).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    },
   },
 }
 </script>
@@ -81,10 +87,12 @@ export default {
       .vue-slider-process {
         background-color: $value;
       }
+
       .vue-slider-dot-tooltip-inner {
         background-color: $value;
         border-color: $value;
       }
+
       .vue-slider-dot-handle-focus {
         box-shadow: 0px 0px 1px 2px rgba($value, 0.3);
       }
@@ -94,13 +102,13 @@ export default {
 </style>
 
 <docs>
-  ```jsx
-  let value = 10
-  let value2 = [100, 500]
-  <McRangeSlider :min="0" :max="100" v-model="value" :step="2" />
-  <br>
-  <McRangeSlider :min="0" :max="100" v-model="value" :step="2" color="mantis-dark" />
-  <br>
-  <McRangeSlider :min="0" :max="1000" v-model="value2" :step="100" />
-  ```
+    ```jsx
+    let value = 10
+    let value2 = [100, 500]
+    <McRangeSlider :min="0" :max="100" v-model="value" :step="2"/>
+    <br>
+    <McRangeSlider :min="0" :max="100" v-model="value" :step="2" color="mantis-dark"/>
+    <br>
+    <McRangeSlider :min="0" :max="10000" v-model="value2" :step="100"/>
+    ```
 </docs>
