@@ -31,7 +31,7 @@
               "
               @click.prevent="handleClick('exists', v)"
             >
-              {{ v === 0 ? tRelationNotIs : tRelationNotExists }}
+              {{ v === 0 ? tRelationNotExists : tRelationNotExists }}
             </McButton>
           </McGridCol>
         </McGridRow>
