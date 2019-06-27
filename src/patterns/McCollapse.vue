@@ -54,7 +54,23 @@ export default {
     },
   },
 
+  watch: {
+    isCollapsed(value) {
+      this.$emit("toggle", value)
+      this.$emit(value ? "open" : "close")
+      if (this.$parent.$options.name === "McAccordion") {
+        this.$parent.$emit("toggle", { value, component: this })
+      }
+    },
+  },
+
   methods: {
+    open() {
+      this.isCollapsed = false
+    },
+    close() {
+      this.isCollapsed = false
+    },
     toggle() {
       this.isCollapsed = !this.isCollapsed
     },
@@ -71,11 +87,13 @@ export default {
 
   &--no-border {
     border: none;
+
     #{$block-name} {
       &__header {
         padding: 8px 0px;
         padding-right: 29px;
       }
+
       &__icon {
         right: 0;
       }
@@ -135,8 +153,10 @@ export default {
           &__header {
             padding-left: 105px;
           }
+
           &__body {
           }
+
           &__icon {
             left: 70px;
           }
@@ -171,20 +191,23 @@ export default {
         color: #222222 !important;
       }
     }
+
     //border-bottom: none !important;
   }
 }
 </style>
 
 <docs>
-  ```jsx
-  <div>
-    <McCollapse>
-      <template>Заголовок</template>
-      <template slot="body">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia tempore unde!
-      </template>
-    </McCollapse>
-  </div>
-  ```
+    ```jsx
+    <div>
+        <McCollapse>
+            <template>Заголовок</template>
+            <template slot="body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
+                facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
+                tempore unde!
+            </template>
+        </McCollapse>
+    </div>
+    ```
 </docs>
