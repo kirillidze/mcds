@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import { findParentComponent } from "../utils/treeSearch"
+
 import McSvgIcon from "../elements/McSvgIcon"
 import SlideUpDown from "vue-slide-up-down"
 
@@ -70,12 +72,7 @@ export default {
     isCollapsed(value) {
       this.$emit("toggle", value)
       this.$emit(value ? "open" : "close")
-      let $parent = null
-      if (this.$parent.$options.name === "McAccordion") {
-        $parent = this.$parent
-      } else if (this.$parent.$parent.$options.name === "McAccordion") {
-        $parent = this.$parent.$parent
-      }
+      let $parent = findParentComponent(this, "McAccordion")
       if ($parent) {
         $parent.$emit("toggle", { value, component: this })
       }
