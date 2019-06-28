@@ -85,7 +85,7 @@ export default {
 
   &.tooltip {
     display: block !important;
-    z-index: 10000;
+    z-index: 10005 !important;
 
     .tooltip-inner {
       @include inset-squish-space($space-m);
