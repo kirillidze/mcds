@@ -16,6 +16,7 @@
     >
       <McSvgIcon slot="icon-append" :name="type === 'password' ? 'visibility' : 'visibility_off'" />
     </McButton>
+    <slot name="footer" slot="footer" />
   </McFieldText>
 </template>
 
