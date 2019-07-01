@@ -7,6 +7,7 @@
     :disabled="disabled"
     :name="name"
     :placeholder="placeholder"
+    :errors="errors"
   >
     <McButton
       variation="gray-darker-link"
