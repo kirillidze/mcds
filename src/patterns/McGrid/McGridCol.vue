@@ -48,6 +48,14 @@ export default {
     pull: { type: Number },
 
     ...props,
+
+    /**
+     *  Автоматически тянущаяся колонка на всё свободное пространство
+     */
+    stretchSelf: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -81,6 +89,10 @@ export default {
       if (this.gutterY !== 0) {
         colStyle["padding-top"] = `${this.gutterY / 2}px`
         colStyle["padding-bottom"] = `${this.gutterY / 2}px`
+      }
+
+      if (this.stretchSelf) {
+        colStyle["flex"] = "1 0 auto"
       }
 
       return this.order ? { ...colStyle, order: this.order } : colStyle
