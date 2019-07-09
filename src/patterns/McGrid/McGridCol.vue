@@ -103,7 +103,7 @@ export default {
 
       if (this.stretchSelf) {
         colStyle["flex"] = `1 0 ${this.basis}${postfix}`
-      } else if (this.basis) {
+      } else if (this.basis !== "auto") {
         colStyle["flex"] = `0 0 ${this.basis}${postfix}`
       }
 

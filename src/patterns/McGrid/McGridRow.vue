@@ -57,6 +57,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Перенос колонок
+     */
+    wrap: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data() {
@@ -83,6 +91,10 @@ export default {
       if (this.gutterY !== 0) {
         result["margin-top"] = `${-this.gutterY / 2}px`
         result["margin-bottom"] = `${-this.gutterY / 2}px`
+      }
+
+      if (this.wrap) {
+        result["flex-wrap"] = "wrap"
       }
 
       return result
@@ -116,7 +128,6 @@ export default {
 
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
 
   @each $key,
     $value
