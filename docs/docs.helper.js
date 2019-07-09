@@ -11,6 +11,7 @@ import VueLazyload from "vue-lazyload"
 import VueMoment from "vue-moment"
 import VModal from "vue-js-modal"
 import VueAutosize from "vue-autosize"
+import WebFontLoader from "../src/utils/webFontLoader" // eslint-disable-line no-unused-vars
 
 Vue.config.productionTip = false
 Vue.mixin(statusLabels)

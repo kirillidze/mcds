@@ -45,7 +45,7 @@
       >
         <McDropdown v-model="menuProfileIsOpen" position="right">
           <McButton slot="activator" variation="gray-darkest-flat" size="l-compact" rounded>
-            <McAvatar :src="user ? user.avatar : null" size="m" rounded />
+            <McAvatar slot="icon-prepend" :src="user ? user.avatar : null" size="m" rounded />
           </McButton>
           <McPanel>
             <McPreview v-if="user">
