@@ -56,6 +56,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Основа флекса, которая является начальным размером элемента (указывать с единицами измерения: px, %...)
+     */
+    basis: {
+      type: String,
+      default: "auto",
+    },
   },
 
   data() {
@@ -92,7 +100,9 @@ export default {
       }
 
       if (this.stretchSelf) {
-        colStyle["flex"] = "1 0 auto"
+        colStyle["flex"] = `1 0 ${this.basis}`
+      } else if (this.basis !== "auto") {
+        colStyle["flex"] = `0 0 ${this.basis}`
       }
 
       return this.order ? { ...colStyle, order: this.order } : colStyle

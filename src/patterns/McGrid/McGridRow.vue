@@ -46,7 +46,7 @@ export default {
       type: String,
       default: "top",
       validator: function(value) {
-        return ["top", "middle", "bottom"].indexOf(value) !== -1
+        return ["top", "middle", "bottom", "stretch"].indexOf(value) !== -1
       },
     },
 
@@ -56,6 +56,14 @@ export default {
     stretch: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     *  Перенос колонок
+     */
+    wrap: {
+      type: Boolean,
+      default: true,
     },
   },
 
@@ -83,6 +91,10 @@ export default {
       if (this.gutterY !== 0) {
         result["margin-top"] = `${-this.gutterY / 2}px`
         result["margin-bottom"] = `${-this.gutterY / 2}px`
+      }
+
+      if (this.wrap) {
+        result["flex-wrap"] = "wrap"
       }
 
       return result
@@ -116,7 +128,6 @@ export default {
 
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
 
   @each $key,
     $value
@@ -132,7 +143,9 @@ export default {
       justify-content: #{$value};
     }
   }
-  @each $key, $value in ("top": "flex-start", "middle": "center", "bottom": "flex-end") {
+  @each $key,
+    $value in ("top": "flex-start", "middle": "center", "bottom": "flex-end", "stretch": "stretch")
+  {
     &.mc-grid-row--align-#{$key} {
       align-items: #{$value};
     }
