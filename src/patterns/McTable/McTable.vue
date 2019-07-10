@@ -2,7 +2,10 @@
   <table class="mc-table">
     <McTableHead :items="headers"></McTableHead>
     <McTableBody :items="items" :headers="headers">
-      <slot></slot>
+      <slot />
+      <template v-for="header in headers" :slot="`cell-${header.key}`" slot-scope="row">
+        <slot :name="`cell-${header.key}`" :item="row.item" />
+      </template>
     </McTableBody>
   </table>
 </template>
@@ -83,6 +86,9 @@ export default {
       default: true,
     },
   },
+  mounted() {
+    console.log("table", this.$slots)
+  },
   computed: {
     classes() {
       return {
@@ -105,9 +111,10 @@ export default {
   let body = require('@/mocks/tableContractsBody').default;
   <div>
     <McTable :headers="headers" :items="body">
-      <template slot="test" slot-scope="row">
+      asd
+      <template slot="cell-button" slot-scope="row">
         <McButton>
-          test
+          {{ row.item.id }}
         </McButton>
       </template>
     </McTable>

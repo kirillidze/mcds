@@ -55,4 +55,8 @@ export default [
     key: "channel_spt_percent",
     title: "SPT",
   },
+  {
+    key: "button",
+    title: "B_T_N",
+  },
 ]

@@ -1,7 +1,7 @@
 <template>
   <tr class="mc-table-row">
     <McTableCell v-for="cell in headers" :key="cell.key">
-      <slot name="test">
+      <slot :name="`cell-${cell.key}`">
         {{ _get(item, cell.key) }}
       </slot>
     </McTableCell>
@@ -28,9 +28,6 @@ export default {
     _get(...args) {
       return _get(...args)
     },
-  },
-  mounted() {
-    console.log(this.$parent.$parent)
   },
 }
 </script>
