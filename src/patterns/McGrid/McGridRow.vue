@@ -46,7 +46,7 @@ export default {
       type: String,
       default: "top",
       validator: function(value) {
-        return ["top", "middle", "bottom"].indexOf(value) !== -1
+        return ["top", "middle", "bottom", "stretch"].indexOf(value) !== -1
       },
     },
 
@@ -143,7 +143,9 @@ export default {
       justify-content: #{$value};
     }
   }
-  @each $key, $value in ("top": "flex-start", "middle": "center", "bottom": "flex-end") {
+  @each $key,
+    $value in ("top": "flex-start", "middle": "center", "bottom": "flex-end", "stretch": "stretch")
+  {
     &.mc-grid-row--align-#{$key} {
       align-items: #{$value};
     }
