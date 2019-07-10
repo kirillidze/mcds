@@ -1,7 +1,7 @@
 <template>
   <tr class="mc-table-row">
     <McTableCell v-for="cell in headers" :key="cell.key">
-      <slot :name="`cell-${cell.key}`">
+      <slot :name="cell.key">
         {{ _get(item, cell.key) }}
       </slot>
     </McTableCell>

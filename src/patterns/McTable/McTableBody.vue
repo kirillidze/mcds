@@ -1,13 +1,7 @@
 <template>
   <tbody class="mc-table-body">
     <McTableRow v-for="(item, index) in items" :key="index" :item="item" :headers="headers">
-      <slot></slot>
-      <slot
-        v-for="header in headers"
-        :name="`cell-${header.key}`"
-        :slot="`cell-${header.key}`"
-        :item="item"
-      />
+      <slot v-for="header in headers" :name="header.key" :slot="header.key" :item="item" />
     </McTableRow>
   </tbody>
 </template>
@@ -26,9 +20,6 @@ export default {
       type: Array,
       required: true,
     },
-  },
-  mounted() {
-    console.log("body", this.$slots)
   },
   computed: {
     classes() {

@@ -48,7 +48,16 @@ export default {
 </script>
 
 <style lang="scss">
-.McTableHead {
+.mc-table-head {
   $block-name: &;
+
+  th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $color-white;
+    z-index: 3;
+  }
 }
 </style>

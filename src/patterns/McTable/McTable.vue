@@ -2,9 +2,8 @@
   <table class="mc-table">
     <McTableHead :items="headers"></McTableHead>
     <McTableBody :items="items" :headers="headers">
-      <slot />
-      <template v-for="header in headers" :slot="`cell-${header.key}`" slot-scope="row">
-        <slot :name="`cell-${header.key}`" :item="row.item" />
+      <template v-for="header in headers" :slot="header.key" slot-scope="row">
+        <slot :name="header.key" :item="row.item" />
       </template>
     </McTableBody>
   </table>
@@ -14,9 +13,13 @@
 import McTableHead from "./McTableHead"
 import McTableBody from "./McTableBody"
 import McButton from "../../elements/McButton"
+import McPreview from "../McPreview"
+import McAvatar from "../../elements/McAvatar/McAvatar"
+import McTitle from "../../elements/McTitle"
+import McAvatarStatus from "../../elements/McAvatar/McAvatarStatus"
 export default {
   name: "McTable",
-  components: { McButton, McTableHead, McTableBody },
+  components: { McAvatarStatus, McTitle, McAvatar, McPreview, McButton, McTableHead, McTableBody },
   props: {
     headers: {
       type: [Array, Object],
@@ -73,21 +76,6 @@ export default {
       type: String,
       default: null,
     },
-    withoutTopLine: {
-      type: Boolean,
-      default: false,
-    },
-    type: {
-      type: String,
-      default: null,
-    },
-    fixedHeight: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  mounted() {
-    console.log("table", this.$slots)
   },
   computed: {
     classes() {
@@ -102,20 +90,70 @@ export default {
 <style lang="scss">
 .mc-table {
   $block-name: &;
+
+  border-collapse: collapse;
 }
 </style>
 
 <docs>
   ```jsx
-  let headers = require('@/mocks/tableContractsHead').default;
-  let body = require('@/mocks/tableContractsBody').default;
+  import _minBy from 'lodash/minBy'
+  let headers = [
+    {
+      key: 'title',
+      title: 'Канал',
+    },
+    {
+      key: 'views_count',
+      title: 'Просмотры',
+    },
+    {
+      key: 'average_views_per_video',
+      title: 'Ср. пр. на видео',
+    },
+    {
+      key: 'subscribers_count',
+      title: 'Подписчики',
+    },
+    {
+      key: 'categories',
+      title: 'Жанр',
+    },
+    {
+      key: 'language',
+      title: 'Язык',
+    },
+    {
+      key: 'country',
+      title: 'Страна ауд.',
+    },
+    {
+      key: 'price',
+      title: 'Цена интегр.',
+    }
+  ]
+  let body = require('../../mocks/tableInfusersBody').default;
+  let total = 1
+  let bodyMapped = body.map(item => (
+    {
+      title: item.title,
+      avatar: item.image_small,
+      views_count: item.views_count,
+      average_views_per_video: item.average_views_per_video,
+      subscribers_count: item.subscribers_count,
+      categories: item.categories.map(c => c.title).join(', '),
+      language: item.language.name,
+      country: item.country.name,
+      price: item.agency_channels.filter( item => item.type === 2 ).length ? _minBy(item.agency_channels.filter( item => item.type === 2 ), 'total').total : null
+    }
+  ))
   <div>
-    <McTable :headers="headers" :items="body">
-      asd
-      <template slot="cell-button" slot-scope="row">
-        <McButton>
-          {{ row.item.id }}
-        </McButton>
+    <McTable :headers="headers" :items="bodyMapped">
+      <template slot="title" slot-scope="row">
+        <McPreview>
+          <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+          <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
+        </McPreview>
       </template>
     </McTable>
   </div>
