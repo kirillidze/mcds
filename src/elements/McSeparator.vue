@@ -39,6 +39,17 @@ export default {
 </script>
 
 <style lang="scss">
+$spaces: (
+  "xxl": $space_xxl,
+  "xl": $space_xl,
+  "l": $space_l,
+  "m": $space_m,
+  "s": $space_s,
+  "xs": $space_xs,
+  "xxs": $space_xxs,
+  "xxxs": $space_xxxs,
+);
+
 .mc-separator {
   $block-name: &;
 
@@ -46,12 +57,14 @@ export default {
   height: $separator-xs;
   background-color: $color-border;
 
-  &--indent-top-xs {
-    margin-top: $space-xs;
-  }
+  @each $key, $value in $spaces {
+    &--indent-top-#{$key} {
+      margin-top: #{$value};
+    }
 
-  &--indent-bottom-xs {
-    margin-bottom: $space-xs;
+    &--indent-bottom-#{$key} {
+      margin-bottom: #{$value};
+    }
   }
 }
 </style>
@@ -60,6 +73,10 @@ export default {
   ```jsx
   <div>
     <McSeparator indent-top="xs" indent-bottom="xs"/>
+  </div>
+
+  <div>
+    <McSeparator indent-top="xl" indent-bottom="xl"/>
   </div>
   ```
 </docs>
