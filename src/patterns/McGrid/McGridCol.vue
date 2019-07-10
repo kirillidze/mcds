@@ -58,7 +58,7 @@ export default {
     },
 
     /**
-     *  Основа флекса, которая является начальным размером элемента (px)
+     *  Основа флекса, которая является начальным размером элемента (указывать с единицами измерения: px, %...)
      */
     basis: {
       type: String,
@@ -99,12 +99,10 @@ export default {
         colStyle["padding-bottom"] = `${this.gutterY / 2}px`
       }
 
-      let postfix = this.basis === "auto" ? "" : "px"
-
       if (this.stretchSelf) {
-        colStyle["flex"] = `1 0 ${this.basis}${postfix}`
+        colStyle["flex"] = `1 0 ${this.basis}`
       } else if (this.basis !== "auto") {
-        colStyle["flex"] = `0 0 ${this.basis}${postfix}`
+        colStyle["flex"] = `0 0 ${this.basis}`
       }
 
       return this.order ? { ...colStyle, order: this.order } : colStyle
