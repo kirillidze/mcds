@@ -70,7 +70,8 @@ export default {
   computed: {
     momentDate() {
       if (this.$moment == null) return null
-      return this.$moment(this.value).locale(this.$i18n.locale)
+      let locale = this.$i18n ? this.$i18n.locale : "ru"
+      return this.$moment(this.value).locale(locale)
     },
     formattedDate() {
       if (this.momentDate == null) return this.value
@@ -110,7 +111,7 @@ export default {
 
     <br />
 
-    <McDate value="2016-01-01T23:35:01" from-format="HH:mm:ss">
+    <McDate value="2016-01-01T23:35:01" format="HH:mm:ss">
         <McSvgIcon slot="prepend" name="access_time" size="xxs"/>
         <McTitle size="s" slot="append">
             Дата
