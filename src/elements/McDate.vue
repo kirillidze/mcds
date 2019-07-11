@@ -1,9 +1,13 @@
 <template>
   <section class="mc-date">
     <slot name="prepend">
-      <McSvgIcon name="event" size="xxs" />
+      <McSvgIcon v-if="defaultIcon" name="event" :size="iconSize" />
     </slot>
-    <time :datetime="momentDate.format()" class="mc-date__time">{{ formattedDate }}</time>
+    <time :datetime="momentDate" class="mc-date__time">
+      <McTitle :size="dateSize">
+        {{ formattedDate }}
+      </McTitle>
+    </time>
     <slot name="append" />
   </section>
 </template>
@@ -34,17 +38,43 @@ export default {
     /**
      *  Формат даты
      */
-    fromFormat: {
-      default: "YYYY-MM-DD HH:mm:ss",
+    format: {
+      default: "DD.MM.YYYY",
+    },
+
+    /**
+     *  Отображение иконки по умолчанию
+     */
+    defaultIcon: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     *  Размер иконки по умолчанию
+     */
+    iconSize: {
+      type: String,
+      default: "xxs",
+    },
+
+    /**
+     *  Размер даты
+     */
+    dateSize: {
+      type: String,
+      default: "s",
     },
   },
 
   computed: {
     momentDate() {
-      return this.$moment(this.value, this.fromFormat).locale("ru")
+      if (this.$moment == null) return null
+      return this.$moment(this.value).locale(this.$i18n.locale)
     },
     formattedDate() {
-      return this.momentDate.calendar()
+      if (this.momentDate == null) return this.value
+      return this.momentDate.format(this.format)
     },
   },
 }
@@ -54,6 +84,8 @@ export default {
 .mc-date {
   $block-name: &;
 
+  display: flex;
+  align-items: center;
   color: $black;
   font-size: 0;
   font-weight: $weight-normal;
@@ -66,8 +98,6 @@ export default {
     font-size: $size-s;
     line-height: line-height(16, 13);
     font-weight: $weight-medium;
-    position: relative;
-    bottom: 3px;
     margin: 0 4px;
   }
 }
