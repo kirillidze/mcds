@@ -4,7 +4,7 @@
       <McSvgIcon v-if="defaultIcon" name="event" :size="iconSize" />
     </slot>
     <time :datetime="momentDate" class="mc-date__time">
-      <McTitle :size="dateSize">
+      <McTitle :size="dateSize" :ellipsis="ellipsis" :uppercase="uppercase">
         {{ formattedDate }}
       </McTitle>
     </time>
@@ -65,6 +65,22 @@ export default {
       type: String,
       default: "s",
     },
+
+    /**
+     *  Перенос строк
+     */
+    ellipsis: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     *  Заглавные буквы
+     */
+    uppercase: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
@@ -91,7 +107,6 @@ export default {
   font-size: 0;
   font-weight: $weight-normal;
   line-height: 0;
-  text-transform: uppercase;
 
   &__time {
     color: $color-gray-darken;
