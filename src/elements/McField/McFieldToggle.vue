@@ -64,16 +64,16 @@ export default {
   cursor: pointer;
 
   &__text {
-    color: #999;
-    margin-right: 8px;
-    transition: color 0.2s;
+    color: $color-gray-light;
+    margin-right: $space-xs;
+    transition: color $duration-standart;
     &:empty {
       margin-right: 0;
     }
   }
 
   &--checked {
-    .mc-field-toggle__text {
+    #{$block-name}__text {
       color: $color-navy-blue-light;
     }
   }
@@ -81,42 +81,34 @@ export default {
   &__wrapper {
     position: relative;
     display: inline-block;
-    width: 42px;
-    height: 20px;
-    & > .mc-field-toggle__field {
+    width: $tappable-element-m + $space-xxxs;
+    height: $size-l;
+    & > #{$block-name}__field {
       opacity: 0;
-      width: 0;
-      height: 0;
+      @include size(0);
 
-      &:checked + .mc-field-toggle__slider {
+      &:checked + #{$block-name}__slider {
         background-color: $color-navy-blue-light;
 
         &:before {
-          transform: translateX(22px);
+          transform: translateX($size-l + $space-xxxs);
         }
       }
     }
 
-    .mc-field-toggle__slider {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: #ccc;
-      transition: 0.2s;
-      border-radius: 20px;
+    #{$block-name}__slider {
+      @include position(absolute, 0 0 0 0);
+      background-color: $color-gray-lighter;
+      transition: $duration-standart;
+      border-radius: $radius-l * 3;
 
       &:before {
-        position: absolute;
-        content: "";
-        height: 16px;
-        width: 16px;
-        left: 2px;
-        bottom: 2px;
-        background-color: #fff;
-        transition: 0.2s;
-        border-radius: 50%;
+        @include pseudo();
+        @include size($tappable-element-xxs);
+        @include position(null, null null $space-xxxs $space-xxxs);
+        background-color: $color-white;
+        transition: $duration-standart;
+        border-radius: $radius-circle;
       }
     }
   }
