@@ -56,7 +56,6 @@ export default {
       return this.item.textAlign || "right"
     },
     isSorted() {
-      console.log(this.item.key === this.sortedBy)
       return this.item.key === this.sortedBy
     },
     isSortable() {
