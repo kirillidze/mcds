@@ -138,6 +138,7 @@ export default {
       return {
         "mc-field-checkbox--error": this.errors,
         "mc-field-checkbox--disabled": this.disabled,
+        "mc-field-checkbox--empty": !this.mainText && !this.$slots.default,
       }
     },
     errorText() {
@@ -159,6 +160,8 @@ export default {
 <style lang="scss">
 .mc-field-checkbox {
   display: block;
+  min-width: 18px;
+  min-height: 18px;
 
   $block-name: &;
 
@@ -223,6 +226,16 @@ export default {
           border-radius: $radius-s;
           background-color: $color-gray-lighten;
         }
+      }
+    }
+  }
+
+  &--empty {
+    #{$block-name} {
+      &__footer,
+      &__name {
+        padding: 0;
+        margin: 0;
       }
     }
   }

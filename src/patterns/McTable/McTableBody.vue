@@ -1,6 +1,12 @@
 <template>
   <tbody class="mc-table-body">
-    <McTableRow v-for="(item, index) in items" :key="index" :item="item" :headers="headers">
+    <McTableRow
+      :size="size"
+      v-for="(item, index) in items"
+      :key="index"
+      :item="item"
+      :headers="headers"
+    >
       <slot v-for="header in headers" :name="header.key" :slot="header.key" :item="item" />
     </McTableRow>
   </tbody>
@@ -20,6 +26,10 @@ export default {
       type: Array,
       required: true,
     },
+    size: {
+      type: String,
+      default: "m",
+    },
   },
   computed: {
     classes() {
@@ -34,5 +44,7 @@ export default {
 <style lang="scss">
 .mc-table-body {
   $block-name: &;
+
+  border: 1px solid $color-gray-light;
 }
 </style>

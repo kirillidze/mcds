@@ -14,7 +14,7 @@ import McTitle from "./McTitle"
 
 export default {
   name: "McDate",
-  status: "ready",
+  status: "deprecated",
   release: "1.0.0",
 
   components: {

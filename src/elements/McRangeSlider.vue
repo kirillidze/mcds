@@ -18,7 +18,7 @@ import VueSlider from "vue-slider-component"
 
 export default {
   name: "McRangeSlider",
-  status: "ready",
+  status: "deprecated",
   release: "1.0.0",
   components: {
     VueSlider,

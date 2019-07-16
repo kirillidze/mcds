@@ -1,7 +1,24 @@
 <template>
-  <table class="mc-table">
-    <McTableHead :items="headers"></McTableHead>
-    <McTableBody :items="items" :headers="headers">
+  <table class="mc-table" :class="classes">
+    <McTableHead
+      :size="size"
+      :items="headers"
+      :sortable="sortable"
+      :sorted-by="sortedBy"
+      :sorted-descending="sortedDescending"
+      @click="handleHeaderClick"
+    ></McTableHead>
+
+    <McTableFoot
+      v-if="!items.length || infinite"
+      :size="size"
+      :items="items"
+      :headers="headers"
+      :infinite="infinite"
+      :hasMore="hasMore"
+    />
+
+    <McTableBody :size="size" :items="items" :headers="headers">
       <template v-for="header in headers" :slot="header.key" slot-scope="row">
         <slot :name="header.key" :item="row.item" />
       </template>
@@ -11,15 +28,45 @@
 
 <script>
 import McTableHead from "./McTableHead"
+import McTableFoot from "./McTableFoot"
 import McTableBody from "./McTableBody"
 import McButton from "../../elements/McButton"
 import McPreview from "../McPreview"
 import McAvatar from "../../elements/McAvatar/McAvatar"
 import McTitle from "../../elements/McTitle"
 import McAvatarStatus from "../../elements/McAvatar/McAvatarStatus"
+import McFieldCheckbox from "../../elements/McField/McFieldCheckbox"
+import McGridRow from "../McGrid/McGridRow"
+import McGridCol from "../McGrid/McGridCol"
+import McBage from "../../elements/McBage"
+import McTooltip from "../../elements/McTooltip"
+import McSvgIcon from "../../elements/McSvgIcon"
+import McStack from "../../elements/McStackCounter/McStack"
+import McChip from "../../elements/McChip"
+import McTableResponsive from "./McTableResponsive"
+import McFieldText from "../../elements/McField/McFieldText"
 export default {
   name: "McTable",
-  components: { McAvatarStatus, McTitle, McAvatar, McPreview, McButton, McTableHead, McTableBody },
+  components: {
+    McFieldText,
+    McTableResponsive,
+    McChip,
+    McStack,
+    McSvgIcon,
+    McTooltip,
+    McBage,
+    McGridCol,
+    McGridRow,
+    McFieldCheckbox,
+    McAvatarStatus,
+    McTitle,
+    McAvatar,
+    McPreview,
+    McButton,
+    McTableHead,
+    McTableBody,
+    McTableFoot,
+  },
   props: {
     headers: {
       type: [Array, Object],
@@ -57,10 +104,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    checkable: {
-      type: Boolean,
-      default: false,
-    },
     checkedItems: {
       type: Array,
     },
@@ -68,56 +111,102 @@ export default {
       type: String,
       default: "id",
     },
-    placeholderNoData: {
-      type: String,
-      default: null,
+    fixed: {
+      type: Boolean,
+      default: true,
     },
-    placeholderAllLoaded: {
+    size: {
       type: String,
-      default: null,
+      default: "m",
     },
   },
   computed: {
     classes() {
       return {
-        // [`el-logo--type-${this.type}`]: this.type,
+        ["mc-table--fixed"]: this.fixed,
       }
+    },
+  },
+  methods: {
+    handleHeaderClick(header) {
+      let descending = this.sortedDefaultDescending
+      if (this.sortedBy === header.key) {
+        descending = !this.sortedDescending
+      }
+      this.$emit("sort", { key: header.key, descending })
     },
   },
 }
 </script>
 
 <style lang="scss">
+.mc-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
 .mc-table {
   $block-name: &;
 
   border-collapse: collapse;
+  width: 100%;
+  border: none;
+  max-width: 100%;
+
+  &--fixed {
+    table-layout: fixed;
+  }
 }
 </style>
 
 <docs>
   ```jsx
   import _minBy from 'lodash/minBy'
+  import { number } from "../../utils/filters"
   let headers = [
     {
       key: 'title',
       title: 'Канал',
+      hasBorder: true,
+      width: '251px',
+      textAlign: 'left',
+    },
+    {
+      key: 'user',
+      title: 'Пользователь',
+      textAlign: 'left'
+    },
+    {
+      key: 'roles',
+      title: 'Роль',
+      textAlign: 'left',
+      width: '190px',
+    },
+    {
+      key: 'channels',
+      title: 'Канал',
+      textAlign: 'left',
+      width: '120px',
     },
     {
       key: 'views_count',
       title: 'Просмотры',
+      textAlign: 'left'
     },
-    {
-      key: 'average_views_per_video',
-      title: 'Ср. пр. на видео',
-    },
-    {
-      key: 'subscribers_count',
-      title: 'Подписчики',
-    },
+    // {
+      // key: 'average_views_per_video',
+      // title: 'Ср. пр. на видео',
+      // textAlign: 'left'
+    // },
+    // {
+      // key: 'subscribers_count',
+      // title: 'Подписчики',
+      // textAlign: 'left'
+    // },
     {
       key: 'categories',
       title: 'Жанр',
+      textAlign: 'left'
     },
     {
       key: 'language',
@@ -130,32 +219,113 @@ export default {
     {
       key: 'price',
       title: 'Цена интегр.',
+    },
+    {
+      key: 'owner',
+      title: 'Владелец',
+      textAlign: 'left',
+      width: '200px',
+    },
+    {
+      key: 'action',
+      title: 'Действие',
+      width: '243px',
     }
   ]
   let body = require('../../mocks/tableInfusersBody').default;
-  let total = 1
-  let bodyMapped = body.map(item => (
-    {
+  let bodyMapped = body.map((item, index) => {
+    return {
       title: item.title,
       avatar: item.image_small,
-      views_count: item.views_count,
-      average_views_per_video: item.average_views_per_video,
-      subscribers_count: item.subscribers_count,
+      views_count: number(item.views_count, 0),
+      average_views_per_video: number(item.average_views_per_video, 0),
+      subscribers_count: number(item.subscribers_count, 0),
       categories: item.categories.map(c => c.title).join(', '),
       language: item.language.name,
       country: item.country.name,
-      price: item.agency_channels.filter( item => item.type === 2 ).length ? _minBy(item.agency_channels.filter( item => item.type === 2 ), 'total').total : null
+      price: item.agency_channels.filter( item => item.type === 2 ).length ? number(_minBy(item.agency_channels.filter( item => item.type === 2 ), 'total').total, 0) + ' $' : null,
     }
-  ))
+  }).slice(0, 15);
   <div>
-    <McTable :headers="headers" :items="bodyMapped">
-      <template slot="title" slot-scope="row">
-        <McPreview>
-          <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
-          <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
-        </McPreview>
-      </template>
-    </McTable>
+    <McTableResponsive>
+      <McTable
+              :loading="true"
+              :headers="headers"
+              :items="bodyMapped"
+              :infinite="true"
+              :hasMore="true"
+              :sortable="['views_count', 'language', 'price']"
+              :sorted-by="'language'"
+              :sorted-descending="true"
+              :sorted-default-descending="true"
+      >
+        <template slot="user" slot-scope="row">
+          <McButton href="#" target="_blank" variation="primary-link">
+            Роман Подумеев
+          </McButton>
+        </template>
+        <template slot="title" slot-scope="row">
+          <McPreview>
+            <McGridRow slot="left" :wrap="false" align="middle" :gutter-x="12">
+              <McGridCol>
+                <McFieldCheckbox/>
+              </McGridCol>
+              <McGridCol>
+                <McAvatarStatus border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+              </McGridCol>
+            </McGridRow>
+            <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
+              <McGridCol>
+                <McTooltip size="s" placement="top" content="Редактировать">
+                  <McButton variation="primary-link" size="s-compact">
+                    <McSvgIcon slot="icon-append" name="create" size="xxs"/>
+                  </McButton>
+                </McTooltip>
+              </McGridCol>
+              <McGridCol>
+                <McTooltip size="s" placement="top" content="Копировать">
+                  <McButton variation="primary-link" size="s-compact">
+                    <McSvgIcon slot="icon-append" name="delete" size="xxs"/>
+                  </McButton>
+                </McTooltip>
+              </McGridCol>
+            </McGridRow>
+            <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
+          </McPreview>
+          <McBage vertical-line variation="success"/>
+        </template>
+        <template slot="roles" slot-scope="row">
+          <McStack :limit="1">
+            <McChip variation="gray-darkest-invert">Администратор</McChip>
+            <McChip variation="gray-darkest-invert">Администратор</McChip>
+            <McChip variation="gray-darkest-invert">Администратор</McChip>
+          </McStack>
+        </template>
+        <template slot="channels" slot-scope="row">
+          <McStack :limit="3">
+            <McAvatar rounded lazy size="s"/>
+            <McAvatar rounded lazy size="s"/>
+            <McAvatar rounded lazy size="s"/>
+            <McAvatar rounded lazy size="s"/>
+          </McStack>
+        </template>
+        <template slot="owner" slot-scope="row">
+          <div style="display: flex; align-items: center; height: 100%;">
+            <McFieldText name="test" placeholder="Владелец"/>
+          </div>
+        </template>
+        <template slot="action" slot-scope="row">
+          <McGridRow justify="right" :wrap="false" align="middle" :gutter-x="5">
+            <McGridCol>
+              <McButton size="s">Выплатить</McButton>
+            </McGridCol>
+            <McGridCol>
+              <McButton variation="danger" size="s">Отменить</McButton>
+            </McGridCol>
+          </McGridRow>
+        </template>
+      </McTable>
+    </McTableResponsive>
   </div>
   ```
 </docs>

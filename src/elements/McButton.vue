@@ -8,7 +8,7 @@
     :exact="exact"
   >
     <slot name="icon-prepend" />
-    <btn-loader class="mc-button__loader" color="inherit" size="19px"></btn-loader>
+    <btn-loader v-if="loading" class="mc-button__loader" color="inherit" size="19px"></btn-loader>
     <span class="mc-button__text">
       <slot />
     </span>
