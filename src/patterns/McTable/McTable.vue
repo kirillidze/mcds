@@ -7,7 +7,7 @@
       :sorted-by="sortedBy"
       :sorted-descending="sortedDescending"
       @click="handleHeaderClick"
-    ></McTableHead>
+    />
 
     <McTableFoot
       v-if="!items.length || infinite"
@@ -18,7 +18,15 @@
       :hasMore="hasMore"
     />
 
-    <McTableBody :size="size" :items="items" :headers="headers">
+    <McTableBody
+      :size="size"
+      :items="items"
+      :headers="headers"
+      :checkable="checkable"
+      :checked-items="checkedItems"
+      :check-by="checkBy"
+      @check="handleCheck"
+    >
       <template v-for="header in headers" :slot="header.key" slot-scope="row">
         <slot :name="header.key" :item="row.item" />
       </template>
@@ -35,7 +43,6 @@ import McPreview from "../McPreview"
 import McAvatar from "../../elements/McAvatar/McAvatar"
 import McTitle from "../../elements/McTitle"
 import McAvatarStatus from "../../elements/McAvatar/McAvatarStatus"
-import McFieldCheckbox from "../../elements/McField/McFieldCheckbox"
 import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
 import McBage from "../../elements/McBage"
@@ -57,7 +64,6 @@ export default {
     McBage,
     McGridCol,
     McGridRow,
-    McFieldCheckbox,
     McAvatarStatus,
     McTitle,
     McAvatar,
@@ -104,8 +110,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    checkable: {
+      type: Boolean,
+      default: false,
+    },
     checkedItems: {
       type: Array,
+      default() {
+        return []
+      },
     },
     checkBy: {
       type: String,
@@ -135,6 +148,17 @@ export default {
       }
       this.$emit("sort", { key: header.key, descending })
     },
+    handleCheck({ item, value }) {
+      const val = item[this.checkBy]
+      const checkedItems = this.checkedItems.concat()
+      if (value) {
+        checkedItems.push(val)
+      } else {
+        const index = checkedItems.indexOf(val)
+        checkedItems.splice(index, 1)
+      }
+      this.$emit("check", checkedItems)
+    },
   },
 }
 </script>
@@ -162,6 +186,7 @@ export default {
 <docs>
   ```jsx
   import _minBy from 'lodash/minBy'
+  import _sortBy from 'lodash/sortBy'
   import { number } from "../../utils/filters"
   let headers = [
     {
@@ -235,7 +260,7 @@ export default {
   let body = require('../../mocks/tableInfusersBody').default;
   let bodyMapped = body.map((item, index) => {
     return {
-      title: item.title,
+      ...item,
       avatar: item.image_small,
       views_count: number(item.views_count, 0),
       average_views_per_video: number(item.average_views_per_video, 0),
@@ -246,6 +271,22 @@ export default {
       price: item.agency_channels.filter( item => item.type === 2 ).length ? number(_minBy(item.agency_channels.filter( item => item.type === 2 ), 'total').total, 0) + ' $' : null,
     }
   }).slice(0, 15);
+
+    let sortBy = 'language';
+    let sortDescending = true;
+
+    let sort = ({key, descending}) => {
+    alert(`Key: ${key}, Desc: ${descending}`)
+    sortBy = key
+    sortDescending = descending
+    }
+
+    let checkedItems = [];
+    let check = value => {
+    alert(`Values: ${value}`)
+    checkedItems = [...value];
+    }
+
   <div>
     <McTableResponsive>
       <McTable
@@ -255,9 +296,13 @@ export default {
               :infinite="true"
               :hasMore="true"
               :sortable="['views_count', 'language', 'price']"
-              :sorted-by="'language'"
-              :sorted-descending="true"
+              :sorted-by="sortBy"
+              :sorted-descending="sortDescending"
               :sorted-default-descending="true"
+              @sort="sort"
+              :checkable="true"
+              :checked-items="checkedItems"
+              @check="check"
       >
         <template slot="user" slot-scope="row">
           <McButton href="#" target="_blank" variation="primary-link">
@@ -266,14 +311,7 @@ export default {
         </template>
         <template slot="title" slot-scope="row">
           <McPreview>
-            <McGridRow slot="left" :wrap="false" align="middle" :gutter-x="12">
-              <McGridCol>
-                <McFieldCheckbox/>
-              </McGridCol>
-              <McGridCol>
-                <McAvatarStatus border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
-              </McGridCol>
-            </McGridRow>
+            <McAvatarStatus border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
             <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
               <McGridCol>
                 <McTooltip size="s" placement="top" content="Редактировать">
