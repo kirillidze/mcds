@@ -30,9 +30,11 @@ import McBage from "../elements/McBage"
 import McChip from "../elements/McChip"
 import McAvatar from "../elements/McAvatar/McAvatar"
 import McFieldText from "../elements/McField/McFieldText"
+import McTableWrapper from "./McTableWrapper"
 export default {
   name: "McMain",
   components: {
+    McTableWrapper,
     McFieldText,
     McAvatar,
     McChip,
@@ -86,6 +88,7 @@ export default {
   }
 
   &__main {
+    flex-grow: 1;
   }
 
   &__footer-wrapper {
@@ -191,7 +194,21 @@ export default {
     country: item.country.name,
     price: item.agency_channels.filter( item => item.type === 2 ).length ? number(_minBy(item.agency_channels.filter( item => item.type === 2 ), 'total').total, 0) + ' $' : null,
   }
-  }).slice(0, 15);
+  }).slice(0, 5);
+  let sortBy = 'language';
+  let sortDescending = true;
+
+  let sort = ({key, descending}) => {
+    alert(`Key: ${key}, Desc: ${descending}`)
+    sortBy = key
+    sortDescending = descending
+  }
+
+  let checkedItems = [];
+    let check = value => {
+    alert(`Values: ${value}`)
+    checkedItems = [...value];
+  }
   <div>
       <McMain>
         <McHeader
@@ -219,85 +236,80 @@ export default {
                 @click-accept="(id) => eventTest('id: ' + id)"
                 @click-reject="(id) => eventTest('id: ' + id)"
         />
-        <McTableResponsive>
-          <McTable
-                  :loading="true"
-                  :headers="headers"
-                  :items="bodyMapped"
-                  :infinite="true"
-                  :hasMore="true"
-                  :sortable="['views_count', 'language', 'price']"
-                  :sorted-by="'language'"
-                  :sorted-descending="true"
-                  :sorted-default-descending="true"
-          >
-            <template slot="user" slot-scope="row">
-              <McButton href="#" target="_blank" variation="primary-link">
-                Роман Подумеев
-              </McButton>
-            </template>
-            <template slot="title" slot-scope="row">
-              <McPreview>
-                <McGridRow slot="left" :wrap="false" align="middle" :gutter-x="12">
+        <McTableWrapper>
+          <McTableResponsive>
+            <McTable
+                    :loading="true"
+                    :headers="headers"
+                    :items="bodyMapped"
+                    :infinite="true"
+                    :hasMore="true"
+                    :sortable="['views_count', 'language', 'price']"
+                    :sorted-by="'language'"
+                    :sorted-descending="true"
+                    :sorted-default-descending="true"
+            >
+              <template slot="user" slot-scope="row">
+                <McButton href="#" target="_blank" variation="primary-link">
+                  Роман Подумеев
+                </McButton>
+              </template>
+              <template slot="title" slot-scope="row">
+                <McPreview>
+                  <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+                  <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
+                    <McGridCol>
+                      <McTooltip size="s" placement="top" content="Редактировать">
+                        <McButton variation="primary-link" size="s-compact">
+                          <McSvgIcon slot="icon-append" name="create" size="xxs"/>
+                        </McButton>
+                      </McTooltip>
+                    </McGridCol>
+                    <McGridCol>
+                      <McTooltip size="s" placement="top" content="Копировать">
+                        <McButton variation="primary-link" size="s-compact">
+                          <McSvgIcon slot="icon-append" name="delete" size="xxs"/>
+                        </McButton>
+                      </McTooltip>
+                    </McGridCol>
+                  </McGridRow>
+                  <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
+                </McPreview>
+                <McBage vertical-line variation="success"/>
+              </template>
+              <template slot="roles" slot-scope="row">
+                <McStack :limit="1">
+                  <McChip variation="gray-darkest-invert">Администратор</McChip>
+                  <McChip variation="gray-darkest-invert">Администратор</McChip>
+                  <McChip variation="gray-darkest-invert">Администратор</McChip>
+                </McStack>
+              </template>
+              <template slot="channels" slot-scope="row">
+                <McStack :limit="3">
+                  <McAvatar rounded lazy size="s"/>
+                  <McAvatar rounded lazy size="s"/>
+                  <McAvatar rounded lazy size="s"/>
+                  <McAvatar rounded lazy size="s"/>
+                </McStack>
+              </template>
+              <template slot="owner" slot-scope="row">
+                <div style="display: flex; align-items: center; height: 100%;">
+                  <McFieldText name="test" placeholder="Владелец"/>
+                </div>
+              </template>
+              <template slot="action" slot-scope="row">
+                <McGridRow justify="right" :wrap="false" align="middle" :gutter-x="5">
                   <McGridCol>
-                    <McFieldCheckbox/>
+                    <McButton size="s">Выплатить</McButton>
                   </McGridCol>
                   <McGridCol>
-                    <McAvatarStatus border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+                    <McButton variation="danger" size="s">Отменить</McButton>
                   </McGridCol>
                 </McGridRow>
-                <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
-                  <McGridCol>
-                    <McTooltip size="s" placement="top" content="Редактировать">
-                      <McButton variation="primary-link" size="s-compact">
-                        <McSvgIcon slot="icon-append" name="create" size="xxs"/>
-                      </McButton>
-                    </McTooltip>
-                  </McGridCol>
-                  <McGridCol>
-                    <McTooltip size="s" placement="top" content="Копировать">
-                      <McButton variation="primary-link" size="s-compact">
-                        <McSvgIcon slot="icon-append" name="delete" size="xxs"/>
-                      </McButton>
-                    </McTooltip>
-                  </McGridCol>
-                </McGridRow>
-                <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
-              </McPreview>
-              <McBage vertical-line variation="success"/>
-            </template>
-            <template slot="roles" slot-scope="row">
-              <McStack :limit="1">
-                <McChip variation="gray-darkest-invert">Администратор</McChip>
-                <McChip variation="gray-darkest-invert">Администратор</McChip>
-                <McChip variation="gray-darkest-invert">Администратор</McChip>
-              </McStack>
-            </template>
-            <template slot="channels" slot-scope="row">
-              <McStack :limit="3">
-                <McAvatar rounded lazy size="s"/>
-                <McAvatar rounded lazy size="s"/>
-                <McAvatar rounded lazy size="s"/>
-                <McAvatar rounded lazy size="s"/>
-              </McStack>
-            </template>
-            <template slot="owner" slot-scope="row">
-              <div style="display: flex; align-items: center; height: 100%;">
-                <McFieldText name="test" placeholder="Владелец"/>
-              </div>
-            </template>
-            <template slot="action" slot-scope="row">
-              <McGridRow justify="right" :wrap="false" align="middle" :gutter-x="5">
-                <McGridCol>
-                  <McButton size="s">Выплатить</McButton>
-                </McGridCol>
-                <McGridCol>
-                  <McButton variation="danger" size="s">Отменить</McButton>
-                </McGridCol>
-              </McGridRow>
-            </template>
-          </McTable>
-        </McTableResponsive>
+              </template>
+            </McTable>
+          </McTableResponsive>
+        </McTableWrapper>
       </McMain>
   </div>
   ```

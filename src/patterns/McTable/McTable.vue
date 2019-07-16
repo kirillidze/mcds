@@ -311,7 +311,7 @@ export default {
         </template>
         <template slot="title" slot-scope="row">
           <McPreview>
-            <McAvatarStatus border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+            <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
             <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
               <McGridCol>
                 <McTooltip size="s" placement="top" content="Редактировать">

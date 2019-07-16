@@ -1,6 +1,9 @@
 <template>
   <component :is="tag" class="mc-table-cell" :style="styles" :class="classes">
-    <slot></slot>
+    <div v-if="checkable" class="mc-table-cell__inner">
+      <slot></slot>
+    </div>
+    <slot v-else></slot>
   </component>
 </template>
 
@@ -22,6 +25,10 @@ export default {
       type: String,
       default: "m",
     },
+    checkable: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -35,6 +42,7 @@ export default {
     classes() {
       return {
         [`mc-table-cell--size-${this.size}`]: this.size,
+        "mc-table-cell--checkable": this.checkable,
       }
     },
   },
@@ -73,16 +81,35 @@ export default {
     bottom: 0;
     right: 0;
   }
+
+  &--checkable {
+    #{$block-name} {
+      &__inner {
+        display: flex;
+        align-items: center;
+
+        .mc-field-checkbox {
+          flex: 0 0 auto;
+          margin-right: 12px;
+
+          + * {
+            @include layout-flex-fix();
+            flex: 1 1 auto;
+          }
+        }
+      }
+    }
+  }
 }
 
 th.mc-table-cell {
   $block-name: &;
 
-  // position: sticky;
-  // top: -1px;
-  // left: 0;
-  // right: 0;
-  // background-color: $color-white;
-  // z-index: 3;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: $color-white;
+  z-index: 3;
 }
 </style>
