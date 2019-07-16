@@ -1,9 +1,13 @@
 <template>
   <section class="mc-date">
     <slot name="prepend">
-      <McSvgIcon name="event" size="xxs" />
+      <McSvgIcon v-if="defaultIcon" name="event" :size="iconSize" />
     </slot>
-    <time :datetime="momentDate.format()" class="mc-date__time">{{ formattedDate }}</time>
+    <time :datetime="momentDate" class="mc-date__time">
+      <McTitle :size="dateSize" :ellipsis="ellipsis" :uppercase="uppercase">
+        {{ formattedDate }}
+      </McTitle>
+    </time>
     <slot name="append" />
   </section>
 </template>
@@ -34,17 +38,60 @@ export default {
     /**
      *  Формат даты
      */
-    fromFormat: {
-      default: "YYYY-MM-DD HH:mm:ss",
+    format: {
+      default: "DD.MM.YYYY",
+    },
+
+    /**
+     *  Отображение иконки по умолчанию
+     */
+    defaultIcon: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     *  Размер иконки по умолчанию
+     */
+    iconSize: {
+      type: String,
+      default: "xxs",
+    },
+
+    /**
+     *  Размер даты
+     */
+    dateSize: {
+      type: String,
+      default: "s",
+    },
+
+    /**
+     *  Перенос строк
+     */
+    ellipsis: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     *  Заглавные буквы
+     */
+    uppercase: {
+      type: Boolean,
+      default: true,
     },
   },
 
   computed: {
     momentDate() {
-      return this.$moment(this.value, this.fromFormat).locale("ru")
+      if (this.$moment == null) return null
+      let locale = this.$i18n ? this.$i18n.locale : "ru"
+      return this.$moment(this.value).locale(locale)
     },
     formattedDate() {
-      return this.momentDate.calendar()
+      if (this.momentDate == null) return this.value
+      return this.momentDate.format(this.format)
     },
   },
 }
@@ -54,11 +101,12 @@ export default {
 .mc-date {
   $block-name: &;
 
+  display: flex;
+  align-items: center;
   color: $black;
   font-size: 0;
   font-weight: $weight-normal;
   line-height: 0;
-  text-transform: uppercase;
 
   &__time {
     color: $color-gray-darken;
@@ -66,8 +114,6 @@ export default {
     font-size: $size-s;
     line-height: line-height(16, 13);
     font-weight: $weight-medium;
-    position: relative;
-    bottom: 3px;
     margin: 0 4px;
   }
 }
@@ -80,7 +126,7 @@ export default {
 
     <br />
 
-    <McDate value="2016-01-01T23:35:01" from-format="HH:mm:ss">
+    <McDate value="2016-01-01T23:35:01" format="HH:mm:ss">
         <McSvgIcon slot="prepend" name="access_time" size="xxs"/>
         <McTitle size="s" slot="append">
             Дата
