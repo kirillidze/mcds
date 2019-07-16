@@ -1,13 +1,17 @@
 <template>
   <tbody class="mc-table-body">
-    <McTableRow v-for="(item, index) in items" :key="index" :item="item" :headers="headers">
-      <slot></slot>
-      <slot
-        v-for="header in headers"
-        :name="`cell-${header.key}`"
-        :slot="`cell-${header.key}`"
-        :item="item"
-      />
+    <McTableRow
+      :size="size"
+      v-for="(item, index) in items"
+      :key="index"
+      :item="item"
+      :headers="headers"
+      :checkable="checkable"
+      :checked-items="checkedItems"
+      :check-by="checkBy"
+      @check="value => handleCheck(item, value)"
+    >
+      <slot v-for="header in headers" :name="header.key" :slot="header.key" :item="item" />
     </McTableRow>
   </tbody>
 </template>
@@ -26,15 +30,28 @@ export default {
       type: Array,
       required: true,
     },
+    size: {
+      type: String,
+      default: "m",
+    },
+    checkable: {
+      type: Boolean,
+      default: false,
+    },
+    checkedItems: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    checkBy: {
+      type: String,
+      default: "id",
+    },
   },
-  mounted() {
-    console.log("body", this.$slots)
-  },
-  computed: {
-    classes() {
-      return {
-        // [`el-logo--type-${this.type}`]: this.type,
-      }
+  methods: {
+    handleCheck(item, value) {
+      this.$emit("check", { item, value })
     },
   },
 }
@@ -43,5 +60,7 @@ export default {
 <style lang="scss">
 .mc-table-body {
   $block-name: &;
+
+  border: 1px solid $color-gray-light;
 }
 </style>

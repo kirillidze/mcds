@@ -12,7 +12,7 @@ import McCollapse from "./McCollapse"
 export default {
   name: "McAccordion",
   components: { McCollapse },
-  status: "ready",
+  status: "deprecated",
   release: "1.0.0",
   created() {
     this.$on("toggle", function(value) {

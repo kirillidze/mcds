@@ -29,7 +29,7 @@ import Multiselect from "vue-multiselect"
 export default {
   name: "McFieldSelect",
   components: { Multiselect },
-  status: "ready",
+  status: "deprecated",
   release: "1.0.0",
   props: {
     options: {
@@ -170,6 +170,11 @@ $colors: $token-colors;
     &__placeholder {
       color: $color-gray-dark;
       font-size: $size-m;
+      line-height: $line-height-s;
+    }
+
+    &__single {
+      @include ellipsis();
     }
 
     &__select {

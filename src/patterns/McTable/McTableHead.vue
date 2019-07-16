@@ -1,54 +1,65 @@
 <template>
   <thead class="mc-table-head">
-    <tr>
-      <th v-for="item in items" v-if="item.key" :key="item.key">
-        {{ item.title }}
-      </th>
-    </tr>
+    <McTableRow>
+      <McTableHeadCell
+        :size="size"
+        :item="item"
+        v-for="item in items"
+        v-if="item.key"
+        :key="item.key"
+        :sortable="sortable"
+        :sorted-by="sortedBy"
+        :sorted-descending="sortedDescending"
+        @click="() => handleCellClick(item)"
+      />
+    </McTableRow>
   </thead>
 </template>
 
 <script>
+import McTableCell from "./McTableCell"
+import McTableRow from "./McTableRow"
+import McTitle from "../../elements/McTitle"
+import McSvgIcon from "../../elements/McSvgIcon"
+import McTableHeadCell from "./McTableHeadCell"
+
 export default {
   name: "McTableHead",
+  components: { McTableHeadCell, McSvgIcon, McTitle, McTableRow, McTableCell },
   props: {
     items: {
       type: [Array, Object],
       required: true,
     },
-    // sortable: {
-    //   type: [Boolean, Array],
-    //   required: true,
-    // },
-    // sortedBy: {
-    //   type: String,
-    //   required: false,
-    // },
-    // sortedDescending: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // offsetTop: {
-    //   type: Number,
-    //   default: 0,
-    // },
-    // checkable: {
-    //   type: Boolean,
-    //   default: false,
-    // },
+    sortable: {
+      type: [Boolean, Array],
+      default: false,
+    },
+    size: {
+      type: String,
+      default: "m",
+    },
+    sortedBy: {
+      type: String,
+      required: false,
+    },
+    sortedDescending: {
+      type: Boolean,
+      default: false,
+    },
   },
-  computed: {
-    classes() {
-      return {
-        // [`el-logo--type-${this.type}`]: this.type,
-      }
+  methods: {
+    handleCellClick(item) {
+      this.$emit("click", item)
     },
   },
 }
 </script>
 
 <style lang="scss">
-.McTableHead {
+.mc-table-head {
   $block-name: &;
+
+  border: 1px solid $color-gray-light;
 }
 </style>

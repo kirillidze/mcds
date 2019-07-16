@@ -41,7 +41,7 @@ export default {
 
   &__left {
     flex: 0 0 auto;
-    margin-right: $space-s;
+    margin-right: $space-m / 2;
 
     &:empty {
       display: none;

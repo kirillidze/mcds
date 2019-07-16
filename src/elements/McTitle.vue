@@ -64,6 +64,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Позиция текста:
+     *  `left, center, right`
+     */
+    textAlign: {
+      type: String,
+      default: "left",
+    },
   },
   computed: {
     tag() {
@@ -75,6 +83,7 @@ export default {
         [`mc-title--family-${this.family}`]: this.family,
         ["mc-title--ellipsis"]: this.ellipsis,
         [`mc-title--color-${this.color}`]: this.color,
+        [`mc-title--text-align-${this.textAlign}`]: this.textAlign,
         "mc-title--uppercase": this.uppercase,
       }
     },
@@ -93,6 +102,7 @@ export default {
   display: inline-flex;
   max-width: 100%;
   width: 100%;
+  text-decoration: none;
 
   &__text {
     padding-bottom: 1px; // fix overflow
@@ -176,6 +186,18 @@ export default {
 
   &--family-text {
     font-family: $font-text;
+  }
+
+  &--text-align {
+    &-left {
+      justify-content: flex-start;
+    }
+    &-center {
+      justify-content: center;
+    }
+    &-right {
+      justify-content: flex-end;
+    }
   }
 }
 </style>
