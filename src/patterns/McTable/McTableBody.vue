@@ -6,6 +6,10 @@
       :key="index"
       :item="item"
       :headers="headers"
+      :checkable="checkable"
+      :checked-items="checkedItems"
+      :check-by="checkBy"
+      @check="value => handleCheck(item, value)"
     >
       <slot v-for="header in headers" :name="header.key" :slot="header.key" :item="item" />
     </McTableRow>
@@ -30,12 +34,24 @@ export default {
       type: String,
       default: "m",
     },
+    checkable: {
+      type: Boolean,
+      default: false,
+    },
+    checkedItems: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+    checkBy: {
+      type: String,
+      default: "id",
+    },
   },
-  computed: {
-    classes() {
-      return {
-        // [`el-logo--type-${this.type}`]: this.type,
-      }
+  methods: {
+    handleCheck(item, value) {
+      this.$emit("check", { item, value })
     },
   },
 }
