@@ -35,6 +35,20 @@
           v-on="listeners"
           @input="$event => handleInput($event.target.value)"
         ></textarea>
+        <textarea-autosize
+          v-else-if="isTextareaAutosize"
+          class="mc-field-text__input"
+          :style="inputStyles"
+          :placeholder="placeholder"
+          :disabled="disabled"
+          :name="name"
+          :id="name"
+          v-on="listeners"
+          rows="1"
+          :min-height="34"
+          @input="handleInput"
+          :value="value"
+        ></textarea-autosize>
         <input
           v-else
           class="mc-field-text__input"
@@ -71,6 +85,7 @@ import _omit from "lodash/omit"
 
 import tokens from "../../assets/tokens/tokens"
 import flatPickr from "vue-flatpickr-component"
+import TextareaAutosize from "vue-textarea-autosize/src/components/TextareaAutosize"
 
 import McTitle from "../McTitle"
 import McSvgIcon from "../McSvgIcon"
@@ -79,7 +94,7 @@ import McTooltip from "../McTooltip"
 
 export default {
   name: "McFieldText",
-  components: { McTooltip, McButton, McSvgIcon, McTitle, flatPickr },
+  components: { McTooltip, McButton, McSvgIcon, McTitle, flatPickr, TextareaAutosize },
   status: "ready",
   release: "1.0.0",
   props: {
@@ -171,6 +186,7 @@ export default {
       return {
         "mc-field-text--error": this.errorText,
         "mc-field-text--textarea": this.isTextarea,
+        "mc-field-text--textarea-autosize": this.isTextareaAutosize,
         "mc-field-text--date": this.isDate,
         "mc-field-text--disabled": this.disabled,
       }
@@ -178,6 +194,10 @@ export default {
 
     isTextarea() {
       return this.type === "textarea"
+    },
+
+    isTextareaAutosize() {
+      return this.type === "textarea-autosize"
     },
 
     isDate() {
@@ -317,16 +337,6 @@ export default {
     }
   }
 
-  textarea#{$block-name} {
-    &__input {
-      $textarea-height: 94px;
-
-      height: auto;
-      min-height: calc(#{$textarea-height} + 2px);
-      resize: vertical;
-    }
-  }
-
   &__footer {
     margin-top: $space-xxxs;
 
@@ -348,6 +358,21 @@ export default {
       &__append,
       &__prepend {
         align-items: flex-start;
+      }
+      &__input {
+        $textarea-height: 94px;
+
+        height: auto;
+        min-height: calc(#{$textarea-height} + 2px);
+        resize: vertical;
+      }
+    }
+  }
+
+  &--textarea-autosize {
+    #{$block-name} {
+      &__input {
+        height: auto;
       }
     }
   }

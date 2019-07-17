@@ -108,13 +108,16 @@ export default {
   font-weight: $weight-normal;
   line-height: 0;
 
+  .mc-svg-icon {
+    margin-right: $space-xxs;
+  }
+
   &__time {
     color: $color-gray-darken;
     font-family: $font-heading;
-    font-size: $size-s;
     line-height: line-height(16, 13);
     font-weight: $weight-medium;
-    margin: 0 4px;
+    margin-left: 0;
   }
 }
 </style>
