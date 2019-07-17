@@ -99,6 +99,8 @@ export default {
 <style lang="scss">
 .mc-chat {
   $block-name: &;
+  padding: $space-xs;
+  border-top: $separator-xs solid $border-color;
 
   &__source {
     margin-bottom: $space-xs;

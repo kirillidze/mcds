@@ -1,6 +1,8 @@
 <template>
   <div class="mc-separator" :class="classes">
-    <slot></slot>
+    <div class="mc-separator__wrapper">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -25,6 +27,20 @@ export default {
       type: String,
       default: null,
     },
+    /**
+     * Отступ слева
+     */
+    indentLeft: {
+      type: String,
+      default: null,
+    },
+    /**
+     * Отступ справа
+     */
+    indentRight: {
+      type: String,
+      default: null,
+    },
   },
 
   computed: {
@@ -32,6 +48,8 @@ export default {
       return {
         [`mc-separator--indent-top-${this.indentTop}`]: this.indentTop,
         [`mc-separator--indent-bottom-${this.indentBottom}`]: this.indentBottom,
+        [`mc-separator--indent-left-${this.indentLeft}`]: this.indentLeft,
+        [`mc-separator--indent-right-${this.indentRight}`]: this.indentRight,
       }
     },
   },
@@ -55,7 +73,11 @@ $spaces: (
 
   width: 100%;
   height: $separator-xs;
-  background-color: $color-border;
+
+  &__wrapper {
+    @include size(100%);
+    background-color: $color-border;
+  }
 
   @each $key, $value in $spaces {
     &--indent-top-#{$key} {
@@ -64,6 +86,14 @@ $spaces: (
 
     &--indent-bottom-#{$key} {
       margin-bottom: #{$value};
+    }
+
+    &--indent-left-#{$key} {
+      padding-left: #{$value};
+    }
+
+    &--indent-right-#{$key} {
+      padding-right: #{$value};
     }
   }
 }

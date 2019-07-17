@@ -3,7 +3,7 @@
     <McDropdown v-model="isOpened">
       <McButton slot="activator" variation="primary-link">
         {{ activeSource.name }}
-        <McSvgIcon name="arrow_drop_down"></McSvgIcon>
+        <McSvgIcon name="arrow_drop_down" slot="icon-append" />
       </McButton>
       <McPanel>
         <McButton
