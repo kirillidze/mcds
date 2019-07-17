@@ -2,13 +2,17 @@
   <tr class="mc-table-row">
     <slot>
       <McTableCell
-        :checkable="index === 0"
+        :checkable="index === 0 && checkable"
         :size="size"
         :item="cell"
         v-for="(cell, index) in headers"
         :key="cell.key"
       >
-        <McFieldCheckbox v-if="index === 0" :value="isChecked" @input="handleCheckInput" />
+        <McFieldCheckbox
+          v-if="index === 0 && checkable"
+          :value="isChecked"
+          @input="handleCheckInput"
+        />
         <slot :name="cell.key">
           <McTitle :text-align="cell.textAlign || textAlign" tagName="span">
             {{ _get(item, cell.key) }}
