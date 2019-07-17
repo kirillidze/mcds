@@ -5,11 +5,8 @@
 </template>
 
 <script>
-import McHeader from "../patterns/McHeader/McHeader"
-import McMain from "./McMain"
 export default {
   name: "McRoot",
-  components: { McMain, McHeader },
   status: "ready",
   release: "0.0.1",
   computed: {
@@ -19,15 +16,31 @@ export default {
       }
     },
   },
+  beforeMount() {
+    this.runResizeEvents()
+    window.addEventListener("resize", this.runResizeEvents)
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.runResizeEvents)
+  },
+  methods: {
+    runResizeEvents() {
+      this.vhFix()
+    },
+    vhFix() {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty("--vh", `${vh}px`)
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-@import "~normalize.css/normalize";
+@import "../../../node_modules/normalize.css/normalize.css";
 
 // Временные
-@import "~vue-snotify/styles/material";
-@import "~flatpickr/dist/flatpickr";
+@import "../../../node_modules/vue-snotify/styles/material.css";
+@import "../../../node_modules/flatpickr/dist/flatpickr.css";
 
 html {
   box-sizing: border-box;
