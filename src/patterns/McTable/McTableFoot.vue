@@ -78,10 +78,7 @@ export default {
 .mc-table-foot {
   $block-name: &;
 
-  border: 1px solid $color-gray-light;
-
-  .mc-table-cell {
-    border-bottom: none;
-  }
+  border-left: 1px solid $color-gray-light;
+  border-right: 1px solid $color-gray-light;
 }
 </style>

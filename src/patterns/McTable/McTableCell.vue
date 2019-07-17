@@ -111,5 +111,22 @@ th.mc-table-cell {
   right: 0;
   background-color: $color-white;
   z-index: 3;
+  border-bottom: none;
+
+  &::before,
+  &::after {
+    @include position(absolute, 0);
+    @include pseudo();
+    height: 1px;
+    background-color: $color-gray-light;
+  }
+
+  &::before {
+    bottom: auto;
+  }
+
+  &::after {
+    top: auto;
+  }
 }
 </style>
