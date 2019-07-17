@@ -50,13 +50,11 @@ import McTooltip from "../../elements/McTooltip"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McStack from "../../elements/McStackCounter/McStack"
 import McChip from "../../elements/McChip"
-import McTableResponsive from "./McTableResponsive"
 import McFieldText from "../../elements/McField/McFieldText"
 export default {
   name: "McTable",
   components: {
     McFieldText,
-    McTableResponsive,
     McChip,
     McStack,
     McSvgIcon,
@@ -137,6 +135,7 @@ export default {
     classes() {
       return {
         ["mc-table--fixed"]: this.fixed,
+        ["mc-table--loading"]: this.loading,
       }
     },
   },
@@ -293,7 +292,6 @@ export default {
     }
 
   <div>
-    <McTableResponsive>
       <McTable
               :loading="true"
               :headers="headers"
@@ -371,7 +369,6 @@ export default {
           </McGridRow>
         </template>
       </McTable>
-    </McTableResponsive>
   </div>
   ```
 </docs>
