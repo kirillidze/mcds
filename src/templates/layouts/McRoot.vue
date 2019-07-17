@@ -36,11 +36,11 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../node_modules/normalize.css/normalize.css";
+@import "normalize.css/normalize.css";
 
 // Временные
-@import "../../../node_modules/vue-snotify/styles/material.css";
-@import "../../../node_modules/flatpickr/dist/flatpickr.css";
+@import "vue-snotify/styles/material.css";
+@import "flatpickr/dist/flatpickr.css";
 
 html {
   box-sizing: border-box;

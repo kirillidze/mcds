@@ -186,6 +186,7 @@ export default {
       return {
         "mc-field-text--error": this.errorText,
         "mc-field-text--textarea": this.isTextarea,
+        "mc-field-text--textarea-autosize": this.isTextareaAutosize,
         "mc-field-text--date": this.isDate,
         "mc-field-text--disabled": this.disabled,
       }
@@ -364,6 +365,14 @@ export default {
         height: auto;
         min-height: calc(#{$textarea-height} + 2px);
         resize: vertical;
+      }
+    }
+  }
+
+  &--textarea-autosize {
+    #{$block-name} {
+      &__input {
+        height: auto;
       }
     }
   }
