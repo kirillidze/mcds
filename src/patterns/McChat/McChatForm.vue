@@ -1,9 +1,9 @@
 <template>
-  <div class="channel-chat-form">
-    <form @submit.prevent="handleSubmit" class="channel-chat-form__input-wrap">
+  <div class="mc-chat-form">
+    <form @submit.prevent="handleSubmit">
       <McFieldText
-        type="textarea"
-        class="channel-chat-form__input"
+        name="chat-field"
+        type="textarea-autosize"
         @input="handleInput"
         :value="value"
         :errors="errors.content"
@@ -11,20 +11,13 @@
         @keyup.ctrl.enter.native="handleSubmit"
         @keyup.shift.enter.native="handleSubmit"
       >
-        <McAvatar
-          slot="prepend"
-          rounded
-          class="channel-chat-form__avatar"
-          size="xs"
-          :src="avatar"
-        />
+        <McAvatar slot="prepend" rounded size="xs" :src="avatar" />
         <McButton
           variation="primary-link"
           slot="append"
           size="s-compact"
           @click.prevent="handleSubmit"
           :loading="loading"
-          class="channel-chat-form__submit"
           type="submit"
         >
           <McSvgIcon slot="icon-append" name="send" />
@@ -39,6 +32,7 @@ import McAvatar from "../../elements/McAvatar/McAvatar"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
 import McFieldText from "../../elements/McField/McFieldText"
+
 export default {
   name: "McChatForm",
   components: { McFieldText, McButton, McSvgIcon, McAvatar },
@@ -77,6 +71,12 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.mc-chat-form {
+  $block-name: &;
+}
+</style>
 
 <docs>
     ```jsx

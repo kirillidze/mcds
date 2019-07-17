@@ -1,5 +1,8 @@
 <template>
   <div class="mc-chat">
+    <McTitle v-if="!!title" size="s">
+      {{ title }}
+    </McTitle>
     <div class="mc-chat__source" v-if="sources.length">
       <McChatSource :sources="sources" :value="source" @input="handleSourceInput" />
     </div>
@@ -26,14 +29,14 @@
 import McChatForm from "./McChatForm"
 import McChatComment from "./McChatComment"
 import McChatSource from "./McChatSource"
+import McTitle from "../../elements/McTitle"
 
 export default {
   name: "McChat",
-  components: { McChatSource, McChatComment, McChatForm },
+  components: { McTitle, McChatSource, McChatComment, McChatForm },
   props: {
     value: {
       type: String,
-      required: true,
     },
     comments: {
       type: Array,
@@ -95,11 +98,13 @@ export default {
 
 <style lang="scss">
 .mc-chat {
+  $block-name: &;
+
   &__source {
-    margin-bottom: 10px;
+    margin-bottom: $space-xs;
   }
   &__comment {
-    margin-top: 10px;
+    margin-top: $space-xs;
   }
 }
 </style>
@@ -113,9 +118,10 @@ export default {
     ]
     let source = '1';
     let comments = [
-    { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name:
-    'Имя изменившего пользователя' },
-    { content: 'Статус (recruiting): Отмена', date: '2014-12-19 10:22', user_name: 'пользователя Имя ' },
+    { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30',
+    user: { name: 'Имя пользователя', avatar: 'https://lorempixel.com/640/480/?64646' },
+    by_user: { name: 'Имя изменившего пользователя' }, },
+    { content: 'Статус (recruiting): Отмена', date: '2014-12-19 10:22', user: { name: 'пользователя Имя' }, },
     ]
     let input = value => {
     text = value
@@ -124,7 +130,7 @@ export default {
     source = value
     }
     let submit = () => {
-    comments.push({ content: text, date: '2014-12-19 10:22', user_name: 'Тест' })
+    comments.push({ content: text, date: '2014-12-19 10:22', user: { name: 'Тест' }, })
     text = ''
     }
     <div>
