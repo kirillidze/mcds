@@ -15,6 +15,7 @@
 
 <script>
 import VueSlider from "vue-slider-component"
+import "vue-slider-component/theme/default.css"
 
 export default {
   name: "McRangeSlider",
@@ -75,7 +76,6 @@ export default {
 
 <style lang="scss">
 .mc-range-slider {
-  @import "vue-slider-component/theme/default.css";
   $block-name: &;
 
   .vue-slider-dot-tooltip-inner {

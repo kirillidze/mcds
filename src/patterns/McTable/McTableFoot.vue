@@ -4,7 +4,7 @@
       <McTableCell :size="size" :item="headers[0]">
         <template v-if="infinite">
           <template v-if="hasMore">
-            <pacman-loader color="rgb(197, 61, 20)" size="30px" />
+            <McTableLoader />
           </template>
           <template v-else>
             <McTitle :text-align="computedTextAlign" tagName="span">
@@ -28,14 +28,13 @@
 </template>
 
 <script>
-import "vue-loaders/dist/vue-loaders.css"
-import { PacmanLoader } from "vue-loaders"
 import McTableCell from "./McTableCell"
 import McTableRow from "./McTableRow"
 import McTitle from "../../elements/McTitle"
+import McTableLoader from "./McTableLoader"
 export default {
   name: "McTableFoot",
-  components: { McTitle, McTableRow, McTableCell, "pacman-loader": PacmanLoader },
+  components: { McTableLoader, McTitle, McTableRow, McTableCell },
   props: {
     headers: {
       type: [Array, Object],

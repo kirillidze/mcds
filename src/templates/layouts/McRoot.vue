@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import "normalize.css"
+import "normalize.css/normalize.css"
 import "flatpickr/dist/flatpickr.css"
 import "vue-snotify/styles/material.css"
 
