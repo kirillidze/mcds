@@ -45,19 +45,5 @@ export default {
       border-bottom: none;
     }
   }
-
-  .mc-table {
-    &:not(.mc-table--loading):not(.mc-table--compleate) {
-      .mc-table-body {
-        .mc-table-row {
-          &:last-child {
-            .mc-table-cell {
-              border-bottom: none;
-            }
-          }
-        }
-      }
-    }
-  }
 }
 </style>
