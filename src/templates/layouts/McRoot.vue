@@ -5,6 +5,10 @@
 </template>
 
 <script>
+import "normalize.css"
+import "flatpickr/dist/flatpickr.css"
+import "vue-snotify/styles/material.css"
+
 export default {
   name: "McRoot",
   status: "ready",
@@ -36,12 +40,6 @@ export default {
 </script>
 
 <style lang="scss">
-// @import "../../../node_modules/normalize.css";
-
-// Временные
-// @import "../../../node_modules/vue-snotify/styles/material.css";
-// @import "../../../node_modules/flatpickr/dist/flatpickr.css";
-
 html {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
