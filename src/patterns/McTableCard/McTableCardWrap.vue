@@ -1,6 +1,6 @@
 <template>
-  <div class="mc-table-infinity-wrap">
-    <div class="mc-table-infinity-wrap__inner">
+  <div class="mc-table-card-wrap">
+    <div class="mc-table-card-wrap__inner">
       <slot></slot>
     </div>
   </div>
@@ -8,43 +8,19 @@
 
 <script>
 export default {
-  name: "McTableInfinityWrap",
-  computed: {
-    classes() {
-      return {
-        // [`el-logo--type-${this.type}`]: this.type,
-      }
-    },
-  },
+  name: "McTableCardWrap",
+  status: "ready",
+  release: "1.0.0",
 }
 </script>
 
 <style lang="scss">
-.mc-table-infinity-wrap {
+.mc-table-card-wrap {
   $block-name: &;
 
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    transition: background 0.3s;
-  }
-  ::-webkit-scrollbar-track {
-    //background: rgba(0, 0, 0, 0.1);
-    //border: 1px solid #dcdcdc;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: hsl(240, 4%, 91%);
-    border-radius: 2px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #c1c1c1;
-  }
-  ::-webkit-scrollbar-thumb:active {
-  }
-
+  @include position(absolute, 0);
   overflow-y: auto;
   border: 1px solid $color-gray-light;
-  // border-radius: $radius-l;
 
   &__inner {
     border-bottom: 1px solid $color-gray-light;
