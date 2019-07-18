@@ -47,7 +47,7 @@ export default {
   }
 
   .mc-table {
-    &:not(.mc-table--loading) {
+    &:not(.mc-table--loading):not(.mc-table--compleate) {
       .mc-table-body {
         .mc-table-row {
           &:last-child {

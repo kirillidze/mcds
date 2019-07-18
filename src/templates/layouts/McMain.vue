@@ -256,7 +256,7 @@ export default {
           </template>
           <McTableCardWrap>
             <McTable
-                    :loading="true"
+                    :loading="false"
                     :headers="headers"
                     :items="bodyMapped"
                     :infinite="true"

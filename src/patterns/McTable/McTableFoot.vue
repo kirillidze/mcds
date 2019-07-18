@@ -79,5 +79,9 @@ export default {
 
   border-left: 1px solid $color-gray-light;
   border-right: 1px solid $color-gray-light;
+
+  .mc-table-cell {
+    height: $tappable-element-l;
+  }
 }
 </style>

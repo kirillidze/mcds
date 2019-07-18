@@ -136,6 +136,7 @@ export default {
       return {
         ["mc-table--fixed"]: this.fixed,
         ["mc-table--loading"]: this.loading,
+        ["mc-table--compleate"]: !this.hasMore,
       }
     },
   },
