@@ -45,7 +45,8 @@
           :id="name"
           v-on="listeners"
           rows="1"
-          :min-height="34"
+          :min-height="minHeight"
+          :max-height="maxHeight"
           @input="handleInput"
           :value="value"
         ></textarea-autosize>
@@ -167,6 +168,24 @@ export default {
     name: {
       type: String,
       required: true,
+    },
+
+    /**
+     *  Min height
+     *
+     */
+    minHeight: {
+      type: Number,
+      default: null,
+    },
+
+    /**
+     *  Max height
+     *
+     */
+    maxHeight: {
+      type: Number,
+      default: null,
     },
   },
 

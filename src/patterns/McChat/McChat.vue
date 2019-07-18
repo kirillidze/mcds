@@ -77,7 +77,6 @@ export default {
       },
     },
     source: {
-      type: String,
       default: null,
     },
   },
@@ -99,6 +98,8 @@ export default {
 <style lang="scss">
 .mc-chat {
   $block-name: &;
+  padding: $space-xs;
+  border-top: $separator-xs solid $border-color;
 
   &__source {
     margin-bottom: $space-xs;
@@ -135,14 +136,14 @@ export default {
     }
     <div>
         <McChat
-                style="width: 500px"
-                :value="text"
-                @input="input"
-                :comments="comments"
-                @submit="submit"
-                :sources="sources"
-                :source="source"
-                @sourceInput="sourceInput"
+            style="width: 500px"
+            :value="text"
+            @input="input"
+            :comments="comments"
+            @submit="submit"
+            :sources="sources"
+            :source="source"
+            @sourceInput="sourceInput"
         />
     </div>
     ```
