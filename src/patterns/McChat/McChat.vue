@@ -77,7 +77,6 @@ export default {
       },
     },
     source: {
-      type: String,
       default: null,
     },
   },
@@ -137,14 +136,14 @@ export default {
     }
     <div>
         <McChat
-                style="width: 500px"
-                :value="text"
-                @input="input"
-                :comments="comments"
-                @submit="submit"
-                :sources="sources"
-                :source="source"
-                @sourceInput="sourceInput"
+            style="width: 500px"
+            :value="text"
+            @input="input"
+            :comments="comments"
+            @submit="submit"
+            :sources="sources"
+            :source="source"
+            @sourceInput="sourceInput"
         />
     </div>
     ```

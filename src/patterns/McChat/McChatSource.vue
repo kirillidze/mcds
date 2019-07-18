@@ -34,7 +34,6 @@ export default {
   components: { McSvgIcon, McPanel, McButton, McDropdown },
   props: {
     value: {
-      type: String,
       required: true,
     },
     sources: {
@@ -54,7 +53,8 @@ export default {
   },
   methods: {
     handleChange(source) {
-      this.$emit("input", source.value)
+      this.isOpened = false
+      this.$emit("input", source)
     },
   },
 }
