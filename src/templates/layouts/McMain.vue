@@ -1,22 +1,14 @@
 <template>
-  <div class="mc-main" :class="classes">
+  <div class="mc-main">
     <div class="mc-main__inner">
       <div class="mc-main__content">
-        <slot name="header">
-          <div ref="stick" class="mc-main__stick">
-            <slot name="stick"></slot>
-          </div>
-        </slot>
+        <slot name="header" />
         <main class="mc-main__main">
           <slot></slot>
-          <McContainer>
-            <McTableInfinityWrap
-              :style="{ height: `calc(var(--vh, 1vh) * 100 - ${stickyHeight}px)` }"
-            >
-              <slot name="table"></slot>
-            </McTableInfinityWrap>
-          </McContainer>
         </main>
+      </div>
+      <div class="mc-main__footer-wrapper">
+        <slot name="footer" />
       </div>
     </div>
     <slot name="includes" />
@@ -41,13 +33,17 @@ import McChip from "../../elements/McChip"
 import McAvatar from "../../elements/McAvatar/McAvatar"
 import McFieldText from "../../elements/McField/McFieldText"
 import McTopLine from "../McTopLine"
-import McTableInfinityWrap from "../../patterns/McTable/McTableInfinityWrap"
+import McTableCardWrap from "../../patterns/McTableCard/McTableCardWrap"
 import McContainer from "../../patterns/McContainer"
+import McBodyFixed from "../McBodyFixed"
+import McFooter from "../../patterns/McFooter"
 export default {
   name: "McMain",
   components: {
+    McFooter,
+    McBodyFixed,
     McContainer,
-    McTableInfinityWrap,
+    McTableCardWrap,
     McTopLine,
     McFieldText,
     McAvatar,
@@ -68,46 +64,6 @@ export default {
   },
   status: "ready",
   release: "0.0.1",
-  data() {
-    return {
-      stickyHeight: 0,
-    }
-  },
-  props: {
-    calculated: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  computed: {
-    classes() {
-      return {
-        //[`el-logo--type-${this.type}`]: this.type,
-      }
-    },
-  },
-  mounted() {
-    if (this.calculated) {
-      this.setValues()
-      window.addEventListener("resize", this.setValues)
-    }
-  },
-
-  beforeDestroy() {
-    if (this.calculated) {
-      window.removeEventListener("resize", this.setValues)
-    }
-  },
-
-  methods: {
-    setValues() {
-      this.stickyHeight = this.setStickyHeight()
-    },
-
-    setStickyHeight() {
-      return this.$refs.stick.clientHeight
-    },
-  },
 }
 </script>
 
@@ -134,15 +90,11 @@ export default {
     flex-direction: column;
   }
 
-  &__stick {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: $z-index-header;
-  }
-
   &__main {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   &__footer-wrapper {
@@ -264,126 +216,127 @@ export default {
     checkedItems = [...value];
   }
   <div>
-      <McMain calculated>
-        <template slot="stick">
-          <McHeader
-                  v-model="search"
-                  logo-title="Mediacube"
-                  logo-src="/icons/mediacube.svg"
-                  logo-href="javascript:void(0);"
-                  :notifications="notifications"
-                  notifications-text-accept="Принять"
-                  notifications-text-reject="Отклонить"
-                  :menu-additional="menuAdditional"
-                  :menu-main="menuMain"
-                  :menu-apps="menuApps"
-                  :menu-profile="menuProfile"
-                  :menu-langs="menuLangs"
-                  :user="authUser"
-                  :search-items="searchResult"
-                  search-placeholder="Начните вводить"
-                  chatra-id="dzDw7eBbL2ramxx25"
-                  searchable
-                  hasMobileMenu
-                  @search-submit="eventTest('Search submit')"
-                  @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
-                  @click-accept="(id) => eventTest('id: ' + id)"
-                  @click-reject="(id) => eventTest('id: ' + id)"
-          />
-          <McTopLine>
-            <template>
-              <McButton>Фильтр</McButton>
-            </template>
-            <template slot="right">
-              <McButton variation="primary-link">Добавить контракт</McButton>
-              <McTitle tag="p" color="gray-dark">19 контрактов</McTitle>
-            </template>
-          </McTopLine>
-        </template>
-        <McContainer>
-          какаю-нибудь поебень
-        </McContainer>
-        <McTable
-                slot="table"
-                :loading="true"
-                :headers="headers"
-                :items="bodyMapped"
-                :infinite="true"
-                :hasMore="true"
-                :sortable="['views_count', 'language', 'price']"
-                :sorted-by="'language'"
-                :sorted-descending="true"
-                :sorted-default-descending="true"
-                @sort="sort"
-                :checkable="true"
-                :checked-items="checkedItems"
-                @check="check"
-        >
-
-          <template slot="user" slot-scope="row">
-            <McButton href="#" target="_blank" variation="primary-link">
-              Роман Подумеев
-            </McButton>
+      <McMain>
+        <McHeader
+                slot="header"
+                v-model="search"
+                logo-title="Mediacube"
+                logo-src="/icons/mediacube.svg"
+                logo-href="javascript:void(0);"
+                :notifications="notifications"
+                notifications-text-accept="Принять"
+                notifications-text-reject="Отклонить"
+                :menu-additional="menuAdditional"
+                :menu-main="menuMain"
+                :menu-apps="menuApps"
+                :menu-profile="menuProfile"
+                :menu-langs="menuLangs"
+                :user="authUser"
+                :search-items="searchResult"
+                search-placeholder="Начните вводить"
+                chatra-id="dzDw7eBbL2ramxx25"
+                searchable
+                hasMobileMenu
+                @search-submit="eventTest('Search submit')"
+                @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
+                @click-accept="(id) => eventTest('id: ' + id)"
+                @click-reject="(id) => eventTest('id: ' + id)"
+        />
+        <McBodyFixed>
+          <template slot="top">
+            <McTopLine>
+              <template>
+                <McButton>Фильтр</McButton>
+              </template>
+              <template slot="right">
+                <McButton variation="primary-link">Добавить контракт</McButton>
+                <McTitle tag="p" color="gray-dark">19 контрактов</McTitle>
+              </template>
+            </McTopLine>
           </template>
+          <McTableCardWrap>
+            <McTable
+                    :loading="true"
+                    :headers="headers"
+                    :items="bodyMapped"
+                    :infinite="true"
+                    :hasMore="false"
+                    :sortable="['views_count', 'language', 'price']"
+                    :sorted-by="'language'"
+                    :sorted-descending="true"
+                    :sorted-default-descending="true"
+                    @sort="sort"
+                    :checkable="true"
+                    :checked-items="checkedItems"
+                    @check="check"
+            >
 
-          <template slot="title" slot-scope="row">
-            <McPreview>
-              <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
-              <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
-                <McGridCol>
-                  <McTooltip size="s" placement="top" content="Редактировать">
-                    <McButton variation="primary-link" size="s-compact">
-                      <McSvgIcon slot="icon-append" name="create" size="xxs"/>
-                    </McButton>
-                  </McTooltip>
-                </McGridCol>
-                <McGridCol>
-                  <McTooltip size="s" placement="top" content="Копировать">
-                    <McButton variation="primary-link" size="s-compact">
-                      <McSvgIcon slot="icon-append" name="delete" size="xxs"/>
-                    </McButton>
-                  </McTooltip>
-                </McGridCol>
-              </McGridRow>
-              <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
-            </McPreview>
-            <McBage vertical-line variation="success"/>
-          </template>
+              <template slot="user" slot-scope="row">
+                <McButton href="#" target="_blank" variation="primary-link">
+                  Роман Подумеев
+                </McButton>
+              </template>
 
-          <template slot="roles" slot-scope="row">
-            <McStack :limit="1">
-              <McChip variation="gray-darkest-invert">Администратор</McChip>
-              <McChip variation="gray-darkest-invert">Администратор</McChip>
-              <McChip variation="gray-darkest-invert">Администратор</McChip>
-            </McStack>
-          </template>
+              <template slot="title" slot-scope="row">
+                <McPreview>
+                  <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+                  <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
+                    <McGridCol>
+                      <McTooltip size="s" placement="top" content="Редактировать">
+                        <McButton variation="primary-link" size="s-compact">
+                          <McSvgIcon slot="icon-append" name="create" size="xxs"/>
+                        </McButton>
+                      </McTooltip>
+                    </McGridCol>
+                    <McGridCol>
+                      <McTooltip size="s" placement="top" content="Копировать">
+                        <McButton variation="primary-link" size="s-compact">
+                          <McSvgIcon slot="icon-append" name="delete" size="xxs"/>
+                        </McButton>
+                      </McTooltip>
+                    </McGridCol>
+                  </McGridRow>
+                  <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
+                </McPreview>
+                <McBage vertical-line variation="success"/>
+              </template>
 
-          <template slot="channels" slot-scope="row">
-            <McStack :limit="3">
-              <McAvatar rounded lazy size="s"/>
-              <McAvatar rounded lazy size="s"/>
-              <McAvatar rounded lazy size="s"/>
-              <McAvatar rounded lazy size="s"/>
-            </McStack>
-          </template>
+              <template slot="roles" slot-scope="row">
+                <McStack :limit="1">
+                  <McChip variation="gray-darkest-invert">Администратор</McChip>
+                  <McChip variation="gray-darkest-invert">Администратор</McChip>
+                  <McChip variation="gray-darkest-invert">Администратор</McChip>
+                </McStack>
+              </template>
 
-          <template slot="owner" slot-scope="row">
-            <div style="display: flex; align-items: center; height: 100%;">
-              <McFieldText name="test" placeholder="Владелец"/>
-            </div>
-          </template>
+              <template slot="channels" slot-scope="row">
+                <McStack :limit="3">
+                  <McAvatar rounded lazy size="s"/>
+                  <McAvatar rounded lazy size="s"/>
+                  <McAvatar rounded lazy size="s"/>
+                  <McAvatar rounded lazy size="s"/>
+                </McStack>
+              </template>
 
-          <template slot="action" slot-scope="row">
-            <McGridRow justify="right" :wrap="false" align="middle" :gutter-x="5">
-              <McGridCol>
-                <McButton size="s">Выплатить</McButton>
-              </McGridCol>
-              <McGridCol>
-                <McButton variation="danger" size="s">Отменить</McButton>
-              </McGridCol>
-            </McGridRow>
-          </template>
-        </McTable>
+              <template slot="owner" slot-scope="row">
+                <div style="display: flex; align-items: center; height: 100%;">
+                  <McFieldText name="test" placeholder="Владелец"/>
+                </div>
+              </template>
+
+              <template slot="action" slot-scope="row">
+                <McGridRow justify="right" :wrap="false" align="middle" :gutter-x="5">
+                  <McGridCol>
+                    <McButton size="s">Выплатить</McButton>
+                  </McGridCol>
+                  <McGridCol>
+                    <McButton variation="danger" size="s">Отменить</McButton>
+                  </McGridCol>
+                </McGridRow>
+              </template>
+            </McTable>
+          </McTableCardWrap>
+        </McBodyFixed>
       </McMain>
   </div>
   ```
