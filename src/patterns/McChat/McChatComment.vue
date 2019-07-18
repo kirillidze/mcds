@@ -25,7 +25,13 @@
       </McTitle>
     </McCell>
 
-    <McTitle slot="bottom" tag-name="p" size="m" v-html="filteredComment" />
+    <McTitle
+      class="mc-chat-comment__content"
+      slot="bottom"
+      tag-name="p"
+      size="m"
+      v-html="filteredComment"
+    />
   </McPreview>
 </template>
 
@@ -74,9 +80,6 @@ export default {
   $block-name: &;
 
   width: 100%;
-
-  &__avatar {
-  }
 
   &__content {
   }

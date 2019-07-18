@@ -6,6 +6,7 @@
         class="mc-chat-form__input"
         type="textarea-autosize"
         @input="handleInput"
+        :min-height="20"
         :value="value"
         :errors="errors.content"
         :placeholder="placeholder"
@@ -83,6 +84,13 @@ export default {
   .mc-field-text__input {
     border: none;
     padding-bottom: 0;
+    padding-top: $space-s + $space-xxs;
+    outline: none;
+    line-height: line-height(18, 16);
+  }
+
+  &__input {
+    margin-bottom: 0;
   }
 
   &__avatar,
