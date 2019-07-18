@@ -61,7 +61,7 @@ export default {
       this.$emit("input", !this.value)
     },
     handleClickOutside(e) {
-      if (!document.body.contains(e.target)) return
+      if (!this.value || !document.body.contains(e.target)) return
       this.closeDropdown()
     },
     closeDropdown() {
