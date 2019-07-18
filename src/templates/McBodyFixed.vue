@@ -33,6 +33,7 @@ export default {
   flex-direction: column;
   flex-grow: 1;
   overflow-y: auto;
+  background-color: $color-white;
 
   ::-webkit-scrollbar {
     width: 5px;
@@ -70,6 +71,9 @@ export default {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
+    margin-left: $space-s;
+    margin-right: $space-s;
+    margin-bottom: $space-s;
   }
 }
 </style>

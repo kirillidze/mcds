@@ -21,8 +21,8 @@ export default {
 .mc-container {
   $block-name: &;
 
-  padding-left: 16px;
-  padding-right: 16px;
+  padding-left: $space-s;
+  padding-right: $space-s;
 
   background-color: $color-white;
 }
