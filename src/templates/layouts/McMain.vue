@@ -200,7 +200,7 @@ export default {
     country: item.country.name,
     price: item.agency_channels.filter( item => item.type === 2 ).length ? number(_minBy(item.agency_channels.filter( item => item.type === 2 ), 'total').total, 0) + ' $' : null,
   }
-  }).slice(0, 20);
+  }).slice(0, 50);
   let sortBy = 'language';
   let sortDescending = true;
 

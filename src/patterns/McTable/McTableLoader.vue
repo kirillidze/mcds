@@ -41,7 +41,7 @@ export default {
   },
 
   mounted() {
-    this.container = findParentComponent(this, this.containerElement)
+    this.container = this.containerElement ? findParentComponent(this, this.containerElement) : null
     this.handleScroll()
   },
 
@@ -67,6 +67,7 @@ export default {
     handleScroll() {
       let el = this.$refs.el
       let container = this.container
+
       let height = container
         ? this.container.$el.clientHeight
         : window.innerHeight || document.documentElement.clientHeight
@@ -74,12 +75,26 @@ export default {
         ? this.container.$el.clientWidth
         : window.innerWidth || document.documentElement.clientWidth
       if (!el) return
-      let rect = el.getBoundingClientRect()
+
+      let childrenPosition = el.getBoundingClientRect()
+      let parentPosition = container ? container.$el.getBoundingClientRect() : null
+
+      let top = parentPosition ? childrenPosition.top - parentPosition.top : childrenPosition.top
+      let left = parentPosition
+        ? childrenPosition.left - parentPosition.left
+        : childrenPosition.left
+      let right = parentPosition
+        ? childrenPosition.right - parentPosition.right
+        : childrenPosition.right
+      let bottom = parentPosition
+        ? childrenPosition.bottom - parentPosition.bottom
+        : childrenPosition.bottom
+
       this.visible =
-        rect.top >= this.offsetTop &&
-        rect.left >= this.offsetLeft &&
-        rect.bottom - this.offsetBottom <= height &&
-        rect.right - this.offsetRight <= width
+        top >= this.offsetTop &&
+        left >= this.offsetLeft &&
+        bottom - this.offsetBottom <= height &&
+        right - this.offsetRight <= width
     },
 
     handleClick() {
