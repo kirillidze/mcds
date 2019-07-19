@@ -200,7 +200,7 @@ export default {
     country: item.country.name,
     price: item.agency_channels.filter( item => item.type === 2 ).length ? number(_minBy(item.agency_channels.filter( item => item.type === 2 ), 'total').total, 0) + ' $' : null,
   }
-  }).slice(0, 30);
+  }).slice(0, 20);
   let sortBy = 'language';
   let sortDescending = true;
 
@@ -256,11 +256,11 @@ export default {
           </template>
           <McTableCardWrap>
             <McTable
-                    :loading="false"
+                    :loading="true"
                     :headers="headers"
                     :items="bodyMapped"
                     :infinite="true"
-                    :hasMore="false"
+                    :hasMore="true"
                     :sortable="['views_count', 'language', 'price']"
                     :sorted-by="'language'"
                     :sorted-descending="true"
@@ -269,6 +269,7 @@ export default {
                     :checkable="true"
                     :checked-items="checkedItems"
                     @check="check"
+                    container-element="McTableCardWrap"
             >
 
               <template slot="user" slot-scope="row">

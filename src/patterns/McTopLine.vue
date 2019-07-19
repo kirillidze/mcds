@@ -33,9 +33,10 @@ export default {
   padding-bottom: $space-xs;
   padding-left: $space_xxs;
   padding-right: $space_xxs;
+  align-items: center;
+  height: $tappable-element-l + 8px;
 
   &__left,
-  &__center,
   &__right {
     @include layout-flex-fix();
     display: flex;
@@ -49,11 +50,6 @@ export default {
       margin-left: $space-m / 2;
       margin-right: $space-m / 2;
     }
-  }
-
-  &__center {
-    margin-left: auto;
-    margin-right: auto;
   }
 
   &__left {

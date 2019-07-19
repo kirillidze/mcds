@@ -4,7 +4,7 @@
       <McTableCell :size="size" :item="headers[0]">
         <template v-if="infinite">
           <template v-if="hasMore">
-            <McTableLoader />
+            <McTableLoader :container-element="containerElement" @load="handleLoad" />
           </template>
           <template v-else>
             <McTitle :text-align="computedTextAlign" tagName="span">
@@ -64,10 +64,19 @@ export default {
       type: Boolean,
       default: false,
     },
+    containerElement: {
+      default: null,
+    },
   },
   computed: {
     computedTextAlign() {
       return this.headers[0].textAlign || this.textAlign
+    },
+  },
+
+  methods: {
+    handleLoad() {
+      this.$emit("load")
     },
   },
 }

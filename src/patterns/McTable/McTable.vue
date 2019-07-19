@@ -16,6 +16,8 @@
       :headers="headers"
       :infinite="infinite"
       :hasMore="hasMore"
+      :container-element="containerElement"
+      @load="handleLoad"
     />
 
     <McTableBody
@@ -130,6 +132,9 @@ export default {
       type: String,
       default: "m",
     },
+    containerElement: {
+      default: null,
+    },
   },
   computed: {
     classes() {
@@ -158,6 +163,10 @@ export default {
         checkedItems.splice(index, 1)
       }
       this.$emit("check", checkedItems)
+    },
+    handleLoad() {
+      console.log(1)
+      this.$emit("load")
     },
   },
 }
