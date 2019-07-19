@@ -18,6 +18,7 @@
       :hasMore="hasMore"
       :container-element="containerElement"
       @load="handleLoad"
+      :loading="loading"
     />
 
     <McTableBody
@@ -165,7 +166,6 @@ export default {
       this.$emit("check", checkedItems)
     },
     handleLoad() {
-      console.log(1)
       this.$emit("load")
     },
   },

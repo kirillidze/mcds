@@ -58,9 +58,6 @@ export default {
         this.handleScroll()
       }
     },
-    visible(val) {
-      val ? this.handleEnter() : this.handleLeave()
-    },
   },
 
   methods: {
@@ -90,11 +87,13 @@ export default {
         ? childrenPosition.bottom - parentPosition.bottom
         : childrenPosition.bottom
 
-      this.visible =
+      let isVisible =
         top >= this.offsetTop &&
         left >= this.offsetLeft &&
         bottom - this.offsetBottom <= height &&
         right - this.offsetRight <= width
+
+      isVisible ? this.handleEnter() : this.handleLeave()
     },
 
     handleClick() {
