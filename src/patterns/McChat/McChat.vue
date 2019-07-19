@@ -18,7 +18,7 @@
       />
     </div>
     <div class="mc-chat__comments" v-if="comments.length">
-      <div class="mc-chat__comment" v-for="comment in comments" :key="comment.key">
+      <div class="mc-chat__comment" v-for="comment in sortedComments" :key="comment.key">
         <McChatComment :comment="comment" />
       </div>
     </div>
@@ -30,6 +30,9 @@ import McChatForm from "./McChatForm"
 import McChatComment from "./McChatComment"
 import McChatSource from "./McChatSource"
 import McTitle from "../../elements/McTitle"
+
+import _sortBy from "lodash/sortBy"
+import _reverse from "lodash/reverse"
 
 export default {
   name: "McChat",
@@ -81,6 +84,12 @@ export default {
     },
   },
 
+  computed: {
+    sortedComments() {
+      return _reverse(_sortBy(this.comments, this.handleSort))
+    },
+  },
+
   methods: {
     handleInput(value) {
       this.$emit("input", value)
@@ -90,6 +99,9 @@ export default {
     },
     handleSourceInput(value) {
       this.$emit("sourceInput", value)
+    },
+    handleSort(comment) {
+      return this.$moment ? this.$moment(comment.date) : Date.parse(comment.date)
     },
   },
 }
@@ -131,7 +143,7 @@ export default {
     source = value
     }
     let submit = () => {
-    comments.push({ content: text, date: '2014-12-19 10:22', user: { name: 'Тест' }, })
+    comments.push({ content: text, date: new Date().toString(), user: { name: 'Тест' }, })
     text = ''
     }
     <div>
