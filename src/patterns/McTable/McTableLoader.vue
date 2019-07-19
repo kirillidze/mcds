@@ -52,14 +52,6 @@ export default {
     window.removeEventListener("scroll", this.handleScroll)
   },
 
-  watch: {
-    loading(val) {
-      if (!val) {
-        this.handleScroll()
-      }
-    },
-  },
-
   methods: {
     handleScroll() {
       let el = this.$refs.el
