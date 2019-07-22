@@ -37,32 +37,29 @@ export default {
   $block-name: &;
 
   .tabs-component-tabs {
-    margin-top: 0;
-    margin-bottom: 0;
-    list-style: none;
-    border-bottom: 2px solid #e5e5e5;
-    padding: 0 15px;
     display: flex;
     flex-wrap: nowrap;
-    margin-top: -6px;
+    @include margin(-$space-xs null 0);
+    padding: 0 $space-s;
+    list-style: none;
+    border-bottom: $separator-xs solid $color-border;
   }
 
   .tabs-component-tab {
-    font-size: 0;
-    line-height: 0;
+    @include reset-text-indents();
     min-width: 0;
 
     &:first-child {
-      margin-left: -12px;
+      margin-left: -$space-s;
     }
 
     &:last-child {
-      margin-right: -12px;
+      margin-right: -$space-s;
     }
 
     &.is-active {
       .tabs-component-tab-a {
-        color: $black;
+        color: $color-black;
         pointer-events: none;
       }
     }
@@ -73,46 +70,18 @@ export default {
     @include interplay-link();
 
     color: $color-secondary;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: $size-s;
+    font-weight: $weight-medium;
     line-height: line-height(17, 14);
     text-transform: uppercase;
     text-decoration: none;
-    padding: 7px 12px;
+    padding: $space-xs $space-s;
   }
 
   .tabs-component-panels {
   }
 
   .tabs-component-panel {
-  }
-
-  &--type-2 {
-    .tabs-component-tabs {
-      border-radius: 8px;
-      border: 1px solid #cccccc;
-      margin-top: 0;
-    }
-
-    .tabs-component-tab-a {
-      color: hsl(0, 0%, 13%);
-      font-family: $font-family--headings-2;
-      font-size: 16px;
-      line-height: line-height(19, 16);
-      font-weight: 600;
-      text-transform: none;
-      padding: 15px;
-
-      @include interplay-link($color: $color-secondary);
-    }
-
-    .tabs-component-tab {
-      &.is-active {
-        .tabs-component-tab-a {
-          color: $color-third;
-        }
-      }
-    }
   }
 }
 </style>

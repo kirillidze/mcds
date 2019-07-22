@@ -1,23 +1,14 @@
 <template>
   <section class="mc-collapse" :class="classes">
     <div class="mc-collapse__header">
-      <div style="display: flex; width: 100%">
-        <div style="position: relative; line-height: 1;">
-          <slot />
-          <a v-if="!isDisabled" class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
-        </div>
-        <div v-if="$slots.title" style="padding: 0 10px; line-height: 1;">
-          <slot name="title" />
-        </div>
-        <div
-          v-if="!isDisabled"
-          style="position: relative;; line-height: 1; margin-left: auto; flex: 1 1 auto"
-        >
-          <a class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
-          <McSvgIcon class="mc-collapse__icon" :width="30" :height="30" name="arrow_drop_down" />
-        </div>
-      </div>
-      <template> </template>
+      <a
+        v-if="!isDisabled && $slots['body']"
+        class="mc-collapse__link"
+        href="#"
+        @click.prevent="toggle"
+      ></a>
+      <McSvgIcon class="mc-collapse__icon" size="s" name="arrow_drop_down" />
+      <slot />
     </div>
     <slide-up-down
       v-if="!isDisabled"
@@ -25,7 +16,7 @@
       :duration="300"
       class="mc-collapse__body"
     >
-      <slot name="body"></slot>
+      <slot name="body" />
     </slide-up-down>
   </section>
 </template>
@@ -71,7 +62,7 @@ export default {
   watch: {
     isCollapsed(value) {
       this.$emit("toggle", value)
-      this.$emit(value ? "open" : "close")
+      value ? this.$emit("open") : this.$emit("close")
       let $parent = findParentComponent(this, "McAccordion")
       if ($parent) {
         $parent.$emit("toggle", { value, component: this })
@@ -97,29 +88,25 @@ export default {
 .mc-collapse {
   $block-name: &;
 
-  border-radius: 4px;
-  border: 1px solid #b7b7b7;
+  border-radius: $radius-m;
+  border: 1px solid $color-gray-lighten;
 
   &--no-border {
     border: none;
 
     #{$block-name} {
       &__header {
-        padding: 8px 0px;
       }
 
       &__icon {
-        right: 0;
       }
     }
   }
 
   &__header {
-    font-family: $font-heading-secondary;
-    font-size: 16px;
     position: relative;
-    padding: 8px 16px;
-    min-height: 48px;
+    padding: $space-xs $space-s $space-xs $space-l;
+    min-height: $tappable-element-l;
     display: flex;
     align-items: center;
 
@@ -130,31 +117,24 @@ export default {
 
   &__link {
     display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
-    left: 0;
-    bottom: 0;
+    @include position(absolute, 0);
     z-index: 1;
   }
 
   &__icon {
-    width: 30px;
-    height: 30px;
     transition: all $duration-quickly;
     position: absolute;
-    top: 50%;
-    margin-top: -15px;
+    left: $space-xs;
   }
 
   &__body {
     #{$block-name} {
       border: none;
       border-radius: 0;
-      border-bottom: 2px solid $color-gray-lightest;
+      border-bottom: $separator-xs solid $color-gray-lightest;
 
       &__header {
-        padding-left: 75px;
+        padding-left: 80px;
       }
 
       &__icon {
@@ -164,20 +144,20 @@ export default {
       &__body {
         #{$block-name} {
           &__header {
-            padding-left: 105px;
+            padding-left: 112px;
           }
 
           &__body {
           }
 
           &__icon {
-            left: 70px;
+            left: 72px;
           }
         }
       }
 
       &:first-child {
-        border-top: 2px solid $color-gray-lightest;
+        border-top: $separator-xs solid $color-gray-lightest;
       }
 
       &:last-child {
@@ -201,11 +181,9 @@ export default {
   &--is-disabled {
     > #{$block-name} {
       &__header {
-        color: #222222 !important;
+        color: $color-gray-darkest !important;
       }
     }
-
-    //border-bottom: none !important;
   }
 }
 </style>
