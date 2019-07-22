@@ -178,7 +178,18 @@ $colors: $token-colors;
       @include ellipsis();
     }
 
+    &__input {
+      padding-left: 0;
+      padding-top: 2px;
+      margin-bottom: 10px;
+
+      @include input-placeholder() {
+        color: $color-gray-dark;
+      }
+    }
+
     &__select {
+      height: 40px;
       &::before {
         border-color: $color-gray-dark transparent transparent;
       }
