@@ -12,8 +12,12 @@
           :value="isChecked"
           @input="handleCheckInput"
         />
-        <slot :name="cell.key">
+        <slot :name="`cell-${cell.key}`">
           <McTitle :text-align="cell.textAlign || textAlign" tagName="span">
+            <div class="mc-table-cell__link" v-if="$slots.link">
+              <slot name="link"></slot>
+            </div>
+            {{ cell.key }}
             {{ _get(item, cell.key) }}
           </McTitle>
         </slot>

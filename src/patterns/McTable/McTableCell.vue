@@ -58,6 +58,25 @@ export default {
   position: relative;
   background-color: $color-white;
 
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    & > * {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
   &__inner {
     @include layout-flex-fix();
     display: flex;

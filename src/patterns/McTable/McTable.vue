@@ -30,8 +30,11 @@
       :check-by="checkBy"
       @check="handleCheck"
     >
-      <template v-for="header in headers" :slot="header.key" slot-scope="row">
-        <slot :name="header.key" :item="row.item" />
+      <template v-for="header in headers" :slot="`cell-${header.key}`" slot-scope="row">
+        <slot :name="`cell-${header.key}`" :item="row.item" />
+      </template>
+      <template slot="link" slot-scope="row">
+        <slot name="link" :item="row.item" />
       </template>
     </McTableBody>
   </table>
@@ -317,42 +320,45 @@ export default {
               :checked-items="checkedItems"
               @check="check"
       >
-        <template slot="user" slot-scope="row">
+        <template slot="link" slot-scope="row">
+          <a href="/#/Patterns/McCard"></a>
+        </template>
+        <template slot="cell-user" slot-scope="row">
           <McButton href="#" target="_blank" variation="primary-link">
             Роман Подумеев
           </McButton>
         </template>
-        <template slot="title" slot-scope="row">
+        <template slot="cell-title" slot-scope="row">
           <McPreview>
-            <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
-            <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
+            <McAvatarStatus slot="cell-left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+            <McGridRow style="height: 100%" slot="cell-right" :wrap="false" align="middle" :gutter-x="5">
               <McGridCol>
                 <McTooltip size="s" placement="top" content="Редактировать">
                   <McButton variation="primary-link" size="s-compact">
-                    <McSvgIcon slot="icon-append" name="create" size="xxs"/>
+                    <McSvgIcon slot="cell-icon-append" name="create" size="xxs"/>
                   </McButton>
                 </McTooltip>
               </McGridCol>
               <McGridCol>
                 <McTooltip size="s" placement="top" content="Копировать">
                   <McButton variation="primary-link" size="s-compact">
-                    <McSvgIcon slot="icon-append" name="delete" size="xxs"/>
+                    <McSvgIcon slot="cell-icon-append" name="delete" size="xxs"/>
                   </McButton>
                 </McTooltip>
               </McGridCol>
             </McGridRow>
-            <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
+            <McTitle size="m" slot="cell-top">{{ row.item.title }}</McTitle>
           </McPreview>
           <McBage vertical-line variation="success"/>
         </template>
-        <template slot="roles" slot-scope="row">
+        <template slot="cell-roles" slot-scope="row">
           <McStack :limit="1">
             <McChip variation="gray-darkest-invert">Администратор</McChip>
             <McChip variation="gray-darkest-invert">Администратор</McChip>
             <McChip variation="gray-darkest-invert">Администратор</McChip>
           </McStack>
         </template>
-        <template slot="channels" slot-scope="row">
+        <template slot="cell-channels" slot-scope="row">
           <McStack :limit="3">
             <McAvatar rounded lazy size="s"/>
             <McAvatar rounded lazy size="s"/>
@@ -360,15 +366,15 @@ export default {
             <McAvatar rounded lazy size="s"/>
           </McStack>
         </template>
-        <template slot="status" slot-scope="row">
+        <template slot="cell-status" slot-scope="row">
           <McBage variation="danger">Отклонен</McBage>
         </template>
-        <template slot="owner" slot-scope="row">
+        <template slot="cell-owner" slot-scope="row">
           <div style="display: flex; align-items: center; height: 100%;">
             <McFieldText name="test" placeholder="Владелец"/>
           </div>
         </template>
-        <template slot="action" slot-scope="row">
+        <template slot="cell-action" slot-scope="row">
           <McGridRow justify="right" :wrap="false" align="middle" :gutter-x="5">
             <McGridCol>
               <McButton size="s">Выплатить</McButton>
