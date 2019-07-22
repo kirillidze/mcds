@@ -4,7 +4,6 @@
       <McTableCell
         :checkable="index === 0 && checkable"
         :size="size"
-        :item="cell"
         v-for="(cell, index) in headers"
         :key="cell.key"
       >
@@ -88,5 +87,6 @@ export default {
   $block-name: &;
 
   background-color: $color-white;
+  position: relative;
 }
 </style>
