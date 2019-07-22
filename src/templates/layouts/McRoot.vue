@@ -5,11 +5,12 @@
 </template>
 
 <script>
-import McHeader from "../patterns/McHeader/McHeader"
-import McMain from "./McMain"
+import "normalize.css/normalize.css"
+import "flatpickr/dist/flatpickr.css"
+import "vue-snotify/styles/material.css"
+
 export default {
   name: "McRoot",
-  components: { McMain, McHeader },
   status: "ready",
   release: "0.0.1",
   computed: {
@@ -19,16 +20,26 @@ export default {
       }
     },
   },
+  beforeMount() {
+    this.runResizeEvents()
+    window.addEventListener("resize", this.runResizeEvents)
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.runResizeEvents)
+  },
+  methods: {
+    runResizeEvents() {
+      this.vhFix()
+    },
+    vhFix() {
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty("--vh", `${vh}px`)
+    },
+  },
 }
 </script>
 
 <style lang="scss">
-@import "~normalize.css/normalize";
-
-// Временные
-@import "~vue-snotify/styles/material";
-@import "~flatpickr/dist/flatpickr";
-
 html {
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);

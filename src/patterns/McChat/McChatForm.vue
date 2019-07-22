@@ -1,36 +1,33 @@
 <template>
-  <div class="channel-chat-form">
-    <form @submit.prevent="handleSubmit" class="channel-chat-form__input-wrap">
+  <div class="mc-chat-form">
+    <form @submit.prevent="handleSubmit">
       <McFieldText
-        type="textarea"
-        class="channel-chat-form__input"
+        name="chat-field"
+        class="mc-chat-form__input"
+        type="textarea-autosize"
         @input="handleInput"
+        :min-height="20"
         :value="value"
         :errors="errors.content"
         :placeholder="placeholder"
         @keyup.ctrl.enter.native="handleSubmit"
         @keyup.shift.enter.native="handleSubmit"
       >
-        <McAvatar
-          slot="prepend"
-          rounded
-          class="channel-chat-form__avatar"
-          size="xs"
-          :src="avatar"
-        />
+        <McAvatar class="mc-chat-form__avatar" slot="prepend" rounded size="xs" :src="avatar" />
         <McButton
+          class="mc-chat-form__btn"
           variation="primary-link"
           slot="append"
           size="s-compact"
           @click.prevent="handleSubmit"
           :loading="loading"
-          class="channel-chat-form__submit"
           type="submit"
         >
           <McSvgIcon slot="icon-append" name="send" />
         </McButton>
       </McFieldText>
     </form>
+    <McSeparator indent-left="l" />
   </div>
 </template>
 
@@ -39,9 +36,11 @@ import McAvatar from "../../elements/McAvatar/McAvatar"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
 import McFieldText from "../../elements/McField/McFieldText"
+import McSeparator from "../../elements/McSeparator"
+
 export default {
   name: "McChatForm",
-  components: { McFieldText, McButton, McSvgIcon, McAvatar },
+  components: { McSeparator, McFieldText, McButton, McSvgIcon, McAvatar },
   props: {
     value: {
       type: String,
@@ -77,6 +76,29 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.mc-chat-form {
+  $block-name: &;
+
+  .mc-field-text__input {
+    border: none;
+    padding-bottom: 0;
+    padding-top: $space-s + $space-xxs;
+    outline: none;
+    line-height: line-height(18, 16);
+  }
+
+  &__input {
+    margin-bottom: 0;
+  }
+
+  &__avatar,
+  &__btn {
+    align-self: flex-end;
+  }
+}
+</style>
 
 <docs>
     ```jsx

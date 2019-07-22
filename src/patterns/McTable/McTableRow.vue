@@ -1,8 +1,17 @@
 <template>
   <tr class="mc-table-row">
     <slot>
-      <McTableCell :size="size" :item="cell" v-for="(cell, index) in headers" :key="cell.key">
-        <McFieldCheckbox v-if="index === 0" :value="isChecked" @input="handleCheckInput" />
+      <McTableCell
+        :checkable="index === 0 && checkable"
+        :size="size"
+        v-for="(cell, index) in headers"
+        :key="cell.key"
+      >
+        <McFieldCheckbox
+          v-if="index === 0 && checkable"
+          :value="isChecked"
+          @input="handleCheckInput"
+        />
         <slot :name="cell.key">
           <McTitle :text-align="cell.textAlign || textAlign" tagName="span">
             {{ _get(item, cell.key) }}
@@ -20,7 +29,7 @@ import McTitle from "../../elements/McTitle"
 import McFieldCheckbox from "../../elements/McField/McFieldCheckbox"
 export default {
   name: "McTableRow",
-  components: { McTitle, McTableCell },
+  components: { McTitle, McTableCell, McFieldCheckbox },
   props: {
     headers: {
       type: [Array, Object],
@@ -78,5 +87,6 @@ export default {
   $block-name: &;
 
   background-color: $color-white;
+  position: relative;
 }
 </style>

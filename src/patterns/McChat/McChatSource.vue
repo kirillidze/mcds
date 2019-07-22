@@ -3,7 +3,7 @@
     <McDropdown v-model="isOpened">
       <McButton slot="activator" variation="primary-link">
         {{ activeSource.name }}
-        <McSvgIcon name="arrow_drop_down"></McSvgIcon>
+        <McSvgIcon name="arrow_drop_down" slot="icon-append" />
       </McButton>
       <McPanel>
         <McButton
@@ -34,7 +34,6 @@ export default {
   components: { McSvgIcon, McPanel, McButton, McDropdown },
   props: {
     value: {
-      type: String,
       required: true,
     },
     sources: {
@@ -54,7 +53,8 @@ export default {
   },
   methods: {
     handleChange(source) {
-      this.$emit("input", source.value)
+      this.isOpened = false
+      this.$emit("input", source)
     },
   },
 }

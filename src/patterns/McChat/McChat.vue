@@ -1,5 +1,8 @@
 <template>
   <div class="mc-chat">
+    <McTitle v-if="!!title" size="s">
+      {{ title }}
+    </McTitle>
     <div class="mc-chat__source" v-if="sources.length">
       <McChatSource :sources="sources" :value="source" @input="handleSourceInput" />
     </div>
@@ -15,7 +18,7 @@
       />
     </div>
     <div class="mc-chat__comments" v-if="comments.length">
-      <div class="mc-chat__comment" v-for="comment in comments" :key="comment.key">
+      <div class="mc-chat__comment" v-for="comment in sortedComments" :key="comment.key">
         <McChatComment :comment="comment" />
       </div>
     </div>
@@ -26,14 +29,17 @@
 import McChatForm from "./McChatForm"
 import McChatComment from "./McChatComment"
 import McChatSource from "./McChatSource"
+import McTitle from "../../elements/McTitle"
+
+import _sortBy from "lodash/sortBy"
+import _reverse from "lodash/reverse"
 
 export default {
   name: "McChat",
-  components: { McChatSource, McChatComment, McChatForm },
+  components: { McTitle, McChatSource, McChatComment, McChatForm },
   props: {
     value: {
       type: String,
-      required: true,
     },
     comments: {
       type: Array,
@@ -74,8 +80,13 @@ export default {
       },
     },
     source: {
-      type: String,
       default: null,
+    },
+  },
+
+  computed: {
+    sortedComments() {
+      return _reverse(_sortBy(this.comments, this.handleSort))
     },
   },
 
@@ -89,17 +100,24 @@ export default {
     handleSourceInput(value) {
       this.$emit("sourceInput", value)
     },
+    handleSort(comment) {
+      return this.$moment ? this.$moment(comment.date) : Date.parse(comment.date)
+    },
   },
 }
 </script>
 
 <style lang="scss">
 .mc-chat {
+  $block-name: &;
+  padding: $space-xs;
+  border-top: $separator-xs solid $border-color;
+
   &__source {
-    margin-bottom: 10px;
+    margin-bottom: $space-xs;
   }
   &__comment {
-    margin-top: 10px;
+    margin-top: $space-xs;
   }
 }
 </style>
@@ -113,9 +131,10 @@ export default {
     ]
     let source = '1';
     let comments = [
-    { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name:
-    'Имя изменившего пользователя' },
-    { content: 'Статус (recruiting): Отмена', date: '2014-12-19 10:22', user_name: 'пользователя Имя ' },
+    { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30',
+    user: { name: 'Имя пользователя', avatar: 'https://lorempixel.com/640/480/?64646' },
+    by_user: { name: 'Имя изменившего пользователя' }, },
+    { content: 'Статус (recruiting): Отмена', date: '2014-12-19 10:22', user: { name: 'пользователя Имя' }, },
     ]
     let input = value => {
     text = value
@@ -124,19 +143,19 @@ export default {
     source = value
     }
     let submit = () => {
-    comments.push({ content: text, date: '2014-12-19 10:22', user_name: 'Тест' })
+    comments.push({ content: text, date: new Date().toString(), user: { name: 'Тест' }, })
     text = ''
     }
     <div>
         <McChat
-                style="width: 500px"
-                :value="text"
-                @input="input"
-                :comments="comments"
-                @submit="submit"
-                :sources="sources"
-                :source="source"
-                @sourceInput="sourceInput"
+            style="width: 500px"
+            :value="text"
+            @input="input"
+            :comments="comments"
+            @submit="submit"
+            :sources="sources"
+            :source="source"
+            @sourceInput="sourceInput"
         />
     </div>
     ```

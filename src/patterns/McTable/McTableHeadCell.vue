@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     handleClick(item) {
-      this.$emit("click", item)
+      this.isSortable && this.$emit("click", item)
     },
   },
 }

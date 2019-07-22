@@ -1,8 +1,11 @@
 export const findParentComponent = ($component, name) => {
   let $parent = null
   do {
+    if (!$component) {
+      return null
+    }
     let $componentParent = $component.$parent
-    if ($componentParent.$options.name === name) {
+    if ($componentParent && $componentParent.$options.name === name) {
       $parent = $componentParent
     } else {
       $component = $componentParent

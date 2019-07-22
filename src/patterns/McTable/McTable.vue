@@ -16,6 +16,9 @@
       :headers="headers"
       :infinite="infinite"
       :hasMore="hasMore"
+      :container-element="containerElement"
+      @load="handleLoad"
+      :loading="loading"
     />
 
     <McTableBody
@@ -50,13 +53,11 @@ import McTooltip from "../../elements/McTooltip"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McStack from "../../elements/McStackCounter/McStack"
 import McChip from "../../elements/McChip"
-import McTableResponsive from "./McTableResponsive"
 import McFieldText from "../../elements/McField/McFieldText"
 export default {
   name: "McTable",
   components: {
     McFieldText,
-    McTableResponsive,
     McChip,
     McStack,
     McSvgIcon,
@@ -132,11 +133,16 @@ export default {
       type: String,
       default: "m",
     },
+    containerElement: {
+      default: null,
+    },
   },
   computed: {
     classes() {
       return {
         ["mc-table--fixed"]: this.fixed,
+        ["mc-table--loading"]: this.loading,
+        ["mc-table--compleate"]: !this.hasMore,
       }
     },
   },
@@ -158,6 +164,9 @@ export default {
         checkedItems.splice(index, 1)
       }
       this.$emit("check", checkedItems)
+    },
+    handleLoad() {
+      this.$emit("load")
     },
   },
 }
@@ -242,6 +251,11 @@ export default {
       title: 'Страна ауд.',
     },
     {
+      key: 'status',
+      title: 'Статус',
+      textAlign: 'left'
+    },
+    {
       key: 'price',
       title: 'Цена интегр.',
     },
@@ -288,7 +302,6 @@ export default {
     }
 
   <div>
-    <McTableResponsive>
       <McTable
               :loading="true"
               :headers="headers"
@@ -311,7 +324,7 @@ export default {
         </template>
         <template slot="title" slot-scope="row">
           <McPreview>
-            <McAvatarStatus border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+            <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
             <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
               <McGridCol>
                 <McTooltip size="s" placement="top" content="Редактировать">
@@ -347,6 +360,9 @@ export default {
             <McAvatar rounded lazy size="s"/>
           </McStack>
         </template>
+        <template slot="status" slot-scope="row">
+          <McBage variation="danger">Отклонен</McBage>
+        </template>
         <template slot="owner" slot-scope="row">
           <div style="display: flex; align-items: center; height: 100%;">
             <McFieldText name="test" placeholder="Владелец"/>
@@ -363,7 +379,6 @@ export default {
           </McGridRow>
         </template>
       </McTable>
-    </McTableResponsive>
   </div>
   ```
 </docs>

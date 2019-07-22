@@ -61,6 +61,7 @@ export default {
 .mc-table-body {
   $block-name: &;
 
-  border: 1px solid $color-gray-light;
+  border-left: 1px solid $color-gray-light;
+  border-right: 1px solid $color-gray-light;
 }
 </style>
