@@ -1,9 +1,8 @@
 <template>
   <component :is="tag" class="mc-table-cell" :style="styles" :class="classes">
-    <div v-if="checkable" class="mc-table-cell__inner">
+    <div class="mc-table-cell__inner">
       <slot></slot>
     </div>
-    <slot v-else></slot>
   </component>
 </template>
 
@@ -59,6 +58,12 @@ export default {
   position: relative;
   background-color: $color-white;
 
+  &__inner {
+    @include layout-flex-fix();
+    display: flex;
+    align-items: center;
+  }
+
   &:first-child {
     // position: sticky;
     // left: 0;
@@ -72,6 +77,12 @@ export default {
   &:not(#{$block-name}) {
     &--height-fixed {
       height: auto;
+    }
+  }
+
+  .mc-field-text {
+    &__footer {
+      display: none;
     }
   }
 
