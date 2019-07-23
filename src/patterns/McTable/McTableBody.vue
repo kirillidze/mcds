@@ -11,7 +11,13 @@
       :check-by="checkBy"
       @check="value => handleCheck(item, value)"
     >
-      <slot v-for="header in headers" :name="header.key" :slot="header.key" :item="item" />
+      <slot
+        v-for="header in headers"
+        :name="`cell-${header.key}`"
+        :slot="`cell-${header.key}`"
+        :item="item"
+      />
+      <slot name="link" slot="link" :item="item" />
     </McTableRow>
   </tbody>
 </template>
