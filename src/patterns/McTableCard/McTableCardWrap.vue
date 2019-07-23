@@ -1,5 +1,6 @@
 <template>
   <div class="mc-table-card-wrap">
+    <slot name="card"></slot>
     <div class="mc-table-card-wrap__inner">
       <slot></slot>
     </div>
