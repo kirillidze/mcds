@@ -41,11 +41,14 @@ export default {
     },
 
     tagBind() {
-      return {
-        target: this.target,
-        to: this.to,
-        href: this.href,
+      const result = {}
+      if (this.to) {
+        result.to = this.to
+      } else if (this.href) {
+        result.href = this.href
       }
+
+      return result
     },
   },
 }

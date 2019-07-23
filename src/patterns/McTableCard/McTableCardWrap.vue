@@ -23,6 +23,16 @@ export default {
   overflow-y: auto;
   border: 1px solid $color-gray-light;
 
+  > .page-enter-active,
+  > .page-leave-active {
+    transition: opacity $transition-time, transform $transition-time;
+  }
+  > .page-enter,
+  > .page-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+
   &__inner {
     border-bottom: 1px solid $color-gray-light;
     margin-bottom: -1px;
