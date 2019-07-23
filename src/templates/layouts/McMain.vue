@@ -37,9 +37,11 @@ import McTableCardWrap from "../../patterns/McTableCard/McTableCardWrap"
 import McContainer from "../../patterns/McContainer"
 import McBodyFixed from "../McBodyFixed"
 import McFooter from "../../patterns/McFooter"
+import McTableCellLink from "../../patterns/McTable/McTableCellLink"
 export default {
   name: "McMain",
   components: {
+    McTableCellLink,
     McFooter,
     McBodyFixed,
     McContainer,
@@ -255,6 +257,9 @@ export default {
             </McTopLine>
           </template>
           <McTableCardWrap>
+            <template slot="link" slot-scope="row">
+              <McTableCellLink href="/#/Patterns/McCard"/>
+            </template>
             <McTable
                     :loading="true"
                     :headers="headers"
@@ -272,13 +277,13 @@ export default {
                     container-element="McTableCardWrap"
             >
 
-              <template slot="user" slot-scope="row">
+              <template slot="cell-user" slot-scope="row">
                 <McButton href="#" target="_blank" variation="primary-link">
                   Роман Подумеев
                 </McButton>
               </template>
 
-              <template slot="title" slot-scope="row">
+              <template slot="cell-title" slot-scope="row">
                 <McPreview>
                   <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
                   <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
@@ -302,7 +307,7 @@ export default {
                 <McBage vertical-line variation="success"/>
               </template>
 
-              <template slot="roles" slot-scope="row">
+              <template slot="cell-roles" slot-scope="row">
                 <McStack :limit="1">
                   <McChip variation="gray-darkest-invert">Администратор</McChip>
                   <McChip variation="gray-darkest-invert">Администратор</McChip>
@@ -310,7 +315,7 @@ export default {
                 </McStack>
               </template>
 
-              <template slot="channels" slot-scope="row">
+              <template slot="cell-channels" slot-scope="row">
                 <McStack :limit="3">
                   <McAvatar rounded lazy size="s"/>
                   <McAvatar rounded lazy size="s"/>
@@ -319,13 +324,13 @@ export default {
                 </McStack>
               </template>
 
-              <template slot="owner" slot-scope="row">
+              <template slot="cell-owner" slot-scope="row">
                 <div style="display: flex; align-items: center; height: 100%;">
                   <McFieldText name="test" placeholder="Владелец"/>
                 </div>
               </template>
 
-              <template slot="action" slot-scope="row">
+              <template slot="cell-action" slot-scope="row">
                 <McGridRow justify="right" :wrap="false" align="middle" :gutter-x="5">
                   <McGridCol>
                     <McButton size="s">Выплатить</McButton>
