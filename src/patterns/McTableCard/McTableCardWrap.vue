@@ -2,7 +2,9 @@
   <div class="mc-table-card-wrap">
     <slot name="card"></slot>
     <div class="mc-table-card-wrap__inner">
-      <slot></slot>
+      <div class="mc-table-card-wrap__inner-2">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -19,9 +21,10 @@ export default {
 .mc-table-card-wrap {
   $block-name: &;
 
-  @include position(absolute, 0);
-  overflow-y: auto;
-  border: 1px solid $color-gray-light;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 
   > .page-enter-active,
   > .page-leave-active {
@@ -34,6 +37,12 @@ export default {
   }
 
   &__inner {
+    @include position(absolute, 0);
+    overflow-y: auto;
+    border: 1px solid $color-gray-light;
+  }
+
+  &__inner-2 {
     border-bottom: 1px solid $color-gray-light;
     margin-bottom: -1px;
   }

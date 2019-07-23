@@ -22,6 +22,5 @@ export default {
   $block-name: &;
 
   @include position(absolute, 0);
-  overflow-y: auto;
 }
 </style>
