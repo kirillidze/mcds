@@ -1,13 +1,10 @@
 <template>
   <section class="mc-collapse" :class="classes">
     <div class="mc-collapse__header">
-      <a
-        v-if="!isDisabled && $slots['body']"
-        class="mc-collapse__link"
-        href="#"
-        @click.prevent="toggle"
-      ></a>
-      <McSvgIcon class="mc-collapse__icon" size="s" name="arrow_drop_down" />
+      <template v-if="!isDisabled && $slots['body']">
+        <a class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
+        <McSvgIcon class="mc-collapse__icon" size="s" name="arrow_drop_down" />
+      </template>
       <slot />
     </div>
     <slide-up-down

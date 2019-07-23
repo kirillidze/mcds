@@ -165,6 +165,7 @@ $colors: $token-colors;
 .mc-field-select {
   $block-name: &;
 
+  @include custom-scroll();
   font-family: $font-heading;
 
   .multiselect {
@@ -176,9 +177,27 @@ $colors: $token-colors;
 
     &__single {
       @include ellipsis();
+      padding-left: 0;
+      padding-top: $space-xxxs;
+      margin-bottom: $space_xs + 2;
+
+      @include input-placeholder() {
+        color: $color-gray-dark;
+      }
+    }
+
+    &__input {
+      padding-left: 0;
+      padding-top: $space-xxxs;
+      margin-bottom: $space_xs + 2;
+
+      @include input-placeholder() {
+        color: $color-gray-dark;
+      }
     }
 
     &__select {
+      height: $tappable-element-m;
       &::before {
         border-color: $color-gray-dark transparent transparent;
       }
@@ -187,7 +206,15 @@ $colors: $token-colors;
     &__tags {
       border: 1px solid $color-gray-lighter;
       border-radius: $radius-m !important;
-      padding: 8px 40px 0 $space-s;
+      padding: $space-xs $tappable-element-m 0 $space-s;
+    }
+
+    &__tag {
+      margin-top: $space-xxxs - 1;
+    }
+
+    &__content {
+      padding: $space-xs;
     }
 
     &__content-wrapper {
@@ -195,6 +222,27 @@ $colors: $token-colors;
       border: none;
       border-radius: $radius-l;
       box-shadow: $shadow-l;
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    &__element {
+    }
+
+    &__option {
+      min-height: $tappable-element-l;
+      display: flex;
+      align-items: center;
+      border-radius: $radius-m;
+      padding: $space-xs;
+
+      span {
+      }
+
+      &--highlight {
+        background-color: $color-gray-lightest;
+        color: $color-text;
+      }
     }
 
     &--active {

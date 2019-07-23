@@ -326,7 +326,7 @@ export default {
     display: inline-block;
     vertical-align: middle;
     width: 100%;
-    min-height: $tappable-element-m;
+    min-height: $tappable-element-m + 2px;
     margin: 0;
     border: 1px solid $color-gray-lighter;
     border-radius: $radius-m;
