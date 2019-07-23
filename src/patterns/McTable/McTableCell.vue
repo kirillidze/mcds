@@ -56,26 +56,6 @@ export default {
   border-bottom: 1px solid $color-gray-light;
   vertical-align: middle;
   position: relative;
-  background-color: $color-white;
-
-  &__link {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    height: 100%;
-    width: 100%;
-    & > * {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      height: 100%;
-      width: 100%;
-    }
-  }
 
   &__inner {
     @include layout-flex-fix();
@@ -110,6 +90,14 @@ export default {
     top: 0;
     bottom: 0;
     right: 0;
+  }
+
+  .mc-field-checkbox,
+  .mc-button,
+  .mc-field-text,
+  .mc-button {
+    position: relative;
+    z-index: 2;
   }
 
   &--checkable {

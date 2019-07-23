@@ -61,6 +61,7 @@ export default {
 .mc-stack {
   $block-name: &;
 
+  position: relative;
   @include reset-text-indents();
   display: flex;
   align-items: center;

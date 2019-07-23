@@ -57,9 +57,11 @@ import McSvgIcon from "../../elements/McSvgIcon"
 import McStack from "../../elements/McStackCounter/McStack"
 import McChip from "../../elements/McChip"
 import McFieldText from "../../elements/McField/McFieldText"
+import McTableCellLink from "./McTableCellLink"
 export default {
   name: "McTable",
   components: {
+    McTableCellLink,
     McFieldText,
     McChip,
     McStack,
@@ -321,7 +323,7 @@ export default {
               @check="check"
       >
         <template slot="link" slot-scope="row">
-          <a href="/#/Patterns/McCard"></a>
+          <McTableCellLink href="/#/Patterns/McCard"/>
         </template>
         <template slot="cell-user" slot-scope="row">
           <McButton href="#" target="_blank" variation="primary-link">
@@ -330,24 +332,24 @@ export default {
         </template>
         <template slot="cell-title" slot-scope="row">
           <McPreview>
-            <McAvatarStatus slot="cell-left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+            <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
             <McGridRow style="height: 100%" slot="cell-right" :wrap="false" align="middle" :gutter-x="5">
               <McGridCol>
                 <McTooltip size="s" placement="top" content="Редактировать">
                   <McButton variation="primary-link" size="s-compact">
-                    <McSvgIcon slot="cell-icon-append" name="create" size="xxs"/>
+                    <McSvgIcon slot="icon-append" name="create" size="xxs"/>
                   </McButton>
                 </McTooltip>
               </McGridCol>
               <McGridCol>
                 <McTooltip size="s" placement="top" content="Копировать">
                   <McButton variation="primary-link" size="s-compact">
-                    <McSvgIcon slot="cell-icon-append" name="delete" size="xxs"/>
+                    <McSvgIcon slot="icon-append" name="delete" size="xxs"/>
                   </McButton>
                 </McTooltip>
               </McGridCol>
             </McGridRow>
-            <McTitle size="m" slot="cell-top">{{ row.item.title }}</McTitle>
+            <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
           </McPreview>
           <McBage vertical-line variation="success"/>
         </template>

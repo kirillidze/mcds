@@ -1,12 +1,14 @@
 <template>
-  <tr class="mc-table-row">
+  <tr class="mc-table-row" :class="classes">
     <slot>
       <McTableCell
         :checkable="index === 0 && checkable"
         :size="size"
         v-for="(cell, index) in headers"
         :key="cell.key"
+        :item="cell"
       >
+        <slot name="link" v-if="$slots.link"></slot>
         <McFieldCheckbox
           v-if="index === 0 && checkable"
           :value="isChecked"
@@ -14,10 +16,6 @@
         />
         <slot :name="`cell-${cell.key}`">
           <McTitle :text-align="cell.textAlign || textAlign" tagName="span">
-            <div class="mc-table-cell__link" v-if="$slots.link">
-              <slot name="link"></slot>
-            </div>
-            {{ cell.key }}
             {{ _get(item, cell.key) }}
           </McTitle>
         </slot>
@@ -74,6 +72,11 @@ export default {
     isChecked() {
       return !!this.checkedItems.find(i => i[this.checkBy] === this.item[this.checkBy])
     },
+    classes() {
+      return {
+        "mc-table-row--link": this.$slots.link,
+      }
+    },
   },
   methods: {
     _get(...args) {
@@ -92,5 +95,16 @@ export default {
 
   background-color: $color-white;
   position: relative;
+
+  &--link {
+    &:hover,
+    &:focus {
+      background-color: fade-out($gray-darkest, 0.95);
+    }
+
+    &:active {
+      background-color: fade-out($gray-darkest, 0.9);
+    }
+  }
 }
 </style>
