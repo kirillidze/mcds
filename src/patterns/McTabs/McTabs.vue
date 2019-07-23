@@ -3,6 +3,8 @@
     class="mc-tabs"
     :cache-lifetime="cacheLifetime"
     :options="{ useUrlFragment, defaultTabHash }"
+    @changed="e => changedHandler(e)"
+    ref="tabs"
   >
     <slot />
   </tabs>
@@ -10,6 +12,7 @@
 
 <script>
 import Tabs from "vue-tabs-component/src/components/Tabs"
+import McTab from "./McTab"
 
 export default {
   name: "McTabs",
@@ -27,7 +30,16 @@ export default {
     },
   },
   components: {
+    McTab,
     Tabs,
+  },
+  methods: {
+    changedHandler(e) {
+      this.$emit("changed", e)
+    },
+    getActiveTab() {
+      return this.$refs.tabs.getActiveTab()
+    },
   },
 }
 </script>
@@ -88,15 +100,18 @@ export default {
 
 <docs>
     ```jsx
+    function changedHandler(e) {
+        console.log(e.tab.id)
+    }
     <div>
-        <mc-tabs>
-            <mc-tab name="First tab">
+        <mc-tabs @changed="e => changedHandler(e)">
+            <mc-tab name="First tab" id="1">
                 First tab content
             </mc-tab>
-            <mc-tab name="Second tab">
+            <mc-tab name="Second tab" id="2">
                 Second tab content
             </mc-tab>
-            <mc-tab name="Third tab">
+            <mc-tab name="Third tab" id="3">
                 Third tab content
             </mc-tab>
         </mc-tabs>
