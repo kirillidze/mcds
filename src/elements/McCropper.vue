@@ -1,26 +1,23 @@
 <template>
   <section class="mc-cropper">
-    <VueNoSsr>
-      <VueCropper
-        ref="cropper"
-        :aspect-ratio="1 / 1"
-        :initialAspectRatio="1 / 1"
-        :highlight="false"
-        :guides="false"
-        :view-mode="2"
-        drag-mode="crop"
-        :background="true"
-        :src="imgSrc"
-        alt="Avatar"
-      >
-      </VueCropper>
-    </VueNoSsr>
+    <VueCropper
+      ref="cropper"
+      :aspect-ratio="1 / 1"
+      :initialAspectRatio="1 / 1"
+      :highlight="false"
+      :guides="false"
+      :view-mode="2"
+      drag-mode="crop"
+      :background="true"
+      :src="imgSrc"
+      alt="Avatar"
+    >
+    </VueCropper>
   </section>
 </template>
 
 <script>
 import VueCropper from "vue-cropperjs"
-import VueNoSsr from "vue-no-ssr"
 
 export default {
   name: "McCropper",
@@ -28,7 +25,6 @@ export default {
   release: "1.0.0",
   components: {
     VueCropper,
-    VueNoSsr,
   },
   data() {
     return {
