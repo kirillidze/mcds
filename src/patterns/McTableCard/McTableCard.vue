@@ -10,12 +10,15 @@
 </template>
 
 <script>
+import McTableCardHeader from "./McTableCardHeader"
+import McButton from "../../elements/McButton"
 export default {
   name: "McTableCard",
+  components: { McButton, McTableCardHeader },
   props: {
     ml: {
       type: String,
-      default: "252px",
+      default: "251px",
     },
   },
   computed: {
@@ -34,7 +37,7 @@ export default {
 
   @include position(absolute, 0);
   z-index: 10;
-  margin-left: 252px;
+  margin-left: 251px;
   background-color: $color-white;
   border: 1px solid $color-gray-light;
   display: flex;
@@ -51,3 +54,26 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  <div>
+
+    <div style="position: relative; height: 100vh; width: 100%">
+      <McTableCard>
+        <McTableCardHeader slot="header">
+          <template>
+            <McButton uppercase variation="primary-link">Назад</McButton>
+          </template>
+          <template slot="right">
+            <McButton uppercase variation="primary-link">Запросить владельца</McButton>
+            <McButton uppercase variation="primary-link">Запросить данные AI</McButton>
+            <McButton uppercase variation="primary-link">Редактировать</McButton>
+          </template>
+        </McTableCardHeader>
+      </McTableCard>
+    </div>
+
+  </div>
+  ```
+</docs>

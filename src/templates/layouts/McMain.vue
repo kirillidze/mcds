@@ -258,7 +258,7 @@ export default {
           </template>
           <McTableCardWrap>
             <template slot="link" slot-scope="row">
-              <McTableCellLink href="/#/Patterns/McCard"/>
+              <McTableCellLink href="/#/Patterns/McTableCard"/>
             </template>
             <McTable
                     :loading="true"
