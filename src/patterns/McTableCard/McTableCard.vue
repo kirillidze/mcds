@@ -1,6 +1,6 @@
 <template>
-  <div class="mc-table-card">
-    <div class="mc-table-card__header" :style="{ marginLeft: ml + 'px' }">
+  <div class="mc-table-card" :style="{ marginLeft: ml + 'px' }">
+    <div class="mc-table-card__header">
       <slot name="header"></slot>
     </div>
     <div class="mc-table-card__body">
