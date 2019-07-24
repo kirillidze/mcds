@@ -1,5 +1,5 @@
 <template>
-  <div class="mc-table-card" :style="{ marginLeft: ml + 'px' }">
+  <div class="mc-table-card" :style="{ marginLeft: ml }">
     <div class="mc-table-card__header">
       <slot name="header"></slot>
     </div>
@@ -14,8 +14,8 @@ export default {
   name: "McTableCard",
   props: {
     ml: {
-      type: Number,
-      default: 252,
+      type: String,
+      default: "252px",
     },
   },
   computed: {
