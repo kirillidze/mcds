@@ -11,10 +11,11 @@
 
 <script>
 import McTableCardHeader from "./McTableCardHeader"
+import McTableCardBody from "./McTableCardBody"
 import McButton from "../../elements/McButton"
 export default {
   name: "McTableCard",
-  components: { McButton, McTableCardHeader },
+  components: { McButton, McTableCardHeader, McTableCardBody },
   props: {
     ml: {
       type: String,
@@ -50,7 +51,10 @@ export default {
   }
 
   &__body {
+    position: relative;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
   }
 }
 </style>
@@ -71,6 +75,14 @@ export default {
             <McButton uppercase variation="primary-link">Редактировать</McButton>
           </template>
         </McTableCardHeader>
+        <McTableCardBody>
+          <template slot="left">
+            left
+          </template>
+          <template slot="right">
+            right
+          </template>
+        </McTableCardBody>
       </McTableCard>
     </div>
 
