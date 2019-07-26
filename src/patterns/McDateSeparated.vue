@@ -33,7 +33,7 @@
 <script>
 import _capitalize from "lodash/capitalize"
 
-import McFieldSelect from "../elements/McField/McFieldSelectOld"
+import McFieldSelect from "../elements/McField/McFieldSelect"
 
 export default {
   name: "McDateSeparated",
@@ -199,7 +199,7 @@ export default {
     ```jsx
     let test = {}
     <div>
-        <McDateSeparated v-model="test" :placeholder="'test'" open-direction="above"/>
+        <McDateSeparated v-model="test" :placeholder="'test'"/>
     </div>
     ```
 </docs>

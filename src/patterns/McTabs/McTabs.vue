@@ -28,6 +28,18 @@ export default {
     defaultTabHash: {
       default: null,
     },
+    size: {
+      type: String,
+      default: "m",
+    },
+    color: {
+      type: String,
+      default: "primary",
+    },
+    uppercase: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     McTab,
@@ -49,51 +61,72 @@ export default {
   $block-name: &;
 
   .tabs-component-tabs {
+    @include reset-text-indents();
+    position: relative;
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
     display: flex;
     flex-wrap: nowrap;
-    @include margin(-$space-xs null 0);
-    padding: 0 $space-s;
-    list-style: none;
-    border-bottom: $separator-xs solid $color-border;
+    overflow-x: auto;
+
+    &:after {
+      @include position(absolute, null 0 0 0);
+      @include pseudo();
+      height: 1px;
+      background-color: $color-gray-light;
+    }
   }
 
   .tabs-component-tab {
-    @include reset-text-indents();
-    min-width: 0;
-
-    &:first-child {
-      margin-left: -$space-s;
-    }
-
-    &:last-child {
-      margin-right: -$space-s;
-    }
-
+    position: relative;
+    flex: 0 0 auto;
     &.is-active {
       .tabs-component-tab-a {
-        color: $color-black;
-        pointer-events: none;
+        &::after {
+          left: 0;
+          right: 0;
+          opacity: 1;
+        }
       }
     }
   }
 
   .tabs-component-tab-a {
-    @include ellipsis();
-    @include interplay-link();
-
-    color: $color-secondary;
-    font-size: $size-s;
+    display: inline-flex;
+    color: $color-text;
+    font-family: $font-heading;
+    font-size: $size-m;
+    line-height: $line-height-s;
     font-weight: $weight-medium;
-    line-height: line-height(17, 14);
-    text-transform: uppercase;
     text-decoration: none;
-    padding: $space-xs $space-s;
+    padding: $space-xs;
+
+    &:after {
+      opacity: 0;
+      position: absolute;
+      left: 50%;
+      right: 50%;
+      bottom: 0;
+      height: 2px;
+      content: "";
+      display: block;
+      z-index: 1;
+      background-color: $color-primary;
+      transition: left 0.2s ease, right 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+    }
   }
 
   .tabs-component-panels {
   }
 
   .tabs-component-panel {
+  }
+
+  &--size-m {
+  }
+  &--color-primary {
   }
 }
 </style>
@@ -113,6 +146,33 @@ export default {
             </mc-tab>
             <mc-tab name="Third tab" id="3">
                 Third tab content
+            </mc-tab>
+            <mc-tab name="Third tab" id="4">
+                4
+            </mc-tab>
+            <mc-tab name="Third tab" id="5">
+                5
+            </mc-tab>
+            <mc-tab name="Third tab" id="6">
+                6
+            </mc-tab>
+            <mc-tab name="Third tab" id="7">
+                7
+            </mc-tab>
+            <mc-tab name="Third tab" id="8">
+                8
+            </mc-tab>
+            <mc-tab name="Third tab" id="9">
+                9
+            </mc-tab>
+            <mc-tab name="Third tab" id="10">
+                10
+            </mc-tab>
+            <mc-tab name="Third tab" id="11">
+                11
+            </mc-tab>
+            <mc-tab name="Third tab" id="12">
+                12
             </mc-tab>
         </mc-tabs>
     </div>
