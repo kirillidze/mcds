@@ -1,20 +1,19 @@
 <template>
   <article class="mc-table-card-body" :class="classes">
-    <div class="mc-table-card-body__inner" v-if="$slots.default">
-      <slot />
+    <div class="mc-table-card-body__inner">
+      <slot>
+        <div class="mc-table-card-body__left">
+          <div class="mc-table-card-body__inner-col">
+            <slot name="left" />
+          </div>
+        </div>
+        <div class="mc-table-card-body__right">
+          <div class="mc-table-card-body__inner-col">
+            <slot name="right" />
+          </div>
+        </div>
+      </slot>
     </div>
-    <template v-else>
-      <div class="mc-table-card-body__left">
-        <div class="mc-table-card-body__inner">
-          <slot name="left" />
-        </div>
-      </div>
-      <div class="mc-table-card-body__right">
-        <div class="mc-table-card-body__inner">
-          <slot name="right" />
-        </div>
-      </div>
-    </template>
   </article>
 </template>
 
@@ -41,16 +40,25 @@ export default {
 .mc-table-card-body {
   $block-name: &;
 
+  position: relative;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   flex-grow: 1;
+
+  &__inner {
+    @include position(absolute, 0);
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 1;
+    overflow-y: auto;
+  }
 
   &__left,
   &__right {
     position: relative;
   }
 
-  &__inner {
+  &__inner-col {
     @include position(absolute, 0);
     overflow-y: auto;
   }
