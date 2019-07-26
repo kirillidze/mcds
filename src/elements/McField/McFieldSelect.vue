@@ -26,6 +26,24 @@
         @search-change="handleSearchChange"
         :internal-search="internalSearch"
       >
+        <template slot="singleLabel" slot-scope="props">
+          <div v-if="avatar" class="mc-field-select__avatar-wrap">
+            <div class="mc-field-select__avatar">
+              <McAvatar size="xs" :src="avatar" />
+            </div>
+            <div class="mc-field-select__avatar-text">
+              {{ props.option ? props.option.name : this.placeholder }}
+            </div>
+          </div>
+          <template v-else>
+            <div class="mc-field-select__avatar-wrap">
+              <div class="mc-field-select__avatar-text mc-field-select__avatar-text--no-img">
+                {{ props.option ? props.option.name : this.placeholder }}
+              </div>
+            </div>
+          </template>
+        </template>
+        <span slot="noResult">Ничего не найдено</span>
       </multiselect>
     </div>
     <div class="mc-field-select__footer">
@@ -44,9 +62,10 @@
 import Multiselect from "vue-multiselect"
 import "vue-multiselect/dist/vue-multiselect.min.css"
 import McTitle from "../McTitle"
+import McAvatar from "../McAvatar/McAvatar"
 export default {
   name: "McFieldSelect",
-  components: { McTitle, Multiselect },
+  components: { McAvatar, McTitle, Multiselect },
   status: "deprecated",
   release: "1.0.0",
   props: {
@@ -152,6 +171,7 @@ export default {
       return {
         "mc-field-select--error": this.errorText,
         "mc-field-select--disabled": this.disabled,
+        [`mc-field-select--bg-${this.backgroundColor}`]: this.backgroundColor,
       }
     },
     _value() {
@@ -227,6 +247,31 @@ $colors: $token-colors;
     }
   }
 
+  &__avatar-wrap {
+    @include reset-text-indents();
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  &__avatar {
+    position: absolute;
+    left: -$space-xs;
+    top: -$space-xxxs;
+  }
+
+  &__avatar-text {
+    @include ellipsis();
+    font-size: $size-m;
+    line-height: $line-height-s;
+    padding-left: $space-m;
+
+    &--no-img {
+      padding-left: 0;
+    }
+  }
+
   .multiselect {
     &__placeholder {
       @include ellipsis();
@@ -238,10 +283,11 @@ $colors: $token-colors;
     }
 
     &__single {
-      @include ellipsis();
+      // @include ellipsis();
       padding-left: 0;
       margin-bottom: $space-xs;
       padding-top: $space-xs + 1;
+      background-color: transparent;
 
       @include input-placeholder() {
         color: $color-gray-dark;
@@ -316,12 +362,11 @@ $colors: $token-colors;
       }
 
       &::after {
+        @include size($space-xs);
         position: absolute;
         color: #e0eeff;
-        left: 5px;
-        top: -2px;
-        width: 8px;
-        height: 8px;
+        left: $space-xxs + 1;
+        top: -$space-xxxs;
       }
     }
 
@@ -373,6 +418,101 @@ $colors: $token-colors;
     }
   }
 
+  @each $color, $value in $token-colors {
+    &--bg-#{$color} {
+      .multiselect {
+        &__tags {
+          background-color: fade-out($value, 0.6);
+          border-color: transparent;
+        }
+
+        //&__option {
+        //
+        //    &--highlight {
+        //        background-color: fade-out($value, 0.8);
+        //        color: $text-color;
+        //
+        //        &::after {
+        //            background-color: fade-out($value, 0.8);
+        //        }
+        //
+        //        &:active {
+        //            background-color: darken(fade-out($value, 0.6), 7%);
+        //        }
+        //    }
+        //
+        //    &--selected {
+        //        background-color: fade-out($value, 0.7);
+        //        color: $text-color;
+        //        font-weight: 400;
+        //
+        //        &:hover,
+        //        &:focus {
+        //            background-color: darken(fade-out($value, 0.7), 3%);
+        //        }
+        //
+        //        &:active {
+        //            background-color: darken(fade-out($value, 0.7), 7%);
+        //        }
+        //
+        //        &.multiselect {
+        //
+        //            &__option {
+        //
+        //                &--highlight {
+        //                    background-color: fade-out($value, 0.8);
+        //                    color: $text-color;
+        //                    font-weight: 400;
+        //
+        //                    &:hover,
+        //                    &:focus {
+        //                        background-color: darken(fade-out($value, 0.6), 3%);
+        //                    }
+        //
+        //                    &:active {
+        //                        background-color: darken(fade-out($value, 0.6), 7%);
+        //                    }
+        //                }
+        //            }
+        //        }
+        //
+        //    }
+        //}
+
+        &--active {
+          .multiselect {
+            &__tags {
+              border-color: $value;
+            }
+
+            &__select {
+              &:before {
+                border-color: $color-gray-dark transparent transparent;
+              }
+            }
+          }
+        }
+      }
+
+      &#{$block-name}--disabled {
+        .multiselect--disabled {
+          .multiselect {
+            &__tags {
+              border-color: transparent !important;
+              background-color: fade-out($value, 0.6);
+            }
+
+            &__select {
+              &::before {
+                border-color: $color-gray-dark transparent transparent;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
   &--error {
     .multiselect {
       &__tags {
@@ -387,15 +527,15 @@ $colors: $token-colors;
       background: transparent;
       .multiselect {
         &__tags {
-          border-color: hsl(0, 0%, 93%) !important;
-          background-color: hsl(0, 0%, 93%);
+          border-color: $color-gray-lightest !important;
+          background-color: $color-gray-lightest;
         }
 
         &__select {
           background-color: transparent;
 
           &::before {
-            border-color: hsl(0, 0%, 60%) transparent transparent;
+            border-color: $color-gray-light transparent transparent;
           }
         }
       }
@@ -410,6 +550,7 @@ $colors: $token-colors;
   let categoriesModel = []
   let categoriesModel2 = []
   let categoriesModel3 = []
+  let categoriesModel4 = 4
   <div style="max-width: 400px">
     <McFieldSelect
             title="Multiple"
@@ -441,6 +582,15 @@ $colors: $token-colors;
             v-model="categoriesModel3"
             :options="categories.map(c => ({ name: c.title, value: c.id }))"
             placeholder="One"/>
+    <br>
+    <McFieldSelect
+            background-color="dodger-blue-lighten"
+            title="Цветной"
+            avatar="https://yt3.ggpht.com/a/AGF-l79FVckie4j9WT-4cEW6iu3gPd4GivQf_XNSWg=s800-mo-c-c0xffffffff-rj-k-no"
+            v-model="categoriesModel4"
+            :options="categories.map(c => ({ name: c.title, value: c.id }))"
+            :searchable="false"
+    />
   </div>
   ```
 </docs>
