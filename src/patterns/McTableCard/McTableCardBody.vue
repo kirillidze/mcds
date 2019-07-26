@@ -1,15 +1,20 @@
 <template>
   <article class="mc-table-card-body" :class="classes">
-    <div class="mc-table-card-body__left">
-      <div class="mc-table-card-body__inner">
-        <slot name="left"></slot>
-      </div>
+    <div class="mc-table-card-body__inner" v-if="$slots.default">
+      <slot />
     </div>
-    <div class="mc-table-card-body__right">
-      <div class="mc-table-card-body__inner">
-        <slot name="right"></slot>
+    <template v-else>
+      <div class="mc-table-card-body__left">
+        <div class="mc-table-card-body__inner">
+          <slot name="left" />
+        </div>
       </div>
-    </div>
+      <div class="mc-table-card-body__right">
+        <div class="mc-table-card-body__inner">
+          <slot name="right" />
+        </div>
+      </div>
+    </template>
   </article>
 </template>
 
