@@ -32,6 +32,8 @@ export default {
 .mc-get-info {
   $block-name: &;
 
+  margin: 0 !important;
+
   &__text {
     @include ellipsis();
     color: $gray-light;
