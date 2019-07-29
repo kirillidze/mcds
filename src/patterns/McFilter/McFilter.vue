@@ -1,11 +1,13 @@
 <template>
   <div class="mc-filter">
-    <McPanel style="padding: 0; width: 100%; max-width: none; max-height: 500px; overflow-y: auto">
-      <McTitle class="mc-filter__title">
-        <slot name="title">Фильтры</slot>
-      </McTitle>
+    <McPanel class="mc-filter__panel" style="max-width: none;">
+      <div class="mc-filter__header">
+        <McTitle level="4" size="l" class="mc-filter__title">
+          <slot name="title">Фильтры</slot>
+        </McTitle>
+      </div>
       <div class="mc-filter__content">
-        <McTabs>
+        <McTabs class="mc-filter__tabs">
           <McTab name="Все">
             <div class="mc-filter__tab">
               <McAccordion>
@@ -17,7 +19,6 @@
                     :real-value="value[filter.value] || ''"
                     @input="value => handleInput(filter, value)"
                     @submit="submit"
-                    style="margin-bottom: 10px"
                   />
                   <McFilterTypeRelation
                     v-else-if="filter.type === 'relation'"
@@ -30,7 +31,6 @@
                     :t-relation-not-is="tRelationNotIs"
                     :t-relation-exists="tRelationExists"
                     :t-relation-not-exists="tRelationNotExists"
-                    style="margin-bottom: 10px"
                   />
                   <McFilterTypeRange
                     v-else-if="filter.type === 'number' || filter.type === 'date'"
@@ -41,7 +41,6 @@
                     @submit="submit"
                     :t-range-more="tRangeMore"
                     :t-range-less="tRangeLess"
-                    style="margin-bottom: 10px"
                   />
                 </template>
               </McAccordion>
@@ -49,24 +48,21 @@
           </McTab>
           <McTab name="Пресеты">
             <div class="mc-filter__tab" v-for="(preset, index) in presets" :key="index">
-              <div>
-                <McFilterPresetValue
-                  v-for="(presetValue, presetName) in preset"
-                  :key="presetName"
-                  :name="presetName"
-                  :value="presetValue"
-                  :filters="filters"
-                  style="margin-bottom: 10px"
-                  :t-relation-is="tRelationIs"
-                  :t-relation-not-is="tRelationNotIs"
-                  :t-relation-exists="tRelationExists"
-                  :t-relation-not-exists="tRelationNotExists"
-                  :t-range-more="tRangeMore"
-                  :t-range-less="tRangeLess"
-                />
-                <McButton size="s" @click="emitInput(preset)">Применить</McButton>
-                <hr />
-              </div>
+              <McFilterPresetValue
+                v-for="(presetValue, presetName) in preset"
+                :key="presetName"
+                :name="presetName"
+                :value="presetValue"
+                :filters="filters"
+                style="margin-bottom: 10px"
+                :t-relation-is="tRelationIs"
+                :t-relation-not-is="tRelationNotIs"
+                :t-relation-exists="tRelationExists"
+                :t-relation-not-exists="tRelationNotExists"
+                :t-range-more="tRangeMore"
+                :t-range-less="tRangeLess"
+              />
+              <McButton size="s" @click="emitInput(preset)">Применить</McButton>
             </div>
           </McTab>
         </McTabs>
@@ -206,18 +202,15 @@ export default {
 
 <style lang="scss">
 .mc-filter {
-  min-width: 500px;
-
-  &__title {
-    margin: 15px;
+  width: $panel-l;
+  &__header {
+    padding: $space-xs;
   }
 
   &__tab {
-    padding: 15px;
   }
 
   &__footer {
-    padding: 15px;
   }
 }
 </style>
@@ -295,7 +288,6 @@ export default {
             :filters="filters"
             :presets="presets"
             @preset-save="savePreset"
-            style="width: 500px"
             t-relation-is="тест Это"
             t-relation-not-is="тест Это не"
             t-relation-exists="тест Не пустое"

@@ -51,7 +51,6 @@ export default {
       return {
         "mc-collapse--is-open": this.isCollapsed,
         "mc-collapse--is-disabled": this.isDisabled,
-        "mc-collapse--no-border": this.noBorder,
       }
     },
   },
@@ -86,19 +85,6 @@ export default {
   $block-name: &;
 
   border-radius: $radius-m;
-  border: 1px solid $color-gray-lighten;
-
-  &--no-border {
-    border: none;
-
-    #{$block-name} {
-      &__header {
-      }
-
-      &__icon {
-      }
-    }
-  }
 
   &__header {
     position: relative;
