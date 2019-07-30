@@ -2,7 +2,7 @@
   <div class="mc-filter">
     <McPanel class="mc-filter__panel" style="max-width: none;">
       <div class="mc-filter__header">
-        <McTitle level="4" size="l" class="mc-filter__title">
+        <McTitle :level="4" size="l" class="mc-filter__title">
           <slot name="title">Фильтры</slot>
         </McTitle>
       </div>
