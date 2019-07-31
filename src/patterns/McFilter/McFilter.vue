@@ -75,7 +75,7 @@
           <slot name="reset">Сбросить</slot>
         </McButton>
         <McButton :disabled="!canSubmit" @click="submit">
-          <slot name="submit">Применить</slot>
+          <slot name="submit">Применить {{filterDeepCount}}</slot>
         </McButton>
       </div>
     </McPanel>
@@ -159,6 +159,20 @@ export default {
     canSubmit() {
       return !_isEqual(this.value, this.currentValues)
     },
+    
+  filterDeepCount(){
+        const data = Object.values(_cloneDeep(this.currentValues));
+
+        let accum = 0;
+
+         data.forEach(item => {
+             Object.keys(item).forEach(i => {
+                 accum += item[i].length
+             })
+         })
+
+         return accum
+   }
   },
   watch: {
     value: {
@@ -174,6 +188,8 @@ export default {
         ...this.currentValues,
         [filter.value]: _cloneDeep(value),
       }
+      
+      this.currentValues = { ...this.clearEmpty(this.currentValues)}
     },
     reset() {
       this.emitInput({})
