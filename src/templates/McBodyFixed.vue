@@ -64,6 +64,8 @@ export default {
   &__top {
     background-color: $color-white;
     flex-shrink: 0;
+    margin-left: $space-s;
+    margin-right: $space-s;
   }
 
   &__mid {
