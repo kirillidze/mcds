@@ -33,12 +33,20 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * Паддинг топ
+     */
+    padding: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
     classes() {
       return {
         "mc-top-line--bordered": this.border,
+        "mc-top-line--padding": this.padding,
       }
     },
   },
@@ -51,9 +59,8 @@ export default {
 
   position: sticky;
   top: 65px;
-  padding-top: 16px;
   background-color: transparent;
-  z-index: 5;
+  z-index: 20;
 
   &__inner {
     background-color: $color-white;
@@ -89,6 +96,10 @@ export default {
       box-shadow: 0 1px 6px rgba(0, 0, 0, 0.16);
       border-radius: $space-xs;
     }
+  }
+
+  &--padding {
+    padding-top: $space-s;
   }
 }
 </style>
