@@ -4,6 +4,7 @@
       <component :is="tag" :to="item.to" :href="item.href || '#'" class="mc-breadcrumbs__link">
         {{ item.title }}
       </component>
+      <span v-if="index === 0 && info"> </span>
     </li>
   </ol>
 </template>
@@ -12,7 +13,7 @@
 export default {
   name: "McBreadcrumbs",
   status: "ready",
-  release: "1.0.0",
+  release: "1.0.1",
   props: {
     /**
      *  Ссылки
@@ -29,6 +30,14 @@ export default {
     nuxt: {
       type: Boolean,
       default: true,
+    },
+    /**
+     *  Информация о кол-ве
+     *
+     */
+    info: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
