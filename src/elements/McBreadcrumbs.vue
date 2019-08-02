@@ -155,6 +155,7 @@ $line-height: $line-height-s;
     }
 
     &:last-child {
+      pointer-events: auto;
       & .mc-breadcrumbs__link {
         pointer-events: none;
       }
