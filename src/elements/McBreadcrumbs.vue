@@ -82,6 +82,10 @@ export default {
       this.$emit("load-info")
     },
   },
+
+  updated() {
+    console.log(this.item.info)
+  },
 }
 </script>
 
