@@ -1,19 +1,35 @@
 <template>
-  <ol class="mc-breadcrumbs">
+  <ol class="mc-breadcrumbs" :class="classes">
     <li class="mc-breadcrumbs__item" v-for="(item, index) in items" :key="index">
       <component :is="tag" :to="item.to" :href="item.href || '#'" class="mc-breadcrumbs__link">
         {{ item.title }}
       </component>
-      <span v-if="index === 0 && info"> </span>
+      <div v-if="index === 0 && info" class="mc-breadcrumbs__info-wrapper">
+        <McButton
+          v-if="!loadedInfo && items.info === null"
+          variation="primary-link"
+          rounded
+          size="m-compact"
+          :loading="loading"
+          @click="loadInfo"
+        >
+          <McSvgIcon style="flex: 0 0 auto" name="reload" size="xs" />
+        </McButton>
+
+        <span v-else>{{ items.info }}</span>
+      </div>
     </li>
   </ol>
 </template>
 
 <script>
+import McSvgIcon from "./McSvgIcon"
+import McButton from "./McButton"
 export default {
   name: "McBreadcrumbs",
   status: "ready",
   release: "1.0.1",
+  components: { McSvgIcon, McButton },
   props: {
     /**
      *  Ссылки
@@ -32,17 +48,42 @@ export default {
       default: true,
     },
     /**
-     *  Информация о кол-ве
+     *  Показать кнопку запроса о кол-ве
      *
      */
     info: {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Лодер кнопки
+     *
+     */
+    loading: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      loadedInfo: false,
+    }
   },
   computed: {
     tag() {
       return this.nuxt ? "nuxt-link" : "a"
+    },
+    classes() {
+      return {
+        "mc-breadcrumbs--info": this.info,
+      }
+    },
+  },
+
+  methods: {
+    loadInfo() {
+      this.$emit("load-info")
+      this.loadedInfo = true
     },
   },
 }
@@ -63,6 +104,18 @@ $line-height: $line-height-s;
   margin-top: -$gutters;
   margin-bottom: -$gutters;
   margin-left: -$gutters;
+
+  &--info {
+    & #{$block-name}__item {
+      &:first-child {
+        display: flex;
+
+        &::after {
+          bottom: -1px;
+        }
+      }
+    }
+  }
 
   &__item {
     font-size: $font-size;
@@ -100,6 +153,16 @@ $line-height: $line-height-s;
       &::after {
         display: none;
       }
+    }
+  }
+
+  &__info-wrapper {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 5px;
+
+    & .mc-button__text {
+      display: inherit;
     }
   }
 
