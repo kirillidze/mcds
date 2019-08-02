@@ -16,7 +16,7 @@
           <McSvgIcon style="flex: 0 0 auto" name="reload" size="xs" />
         </McButton>
 
-        <span v-else>{{ items.info }}</span>
+        <span v-else>{{ item.info }}</span>
       </div>
     </li>
   </ol>
