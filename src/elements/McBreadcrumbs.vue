@@ -84,6 +84,8 @@ export default {
   },
 
   updated() {
+    console.log(this.item)
+
     console.log(this.item.info)
   },
 }
