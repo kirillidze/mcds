@@ -16,7 +16,7 @@
           <McSvgIcon style="flex: 0 0 auto" name="reload" size="xs" />
         </McButton>
 
-        <span v-else>{{ item.info }}</span>
+        <span v-else class="mc-breadcrumbs__info-total">({{ item.info }})</span>
       </div>
     </li>
   </ol>
@@ -166,6 +166,10 @@ $line-height: $line-height-s;
     & .mc-button__text {
       display: inherit;
     }
+  }
+
+  &__info-total {
+    margin-left: 3px;
   }
 
   &__link {
