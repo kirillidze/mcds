@@ -6,6 +6,7 @@
       </component>
       <div v-if="index === 0 && info" class="mc-breadcrumbs__info-wrapper">
         <McButton
+          v-if="!loadedInfo && item.info === null"
           variation="primary-link"
           rounded
           size="m-compact"
@@ -15,7 +16,7 @@
           <McSvgIcon style="flex: 0 0 auto" name="reload" size="xs" />
         </McButton>
 
-        <span class="123">{{ item.info }}</span>
+        <span v-else>{{ item.info }}</span>
       </div>
     </li>
   </ol>
@@ -85,14 +86,6 @@ export default {
       this.loadedInfo = true
     },
   },
-
-  created() {
-    console.log(this.items)
-  },
-
-  updated() {
-    console.log(this.items)
-  },
 }
 </script>
 
@@ -155,7 +148,6 @@ $line-height: $line-height-s;
     }
 
     &:last-child {
-      pointer-events: auto;
       & .mc-breadcrumbs__link {
         pointer-events: none;
       }
