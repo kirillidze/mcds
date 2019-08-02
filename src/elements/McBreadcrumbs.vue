@@ -5,6 +5,7 @@
         {{ item.title }}
       </component>
       <div v-if="index === 0 && info" class="mc-breadcrumbs__info-wrapper">
+        1
         <McButton
           variation="primary-link"
           rounded
@@ -14,8 +15,10 @@
         >
           <McSvgIcon style="flex: 0 0 auto" name="reload" size="xs" />
         </McButton>
+        2
 
         <span class="123">{{ item.info }}</span>
+        3
       </div>
     </li>
   </ol>
