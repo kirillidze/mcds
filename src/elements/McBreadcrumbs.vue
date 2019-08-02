@@ -86,6 +86,14 @@ export default {
       this.loadedInfo = true
     },
   },
+
+  created() {
+    console.log(this.items)
+  },
+
+  updated() {
+    console.log(this.items)
+  },
 }
 </script>
 
@@ -190,7 +198,7 @@ $line-height: $line-height-s;
 
 <docs>
   ```jsx
-  <McBreadcrumbs active="Dashboard" :nuxt="false" :items="[
+  <McBreadcrumbs active="Dashboard" info :nuxt="false" :items="[
     {title: 'Рейтинг каналов', href: 'javascript:void(0)'},
     {title: 'Ed Sheeran', href: 'javascript:void(0)'},
     {title: 'Владилен', href: 'javascript:void(0)'},
