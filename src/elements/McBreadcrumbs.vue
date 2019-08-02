@@ -6,7 +6,6 @@
       </component>
       <div v-if="index === 0 && info" class="mc-breadcrumbs__info-wrapper">
         <McButton
-          v-if="!loadedInfo"
           variation="primary-link"
           rounded
           size="m-compact"
@@ -16,7 +15,7 @@
           <McSvgIcon style="flex: 0 0 auto" name="reload" size="xs" />
         </McButton>
 
-        <span v-if="item.info !== 0">{{ item.info }}</span>
+        <span class="123">{{ item.info }}</span>
       </div>
     </li>
   </ol>
