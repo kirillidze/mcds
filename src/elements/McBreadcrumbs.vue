@@ -6,7 +6,7 @@
       </component>
       <div v-if="index === 0 && info" class="mc-breadcrumbs__info-wrapper">
         <McButton
-          v-if="!loadedInfo && item.info === null"
+          v-if="item.info === null"
           variation="primary-link"
           rounded
           size="m-compact"
@@ -16,7 +16,9 @@
           <McSvgIcon style="flex: 0 0 auto" name="reload" size="xs" />
         </McButton>
 
-        <span v-else class="mc-breadcrumbs__info-total">({{ item.info }})</span>
+        <span v-else-if="item.info !== null" class="mc-breadcrumbs__info-total"
+          >({{ item.info }})</span
+        >
       </div>
     </li>
   </ol>
@@ -64,11 +66,6 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      loadedInfo: false,
-    }
-  },
   computed: {
     tag() {
       return this.nuxt ? "nuxt-link" : "a"
@@ -83,7 +80,6 @@ export default {
   methods: {
     loadInfo() {
       this.$emit("load-info")
-      this.loadedInfo = true
     },
   },
 }
