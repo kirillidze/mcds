@@ -16,7 +16,9 @@
           <McSvgIcon style="flex: 0 0 auto" name="reload" size="xs" />
         </McButton>
 
-        <span v-else-if="item.info !== null" class="mc-breadcrumbs__info-total"
+        <span
+          v-if="item.info !== undefined && item.info !== null"
+          class="mc-breadcrumbs__info-total"
           >({{ item.info }})</span
         >
       </div>
