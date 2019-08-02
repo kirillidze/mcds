@@ -195,7 +195,7 @@ $line-height: $line-height-s;
 <docs>
   ```jsx
   <McBreadcrumbs active="Dashboard" info :nuxt="false" :items="[
-    {title: 'Рейтинг каналов', href: 'javascript:void(0)'},
+    {title: 'Рейтинг каналов', href: 'javascript:void(0)', info: '12'},
     {title: 'Ed Sheeran', href: 'javascript:void(0)'},
     {title: 'Владилен', href: 'javascript:void(0)'},
   ]"/>
