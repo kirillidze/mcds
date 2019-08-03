@@ -65,11 +65,11 @@ export default {
     position: relative;
     padding-left: 0;
     margin-top: 0;
-    margin-bottom: 0;
     list-style-type: none;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    margin-bottom: $space-m;
 
     &:after {
       @include position(absolute, null 0 0 0);
@@ -82,6 +82,7 @@ export default {
   .tabs-component-tab {
     position: relative;
     flex: 0 0 auto;
+
     &.is-active {
       .tabs-component-tab-a {
         &::after {
@@ -109,7 +110,7 @@ export default {
       left: 50%;
       right: 50%;
       bottom: 0;
-      height: 2px;
+      height: $separator-xs;
       content: "";
       display: block;
       z-index: 1;
@@ -146,33 +147,6 @@ export default {
             </mc-tab>
             <mc-tab name="Third tab" id="3">
                 Third tab content
-            </mc-tab>
-            <mc-tab name="Third tab" id="4">
-                4
-            </mc-tab>
-            <mc-tab name="Third tab" id="5">
-                5
-            </mc-tab>
-            <mc-tab name="Third tab" id="6">
-                6
-            </mc-tab>
-            <mc-tab name="Third tab" id="7">
-                7
-            </mc-tab>
-            <mc-tab name="Third tab" id="8">
-                8
-            </mc-tab>
-            <mc-tab name="Third tab" id="9">
-                9
-            </mc-tab>
-            <mc-tab name="Third tab" id="10">
-                10
-            </mc-tab>
-            <mc-tab name="Third tab" id="11">
-                11
-            </mc-tab>
-            <mc-tab name="Third tab" id="12">
-                12
             </mc-tab>
         </mc-tabs>
     </div>

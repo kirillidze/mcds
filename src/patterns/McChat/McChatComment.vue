@@ -1,13 +1,13 @@
 <template>
   <McPreview class="mc-chat-comment">
-    <McAvatar rounded size="m" :src="comment.user.avatar" slot="left" />
+    <McAvatar rounded size="m" :src="comment.user ? comment.user.avatar : null" slot="left" />
 
     <McCell slot="top">
       <McTitle slot="title" size="xs" uppercase>
         <McGridRow :gutter-x="10" justify="between" align="middle" :wrap="false">
           <McGridCol style="min-width: 30%">
             <McTitle size="xs" uppercase>
-              {{ comment.user.name ? comment.user.name : "Системный комментарий" }}
+              {{ comment.user ? comment.user.name : "Системный комментарий" }}
             </McTitle>
           </McGridCol>
           <McGridCol>

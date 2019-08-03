@@ -86,18 +86,10 @@ export default {
   $block-name: &;
 
   border-radius: $radius-m;
-  border: 1px solid $color-gray-lighten;
+  border: 2px solid $border-color;
 
   &--no-border {
     border: none;
-
-    #{$block-name} {
-      &__header {
-      }
-
-      &__icon {
-      }
-    }
   }
 
   &__header {
