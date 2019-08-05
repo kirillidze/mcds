@@ -148,7 +148,6 @@ $line-height: $line-height-s;
     &:last-child {
       & #{$block-name}__link {
         pointer-events: none;
-        color: blue;
       }
 
       &::after {
