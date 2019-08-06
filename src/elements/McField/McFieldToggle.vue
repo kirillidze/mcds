@@ -67,6 +67,7 @@ export default {
     color: $color-gray-light;
     margin-right: $space-xs;
     transition: color $duration-standart;
+    line-height: $line-height-m;
     &:empty {
       margin-right: 0;
     }
