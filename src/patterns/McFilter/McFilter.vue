@@ -8,7 +8,7 @@
       </div>
       <div class="mc-filter__content">
         <McTabs class="mc-filter__tabs">
-          <McTab name="Все">
+          <McTab :name="tabAll">
             <div class="mc-filter__tab">
               <McAccordion>
                 <template v-for="(filter, _key) in filters">
@@ -49,7 +49,7 @@
               </McAccordion>
             </div>
           </McTab>
-          <McTab name="Пресеты">
+          <McTab :name="tabPresets">
             <div class="mc-filter__tab" v-for="(preset, index) in presets" :key="index">
               <McFilterPresetValue
                 v-for="(presetValue, presetName) in preset"
@@ -78,7 +78,7 @@
           <slot name="reset">Сбросить</slot>
         </McButton>
         <McButton :disabled="!canSubmit" @click="submit">
-          <slot name="submit">Применить {{ filterDeepCount }}</slot>
+          <slot name="submit">Применить </slot> {{ filterDeepCount }}
         </McButton>
       </div>
     </McPanel>
@@ -152,6 +152,14 @@ export default {
       type: String,
       default: "Меньше",
     },
+    tabAll: {
+      type: String,
+      default: "Все",
+    },
+    tabPresets: {
+      type: String,
+      default: "Пресеты",
+    },
   },
   data() {
     return {
@@ -173,6 +181,7 @@ export default {
           accum += item[i].length
         })
       })
+
       return accum
     },
   },
