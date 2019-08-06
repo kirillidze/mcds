@@ -11,9 +11,10 @@
           <McTab name="Все">
             <div class="mc-filter__tab">
               <McAccordion>
-                <template v-for="filter in filters">
+                <template v-for="(filter, _key) in filters">
                   <McFilterTypeText
                     v-if="filter.type === 'text'"
+                    :key="_key"
                     :filter="filter"
                     :value="currentValues[filter.value] || ''"
                     :real-value="value[filter.value] || ''"
@@ -22,6 +23,7 @@
                   />
                   <McFilterTypeRelation
                     v-else-if="filter.type === 'relation'"
+                    :key="_key"
                     :filter="filter"
                     :value="currentValues[filter.value] || {}"
                     :real-value="value[filter.value] || {}"
@@ -34,6 +36,7 @@
                   />
                   <McFilterTypeRange
                     v-else-if="filter.type === 'number' || filter.type === 'date'"
+                    :key="_key"
                     :filter="filter"
                     :value="currentValues[filter.value] || {}"
                     :real-value="value[filter.value] || {}"
@@ -75,7 +78,7 @@
           <slot name="reset">Сбросить</slot>
         </McButton>
         <McButton :disabled="!canSubmit" @click="submit">
-          <slot name="submit">Применить {{filterDeepCount}}</slot>
+          <slot name="submit">Применить {{ filterDeepCount }}</slot>
         </McButton>
       </div>
     </McPanel>
@@ -159,20 +162,19 @@ export default {
     canSubmit() {
       return !_isEqual(this.value, this.currentValues)
     },
-    
-  filterDeepCount(){
-        const data = Object.values(_cloneDeep(this.currentValues));
 
-        let accum = 0;
+    filterDeepCount() {
+      const data = Object.values(_cloneDeep(this.currentValues))
 
-         data.forEach(item => {
-             Object.keys(item).forEach(i => {
-                 accum += item[i].length
-             })
-         })
+      let accum = 0
 
-         return accum
-   }
+      data.forEach(item => {
+        Object.keys(item).forEach(i => {
+          accum += item[i].length
+        })
+      })
+      return accum
+    },
   },
   watch: {
     value: {
@@ -188,8 +190,8 @@ export default {
         ...this.currentValues,
         [filter.value]: _cloneDeep(value),
       }
-      
-      this.currentValues = { ...this.clearEmpty(this.currentValues)}
+
+      this.currentValues = { ...this.clearEmpty(this.currentValues) }
     },
     reset() {
       this.emitInput({})
