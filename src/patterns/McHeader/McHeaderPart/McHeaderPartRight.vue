@@ -68,6 +68,7 @@
               size="l"
               :href="menuProfileItem.href"
               :to="menuProfileItem.to"
+              @click.prevent="menuProfileItem.handler()"
               exact
             >
               <McSvgIcon slot="icon-prepend" :name="menuProfileItem.icon" size="xxs" />
