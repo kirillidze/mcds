@@ -85,6 +85,9 @@ export default {
 
   &__toggler {
     outline: none;
+    .mc-svg-icon {
+      transition: all $duration-quickly;
+    }
   }
 
   &__body {
@@ -98,7 +101,6 @@ export default {
     background-color: transparent;
     opacity: 0;
     visibility: hidden;
-    /*transform: translateY(10px);*/
     transition: opacity $duration-quickly, transform $duration-quickly;
   }
 
@@ -130,6 +132,16 @@ export default {
         transform: translateY(0);
       }
     }
+
+    #{$block-name} {
+      &__toggler {
+        > .mc-button {
+          .mc-svg-icon {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
   }
 
   &--position-right {
@@ -157,7 +169,10 @@ export default {
   let dropIsOpen = false
   <div>
     <McDropdown v-model="dropIsOpen">
-      <McButton slot="activator">Владилен</McButton>
+      <McButton slot="activator">
+        Владилен
+        <McSvgIcon slot="icon-append" name="arrow_drop_down" size="xs"/>
+      </McButton>
       <McPanel>
         <McButton
                 href="#"
