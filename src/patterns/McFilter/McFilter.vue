@@ -11,9 +11,10 @@
           <McTab :name="tabAll">
             <div class="mc-filter__tab">
               <McAccordion>
-                <template v-for="filter in filters">
+                <template v-for="(filter, _key) in filters">
                   <McFilterTypeText
                     v-if="filter.type === 'text'"
+                    :key="_key"
                     :filter="filter"
                     :value="currentValues[filter.value] || ''"
                     :real-value="value[filter.value] || ''"
@@ -22,6 +23,7 @@
                   />
                   <McFilterTypeRelation
                     v-else-if="filter.type === 'relation'"
+                    :key="_key"
                     :filter="filter"
                     :value="currentValues[filter.value] || {}"
                     :real-value="value[filter.value] || {}"
@@ -34,6 +36,7 @@
                   />
                   <McFilterTypeRange
                     v-else-if="filter.type === 'number' || filter.type === 'date'"
+                    :key="_key"
                     :filter="filter"
                     :value="currentValues[filter.value] || {}"
                     :real-value="value[filter.value] || {}"
