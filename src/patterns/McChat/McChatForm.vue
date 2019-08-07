@@ -13,7 +13,7 @@
         @keyup.ctrl.enter.native="handleSubmit"
         @keyup.shift.enter.native="handleSubmit"
       >
-        <McAvatar class="mc-chat-form__avatar" slot="prepend" rounded size="xs" :src="avatar" />
+        <McAvatar class="mc-chat-form__avatar" slot="prepend" rounded size="s" :src="avatar" />
         <McButton
           class="mc-chat-form__btn"
           variation="primary-link"
