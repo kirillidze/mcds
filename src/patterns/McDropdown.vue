@@ -1,6 +1,11 @@
 <template>
   <div class="mc-dropdown" :class="dropdownClasses" v-click-outside="handleClickOutside">
-    <div class="mc-dropdown__toggler" tabindex="0" @keyup.esc="closeDropdown">
+    <div
+      class="mc-dropdown__toggler"
+      :class="togglerClasses"
+      tabindex="0"
+      @keyup.esc="closeDropdown"
+    >
       <slot name="activator" />
     </div>
     <div class="mc-dropdown__body">
@@ -36,6 +41,10 @@ export default {
       type: String,
       default: "bottom",
     },
+    rotateIcon: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
@@ -44,6 +53,11 @@ export default {
         [`mc-dropdown--position-${this.position}`]: this.position,
         [`mc-dropdown--list-position-${this.listPosition}`]: this.listPosition,
         ["mc-dropdown--is-open"]: this.value,
+      }
+    },
+    togglerClasses() {
+      return {
+        ["mc-dropdown__toggler--rotate-icon"]: this.rotateIcon,
       }
     },
     activator() {
@@ -134,7 +148,7 @@ export default {
     }
 
     #{$block-name} {
-      &__toggler {
+      &__toggler--rotate-icon {
         > .mc-button {
           .mc-svg-icon {
             transform: rotate(180deg);
