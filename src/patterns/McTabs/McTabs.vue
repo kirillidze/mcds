@@ -70,13 +70,7 @@ export default {
     flex-wrap: nowrap;
     overflow-x: auto;
     margin-bottom: $space-m;
-
-    &:after {
-      @include position(absolute, null 0 0 0);
-      @include pseudo();
-      height: 1px;
-      background-color: $color-gray-light;
-    }
+    border-bottom: 1px solid $color-gray-light;
   }
 
   .tabs-component-tab {
