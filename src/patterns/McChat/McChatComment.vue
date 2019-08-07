@@ -1,6 +1,12 @@
 <template>
   <McPreview class="mc-chat-comment">
-    <McAvatar rounded size="m" :src="comment.user ? comment.user.avatar : null" slot="left" />
+    <McAvatar
+      class="mc-chat-comment__avatar"
+      rounded
+      size="s"
+      :src="comment.user ? comment.user.avatar : null"
+      slot="left"
+    />
 
     <McCell slot="top">
       <McTitle slot="title" size="xs" uppercase>
@@ -81,7 +87,8 @@ export default {
 
   width: 100%;
 
-  &__content {
+  &__avatar {
+    margin-left: $space-xs;
   }
 }
 </style>
