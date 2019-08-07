@@ -43,6 +43,7 @@ export default {
   border: 1px solid $color-gray-light;
   display: flex;
   flex-direction: column;
+  border-radius: 0 8px 0 0;
 
   &__header {
     height: $tappable-element-l;
