@@ -105,6 +105,12 @@ $dot-colors: $token-colors;
     }
   }
 
+  &--dot-color-transparent {
+    &::after {
+      border: none;
+    }
+  }
+
   &--size-xs {
     &::after {
       bottom: 0;
