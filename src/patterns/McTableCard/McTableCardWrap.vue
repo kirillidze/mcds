@@ -40,6 +40,7 @@ export default {
     @include position(absolute, 0);
     overflow-y: auto;
     border: 1px solid $color-gray-light;
+    border-radius: 8px 8px 0 0;
   }
 
   &__inner-2 {
