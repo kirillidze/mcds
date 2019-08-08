@@ -3,7 +3,7 @@
     <div class="mc-header-part-center__inner">
       <McHeaderNav>
         <McHeaderNavItem v-if="menuAdditional && menuAdditional.length">
-          <McDropdown v-model="menuAdditionalIsOpen">
+          <McDropdown v-model="menuAdditionalIsOpen" :rotate-icon="false">
             <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
               <McSvgIcon slot="icon-append" name="add" />
             </McButton>
@@ -43,7 +43,7 @@
         </McHeaderNavItem>
 
         <McHeaderNavItem v-if="menuHidden && menuHidden.length">
-          <McDropdown position="right" v-model="menuHiddenIsOpen">
+          <McDropdown position="right" v-model="menuHiddenIsOpen" :rotate-icon="false">
             <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
               <McSvgIcon slot="icon-append" name="more_horiz" />
             </McButton>
