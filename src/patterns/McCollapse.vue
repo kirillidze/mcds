@@ -86,7 +86,7 @@ export default {
   $block-name: &;
 
   border-radius: $radius-m;
-  border: 2px solid $border-color;
+  border: 1px solid $border-color;
 
   &--no-border {
     border: none;

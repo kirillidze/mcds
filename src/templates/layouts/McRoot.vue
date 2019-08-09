@@ -626,7 +626,7 @@ pre {
     margin-top: 0;
     margin-bottom: 0;
     list-style: none;
-    border-bottom: 2px solid #e5e5e5;
+    border-bottom: 1px solid $border-color;
     padding: 0 15px;
     display: flex;
     flex-wrap: nowrap;
@@ -708,7 +708,7 @@ pre {
 
   &__item {
     padding: 15px;
-    border-bottom: 2px solid $border-color;
+    border-bottom: 1px solid $border-color;
     overflow: hidden;
 
     &:empty {
@@ -792,7 +792,7 @@ pre {
     flex-wrap: nowrap;
     padding: 15px;
     border-radius: 8px;
-    border: 2px solid $border-color;
+    border: 1px solid $border-color;
     width: calc(25% - 16px);
     margin: 8px;
 
@@ -869,7 +869,7 @@ pre {
   right: 0;
   background-color: #fff;
   z-index: 9999;
-  border-bottom: 2px solid #d9d9d9;
+  border-bottom: 1px solid $border-color;
   height: 31px;
   display: flex;
   flex-wrap: nowrap;

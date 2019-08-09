@@ -431,7 +431,7 @@ export default {
     @include position(absolute, 0);
     @include pseudo();
     top: auto;
-    border-bottom: 2px solid $color-border;
+    border-bottom: 1px solid $color-border;
     margin-left: -$space-s;
     margin-right: -$space-s;
   }
