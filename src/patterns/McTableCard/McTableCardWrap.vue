@@ -44,7 +44,6 @@ export default {
   }
 
   &__inner-2 {
-    border-bottom: 1px solid $color-border;
     margin-bottom: -1px;
   }
 
