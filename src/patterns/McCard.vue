@@ -105,7 +105,7 @@ export default {
   position: relative;
   display: block;
   border-radius: $radius-l;
-  border: 1px solid $border-color;
+  border: 1px solid $color-border;
   background: $color-white;
 
   &__content {
@@ -114,7 +114,7 @@ export default {
 
   &__header {
     padding: $size-m;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $color-border;
   }
 
   &__link {
