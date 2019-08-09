@@ -146,7 +146,7 @@ export default {
       }
 
       &:first-child {
-        border-top: $separator-xs solid $color-border;
+        border-top: 1px solid $color-border;
       }
 
       &:last-child {
