@@ -513,8 +513,8 @@
     "separator_xs": {
       "type": "number",
       "category": "size",
-      "value": "2px",
-      "originalValue": "2px",
+      "value": "1px",
+      "originalValue": "1px",
       "name": "separator_xs"
     },
     "tappable_element_xs": {

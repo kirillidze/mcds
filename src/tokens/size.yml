@@ -34,7 +34,7 @@ props:
     value: "92px"
 
   separator_xs:
-    value: "2px"
+    value: "1px"
 
   panel_xl:
     value: "500px"

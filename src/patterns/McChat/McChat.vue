@@ -111,7 +111,7 @@ export default {
 .mc-chat {
   $block-name: &;
   padding: $space-xs;
-  border-top: $separator-xs solid $color-border;
+  border-top: 1px solid $color-border;
 
   &__source {
     margin-bottom: $space-xs;
