@@ -328,7 +328,7 @@ export default {
     width: 100%;
     min-height: $tappable-element-m;
     margin: 0;
-    border: 1px solid $color-gray-lighter;
+    border: 1px solid $color-border;
     border-radius: $radius-m;
     padding: ($space-s / 2) + 1 $space-s;
     line-height: $line-height-s;

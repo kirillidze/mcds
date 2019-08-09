@@ -95,7 +95,7 @@ export default {
   flex-direction: column;
   text-decoration: none;
   position: relative;
-  border: 1px solid $color-gray-lighter;
+  border: 1px solid $color-border;
   border-radius: $radius-m;
   min-height: $tappable-element-xl;
   padding: $space-m / 2;

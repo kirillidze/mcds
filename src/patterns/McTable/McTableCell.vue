@@ -53,7 +53,7 @@ export default {
   $block-name: &;
 
   @include reset-text-indents();
-  border-bottom: 1px solid $color-gray-light;
+  border-bottom: 1px solid $color-border;
   vertical-align: middle;
   position: relative;
 
@@ -136,7 +136,7 @@ th.mc-table-cell {
     @include position(absolute, 0);
     @include pseudo();
     height: 1px;
-    background-color: $color-gray-light;
+    background-color: $color-border;
   }
 
   &::before {

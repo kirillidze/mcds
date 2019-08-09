@@ -120,7 +120,7 @@ export default {
     #{$block-name} {
       border: none;
       border-radius: 0;
-      border-bottom: $separator-xs solid $color-gray-lightest;
+      border-bottom: $separator-xs solid $color-border;
 
       &__header {
         padding-left: 80px;
@@ -146,7 +146,7 @@ export default {
       }
 
       &:first-child {
-        border-top: $separator-xs solid $color-gray-lightest;
+        border-top: $separator-xs solid $color-border;
       }
 
       &:last-child {

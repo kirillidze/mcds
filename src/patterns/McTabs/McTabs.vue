@@ -70,7 +70,7 @@ export default {
     flex-wrap: nowrap;
     overflow-x: auto;
     margin-bottom: $space-m;
-    border-bottom: 1px solid $color-gray-light;
+    border-bottom: 1px solid $color-border;
   }
 
   .tabs-component-tab {

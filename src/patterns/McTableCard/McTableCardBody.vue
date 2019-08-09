@@ -67,7 +67,7 @@ export default {
     #{$block-name} {
       &__left {
         width: calc(100% - 240px);
-        border-right: 1px solid $color-gray-light;
+        border-right: 1px solid $color-border;
         flex: 1 1 auto;
 
         @media #{$media-query-xxl} {
