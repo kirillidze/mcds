@@ -35,7 +35,7 @@ export default {
       if (!this.item) return
       return {
         width: this.item.width,
-        borderRight: this.item.hasBorder ? `1px solid ${tokens.color_gray_light}` : null,
+        borderRight: this.item.hasBorder ? `1px solid ${tokens.border_color}` : null,
       }
     },
     classes() {
