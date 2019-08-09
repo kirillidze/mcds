@@ -130,11 +130,11 @@ export default {
 
     &:hover,
     &:focus {
-      border-color: darken($border-color, 10%);
+      border-color: darken($color-border, 10%);
     }
 
     &:active {
-      border-color: darken($border-color, 15%);
+      border-color: darken($color-border, 15%);
     }
   }
 }

@@ -70,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss">
-$border-colors: $token-colors;
+$color-borders: $token-colors;
 $dot-colors: $token-colors;
 
 .mc-avatar-status {
@@ -91,7 +91,7 @@ $dot-colors: $token-colors;
     border-radius: 50%;
   }
 
-  @each $color, $value in $border-colors {
+  @each $color, $value in $color-borders {
     &--border-color-#{$color} {
       border-color: $value;
     }
