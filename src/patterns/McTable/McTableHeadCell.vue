@@ -14,7 +14,7 @@
       ></McSvgIcon>
       {{ item.title }}
       <McTooltip v-if="isTooltip" slot="icon-append" :content="tooltipContent">
-        <McSvgIcon slot="icon-append" name="help"></McSvgIcon>
+        <McSvgIcon name="help"></McSvgIcon>
       </McTooltip>
     </McTitle>
   </McTableCell>
