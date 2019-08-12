@@ -68,7 +68,7 @@
               size="l"
               :href="menuProfileItem.href"
               :to="menuProfileItem.to"
-              @click="menuProfileItem.handler() || ''"
+              @click="typeof menuProfileItem.handler === 'function' ? menuProfileItem.handler() : ''"
               exact
             >
               <McSvgIcon slot="icon-prepend" :name="menuProfileItem.icon" size="xxs" />
