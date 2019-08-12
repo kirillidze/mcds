@@ -13,7 +13,7 @@
         :name="!isSorted ? 'unfold_more' : iconName"
       ></McSvgIcon>
       {{ item.title }}
-      <McTooltip v-if="isTooltip" :content="tooltipContent">
+      <McTooltip v-if="isTooltip" slot="icon-append" :content="tooltipContent">
         <McSvgIcon slot="icon-append" name="help"></McSvgIcon>
       </McTooltip>
     </McTitle>
