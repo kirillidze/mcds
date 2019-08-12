@@ -71,7 +71,7 @@ export default {
 
   &__item {
     &:not(:last-child) {
-      border-bottom: 2px solid $color-border;
+      border-bottom: 1px solid $color-border;
       padding-bottom: $space_xs;
       margin-bottom: $space_xs;
     }

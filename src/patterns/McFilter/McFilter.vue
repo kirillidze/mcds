@@ -8,12 +8,13 @@
       </div>
       <div class="mc-filter__content">
         <McTabs class="mc-filter__tabs">
-          <McTab name="Все">
+          <McTab :name="tabAll">
             <div class="mc-filter__tab">
               <McAccordion>
-                <template v-for="filter in filters">
+                <template v-for="(filter, _key) in filters">
                   <McFilterTypeText
                     v-if="filter.type === 'text'"
+                    :key="_key"
                     :filter="filter"
                     :value="currentValues[filter.value] || ''"
                     :real-value="value[filter.value] || ''"
@@ -22,6 +23,7 @@
                   />
                   <McFilterTypeRelation
                     v-else-if="filter.type === 'relation'"
+                    :key="_key"
                     :filter="filter"
                     :value="currentValues[filter.value] || {}"
                     :real-value="value[filter.value] || {}"
@@ -34,6 +36,7 @@
                   />
                   <McFilterTypeRange
                     v-else-if="filter.type === 'number' || filter.type === 'date'"
+                    :key="_key"
                     :filter="filter"
                     :value="currentValues[filter.value] || {}"
                     :real-value="value[filter.value] || {}"
@@ -46,7 +49,7 @@
               </McAccordion>
             </div>
           </McTab>
-          <McTab name="Пресеты">
+          <McTab :name="tabPresets">
             <div class="mc-filter__tab" v-for="(preset, index) in presets" :key="index">
               <McFilterPresetValue
                 v-for="(presetValue, presetName) in preset"
@@ -75,7 +78,11 @@
           <slot name="reset">Сбросить</slot>
         </McButton>
         <McButton :disabled="!canSubmit" @click="submit">
+          <<<<<<< HEAD
           <slot name="submit">Применить {{ filterDeepCount }}</slot>
+          =======
+          <slot name="submit">Применить </slot> {{ filterDeepCount }}
+          >>>>>>> e2555bf6a96a056ee26e6d572d496073c359bf65
         </McButton>
       </div>
     </McPanel>
@@ -148,6 +155,14 @@ export default {
     tRangeLess: {
       type: String,
       default: "Меньше",
+    },
+    tabAll: {
+      type: String,
+      default: "Все",
+    },
+    tabPresets: {
+      type: String,
+      default: "Пресеты",
     },
   },
   data() {

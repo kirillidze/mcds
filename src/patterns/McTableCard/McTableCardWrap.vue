@@ -39,11 +39,12 @@ export default {
   &__inner {
     @include position(absolute, 0);
     overflow-y: auto;
-    border: 1px solid $color-gray-light;
+    border: 1px solid $color-border;
+    border-radius: 8px 8px 0 0;
   }
 
   &__inner-2 {
-    border-bottom: 1px solid $color-gray-light;
+    border-bottom: 1px solid $color-border;
     margin-bottom: -1px;
   }
 

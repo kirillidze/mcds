@@ -1,6 +1,11 @@
 <template>
   <div class="mc-dropdown" :class="dropdownClasses" v-click-outside="handleClickOutside">
-    <div class="mc-dropdown__toggler" tabindex="0" @keyup.esc="closeDropdown">
+    <div
+      class="mc-dropdown__toggler"
+      :class="togglerClasses"
+      tabindex="0"
+      @keyup.esc="closeDropdown"
+    >
       <slot name="activator" />
     </div>
     <div class="mc-dropdown__body">
@@ -32,13 +37,27 @@ export default {
       type: String,
       default: "left",
     },
+    listPosition: {
+      type: String,
+      default: "bottom",
+    },
+    rotateIcon: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
     dropdownClasses() {
       return {
         [`mc-dropdown--position-${this.position}`]: this.position,
+        [`mc-dropdown--list-position-${this.listPosition}`]: this.listPosition,
         ["mc-dropdown--is-open"]: this.value,
+      }
+    },
+    togglerClasses() {
+      return {
+        ["mc-dropdown__toggler--rotate-icon"]: this.rotateIcon,
       }
     },
     activator() {
@@ -80,12 +99,14 @@ export default {
 
   &__toggler {
     outline: none;
+    .mc-svg-icon {
+      transition: all $duration-quickly;
+    }
   }
 
   &__body {
     position: absolute;
     z-index: $z_index_dropdown;
-    top: 100%;
     left: 0;
     height: 0;
     overflow: hidden;
@@ -94,8 +115,25 @@ export default {
     background-color: transparent;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
     transition: opacity $duration-quickly, transform $duration-quickly;
+  }
+
+  &--list-position-top {
+    #{$block-name} {
+      &__body {
+        bottom: 100%;
+        transform: translateY(-10px);
+      }
+    }
+  }
+
+  &--list-position-bottom {
+    #{$block-name} {
+      &__body {
+        top: 100%;
+        transform: translateY(10px);
+      }
+    }
   }
 
   &--is-open {
@@ -106,6 +144,16 @@ export default {
         overflow: visible;
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    #{$block-name} {
+      &__toggler--rotate-icon {
+        > .mc-button {
+          .mc-svg-icon {
+            transform: rotate(180deg);
+          }
+        }
       }
     }
   }
@@ -135,7 +183,10 @@ export default {
   let dropIsOpen = false
   <div>
     <McDropdown v-model="dropIsOpen">
-      <McButton slot="activator">Владилен</McButton>
+      <McButton slot="activator">
+        Владилен
+        <McSvgIcon slot="icon-append" name="arrow_drop_down" size="xs"/>
+      </McButton>
       <McPanel>
         <McButton
                 href="#"

@@ -566,7 +566,7 @@ $colors: $token-colors;
   &--disabled {
     background-color: $color-gray-lighten !important;
     color: $color-white !important;
-    border-color: $color-gray-lighten !important;
+    border-color: $color-border !important;
   }
 }
 </style>

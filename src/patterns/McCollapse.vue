@@ -86,7 +86,7 @@ export default {
   $block-name: &;
 
   border-radius: $radius-m;
-  border: 2px solid $border-color;
+  border: 1px solid $color-border;
 
   &--no-border {
     border: none;
@@ -120,7 +120,7 @@ export default {
     #{$block-name} {
       border: none;
       border-radius: 0;
-      border-bottom: $separator-xs solid $color-gray-lightest;
+      border-bottom: 1px solid $color-border;
 
       &__header {
         padding-left: 80px;
@@ -146,7 +146,7 @@ export default {
       }
 
       &:first-child {
-        border-top: $separator-xs solid $color-gray-lightest;
+        border-top: 1px solid $color-border;
       }
 
       &:last-child {

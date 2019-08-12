@@ -94,8 +94,8 @@ export default {
 .mc-table-foot {
   $block-name: &;
 
-  border-left: 1px solid $color-gray-light;
-  border-right: 1px solid $color-gray-light;
+  border-left: 1px solid $color-border;
+  border-right: 1px solid $color-border;
 
   .mc-table-cell {
     height: $tappable-element-l;

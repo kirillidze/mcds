@@ -121,8 +121,8 @@
     "color_border": {
       "type": "color",
       "category": "color_group_65",
-      "value": "rgb(230, 230, 230)",
-      "originalValue": "hsla({!gray}, 90%, 1)",
+      "value": "rgb(204, 204, 204)",
+      "originalValue": "hsla({!gray}, 80%, 1)",
       "name": "color_border"
     },
     "color_text": {
@@ -513,8 +513,8 @@
     "separator_xs": {
       "type": "number",
       "category": "size",
-      "value": "2px",
-      "originalValue": "2px",
+      "value": "1px",
+      "originalValue": "1px",
       "name": "separator_xs"
     },
     "tappable_element_xs": {
