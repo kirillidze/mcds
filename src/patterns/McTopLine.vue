@@ -61,6 +61,8 @@ export default {
   top: 65px;
   background-color: transparent;
   z-index: 20;
+  min-height: 56px;
+  display: flex;
 
   &__inner {
     background-color: $color-white;
@@ -70,6 +72,7 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+    width: 100%;
   }
 
   &__left,
