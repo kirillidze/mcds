@@ -187,6 +187,15 @@ export default {
       type: Number,
       default: null,
     },
+
+    /**
+     *  Background gradient
+     *
+     */
+    gradient: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -208,6 +217,7 @@ export default {
         "mc-field-text--textarea-autosize": this.isTextareaAutosize,
         "mc-field-text--date": this.isDate,
         "mc-field-text--disabled": this.disabled,
+        "mc-field-text--gradient": this.gradient,
       }
     },
 
@@ -402,6 +412,16 @@ export default {
         cursor: not-allowed;
         background-color: $color-gray-lightest;
         border-color: $color-gray-lightest;
+      }
+    }
+  }
+
+  &--gradient {
+    #{$block-name} {
+      &__input {
+        border: none;
+        color: #fff;
+        background-color: $gradient-input;
       }
     }
   }

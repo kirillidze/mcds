@@ -859,6 +859,13 @@
       "value": "linear-gradient(-42deg, #391c5f 0%, #5b2770 100%)",
       "originalValue": "linear-gradient(-42deg, #391c5f 0%, #5b2770 100%)",
       "name": "gradient_auth"
+    },
+    "gradient_input": {
+      "type": "number",
+      "category": "background-gradient",
+      "value": "linear-gradient(80deg,#f5566b,#f193fb)",
+      "originalValue": "linear-gradient(80deg,#f5566b,#f193fb)",
+      "name": "gradient_input"
     }
   }
 }
