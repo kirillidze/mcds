@@ -421,7 +421,7 @@ export default {
       &__input {
         border: none;
         color: #fff;
-        background-color: $gradient-input;
+        background-image: $gradient-input;
       }
     }
   }
