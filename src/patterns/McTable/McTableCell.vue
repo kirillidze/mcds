@@ -122,7 +122,7 @@ export default {
   & .mc-grid-row {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 2.5px;
     bottom: 0;
     height: 100%;
     background: #fff;
