@@ -35,7 +35,6 @@
             :href="menuMainItem.href"
             :to="menuMainItem.to"
             variation="gray-darkest-flat"
-            exact
           >
             <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
             {{ menuMainItem.name }}
