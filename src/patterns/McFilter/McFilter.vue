@@ -171,8 +171,25 @@ export default {
       return !_isEqual(this.value, this.currentValues)
     },
 
-  filterDeepCount() {
-      return Object.values(_cloneDeep(this.currentValues)).length
+    filterDeepCount() {
+      const data = Object.values(_cloneDeep(this.currentValues))
+      let accum = 0
+
+      data.forEach(item => {
+          if(typeof item == 'string'){
+              accum++
+          }
+          else if(typeof item == 'object'){
+              accum+= Object.keys(item).length
+          }
+          else{
+              Object.keys(item).forEach(i => {
+                  accum += item[i].length
+              })
+          }
+      })
+
+      return accum
     },
   },
   watch: {
