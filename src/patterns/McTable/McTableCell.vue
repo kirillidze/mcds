@@ -125,7 +125,7 @@ export default {
     right: 2.5px;
     bottom: 0;
     height: 100%;
-    background: #fff;
+    background: transparent;
     align-items: center;
     padding-right: 8px;
     padding-left: 4px;
