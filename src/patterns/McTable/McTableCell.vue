@@ -119,15 +119,27 @@ export default {
     }
   }
 
-  & .mc-grid-row:before {
-    content: "";
+  & .mc-grid-row {
     position: absolute;
     top: 0;
-    right: 100%;
+    right: 0;
     bottom: 0;
     height: 100%;
-    width: 16px;
-    background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff);
+    background: #fff;
+    align-items: center;
+    padding-right: 8px;
+    padding-left: 4px;
+    display: flex;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 100%;
+      bottom: 0;
+      height: 100%;
+      width: 16px;
+      background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff);
+    }
   }
 }
 
