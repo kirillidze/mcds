@@ -118,6 +118,17 @@ export default {
       }
     }
   }
+
+  & .mc-grid-row:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 100%;
+    bottom: 0;
+    height: 100%;
+    width: 16px;
+    background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff);
+  }
 }
 
 th.mc-table-cell {
