@@ -36,6 +36,7 @@
       slot="bottom"
       tag-name="p"
       size="m"
+      :color="comment.color"
       v-html="filteredComment"
     />
   </McPreview>
@@ -95,7 +96,7 @@ export default {
 
 <docs>
     ```jsx
-    let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя' }
+    let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя', color: 'primary' }
     <div>
         <McChatComment :comment="comment" />
     </div>
