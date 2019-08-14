@@ -97,8 +97,8 @@ export default {
   position: relative;
   border: 1px solid $color-border;
   border-radius: $radius-m;
-  min-height: $tappable-element-xl;
-  padding: $space-m / 2;
+  min-height: $tappable-element-xl - 10px;
+  padding: $space_xs $space_xs $space_xs $space_s;
   transition: all $duration-quickly;
 
   &::after {
