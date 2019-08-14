@@ -102,6 +102,8 @@ export default {
       background-color: fade-out($gray-darkest, 0.95);
 
       & .mc-table-cell .mc-grid-row {
+        background-color: fade-out($gray-darkest, 0.95);
+
         &:before {
           background: linear-gradient(90deg, hsla(0, 0%, 92.9%, 0) 0, #ededed);
         }
