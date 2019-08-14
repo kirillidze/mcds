@@ -171,18 +171,8 @@ export default {
       return !_isEqual(this.value, this.currentValues)
     },
 
-    filterDeepCount() {
-      const data = Object.values(_cloneDeep(this.currentValues))
-
-      let accum = 0
-
-      data.forEach(item => {
-        Object.keys(item).forEach(i => {
-          accum += item[i].length
-        })
-      })
-
-      return accum
+  filterDeepCount() {
+      return Object.values(_cloneDeep(this.currentValues)).length
     },
   },
   watch: {
