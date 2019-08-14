@@ -156,6 +156,10 @@ export default {
       }
     }
   }
+
+  & .mc-title {
+    line-height: $line-height-s;
+  }
 }
 </style>
 
