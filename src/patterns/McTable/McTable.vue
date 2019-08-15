@@ -6,6 +6,7 @@
       :sortable="sortable"
       :sorted-by="sortedBy"
       :sorted-descending="sortedDescending"
+      :tooltip="tooltip"
       @click="handleHeaderClick"
     />
 
@@ -103,6 +104,10 @@ export default {
     sortedDefaultDescending: {
       type: Boolean,
       default: false,
+    },
+    tooltip: {
+      type: [Boolean, Array],
+      required: false,
     },
     infinite: {
       type: Boolean,

@@ -1,5 +1,10 @@
 <template>
   <div class="mc-date-separated" :class="classes">
+    <div class="mc-date-separated__header">
+      <slot name="header">
+        <McTitle :ellipsis="false" v-if="title" :level="4">{{ title }}</McTitle>
+      </slot>
+    </div>
     <div class="mc-date-separated__grid">
       <div class="mc-date-separated__cell">
         <McFieldSelect
@@ -34,13 +39,22 @@
 import _capitalize from "lodash/capitalize"
 
 import McFieldSelect from "../elements/McField/McFieldSelect"
+import McTitle from "../elements/McTitle"
 
 export default {
   name: "McDateSeparated",
   status: "deprecated",
   release: "1.0.0",
-  components: { McFieldSelect },
+  components: { McFieldSelect, McTitle },
   props: {
+    /**
+     *  Заголовок
+     *
+     */
+    title: {
+      type: String,
+      default: null,
+    },
     fromFormat: {
       type: String,
       default: "YYYY-MM-DD",
@@ -171,6 +185,17 @@ export default {
 <style lang="scss">
 .mc-date-separated {
   $block-name: &;
+
+  &__header {
+    @include reset-text-indents();
+    font-family: $font-heading;
+    display: block;
+    margin-bottom: $space-xs;
+
+    &:empty {
+      display: none;
+    }
+  }
 
   &__grid {
     margin-left: -4px;

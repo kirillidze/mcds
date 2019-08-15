@@ -1,82 +1,110 @@
 <template>
   <div class="mc-filter">
-    <McPanel class="mc-filter__panel" style="max-width: none;">
+    <McPanel class="mc-filter__panel">
       <div class="mc-filter__header">
-        <McTitle level="4" size="l" class="mc-filter__title">
+        <McTitle :level="4" size="l" class="mc-filter__title">
           <slot name="title">Фильтры</slot>
         </McTitle>
       </div>
       <div class="mc-filter__content">
         <McTabs class="mc-filter__tabs">
-          <McTab name="Все">
-            <div class="mc-filter__tab">
-              <McAccordion>
-                <template v-for="filter in filters">
-                  <McFilterTypeText
-                    v-if="filter.type === 'text'"
-                    :filter="filter"
-                    :value="currentValues[filter.value] || ''"
-                    :real-value="value[filter.value] || ''"
-                    @input="value => handleInput(filter, value)"
-                    @submit="submit"
-                  />
-                  <McFilterTypeRelation
-                    v-else-if="filter.type === 'relation'"
-                    :filter="filter"
-                    :value="currentValues[filter.value] || {}"
-                    :real-value="value[filter.value] || {}"
-                    @input="value => handleInput(filter, value)"
-                    @submit="submit"
+          <McTab :name="tabAll">
+            <McAccordion>
+              <template v-for="(filter, _key) in filters">
+                <McFilterTypeText
+                  v-if="filter.type === 'text'"
+                  :key="_key"
+                  :filter="filter"
+                  :value="currentValues[filter.value] || ''"
+                  :real-value="value[filter.value] || ''"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                />
+                <McFilterTypeRelation
+                  v-else-if="filter.type === 'relation'"
+                  :key="_key"
+                  :filter="filter"
+                  :value="currentValues[filter.value] || {}"
+                  :real-value="value[filter.value] || {}"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                  :t-relation-is="tRelationIs"
+                  :t-relation-not-is="tRelationNotIs"
+                  :t-relation-exists="tRelationExists"
+                  :t-relation-not-exists="tRelationNotExists"
+                />
+                <McFilterTypeRange
+                  v-else-if="filter.type === 'number' || filter.type === 'date'"
+                  :key="_key"
+                  :filter="filter"
+                  :value="currentValues[filter.value] || {}"
+                  :real-value="value[filter.value] || {}"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                  :t-range-more="tRangeMore"
+                  :t-range-less="tRangeLess"
+                />
+              </template>
+            </McAccordion>
+          </McTab>
+          <McTab :name="tabPresets">
+            <div class="mc-filter__preset-items">
+              <div class="mc-filter__preset-item" v-for="(preset, index) in presets" :key="index">
+                <div class="mc-filter__preset-value">
+                  <McFilterPresetValue
+                    v-for="(presetValue, presetName) in preset"
+                    :key="presetName"
+                    :name="presetName"
+                    :value="presetValue"
+                    :filters="filters"
                     :t-relation-is="tRelationIs"
                     :t-relation-not-is="tRelationNotIs"
                     :t-relation-exists="tRelationExists"
                     :t-relation-not-exists="tRelationNotExists"
-                  />
-                  <McFilterTypeRange
-                    v-else-if="filter.type === 'number' || filter.type === 'date'"
-                    :filter="filter"
-                    :value="currentValues[filter.value] || {}"
-                    :real-value="value[filter.value] || {}"
-                    @input="value => handleInput(filter, value)"
-                    @submit="submit"
                     :t-range-more="tRangeMore"
                     :t-range-less="tRangeLess"
                   />
-                </template>
-              </McAccordion>
-            </div>
-          </McTab>
-          <McTab name="Пресеты">
-            <div class="mc-filter__tab" v-for="(preset, index) in presets" :key="index">
-              <McFilterPresetValue
-                v-for="(presetValue, presetName) in preset"
-                :key="presetName"
-                :name="presetName"
-                :value="presetValue"
-                :filters="filters"
-                style="margin-bottom: 10px"
-                :t-relation-is="tRelationIs"
-                :t-relation-not-is="tRelationNotIs"
-                :t-relation-exists="tRelationExists"
-                :t-relation-not-exists="tRelationNotExists"
-                :t-range-more="tRangeMore"
-                :t-range-less="tRangeLess"
-              />
-              <McButton size="s" @click="emitInput(preset)">Применить</McButton>
+                </div>
+                <div class="mc-filter__preset-btn">
+                  <McButton size="s" @click="emitInput(preset)">Применить</McButton>
+                </div>
+              </div>
             </div>
           </McTab>
         </McTabs>
       </div>
       <div class="mc-filter__footer">
-        <McButton :disabled="!Object.keys(currentValues).length" @click="savePreset">
-          <slot name="button-save-preset">Сохранить пресет</slot>
-        </McButton>
-        <McButton :disabled="!Object.keys(currentValues).length" @click="reset">
-          <slot name="reset">Сбросить</slot>
-        </McButton>
-        <McButton :disabled="!canSubmit" @click="submit">
-          <slot name="submit">Применить</slot>
-        </McButton>
+        <McGridRow :gutter-x="6" :gutter-y="6">
+          <McGridCol>
+            <McTooltip size="s" placement="top" content="Сбросить">
+              <McButton
+                :disabled="!Object.keys(currentValues).length"
+                @click="reset"
+                variation="danger-invert"
+                size="m-compact"
+              >
+                <McSvgIcon slot="icon-append" name="delete" />
+              </McButton>
+            </McTooltip>
+          </McGridCol>
+          <McGridCol>
+            <McTooltip size="s" placement="top" content="Сохранить пресет">
+              <McButton
+                :disabled="!Object.keys(currentValues).length"
+                @click="savePreset"
+                variation="success-invert"
+                size="m-compact"
+              >
+                <McSvgIcon slot="icon-append" name="archive" />
+              </McButton>
+            </McTooltip>
+          </McGridCol>
+          <McGridCol stretch-self>
+            <McButton full-width :disabled="!canSubmit" @click="submit">
+              <slot name="submit">Применить </slot> {{ filterDeepCount }} фильтра
+            </McButton>
+          </McGridCol>
+        </McGridRow>
       </div>
     </McPanel>
   </div>
@@ -95,10 +123,18 @@ import McFilterTypeRange from "./McFilterTypeRange"
 import McButton from "../../elements/McButton"
 import McFilterPresetValue from "./McFilterPresetValue"
 import McAccordion from "../McAccordion"
+import McGridRow from "../McGrid/McGridRow"
+import McGridCol from "../McGrid/McGridCol"
+import McTooltip from "../../elements/McTooltip"
+import McSvgIcon from "../../elements/McSvgIcon"
 
 export default {
   name: "McFilter",
   components: {
+    McSvgIcon,
+    McTooltip,
+    McGridCol,
+    McGridRow,
     McAccordion,
     McFilterPresetValue,
     McButton,
@@ -149,6 +185,14 @@ export default {
       type: String,
       default: "Меньше",
     },
+    tabAll: {
+      type: String,
+      default: "Все",
+    },
+    tabPresets: {
+      type: String,
+      default: "Пресеты",
+    },
   },
   data() {
     return {
@@ -158,6 +202,25 @@ export default {
   computed: {
     canSubmit() {
       return !_isEqual(this.value, this.currentValues)
+    },
+
+    filterDeepCount() {
+      const data = Object.values(_cloneDeep(this.currentValues))
+      let accum = 0
+
+      data.forEach(item => {
+        if (typeof item == "string") {
+          accum++
+        } else if (typeof item == "object") {
+          accum += Object.keys(item).length
+        } else {
+          Object.keys(item).forEach(i => {
+            accum += item[i].length
+          })
+        }
+      })
+
+      return accum
     },
   },
   watch: {
@@ -174,6 +237,8 @@ export default {
         ...this.currentValues,
         [filter.value]: _cloneDeep(value),
       }
+
+      this.currentValues = { ...this.clearEmpty(this.currentValues) }
     },
     reset() {
       this.emitInput({})
@@ -203,14 +268,91 @@ export default {
 <style lang="scss">
 .mc-filter {
   width: $panel-l;
+  max-width: 100%;
+  height: $panel-xl;
+  display: flex;
+  flex-direction: column;
+
+  @include custom-scroll();
+
+  &__panel {
+    max-width: none;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
   &__header {
     padding: $space-xs;
+    height: 38px;
+    flex-shrink: 0;
   }
 
-  &__tab {
+  &__content {
+    position: relative;
+    flex-grow: 1;
+
+    .mc-collapse {
+      &__body {
+        margin-left: $space-xs;
+        margin-right: $space-xs;
+      }
+      &__body-inner {
+        border-bottom: 1px solid $color-border;
+        padding-top: $space-xs;
+        padding-bottom: $space-s;
+        margin-bottom: $space-xs;
+      }
+    }
+  }
+
+  &__tabs {
+    @include position(absolute, 0);
+    display: flex;
+    flex-direction: column;
+    .tabs-component-tabs {
+      margin-bottom: 0;
+      flex-shrink: 0;
+    }
+    .tabs-component-panels {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding-top: $space-xs;
+      padding-bottom: $space-xs;
+    }
+    .tabs-component-panel {
+      overflow: hidden;
+    }
   }
 
   &__footer {
+    border-top: 1px solid $color-border;
+    padding-top: $space-xs;
+    flex-shrink: 0;
+  }
+
+  &__preset-items {
+    padding: $space-xs;
+  }
+
+  &__preset-item {
+    &:not(:last-child) {
+      padding-bottom: $space-m;
+    }
+  }
+
+  &__preset-btn {
+    margin-top: $space-xs;
+  }
+}
+
+.mc-collapse {
+  &:last-child {
+    .mc-collapse {
+      &__body-inner {
+        border-bottom-color: transparent;
+        margin-bottom: 0;
+      }
+    }
   }
 }
 </style>
@@ -288,12 +430,12 @@ export default {
             :filters="filters"
             :presets="presets"
             @preset-save="savePreset"
-            t-relation-is="тест Это"
-            t-relation-not-is="тест Это не"
-            t-relation-exists="тест Не пустое"
-            t-relation-not-exists="тест Пустое"
-            t-range-more="тест Больше"
-            t-range-less="тест Меньше"
+            t-relation-is="Это"
+            t-relation-not-is="Это не"
+            t-relation-exists="Не пустое"
+            t-relation-not-exists="Пустое"
+            t-range-more="Больше"
+            t-range-less="Меньше"
     />
     <br>
     <br>

@@ -69,7 +69,7 @@
         <slot name="append" />
       </div>
     </div>
-    <div class="mc-field-text__footer">
+    <div class="mc-field-text__footer" v-if="errorText || helpText || $slots.footer">
       <McTitle tag-name="div" :ellipsis="false" color="danger" size="s" v-if="errorText">
         {{ errorText }}
       </McTitle>
@@ -187,6 +187,15 @@ export default {
       type: Number,
       default: null,
     },
+
+    /**
+     *  Background gradient
+     *
+     */
+    gradient: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -208,6 +217,7 @@ export default {
         "mc-field-text--textarea-autosize": this.isTextareaAutosize,
         "mc-field-text--date": this.isDate,
         "mc-field-text--disabled": this.disabled,
+        "mc-field-text--gradient": this.gradient,
       }
     },
 
@@ -328,7 +338,7 @@ export default {
     width: 100%;
     min-height: $tappable-element-m;
     margin: 0;
-    border: 1px solid $color-gray-lighter;
+    border: 1px solid $color-border;
     border-radius: $radius-m;
     padding: ($space-s / 2) + 1 $space-s;
     line-height: $line-height-s;
@@ -402,6 +412,16 @@ export default {
         cursor: not-allowed;
         background-color: $color-gray-lightest;
         border-color: $color-gray-lightest;
+      }
+    }
+  }
+
+  &--gradient {
+    #{$block-name} {
+      &__input {
+        border: none;
+        color: #fff;
+        background-image: $gradient-input;
       }
     }
   }

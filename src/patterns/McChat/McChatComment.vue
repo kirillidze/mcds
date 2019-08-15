@@ -1,13 +1,19 @@
 <template>
   <McPreview class="mc-chat-comment">
-    <McAvatar rounded size="m" :src="comment.user.avatar" slot="left" />
+    <McAvatar
+      class="mc-chat-comment__avatar"
+      rounded
+      size="s"
+      :src="comment.user ? comment.user.avatar : null"
+      slot="left"
+    />
 
     <McCell slot="top">
       <McTitle slot="title" size="xs" uppercase>
         <McGridRow :gutter-x="10" justify="between" align="middle" :wrap="false">
           <McGridCol style="min-width: 30%">
             <McTitle size="xs" uppercase>
-              {{ comment.user.name ? comment.user.name : "Системный комментарий" }}
+              {{ comment.user ? comment.user.name : "Системный комментарий" }}
             </McTitle>
           </McGridCol>
           <McGridCol>
@@ -30,6 +36,7 @@
       slot="bottom"
       tag-name="p"
       size="m"
+      :color="comment.color"
       v-html="filteredComment"
     />
   </McPreview>
@@ -81,14 +88,15 @@ export default {
 
   width: 100%;
 
-  &__content {
+  &__avatar {
+    margin-left: $space-xs;
   }
 }
 </style>
 
 <docs>
     ```jsx
-    let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя' }
+    let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя', color: 'primary' }
     <div>
         <McChatComment :comment="comment" />
     </div>

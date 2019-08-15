@@ -40,13 +40,14 @@ export default {
   z-index: 10;
   margin-left: 251px;
   background-color: $color-white;
-  border: 1px solid $color-gray-light;
+  border: 1px solid $color-border;
   display: flex;
   flex-direction: column;
+  border-radius: 0 8px 0 0;
 
   &__header {
     height: $tappable-element-l;
-    border-bottom: 1px solid $color-gray-light;
+    border-bottom: 1px solid $color-border;
     flex-shrink: 0;
   }
 

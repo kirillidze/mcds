@@ -2,7 +2,7 @@
   <section class="mc-header-part-right">
     <McHeaderNav>
       <McHeaderNavItem class="mc-header-part-right__chatra" v-if="chatraId">
-        <McDropdown v-model="menuChatraIsOpen" position="right">
+        <McDropdown v-model="menuChatraIsOpen" position="right" :rotate-icon="false">
           <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
             <McSvgIcon slot="icon-append" name="live_help" />
           </McButton>
@@ -14,7 +14,7 @@
       </McHeaderNavItem>
 
       <McHeaderNavItem class="mc-header-part-right__apps" v-if="menuApps && menuApps.length">
-        <McDropdown v-model="menuAppsIsOpen" position="right">
+        <McDropdown v-model="menuAppsIsOpen" position="right" :rotate-icon="false">
           <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
             <McSvgIcon slot="icon-append" name="apps" />
           </McButton>
@@ -68,6 +68,9 @@
               size="l"
               :href="menuProfileItem.href"
               :to="menuProfileItem.to"
+              @click="
+                typeof menuProfileItem.handler === 'function' ? menuProfileItem.handler() : ''
+              "
               exact
             >
               <McSvgIcon slot="icon-prepend" :name="menuProfileItem.icon" size="xxs" />

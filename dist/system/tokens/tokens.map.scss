@@ -11,7 +11,7 @@ $tokens-map: (
   'color-primary': (rgb(67, 135, 244)),
   'color-aqua-darken': (rgb(0, 151, 168)),
   'color-success': (rgb(112, 194, 116)),
-  'color-border': (rgb(230, 230, 230)),
+  'color-border': (rgb(204, 204, 204)),
   'color-text': (rgb(33, 33, 33)),
   'color-bermuda-gray': (rgb(120, 144, 155)),
   'color-bright-turquoise-darker': (rgb(0, 122, 108)),
@@ -67,7 +67,7 @@ $tokens-map: (
   'tappable-element-m': (40px),
   'height-footer': (64px),
   'container-s': (810px),
-  'separator-xs': (2px),
+  'separator-xs': (1px),
   'tappable-element-xs': (24px),
   'panel-s': (250px),
   'tappable-element-xxs': (16px),
@@ -117,4 +117,5 @@ $tokens-map: (
   'line-height-xs': (1),
   'gradient-notification': (linear-gradient(to right, hsl(205, 93%, 54%) 0%, hsl(192, 100%, 46%) 100%)),
   'gradient-auth': (linear-gradient(-42deg, #391c5f 0%, #5b2770 100%)),
+  'gradient-input': (linear-gradient(80deg,#f5566b,#f193fb)),
 );

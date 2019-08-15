@@ -152,7 +152,7 @@ props:
     value: "hsla({!gray}, 13%, 1)"
     category: color_group_65
   color_border:
-    value: "hsla({!gray}, 90%, 1)"
+    value: "hsla({!gray}, 80%, 1)"
     category: color_group_65
 global:
   type: color

@@ -1,19 +1,21 @@
 <template>
-  <McCollapse no-border>
-    {{ filter.name }}
-    <McChip
-      slot="title"
-      v-if="chipCount"
-      variation="gray-darkest-invert"
-      size="s"
-      :closable="true"
-      @click="emitInput(null)"
-    >
-      {{ chipCount }}
-    </McChip>
-    <template slot="body">
-      <div class="mc-filter-type-range">
-        <McGridRow :gutter-x="10">
+  <McCollapse>
+    <McFilterRow slot="activator">
+      {{ filter.name }}
+      <McChip
+        slot="chip"
+        v-if="chipCount"
+        variation="gray-darkest-invert"
+        size="s"
+        :closable="true"
+        @click="e => emitInput(null, e)"
+      >
+        {{ chipCount }}
+      </McChip>
+    </McFilterRow>
+    <div class="mc-filter-type-range__body" slot="body">
+      <div class="mc-filter-type-range__row">
+        <McGridRow :gutter-x="6" :gutter-y="6">
           <McGridCol :span="6">
             <McFieldText
               :value="value.more || ''"
@@ -35,6 +37,8 @@
             />
           </McGridCol>
         </McGridRow>
+      </div>
+      <div class="mc-filter-type-range__row mc-filter-type-range__row--slider">
         <McRangeSlider
           v-if="canRange"
           :min="filter.min"
@@ -43,7 +47,7 @@
           v-model="rangeValue"
         />
       </div>
-    </template>
+    </div>
   </McCollapse>
 </template>
 
@@ -54,10 +58,21 @@ import McCollapse from "../../patterns/McCollapse"
 import McFieldText from "../../elements/McField/McFieldText"
 import McRangeSlider from "../../elements/McRangeSlider"
 import McChip from "../../elements/McChip"
+import McButton from "../../elements/McButton"
+import McFilterRow from "./McFilterRow"
 
 export default {
   name: "McFilterTypeRange",
-  components: { McChip, McRangeSlider, McFieldText, McGridCol, McGridRow, McCollapse },
+  components: {
+    McFilterRow,
+    McButton,
+    McChip,
+    McRangeSlider,
+    McFieldText,
+    McGridCol,
+    McGridRow,
+    McCollapse,
+  },
   props: {
     value: {
       type: Object,
@@ -126,8 +141,12 @@ export default {
       })
       return newVal
     },
-    emitInput(value) {
+    emitInput(value, e) {
       this.$emit("input", this.clearValue(value))
+
+      if (e) {
+        e.stopPropagation()
+      }
     },
     submit() {
       this.$emit("submit")
@@ -135,3 +154,18 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.mc-filter-type-range {
+  &__row {
+    &:not(:last-child) {
+      margin-bottom: $space-xs;
+    }
+
+    &--slider {
+      padding-left: $space-xs;
+      padding-right: $space-xs;
+    }
+  }
+}
+</style>

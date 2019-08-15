@@ -60,6 +60,15 @@ export default {
 .mc-tabs {
   $block-name: &;
 
+  @mixin border() {
+    &::before {
+      @include pseudo();
+      @include position(absolute, auto 0 0 0);
+      height: $separator-xs;
+      background-color: $color-border;
+    }
+  }
+
   .tabs-component-tabs {
     @include reset-text-indents();
     position: relative;
@@ -71,12 +80,7 @@ export default {
     overflow-x: auto;
     margin-bottom: $space-m;
 
-    &:after {
-      @include position(absolute, null 0 0 0);
-      @include pseudo();
-      height: 1px;
-      background-color: $color-gray-light;
-    }
+    @include border();
   }
 
   .tabs-component-tab {
@@ -104,13 +108,15 @@ export default {
     text-decoration: none;
     padding: $space-xs;
 
+    @include border();
+
     &:after {
       opacity: 0;
       position: absolute;
       left: 50%;
       right: 50%;
       bottom: 0;
-      height: $separator-xs;
+      height: $separator-s;
       content: "";
       display: block;
       z-index: 1;

@@ -111,7 +111,7 @@ export default {
 .mc-chat {
   $block-name: &;
   padding: $space-xs;
-  border-top: $separator-xs solid $border-color;
+  border-top: 1px solid $color-border;
 
   &__source {
     margin-bottom: $space-xs;
@@ -134,7 +134,7 @@ export default {
     { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30',
     user: { name: 'Имя пользователя', avatar: 'https://lorempixel.com/640/480/?64646' },
     by_user: { name: 'Имя изменившего пользователя' }, },
-    { content: 'Статус (recruiting): Отмена', date: '2014-12-19 10:22', user: { name: 'пользователя Имя' }, },
+    { content: 'Статус (recruiting): Отмена', date: '2014-12-19 10:22', user: { name: 'пользователя Имя' }, color: 'danger' },
     ]
     let input = value => {
     text = value
@@ -143,7 +143,7 @@ export default {
     source = value
     }
     let submit = () => {
-    comments.push({ content: text, date: new Date().toString(), user: { name: 'Тест' }, })
+    comments.push({ content: text, date: new Date().toString(), user: { name: 'Тест' }, color: 'primary',})
     text = ''
     }
     <div>

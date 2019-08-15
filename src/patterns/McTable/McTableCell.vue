@@ -35,7 +35,7 @@ export default {
       if (!this.item) return
       return {
         width: this.item.width,
-        borderRight: this.item.hasBorder ? `1px solid ${tokens.color_gray_light}` : null,
+        borderRight: this.item.hasBorder ? `1px solid ${tokens.color_border}` : null,
       }
     },
     classes() {
@@ -53,7 +53,7 @@ export default {
   $block-name: &;
 
   @include reset-text-indents();
-  border-bottom: 1px solid $color-gray-light;
+  border-bottom: 1px solid $color-border;
   vertical-align: middle;
   position: relative;
 
@@ -118,6 +118,29 @@ export default {
       }
     }
   }
+
+  & .mc-grid-row {
+    position: absolute;
+    top: 0;
+    right: 2.5px;
+    bottom: 0;
+    height: 100%;
+    background: #fff;
+    align-items: center;
+    padding-right: 8px;
+    padding-left: 4px;
+    display: flex;
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 100%;
+      bottom: 0;
+      height: 100%;
+      width: 16px;
+      background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #fff);
+    }
+  }
 }
 
 th.mc-table-cell {
@@ -136,7 +159,7 @@ th.mc-table-cell {
     @include position(absolute, 0);
     @include pseudo();
     height: 1px;
-    background-color: $color-gray-light;
+    background-color: $color-border;
   }
 
   &::before {

@@ -95,10 +95,10 @@ export default {
   flex-direction: column;
   text-decoration: none;
   position: relative;
-  border: 1px solid $color-gray-lighter;
+  border: 1px solid $color-border;
   border-radius: $radius-m;
-  min-height: $tappable-element-xl;
-  padding: $space-m / 2;
+  min-height: $tappable-element-xl - 10px;
+  padding: $space_xs $space_xs $space_xs $space_s;
   transition: all $duration-quickly;
 
   &::after {
@@ -155,6 +155,10 @@ export default {
         }
       }
     }
+  }
+
+  & .mc-title {
+    line-height: $line-height-s;
   }
 }
 </style>

@@ -121,8 +121,8 @@
     "color_border": {
       "type": "color",
       "category": "color_group_65",
-      "value": "rgb(230, 230, 230)",
-      "originalValue": "hsla({!gray}, 90%, 1)",
+      "value": "rgb(204, 204, 204)",
+      "originalValue": "hsla({!gray}, 80%, 1)",
       "name": "color_border"
     },
     "color_text": {
@@ -513,8 +513,8 @@
     "separator_xs": {
       "type": "number",
       "category": "size",
-      "value": "2px",
-      "originalValue": "2px",
+      "value": "1px",
+      "originalValue": "1px",
       "name": "separator_xs"
     },
     "tappable_element_xs": {
@@ -544,6 +544,13 @@
       "value": "32px",
       "originalValue": "32px",
       "name": "tappable_element_s"
+    },
+    "separator_s": {
+      "type": "number",
+      "category": "size",
+      "value": "2px",
+      "originalValue": "2px",
+      "name": "separator_s"
     },
     "avatar_xl": {
       "type": "number",
@@ -859,6 +866,13 @@
       "value": "linear-gradient(-42deg, #391c5f 0%, #5b2770 100%)",
       "originalValue": "linear-gradient(-42deg, #391c5f 0%, #5b2770 100%)",
       "name": "gradient_auth"
+    },
+    "gradient_input": {
+      "type": "number",
+      "category": "background-gradient",
+      "value": "linear-gradient(80deg,#f5566b,#f193fb)",
+      "originalValue": "linear-gradient(80deg,#f5566b,#f193fb)",
+      "name": "gradient_input"
     }
   }
 }

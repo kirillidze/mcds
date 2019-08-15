@@ -105,7 +105,7 @@ export default {
   position: relative;
   display: block;
   border-radius: $radius-l;
-  border: 2px solid $border-color;
+  border: 1px solid $color-border;
   background: $color-white;
 
   &__content {
@@ -114,7 +114,7 @@ export default {
 
   &__header {
     padding: $size-m;
-    border-bottom: 2px solid $border-color;
+    border-bottom: 1px solid $color-border;
   }
 
   &__link {
@@ -130,11 +130,11 @@ export default {
 
     &:hover,
     &:focus {
-      border-color: darken($border-color, 10%);
+      border-color: darken($color-border, 10%);
     }
 
     &:active {
-      border-color: darken($border-color, 15%);
+      border-color: darken($color-border, 15%);
     }
   }
 }

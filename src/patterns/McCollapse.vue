@@ -1,11 +1,12 @@
 <template>
   <section class="mc-collapse" :class="classes">
-    <div class="mc-collapse__header">
-      <template v-if="!isDisabled && $slots['body']">
-        <a class="mc-collapse__link" href="#" @click.prevent="toggle"></a>
-        <McSvgIcon class="mc-collapse__icon" size="s" name="arrow_drop_down" />
-      </template>
-      <slot />
+    <div
+      class="mc-collapse__header"
+      v-if="!isDisabled && $slots['body']"
+      tabindex="0"
+      @keyup.esc="close"
+    >
+      <slot name="activator" />
     </div>
     <slide-up-down
       v-if="!isDisabled"
@@ -13,7 +14,9 @@
       :duration="300"
       class="mc-collapse__body"
     >
-      <slot name="body" />
+      <div class="mc-collapse__body-inner">
+        <slot name="body" />
+      </div>
     </slide-up-down>
   </section>
 </template>
@@ -23,12 +26,13 @@ import { findParentComponent } from "../utils/treeSearch"
 
 import McSvgIcon from "../elements/McSvgIcon"
 import SlideUpDown from "vue-slide-up-down"
+import McButton from "../elements/McButton"
 
 export default {
   name: "McCollapse",
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
-  components: { McSvgIcon, SlideUpDown },
+  components: { McButton, McSvgIcon, SlideUpDown },
   data() {
     return {
       isCollapsed: false,
@@ -37,10 +41,6 @@ export default {
 
   props: {
     isDisabled: {
-      type: Boolean,
-      default: false,
-    },
-    noBorder: {
       type: Boolean,
       default: false,
     },
@@ -53,6 +53,9 @@ export default {
         "mc-collapse--is-disabled": this.isDisabled,
       }
     },
+    activator() {
+      return this.$slots.activator ? this.$slots.activator[0].elm : null
+    },
   },
 
   watch: {
@@ -64,6 +67,10 @@ export default {
         $parent.$emit("toggle", { value, component: this })
       }
     },
+  },
+
+  mounted() {
+    this.activator && this.activator.addEventListener("click", this.toggle)
   },
 
   methods: {
@@ -84,67 +91,38 @@ export default {
 .mc-collapse {
   $block-name: &;
 
-  border-radius: $radius-m;
-
   &__header {
-    position: relative;
-    padding: $space-xs $space-s $space-xs $space-l;
-    min-height: $tappable-element-l;
-    display: flex;
-    align-items: center;
-
-    &:hover {
-      color: $color-cinnabar;
-    }
-  }
-
-  &__link {
-    display: block;
-    @include position(absolute, 0);
-    z-index: 1;
+    outline: none;
   }
 
   &__icon {
-    transition: all $duration-quickly;
-    position: absolute;
-    left: $space-xs;
   }
 
   &__body {
     #{$block-name} {
-      border: none;
-      border-radius: 0;
-      border-bottom: $separator-xs solid $color-gray-lightest;
-
       &__header {
-        padding-left: 80px;
       }
 
       &__icon {
-        left: 40px;
       }
 
       &__body {
         #{$block-name} {
           &__header {
-            padding-left: 112px;
           }
 
           &__body {
           }
 
           &__icon {
-            left: 72px;
           }
         }
       }
 
       &:first-child {
-        border-top: $separator-xs solid $color-gray-lightest;
       }
 
       &:last-child {
-        border-bottom: none;
       }
     }
   }
@@ -154,7 +132,6 @@ export default {
       &__header {
         #{$block-name} {
           &__icon {
-            transform: rotate(180deg);
           }
         }
       }
@@ -164,7 +141,6 @@ export default {
   &--is-disabled {
     > #{$block-name} {
       &__header {
-        color: $color-gray-darkest !important;
       }
     }
   }
@@ -175,7 +151,7 @@ export default {
     ```jsx
     <div>
         <McCollapse>
-            <template>Заголовок</template>
+            <mc-button slot="activator">Заголовок</mc-button>
             <template slot="body">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                 facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia

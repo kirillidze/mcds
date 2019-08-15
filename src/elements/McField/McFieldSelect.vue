@@ -307,13 +307,13 @@ $colors: $token-colors;
     &__select {
       height: $tappable-element-m - 2px;
       &::before {
-        border-color: $color-gray-dark transparent transparent;
+        border-color: $color-border transparent transparent;
       }
     }
 
     &__tags {
       @include reset-text-indents();
-      border: 1px solid $color-gray-lighter;
+      border: 1px solid $color-border;
       border-radius: $radius-m !important;
       padding: $space-xxxs - 1 $tappable-element-m 0 $space-s;
     }
@@ -487,7 +487,7 @@ $colors: $token-colors;
 
             &__select {
               &:before {
-                border-color: $color-gray-dark transparent transparent;
+                border-color: $color-border transparent transparent;
               }
             }
           }
@@ -504,7 +504,7 @@ $colors: $token-colors;
 
             &__select {
               &::before {
-                border-color: $color-gray-dark transparent transparent;
+                border-color: $color-border transparent transparent;
               }
             }
           }
@@ -527,7 +527,7 @@ $colors: $token-colors;
       background: transparent;
       .multiselect {
         &__tags {
-          border-color: $color-gray-lightest !important;
+          border-color: $color-border !important;
           background-color: $color-gray-lightest;
         }
 
@@ -535,7 +535,7 @@ $colors: $token-colors;
           background-color: transparent;
 
           &::before {
-            border-color: $color-gray-light transparent transparent;
+            border-color: $color-border transparent transparent;
           }
         }
       }

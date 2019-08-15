@@ -10,6 +10,8 @@
         :sortable="sortable"
         :sorted-by="sortedBy"
         :sorted-descending="sortedDescending"
+        :tooltip="tooltip"
+        :tooltip-content="item.tooltip_content"
         @click="() => handleCellClick(item)"
       />
     </McTableRow>
@@ -47,6 +49,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    tooltip: {
+      type: [Boolean, Array],
+      required: false,
+    },
   },
   methods: {
     handleCellClick(item) {
@@ -60,7 +66,7 @@ export default {
 .mc-table-head {
   $block-name: &;
 
-  border-left: 1px solid $color-gray-light;
-  border-right: 1px solid $color-gray-light;
+  border-left: 1px solid $color-border;
+  border-right: 1px solid $color-border;
 }
 </style>

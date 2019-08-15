@@ -8,11 +8,12 @@
 import { findChildrenComponents } from "../utils/treeSearch"
 
 import McCollapse from "./McCollapse"
+import McButton from "../elements/McButton"
 
 export default {
   name: "McAccordion",
-  components: { McCollapse },
-  status: "deprecated",
+  components: { McButton, McCollapse },
+  status: "ready",
   release: "1.0.0",
   created() {
     this.$on("toggle", function(value) {
@@ -44,7 +45,7 @@ export default {
     <div>
         <McAccordion>
             <McCollapse>
-                <template>Заголовок 1</template>
+                <mc-button slot="activator">Заголовок</mc-button>
                 <template slot="body">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                     facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
@@ -52,7 +53,7 @@ export default {
                 </template>
             </McCollapse>
             <McCollapse>
-                <template>Заголовок 2</template>
+                <mc-button slot="activator">Заголовок 2</mc-button>
                 <template slot="body">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                     facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
