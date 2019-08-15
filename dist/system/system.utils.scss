@@ -71,6 +71,7 @@ $tappable-element-xs: 24px;
 $panel-s: 250px;
 $tappable-element-xxs: 16px;
 $tappable-element-s: 32px;
+$separator-s: 2px;
 $avatar-xl: 92px;
 $site-width-m: 1200px;
 $duration-quickly: 0.15s;
@@ -405,15 +406,17 @@ $spacing-ratio: $line-height-m;
 
 @mixin custom-scroll() {
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 5px;
+    height: 5px;
     transition: background 0.3s;
   }
-
   ::-webkit-scrollbar-track {
+    //background: rgba(0, 0, 0, 0.1);
+    //border: 1px solid #dcdcdc;
   }
   ::-webkit-scrollbar-thumb {
-    background: #c9c9c9;
+    background: hsl(240, 4%, 91%);
+    border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #c1c1c1;
