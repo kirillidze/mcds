@@ -78,7 +78,6 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    margin-bottom: $space-m;
 
     @include border();
   }
