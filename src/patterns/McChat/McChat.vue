@@ -114,7 +114,7 @@ export default {
   border-top: 1px solid $color-border;
 
   &__source {
-    margin-bottom: $space-xs;
+    margin-bottom: $space-s;
   }
   &__comment {
     margin-top: $space-xs;
