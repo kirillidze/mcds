@@ -1,31 +1,32 @@
 <template>
-  <McCollapse @open="handleOpen" no-border>
-    <template>
-      {{ filter.name }} <McSvgIcon v-if="isAjax" name="search" />
-    </template>
-    <McChip
-      slot="title"
-      v-if="chipCount"
-      variation="gray-darkest-invert"
-      size="s"
-      :closable="true"
-      @click="emitInput({})"
-    >
-      {{ chipCount }}
-    </McChip>
-    <template slot="body">
-      <div class="mc-filter-type-relation">
-        <McGridRow :gutter-x="10" style="margin-bottom: 10px">
-          <McGridCol v-for="selectType in selectTypes" :key="selectType" :span="3">
+  <McCollapse @open="handleOpen">
+    <McFilterRow slot="activator">
+      {{ filter.name }}
+      <!--<McSvgIcon v-if="isAjax" name="search" />-->
+      <McChip
+        slot="chip"
+        v-if="chipCount"
+        variation="gray-darkest-invert"
+        size="s"
+        :closable="true"
+        @click="e => emitInput({}, e)"
+      >
+        {{ chipCount }}
+      </McChip>
+    </McFilterRow>
+    <div class="mc-filter-type-relation__body" slot="body">
+      <div class="mc-filter-type-relation__row">
+        <McGridRow :gutter-x="6" :gutter-y="6">
+          <McGridCol v-for="selectType in selectTypes" :key="selectType">
             <McButton
               v-bind="buttonBind"
-              :is-active="selectType === type"
+              :variation="selectType === type ? 'soft-green-dark-invert' : 'primary'"
               @click.prevent="handleClick(selectType)"
             >
               {{ selectType === "is" ? tRelationIs : tRelationNotIs }}
             </McButton>
           </McGridCol>
-          <McGridCol v-for="v in [1, 0]" :key="v" :span="3" full-width>
+          <McGridCol v-for="v in [1, 0]" :key="v">
             <McButton
               v-bind="buttonBind"
               :variation="
@@ -37,6 +38,8 @@
             </McButton>
           </McGridCol>
         </McGridRow>
+      </div>
+      <div class="mc-filter-type-relation__row">
         <McFieldSelect
           v-if="selectTypes.indexOf(type) !== -1"
           :options="computedOptions"
@@ -45,8 +48,14 @@
           :internal-search="!isAjax"
           @search-change="handleSearchChange"
         />
-        <div>
-          <template v-for="(chips, type) in value || {}" v-if="selectTypes.indexOf(type) !== -1">
+      </div>
+      <div class="mc-filter-type-relation__row">
+        <McGridRow :gutter-x="6" :gutter-y="6">
+          <McGridCol
+            v-for="(chips, type) in value || {}"
+            v-if="selectTypes.indexOf(type) !== -1"
+            :key="type"
+          >
             <McFilterTypeRelationChip
               v-for="chip in chips"
               :key="type + '-' + chip"
@@ -55,13 +64,12 @@
               :options="options"
               :t-relation-is="tRelationIs"
               :t-relation-not-is="tRelationNotIs"
-              style="margin-top: 10px; margin-right: 10px"
               @click="handleRelationChipClick(type, chip)"
             />
-          </template>
-        </div>
+          </McGridCol>
+        </McGridRow>
       </div>
-    </template>
+    </div>
   </McCollapse>
 </template>
 
@@ -77,10 +85,12 @@ import McCollapse from "../../patterns/McCollapse"
 import McChip from "../../elements/McChip"
 import McFilterTypeRelationChip from "./McFilterTypeRelationChip"
 import McSvgIcon from "../../elements/McSvgIcon"
+import McFilterRow from "./McFilterRow"
 
 export default {
   name: "McFilterTypeRelation",
   components: {
+    McFilterRow,
     McSvgIcon,
     McFilterTypeRelationChip,
     McChip,
@@ -193,8 +203,12 @@ export default {
       }
       this.emitInput(currentValue)
     },
-    emitInput(value) {
+    emitInput(value, e) {
       this.$emit("input", value)
+
+      if (e) {
+        e.stopPropagation()
+      }
     },
     handleSearchChange(value) {
       if (!this.isAjax) return
@@ -219,3 +233,13 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.mc-filter-type-relation {
+  &__row {
+    &:not(:last-child) {
+      margin-bottom: $space-xs;
+    }
+  }
+}
+</style>

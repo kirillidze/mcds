@@ -10,6 +10,8 @@
         :sortable="sortable"
         :sorted-by="sortedBy"
         :sorted-descending="sortedDescending"
+        :tooltip="tooltip"
+        :tooltip-content="item.tooltip_content"
         @click="() => handleCellClick(item)"
       />
     </McTableRow>
@@ -46,6 +48,10 @@ export default {
     sortedDescending: {
       type: Boolean,
       default: false,
+    },
+    tooltip: {
+      type: [Boolean, Array],
+      required: false,
     },
   },
   methods: {

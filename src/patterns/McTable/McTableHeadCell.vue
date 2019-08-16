@@ -13,6 +13,14 @@
         :name="!isSorted ? 'unfold_more' : iconName"
       ></McSvgIcon>
       {{ item.title }}
+      <McTooltip
+        v-if="isTooltip"
+        slot="icon-append"
+        :content="tooltipContent"
+        style="margin-bottom: 1px;"
+      >
+        <McSvgIcon name="help_invert"></McSvgIcon>
+      </McTooltip>
     </McTitle>
   </McTableCell>
 </template>
@@ -21,6 +29,7 @@
 import McTitle from "../../elements/McTitle"
 import McTableCell from "./McTableCell"
 import McSvgIcon from "../../elements/McSvgIcon"
+import McTooltip from "../../elements/McTooltip"
 export default {
   name: "McTableHeadCell",
   props: {
@@ -40,12 +49,19 @@ export default {
       type: [Boolean, Array],
       default: false,
     },
+    tooltip: {
+      type: [Boolean, Array],
+      default: false,
+    },
+    tooltipContent: {
+      type: String,
+    },
     size: {
       type: String,
       default: "m",
     },
   },
-  components: { McSvgIcon, McTableCell, McTitle },
+  components: { McTooltip, McSvgIcon, McTableCell, McTitle },
   computed: {
     classes() {
       return {
@@ -60,6 +76,9 @@ export default {
     },
     isSortable() {
       return this.sortable && (this.sortable === true || this.sortable.includes(this.item.key))
+    },
+    isTooltip() {
+      return this.tooltip && (this.tooltip === true || this.tooltip.includes(this.item.key))
     },
     iconName() {
       return this.sortedDescending ? "arrow_downward" : "arrow_upward"

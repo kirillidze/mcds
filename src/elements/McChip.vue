@@ -1,5 +1,5 @@
 <template>
-  <section class="mc-chip" :class="classes">
+  <section tabindex="0" class="mc-chip" :class="classes">
     <slot name="icon" />
     <div class="mc-chip__title">
       <slot></slot>
@@ -97,6 +97,7 @@ export default {
   padding-right: $space-xs;
   border-radius: $radius-xxxxl;
   vertical-align: middle;
+  outline: none;
 
   &__title {
     @include ellipsis();

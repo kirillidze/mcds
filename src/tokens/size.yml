@@ -33,6 +33,9 @@ props:
   avatar_xl:
     value: "92px"
 
+  separator_s:
+    value: "2px"
+
   separator_xs:
     value: "1px"
 

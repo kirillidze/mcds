@@ -1,26 +1,22 @@
 <template>
-  <McCollapse no-border>
-    {{ filter.name }}
-    <McChip
-      slot="title"
-      v-if="value != null && value !== ''"
-      variation="gray-darkest-invert"
-      size="s"
-      :closable="true"
-      @click="handleInput(null)"
-    >
-      1
-    </McChip>
-    <template slot="body">
-      <div class="mc-filter-type-text">
-        <McFieldText
-          :name="filter.name"
-          :value="value"
-          @input="handleInput"
-          @keypress.enter="submit"
-        ></McFieldText>
-      </div>
-    </template>
+  <McCollapse class="mc-filter-type-text">
+    <McFilterRow slot="activator">
+      {{ filter.name }}
+      <McChip
+        slot="title"
+        v-if="value != null && value !== ''"
+        variation="gray-darkest-invert"
+        size="s"
+        :closable="true"
+        @click="e => handleInput(null, e)"
+      >
+        1
+      </McChip>
+    </McFilterRow>
+    <div class="mc-filter-type-text__body" slot="body">
+      <McFieldText :name="filter.name" :value="value" @input="handleInput" @keypress.enter="submit">
+      </McFieldText>
+    </div>
   </McCollapse>
 </template>
 
@@ -28,10 +24,13 @@
 import McCollapse from "../../patterns/McCollapse"
 import McFieldText from "../../elements/McField/McFieldText"
 import McChip from "../../elements/McChip"
+import McButton from "../../elements/McButton"
+import McFilterRow from "./McFilterRow"
+import McSvgIcon from "../../elements/McSvgIcon"
 
 export default {
   name: "McFilterTypeText",
-  components: { McChip, McFieldText, McCollapse },
+  components: { McSvgIcon, McFilterRow, McButton, McChip, McFieldText, McCollapse },
   props: {
     value: {
       type: String,
@@ -47,8 +46,12 @@ export default {
     },
   },
   methods: {
-    handleInput(value) {
+    handleInput(value, e) {
       this.emitInput(value === null || value === "" ? null : value)
+
+      if (e) {
+        e.stopPropagation()
+      }
     },
     emitInput(value) {
       this.$emit("input", value)
@@ -59,3 +62,5 @@ export default {
   },
 }
 </script>
+
+<style lang="scss"></style>

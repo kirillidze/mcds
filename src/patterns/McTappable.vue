@@ -5,33 +5,30 @@
 </template>
 
 <script>
+import McPreview from "./McPreview"
+import McAvatar from "../elements/McAvatar/McAvatar"
+import McTitle from "../elements/McTitle"
+import McSvgIcon from "../elements/McSvgIcon"
 export default {
   name: "McTappable",
-  status: "deprecated",
+  components: { McSvgIcon, McTitle, McAvatar, McPreview },
+  status: "ready",
   release: "1.0.0",
   props: {
     /**
-     *  Процент
-     *
+     *  Размеры:
+     *  `s, m, l, xl`
      */
-    percent: {
-      type: Number,
-      default: 0,
-    },
-    /**
-     *  Цвет
-     *
-     */
-    color: {
+    size: {
       type: String,
-      default: null,
+      default: "m",
     },
   },
 
   computed: {
     classes() {
       return {
-        [`mc-tappable__line--color-${this.color}`]: this.color,
+        [`mc-tappable--size-${this.size}`]: this.size,
       }
     },
   },
@@ -41,6 +38,20 @@ export default {
 <style lang="scss">
 .mc-tappable {
   $block-name: &;
+
+  padding: $space-xs;
+  transition: background-color $duration-quickly;
+  border-radius: $radius-m;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    background-color: fade-out($color-gray-darkest, 0.9);
+  }
+
+  &:active {
+    background-color: fade-out($color-gray-darkest, 0.85);
+  }
 }
 </style>
 
@@ -48,7 +59,15 @@ export default {
   ```jsx
   <div>
     <McTappable>
-      lorem
+        <McPreview>
+            <McAvatar slot="left"/>
+            <McTitle size="l" slot="top">Татьяна Владимирова Татьяна Владимирова Татьяна Владимирова</McTitle>
+            <McTitle color="gray" size="m" slot="bottom">
+                <McSvgIcon fill="rgb(61, 143, 65)" slot="icon-prepend" name="ready"/>
+                ildar@mediacube.in
+            </McTitle>
+            <McAvatar size="xs" slot="right"/>
+        </McPreview>
     </McTappable>
   </div>
   ```
