@@ -1,11 +1,6 @@
 <template>
   <section class="mc-collapse" :class="classes">
-    <div
-      class="mc-collapse__header"
-      v-if="!isDisabled && $slots['body']"
-      tabindex="0"
-      @keyup.esc="close"
-    >
+    <div class="mc-collapse__header" v-if="!isDisabled" tabindex="0" @keyup.esc="close">
       <slot name="activator" />
     </div>
     <slide-up-down
