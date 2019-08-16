@@ -112,6 +112,14 @@ export default {
 
     &:active {
       background-color: fade-out($gray-darkest, 0.9);
+
+      & .mc-table-cell .mc-grid-row {
+        background-color: #e7e7e7;
+
+        &:before {
+          background: linear-gradient(90deg, hsla(0, 0%, 92.9%, 0) 0, #e7e7e7);
+        }
+      }
     }
   }
 }
