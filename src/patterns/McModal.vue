@@ -136,7 +136,7 @@ export default {
     margin-top: 0;
     margin-bottom: 0;
     color: hsl(0, 0%, 13%);
-    font-family: $font-heading-secondary;
+    font-family: $font-heading;
     font-size: 20px;
     font-weight: 400;
     line-height: line-height(23, 20);
