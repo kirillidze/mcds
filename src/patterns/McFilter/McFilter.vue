@@ -267,13 +267,17 @@ export default {
 
 <style lang="scss">
 .mc-filter {
-  width: $panel-l;
+  width: $panel-s + 34;
   max-width: 100%;
-  height: $panel-xl;
+  height: 75vh;
   display: flex;
   flex-direction: column;
-
   @include custom-scroll();
+
+  @media #{$media-query-s} {
+    width: $panel-l;
+    height: $panel-xl;
+  }
 
   &__panel {
     max-width: none;
