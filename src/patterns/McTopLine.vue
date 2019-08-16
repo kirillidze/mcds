@@ -103,6 +103,7 @@ export default {
 
   &--padding {
     padding-top: $space-s;
+    background-color: #fff;
   }
 }
 </style>
