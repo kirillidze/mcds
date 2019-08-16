@@ -1,6 +1,12 @@
 <template>
   <section class="mc-collapse" :class="classes">
     <div class="mc-collapse__header" v-if="!isDisabled" tabindex="0" @keyup.esc="close">
+      <McSvgIcon
+        class="mc-collapse__icon"
+        v-if="icon && $slots['body']"
+        size="s"
+        name="arrow_drop_down"
+      />
       <slot name="activator" />
     </div>
     <slide-up-down
@@ -39,6 +45,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    border: {
+      type: Boolean,
+      default: false,
+    },
+    icon: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -47,6 +61,7 @@ export default {
         "mc-collapse--is-open": this.isCollapsed,
         "mc-collapse--is-disabled": this.isDisabled,
         "mc-collapse--is-empty": this.isEmpty,
+        "mc-collapse--border": this.border,
       }
     },
     activator() {
@@ -90,12 +105,20 @@ export default {
 .mc-collapse {
   $block-name: &;
 
+  &--border {
+    border-radius: $radius-m;
+    border: 1px solid $color-border;
+  }
+
   &__header {
+    display: flex;
+    align-items: center;
     outline: none;
     cursor: pointer;
   }
 
   &__icon {
+    transition: all $duration-quickly;
   }
 
   &__body {
@@ -132,6 +155,7 @@ export default {
       &__header {
         #{$block-name} {
           &__icon {
+            transform: rotate(180deg);
           }
         }
       }
@@ -154,6 +178,15 @@ export default {
     <div>
         <McCollapse>
             <mc-button slot="activator">Заголовок</mc-button>
+            <template slot="body">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
+                facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
+                tempore unde!
+            </template>
+        </McCollapse>
+        <br/>
+        <McCollapse :icon="true" :border="true">
+            <div slot="activator">Заголовок</div>
             <template slot="body">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                 facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
