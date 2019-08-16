@@ -46,10 +46,14 @@ export default {
       return {
         "mc-collapse--is-open": this.isCollapsed,
         "mc-collapse--is-disabled": this.isDisabled,
+        "mc-collapse--is-empty": this.isEmpty,
       }
     },
     activator() {
       return this.$slots.activator ? this.$slots.activator[0].elm : null
+    },
+    isEmpty() {
+      return !this.$slots.body
     },
   },
 
@@ -88,6 +92,7 @@ export default {
 
   &__header {
     outline: none;
+    cursor: pointer;
   }
 
   &__icon {
@@ -133,9 +138,11 @@ export default {
     }
   }
 
-  &--is-disabled {
+  &--is-disabled,
+  &--is-empty {
     > #{$block-name} {
       &__header {
+        cursor: inherit;
       }
     }
   }
