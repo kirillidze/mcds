@@ -1,6 +1,6 @@
 <template>
   <section class="mc-collapse" :class="classes">
-    <div class="mc-collapse__header" v-if="!isDisabled" tabindex="0" @keyup.esc="close">
+    <span class="mc-collapse__header" v-if="!isDisabled" tabindex="0" @keyup.esc="close">
       <McSvgIcon
         class="mc-collapse__icon"
         v-if="icon && $slots['body']"
@@ -8,7 +8,13 @@
         name="arrow_drop_down"
       />
       <slot name="activator" />
-    </div>
+      <a
+        v-if="border && $slots['body']"
+        class="mc-collapse__link"
+        href="#"
+        @click.prevent="toggle"
+      ></a>
+    </span>
     <slide-up-down
       v-if="!isDisabled"
       :active="isCollapsed"
@@ -84,7 +90,7 @@ export default {
   },
 
   mounted() {
-    this.activator && this.activator.addEventListener("click", this.toggle)
+    !this.border && this.activator && this.activator.addEventListener("click", this.toggle)
   },
 
   methods: {
@@ -108,22 +114,47 @@ export default {
   &--border {
     border-radius: $radius-m;
     border: 1px solid $color-border;
+
+    #{$block-name} {
+      &__header {
+        position: relative;
+        display: flex;
+        padding: $space-xs $space-s;
+        transition: color $duration-quickly;
+
+        &:hover {
+          color: $color-cinnabar;
+        }
+      }
+    }
+  }
+
+  &__link {
+    display: block;
+    @include position(absolute, 0);
+    z-index: 1;
   }
 
   &__header {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     outline: none;
     cursor: pointer;
   }
 
   &__icon {
-    transition: all $duration-quickly;
+    transition: transform $duration-quickly;
   }
 
   &__body {
     #{$block-name} {
+      border: none;
+      border-radius: 0;
+      border-bottom: 1px solid $color-border;
+
       &__header {
+        padding-left: 2 * $space-s;
+        padding-right: $space-s;
       }
 
       &__icon {
@@ -132,6 +163,7 @@ export default {
       &__body {
         #{$block-name} {
           &__header {
+            padding-left: $space-xl;
           }
 
           &__body {
@@ -143,9 +175,11 @@ export default {
       }
 
       &:first-child {
+        border-top: 1px solid $color-border;
       }
 
       &:last-child {
+        border-bottom: none;
       }
     }
   }
@@ -167,6 +201,9 @@ export default {
     > #{$block-name} {
       &__header {
         cursor: inherit;
+        &:hover {
+          color: inherit;
+        }
       }
     }
   }
@@ -184,13 +221,47 @@ export default {
                 tempore unde!
             </template>
         </McCollapse>
+
         <br/>
+        <br/>
+        <br/>
+
         <McCollapse :icon="true" :border="true">
             <div slot="activator">Заголовок</div>
             <template slot="body">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                 facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
                 tempore unde!
+                <McCollapse :icon="true" :border="true">
+                    <div slot="activator">Заголовок без бадика</div>
+                </McCollapse>
+                <McCollapse :icon="true" :border="true">
+                    <div slot="activator">Заголовок</div>
+                    <template slot="body">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
+                        facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
+                        tempore unde!
+                        <McCollapse :icon="true" :border="true">
+                            <div slot="activator">Заголовок</div>
+                            <template slot="body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
+                                facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
+                                tempore unde!
+                            </template>
+                        </McCollapse>
+                        <McCollapse :icon="true" :border="true">
+                            <div slot="activator">Заголовок</div>
+                            <template slot="body">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
+                                facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
+                                tempore unde!
+                            </template>
+                        </McCollapse>
+                        <McCollapse :icon="true" :border="true">
+                            <div slot="activator">Заголовок без бадика</div>
+                        </McCollapse>
+                    </template>
+                </McCollapse>
             </template>
         </McCollapse>
     </div>
