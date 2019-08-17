@@ -423,7 +423,12 @@ $colors: $token-colors;
       .multiselect {
         &__tags {
           background-color: fade-out($value, 0.6);
-          border-color: transparent;
+        }
+
+        @if $color != "white" {
+          &__tags {
+            border-color: transparent;
+          }
         }
 
         //&__option {
@@ -482,7 +487,9 @@ $colors: $token-colors;
         &--active {
           .multiselect {
             &__tags {
-              border-color: $value;
+              @if $color != "white" {
+                border-color: $value;
+              }
             }
 
             &__select {
