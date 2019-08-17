@@ -1,12 +1,7 @@
 <template>
   <section class="mc-collapse" :class="classes">
     <span class="mc-collapse__header" v-if="!isDisabled" tabindex="0" @keyup.esc="close">
-      <McSvgIcon
-        class="mc-collapse__icon"
-        v-if="icon && $slots['body']"
-        size="s"
-        name="arrow_drop_down"
-      />
+      <component :is="tag" class="mc-collapse__icon" v-if="icon" size="s" name="arrow_drop_down" />
       <slot name="activator" />
       <a
         v-if="border && $slots['body']"
@@ -70,6 +65,9 @@ export default {
         "mc-collapse--border": this.border,
       }
     },
+    tag() {
+      return this.$slots["body"] ? "McSvgIcon" : "div"
+    },
     activator() {
       return this.$slots.activator ? this.$slots.activator[0].elm : null
     },
@@ -91,6 +89,7 @@ export default {
 
   mounted() {
     !this.border && this.activator && this.activator.addEventListener("click", this.toggle)
+    this.activator && (this.activator.style.transition = "all 0.15s")
   },
 
   methods: {
@@ -143,7 +142,9 @@ export default {
   }
 
   &__icon {
-    transition: transform $duration-quickly;
+    width: 32px;
+    height: 32px;
+    transition: all $duration-quickly;
   }
 
   &__body {

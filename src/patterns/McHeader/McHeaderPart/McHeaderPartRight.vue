@@ -44,7 +44,13 @@
         v-if="menuProfile && menuProfile.length"
       >
         <McDropdown v-model="menuProfileIsOpen" position="right">
-          <McButton slot="activator" variation="gray-darkest-flat" size="l-compact" rounded>
+          <McButton
+            slot="activator"
+            variation="gray-darkest-flat"
+            size="l-compact"
+            dusk="menu-user-dropdown"
+            rounded
+          >
             <McAvatar slot="icon-prepend" :src="user ? user.avatar : null" size="m" rounded />
           </McButton>
           <McPanel>
@@ -72,6 +78,7 @@
                 typeof menuProfileItem.handler === 'function' ? menuProfileItem.handler() : ''
               "
               exact
+              :dusk="menuProfileItem.dusk"
             >
               <McSvgIcon slot="icon-prepend" :name="menuProfileItem.icon" size="xxs" />
               {{ menuProfileItem.name }}
