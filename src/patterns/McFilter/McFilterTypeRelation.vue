@@ -58,7 +58,7 @@
           >
             <McFilterTypeRelationChip
               v-for="chip in chips"
-              :key="type + '-' + chip"
+              :key="type + '-' + filter.value + chip"
               :type="type"
               :value="chip"
               :options="options"

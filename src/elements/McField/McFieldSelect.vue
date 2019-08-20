@@ -505,8 +505,10 @@ $colors: $token-colors;
         .multiselect--disabled {
           .multiselect {
             &__tags {
-              border-color: transparent !important;
               background-color: fade-out($value, 0.6);
+              @if $color != "white" {
+                border-color: transparent !important;
+              }
             }
 
             &__select {
