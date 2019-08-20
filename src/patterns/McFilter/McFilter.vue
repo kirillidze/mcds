@@ -269,14 +269,13 @@ export default {
 .mc-filter {
   width: $panel-s + 34;
   max-width: 100%;
-  height: 75vh;
   display: flex;
   flex-direction: column;
   @include custom-scroll();
 
   @media #{$media-query-s} {
     width: $panel-l;
-    height: $panel-xl;
+    min-height: $panel-xl;
   }
 
   &__panel {
@@ -316,21 +315,18 @@ export default {
   }
 
   &__tabs {
-    @include position(absolute, 0);
+    @include position(relative, 0);
     display: flex;
     flex-direction: column;
+    z-index: 100;
     .tabs-component-tabs {
       margin-bottom: 0;
       flex-shrink: 0;
     }
     .tabs-component-panels {
       flex-grow: 1;
-      overflow-y: auto;
       padding-top: $space-xs;
       padding-bottom: $space-xs;
-    }
-    .tabs-component-panel {
-      overflow: hidden;
     }
   }
 
@@ -429,6 +425,12 @@ export default {
     name: 'Дата создания',
     value: 'created_at',
     type: 'date',
+    },
+    {
+    name: 'Страна',
+    value: 'countries',
+    type: 'relation',
+    values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
     ]
     let presets = [
