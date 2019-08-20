@@ -306,6 +306,12 @@ export default {
         padding-bottom: $space-s;
         margin-bottom: $space-xs;
       }
+      & .mc-collapse__header {
+        width: 100%;
+        & .mc-tappable.mc-filter-row {
+          width: 100%;
+        }
+      }
     }
   }
 
