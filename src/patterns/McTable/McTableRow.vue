@@ -1,5 +1,9 @@
 <template>
-  <tr class="mc-table-row" :class="classes">
+  <tr
+    class="mc-table-row"
+    :class="classes"
+    :style="{ visibility: isVisible ? 'visible' : 'hidden' }"
+  >
     <slot>
       <McTableCell
         :checkable="index === 0 && checkable"
@@ -68,6 +72,12 @@ export default {
       default: "id",
     },
   },
+  data() {
+    return {
+      isVisible: true,
+      offsetHeight: 0,
+    }
+  },
   computed: {
     isChecked() {
       return !!this.checkedItems.find(i => i[this.checkBy] === this.item[this.checkBy])
@@ -78,12 +88,37 @@ export default {
       }
     },
   },
+  mounted() {
+    this.checkVisibility()
+    window.addEventListener("scroll", this.checkVisibility)
+    setInterval(() => {
+      this.offsetHeight = this.$el.offsetHeight
+    }, 250)
+  },
+  watch: {
+    offsetHeight(val, prevVal) {
+      if (val && !prevVal) {
+        this.checkVisibility()
+      }
+    },
+  },
   methods: {
     _get(...args) {
       return _get(...args)
     },
     handleCheckInput(value) {
       this.$emit("check", value)
+    },
+    checkVisibility() {
+      let el = this.$el
+
+      let coords = el.getBoundingClientRect()
+      let abs = {
+        top: coords.top + pageYOffset,
+        bottom: coords.bottom + pageYOffset,
+      }
+
+      this.isVisible = abs.bottom > pageYOffset && abs.top < pageYOffset + window.innerHeight
     },
   },
 }
