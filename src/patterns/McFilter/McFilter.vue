@@ -101,7 +101,8 @@
           </McGridCol>
           <McGridCol stretch-self>
             <McButton full-width :disabled="!canSubmit" @click="submit">
-              <slot name="submit">Применить </slot> {{ filterDeepCount }} фильтра
+              <slot name="submit">Применить</slot>
+              <template v-if="filterDeepCount">{{ filterDeepCount }}</template>
             </McButton>
           </McGridCol>
         </McGridRow>
@@ -201,7 +202,7 @@ export default {
   },
   computed: {
     canSubmit() {
-      return !_isEqual(this.value, this.currentValues)
+      return !_isEqual(this.value, this.currentValues) && this.filterDeepCount
     },
 
     filterDeepCount() {
