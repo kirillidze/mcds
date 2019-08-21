@@ -72,6 +72,10 @@ export default {
       type: String,
       default: "id",
     },
+    optimizeVisibility: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -91,15 +95,19 @@ export default {
     },
   },
   mounted() {
-    this.wrapper = findParentComponent(this, "McTableCardWrap").$el.getElementsByClassName(
-      "mc-table-card-wrap__inner"
-    )[0]
+    if (this.optimizeVisibility) {
+      this.wrapper = findParentComponent(this, "McTableCardWrap").$el.getElementsByClassName(
+        "mc-table-card-wrap__inner"
+      )[0]
 
-    this.checkVisibility()
-    this.wrapper.addEventListener("scroll", this.checkVisibility)
-    setInterval(() => {
-      this.offsetHeight = this.$el.offsetHeight
-    }, 250)
+      if (this.wrapper) {
+        this.checkVisibility()
+        this.wrapper.addEventListener("scroll", this.checkVisibility)
+        setInterval(() => {
+          this.offsetHeight = this.$el.offsetHeight
+        }, 250)
+      }
+    }
   },
   watch: {
     offsetHeight(val, prevVal) {
