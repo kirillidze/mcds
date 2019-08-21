@@ -1,5 +1,9 @@
 <template>
-  <tr class="mc-table-row" :class="classes">
+  <tr
+    class="mc-table-row"
+    :class="classes"
+    :style="{ visibility: isVisible ? 'visible' : 'hidden' }"
+  >
     <slot>
       <McTableCell
         :checkable="index === 0 && checkable"
@@ -29,6 +33,7 @@ import _get from "lodash/get"
 import McTableCell from "./McTableCell"
 import McTitle from "../../elements/McTitle"
 import McFieldCheckbox from "../../elements/McField/McFieldCheckbox"
+import { findParentComponent } from "../../utils/treeSearch"
 export default {
   name: "McTableRow",
   components: { McTitle, McTableCell, McFieldCheckbox },
@@ -67,6 +72,17 @@ export default {
       type: String,
       default: "id",
     },
+    optimizeVisibility: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  data() {
+    return {
+      isVisible: true,
+      offsetHeight: 0,
+      wrapper: null,
+    }
   },
   computed: {
     isChecked() {
@@ -78,12 +94,43 @@ export default {
       }
     },
   },
+  mounted() {
+    if (this.optimizeVisibility) {
+      this.wrapper = findParentComponent(this, "McTableCardWrap").$el.getElementsByClassName(
+        "mc-table-card-wrap__inner"
+      )[0]
+
+      if (this.wrapper) {
+        this.checkVisibility()
+        this.wrapper.addEventListener("scroll", this.checkVisibility)
+        setInterval(() => {
+          this.offsetHeight = this.$el.offsetHeight
+        }, 250)
+      }
+    }
+  },
+  watch: {
+    offsetHeight(val, prevVal) {
+      if (val && !prevVal) {
+        this.checkVisibility()
+      }
+    },
+  },
   methods: {
     _get(...args) {
       return _get(...args)
     },
     handleCheckInput(value) {
       this.$emit("check", value)
+    },
+    checkVisibility() {
+      let el = this.$el
+      let wrapper = this.wrapper
+
+      let boxWrapper = wrapper.getBoundingClientRect()
+      let boxRow = el.getBoundingClientRect()
+
+      this.isVisible = boxRow.bottom > boxWrapper.top && boxRow.top < boxWrapper.bottom
     },
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <thead class="mc-table-head">
-    <McTableRow>
+    <McTableRow :optimize-visibility="false">
       <McTableHeadCell
         :size="size"
         :item="item"
