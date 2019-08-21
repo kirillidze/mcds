@@ -33,6 +33,7 @@ import _get from "lodash/get"
 import McTableCell from "./McTableCell"
 import McTitle from "../../elements/McTitle"
 import McFieldCheckbox from "../../elements/McField/McFieldCheckbox"
+import { findParentComponent } from "../../utils/treeSearch"
 export default {
   name: "McTableRow",
   components: { McTitle, McTableCell, McFieldCheckbox },
@@ -76,6 +77,7 @@ export default {
     return {
       isVisible: true,
       offsetHeight: 0,
+      wrapper: null,
     }
   },
   computed: {
@@ -89,8 +91,12 @@ export default {
     },
   },
   mounted() {
+    this.wrapper = findParentComponent(this, "McTableCardWrap").$el.getElementsByClassName(
+      "mc-table-card-wrap__inner"
+    )[0]
+
     this.checkVisibility()
-    window.addEventListener("scroll", this.checkVisibility)
+    this.wrapper.addEventListener("scroll", this.checkVisibility)
     setInterval(() => {
       this.offsetHeight = this.$el.offsetHeight
     }, 250)
@@ -111,14 +117,12 @@ export default {
     },
     checkVisibility() {
       let el = this.$el
+      let wrapper = this.wrapper
 
-      let coords = el.getBoundingClientRect()
-      let abs = {
-        top: coords.top + pageYOffset,
-        bottom: coords.bottom + pageYOffset,
-      }
+      let boxWrapper = wrapper.getBoundingClientRect()
+      let boxRow = el.getBoundingClientRect()
 
-      this.isVisible = abs.bottom > pageYOffset && abs.top < pageYOffset + window.innerHeight
+      this.isVisible = boxRow.bottom > boxWrapper.top && boxRow.top < boxWrapper.bottom
     },
   },
 }
