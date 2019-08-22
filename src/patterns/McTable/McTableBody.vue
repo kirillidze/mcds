@@ -10,6 +10,7 @@
       :checked-items="checkedItems"
       :check-by="checkBy"
       @check="value => handleCheck(item, value)"
+      :container-element="containerElement"
     >
       <slot
         v-for="header in headers"
@@ -53,6 +54,9 @@ export default {
     checkBy: {
       type: String,
       default: "id",
+    },
+    containerElement: {
+      default: null,
     },
   },
   methods: {
