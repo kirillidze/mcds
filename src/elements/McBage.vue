@@ -75,15 +75,6 @@ export default {
       }
     }
   }
-  &--variation-transparent {
-    background-color: transparent;
-
-    &-outline {
-      background-color: $white;
-      color: $color-text;
-      border-color: transparent;
-    }
-  }
 
   &--vertical-line {
     padding: 0;
