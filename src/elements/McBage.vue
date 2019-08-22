@@ -66,6 +66,18 @@ export default {
   border: 1px solid transparent;
 
   @each $color, $value in $token-colors {
+    @if $color == "transparent" {
+      &--variation-#{$color} {
+        background-color: transparent;
+
+        &-outline {
+          background-color: $white;
+          color: $color-text;
+          border-color: $value;
+        }
+      }
+    }
+
     &--variation-#{$color} {
       background-color: $value;
 
