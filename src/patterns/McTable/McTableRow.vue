@@ -114,6 +114,7 @@ export default {
       if (this.wrapper) {
         this.checkVisibility()
         this.wrapper.addEventListener("scroll", this.checkVisibility)
+        window.addEventListener("resize", this.checkVisibility)
         setInterval(() => {
           this.offsetHeight = this.$el.offsetHeight
         }, 250)
