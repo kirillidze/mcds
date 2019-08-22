@@ -469,6 +469,7 @@ $colors: $token-colors;
           height: auto;
           width: auto;
           border: none;
+          user-select: text;
 
           &:hover,
           &:focus {
