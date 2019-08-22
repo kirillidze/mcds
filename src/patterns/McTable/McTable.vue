@@ -30,6 +30,7 @@
       :checked-items="checkedItems"
       :check-by="checkBy"
       @check="handleCheck"
+      :container-element="containerElement"
     >
       <template v-for="header in headers" :slot="`cell-${header.key}`" slot-scope="row">
         <slot :name="`cell-${header.key}`" :item="row.item" />

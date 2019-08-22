@@ -76,6 +76,9 @@ export default {
       type: Boolean,
       default: true,
     },
+    containerElement: {
+      default: null,
+    },
   },
   data() {
     return {
@@ -95,10 +98,18 @@ export default {
     },
   },
   mounted() {
-    if (this.optimizeVisibility) {
-      this.wrapper = findParentComponent(this, "McTableCardWrap").$el.getElementsByClassName(
-        "mc-table-card-wrap__inner"
-      )[0]
+    if (this.optimizeVisibility && this.containerElement) {
+      if (this.containerElement === "McTableCardWrap") {
+        this.wrapper = findParentComponent(this, "McTableCardWrap").$el.getElementsByClassName(
+          "mc-table-card-wrap__inner"
+        )[0]
+      }
+
+      if (this.containerElement === "McTableCardBody") {
+        this.wrapper = findParentComponent(this, "McTableCardBody").$el.querySelector(
+          ".mc-table-card-body__left .mc-table-card-body__inner-col"
+        )
+      }
 
       if (this.wrapper) {
         this.checkVisibility()
