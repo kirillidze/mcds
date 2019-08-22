@@ -57,7 +57,6 @@ export default {
   font-size: $size-xs;
   line-height: $line-height-s;
   font-weight: $weight-medium;
-  background-color: $color-primary;
   text-transform: uppercase;
   vertical-align: middle;
   max-width: 100%;
@@ -74,15 +73,6 @@ export default {
         color: $color-text;
         border-color: $value;
       }
-    }
-  }
-  &--variation-transparent {
-    background-color: transparent;
-
-    &-outline {
-      background-color: $white;
-      color: $color-text;
-      border-color: transparent;
     }
   }
 
