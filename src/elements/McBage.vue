@@ -57,7 +57,6 @@ export default {
   font-size: $size-xs;
   line-height: $line-height-s;
   font-weight: $weight-medium;
-  background-color: $color-primary;
   text-transform: uppercase;
   vertical-align: middle;
   max-width: 100%;
