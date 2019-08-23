@@ -20,10 +20,21 @@ export default {
       this.handleToggle(value)
     })
   },
+  data() {
+    return {
+      isClosed: true,
+    }
+  },
+
   methods: {
     handleToggle({ value, component }) {
-      if (value === false) return
       let $collapse = findChildrenComponents(this, "McCollapse")
+      this.isClosed = $collapse.every($child => {
+        return !$child.isCollapsed
+      })
+
+      if (value === false) return
+
       $collapse.forEach($child => {
         if (component !== $child) {
           $child.close()

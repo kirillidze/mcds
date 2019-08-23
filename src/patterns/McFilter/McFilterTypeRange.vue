@@ -1,5 +1,5 @@
 <template>
-  <McCollapse>
+  <McCollapse @open="handleOpen" ref="collapse">
     <McFilterRow slot="activator">
       {{ filter.name }}
       <McChip
@@ -123,6 +123,9 @@ export default {
     },
   },
   methods: {
+    handleOpen() {
+      this.$emit("open", this)
+    },
     handleInput(type, value) {
       const currentValue = value == null ? {} : { ...this.value }
       currentValue[type] = this.filter.type === "date" ? value : value == null ? null : +value

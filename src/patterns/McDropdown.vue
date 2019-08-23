@@ -122,7 +122,7 @@ export default {
     #{$block-name} {
       &__body {
         bottom: 100%;
-        transform: translateY(-10px);
+        //transform: translateY(-10px);
       }
     }
   }
@@ -131,7 +131,7 @@ export default {
     #{$block-name} {
       &__body {
         top: 100%;
-        transform: translateY(10px);
+        /*transform: translateY(10px);*/
       }
     }
   }
@@ -143,7 +143,7 @@ export default {
         visibility: visible;
         overflow: visible;
         opacity: 1;
-        transform: translateY(0);
+        /*transform: translateY(0);*/
       }
     }
 

@@ -1,5 +1,5 @@
 <template>
-  <McCollapse @open="handleOpen">
+  <McCollapse @open="handleOpen" ref="collapse">
     <McFilterRow slot="activator">
       {{ filter.name }}
       <!--<McSvgIcon v-if="isAjax" name="search" />-->
@@ -174,6 +174,7 @@ export default {
   },
   methods: {
     handleOpen() {
+      this.$emit("open", this)
       this.loadAjaxOptions()
     },
     handleInput(value) {

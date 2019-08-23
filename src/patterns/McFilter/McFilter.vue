@@ -7,9 +7,9 @@
         </McTitle>
       </div>
       <div class="mc-filter__content">
-        <McTabs class="mc-filter__tabs">
+        <McTabs class="mc-filter__tabs" ref="tabs">
           <McTab :name="tabAll">
-            <McAccordion>
+            <McAccordion ref="accordion">
               <template v-for="(filter, _key) in filters">
                 <McFilterTypeText
                   v-if="filter.type === 'text'"
@@ -19,6 +19,7 @@
                   :real-value="value[filter.value] || ''"
                   @input="value => handleInput(filter, value)"
                   @submit="submit"
+                  @open="getOpenElems"
                 />
                 <McFilterTypeRelation
                   v-else-if="filter.type === 'relation'"
@@ -32,6 +33,7 @@
                   :t-relation-not-is="tRelationNotIs"
                   :t-relation-exists="tRelationExists"
                   :t-relation-not-exists="tRelationNotExists"
+                  @open="getOpenElems"
                 />
                 <McFilterTypeRange
                   v-else-if="filter.type === 'number' || filter.type === 'date'"
@@ -43,6 +45,7 @@
                   @submit="submit"
                   :t-range-more="tRangeMore"
                   :t-range-less="tRangeLess"
+                  @open="getOpenElems"
                 />
               </template>
             </McAccordion>
@@ -128,6 +131,7 @@ import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
 import McTooltip from "../../elements/McTooltip"
 import McSvgIcon from "../../elements/McSvgIcon"
+import McDropdown from "../McDropdown"
 
 export default {
   name: "McFilter",
@@ -146,6 +150,7 @@ export default {
     McTabs,
     McTitle,
     McPanel,
+    McDropdown,
   },
   props: {
     value: {
@@ -198,7 +203,15 @@ export default {
   data() {
     return {
       currentValues: {},
+      panel: null,
+      header: null,
+      body: null,
     }
+  },
+  mounted() {
+    this.panel = this.$refs.tabs.$el.querySelector(".tabs-component-panels")
+    window.addEventListener("scroll", this.onScroll)
+    this.panel.addEventListener("scroll", this.onScroll)
   },
   computed: {
     canSubmit() {
@@ -222,6 +235,9 @@ export default {
       })
 
       return accum
+    },
+    accordionIsClosed() {
+      return this.$refs.accordion.isClosed
     },
   },
   watch: {
@@ -262,6 +278,35 @@ export default {
     emitInput(value) {
       this.$emit("input", this.clearEmpty(value))
     },
+    getOpenElems(elem) {
+      this.header = elem.$refs.collapse.$el.querySelector(".mc-collapse__header")
+      this.body = elem.$refs.collapse.$children.find(
+        el => el.$options._componentTag === "slide-up-down"
+      ).$el
+
+      this.changePos()
+    },
+
+    changePos() {
+      this.panelBox = this.panel.getBoundingClientRect()
+      let headerBox = this.header.getBoundingClientRect()
+
+      this.body.style.left = headerBox.left + "px"
+      this.body.style.width = headerBox.width + "px"
+
+      if (headerBox.bottom >= this.panelBox.top && headerBox.bottom <= this.panelBox.bottom) {
+        this.body.style.top = headerBox.bottom + 8 + "px"
+      } else if (headerBox.bottom < this.panelBox.top) {
+        this.body.style.top = this.panelBox.top + "px"
+      } else if (headerBox.bottom > this.panelBox.bottom) {
+        this.body.style.top = this.panelBox.bottom + "px"
+      }
+    },
+    onScroll() {
+      if (!this.accordionIsClosed) {
+        this.changePos()
+      }
+    },
   },
 }
 </script>
@@ -296,15 +341,18 @@ export default {
     flex-grow: 1;
 
     .mc-collapse {
+      position: relative;
       &__body {
-        margin-left: $space-xs;
-        margin-right: $space-xs;
+        position: fixed;
+        padding: 0 $space-xs;
+        z-index: 100;
+        background-color: $color-white;
+        box-shadow: $shadow-m;
+        border-radius: $radius-m;
       }
       &__body-inner {
-        border-bottom: 1px solid $color-border;
         padding-top: $space-xs;
-        padding-bottom: $space-s;
-        margin-bottom: $space-xs;
+        padding-bottom: $space-xs;
       }
       & .mc-collapse__header {
         width: 100%;
@@ -316,18 +364,21 @@ export default {
   }
 
   &__tabs {
-    @include position(relative, 0);
+    @include position(absolute, 0);
     display: flex;
     flex-direction: column;
-    z-index: 100;
     .tabs-component-tabs {
       margin-bottom: 0;
       flex-shrink: 0;
     }
     .tabs-component-panels {
       flex-grow: 1;
+      overflow-y: auto;
       padding-top: $space-xs;
       padding-bottom: $space-xs;
+    }
+    .tabs-component-panel {
+      overflow: hidden;
     }
   }
 
@@ -433,11 +484,56 @@ export default {
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
+    {
+    name: 'Страна',
+    value: 'countries',
+    type: 'relation',
+    values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
+    },
+    {
+    name: 'Страна',
+    value: 'countries',
+    type: 'relation',
+    values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
+    },
+    {
+    name: 'Страна',
+    value: 'countries',
+    type: 'relation',
+    values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
+    },
     ]
     let presets = [
     {q: 'asd', views_count: {more: 10}},
     ]
     const savePreset = values => presets.push(values)
+    let dropIsOpen = false
+
+    <div>
+
+    <McDropdown v-model="dropIsOpen">
+        <McButton slot="activator" >
+            Владилен
+            <McSvgIcon slot="icon-append" name="arrow_drop_down" size="xs"/>
+        </McButton>
+        <McFilter
+                v-model="value"
+                :filters="filters"
+                :presets="presets"
+                @preset-save="savePreset"
+                t-relation-is="Это"
+                t-relation-not-is="Это не"
+                t-relation-exists="Не пустое"
+                t-relation-not-exists="Пустое"
+                t-range-more="Больше"
+                t-range-less="Меньше"
+        />
+    </McDropdown>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <McFilter
             v-model="value"
             :filters="filters"
@@ -450,13 +546,6 @@ export default {
             t-range-more="Больше"
             t-range-less="Меньше"
     />
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    </div>
     ```
 </docs>

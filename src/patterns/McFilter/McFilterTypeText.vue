@@ -1,5 +1,5 @@
 <template>
-  <McCollapse class="mc-filter-type-text">
+  <McCollapse @open="handleOpen" class="mc-filter-type-text" ref="collapse">
     <McFilterRow slot="activator">
       {{ filter.name }}
       <McChip
@@ -46,6 +46,9 @@ export default {
     },
   },
   methods: {
+    handleOpen() {
+      this.$emit("open", this)
+    },
     handleInput(value, e) {
       this.emitInput(value === null || value === "" ? null : value)
 
