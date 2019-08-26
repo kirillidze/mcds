@@ -105,7 +105,7 @@ export default {
   position: relative;
   display: block;
   border-radius: $radius-l;
-  border: 1px solid $color-border;
+  border: 1px solid $color-outline-gray;
   background: $color-white;
 
   &__content {
@@ -114,7 +114,7 @@ export default {
 
   &__header {
     padding: $size-m;
-    border-bottom: 1px solid $color-border;
+    border-bottom: 1px solid $color-outline-gray;
   }
 
   &__link {
@@ -130,11 +130,11 @@ export default {
 
     &:hover,
     &:focus {
-      border-color: darken($color-border, 10%);
+      border-color: darken($color-outline-gray, 10%);
     }
 
     &:active {
-      border-color: darken($color-border, 15%);
+      border-color: darken($color-outline-gray, 15%);
     }
   }
 }
@@ -152,14 +152,14 @@ export default {
                 <McGridRow slot="right" :gutter-x="5" :gutter-y="5">
                     <McGridCol>
                         <McTooltip size="s" placement="top" content="Редактировать">
-                            <McButton variation="primary-invert" size="s-compact">
+                            <McButton variation="accent-blue-invert" size="s-compact">
                                 <McSvgIcon slot="icon-append" name="create"/>
                             </McButton>
                         </McTooltip>
                     </McGridCol>
                     <McGridCol>
                         <McTooltip size="s" placement="top" content="Удалить">
-                            <McButton variation="danger-invert" size="s-compact">
+                            <McButton variation="red-invert" size="s-compact">
                                 <McSvgIcon slot="icon-append" name="delete"/>
                             </McButton>
                         </McTooltip>
@@ -247,14 +247,14 @@ export default {
                     <McGridRow :gutter-x="5" :gutter-y="5">
                         <McGridCol>
                             <McTooltip size="s" placement="top" content="Редактировать">
-                                <McButton variation="primary-invert" size="s-compact">
+                                <McButton variation="accent-blue-invert" size="s-compact">
                                     <McSvgIcon slot="icon-append" name="create"/>
                                 </McButton>
                             </McTooltip>
                         </McGridCol>
                         <McGridCol>
                             <McTooltip size="s" placement="top" content="Удалить">
-                                <McButton variation="danger-invert" size="s-compact">
+                                <McButton variation="red-invert" size="s-compact">
                                     <McSvgIcon slot="icon-append" name="delete"/>
                                 </McButton>
                             </McTooltip>
@@ -268,14 +268,14 @@ export default {
                         <McTitle tag-name="p" size="l">
                             10$
                         </McTitle>
-                        <McTitle tag-name="p" size="s">
-                            <McTitle tag-name="span" color="soft-green-light" size="s">
+                        <McCell tag-name="p" size="s">
+                            <McTitle tag-name="span" color="light-green" size="s">
                                 10$
                             </McTitle>
-                            <McTitle color="gray-light" tag-name="span" size="s">
+                            <McTitle color="gray" tag-name="span" size="s">
                                 (2%)
                             </McTitle>
-                        </McTitle>
+                        </McCell>
                     </McCell>
                 </McGridCol>
                 <McGridCol>
@@ -283,14 +283,14 @@ export default {
                         <McTitle tag-name="p" size="l">
                             12$
                         </McTitle>
-                        <McTitle tag-name="p" size="s">
-                            <McTitle tag-name="span" color="soft-green-light" size="s">
+                        <McCell tag-name="p" size="s">
+                            <McTitle tag-name="span" color="light-green" size="s">
                                 12$
                             </McTitle>
-                            <McTitle color="gray-light" tag-name="span" size="s">
+                            <McTitle color="gray" tag-name="span" size="s">
                                 (4%)
                             </McTitle>
-                        </McTitle>
+                        </McCell>
                     </McCell>
                 </McGridCol>
                 <McGridCol>
@@ -298,14 +298,14 @@ export default {
                         <McTitle tag-name="p" size="l">
                             12$
                         </McTitle>
-                        <McTitle tag-name="p" size="s">
-                            <McTitle tag-name="span" color="soft-green-light" size="s">
+                        <McCell tag-name="p" size="s">
+                            <McTitle tag-name="span" color="light-green" size="s">
                                 12$
                             </McTitle>
-                            <McTitle color="gray-light" tag-name="span" size="s">
+                            <McTitle color="gray" tag-name="span" size="s">
                                 (4%)
                             </McTitle>
-                        </McTitle>
+                        </McCell>
                     </McCell>
                 </McGridCol>
                 <McGridCol>
@@ -313,14 +313,14 @@ export default {
                         <McTitle tag-name="p" size="l">
                             12$
                         </McTitle>
-                        <McTitle tag-name="p" size="s">
-                            <McTitle tag-name="span" color="soft-green-light" size="s">
+                        <McCell tag-name="p" size="s">
+                            <McTitle tag-name="span" color="light-green" size="s">
                                 17$
                             </McTitle>
-                            <McTitle color="gray-light" tag-name="span" size="s">
+                            <McTitle color="gray" tag-name="span" size="s">
                                 (43%)
                             </McTitle>
-                        </McTitle>
+                        </McCell>
                     </McCell>
                 </McGridCol>
             </McGridRow>

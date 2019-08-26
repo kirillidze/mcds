@@ -5,7 +5,7 @@
       <McChip
         slot="chip"
         v-if="chipCount"
-        variation="gray-darkest-invert"
+        variation="gray-dark-invert"
         size="s"
         :closable="true"
         @click="e => emitInput(null, e)"

@@ -78,7 +78,7 @@ body {
   font-family: $font-text;
   font-size: $size-m;
   line-height: $line-height-s;
-  color: $color-text;
+  color: $color-black;
 }
 
 [tabindex="-1"]:focus {
@@ -162,12 +162,12 @@ a {
 }
 
 ::selection {
-  background: fade-out($color-primary, 0);
+  background: fade-out($color-accent-blue, 0);
   color: $color-white;
 }
 
 ::-moz-selection {
-  background: fade-out($color-primary, 0);
+  background: fade-out($color-accent-blue, 0);
   color: $color-white;
 }
 
@@ -272,21 +272,21 @@ pre {
 
   #{$block-name}__el-link.el-link {
     font-size: 19px;
-    color: $gray-darker;
+    color: darken($color-gray-dark, 50%);
 
     &:hover,
     &:focus {
-      color: $color-secondary;
+      color: $color-red;
     }
 
     &:active {
-      color: darken($color-secondary, 8%);
+      color: darken($color-red, 8%);
     }
   }
 
   &__text {
     @include ellipsis();
-    color: $gray-light;
+    color: $color-gray;
     font-size: 16px;
     font-weight: 400;
     line-height: line-height(19, 16);
@@ -357,7 +357,7 @@ pre {
     }
 
     &--danger {
-      color: #e73232;
+      color: $color-red;
     }
   }
 
@@ -626,7 +626,7 @@ pre {
     margin-top: 0;
     margin-bottom: 0;
     list-style: none;
-    border-bottom: 1px solid $color-border;
+    border-bottom: 1px solid $color-outline-gray;
     padding: 0 15px;
     display: flex;
     flex-wrap: nowrap;
@@ -658,7 +658,7 @@ pre {
     @include ellipsis();
     @include interplay-link();
 
-    color: $color-secondary;
+    color: $color-red;
     font-size: 14px;
     font-weight: 500;
     line-height: line-height(17, 14);
@@ -688,7 +688,7 @@ pre {
       text-transform: none;
       padding: 15px;
 
-      @include interplay-link($color: $color-secondary);
+      @include interplay-link($color: $color-red);
     }
     .tabs-component-tab {
       &.is-active {
@@ -708,7 +708,7 @@ pre {
 
   &__item {
     padding: 15px;
-    border-bottom: 1px solid $color-border;
+    border-bottom: 1px solid $color-outline-gray;
     overflow: hidden;
 
     &:empty {
@@ -792,7 +792,7 @@ pre {
     flex-wrap: nowrap;
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid $color-border;
+    border: 1px solid $color-outline-gray;
     width: calc(25% - 16px);
     margin: 8px;
 
@@ -801,7 +801,7 @@ pre {
     }
 
     &:hover {
-      border-color: $color-secondary;
+      border-color: $color-red;
     }
   }
 
@@ -869,7 +869,7 @@ pre {
   right: 0;
   background-color: #fff;
   z-index: 9999;
-  border-bottom: 1px solid $color-border;
+  border-bottom: 1px solid $color-outline-gray;
   height: 31px;
   display: flex;
   flex-wrap: nowrap;

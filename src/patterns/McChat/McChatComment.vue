@@ -96,7 +96,7 @@ export default {
 
 <docs>
     ```jsx
-    let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя', color: 'primary' }
+    let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя', color: 'accent-blue' }
     <div>
         <McChatComment :comment="comment" />
     </div>

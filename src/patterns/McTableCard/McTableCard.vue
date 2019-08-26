@@ -68,12 +68,12 @@ export default {
       <McTableCard>
         <McTableCardHeader slot="header">
           <template>
-            <McButton uppercase variation="primary-link">Назад</McButton>
+            <McButton uppercase variation="accent-blue-link">Назад</McButton>
           </template>
           <template slot="right">
-            <McButton uppercase variation="primary-link">Запросить владельца</McButton>
-            <McButton uppercase variation="primary-link">Запросить данные AI</McButton>
-            <McButton uppercase variation="primary-link">Редактировать</McButton>
+            <McButton uppercase variation="accent-blue-link">Запросить владельца</McButton>
+            <McButton uppercase variation="accent-blue-link">Запросить данные AI</McButton>
+            <McButton uppercase variation="accent-blue-link">Редактировать</McButton>
           </template>
         </McTableCardHeader>
         <McTableCardBody>

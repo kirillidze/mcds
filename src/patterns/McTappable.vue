@@ -46,11 +46,11 @@ export default {
 
   &:hover,
   &:focus {
-    background-color: fade-out($color-gray-darkest, 0.9);
+    background-color: fade-out($color-black, 0.9);
   }
 
   &:active {
-    background-color: fade-out($color-gray-darkest, 0.85);
+    background-color: fade-out($color-black, 0.85);
   }
 }
 </style>

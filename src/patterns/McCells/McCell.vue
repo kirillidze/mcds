@@ -80,7 +80,7 @@ export default {
         <br>
 
         <McCell>
-            <McTitle uppercase color="primary" slot="title" size="m">
+            <McTitle uppercase color="accent-blue" slot="title" size="m">
                 Имя Фамилия
             </McTitle>
             <McTitle tag-name="p" size="xl">

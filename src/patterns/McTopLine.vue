@@ -125,16 +125,16 @@ export default {
         ]"/>
       </template>
       <template slot="right">
-        <McButton variation="gray-darkest-flat" size="m-compact">
+        <McButton variation="gray-dark-flat" size="m-compact">
           <McSvgIcon slot="icon-append" name="delete"/>
         </McButton>
-        <McButton variation="primary-link" size="m-compact">
+        <McButton variation="accent-blue-link" size="m-compact">
           Ссылка
         </McButton>
-        <McButton variation="gray-darkest-flat" size="m-compact">
+        <McButton variation="gray-dark-flat" size="m-compact">
           <McSvgIcon slot="icon-append" name="delete"/>
         </McButton>
-        <McButton variation="gray-darkest-flat" size="m-compact">
+        <McButton variation="gray-dark-flat" size="m-compact">
           <McSvgIcon slot="icon-append" name="delete"/>
         </McButton>
       </template>
@@ -149,16 +149,16 @@ export default {
         ]"/>
       </template>
       <template slot="right">
-        <McButton variation="gray-darkest-flat" size="l-compact">
+        <McButton variation="gray-dark-flat" size="l-compact">
           <McSvgIcon slot="icon-append" name="delete"/>
         </McButton>
-        <McButton variation="primary-link" size="m-compact">
+        <McButton variation="accent-blue-link" size="m-compact">
           Ссылка
         </McButton>
-        <McButton variation="gray-darkest-flat" size="l-compact">
+        <McButton variation="gray-dark-flat" size="l-compact">
           <McSvgIcon slot="icon-append" name="delete"/>
         </McButton>
-        <McButton variation="gray-darkest-flat" size="l-compact">
+        <McButton variation="gray-dark-flat" size="l-compact">
           <McSvgIcon slot="icon-append" name="delete"/>
         </McButton>
       </template>
@@ -169,7 +169,7 @@ export default {
         <McDropdown v-model="dropIsOpen">
           <McButton
                   slot="activator"
-                  variation="gray-darkest-flat"
+                  variation="gray-dark-flat"
                   size="l"
           >
             <McAvatar slot="icon-prepend" rounded size="s"></McAvatar>
@@ -181,7 +181,7 @@ export default {
                     @click.prevent
                     full-width
                     text-align="left"
-                    variation="gray-darkest-flat"
+                    variation="gray-dark-flat"
                     size="l"
             >
               <McSvgIcon slot="icon-prepend" name="account_circle" size="xxs"/>
@@ -192,7 +192,7 @@ export default {
                     @click.prevent
                     full-width
                     text-align="left"
-                    variation="gray-darkest-flat"
+                    variation="gray-dark-flat"
                     size="l"
             >
               <McSvgIcon slot="icon-prepend" name="swap_horizontal_circle" size="xxs"/>
@@ -203,7 +203,7 @@ export default {
                     @click.prevent
                     full-width
                     text-align="left"
-                    variation="gray-darkest-flat"
+                    variation="gray-dark-flat"
                     size="l"
             >
               <McSvgIcon slot="icon-prepend" name="settings" size="xxs"/>
@@ -214,7 +214,7 @@ export default {
                     @click.prevent
                     full-width
                     text-align="left"
-                    variation="danger-flat"
+                    variation="red-flat"
                     size="l"
             >
               <McSvgIcon slot="icon-prepend" name="exit_to_app" size="xxs"/>
@@ -226,7 +226,7 @@ export default {
       <template slot="right">
         <McDropdown v-model="dropIsOpen2" position="right">
           <McButton slot="activator"
-                    variation="gray-darkest-flat"
+                    variation="gray-dark-flat"
                     size="m-compact"
           >
             <McSvgIcon slot="icon-append" name="sort_list"/>
@@ -237,7 +237,7 @@ export default {
                     @click.prevent
                     full-width
                     text-align="right"
-                    variation="gray-darkest-flat"
+                    variation="gray-dark-flat"
                     size="l"
             >
               Профиль
@@ -247,7 +247,7 @@ export default {
                     @click.prevent
                     full-width
                     text-align="right"
-                    variation="gray-darkest-flat"
+                    variation="gray-dark-flat"
                     size="l"
             >
               Транзакции
@@ -257,7 +257,7 @@ export default {
                     @click.prevent
                     full-width
                     text-align="right"
-                    variation="gray-darkest-flat"
+                    variation="gray-dark-flat"
                     size="l"
             >
               Безопасность
@@ -267,7 +267,7 @@ export default {
                     @click.prevent
                     full-width
                     text-align="right"
-                    variation="danger-flat"
+                    variation="red-flat"
                     size="l"
             >
               Выйти
@@ -276,7 +276,7 @@ export default {
         </McDropdown>
 
 
-        <McButton variation="gray-darkest-flat" size="m-compact">
+        <McButton variation="gray-dark-flat" size="m-compact">
           <McSvgIcon slot="icon-append" name="filter_list"/>
         </McButton>
       </template>

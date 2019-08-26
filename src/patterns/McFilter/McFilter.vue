@@ -83,7 +83,7 @@
               <McButton
                 :disabled="!Object.keys(currentValues).length"
                 @click="reset"
-                variation="danger-invert"
+                variation="red-invert"
                 size="m-compact"
               >
                 <McSvgIcon slot="icon-append" name="delete" />
@@ -95,7 +95,7 @@
               <McButton
                 :disabled="!Object.keys(currentValues).length"
                 @click="savePreset"
-                variation="success-invert"
+                variation="light-green-invert"
                 size="m-compact"
               >
                 <McSvgIcon slot="icon-append" name="archive" />

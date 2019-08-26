@@ -24,7 +24,7 @@
         </span>
       </label>
       <div class="mc-field-checkbox__footer">
-        <McTitle tag-name="div" :ellipsis="false" color="danger" size="s" v-if="errorText">
+        <McTitle tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
           {{ errorText }}
         </McTitle>
         <br v-if="errorText" />
@@ -224,7 +224,7 @@ export default {
         &:before {
           background-image: none;
           border-radius: $radius-s;
-          background-color: $color-gray-lighten;
+          background-color: $color-outline-gray;
         }
       }
     }

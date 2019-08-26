@@ -7,7 +7,7 @@
             {{ item.title }}
           </h4>
           <McButton
-            variation="primary-flat"
+            variation="accent-blue-flat"
             size="m"
             @click.native="handleClickSearchAll"
             :href="item.button.href"
@@ -103,7 +103,7 @@ export default {
     @include ellipsis();
 
     font-family: $font_heading;
-    color: $color-gray-darken;
+    color: $color-gray-dark;
     font-size: $size-m;
     font-weight: $weight-medium;
     line-height: $line-height-s;

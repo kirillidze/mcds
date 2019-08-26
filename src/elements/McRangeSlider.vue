@@ -43,7 +43,7 @@ export default {
     },
     color: {
       type: String,
-      default: "primary",
+      default: "accent-blue",
     },
     lazy: {
       type: Boolean,
@@ -107,7 +107,7 @@ export default {
     let value2 = [100, 500]
     <McRangeSlider :min="0" :max="100" v-model="value" :step="2"/>
     <br>
-    <McRangeSlider :min="0" :max="100" v-model="value" :step="2" color="mantis-dark"/>
+    <McRangeSlider :min="0" :max="100" v-model="value" :step="2" color="light-green"/>
     <br>
     <McRangeSlider :min="0" :max="10000" v-model="value2" :step="100"/>
     ```

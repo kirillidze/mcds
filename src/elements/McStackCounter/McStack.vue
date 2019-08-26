@@ -114,12 +114,12 @@ export default {
     </McStack>
     <br>
     <McStack :limit="4">
-      <McChip style="width: 150px;" variation="gray-darkest-invert">Статусы в проектах</McChip>
-      <McChip style="width: 150px;" variation="gray-darkest-invert">Экспорт канала</McChip>
-      <McChip style="width: 150px;" variation="gray-darkest-invert">Администратор</McChip>
-      <McChip style="width: 150px;" variation="gray-darkest-invert">Пользователь</McChip>
-      <McChip style="width: 150px;" variation="gray-darkest-invert">Способы оплаты</McChip>
-      <McChip style="width: 150px;" variation="gray-darkest-invert">Статусы в проектах</McChip>
+      <McChip style="width: 150px;" variation="gray-dark-invert">Статусы в проектах</McChip>
+      <McChip style="width: 150px;" variation="gray-dark-invert">Экспорт канала</McChip>
+      <McChip style="width: 150px;" variation="gray-dark-invert">Администратор</McChip>
+      <McChip style="width: 150px;" variation="gray-dark-invert">Пользователь</McChip>
+      <McChip style="width: 150px;" variation="gray-dark-invert">Способы оплаты</McChip>
+      <McChip style="width: 150px;" variation="gray-dark-invert">Статусы в проектах</McChip>
     </McStack>
   </div>
   ```

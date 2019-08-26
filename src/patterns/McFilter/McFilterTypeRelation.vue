@@ -6,7 +6,7 @@
       <McChip
         slot="chip"
         v-if="chipCount"
-        variation="gray-darkest-invert"
+        variation="gray-dark-invert"
         size="s"
         :closable="true"
         @click="e => emitInput({}, e)"
@@ -20,7 +20,7 @@
           <McGridCol v-for="selectType in selectTypes" :key="selectType">
             <McButton
               v-bind="buttonBind"
-              :variation="selectType === type ? 'soft-green-dark-invert' : 'primary'"
+              :variation="selectType === type ? 'light-green-invert' : 'accent-blue'"
               @click.prevent="handleClick(selectType)"
             >
               {{ selectType === "is" ? tRelationIs : tRelationNotIs }}
@@ -30,7 +30,7 @@
             <McButton
               v-bind="buttonBind"
               :variation="
-                (value.exists || []).indexOf(v) === -1 ? 'primary' : 'soft-green-dark-invert'
+                (value.exists || []).indexOf(v) === -1 ? 'accent-blue' : 'light-green-invert'
               "
               @click.prevent="handleClick('exists', v)"
             >

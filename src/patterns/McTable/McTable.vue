@@ -332,24 +332,24 @@ export default {
           <McTableCellLink href="/#/Patterns/McCard"/>
         </template>
         <template slot="cell-user" slot-scope="row">
-          <McButton href="#" target="_blank" variation="primary-link">
+          <McButton href="#" target="_blank" variation="accent-blue-link">
             Роман Подумеев
           </McButton>
         </template>
         <template slot="cell-title" slot-scope="row">
           <McPreview>
-            <McAvatarStatus slot="left" border-color="dodger-blue-light" dot-color="gorse" lazy :src="row.item.avatar" size="s"/>
+            <McAvatarStatus slot="left" border-color="accent-blue" dot-color="orange" lazy :src="row.item.avatar" size="s"/>
             <McGridRow style="height: 100%" slot="cell-right" :wrap="false" align="middle" :gutter-x="5">
               <McGridCol>
                 <McTooltip size="s" placement="top" content="Редактировать">
-                  <McButton variation="primary-link" size="s-compact">
+                  <McButton variation="accent-blue-link" size="s-compact">
                     <McSvgIcon slot="icon-append" name="create" size="xxs"/>
                   </McButton>
                 </McTooltip>
               </McGridCol>
               <McGridCol>
                 <McTooltip size="s" placement="top" content="Копировать">
-                  <McButton variation="primary-link" size="s-compact">
+                  <McButton variation="accent-blue-link" size="s-compact">
                     <McSvgIcon slot="icon-append" name="delete" size="xxs"/>
                   </McButton>
                 </McTooltip>
@@ -357,13 +357,13 @@ export default {
             </McGridRow>
             <McTitle size="m" slot="top">{{ row.item.title }}</McTitle>
           </McPreview>
-          <McBage vertical-line variation="success"/>
+          <McBage vertical-line variation="light-green"/>
         </template>
         <template slot="cell-roles" slot-scope="row">
           <McStack :limit="1">
-            <McChip variation="gray-darkest-invert">Администратор</McChip>
-            <McChip variation="gray-darkest-invert">Администратор</McChip>
-            <McChip variation="gray-darkest-invert">Администратор</McChip>
+            <McChip variation="gray-dark-invert">Администратор</McChip>
+            <McChip variation="gray-dark-invert">Администратор</McChip>
+            <McChip variation="gray-dark-invert">Администратор</McChip>
           </McStack>
         </template>
         <template slot="cell-channels" slot-scope="row">
@@ -375,7 +375,7 @@ export default {
           </McStack>
         </template>
         <template slot="cell-status" slot-scope="row">
-          <McBage variation="danger">Отклонен</McBage>
+          <McBage variation="red">Отклонен</McBage>
         </template>
         <template slot="cell-owner" slot-scope="row">
           <div style="display: flex; align-items: center; height: 100%;">
@@ -388,7 +388,7 @@ export default {
               <McButton size="s">Выплатить</McButton>
             </McGridCol>
             <McGridCol>
-              <McButton variation="danger" size="s">Отменить</McButton>
+              <McButton variation="red" size="s">Отменить</McButton>
             </McGridCol>
           </McGridRow>
         </template>

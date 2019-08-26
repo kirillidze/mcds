@@ -112,7 +112,7 @@ export default {
 
   &--border {
     border-radius: $radius-m;
-    border: 1px solid $color-border;
+    border: 1px solid $color-outline-gray;
 
     #{$block-name} {
       &__header {
@@ -122,7 +122,7 @@ export default {
         transition: color $duration-quickly;
 
         &:hover {
-          color: $color-cinnabar;
+          color: $color-red;
         }
       }
     }
@@ -151,7 +151,7 @@ export default {
     #{$block-name} {
       border: none;
       border-radius: 0;
-      border-bottom: 1px solid $color-border;
+      border-bottom: 1px solid $color-outline-gray;
 
       &__header {
         padding-left: 2 * $space-s;
@@ -176,7 +176,7 @@ export default {
       }
 
       &:first-child {
-        border-top: 1px solid $color-border;
+        border-top: 1px solid $color-outline-gray;
       }
 
       &:last-child {

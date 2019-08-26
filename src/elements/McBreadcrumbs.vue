@@ -7,7 +7,7 @@
       <div v-if="index === 0 && info" class="mc-breadcrumbs__info-wrapper">
         <McButton
           v-if="item.info === null"
-          variation="primary-link"
+          variation="accent-blue-link"
           rounded
           size="m-compact"
           :loading="loading"
@@ -118,7 +118,7 @@ $line-height: $line-height-s;
   &__item {
     font-size: $font-size;
     line-height: $line-height;
-    color: $color-text;
+    color: $color-black;
     margin-right: $gutters;
     font-family: $font-heading;
     font-weight: $weight-medium;
@@ -182,11 +182,11 @@ $line-height: $line-height-s;
 
     &:hover,
     &:focus {
-      color: $color-secondary;
+      color: $color-red;
     }
 
     &:active {
-      color: darken($color-secondary, 8%);
+      color: darken($color-red, 8%);
     }
   }
 }

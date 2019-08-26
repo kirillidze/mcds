@@ -118,7 +118,7 @@ export default {
   &:focus {
     #{$block-name} {
       &__text {
-        color: $color-secondary;
+        color: $color-red;
       }
     }
   }
@@ -126,7 +126,7 @@ export default {
   &:active {
     #{$block-name} {
       &__text {
-        color: darken($color-secondary, 8%);
+        color: darken($color-red, 8%);
       }
     }
   }

@@ -4,7 +4,7 @@
       <McHeaderNav>
         <McHeaderNavItem v-if="menuAdditional && menuAdditional.length">
           <McDropdown v-model="menuAdditionalIsOpen" :rotate-icon="false">
-            <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
+            <McButton slot="activator" variation="gray-dark-flat" size="m-compact" rounded>
               <McSvgIcon slot="icon-append" name="add" />
             </McButton>
 
@@ -17,7 +17,7 @@
                 @click.prevent="handleClickAdd(menuAdditionalItem)"
                 full-width
                 text-align="left"
-                variation="gray-darkest-flat"
+                variation="gray-dark-flat"
                 size="l"
               >
                 {{ menuAdditionalItem.name }}
@@ -34,7 +34,7 @@
           <McButton
             :href="menuMainItem.href"
             :to="menuMainItem.to"
-            variation="gray-darkest-flat"
+            variation="gray-dark-flat"
             :exact="$route.name.includes('index-index')"
           >
             <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
@@ -44,7 +44,7 @@
 
         <McHeaderNavItem v-if="menuHidden && menuHidden.length">
           <McDropdown position="right" v-model="menuHiddenIsOpen" :rotate-icon="false">
-            <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
+            <McButton slot="activator" variation="gray-dark-flat" size="m-compact" rounded>
               <McSvgIcon slot="icon-append" name="more_horiz" />
             </McButton>
 
@@ -55,7 +55,7 @@
                 :key="`menu-hidden-item-${index}`"
                 full-width
                 text-align="left"
-                variation="gray-darkest-flat"
+                variation="gray-dark-flat"
                 size="l"
                 :href="menuHiddenItem.href"
                 :to="menuHiddenItem.to"
@@ -69,7 +69,7 @@
 
         <McHeaderNavItem v-if="searchable">
           <McButton
-            variation="gray-darkest-flat"
+            variation="gray-dark-flat"
             size="m-compact"
             rounded
             @click.prevent="handleBtnSearchClick"

@@ -76,7 +76,7 @@ $spaces: (
 
   &__wrapper {
     @include size(100%);
-    background-color: $color-border;
+    background-color: $color-outline-gray;
   }
 
   @each $key, $value in $spaces {

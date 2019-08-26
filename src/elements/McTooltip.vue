@@ -89,7 +89,7 @@ export default {
 
     .tooltip-inner {
       @include inset-squish-space($space-m);
-      background: $color-text;
+      background: $color-black;
       color: $color-white;
       border-radius: $radius-l;
       font-family: $font-family--headings-2;
@@ -106,7 +106,7 @@ export default {
       border-style: solid;
       position: absolute;
       margin: $arrow-size;
-      border-color: $color-text;
+      border-color: $color-black;
       z-index: 1;
     }
 
@@ -240,7 +240,7 @@ export default {
       @if $color == "white" {
         &.tooltip {
           .tooltip-inner {
-            color: $gray-darkest;
+            color: $color-black;
             background-color: $value;
           }
           .tooltip-arrow {
@@ -265,12 +265,12 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McTooltip color="gray-darkest" placement="top" content="А если текста реально очень очень много, например как сейчас?">
+    <McTooltip color="dark" placement="top" content="А если текста реально очень очень много, например как сейчас?">
       <McButton>Тултип</McButton>
     </McTooltip>
     <br>
     <br>
-    <McTooltip size="s" color="primary" content="А если текста реально очень очень много, например как сейчас?">
+    <McTooltip size="s" color="accent-blue" content="А если текста реально очень очень много, например как сейчас?">
       <McSvgIcon name="face"/>
     </McTooltip>
     <br>

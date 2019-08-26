@@ -34,7 +34,7 @@ export default {
     },
     color: {
       type: String,
-      default: "primary",
+      default: "accent-blue",
     },
     uppercase: {
       type: Boolean,
@@ -65,7 +65,7 @@ export default {
       @include pseudo();
       @include position(absolute, auto 0 0 0);
       height: $separator-xs;
-      background-color: $color-border;
+      background-color: $color-outline-gray;
     }
   }
 
@@ -99,7 +99,7 @@ export default {
 
   .tabs-component-tab-a {
     display: inline-flex;
-    color: $color-text;
+    color: $color-black;
     font-family: $font-heading;
     font-size: $size-m;
     line-height: $line-height-s;
@@ -119,7 +119,7 @@ export default {
       content: "";
       display: block;
       z-index: 1;
-      background-color: $color-primary;
+      background-color: $color-accent-blue;
       transition: left 0.2s ease, right 0.2s ease, opacity 0.2s ease, color 0.2s ease;
     }
   }
@@ -132,7 +132,7 @@ export default {
 
   &--size-m {
   }
-  &--color-primary {
+  &--color-accent-blue {
   }
 }
 </style>

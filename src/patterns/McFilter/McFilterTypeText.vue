@@ -5,7 +5,7 @@
       <McChip
         slot="title"
         v-if="value != null && value !== ''"
-        variation="gray-darkest-invert"
+        variation="gray-dark-invert"
         size="s"
         :closable="true"
         @click="e => handleInput(null, e)"

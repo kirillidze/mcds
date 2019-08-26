@@ -77,7 +77,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="l"
       >
         Добавить партнера
@@ -87,7 +87,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="l"
       >
         Добавить рекрутера
@@ -97,7 +97,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="l"
       >
         Добавить контракт
@@ -111,7 +111,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="l"
       >
         <McSvgIcon slot="icon-prepend" name="account_circle" size="xxs"/>
@@ -122,7 +122,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="l"
       >
         <McSvgIcon slot="icon-prepend" name="swap_horizontal_circle" size="xxs"/>
@@ -133,7 +133,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="l"
       >
         <McSvgIcon slot="icon-prepend" name="settings" size="xxs"/>
@@ -144,7 +144,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="danger-flat"
+              variation="red-flat"
               size="l"
       >
         <McSvgIcon slot="icon-prepend" name="exit_to_app" size="xxs"/>
@@ -159,7 +159,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="xl"
       >
         <McSvgIcon slot="icon-prepend" name="mediacube" size="m"/>
@@ -170,7 +170,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="xl"
       >
         <McSvgIcon slot="icon-prepend" name="mediacube" size="m"/>
@@ -181,7 +181,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="xl"
       >
         <McSvgIcon slot="icon-prepend" name="mediacube" size="m"/>
@@ -192,7 +192,7 @@ export default {
               @click.prevent
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="xl"
       >
         <McSvgIcon slot="icon-prepend" name="mediacube" size="m"/>

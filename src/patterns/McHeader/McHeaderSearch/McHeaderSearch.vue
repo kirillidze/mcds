@@ -13,7 +13,7 @@
         />
       </div>
       <McButton
-        variation="gray-darkest-flat"
+        variation="gray-dark-flat"
         size="m-compact"
         rounded
         tabindex="-1"
@@ -23,7 +23,7 @@
         <McSvgIcon slot="icon-append" name="search" />
       </McButton>
       <McButton
-        variation="gray-darkest-flat"
+        variation="gray-dark-flat"
         size="m-compact"
         rounded
         tabindex="-1"
@@ -135,7 +135,7 @@ export default {
     width: 100%;
     outline: none;
     padding: $space-xxs $space-l;
-    color: $color-text;
+    color: $color-black;
     font-size: $size-m;
     font-weight: $weight-medium;
     line-height: $line-height-s;
@@ -156,7 +156,7 @@ export default {
 
     @include input-placeholder() {
       font-weight: $weight-medium;
-      color: $color-gray-lighten;
+      color: $color-outline-gray;
     }
   }
 

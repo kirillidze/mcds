@@ -45,7 +45,7 @@ export default {
   position: relative;
   border-radius: $radius-m;
   height: $space-xs;
-  background-color: $color-gray-lightest;
+  background-color: $color-hover-gray;
   width: 100%;
 
   &__line {
@@ -68,7 +68,7 @@ export default {
   <div>
     <McProgress :percent="20" />
     <br>
-    <McProgress :percent="90" color="dodger-blue-lighter" />
+    <McProgress :percent="90" color="azure" />
   </div>
   ```
 </docs>

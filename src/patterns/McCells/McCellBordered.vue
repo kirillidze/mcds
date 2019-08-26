@@ -95,7 +95,7 @@ export default {
   flex-direction: column;
   text-decoration: none;
   position: relative;
-  border: 1px solid $color-border;
+  border: 1px solid $color-outline-gray;
   border-radius: $radius-m;
   min-height: $tappable-element-xl - 10px;
   padding: $space_xs $space_xs $space_xs $space_s;
@@ -120,11 +120,11 @@ export default {
 
   &--tappable {
     &:hover {
-      background-color: $color-gray-lightest;
+      background-color: $color-hover-gray;
     }
 
     &:active {
-      background-color: darken($color-gray-lightest, 2%);
+      background-color: darken($color-hover-gray, 2%);
     }
   }
 
@@ -180,7 +180,7 @@ export default {
 
     <br>
 
-    <McCellBordered border-color="red-light">
+    <McCellBordered border-color="red">
       <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
@@ -193,7 +193,7 @@ export default {
 
     <br>
 
-    <McCellBordered border-color="primary" @click>
+    <McCellBordered border-color="accent-blue" @click>
       <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
@@ -206,7 +206,7 @@ export default {
 
     <br>
 
-    <McCellBordered gradient border-color="gorse" @click>
+    <McCellBordered gradient border-color="orange" @click>
       <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
@@ -219,7 +219,7 @@ export default {
 
     <br>
 
-    <McCellBordered disabled border-color="bright-turquoise-darker" @click>
+    <McCellBordered disabled border-color="dark-green" @click>
       <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации

@@ -10,7 +10,7 @@
     :errors="errors"
   >
     <McButton
-      variation="gray-darker-link"
+      variation="gray-dark-link"
       slot="append"
       size="s-compact"
       @click.prevent="handleToggleClick"

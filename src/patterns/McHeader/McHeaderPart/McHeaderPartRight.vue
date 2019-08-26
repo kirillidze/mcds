@@ -3,7 +3,7 @@
     <McHeaderNav>
       <McHeaderNavItem class="mc-header-part-right__chatra" v-if="chatraId">
         <McDropdown v-model="menuChatraIsOpen" position="right" :rotate-icon="false">
-          <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
+          <McButton slot="activator" variation="gray-dark-flat" size="m-compact" rounded>
             <McSvgIcon slot="icon-append" name="live_help" />
           </McButton>
 
@@ -15,7 +15,7 @@
 
       <McHeaderNavItem class="mc-header-part-right__apps" v-if="menuApps && menuApps.length">
         <McDropdown v-model="menuAppsIsOpen" position="right" :rotate-icon="false">
-          <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
+          <McButton slot="activator" variation="gray-dark-flat" size="m-compact" rounded>
             <McSvgIcon slot="icon-append" name="apps" />
           </McButton>
 
@@ -26,7 +26,7 @@
               :key="`menu-apps-item-${index}`"
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="xl"
               :href="menuAppsItem.href"
               :to="menuAppsItem.to"
@@ -46,7 +46,7 @@
         <McDropdown v-model="menuProfileIsOpen" position="right">
           <McButton
             slot="activator"
-            variation="gray-darkest-flat"
+            variation="gray-dark-flat"
             size="l-compact"
             dusk="menu-user-dropdown"
             rounded
@@ -89,7 +89,7 @@
 
       <McHeaderNavItem class="mc-header-part-right__langs" v-if="menuLangs && menuLangs.length">
         <McDropdown v-model="menuLangsIsOpen" position="right">
-          <McButton slot="activator" variation="gray-darkest-flat">
+          <McButton slot="activator" variation="gray-dark-flat">
             {{ menuLangs[0].name }}
             <McSvgIcon slot="icon-append" name="arrow_drop_down" />
           </McButton>
@@ -100,7 +100,7 @@
               :key="`menu-langs-item-${index}`"
               full-width
               text-align="left"
-              variation="gray-darkest-flat"
+              variation="gray-dark-flat"
               size="l"
               :href="menuLangsItem.href"
               :to="menuLangsItem.to"
@@ -113,7 +113,7 @@
       </McHeaderNavItem>
 
       <McHeaderNavItem class="mc-header-part-right__burger">
-        <McButton @click="handleToggleMenu" variation="gray-darkest-flat" size="m-compact" rounded>
+        <McButton @click="handleToggleMenu" variation="gray-dark-flat" size="m-compact" rounded>
           <McSvgIcon slot="icon-prepend" :name="value ? 'close' : 'menu'" />
         </McButton>
       </McHeaderNavItem>

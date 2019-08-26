@@ -103,7 +103,7 @@ export default {
 
   display: flex;
   align-items: center;
-  color: $black;
+  color: $color-black;
   font-size: 0;
   font-weight: $weight-normal;
   line-height: 0;
@@ -113,7 +113,7 @@ export default {
   }
 
   &__time {
-    color: $color-gray-darken;
+    color: $color-gray-dark;
     font-family: $font-heading;
     line-height: line-height(16, 13);
     font-weight: $weight-medium;

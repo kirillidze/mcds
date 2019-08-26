@@ -70,7 +70,7 @@
       </div>
     </div>
     <div class="mc-field-text__footer" v-if="errorText || helpText || $slots.footer">
-      <McTitle tag-name="div" :ellipsis="false" color="danger" size="s" v-if="errorText">
+      <McTitle tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
         {{ errorText }}
       </McTitle>
       <br v-if="errorText" />
@@ -338,7 +338,7 @@ export default {
     width: 100%;
     min-height: $tappable-element-m;
     margin: 0;
-    border: 1px solid $color-border;
+    border: 1px solid $color-outline-gray;
     border-radius: $radius-m;
     padding: ($space-s / 2) + 1 $space-s;
     line-height: $line-height-s;
@@ -347,11 +347,11 @@ export default {
     -moz-appearance: textfield;
     appearance: textfield;
     transition: background-color $transition-time-fast, border-color $transition-time-fast;
-    color: $color-text;
+    color: $color-black;
 
     &:focus {
       outline: 0;
-      border-color: $color-primary;
+      border-color: $color-accent-blue;
     }
 
     &::-webkit-search-cancel-button,
@@ -377,7 +377,7 @@ export default {
   &--error {
     #{$block-name} {
       &__input {
-        border-color: $color-danger;
+        border-color: $color-red;
       }
     }
   }
@@ -410,8 +410,8 @@ export default {
     #{$block-name} {
       &__input {
         cursor: not-allowed;
-        background-color: $color-gray-lightest;
-        border-color: $color-gray-lightest;
+        background-color: $color-hover-gray;
+        border-color: $color-hover-gray;
       }
     }
   }
@@ -449,11 +449,11 @@ export default {
             <McSvgIcon slot="append" name="attach_money"/>
 
             <McTooltip slot="append" size="s" content="Вывести все средства">
-                <McButton uppercase variation="gray-darkest-invert" size="s">
+                <McButton uppercase variation="gray-dark-invert" size="s">
                     Все
                 </McButton>
             </McTooltip>
-            <McButton slot="append" uppercase variation="gray-darkest-invert" size="s">
+            <McButton slot="append" uppercase variation="gray-dark-invert" size="s">
                 Фонды
             </McButton>
         </McFieldText>
@@ -478,7 +478,7 @@ export default {
                 title="Textarea"
         >
             <McButton
-                    variation="primary-link"
+                    variation="accent-blue-link"
                     slot="append"
                     size="s-compact"
             >

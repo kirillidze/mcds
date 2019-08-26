@@ -1,7 +1,7 @@
 <template>
   <McChip
     v-if="option"
-    variation="gray-darkest-invert"
+    variation="gray-dark-invert"
     size="s"
     :closable="true"
     @click="handleChipClick"

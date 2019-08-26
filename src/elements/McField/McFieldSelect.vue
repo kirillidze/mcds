@@ -47,7 +47,7 @@
       </multiselect>
     </div>
     <div class="mc-field-select__footer">
-      <McTitle tag-name="div" :ellipsis="false" color="danger" size="s" v-if="errorText">
+      <McTitle tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
         {{ errorText }}
       </McTitle>
       <br v-if="errorText" />
@@ -307,13 +307,13 @@ $colors: $token-colors;
     &__select {
       height: $tappable-element-m - 2px;
       &::before {
-        border-color: $color-border transparent transparent;
+        border-color: $color-outline-gray transparent transparent;
       }
     }
 
     &__tags {
       @include reset-text-indents();
-      border: 1px solid $color-border;
+      border: 1px solid $color-outline-gray;
       border-radius: $radius-m !important;
       padding: $space-xxxs - 1 $tappable-element-m 0 $space-s;
     }
@@ -332,8 +332,8 @@ $colors: $token-colors;
     &__tag {
       font-family: $font-family;
       margin-top: $space-xxxs;
-      background-color: fade-out($color-primary, 0.9);
-      color: $color-text;
+      background-color: fade-out($color-accent-blue, 0.9);
+      color: $color-black;
       display: inline-flex;
       align-items: center;
       padding: $space-xxxs $space-xs;
@@ -353,12 +353,12 @@ $colors: $token-colors;
     &__tag-icon {
       @include size($tappable_element_xxs + 2);
       position: relative;
-      background-color: $color-primary;
+      background-color: $color-accent-blue;
       border-radius: $radius-circle;
       flex: 0 0 auto;
 
       &:hover {
-        background-color: $color-danger;
+        background-color: $color-red;
       }
 
       &::after {
@@ -399,19 +399,19 @@ $colors: $token-colors;
       }
 
       &--highlight {
-        background-color: $color-gray-lightest;
-        color: $color-text;
+        background-color: $color-hover-gray;
+        color: $color-black;
       }
     }
 
     &--active {
       .multiselect {
         &__tags {
-          border-color: $color-primary;
+          border-color: $color-accent-blue;
         }
         &__select {
           &::before {
-            border-color: $color-primary transparent transparent;
+            border-color: $color-accent-blue transparent transparent;
           }
         }
       }
@@ -494,7 +494,7 @@ $colors: $token-colors;
 
             &__select {
               &:before {
-                border-color: $color-border transparent transparent;
+                border-color: $color-outline-gray transparent transparent;
               }
             }
           }
@@ -513,7 +513,7 @@ $colors: $token-colors;
 
             &__select {
               &::before {
-                border-color: $color-border transparent transparent;
+                border-color: $color-outline-gray transparent transparent;
               }
             }
           }
@@ -536,15 +536,15 @@ $colors: $token-colors;
       background: transparent;
       .multiselect {
         &__tags {
-          border-color: $color-border !important;
-          background-color: $color-gray-lightest;
+          border-color: $color-outline-gray !important;
+          background-color: $color-hover-gray;
         }
 
         &__select {
           background-color: transparent;
 
           &::before {
-            border-color: $color-border transparent transparent;
+            border-color: $color-outline-gray transparent transparent;
           }
         }
       }
@@ -593,7 +593,7 @@ $colors: $token-colors;
             placeholder="One"/>
     <br>
     <McFieldSelect
-            background-color="dodger-blue-lighten"
+            background-color="azure"
             title="Цветной"
             avatar="https://yt3.ggpht.com/a/AGF-l79FVckie4j9WT-4cEW6iu3gPd4GivQf_XNSWg=s800-mo-c-c0xffffffff-rj-k-no"
             v-model="categoriesModel4"

@@ -64,7 +64,7 @@ export default {
   cursor: pointer;
 
   &__text {
-    color: $color-gray-light;
+    color: $color-gray;
     margin-right: $space-xs;
     transition: color $duration-standart;
     line-height: $line-height-m;
@@ -75,7 +75,7 @@ export default {
 
   &--checked {
     #{$block-name}__text {
-      color: $color-navy-blue-light;
+      color: $color-accent-blue;
     }
   }
 
@@ -89,7 +89,7 @@ export default {
       @include size(0);
 
       &:checked + #{$block-name}__slider {
-        background-color: $color-navy-blue-light;
+        background-color: $color-accent-blue;
 
         &:before {
           transform: translateX($size-l + $space-xxxs);
@@ -99,7 +99,7 @@ export default {
 
     #{$block-name}__slider {
       @include position(absolute, 0 0 0 0);
-      background-color: $color-gray-lighter;
+      background-color: $color-outline-gray;
       transition: $duration-standart;
       border-radius: $radius-l * 3;
 

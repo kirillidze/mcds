@@ -79,11 +79,11 @@ export default {
     },
     /**
      *  Дизайн:
-     *  `primary, secondary, primary-outline, primary-invert, primary-flat и т.д.`
+     *  `accent-blue, red, accent-blue-outline, accent-blue-invert, accent-blue-flat и т.д.`
      */
     variation: {
       type: String,
-      default: "primary",
+      default: "accent-blue",
     },
     /**
      *  Размеры:
@@ -241,7 +241,7 @@ $colors: $token-colors;
   flex-wrap: nowrap;
   max-width: 100%;
   align-items: center;
-  color: $color-text;
+  color: $color-black;
   -webkit-appearance: none;
   -webkit-text-fill-color: currentColor;
 
@@ -499,7 +499,7 @@ $colors: $token-colors;
 
   &--is-active,
   &.nuxt-link-active {
-    color: $color-primary;
+    color: $color-accent-blue;
     background-color: transparent;
     border-color: transparent;
     pointer-events: none;
@@ -565,9 +565,9 @@ $colors: $token-colors;
   }
 
   &--disabled {
-    background-color: $color-gray-lighten !important;
+    background-color: $color-outline-gray !important;
     color: $color-white !important;
-    border-color: $color-border !important;
+    border-color: $color-outline-gray !important;
   }
 }
 </style>
@@ -575,13 +575,13 @@ $colors: $token-colors;
 <docs>
   ```jsx
   let variations = [
-    'primary',
-    'soft-green-dark-invert',
-    'danger-outline',
-    'gray-darkest-flat',
+    'accent-blue',
+    'dark-green-invert',
+    'red-outline',
+    'gray-dark-flat',
     'white',
     'white-flat',
-    'primary-link',
+    'accent-blue-link',
   ]
 
   <div style="text-align: center">
@@ -644,7 +644,7 @@ $colors: $token-colors;
       <br><br>
     </div>
 
-    <McButton variation="gray-darkest-invert" size="m" full-width>
+    <McButton variation="gray-dark-invert" size="m" full-width>
       <McSvgIcon slot="icon-prepend" name="assessment"/>
       На всю ширину родителя
       <McSvgIcon slot="icon-append" name="add"/>

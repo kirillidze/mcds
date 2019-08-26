@@ -36,7 +36,7 @@ export default {
 
   &__text {
     @include ellipsis();
-    color: $gray-light;
+    color: $color-gray;
     font-size: $size-m;
     font-weight: $weight-medium;
     line-height: line-height(19, 16);
@@ -58,7 +58,7 @@ export default {
     <McGetInfo :total="total" >
         <McButton
             size="s"
-            variation="primary-link"
+            variation="accent-blue-link"
             @click.prevent="_ => total = 10"
             uppercase
         >

@@ -39,7 +39,7 @@ export default {
     },
     /**
      *  Дизайн:
-     *  `primary, primary-invert т.д.`
+     *  `accent-blue, accent-blue-invert т.д.`
      */
     variation: {
       type: String,
@@ -84,7 +84,7 @@ export default {
 .mc-chip {
   $block-name: &;
 
-  color: $color-text;
+  color: $color-black;
   font-family: $font-text;
   font-size: $size-m - 1;
   line-height: $line-height-s;
@@ -144,16 +144,16 @@ export default {
     flex-wrap: nowrap;
     -webkit-appearance: none;
     -webkit-text-fill-color: currentColor;
-    color: $color-primary;
+    color: $color-accent-blue;
     margin-left: $space_xxs;
 
     &:hover,
     &:focus {
-      color: darken($color-danger, 10%);
+      color: darken($color-red, 10%);
     }
 
     &:active {
-      color: darken($color-danger, 15%);
+      color: darken($color-red, 15%);
     }
   }
 
@@ -193,24 +193,24 @@ export default {
   ```jsx
   let eventTest = (val) => alert(val)
   <div>
-    <McChip variation="gray-darkest-invert" closable @click="eventTest('close')">
+    <McChip variation="gray-dark-invert" closable @click="eventTest('close')">
       Чипс
     </McChip>
-    <McChip variation="dark-orchid">
+    <McChip variation="ultraviolet">
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
       Чипс c иконкой
     </McChip>
-    <McChip variation="primary-invert" closable @click="eventTest('close')">
+    <McChip variation="accent-blue-invert" closable @click="eventTest('close')">
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
       Чипс c иконкой и кнопкой
     </McChip>
-    <McChip :counter="15" variation="primary" closable @click="eventTest('close')">
+    <McChip :counter="15" variation="accent-blue" closable @click="eventTest('close')">
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
       Чипс c иконкой, кнопкой и счетчкиком
     </McChip>
     <McChip :counter="15">
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
-      Чипс cо счетчкиком
+      Чипс cо счетчиком
     </McChip>
   </div>
   ```

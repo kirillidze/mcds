@@ -126,7 +126,7 @@ $part-width-right: 37.5%;
     flex-grow: 1;
 
     @media #{$media-query-s} {
-      border: 1px solid $color-border;
+      border: 1px solid $color-outline-gray;
       border-radius: $radius-xl;
       box-shadow: $shadow-m;
       min-height: $height-auth;
@@ -173,7 +173,7 @@ $part-width-right: 37.5%;
       top: 0;
       right: 0;
       bottom: 0;
-      background-color: darken($color-dark-orchid, 25%);
+      background-color: darken(rgb(135, 61, 199), 25%);
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;

@@ -28,7 +28,7 @@ export default {
     },
     /**
      *  Дизайн:
-     *  `primary, primary-outline т.д.`
+     *  `accent-blue, accent-blue-outline т.д.`
      */
     variation: {
       type: String,
@@ -69,10 +69,20 @@ export default {
       background-color: $value;
 
       &-outline {
-        background-color: $white;
-        color: $color-text;
+        background-color: $color-white;
+        color: $color-black;
         border-color: $value;
       }
+    }
+  }
+
+  &--variation-transparent {
+    background-color: transparent;
+
+    &-outline {
+      background-color: $white;
+      color: $color-black;
+      border-color: transparent;
     }
   }
 
@@ -96,16 +106,16 @@ export default {
     <McBage>
       В обработке
     </McBage>
-    <McBage variation="danger">
+    <McBage variation="red">
       Ошибка
     </McBage>
-    <McBage variation="success">
+    <McBage variation="light-green">
       Ок
     </McBage>
-    <McBage variation="gray-lighter-outline">
+    <McBage variation="outline-gray-outline">
       network
     </McBage>
-    <McBage vertical-line>
+    <McBage vertical-line variation="accent-blue-outline">
       В обработке
     </McBage>
   </div>

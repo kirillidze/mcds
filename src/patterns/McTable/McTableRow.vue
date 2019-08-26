@@ -158,7 +158,7 @@ export default {
   &--link {
     &:hover,
     &:focus {
-      background-color: fade-out($gray-darkest, 0.95);
+      background-color: fade-out($color-black, 0.95);
 
       & .mc-table-cell .mc-grid-row {
         background-color: #f3f3f3;
@@ -170,7 +170,7 @@ export default {
     }
 
     &:active {
-      background-color: fade-out($gray-darkest, 0.9);
+      background-color: fade-out($color-black, 0.9);
 
       & .mc-table-cell .mc-grid-row {
         background-color: #e7e7e7;
