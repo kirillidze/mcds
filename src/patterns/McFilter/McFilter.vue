@@ -3,12 +3,12 @@
     <McPanel class="mc-filter__panel">
       <div class="mc-filter__header">
         <McTitle :level="4" size="l" class="mc-filter__title">
-          <slot name="title">Фильтры</slot>
+          <slot name="title">{{ lang.filter }}</slot>
         </McTitle>
       </div>
       <div class="mc-filter__content">
         <McTabs class="mc-filter__tabs" ref="tabs">
-          <McTab :name="tabAll">
+          <McTab :name="lang.all">
             <McAccordion ref="accordion">
               <template v-for="(filter, _key) in filters">
                 <McFilterTypeText
@@ -29,10 +29,10 @@
                   :real-value="value[filter.value] || {}"
                   @input="value => handleInput(filter, value)"
                   @submit="submit"
-                  :t-relation-is="tRelationIs"
-                  :t-relation-not-is="tRelationNotIs"
-                  :t-relation-exists="tRelationExists"
-                  :t-relation-not-exists="tRelationNotExists"
+                  :t-relation-is="lang.this"
+                  :t-relation-not-is="lang.is_not"
+                  :t-relation-exists="lang.not_empty"
+                  :t-relation-not-exists="lang.empty"
                   @open="getOpenElems"
                 />
                 <McFilterTypeRange
@@ -43,14 +43,14 @@
                   :real-value="value[filter.value] || {}"
                   @input="value => handleInput(filter, value)"
                   @submit="submit"
-                  :t-range-more="tRangeMore"
-                  :t-range-less="tRangeLess"
+                  :t-range-more="lang.more"
+                  :t-range-less="lang.less"
                   @open="getOpenElems"
                 />
               </template>
             </McAccordion>
           </McTab>
-          <McTab :name="tabPresets">
+          <McTab :name="lang.presets">
             <div class="mc-filter__preset-items">
               <div class="mc-filter__preset-item" v-for="(preset, index) in presets" :key="index">
                 <div class="mc-filter__preset-value">
@@ -60,16 +60,16 @@
                     :name="presetName"
                     :value="presetValue"
                     :filters="filters"
-                    :t-relation-is="tRelationIs"
-                    :t-relation-not-is="tRelationNotIs"
-                    :t-relation-exists="tRelationExists"
-                    :t-relation-not-exists="tRelationNotExists"
-                    :t-range-more="tRangeMore"
-                    :t-range-less="tRangeLess"
+                    :t-relation-is="lang.this"
+                    :t-relation-not-is="lang.is_not"
+                    :t-relation-exists="lang.not_empty"
+                    :t-relation-not-exists="lang.empty"
+                    :t-range-more="lang.more"
+                    :t-range-less="lang.less"
                   />
                 </div>
                 <div class="mc-filter__preset-btn">
-                  <McButton size="s" @click="emitInput(preset)">Применить</McButton>
+                  <McButton size="s" @click="emitInput(preset)">{{ lang.apply }}</McButton>
                 </div>
               </div>
             </div>
@@ -79,7 +79,7 @@
       <div class="mc-filter__footer">
         <McGridRow :gutter-x="6" :gutter-y="6">
           <McGridCol>
-            <McTooltip size="s" placement="top" content="Сбросить">
+            <McTooltip size="s" placement="top" :content="lang.reset">
               <McButton
                 :disabled="!Object.keys(currentValues).length"
                 @click="reset"
@@ -91,7 +91,7 @@
             </McTooltip>
           </McGridCol>
           <McGridCol>
-            <McTooltip size="s" placement="top" content="Сохранить пресет">
+            <McTooltip size="s" placement="top" :content="lang.save_preset">
               <McButton
                 :disabled="!Object.keys(currentValues).length"
                 @click="savePreset"
@@ -104,7 +104,7 @@
           </McGridCol>
           <McGridCol stretch-self>
             <McButton full-width :disabled="!canSubmit" @click="submit">
-              <slot name="submit">Применить</slot>
+              <slot name="submit">{{ lang.apply }}</slot>
               <template v-if="filterDeepCount">{{ filterDeepCount }}</template>
             </McButton>
           </McGridCol>
@@ -161,44 +161,48 @@ export default {
       type: Array,
       required: true,
     },
+    lang: {
+      type: [Array, Object],
+      required: false,
+    },
     presets: {
       type: Array,
       default() {
         return []
       },
     },
-    tRelationIs: {
-      type: String,
-      default: "Это",
-    },
-    tRelationNotIs: {
-      type: String,
-      default: "Это не",
-    },
-    tRelationExists: {
-      type: String,
-      default: "Не пустое",
-    },
-    tRelationNotExists: {
-      type: String,
-      default: "Пустое",
-    },
-    tRangeMore: {
-      type: String,
-      default: "Больше",
-    },
-    tRangeLess: {
-      type: String,
-      default: "Меньше",
-    },
-    tabAll: {
-      type: String,
-      default: "Все",
-    },
-    tabPresets: {
-      type: String,
-      default: "Пресеты",
-    },
+    // tRelationIs: {
+    //   type: String,
+    //   default: "Это",
+    // },
+    // tRelationNotIs: {
+    //   type: String,
+    //   default: "Это не",
+    // },
+    // tRelationExists: {
+    //   type: String,
+    //   default: "Не пустое",
+    // },
+    // tRelationNotExists: {
+    //   type: String,
+    //   default: "Пустое",
+    // },
+    // tRangeMore: {
+    //   type: String,
+    //   default: "Больше",
+    // },
+    // tRangeLess: {
+    //   type: String,
+    //   default: "Меньше",
+    // },
+    // tabAll: {
+    //   type: String,
+    //   default: "Все",
+    // },
+    // tabPresets: {
+    //   type: String,
+    //   default: "Пресеты",
+    // },
   },
   data() {
     return {
