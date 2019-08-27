@@ -20,7 +20,7 @@ export default {
 .mc-stack-counter {
   $block-name: &;
 
-  color: $color-text;
+  color: $color-black;
   font-family: $font-text;
   font-size: $size-m;
   line-height: $line-height-s;

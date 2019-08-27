@@ -14,7 +14,7 @@
           @click.prevent="_ => handleChange(source)"
           full-width
           text-align="left"
-          variation="gray-dark-flat"
+          variation="black-flat"
           size="m"
         >
           {{ source.name }}

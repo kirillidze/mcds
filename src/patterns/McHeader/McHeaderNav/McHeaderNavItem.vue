@@ -49,7 +49,7 @@ export default {
   ```jsx
   <div>
     <McHeaderNavItem>
-      <McButton href="javascript:void(0);" variation="gray-dark-flat">
+      <McButton href="javascript:void(0);" variation="black-flat">
         <McSvgIcon slot="icon-prepend" name="public" />
         Пункт меню
       </McButton>

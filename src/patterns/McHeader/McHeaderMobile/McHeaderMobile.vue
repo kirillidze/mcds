@@ -12,7 +12,7 @@
             text-align="left"
             :href="menuMainItem.href"
             :to="menuMainItem.to"
-            variation="gray-dark-flat"
+            variation="black-flat"
             size="l"
           >
             <McSvgIcon slot="icon-prepend" size="xxs" :name="menuMainItem.icon" />

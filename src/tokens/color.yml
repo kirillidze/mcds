@@ -97,13 +97,13 @@ props:
     category: color_scale
 
   # old colors:
-  color_gray_darkest: # ++
+  color_gray_darkest: # ++ s st
     value: "hsla({!gray}, 13%, 1)"
     category: color_group_1
-  color_gray_darker: # ++
+  color_gray_darker: # ++ s st
     value: "hsla({!gray}, 20%, 1)"
     category: color_group_1
-  color_gray_darken: # ++
+  color_gray_darken: # ++ s st
     value: "hsla({!gray}, 30%, 1)"
     category: color_group_1
   #  color_gray_dark:
@@ -112,79 +112,79 @@ props:
   #  color_gray:
   #    value: "hsla({!gray}, 50%, 1)"
   #    category: color_group_1
-  color_gray_light: # ++
+  color_gray_light: # ++ s st
     value: "hsla({!gray}, 60%, 1)"
     category: color_group_1
-  color_gray_lighten: # ++
+  color_gray_lighten: # ++ s st
     value: "hsla({!gray}, 76%, 1)"
     category: color_group_1
-  color_gray_lighter: # ++
+  color_gray_lighter: # ++ s st
     value: "hsla({!gray}, 80%, 1)"
     category: color_group_1
-  color_gray_lightest: # ++
+  color_gray_lightest: # ++ s st
     value: "hsla({!gray}, 93%, 1)"
     category: color_group_1
 
-  color_red_light: # ++
+  color_red_light: # ++ s st
     value: "hsla({!red}, 61%, 1)"
     category: color_group_5
 
-  color_cinnabar_dark: # ++
+  color_cinnabar_dark: # ++ s st
     value: "hsla({!cinnabar}, 46%, 1)"
     category: color_group_10
-  color_cinnabar: # ++
+  color_cinnabar: # ++ s st
     value: "hsla({!cinnabar}, 50%, 1)"
     category: color_group_10
 
-  color_gorse: # ++
+  color_gorse: # ++ s st
     value: "hsla({!gorse}, 58%, 1)"
     category: color_group_15
 
-  color_mantis_dark: # ++
+  color_mantis_dark: # ++ s st
     value: "hsla({!mantis}, 47%, 1)"
     category: color_group_20
 
-  color_soft_green_dark: # ++
+  color_soft_green_dark: # ++ s st
     value: "hsla({!soft_green}, 40%, 1)"
     category: color_group_21
 
-  color_soft_green_light: # ++
+  color_soft_green_light: # ++ s st
     value: "hsla({!soft_green}, 60%, 1)"
     category: color_group_21
 
-  color_bright_turquoise_darker: # ++
+  color_bright_turquoise_darker: # ++ s st
     value: "hsla({!bright_turquoise}, 24%, 1)"
     category: color_group_25
 
-  color_aqua_darken: # ++
+  color_aqua_darken: # ++ s st
     value: "hsla({!aqua}, 33%, 1)"
     category: color_group_30
 
-  color_bermuda_gray: # ++
+  color_bermuda_gray: # ++ s st
     value: "hsla({!bermuda_gray}, 54%, 1)"
     category: color_group_35
 
-  color_navy_blue_light: # ++
+  color_navy_blue_light: # ++ s st
     value: "hsla({!navy_blue}, 61%, 1)"
     category: color_group_40
 
-  color_dodger_blue_light: # ++
+  color_dodger_blue_light: # ++ s st
     value: "hsla({!dodger_blue}, 60%, 1)"
     category: color_group_45
 
-  color_dodger_blue_lighten: # ++
+  color_dodger_blue_lighten: # ++ s st
     value: "hsla({!dodger_blue}, 70%, 1)"
     category: color_group_45
 
-  color_dodger_blue_lighter: # ++
+  color_dodger_blue_lighter: # ++ s st
     value: "hsla({!dodger_blue}, 80%, 1)"
     category: color_group_45
 
-  color_dark_orchid: # ++
+  color_dark_orchid: # ++ s st
     value: "hsla({!dark_orchid}, 51%, 1)"
     category: color_group_50
 
-  color_razzle_dazzle_rose_light: # ++
+  color_razzle_dazzle_rose_light: # ++ s st
     value: "hsla({!razzle_dazzle_rose}, 68%, 1)"
     category: color_group_55
 
@@ -195,25 +195,25 @@ props:
   #    value: "hsla({!gray}, 0%, 1)"
   #    category: color_group_60
 
-  color_primary: # ++
+  color_primary: # ++ s st
     value: "hsla({!navy_blue}, 61%, 1)"
     category: color_group_65
-  color_secondary: # ++
+  color_secondary: # ++ s st
     value: "hsla({!cinnabar}, 50%, 1)"
     category: color_group_65
-  color_danger: # ++
+  color_danger: # ++ s st
     value: "hsla({!red}, 61%, 1)"
     category: color_group_65
-  color_success: # ++
+  color_success: # ++ s st
     value: "hsla({!soft_green}, 60%, 1)"
     category: color_group_65
-  color_placeholder: # ++
+  color_placeholder: # ++ s st
     value: "hsla({!gray}, 90%, 1)"
     category: color_group_65
-  color_text: # ++
+  color_text: # ++ s st
     value: "hsla({!gray}, 13%, 1)"
     category: color_group_65
-  color_border: # ++
+  color_border: # ++ s st
     value: "hsla({!gray}, 80%, 1)"
     category: color_group_65
 global:

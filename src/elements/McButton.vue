@@ -578,7 +578,7 @@ $colors: $token-colors;
     'accent-blue',
     'dark-green-invert',
     'red-outline',
-    'gray-dark-flat',
+    'black-flat',
     'white',
     'white-flat',
     'accent-blue-link',

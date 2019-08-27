@@ -13,7 +13,7 @@
         />
       </div>
       <McButton
-        variation="gray-dark-flat"
+        variation="black-flat"
         size="m-compact"
         rounded
         tabindex="-1"
@@ -23,7 +23,7 @@
         <McSvgIcon slot="icon-append" name="search" />
       </McButton>
       <McButton
-        variation="gray-dark-flat"
+        variation="black-flat"
         size="m-compact"
         rounded
         tabindex="-1"
@@ -140,7 +140,7 @@ export default {
     font-weight: $weight-medium;
     line-height: $line-height-s;
     appearance: textfield;
-    border: 1px solid $color-border;
+    border: 1px solid $color-outline-gray;
     background-color: $color-white;
     border-radius: $radius-m;
     height: $tappable-element-l;
@@ -184,8 +184,8 @@ export default {
     border-bottom-left-radius: $radius-m;
     background-color: $color-white;
     box-shadow: $shadow-m;
-    border: 1px solid $color-border;
-    border-top-color: $color-border;
+    border: 1px solid $color-outline-gray;
+    border-top-color: $color-outline-gray;
     max-height: 75vmin;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -197,7 +197,7 @@ export default {
         box-shadow: $shadow-m;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
-        border-bottom-color: $color-border;
+        border-bottom-color: $color-outline-gray;
       }
     }
   }

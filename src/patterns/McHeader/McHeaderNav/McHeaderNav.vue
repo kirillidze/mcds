@@ -58,7 +58,7 @@ export default {
               v-for="(menuMainItem, index) in menuMain"
               :key="`menu-main-${index}`"
       >
-        <McButton :href="menuMainItem.href" :to="menuMainItem.to" variation="gray-dark-flat">
+        <McButton :href="menuMainItem.href" :to="menuMainItem.to" variation="black-flat">
           <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
           {{ menuMainItem.name }}
         </McButton>

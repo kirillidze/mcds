@@ -384,7 +384,7 @@ export default {
   }
 
   &__footer {
-    border-top: 1px solid $color-border;
+    border-top: 1px solid $color-outline-gray;
     padding-top: $space-xs;
     flex-shrink: 0;
   }

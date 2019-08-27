@@ -103,7 +103,7 @@ export default {
 
   @include reset-text-indents();
 
-  color: $color-text;
+  color: $color-black;
   font-family: $font-heading;
   display: inline-flex;
   white-space: nowrap;

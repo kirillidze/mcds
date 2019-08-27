@@ -4,7 +4,7 @@
     :href="item.href"
     :to="item.to"
     text-align="left"
-    variation="gray-dark-flat"
+    variation="black-flat"
     size="l"
     full-width
     @click.native="handleClick"
