@@ -162,7 +162,7 @@ export default {
       required: true,
     },
     lang: {
-      type: [Array, Object],
+      //type:,
       required: false,
     },
     presets: {
@@ -514,6 +514,27 @@ export default {
     const savePreset = values => presets.push(values)
     let dropIsOpen = false
 
+    let lang = {
+        placeholder: "Поиск",
+        from: "от",
+        to: "до",
+        this: "Это",
+        is_not: "Это не",
+        not_empty: "Не пустое",
+        empty: "Пустое",
+        more: "Больше",
+        less: "Меньше",
+        later: "Позже",
+        above: "Раньше",
+        apply: "Применить",
+        reset: "Сбросить",
+        save_preset: "Сохранить пресет",
+        filter: "Фильтр",
+        all: "Все",
+        presets: "Пресеты"
+    }
+
+
     <div>
 
     <McDropdown v-model="dropIsOpen">
@@ -526,12 +547,7 @@ export default {
                 :filters="filters"
                 :presets="presets"
                 @preset-save="savePreset"
-                t-relation-is="Это"
-                t-relation-not-is="Это не"
-                t-relation-exists="Не пустое"
-                t-relation-not-exists="Пустое"
-                t-range-more="Больше"
-                t-range-less="Меньше"
+                :lang="lang"
         />
     </McDropdown>
     <br/>
@@ -544,12 +560,7 @@ export default {
             :filters="filters"
             :presets="presets"
             @preset-save="savePreset"
-            t-relation-is="Это"
-            t-relation-not-is="Это не"
-            t-relation-exists="Не пустое"
-            t-relation-not-exists="Пустое"
-            t-range-more="Больше"
-            t-range-less="Меньше"
+            :lang="lang"
     />
     </div>
     ```

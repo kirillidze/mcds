@@ -265,7 +265,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McTooltip color="dark" placement="top" content="А если текста реально очень очень много, например как сейчас?">
+    <McTooltip color="black" placement="top" content="А если текста реально очень очень много, например как сейчас?">
       <McButton>Тултип</McButton>
     </McTooltip>
     <br>
