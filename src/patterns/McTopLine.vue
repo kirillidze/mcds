@@ -128,7 +128,7 @@ export default {
         <McButton variation="black-flat" size="m-compact">
           <McSvgIcon slot="icon-append" name="delete"/>
         </McButton>
-        <McButton variation="accent-blue-link" size="m-compact">
+        <McButton variation="blue-link" size="m-compact">
           Ссылка
         </McButton>
         <McButton variation="black-flat" size="m-compact">
@@ -152,7 +152,7 @@ export default {
         <McButton variation="black-flat" size="l-compact">
           <McSvgIcon slot="icon-append" name="delete"/>
         </McButton>
-        <McButton variation="accent-blue-link" size="m-compact">
+        <McButton variation="blue-link" size="m-compact">
           Ссылка
         </McButton>
         <McButton variation="black-flat" size="l-compact">

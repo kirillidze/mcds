@@ -330,9 +330,9 @@ $colors: $token-colors;
     }
 
     &__tag {
-      font-family: $font-family;
+      font-family: $font-heading-secondary;
       margin-top: $space-xxxs;
-      background-color: fade-out($color-accent-blue, 0.9);
+      background-color: fade-out($color-blue, 0.9);
       color: $color-black;
       display: inline-flex;
       align-items: center;
@@ -353,7 +353,7 @@ $colors: $token-colors;
     &__tag-icon {
       @include size($tappable_element_xxs + 2);
       position: relative;
-      background-color: $color-accent-blue;
+      background-color: $color-blue;
       border-radius: $radius-circle;
       flex: 0 0 auto;
 
@@ -407,11 +407,11 @@ $colors: $token-colors;
     &--active {
       .multiselect {
         &__tags {
-          border-color: $color-accent-blue;
+          border-color: $color-blue;
         }
         &__select {
           &::before {
-            border-color: $color-accent-blue transparent transparent;
+            border-color: $color-blue transparent transparent;
           }
         }
       }
@@ -525,7 +525,7 @@ $colors: $token-colors;
   &--error {
     .multiselect {
       &__tags {
-        border-color: $color-main !important;
+        border-color: $color-red !important;
       }
     }
   }

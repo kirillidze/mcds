@@ -58,7 +58,7 @@ export default {
     <McGetInfo :total="total" >
         <McButton
             size="s"
-            variation="accent-blue-link"
+            variation="blue-link"
             @click.prevent="_ => total = 10"
             uppercase
         >

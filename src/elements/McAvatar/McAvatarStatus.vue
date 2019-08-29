@@ -151,11 +151,11 @@ $dot-colors: $token-colors;
 <docs>
   ```jsx
   <div>
-    <McAvatarStatus size="xs" border-color="accent-blue" dot-color="orange" lazy/>
-    <McAvatarStatus size="s" border-color="accent-blue" dot-color="orange" lazy/>
-    <McAvatarStatus size="m" border-color="accent-blue" dot-color="orange" lazy/>
-    <McAvatarStatus size="l" border-color="accent-blue" dot-color="orange" lazy/>
-    <McAvatarStatus size="xl" border-color="accent-blue" dot-color="orange" lazy/>
+    <McAvatarStatus size="xs" border-color="blue" dot-color="orange" lazy/>
+    <McAvatarStatus size="s" border-color="blue" dot-color="orange" lazy/>
+    <McAvatarStatus size="m" border-color="blue" dot-color="orange" lazy/>
+    <McAvatarStatus size="l" border-color="blue" dot-color="orange" lazy/>
+    <McAvatarStatus size="xl" border-color="blue" dot-color="orange" lazy/>
   </div>
   ```
 </docs>

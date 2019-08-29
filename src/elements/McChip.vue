@@ -39,7 +39,7 @@ export default {
     },
     /**
      *  Дизайн:
-     *  `accent-blue, accent-blue-invert т.д.`
+     *  `blue, blue-invert т.д.`
      */
     variation: {
       type: String,
@@ -144,7 +144,7 @@ export default {
     flex-wrap: nowrap;
     -webkit-appearance: none;
     -webkit-text-fill-color: currentColor;
-    color: $color-accent-blue;
+    color: $color-blue;
     margin-left: $space_xxs;
 
     &:hover,
@@ -200,11 +200,11 @@ export default {
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
       Чипс c иконкой
     </McChip>
-    <McChip variation="accent-blue-invert" closable @click="eventTest('close')">
+    <McChip variation="blue-invert" closable @click="eventTest('close')">
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
       Чипс c иконкой и кнопкой
     </McChip>
-    <McChip :counter="15" variation="accent-blue" closable @click="eventTest('close')">
+    <McChip :counter="15" variation="blue" closable @click="eventTest('close')">
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
       Чипс c иконкой, кнопкой и счетчкиком
     </McChip>

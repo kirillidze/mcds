@@ -43,7 +43,7 @@ export default {
     },
     color: {
       type: String,
-      default: "accent-blue",
+      default: "blue",
     },
     lazy: {
       type: Boolean,

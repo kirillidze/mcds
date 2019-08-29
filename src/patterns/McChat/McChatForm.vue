@@ -16,7 +16,7 @@
         <McAvatar class="mc-chat-form__avatar" slot="prepend" rounded size="s" :src="avatar" />
         <McButton
           class="mc-chat-form__btn"
-          variation="accent-blue-link"
+          variation="blue-link"
           slot="append"
           size="s-compact"
           @click.prevent="handleSubmit"

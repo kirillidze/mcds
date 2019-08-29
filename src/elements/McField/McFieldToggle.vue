@@ -75,7 +75,7 @@ export default {
 
   &--checked {
     #{$block-name}__text {
-      color: $color-accent-blue;
+      color: $color-blue;
     }
   }
 
@@ -89,7 +89,7 @@ export default {
       @include size(0);
 
       &:checked + #{$block-name}__slider {
-        background-color: $color-accent-blue;
+        background-color: $color-blue;
 
         &:before {
           transform: translateX($size-l + $space-xxxs);

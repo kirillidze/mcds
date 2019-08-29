@@ -34,7 +34,7 @@ export default {
     },
     color: {
       type: String,
-      default: "accent-blue",
+      default: "blue",
     },
     uppercase: {
       type: Boolean,
@@ -119,7 +119,7 @@ export default {
       content: "";
       display: block;
       z-index: 1;
-      background-color: $color-accent-blue;
+      background-color: $color-blue;
       transition: left 0.2s ease, right 0.2s ease, opacity 0.2s ease, color 0.2s ease;
     }
   }
@@ -132,7 +132,7 @@ export default {
 
   &--size-m {
   }
-  &--color-accent-blue {
+  &--color-blue {
   }
 }
 </style>

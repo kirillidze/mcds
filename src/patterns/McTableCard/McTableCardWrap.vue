@@ -28,7 +28,7 @@ export default {
 
   > .page-enter-active,
   > .page-leave-active {
-    transition: opacity $transition-time, transform $transition-time;
+    transition: opacity $duration-standart ease, transform $duration-standart ease;
   }
   > .page-enter,
   > .page-leave-to {

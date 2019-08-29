@@ -7,7 +7,7 @@
             {{ item.title }}
           </h4>
           <McButton
-            variation="accent-blue-flat"
+            variation="blue-flat"
             size="m"
             @click.native="handleClickSearchAll"
             :href="item.button.href"

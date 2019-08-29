@@ -80,7 +80,7 @@ export default {
         <br>
 
         <McLines>
-            <McTitle uppercase color="accent-blue" slot="title" size="m">
+            <McTitle uppercase color="blue" slot="title" size="m">
                 Имя Фамилия
             </McTitle>
             <McTitle tag-name="p" size="xl">

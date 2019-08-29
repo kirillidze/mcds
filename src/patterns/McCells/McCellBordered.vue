@@ -193,7 +193,7 @@ export default {
 
     <br>
 
-    <McCellBordered border-color="accent-blue" @click>
+    <McCellBordered border-color="blue" @click>
       <McCell>
         <McTitle color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации

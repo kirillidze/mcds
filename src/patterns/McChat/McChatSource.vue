@@ -1,7 +1,7 @@
 <template>
   <div class="channel-chat-source">
     <McDropdown v-model="isOpened">
-      <McButton slot="activator" variation="accent-blue-link">
+      <McButton slot="activator" variation="blue-link">
         {{ activeSource.name }}
         <McSvgIcon name="arrow_drop_down" slot="icon-append" />
       </McButton>

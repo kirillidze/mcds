@@ -346,12 +346,12 @@ export default {
     background-color: $color-white;
     -moz-appearance: textfield;
     appearance: textfield;
-    transition: background-color $transition-time-fast, border-color $transition-time-fast;
+    transition: background-color $duration-quickly ease, border-color $duration-quickly ease;
     color: $color-black;
 
     &:focus {
       outline: 0;
-      border-color: $color-accent-blue;
+      border-color: $color-blue;
     }
 
     &::-webkit-search-cancel-button,
@@ -478,7 +478,7 @@ export default {
                 title="Textarea"
         >
             <McButton
-                    variation="accent-blue-link"
+                    variation="blue-link"
                     slot="append"
                     size="s-compact"
             >

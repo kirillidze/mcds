@@ -143,7 +143,7 @@ export default {
     source = value
     }
     let submit = () => {
-    comments.push({ content: text, date: new Date().toString(), user: { name: 'Тест' }, color: 'accent-blue',})
+    comments.push({ content: text, date: new Date().toString(), user: { name: 'Тест' }, color: 'blue',})
     text = ''
     }
     <div>

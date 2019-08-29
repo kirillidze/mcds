@@ -79,11 +79,11 @@ export default {
     },
     /**
      *  Дизайн:
-     *  `accent-blue, red, accent-blue-outline, accent-blue-invert, accent-blue-flat и т.д.`
+     *  `blue, red, blue-outline, blue-invert, blue-flat и т.д.`
      */
     variation: {
       type: String,
-      default: "accent-blue",
+      default: "blue",
     },
     /**
      *  Размеры:
@@ -499,7 +499,7 @@ $colors: $token-colors;
 
   &--is-active,
   &.nuxt-link-active {
-    color: $color-accent-blue;
+    color: $color-blue;
     background-color: transparent;
     border-color: transparent;
     pointer-events: none;
@@ -575,13 +575,13 @@ $colors: $token-colors;
 <docs>
   ```jsx
   let variations = [
-    'accent-blue',
+    'blue',
     'dark-green-invert',
     'red-outline',
     'black-flat',
     'white',
     'white-flat',
-    'accent-blue-link',
+    'blue-link',
   ]
 
   <div style="text-align: center">

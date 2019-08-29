@@ -258,7 +258,7 @@ export default {
 
     <br><br>
 
-    <McTitle size="xxxxl" color="accent-blue">
+    <McTitle size="xxxxl" color="blue">
       <McSvgIcon slot="icon-prepend" name="ready"/>
       Заголовок
     </McTitle>

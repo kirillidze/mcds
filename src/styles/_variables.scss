@@ -1,198 +1,78 @@
 // ↓↓↓ Этих переменных не будет, не используйте их нигде. Они временные, чтобы поддерживать работу стилей старого медиакуба. ↓↓↓
 
-$black: hsl(0, 0%, 0%);
-$gray-darkest: hsl(0, 0%, 10%);
-$gray-darker: hsl(0, 0%, 20%);
-$gray-darken: hsl(0, 0%, 30%);
-$gray-dark: hsl(0, 0%, 40%);
-$gray: hsl(0, 0%, 50%);
-$gray-light: hsl(0, 0%, 60%);
-$gray-lighten: hsl(0, 0%, 70%);
-$gray-lighter: hsl(0, 0%, 80%);
-$gray-lightest: hsl(0, 0%, 90%);
-$white: hsl(0, 0%, 100%);
-$color-main: hsl(14, 80%, 50%);
-// $color-secondary: hsl(217, 89%, 61%);
-$color-third: hsl(302, 90%, 68%);
-//$color-third:                       hsl(0, 0%, 96%);
-//$color-danger:                      hsl(0, 100%, 55%);
-
-// Цвета графиков
-
-$color-blue: hsl(217, 89%, 62%);
-$color-red: hsl(5, 70%, 56%);
-$color-green: hsl(112, 31%, 52%);
-$color-yellow: hsl(45, 100%, 60%);
-$color-light-yellow: hsl(55, 100%, 72%);
-$color-purple: hsl(300, 50%, 60%);
-$color-light-purple: hsl(358, 72%, 93%);
-$color-lighten-purple: hsl(300, 100%, 90%);
-$color-azure: hsl(180, 60%, 50%);
-$color-orange: hsl(30, 100%, 60%);
-
-$color-collection-1: (
-  $color-blue,
-  $color-red,
-  $color-green,
-  $color-yellow,
-  $color-purple,
-  $color-azure,
-  $color-orange
-);
-
-// Цвета статусов
-
-$color-status-red: hsl(0, 89%, 61%);
-$color-status-blue: hsl(225, 100%, 60%);
-$color-status-light-blue: fade-out($color-status-blue, 0.24);
-$color-status-lighten-blue: fade-out($color-status-blue, 0.34);
-$color-status-green: hsl(102, 74%, 47%);
-$color-status-yellow: #ffe029;
-$color-status-dark-gray: #666666;
-$color-status-gray: #78909c;
-$color-status-light-gray: #cccccc;
-$color-status-black: #000000;
-$color-status-purple: #873cc7;
-$color-status-emerald: #00796b;
-$color-status-azure: #0097a7;
-$color-status-orange: #d84315;
-
-$colors: (
-  "red": $color-status-red,
-  "blue": $color-status-blue,
-  "light-blue": $color-status-light-blue,
-  "lighten-blue": $color-status-lighten-blue,
-  "green": $color-status-green,
-  "yellow": $color-status-yellow,
-  "dark-gray": $color-status-dark-gray,
-  "light-gray": $color-status-light-gray,
-  "black": $color-status-black,
-  "purple": $color-status-purple,
-  "emerald": $color-status-emerald,
-  "azure": $color-status-azure,
-  "orange": $color-status-orange,
-  "gray": $color-status-gray,
-);
-
-// Семантические цвета
-
-$text-color: $black;
-$text-color--muted: $gray-darken;
-$link-bg-color: hsl(0, 0%, 93%);
-$link-bg-color--active: fade-out($black, 0.88);
-$body-bg: $white;
-$placeholder-color: $gray-lightest;
-$color-border: $gray-lighter;
-
 // Базовая типографика
 
-$rem-baseline: 16px;
-$font-size: rem(16px);
-$line-height: 1.5;
-$font-family: "Roboto", sans-serif;
-$font-family--headings: "Roboto Slab", serif;
-$font-family--headings-2: "Montserrat", sans-serif;
+//$rem-baseline: 16px; // m +
+//$font-size: rem(16px); // m +
+//$line-height: 1.5; // m +
+//$font-family: "Roboto", sans-serif; // m +
+//$font-family--headings: "Roboto Slab", serif; // m +
+//$font-family--headings-2: "Montserrat", sans-serif; // m +
 
 // Ширины
 
-$width-sidebar: 70px;
-$width-sidebar--opened: 240px;
-$width-main: calc(100% - #{$width-sidebar});
-$gutters: 12px;
+//$width-sidebar: 70px;
+//$width-sidebar--opened: 240px;
+//$width-main: calc(100% - #{$width-sidebar});
+//$gutters: 12px;
 
 // Mobile first (min-width)
 
-$screen-xs-up: 0;
-$screen-sm-up: 480px;
-$screen-md-up: 768px;
-$screen-lg-up: 1024px;
-$screen-xl-up: 1200px;
-$screen-xxl-up: 1440px;
+//$screen-xs-up: 0;
+//$screen-sm-up: 480px;
+//$screen-md-up: 768px;
+//$screen-lg-up: 1024px;
+//$screen-xl-up: 1200px;
+//$screen-xxl-up: 1440px;
 
 // Desctop first (max-width)
 
-$screen-sm-down: $screen-sm-up - 1px;
-$screen-md-down: $screen-md-up - 1px;
-$screen-lg-down: $screen-lg-up - 1px;
-$screen-xl-down: $screen-xl-up - 1px;
-$screen-xxl-down: $screen-xxl-up - 1px;
+//$screen-sm-down: $screen-sm-up - 1px;
+//$screen-md-down: $screen-md-up - 1px;
+//$screen-lg-down: $screen-lg-up - 1px;
+//$screen-xl-down: $screen-xl-up - 1px;
+//$screen-xxl-down: $screen-xxl-up - 1px;
 
 // Разное
 
-$opacity: 0.7;
-$transition-time: 0.3s ease;
-$transition-time-fast: 0.15s ease;
+//$opacity: 0.7;
+//$transition-time: 0.3s ease;
+//$transition-time-fast: 0.15s ease;
 
-$z-index-header: 10000;
-$z-index-top-line: $z-index-header - 1;
-$z-index-notification: $z-index-header + 1;
-$z-index-overlay: $z-index-header + 2;
+//$z-index-header: 10000;
+//$z-index-top-line: $z-index-header - 1;
+//$z-index-notification: $z-index-header + 1;
+//$z-index-overlay: $z-index-header + 2;
 
-$header-height: 65px;
-$breadcrumbs-height: 31px;
-$content-height: calc(100vh - #{$header-height});
+// $header-height: 65px;
+// $breadcrumbs-height: 31px;
+// $content-height: calc(100vh - #{$header-height});
 
-$top-line-height: 40px;
+// $top-line-height: 40px;
 
-$tabble-head-height: 45px;
-$tabble-first-col-width: 250px;
+//$tabble-head-height: 45px;
+//$tabble-first-col-width: 250px;
 
-$filter-search-input-height: 54px;
+//$filter-search-input-height: 54px;
 
 // ↑↑↑ Этих переменных не будет, не используйте их нигде. Они временные, чтобы поддерживать работу стилей старого медиакуба. ↑↑↑
 
 $token-colors: (
-  // new colors:
-    "white": $color-white,
+  "white": $color-white,
   "hover-gray": $color_hover_gray,
   "outline-gray": $color_outline_gray,
   "gray": $color_gray,
   "gray-dark": $color_gray_dark,
   "black": $color_black,
-  "active-blue": $color_active_blue,
-  "text-blue": $color_text_blue,
-  "accent-blue": $color_accent_blue,
+  "lightest-blue": $color_lightest_blue,
+  "light-blue": $color_light_blue,
+  "blue": $color_blue,
   "light-green": $color_light_green,
   "dark-green": $color_dark_green,
   "orange": $color_orange,
   "red": $color_red,
   "ultraviolet": $color_ultraviolet,
-  "purple-blue": $color_purple_blue,
+  "purple": $color_purple,
   "pinkish": $color_pinkish,
   "azure": $color_azure,
-  // old colors:
-    "gray-darkest": $color-gray-darkest,
-  "gray-darker": $color-gray-darker,
-  "gray-darken": $color-gray-darken,
-  // "gray-dark": $color-gray-dark,
-    // "gray": $color-gray,
-    "gray-light": $color-gray-light,
-  "gray-lighten": $color-gray-lighten,
-  "gray-lighter": $color-gray-lighter,
-  "gray-lightest": $color-gray-lightest,
-  "red-light": $color-red-light,
-  "cinnabar-dark": $color-cinnabar-dark,
-  "cinnabar": $color-cinnabar,
-  "gorse": $color-gorse,
-  "mantis-dark": $color-mantis-dark,
-  "soft-green-dark": $color-soft-green-dark,
-  "soft-green-light": $color-soft-green-light,
-  "bright-turquoise-darker": $color-bright-turquoise-darker,
-  "aqua-darken": $color-aqua-darken,
-  "bermuda-gray": $color-bermuda-gray,
-  "color-navy-blue-light": $color-navy-blue-light,
-  "dodger-blue-light": $color-dodger-blue-light,
-  "dodger-blue-lighten": $color-dodger-blue-lighten,
-  "dodger-blue-lighter": $color-dodger-blue-lighter,
-  "dark-orchid": $color-dark-orchid,
-  "razzle-dazzle-rose-light": $color-razzle-dazzle-rose-light,
-  // "black": $color-black,
-    // "white": $color-white,
-    "primary": $color-primary,
-  "secondary": $color-secondary,
-  "danger": $color-danger,
-  "success": $color-success,
-  "placeholder": $color-placeholder,
-  "text": $color-text,
-  "border": $color-border
 );

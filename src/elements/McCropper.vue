@@ -66,7 +66,7 @@ export default {
   .cropper {
     &-modal {
       opacity: $opacity-active;
-      background-color: $white;
+      background-color: $color-white;
     }
 
     &-face,

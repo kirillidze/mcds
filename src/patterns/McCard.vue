@@ -152,7 +152,7 @@ export default {
                 <McGridRow slot="right" :gutter-x="5" :gutter-y="5">
                     <McGridCol>
                         <McTooltip size="s" placement="top" content="Редактировать">
-                            <McButton variation="accent-blue-invert" size="s-compact">
+                            <McButton variation="blue-invert" size="s-compact">
                                 <McSvgIcon slot="icon-append" name="create"/>
                             </McButton>
                         </McTooltip>
@@ -247,7 +247,7 @@ export default {
                     <McGridRow :gutter-x="5" :gutter-y="5">
                         <McGridCol>
                             <McTooltip size="s" placement="top" content="Редактировать">
-                                <McButton variation="accent-blue-invert" size="s-compact">
+                                <McButton variation="blue-invert" size="s-compact">
                                     <McSvgIcon slot="icon-append" name="create"/>
                                 </McButton>
                             </McTooltip>

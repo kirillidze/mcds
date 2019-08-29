@@ -7,7 +7,7 @@
       <div v-if="index === 0 && info" class="mc-breadcrumbs__info-wrapper">
         <McButton
           v-if="item.info === null"
-          variation="accent-blue-link"
+          variation="blue-link"
           rounded
           size="m-compact"
           :loading="loading"

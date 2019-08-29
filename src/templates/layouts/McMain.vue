@@ -251,7 +251,7 @@ export default {
                 <McButton>Фильтр</McButton>
               </template>
               <template slot="right">
-                <McButton variation="accent-blue-link">Добавить контракт</McButton>
+                <McButton variation="blue-link">Добавить контракт</McButton>
                 <McTitle tag="p" color="gray-dark">19 контрактов</McTitle>
               </template>
             </McTopLine>
@@ -278,25 +278,25 @@ export default {
             >
 
               <template slot="cell-user" slot-scope="row">
-                <McButton href="#" target="_blank" variation="accent-blue-link">
+                <McButton href="#" target="_blank" variation="blue-link">
                   Роман Подумеев
                 </McButton>
               </template>
 
               <template slot="cell-title" slot-scope="row">
                 <McPreview>
-                  <McAvatarStatus slot="left" border-color="accent-blue" dot-color="orange" lazy :src="row.item.avatar" size="s"/>
+                  <McAvatarStatus slot="left" border-color="blue" dot-color="orange" lazy :src="row.item.avatar" size="s"/>
                   <McGridRow style="height: 100%" slot="right" :wrap="false" align="middle" :gutter-x="5">
                     <McGridCol>
                       <McTooltip size="s" placement="top" content="Редактировать">
-                        <McButton variation="accent-blue-link" size="s-compact">
+                        <McButton variation="blue-link" size="s-compact">
                           <McSvgIcon slot="icon-append" name="create" size="xxs"/>
                         </McButton>
                       </McTooltip>
                     </McGridCol>
                     <McGridCol>
                       <McTooltip size="s" placement="top" content="Копировать">
-                        <McButton variation="accent-blue-link" size="s-compact">
+                        <McButton variation="blue-link" size="s-compact">
                           <McSvgIcon slot="icon-append" name="delete" size="xxs"/>
                         </McButton>
                       </McTooltip>

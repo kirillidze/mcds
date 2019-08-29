@@ -92,7 +92,7 @@ export default {
       background: $color-black;
       color: $color-white;
       border-radius: $radius-l;
-      font-family: $font-family--headings-2;
+      font-family: $font-heading;
       font-weight: $weight-medium;
       letter-spacing: $spacing-m;
       line-height: $line-height-s;
@@ -270,7 +270,7 @@ export default {
     </McTooltip>
     <br>
     <br>
-    <McTooltip size="s" color="accent-blue" content="А если текста реально очень очень много, например как сейчас?">
+    <McTooltip size="s" color="blue" content="А если текста реально очень очень много, например как сейчас?">
       <McSvgIcon name="face"/>
     </McTooltip>
     <br>

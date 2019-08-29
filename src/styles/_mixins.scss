@@ -218,7 +218,7 @@
   }
 }
 
-@mixin interplay-link($color: $color-cinnabar) {
+@mixin interplay-link($color: $color-red) {
   &:hover,
   &:focus {
     color: $color;
@@ -230,7 +230,7 @@
 }
 
 @mixin field-error() {
-  color: #e73232;
+  color: $color-red;
   font-size: 13px;
   line-height: line-height(16, 13);
   display: block;
@@ -248,11 +248,11 @@
     //border: 1px solid #dcdcdc;
   }
   ::-webkit-scrollbar-thumb {
-    background: hsl(240, 4%, 91%);
+    background: $color-gray;
     border-radius: 2px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #c1c1c1;
+    background: $color-hover-gray;
   }
   ::-webkit-scrollbar-thumb:active {
   }
@@ -338,10 +338,10 @@
 @mixin interplay() {
   &:hover,
   &:focus {
-    background-color: $link-bg-color;
+    background-color: $color_hover_gray;
   }
 
   &:active {
-    background-color: $link-bg-color--active;
+    background-color: $color_gray;
   }
 }

@@ -162,12 +162,12 @@ a {
 }
 
 ::selection {
-  background: fade-out($color-accent-blue, 0);
+  background: fade-out($color-blue, 0);
   color: $color-white;
 }
 
 ::-moz-selection {
-  background: fade-out($color-accent-blue, 0);
+  background: fade-out($color-blue, 0);
   color: $color-white;
 }
 
@@ -215,17 +215,17 @@ pre {
   $block-name: &; // #{$block-name}__element
 
   position: fixed;
-  top: $header-height + $breadcrumbs-height;
+  top: 65px + 31px;
   left: 0;
   right: 0;
-  background-color: $white;
+  background-color: $color-white;
   z-index: $z-index-top-line;
-  margin-left: $width-sidebar;
-  padding-left: $gutters * 2;
-  padding-right: $gutters * 2;
+  margin-left: 70px;
+  padding-left: $space-m;
+  padding-right: $space-m;
 
   &__inner {
-    height: $top-line-height;
+    height: $tappable-element-m;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -299,8 +299,8 @@ pre {
 .g-container {
   $block-name: &; // #{$block-name}__element
 
-  padding-left: $gutters * 2;
-  padding-right: $gutters * 2;
+  padding-left: $space-m;
+  padding-right: $space-m;
 }
 
 .channel-form {
@@ -308,14 +308,14 @@ pre {
 
   &__subtitle {
     @include ellipsis();
-    font-family: $font-family--headings-2;
-    color: hsl(0, 0%, 13%);
+    font-family: $font-heading;
+    color: $color-black;
     font-size: 16px;
     font-weight: 500;
     line-height: line-height(18, 16);
     margin-top: 0;
     margin-bottom: 0;
-    background-color: $white;
+    background-color: $color-white;
     display: block;
 
     &--small {
@@ -327,7 +327,7 @@ pre {
     }
 
     &--light {
-      color: hsl(0, 0%, 53%);
+      color: $color_gray;
     }
 
     &--bordered {
@@ -336,7 +336,7 @@ pre {
 
       span {
         position: relative;
-        background-color: $white;
+        background-color: $color-white;
         z-index: 1;
         padding-right: 8px;
       }
@@ -348,7 +348,7 @@ pre {
         left: 0;
         right: 0;
         bottom: 8px;
-        border-bottom: 1px dashed hsl(0, 0%, 53%);
+        border-bottom: 1px dashed $color_gray;
       }
     }
 
@@ -504,8 +504,8 @@ pre {
   }
 
   &__balance-title {
-    color: $white;
-    font-family: $font-family--headings-2;
+    color: $color-white;
+    font-family: $font-heading;
     font-size: 20px;
     line-height: line-height(23, 20);
     font-weight: 500;
@@ -516,7 +516,7 @@ pre {
   &__info-text {
     @include ellipsis();
 
-    color: hsl(0, 0%, 61%);
+    color: $color_gray;
     font-size: 14px;
     line-height: line-height(17, 14);
     font-weight: 500;
@@ -529,7 +529,7 @@ pre {
 
   &__help-text {
     color: #222222;
-    font-family: $font-family--headings-2;
+    font-family: $font-heading;
     font-size: 16px;
     line-height: line-height(19, 16);
     font-weight: 500;
@@ -563,15 +563,15 @@ pre {
     text-decoration: none;
     margin-top: 0;
     margin-bottom: 0;
-    color: hsl(0, 0%, 13%);
+    color: $color-black;
     font-size: 16px;
     font-weight: 500;
     line-height: line-height(19, 16);
-    transition: color $transition-time-fast;
-    font-family: $font-family--headings-2;
+    transition: color $duration-quickly ease;
+    font-family: $font-heading;
 
     &:hover {
-      color: $color-main;
+      color: $color-red;
     }
   }
 
@@ -602,11 +602,11 @@ pre {
     display: inline-block;
     text-decoration: none;
     color: #222222;
-    font-family: $font-family--headings-2;
+    font-family: $font-heading;
     font-size: 13px;
     line-height: line-height(16, 13);
     font-weight: 500;
-    transition: color $transition-time-fast;
+    transition: color $duration-quickly ease;
 
     @include interplay-link();
   }
@@ -648,7 +648,7 @@ pre {
 
     &.is-active {
       .tabs-component-tab-a {
-        color: $black;
+        color: $color-black;
         pointer-events: none;
       }
     }
@@ -680,8 +680,8 @@ pre {
       margin-top: 0;
     }
     .tabs-component-tab-a {
-      color: hsl(0, 0%, 13%);
-      font-family: $font-family--headings-2;
+      color: $color-black;
+      font-family: $font-heading;
       font-size: 16px;
       line-height: line-height(19, 16);
       font-weight: 600;
@@ -693,7 +693,7 @@ pre {
     .tabs-component-tab {
       &.is-active {
         .tabs-component-tab-a {
-          color: $color-third;
+          color: $color-pinkish;
         }
       }
     }
@@ -762,8 +762,8 @@ pre {
   }
 
   &__submenu-title {
-    color: #212121;
-    font-family: $font-family--headings-2;
+    color: $color-black;
+    font-family: $font-heading;
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 20px;
@@ -786,7 +786,7 @@ pre {
   &__item {
     text-decoration: none;
     color: hsl(0, 0%, 13%);
-    transition: border-color $transition-time-fast;
+    transition: border-color $duration-quickly ease;
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
@@ -796,7 +796,7 @@ pre {
     width: calc(25% - 16px);
     margin: 8px;
 
-    @media (min-width: $screen-xxl-up) {
+    @media #{$media-query-xxl} {
       width: calc(20% - 16px);
     }
 
@@ -806,7 +806,7 @@ pre {
   }
 
   &__title {
-    font-family: $font-family--headings-2;
+    font-family: $font-heading;
     font-size: 20px;
     line-height: 1.15;
     font-weight: 500;
@@ -831,7 +831,7 @@ pre {
     margin-top: 0;
     margin-bottom: 0;
     color: #222222;
-    font-family: $font-family;
+    font-family: $font-heading-secondary;
     font-size: 16px;
     line-height: line-height(19, 16);
     font-weight: 400;
@@ -843,7 +843,7 @@ pre {
 
   h1,
   h2 {
-    font-family: $font-family--headings-2;
+    font-family: $font-heading;
     font-size: 20px;
     line-height: line-height(23, 20);
     font-weight: 400;

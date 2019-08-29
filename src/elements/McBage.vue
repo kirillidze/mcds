@@ -28,7 +28,7 @@ export default {
     },
     /**
      *  Дизайн:
-     *  `accent-blue, accent-blue-outline т.д.`
+     *  `blue, blue-outline т.д.`
      */
     variation: {
       type: String,
@@ -80,7 +80,7 @@ export default {
     background-color: transparent;
 
     &-outline {
-      background-color: $white;
+      background-color: $color-white;
       color: $color-black;
       border-color: transparent;
     }
@@ -115,7 +115,7 @@ export default {
     <McBage variation="outline-gray-outline">
       network
     </McBage>
-    <McBage vertical-line variation="accent-blue-outline">
+    <McBage vertical-line variation="blue-outline">
       В обработке
     </McBage>
   </div>
