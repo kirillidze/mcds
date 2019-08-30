@@ -20,7 +20,7 @@
           <McGridCol v-for="selectType in selectTypes" :key="selectType">
             <McButton
               v-bind="buttonBind"
-              :variation="selectType === type ? 'light-green-invert' : 'blue'"
+              :variation="selectType === type ? 'blue' : 'white'"
               @click.prevent="handleClick(selectType)"
             >
               {{ selectType === "is" ? tRelationIs : tRelationNotIs }}
@@ -29,7 +29,7 @@
           <McGridCol v-for="v in [1, 0]" :key="v">
             <McButton
               v-bind="buttonBind"
-              :variation="(value.exists || []).indexOf(v) === -1 ? 'blue' : 'light-green-invert'"
+              :variation="(value.exists || []).indexOf(v) === -1 ? 'white' : 'blue'"
               @click.prevent="handleClick('exists', v)"
             >
               {{ v === 0 ? tRelationExists : tRelationNotExists }}
