@@ -45,6 +45,7 @@
           :allow-empty="true"
           :internal-search="!isAjax"
           @search-change="handleSearchChange"
+          :disabled="value.hasOwnProperty('exists')"
         />
       </div>
       <div class="mc-filter-type-relation__row">
@@ -54,16 +55,18 @@
             v-if="selectTypes.indexOf(type) !== -1"
             :key="type"
           >
-            <McFilterTypeRelationChip
-              v-for="chip in chips"
-              :key="type + '-' + filter.value + chip"
-              :type="type"
-              :value="chip"
-              :options="options"
-              :t-relation-is="tRelationIs"
-              :t-relation-not-is="tRelationNotIs"
-              @click="handleRelationChipClick(type, chip)"
-            />
+            <McGridRow :gutter-x="6" :gutter-y="6">
+              <McGridCol v-for="chip in chips" :key="type + '-' + filter.value + chip">
+                <McFilterTypeRelationChip
+                  :type="type"
+                  :value="chip"
+                  :options="options"
+                  :t-relation-is="tRelationIs"
+                  :t-relation-not-is="tRelationNotIs"
+                  @click="handleRelationChipClick(type, chip)"
+                />
+              </McGridCol>
+            </McGridRow>
           </McGridCol>
         </McGridRow>
       </div>

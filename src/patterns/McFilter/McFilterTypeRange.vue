@@ -24,7 +24,17 @@
               name="more"
               @input="value => handleInput('more', value)"
               @keypress.enter="submit"
-            />
+            >
+              <McButton
+                slot="append"
+                variation="blue-link"
+                size="s-compact"
+                @click.prevent="value => handleInput('more', '')"
+                v-if="value.more"
+              >
+                <McSvgIcon slot="icon-append" name="cancel" />
+              </McButton>
+            </McFieldText>
           </McGridCol>
           <McGridCol :span="6">
             <McFieldText
@@ -34,7 +44,17 @@
               name="less"
               @input="value => handleInput('less', value)"
               @keypress.enter="submit"
-            />
+            >
+              <McButton
+                slot="append"
+                variation="blue-link"
+                size="s-compact"
+                @click.prevent="value => handleInput('less', '')"
+                v-if="value.less"
+              >
+                <McSvgIcon slot="icon-append" name="cancel" />
+              </McButton>
+            </McFieldText>
           </McGridCol>
         </McGridRow>
       </div>
@@ -60,10 +80,12 @@ import McRangeSlider from "../../elements/McRangeSlider"
 import McChip from "../../elements/McChip"
 import McButton from "../../elements/McButton"
 import McFilterRow from "./McFilterRow"
+import McSvgIcon from "../../elements/McSvgIcon"
 
 export default {
   name: "McFilterTypeRange",
   components: {
+    McSvgIcon,
     McFilterRow,
     McButton,
     McChip,
