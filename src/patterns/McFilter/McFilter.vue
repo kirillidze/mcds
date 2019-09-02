@@ -284,8 +284,8 @@ export default {
         this.changePos()
       }
     },
-    handleClickOutside() {
-      if (!this.accordionIsClosed) {
+    handleClickOutside(e) {
+      if (!this.accordionIsClosed && document.body.contains(e.target)) {
         this.$refs.accordion.handleToggle(true)
       }
     },
