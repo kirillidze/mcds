@@ -3,7 +3,7 @@
     <McFilterRow slot="activator">
       {{ filter.name }}
       <McChip
-        slot="title"
+        slot="chip"
         v-if="value != null && value !== ''"
         variation="gray-dark-invert"
         size="s"

@@ -29,7 +29,7 @@
                 slot="append"
                 variation="blue-link"
                 size="s-compact"
-                @click.prevent="value => handleInput('more', '')"
+                @click.prevent="value => handleInput('more', null)"
                 v-if="value.more"
               >
                 <McSvgIcon slot="icon-append" name="cancel" />
@@ -49,7 +49,7 @@
                 slot="append"
                 variation="blue-link"
                 size="s-compact"
-                @click.prevent="value => handleInput('less', '')"
+                @click.prevent="value => handleInput('less', null)"
                 v-if="value.less"
               >
                 <McSvgIcon slot="icon-append" name="cancel" />
@@ -149,7 +149,7 @@ export default {
       this.$emit("open", this)
     },
     handleInput(type, value) {
-      const currentValue = value == null ? {} : { ...this.value }
+      const currentValue = { ...this.value }
       currentValue[type] = this.filter.type === "date" ? value : value == null ? null : +value
       this.emitInput(currentValue)
     },

@@ -1,5 +1,5 @@
 <template>
-  <div class="mc-filter">
+  <div class="mc-filter" v-click-outside="handleClickOutside">
     <McPanel class="mc-filter__panel">
       <div class="mc-filter__header">
         <McTitle :level="4" size="l" class="mc-filter__title">
@@ -117,6 +117,7 @@
 <script>
 import _isEqual from "lodash/isEqual"
 import _cloneDeep from "lodash/cloneDeep"
+import VueClickOutside from "vue-click-outside"
 import McPanel from "../McPanel"
 import McTitle from "../../elements/McTitle"
 import McTabs from "../McTabs/McTabs"
@@ -152,6 +153,9 @@ export default {
     McPanel,
     McDropdown,
   },
+  directives: {
+    "click-outside": VueClickOutside,
+  },
   props: {
     value: {
       type: Object,
@@ -171,38 +175,6 @@ export default {
         return []
       },
     },
-    // tRelationIs: {
-    //   type: String,
-    //   default: "Это",
-    // },
-    // tRelationNotIs: {
-    //   type: String,
-    //   default: "Это не",
-    // },
-    // tRelationExists: {
-    //   type: String,
-    //   default: "Не пустое",
-    // },
-    // tRelationNotExists: {
-    //   type: String,
-    //   default: "Пустое",
-    // },
-    // tRangeMore: {
-    //   type: String,
-    //   default: "Больше",
-    // },
-    // tRangeLess: {
-    //   type: String,
-    //   default: "Меньше",
-    // },
-    // tabAll: {
-    //   type: String,
-    //   default: "Все",
-    // },
-    // tabPresets: {
-    //   type: String,
-    //   default: "Пресеты",
-    // },
   },
   data() {
     return {
@@ -300,7 +272,7 @@ export default {
       this.body.style.width = headerBox.width + "px"
 
       if (headerBox.bottom >= this.panelBox.top && headerBox.bottom <= this.panelBox.bottom) {
-        this.body.style.top = headerBox.bottom + 8 + "px"
+        this.body.style.top = headerBox.bottom + "px"
       } else if (headerBox.bottom < this.panelBox.top) {
         this.body.style.top = this.panelBox.top + "px"
       } else if (headerBox.bottom > this.panelBox.bottom) {
@@ -310,6 +282,11 @@ export default {
     onScroll() {
       if (!this.accordionIsClosed) {
         this.changePos()
+      }
+    },
+    handleClickOutside() {
+      if (!this.accordionIsClosed) {
+        this.$refs.accordion.handleToggle(true)
       }
     },
   },
