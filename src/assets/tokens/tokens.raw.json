@@ -274,6 +274,13 @@
       "originalValue": "24px",
       "name": "avatar_xs"
     },
+    "height_header": {
+      "type": "number",
+      "category": "size",
+      "value": "65px",
+      "originalValue": "65px",
+      "name": "height_header"
+    },
     "avatar_l": {
       "type": "number",
       "category": "size",
@@ -287,6 +294,13 @@
       "value": "42px",
       "originalValue": "42px",
       "name": "avatar_m"
+    },
+    "height_table_head": {
+      "type": "number",
+      "category": "size",
+      "value": "48px",
+      "originalValue": "48px",
+      "name": "height_table_head"
     },
     "avatar_s": {
       "type": "number",
@@ -364,6 +378,13 @@
       "value": "1px",
       "originalValue": "1px",
       "name": "separator_xs"
+    },
+    "height_top_line": {
+      "type": "number",
+      "category": "size",
+      "value": "56px",
+      "originalValue": "56px",
+      "name": "height_top_line"
     },
     "tappable_element_xs": {
       "type": "number",

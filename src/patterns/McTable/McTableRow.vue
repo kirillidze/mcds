@@ -33,7 +33,7 @@ import _get from "lodash/get"
 import McTableCell from "./McTableCell"
 import McTitle from "../../elements/McTitle"
 import McFieldCheckbox from "../../elements/McField/McFieldCheckbox"
-import { findParentComponent } from "../../utils/treeSearch"
+import { findParentComponent, findChildrenComponents } from "../../utils/treeSearch"
 export default {
   name: "McTableRow",
   components: { McTitle, McTableCell, McFieldCheckbox },
@@ -83,6 +83,7 @@ export default {
   data() {
     return {
       isVisible: true,
+      isChildActive: false,
       offsetHeight: 0,
       wrapper: null,
     }
@@ -94,10 +95,12 @@ export default {
     classes() {
       return {
         "mc-table-row--link": this.$slots.link,
+        "nuxt-link-active": this.isChildActive,
       }
     },
   },
   mounted() {
+    this.setIsChildActive()
     if (this.optimizeVisibility && this.containerElement) {
       if (this.containerElement === "McTableCardWrap") {
         this.wrapper = findParentComponent(this, "McTableCardWrap").$el.getElementsByClassName(
@@ -122,6 +125,9 @@ export default {
     }
   },
   watch: {
+    $route() {
+      this.setIsChildActive()
+    },
     offsetHeight(val, prevVal) {
       if (val && !prevVal) {
         this.checkVisibility()
@@ -134,6 +140,12 @@ export default {
     },
     handleCheckInput(value) {
       this.$emit("check", value)
+    },
+    setIsChildActive() {
+      let cellLinks = findChildrenComponents(this, "McTableCellLink")
+      if (cellLinks.length > 0) {
+        this.isChildActive = cellLinks[0].isTagActive
+      }
     },
     checkVisibility() {
       let el = this.$el
@@ -156,6 +168,14 @@ export default {
   position: relative;
 
   &--link {
+    &.nuxt-link-active {
+      background-color: $color-lightest-blue;
+      transition: none;
+      position: sticky;
+      z-index: 3;
+      top: $height-header + $height-top-line + 48px;
+    }
+
     &:hover,
     &:focus {
       background-color: fade-out($color-black, 0.95);

@@ -50,6 +50,13 @@ export default {
 
       return result
     },
+
+    isTagActive() {
+      if (this.tag === "nuxt-link") {
+        return this.$router.resolve(this.to).route.path === this.$route.path
+      }
+      return false
+    },
   },
 }
 </script>

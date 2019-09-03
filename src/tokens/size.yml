@@ -6,6 +6,12 @@
 props:
   height_footer:
     value: "64px"
+  height_header:
+    value: "65px"
+  height_top_line:
+    value: "56px"
+  height_table_head:
+    value: "48px"
   height_auth:
     value: "665px"
 
