@@ -34,6 +34,7 @@
           :id="name"
           v-on="listeners"
           @input="$event => handleInput($event.target.value)"
+          :autocomplete="autocomplete"
         ></textarea>
         <textarea-autosize
           v-else-if="isTextareaAutosize"
@@ -49,6 +50,7 @@
           :max-height="maxHeight"
           @input="handleInput"
           :value="value"
+          :autocomplete="autocomplete"
         ></textarea-autosize>
         <input
           v-else
@@ -63,6 +65,7 @@
           :id="name"
           v-on="listeners"
           @input="$event => handleInput($event.target.value)"
+          :autocomplete="autocomplete"
         />
       </div>
       <div class="mc-field-text__append">
@@ -195,6 +198,14 @@ export default {
     gradient: {
       type: Boolean,
       default: false,
+    },
+    /**
+     *  автокомплит введённого ранее текста: on, off
+     *
+     */
+    autocomplete: {
+      type: String,
+      default: "on",
     },
   },
 

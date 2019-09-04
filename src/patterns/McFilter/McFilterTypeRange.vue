@@ -24,6 +24,7 @@
               name="more"
               @input="value => handleInput('more', value)"
               @keypress.enter="submit"
+              autocomplete="off"
             >
               <McButton
                 slot="append"
@@ -44,6 +45,7 @@
               name="less"
               @input="value => handleInput('less', value)"
               @keypress.enter="submit"
+              autocomplete="off"
             >
               <McButton
                 slot="append"
