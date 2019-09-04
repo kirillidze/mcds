@@ -13,7 +13,10 @@
         </McDropdown>
       </McHeaderNavItem>
 
-      <McHeaderNavItem class="mc-header-part-right__apps" v-if="menuApps && menuApps.length">
+      <McHeaderNavItem
+        class="mc-header-part-right__apps"
+        v-if="menuApps && menuApps.length && menuApps[0].isAuth !== null"
+      >
         <McDropdown v-model="menuAppsIsOpen" position="right" :rotate-icon="false">
           <McButton slot="activator" variation="black-flat" size="m-compact" rounded>
             <McSvgIcon slot="icon-append" name="apps" />
