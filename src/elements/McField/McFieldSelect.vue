@@ -222,6 +222,9 @@ export default {
 
 <style lang="scss">
 $colors: $token-colors;
+$gray-scale: "light-gray", "gray-darkest", "black";
+$text-black: scale-color($color-black, $alpha: -10%);
+$text-white: scale-color($color-white, $alpha: -10%);
 
 .mc-field-select {
   $block-name: &;
@@ -266,6 +269,7 @@ $colors: $token-colors;
     font-size: $size-m;
     line-height: $line-height-s;
     padding-left: $space-m;
+    color: $text-black;
 
     &--no-img {
       padding-left: 0;
@@ -275,7 +279,7 @@ $colors: $token-colors;
   .multiselect {
     &__placeholder {
       @include ellipsis();
-      color: $color-gray-dark;
+      color: $text-black;
       font-size: $size-m;
       line-height: $line-height-s;
       margin-bottom: $space-xs;
@@ -283,7 +287,6 @@ $colors: $token-colors;
     }
 
     &__single {
-      // @include ellipsis();
       padding-left: 0;
       margin-bottom: $space-xs;
       padding-top: $space-xs + 1;
@@ -307,7 +310,7 @@ $colors: $token-colors;
     &__select {
       height: $tappable-element-m - 2px;
       &::before {
-        border-color: $color-outline-gray transparent transparent;
+        border-color: $text-black transparent transparent;
       }
     }
 
@@ -336,8 +339,7 @@ $colors: $token-colors;
       color: $color-black;
       display: inline-flex;
       align-items: center;
-      padding: $space-xxxs $space-xs;
-      padding-left: $space-m / 2;
+      padding: $space-xxxs $space-xs $space-xxxs $space-m / 2;
       border-radius: $radius-xxxxl;
       font-size: $size-m - 1;
       height: $tappable-element-s;
@@ -431,59 +433,6 @@ $colors: $token-colors;
           }
         }
 
-        //&__option {
-        //
-        //    &--highlight {
-        //        background-color: fade-out($value, 0.8);
-        //        color: $text-color;
-        //
-        //        &::after {
-        //            background-color: fade-out($value, 0.8);
-        //        }
-        //
-        //        &:active {
-        //            background-color: darken(fade-out($value, 0.6), 7%);
-        //        }
-        //    }
-        //
-        //    &--selected {
-        //        background-color: fade-out($value, 0.7);
-        //        color: $text-color;
-        //        font-weight: 400;
-        //
-        //        &:hover,
-        //        &:focus {
-        //            background-color: darken(fade-out($value, 0.7), 3%);
-        //        }
-        //
-        //        &:active {
-        //            background-color: darken(fade-out($value, 0.7), 7%);
-        //        }
-        //
-        //        &.multiselect {
-        //
-        //            &__option {
-        //
-        //                &--highlight {
-        //                    background-color: fade-out($value, 0.8);
-        //                    color: $text-color;
-        //                    font-weight: 400;
-        //
-        //                    &:hover,
-        //                    &:focus {
-        //                        background-color: darken(fade-out($value, 0.6), 3%);
-        //                    }
-        //
-        //                    &:active {
-        //                        background-color: darken(fade-out($value, 0.6), 7%);
-        //                    }
-        //                }
-        //            }
-        //        }
-        //
-        //    }
-        //}
-
         &--active {
           .multiselect {
             &__tags {
@@ -494,7 +443,39 @@ $colors: $token-colors;
 
             &__select {
               &:before {
-                border-color: $color-outline-gray transparent transparent;
+                border-color: $text-black transparent transparent;
+              }
+            }
+          }
+        }
+      }
+
+      @each $col-g in $gray-scale {
+        @if $color == $col-g {
+          #{$block-name}__avatar-text {
+            color: $text-white;
+          }
+
+          .multiselect {
+            &__tags {
+              background-color: $value;
+            }
+
+            &__placeholder {
+              color: $text-white;
+            }
+
+            &__select {
+              &::before {
+                border-color: $text-white transparent transparent !important;
+              }
+            }
+
+            &--active {
+              .multiselect {
+                &__tags {
+                  border-color: $color-black;
+                }
               }
             }
           }
@@ -538,6 +519,10 @@ $colors: $token-colors;
         &__tags {
           border-color: $color-outline-gray !important;
           background-color: $color-hover-gray;
+        }
+
+        &__placeholder {
+          color: $color-gray-dark;
         }
 
         &__select {
