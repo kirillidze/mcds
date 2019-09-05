@@ -389,7 +389,7 @@ $spacing-ratio: $line-height-m;
 }
 
 @mixin field-error() {
-  color: #F43E3E;
+  color: #f43e3e;
   font-size: 13px;
   line-height: line-height(16, 13);
   display: block;
@@ -497,7 +497,7 @@ $spacing-ratio: $line-height-m;
 @mixin interplay() {
   &:hover,
   &:focus {
-    background-color: #EBEBEB;//$color-hover-gray;
+    background-color: #ebebeb; //$color-hover-gray;
   }
 
   &:active {
