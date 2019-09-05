@@ -1,7 +1,7 @@
 <template>
   <div class="mc-notification" :class="classes">
     <div class="mc-notification__left">
-      <McSvgIcon :fill="background" name="review"></McSvgIcon>
+      <McSvgIcon :fill="background" name="baseline_warning"></McSvgIcon>
     </div>
     <div class="mc-notification__right">
       <slot></slot>
