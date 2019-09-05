@@ -222,7 +222,7 @@ export default {
 
 <style lang="scss">
 $colors: $token-colors;
-$gray-scale: "gray-darkest", "black";
+$gray-scale: "light-gray", "gray-darkest", "black";
 $text-black: scale-color($color-black, $alpha: -10%);
 $text-white: scale-color($color-white, $alpha: -10%);
 
