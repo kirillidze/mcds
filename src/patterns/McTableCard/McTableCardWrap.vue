@@ -1,7 +1,7 @@
 <template>
   <div class="mc-table-card-wrap">
     <slot name="card"></slot>
-    <div class="mc-table-card-wrap__inner">
+    <div class="mc-table-card-wrap__inner" :class="innerClasses">
       <div class="mc-table-card-wrap__inner-2">
         <slot></slot>
       </div>
@@ -14,6 +14,22 @@ export default {
   name: "McTableCardWrap",
   status: "ready",
   release: "1.0.0",
+  props: {
+    /** Ширина левого столбца таблицы (xs = 190px, s = 215px, m = 251px, l = 300px, xl = 350px)
+     *
+     */
+    titleSize: {
+      type: String,
+      default: "m",
+    },
+  },
+  computed: {
+    innerClasses() {
+      return {
+        [`mc-table-card-wrap__inner--size-${this.titleSize}`]: this.titleSize,
+      }
+    },
+  },
 }
 </script>
 
@@ -64,6 +80,41 @@ export default {
   .mc-table-foot {
     .mc-table-cell {
       border-bottom: none;
+    }
+  }
+
+  .mc-table-card {
+    & + .mc-table-card-wrap__inner {
+      border-top-right-radius: 0;
+      overflow-x: hidden;
+      box-sizing: content-box;
+
+      &--size {
+        &-xs {
+          width: 190px;
+        }
+        &-s {
+          width: 215px;
+        }
+        &-m {
+          width: 251px;
+        }
+        &-l {
+          width: 300px;
+        }
+        &-xl {
+          width: 350px;
+        }
+      }
+
+      .mc-table-row {
+        box-sizing: border-box;
+        .mc-table-cell {
+          &:not(:first-child) {
+            display: none;
+          }
+        }
+      }
     }
   }
 }
