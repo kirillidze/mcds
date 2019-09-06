@@ -107,6 +107,10 @@ export default {
         }
       }
 
+      .mc-bage {
+        right: 5px;
+      }
+
       .mc-table-row {
         box-sizing: border-box;
         .mc-table-cell {
