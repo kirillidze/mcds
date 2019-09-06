@@ -36,7 +36,7 @@ export default {
   }
 
   &__content {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
 
     > *:not(:first-child) {

@@ -53,6 +53,12 @@ export default {
     margin-right: 8px;
   }
 
+  &__right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   &--background {
     @each $color, $value in $token-colors {
       &-#{$color} {
