@@ -450,6 +450,25 @@ $text-white: scale-color($color-white, $alpha: -10%);
         }
       }
 
+      &#{$block-name}--disabled {
+        .multiselect--disabled {
+          .multiselect {
+            &__tags {
+              background-color: fade-out($value, 0.6);
+              @if $color != "white" {
+                border-color: transparent !important;
+              }
+            }
+
+            &__select {
+              &::before {
+                border-color: $color-gray transparent transparent;
+              }
+            }
+          }
+        }
+      }
+
       @each $col-g in $gray-scale {
         @if $color == $col-g {
           #{$block-name}__avatar-text {
@@ -467,7 +486,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
 
             &__select {
               &::before {
-                border-color: $text-white transparent transparent !important;
+                border-color: $text-white transparent transparent;
               }
             }
 
@@ -479,22 +498,19 @@ $text-white: scale-color($color-white, $alpha: -10%);
               }
             }
           }
-        }
-      }
 
-      &#{$block-name}--disabled {
-        .multiselect--disabled {
-          .multiselect {
-            &__tags {
-              background-color: fade-out($value, 0.6);
-              @if $color != "white" {
-                border-color: transparent !important;
-              }
-            }
+          &#{$block-name}--disabled {
+            .multiselect--disabled {
+              .multiselect {
+                &__tags {
+                  background-color: $value;
+                }
 
-            &__select {
-              &::before {
-                border-color: $color-outline-gray transparent transparent;
+                &__select {
+                  &::before {
+                    border-color: fade-out($color-outline-gray, 0.3) transparent transparent;
+                  }
+                }
               }
             }
           }
