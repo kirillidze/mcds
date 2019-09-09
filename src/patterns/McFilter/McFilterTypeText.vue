@@ -2,16 +2,11 @@
   <McCollapse @open="handleOpen" class="mc-filter-type-text" ref="collapse">
     <McFilterRow slot="activator">
       {{ filter.name }}
-      <McChip
+      <McFilterDot
         slot="chip"
         v-if="value != null && value !== ''"
-        variation="gray-dark-invert"
-        size="s"
-        :closable="true"
         @click="e => handleInput(null, e)"
-      >
-        1
-      </McChip>
+      />
     </McFilterRow>
     <div class="mc-filter-type-text__body" slot="body">
       <McFieldText :name="filter.name" :value="value" @input="handleInput" @keypress.enter="submit">
@@ -27,10 +22,11 @@ import McChip from "../../elements/McChip"
 import McButton from "../../elements/McButton"
 import McFilterRow from "./McFilterRow"
 import McSvgIcon from "../../elements/McSvgIcon"
+import McFilterDot from "./McFilterDot"
 
 export default {
   name: "McFilterTypeText",
-  components: { McSvgIcon, McFilterRow, McButton, McChip, McFieldText, McCollapse },
+  components: { McSvgIcon, McFilterRow, McButton, McChip, McFieldText, McCollapse, McFilterDot },
   props: {
     value: {
       type: String,

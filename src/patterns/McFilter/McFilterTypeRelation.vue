@@ -1,18 +1,9 @@
 <template>
-  <McCollapse @open="handleOpen" ref="collapse">
+  <McCollapse @open="handleOpen" ref="collapse" class="mc-filter-type-relation">
     <McFilterRow slot="activator">
       {{ filter.name }}
       <!--<McSvgIcon v-if="isAjax" name="search" />-->
-      <McChip
-        slot="chip"
-        v-if="chipCount"
-        variation="gray-dark-invert"
-        size="s"
-        :closable="true"
-        @click="e => emitInput({}, e)"
-      >
-        {{ chipCount }}
-      </McChip>
+      <McFilterDot slot="chip" v-if="chipCount" @click="e => emitInput({}, e)" />
     </McFilterRow>
     <div class="mc-filter-type-relation__body" slot="body">
       <div class="mc-filter-type-relation__row">
@@ -22,6 +13,7 @@
               v-bind="buttonBind"
               :variation="selectType === type ? 'blue' : 'white'"
               @click.prevent="handleClick(selectType)"
+              :disabled="value.hasOwnProperty('exists')"
             >
               {{ selectType === "is" ? tRelationIs : tRelationNotIs }}
             </McButton>
@@ -55,7 +47,7 @@
             v-if="selectTypes.indexOf(type) !== -1"
             :key="type"
           >
-            <McGridRow :gutter-x="6" :gutter-y="6">
+            <McGridRow :gutter-x="8" :gutter-y="8">
               <McGridCol v-for="chip in chips" :key="type + '-' + filter.value + chip">
                 <McFilterTypeRelationChip
                   :type="type"
@@ -87,6 +79,7 @@ import McChip from "../../elements/McChip"
 import McFilterTypeRelationChip from "./McFilterTypeRelationChip"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McFilterRow from "./McFilterRow"
+import McFilterDot from "./McFilterDot"
 
 export default {
   name: "McFilterTypeRelation",
@@ -100,6 +93,7 @@ export default {
     McGridRow,
     McFieldSelect,
     McCollapse,
+    McFilterDot,
   },
   props: {
     value: {
@@ -238,6 +232,7 @@ export default {
 
 <style lang="scss">
 .mc-filter-type-relation {
+  $block-name: &;
   &__row {
     &:not(:last-child) {
       margin-bottom: $space-xs;

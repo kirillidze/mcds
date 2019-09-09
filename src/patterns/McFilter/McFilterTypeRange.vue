@@ -2,16 +2,7 @@
   <McCollapse @open="handleOpen" ref="collapse">
     <McFilterRow slot="activator">
       {{ filter.name }}
-      <McChip
-        slot="chip"
-        v-if="chipCount"
-        variation="gray-dark-invert"
-        size="s"
-        :closable="true"
-        @click="e => emitInput(null, e)"
-      >
-        {{ chipCount }}
-      </McChip>
+      <McFilterDot slot="chip" v-if="chipCount" @click="e => emitInput(null, e)" />
     </McFilterRow>
     <div class="mc-filter-type-range__body" slot="body">
       <div class="mc-filter-type-range__row">
@@ -83,6 +74,7 @@ import McChip from "../../elements/McChip"
 import McButton from "../../elements/McButton"
 import McFilterRow from "./McFilterRow"
 import McSvgIcon from "../../elements/McSvgIcon"
+import McFilterDot from "./McFilterDot"
 
 export default {
   name: "McFilterTypeRange",
@@ -96,6 +88,7 @@ export default {
     McGridCol,
     McGridRow,
     McCollapse,
+    McFilterDot,
   },
   props: {
     value: {

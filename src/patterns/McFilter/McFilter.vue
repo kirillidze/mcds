@@ -86,7 +86,7 @@
                 variation="red-invert"
                 size="m-compact"
               >
-                <McSvgIcon slot="icon-append" name="delete" />
+                <McSvgIcon slot="icon-append" name="backspace" />
               </McButton>
             </McTooltip>
           </McGridCol>
@@ -98,14 +98,13 @@
                 variation="light-green-invert"
                 size="m-compact"
               >
-                <McSvgIcon slot="icon-append" name="archive" />
+                <McSvgIcon slot="icon-append" name="save" />
               </McButton>
             </McTooltip>
           </McGridCol>
           <McGridCol stretch-self>
             <McButton full-width :disabled="!canSubmit" @click="submit">
               <slot name="submit">{{ lang.apply }}</slot>
-              <template v-if="filterDeepCount">{{ filterDeepCount }}</template>
             </McButton>
           </McGridCol>
         </McGridRow>

@@ -1,5 +1,5 @@
 <template>
-  <McChip variation="gray-dark-invert" size="s" :closable="closable" @click="handleChipClick">
+  <McChip variation="blue-invert" size="s" :closable="closable" @click="handleChipClick">
     {{ text }}
   </McChip>
 </template>

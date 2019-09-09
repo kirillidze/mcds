@@ -1,11 +1,5 @@
 <template>
-  <McChip
-    v-if="option"
-    variation="gray-dark-invert"
-    size="s"
-    :closable="true"
-    @click="handleChipClick"
-  >
+  <McChip v-if="option" variation="blue-invert" size="s" :closable="true" @click="handleChipClick">
     {{ type === "is" ? tRelationIs : tRelationNotIs }} {{ option.name }}
   </McChip>
 </template>

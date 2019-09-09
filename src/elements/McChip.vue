@@ -8,7 +8,9 @@
       {{ counter }}
     </div>
     <button v-if="closable" class="mc-chip__button" v-on="$listeners">
-      <McSvgIcon size="xxs" name="cancel" />
+      <slot name="button">
+        <McSvgIcon size="xxs" name="cancel" />
+      </slot>
     </button>
   </section>
 </template>
@@ -125,6 +127,7 @@ export default {
 
   &__button {
     @include size($tappable-element-xxs);
+    position: relative;
     display: flex;
     flex: 0 0 auto;
     justify-content: center;
@@ -182,7 +185,7 @@ export default {
       }
 
       &-invert {
-        background-color: fade-out($value, 0.9);
+        background-color: fade-out($value, 0.85);
       }
     }
   }

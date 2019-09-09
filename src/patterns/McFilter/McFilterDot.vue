@@ -1,0 +1,65 @@
+<template>
+  <McChip
+    class="mc-filter-dot"
+    variation="white-invert"
+    size="s"
+    :closable="true"
+    @click="handleChipClick"
+  >
+    <template slot="button">
+      <div class="mc-filter-dot__circle"></div>
+      <McSvgIcon size="xxs" name="cancel" />
+    </template>
+  </McChip>
+</template>
+
+<script>
+import McChip from "../../elements/McChip"
+import McSvgIcon from "../../elements/McSvgIcon"
+
+export default {
+  name: "McFilterChip",
+  components: { McChip, McSvgIcon },
+  methods: {
+    handleChipClick(e) {
+      this.$emit("click", e)
+    },
+  },
+}
+</script>
+
+<style lang="scss">
+.mc-filter-dot {
+  $block-name: &;
+
+  .mc-chip__button {
+    margin: 0;
+  }
+
+  #{$block-name}__circle {
+    @include size($space-xs);
+    @include position(absolute, 50%);
+    transform: translate(-50%, -50%);
+    background-color: $color-blue;
+    border-radius: $radius-circle;
+    display: inline-block;
+    z-index: 2;
+    transition: width $duration-quickly ease, height $duration-quickly ease;
+
+    &:hover {
+      @include size($space-s);
+      background-color: transparent;
+    }
+
+    + .mc-svg-icon {
+      visibility: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    &:hover + .mc-svg-icon {
+      visibility: visible;
+    }
+  }
+}
+</style>
