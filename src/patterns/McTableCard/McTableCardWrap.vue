@@ -35,6 +35,13 @@ export default {
 
 <style lang="scss">
 .mc-table-card-wrap {
+  $sizes: (
+    xs: 190px,
+    s: 215px,
+    m: 251px,
+    l: 300px,
+    xl: 350px,
+  );
   $block-name: &;
 
   position: relative;
@@ -90,30 +97,24 @@ export default {
       box-sizing: content-box;
 
       &--size {
-        &-xs {
-          width: 190px;
-        }
-        &-s {
-          width: 215px;
-        }
-        &-m {
-          width: 251px;
-        }
-        &-l {
-          width: 300px;
-        }
-        &-xl {
-          width: 350px;
+        @each $key, $value in $sizes {
+          &-#{$key} {
+            width: $value;
+            .mc-table-cell {
+              max-width: $value - 5px;
+            }
+          }
         }
       }
 
-      .mc-bage {
-        right: 5px;
+      .mc-table {
+        table-layout: auto;
       }
 
       .mc-table-row {
         box-sizing: border-box;
         .mc-table-cell {
+          border-right: none !important;
           &:not(:first-child) {
             display: none;
           }
