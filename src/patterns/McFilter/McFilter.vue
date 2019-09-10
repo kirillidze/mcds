@@ -257,7 +257,7 @@ export default {
     getOpenElems(elem) {
       this.header = elem.$refs.collapse.$el.querySelector(".mc-collapse__header")
       this.body = elem.$refs.collapse.$children.find(
-        el => el.$options._componentTag === "slide-up-down"
+        el => el.$options._componentTag === "McSlideUpDown"
       ).$el
 
       this.changePos()
