@@ -81,7 +81,7 @@
           <McGridCol>
             <McTooltip size="s" placement="top" :content="lang.reset">
               <McButton
-                :disabled="!Object.keys(currentValues).length"
+                :disabled="!Object.keys(currentValues).length && !Object.keys(value).length"
                 @click="reset"
                 variation="red-invert"
                 size="m-compact"
@@ -460,25 +460,25 @@ export default {
     type: 'date',
     },
     {
-    name: 'Страна',
+    name: 'Страна1',
     value: 'countries',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
     {
-    name: 'Страна',
+    name: 'Страна2',
     value: 'countries',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
     {
-    name: 'Страна',
+    name: 'Страна3',
     value: 'countries',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
     {
-    name: 'Страна',
+    name: 'Страна4',
     value: 'countries',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
@@ -513,10 +513,10 @@ export default {
 
     <div>
 
-    <McDropdown v-model="dropIsOpen">
-        <McButton slot="activator" >
-            Владилен
-            <McSvgIcon slot="icon-append" name="arrow_drop_down" size="xs"/>
+    <McDropdown v-model="dropIsOpen" :rotate-icon="false">
+        <McButton slot="activator" :variation="Object.keys(value).length ? 'blue-invert' : 'black-flat'">
+            Фильтр
+            <McSvgIcon slot="icon-append" name="filter_list"/>
         </McButton>
         <McFilter
                 v-model="value"
