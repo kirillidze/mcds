@@ -224,9 +224,11 @@ export default {
     },
 
     closeSearch() {
-      this.isSearchOpen = false
-      this.emitInput(null)
-      this.setInputBlur("inputSearch")
+      if (this.isSearchOpen) {
+        this.isSearchOpen = false
+        this.emitInput(null)
+        this.setInputBlur("inputSearch")
+      }
     },
 
     openSearch() {

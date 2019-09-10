@@ -10,7 +10,7 @@
         @click.prevent="toggle"
       ></a>
     </span>
-    <slide-up-down
+    <McSlideUpDown
       v-if="!isDisabled"
       :active="isCollapsed"
       :duration="300"
@@ -19,7 +19,7 @@
       <div class="mc-collapse__body-inner">
         <slot name="body" />
       </div>
-    </slide-up-down>
+    </McSlideUpDown>
   </section>
 </template>
 
@@ -27,14 +27,14 @@
 import { findParentComponent } from "../utils/treeSearch"
 
 import McSvgIcon from "../elements/McSvgIcon"
-import SlideUpDown from "vue-slide-up-down"
+import McSlideUpDown from "../elements/McSlideUpDown"
 import McButton from "../elements/McButton"
 
 export default {
   name: "McCollapse",
   status: "ready",
   release: "1.0.0",
-  components: { McButton, McSvgIcon, SlideUpDown },
+  components: { McButton, McSvgIcon, McSlideUpDown },
   data() {
     return {
       isCollapsed: false,
@@ -119,11 +119,6 @@ export default {
         position: relative;
         display: flex;
         padding: $space-xs $space-s;
-        transition: color $duration-quickly;
-
-        &:hover {
-          color: $color-red;
-        }
       }
     }
   }
