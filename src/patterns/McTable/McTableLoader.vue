@@ -84,6 +84,8 @@ export default {
         left >= this.offsetLeft &&
         bottom - this.offsetBottom <= height &&
         right - this.offsetRight <= width
+
+      isVisible && this.load()
     },
 
     handleClick() {
