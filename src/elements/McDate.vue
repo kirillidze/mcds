@@ -4,7 +4,7 @@
       <McSvgIcon v-if="defaultIcon" name="event" :size="iconSize" />
     </slot>
     <time :datetime="momentDate" class="mc-date__time">
-      <McTitle :size="dateSize" :ellipsis="ellipsis" :uppercase="uppercase">
+      <McTitle :size="dateSize" :ellipsis="ellipsis" :uppercase="uppercase" :color="color">
         {{ formattedDate }}
       </McTitle>
     </time>
@@ -81,6 +81,14 @@ export default {
       type: Boolean,
       default: true,
     },
+    /**
+     *  Цвет текста:
+     *  `blue, red, blue-outline, blue-invert, blue-flat и т.д.`
+     */
+    color: {
+      type: String,
+      default: "black",
+    },
   },
 
   computed: {
@@ -101,12 +109,11 @@ export default {
 .mc-date {
   $block-name: &;
 
-  display: flex;
+  display: inline-flex;
   align-items: center;
   color: $color-black;
-  font-size: 0;
   font-weight: $weight-normal;
-  line-height: 0;
+  @include reset-text-indents();
 
   .mc-svg-icon {
     margin-right: $space-xxs;
@@ -125,7 +132,7 @@ export default {
 <docs>
     ```jsx
 
-    <McDate value="2019-06-11T16:33:20+03:00"/>
+    <McDate value="2019-06-11T16:33:20+03:00" color="red"/>
 
     <br />
 
