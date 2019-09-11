@@ -84,22 +84,11 @@ export default {
         left >= this.offsetLeft &&
         bottom - this.offsetBottom <= height &&
         right - this.offsetRight <= width
-
-      isVisible ? this.handleEnter() : this.handleLeave()
     },
 
     handleClick() {
       this.$emit("click")
       this.load()
-    },
-
-    handleEnter() {
-      this.$emit("enter")
-      this.load()
-    },
-
-    handleLeave() {
-      this.$emit("leave")
     },
 
     load() {

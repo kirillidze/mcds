@@ -11616,11 +11616,6 @@ vue-router@^3.0.2:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.7.tgz#b36ca107b4acb8ff5bc4ff824584059c23fcb87b"
   integrity sha512-utJ+QR3YlIC/6x6xq17UMXeAfxEvXA0VKD3PiSio7hBOZNusA1jXcbxZxVEfJunLp48oonjTepY8ORoIlRx/EQ==
 
-vue-slide-up-down@^1.7.2:
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/vue-slide-up-down/-/vue-slide-up-down-1.7.2.tgz#88bcea3203eb054a44f4eba1bc77062d555db3d6"
-  integrity sha512-y7vpjKNfjQGdKiLTZyonNZbWjtzyEA9nGXIK8wojJvGQapHi7EsLcWAYOQHJ1dE70FrpbAyMP6OIV3xRJEwXkg==
-
 vue-slider-component@^3.0.33:
   version "3.0.33"
   resolved "https://registry.yarnpkg.com/vue-slider-component/-/vue-slider-component-3.0.33.tgz#f519cad87b2f49b7d71c9cc401136af97c4b9b40"
