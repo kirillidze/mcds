@@ -185,9 +185,8 @@ export default {
   },
   mounted() {
     this.panel = this.$refs.tabs.$el.querySelector(".tabs-component-panels")
-    window.addEventListener("scroll", this.onScroll)
+    window.addEventListener("scroll", this.onScroll, true)
     window.addEventListener("resize", this.onScroll)
-    this.panel.addEventListener("scroll", this.onScroll)
   },
   computed: {
     canSubmit() {
