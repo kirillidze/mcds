@@ -72,7 +72,7 @@ body,
 body {
   background-color: $color-white;
   margin: 0;
-  overflow-y: scroll;
+  overflow-y: auto;
   word-break: break-word;
 
   font-family: $font-text;

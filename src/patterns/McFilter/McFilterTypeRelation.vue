@@ -3,7 +3,7 @@
     <McFilterRow slot="activator">
       {{ filter.name }}
       <!--<McSvgIcon v-if="isAjax" name="search" />-->
-      <McFilterDot slot="chip" v-if="chipCount" @click="e => emitInput({}, e)" />
+      <McFilterDot slot="chip" v-if="chipCount" @click="e => handleDotClick(e)" />
     </McFilterRow>
     <div class="mc-filter-type-relation__body" slot="body">
       <div class="mc-filter-type-relation__row">
@@ -13,7 +13,6 @@
               v-bind="buttonBind"
               :variation="selectType === type ? 'blue' : 'white'"
               @click.prevent="handleClick(selectType)"
-              :disabled="value.hasOwnProperty('exists')"
             >
               {{ selectType === "is" ? tRelationIs : tRelationNotIs }}
             </McButton>
@@ -31,7 +30,7 @@
       </div>
       <div class="mc-filter-type-relation__row">
         <McFieldSelect
-          v-if="selectTypes.indexOf(type) !== -1"
+          v-if="selectTypes.indexOf(type) !== -1 || type === 'exists'"
           :options="computedOptions"
           @input="handleInput"
           :allow-empty="true"
@@ -41,7 +40,7 @@
         />
       </div>
       <div class="mc-filter-type-relation__row">
-        <McGridRow :gutter-x="6" :gutter-y="6">
+        <McGridRow :gutter-x="6" :gutter-y="6" v-if="!value.exists">
           <McGridCol
             v-for="(chips, type) in value || {}"
             v-if="selectTypes.indexOf(type) !== -1"
@@ -180,15 +179,20 @@ export default {
       let currentTypeValue = currentValue[type] || []
       if (this.selectTypes.indexOf(type) !== -1) {
         this.type = type
+        delete this.value.exists
+        this.setValue(type, currentTypeValue)
       } else {
         const index = currentTypeValue.indexOf(value)
-        if (index !== -1) {
-          currentTypeValue = []
-        } else {
+        if (index === -1) {
           currentTypeValue = [value]
+          this.type = "exists"
         }
         this.setValue(type, currentTypeValue)
       }
+    },
+    handleDotClick(e) {
+      this.type = "is"
+      this.emitInput({}, e)
     },
     setValue(type, value) {
       const currentValue = { ...this.value }

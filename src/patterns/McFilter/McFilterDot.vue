@@ -34,31 +34,32 @@ export default {
 
   .mc-chip__button {
     margin: 0;
-  }
 
-  #{$block-name}__circle {
-    @include size($space-xs);
-    @include position(absolute, 50%);
-    transform: translate(-50%, -50%);
-    background-color: $color-blue;
-    border-radius: $radius-circle;
-    display: inline-block;
-    z-index: 2;
-    transition: width $duration-quickly ease, height $duration-quickly ease;
+    #{$block-name}__circle {
+      @include size($space-xs);
+      @include position(absolute, 50%);
+      transform: translate(-50%, -50%);
+      background-color: $color-blue;
+      border-radius: $radius-circle;
+      display: inline-block;
+      z-index: 2;
+      transition: width $duration-quickly ease, height $duration-quickly ease;
+
+      + .mc-svg-icon {
+        visibility: hidden;
+        position: relative;
+        z-index: 1;
+      }
+    }
 
     &:hover {
-      @include size($space-s);
-      background-color: transparent;
-    }
-
-    + .mc-svg-icon {
-      visibility: hidden;
-      position: relative;
-      z-index: 1;
-    }
-
-    &:hover + .mc-svg-icon {
-      visibility: visible;
+      #{$block-name}__circle {
+        @include size($space-s);
+        background-color: transparent;
+      }
+      .mc-svg-icon {
+        visibility: visible;
+      }
     }
   }
 }
