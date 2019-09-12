@@ -75,7 +75,7 @@ body {
   overflow-y: auto;
   word-break: break-word;
 
-  font-family: $font-text;
+  font-family: $font-heading;
   font-size: $size-m;
   line-height: $line-height-s;
   color: $color-black;
@@ -831,7 +831,7 @@ pre {
     margin-top: 0;
     margin-bottom: 0;
     color: #222222;
-    font-family: $font-heading-secondary;
+    font-family: $font-heading;
     font-size: 16px;
     line-height: line-height(19, 16);
     font-weight: 400;

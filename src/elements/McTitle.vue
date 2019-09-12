@@ -185,7 +185,7 @@ export default {
   }
 
   &--family-text {
-    font-family: $font-text;
+    font-family: $font-heading;
   }
 
   &--text-align {

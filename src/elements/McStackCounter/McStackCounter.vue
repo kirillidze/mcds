@@ -21,7 +21,7 @@ export default {
   $block-name: &;
 
   color: $color-black;
-  font-family: $font-text;
+  font-family: $font-heading;
   font-size: $size-m;
   line-height: $line-height-s;
   font-weight: $weight-normal;

@@ -190,20 +190,6 @@
       "originalValue": "'Montserrat', sans-serif",
       "name": "font_heading"
     },
-    "font_heading_secondary": {
-      "type": "...",
-      "category": "font",
-      "value": "'Roboto Slab', serif",
-      "originalValue": "'Roboto Slab', serif",
-      "name": "font_heading_secondary"
-    },
-    "font_text": {
-      "type": "...",
-      "category": "font",
-      "value": "'Roboto', sans-serif",
-      "originalValue": "'Roboto', sans-serif",
-      "name": "font_text"
-    },
     "weight_bold": {
       "type": "...",
       "category": "font",
