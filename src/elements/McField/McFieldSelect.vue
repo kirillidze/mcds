@@ -333,7 +333,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
     }
 
     &__tag {
-      font-family: $font-heading-secondary;
+      font-family: $font-heading;
       margin-top: $space-xxxs;
       background-color: fade-out($color-blue, 0.9);
       color: $color-black;
