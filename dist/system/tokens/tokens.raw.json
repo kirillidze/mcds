@@ -127,20 +127,6 @@
       "originalValue": "hsla({!gray}, 57%, 1)",
       "name": "color_gray"
     },
-    "size_xxxxl": {
-      "type": "number",
-      "category": "font-size",
-      "value": "64px",
-      "originalValue": "64px",
-      "name": "size_xxxxl"
-    },
-    "size_xxxl": {
-      "type": "number",
-      "category": "font-size",
-      "value": "56px",
-      "originalValue": "56px",
-      "name": "size_xxxl"
-    },
     "size_xxl": {
       "type": "number",
       "category": "font-size",
@@ -148,12 +134,12 @@
       "originalValue": "48px",
       "name": "size_xxl"
     },
-    "size_xl": {
+    "size_xxxxl": {
       "type": "number",
       "category": "font-size",
-      "value": "34px",
-      "originalValue": "34px",
-      "name": "size_xl"
+      "value": "64px",
+      "originalValue": "64px",
+      "name": "size_xxxxl"
     },
     "size_l": {
       "type": "number",
@@ -169,6 +155,20 @@
       "originalValue": "16px",
       "name": "size_m"
     },
+    "size_xxxl": {
+      "type": "number",
+      "category": "font-size",
+      "value": "56px",
+      "originalValue": "56px",
+      "name": "size_xxxl"
+    },
+    "size_xl": {
+      "type": "number",
+      "category": "font-size",
+      "value": "34px",
+      "originalValue": "34px",
+      "name": "size_xl"
+    },
     "size_s": {
       "type": "number",
       "category": "font-size",
@@ -182,6 +182,13 @@
       "value": "10px",
       "originalValue": "10px",
       "name": "size_xs"
+    },
+    "size_ll": {
+      "type": "number",
+      "category": "font-size",
+      "value": "28px",
+      "originalValue": "28px",
+      "name": "size_ll"
     },
     "font_heading": {
       "type": "...",
