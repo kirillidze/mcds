@@ -877,6 +877,282 @@ pre {
   justify-content: space-between;
   margin: -5px 16px 10px 16px;
 }
+
+.pb-xl {
+  padding-bottom: 56px;
+  @media #{$media-query-m} {
+    padding-bottom: 56px;
+  }
+  @media #{$media-query-l} {
+    padding-bottom: 56px;
+  }
+}
+.pt-xl {
+  padding-top: 56px;
+  @media #{$media-query-m} {
+    padding-top: 56px;
+  }
+  @media #{$media-query-l} {
+    padding-top: 56px;
+  }
+}
+.pb-l {
+  padding-bottom: 48px;
+  @media #{$media-query-m} {
+    padding-bottom: 48px;
+  }
+  @media #{$media-query-l} {
+    padding-bottom: 48px;
+  }
+}
+.pt-l {
+  padding-top: 48px;
+  @media #{$media-query-m} {
+    padding-top: 48px;
+  }
+  @media #{$media-query-l} {
+    padding-top: 48px;
+  }
+}
+.pb-ml {
+  padding-bottom: 40px;
+  @media #{$media-query-m} {
+    padding-bottom: 40px;
+  }
+  @media #{$media-query-l} {
+    padding-bottom: 40px;
+  }
+}
+.pt-ml {
+  padding-top: 40px;
+  @media #{$media-query-m} {
+    padding-top: 40px;
+  }
+  @media #{$media-query-l} {
+    padding-top: 40px;
+  }
+}
+.pb-m {
+  padding-bottom: 32px;
+  @media #{$media-query-m} {
+    padding-bottom: 32px;
+  }
+  @media #{$media-query-l} {
+    padding-bottom: 32px;
+  }
+}
+.pt-m {
+  padding-top: 32px;
+  @media #{$media-query-m} {
+    padding-top: 32px;
+  }
+  @media #{$media-query-l} {
+    padding-top: 32px;
+  }
+}
+.pb-sm {
+  padding-bottom: 24px;
+  @media #{$media-query-m} {
+    padding-bottom: 24px;
+  }
+  @media #{$media-query-l} {
+    padding-bottom: 24px;
+  }
+}
+.pt-sm {
+  padding-top: 24px;
+  @media #{$media-query-m} {
+    padding-top: 24px;
+  }
+  @media #{$media-query-l} {
+    padding-top: 24px;
+  }
+}
+.pb-s {
+  padding-bottom: 16px;
+  @media #{$media-query-m} {
+    padding-bottom: 16px;
+  }
+  @media #{$media-query-l} {
+    padding-bottom: 16px;
+  }
+}
+.pt-s {
+  padding-top: 16px;
+  @media #{$media-query-m} {
+    padding-top: 16px;
+  }
+  @media #{$media-query-l} {
+    padding-top: 16px;
+  }
+}
+.pb-xs {
+  padding-bottom: 12px;
+  @media #{$media-query-m} {
+    padding-bottom: 12px;
+  }
+  @media #{$media-query-l} {
+    padding-bottom: 12px;
+  }
+}
+.pt-xs {
+  padding-top: 12px;
+  @media #{$media-query-m} {
+    padding-top: 12px;
+  }
+  @media #{$media-query-l} {
+    padding-top: 12px;
+  }
+}
+
+.mb-xl {
+  margin-bottom: 56px;
+  @media #{$media-query-m} {
+    margin-bottom: 56px;
+  }
+  @media #{$media-query-l} {
+    margin-bottom: 56px;
+  }
+}
+.mt-xl {
+  margin-top: 56px;
+  @media #{$media-query-m} {
+    margin-top: 56px;
+  }
+  @media #{$media-query-l} {
+    margin-top: 56px;
+  }
+}
+.mb-l {
+  margin-bottom: 48px;
+  @media #{$media-query-m} {
+    margin-bottom: 48px;
+  }
+  @media #{$media-query-l} {
+    margin-bottom: 48px;
+  }
+}
+.mt-l {
+  margin-top: 48px;
+  @media #{$media-query-m} {
+    margin-top: 48px;
+  }
+  @media #{$media-query-l} {
+    margin-top: 48px;
+  }
+}
+.mb-ml {
+  margin-bottom: 40px;
+  @media #{$media-query-m} {
+    margin-bottom: 40px;
+  }
+  @media #{$media-query-l} {
+    margin-bottom: 40px;
+  }
+}
+.mt-ml {
+  margin-top: 40px;
+  @media #{$media-query-m} {
+    margin-top: 40px;
+  }
+  @media #{$media-query-l} {
+    margin-top: 40px;
+  }
+}
+.mb-m {
+  margin-bottom: 32px;
+  @media #{$media-query-m} {
+    margin-bottom: 32px;
+  }
+  @media #{$media-query-l} {
+    margin-bottom: 32px;
+  }
+}
+.mt-m {
+  margin-top: 32px;
+  @media #{$media-query-m} {
+    margin-top: 32px;
+  }
+  @media #{$media-query-l} {
+    margin-top: 32px;
+  }
+}
+.mb-sm {
+  margin-bottom: 24px;
+  @media #{$media-query-m} {
+    margin-bottom: 24px;
+  }
+  @media #{$media-query-l} {
+    margin-bottom: 24px;
+  }
+}
+.mt-sm {
+  margin-top: 24px;
+  @media #{$media-query-m} {
+    margin-top: 24px;
+  }
+  @media #{$media-query-l} {
+    margin-top: 24px;
+  }
+}
+.mb-s {
+  margin-bottom: 16px;
+  @media #{$media-query-m} {
+    margin-bottom: 16px;
+  }
+  @media #{$media-query-l} {
+    margin-bottom: 16px;
+  }
+}
+.mt-s {
+  margin-top: 16px;
+  @media #{$media-query-m} {
+    margin-top: 16px;
+  }
+  @media #{$media-query-l} {
+    margin-top: 16px;
+  }
+}
+.mb-xs {
+  margin-bottom: 12px;
+  @media #{$media-query-m} {
+    margin-bottom: 12px;
+  }
+  @media #{$media-query-l} {
+    margin-bottom: 12px;
+  }
+}
+.mt-xs {
+  margin-top: 12px;
+  @media #{$media-query-m} {
+    margin-top: 12px;
+  }
+  @media #{$media-query-l} {
+    margin-top: 12px;
+  }
+}
+
+.hidden-m {
+  @media #{$media-query-m} {
+    display: none !important;
+  }
+}
+.hidden-l {
+  @media #{$media-query-l} {
+    display: none !important;
+  }
+}
+
+.hidden-m-down {
+  @media #{$media-query-m-down} {
+    display: none !important;
+  }
+}
+.hidden-l-down {
+  @media #{$media-query-l-down} {
+    display: none !important;
+  }
+}
 </style>
 
 <docs>
@@ -884,6 +1160,24 @@ pre {
     <div>
       <McRoot>
         Это обязательный компонент, с него начинается любой layout, т.к. здесь находятся глобальные стили.
+        <br><br>
+        margin-bottom - mb
+        margin-top - mt
+        padding-bottom - pb
+        margin-top - pb
+
+        xl - 56
+        l - 48
+        ml - 40
+        m - 32
+        sm - 24
+        s - 16
+        xs - 12
+
+        hidden-m (>768)
+        hidden-l (>1024)
+        hidden-m-down (<768)
+        hidden-l-down (<1024)
       </McRoot>
     </div>
   ```
