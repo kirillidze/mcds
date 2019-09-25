@@ -4,6 +4,8 @@
 #
 
 props:
+  media_query_xs:
+    value: "(min-width: 375px)"
   media_query_s:
     value: "(min-width: 480px)"
   media_query_m:
@@ -15,6 +17,8 @@ props:
   media_query_xxl:
     value: "(min-width: 1440px)"
 
+  media_query_xs_down:
+    value: "(min-width: 374px)"
   media_query_s_down:
     value: "(max-width: 479px)"
   media_query_m_down:

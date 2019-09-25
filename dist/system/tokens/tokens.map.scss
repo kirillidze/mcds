@@ -76,6 +76,8 @@ $tokens-map: (
   'media-query-xl': ((min-width: 1200px)),
   'media-query-l-down': ((max-width: 1023px)),
   'media-query-xxl-down': ((max-width: 1439px)),
+  'media-query-xs': ((min-width: 375px)),
+  'media-query-xs-down': ((min-width: 374px)),
   'media-query-l': ((min-width: 1024px)),
   'media-query-xxl': ((min-width: 1440px)),
   'media-query-m': ((min-width: 768px)),

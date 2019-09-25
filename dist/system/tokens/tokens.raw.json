@@ -540,6 +540,20 @@
       "originalValue": "(max-width: 1439px)",
       "name": "media_query_xxl_down"
     },
+    "media_query_xs": {
+      "type": "...",
+      "category": "media-query",
+      "value": "(min-width: 375px)",
+      "originalValue": "(min-width: 375px)",
+      "name": "media_query_xs"
+    },
+    "media_query_xs_down": {
+      "type": "...",
+      "category": "media-query",
+      "value": "(min-width: 374px)",
+      "originalValue": "(min-width: 374px)",
+      "name": "media_query_xs_down"
+    },
     "media_query_l": {
       "type": "...",
       "category": "media-query",

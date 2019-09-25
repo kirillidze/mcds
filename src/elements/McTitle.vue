@@ -141,6 +141,10 @@ export default {
     font-size: $size-l;
   }
 
+  &--size-ll {
+    font-size: $size-ll;
+  }
+
   &--size-xl {
     font-size: $size-xl;
   }
