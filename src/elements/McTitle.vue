@@ -31,6 +31,13 @@ export default {
       default: "m",
     },
     /**
+     * Размер: `xs`, `s`, `m`
+     */
+    lineHeight: {
+      type: String,
+      default: "xs",
+    },
+    /**
      * В одну строку с точками в конце, если не вмещается
      */
     ellipsis: {
@@ -45,7 +52,7 @@ export default {
       default: "black",
     },
     /**
-     * Family
+     * Family: heading, semi-bold, bold
      */
     family: {
       type: String,
@@ -80,6 +87,7 @@ export default {
     classObject() {
       return {
         [`mc-title--size-${this.size}`]: this.size,
+        [`mc-title--line-height-${this.lineHeight}`]: this.lineHeight,
         [`mc-title--family-${this.family}`]: this.family,
         ["mc-title--ellipsis"]: this.ellipsis,
         [`mc-title--color-${this.color}`]: this.color,
@@ -96,9 +104,6 @@ export default {
   $block-name: &;
   margin-top: 0;
   margin-bottom: 0;
-  font-family: $font-heading;
-  line-height: $line-height-xs;
-  font-weight: $weight-medium;
   display: inline-flex;
   max-width: 100%;
   width: 100%;
@@ -161,6 +166,18 @@ export default {
     font-size: $size-xxxxl;
   }
 
+  &--line-height-m {
+    line-height: $line-height-m;
+  }
+
+  &--line-height-s {
+    line-height: $line-height-s;
+  }
+
+  &--line-height-xs {
+    line-height: $line-height-xs;
+  }
+
   &--ellipsis {
     align-items: center;
 
@@ -186,10 +203,22 @@ export default {
 
   &--family-heading {
     font-family: $font-heading;
+    font-weight: $weight-medium;
+  }
+
+  &--family-bold {
+    font-family: $font-heading;
+    font-weight: $weight-bold;
+  }
+
+  &--family-semi-bold {
+    font-family: $font-heading;
+    font-weight: $weight-semi-bold;
   }
 
   &--family-text {
     font-family: $font-heading;
+    font-weight: $weight-medium;
   }
 
   &--text-align {
@@ -209,7 +238,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McTitle size="s">
+    <McTitle size="s" family="semi-bold" line-height="m">
       <McSvgIcon slot="icon-prepend" name="copyright"/>
       Заголовок
     </McTitle>

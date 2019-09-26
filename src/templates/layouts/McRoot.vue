@@ -1209,7 +1209,7 @@ pre {
         sm - 24
         s - 16
         xs - 12
-        xss - 8
+        xxs - 8
 
         hidden-m (>768)
         hidden-l (>1024)
