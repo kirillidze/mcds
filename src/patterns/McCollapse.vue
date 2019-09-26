@@ -88,7 +88,10 @@ export default {
   },
 
   mounted() {
-    !this.border && this.activator && this.activator.addEventListener("click", this.toggle)
+    !this.border &&
+      this.$slots.body &&
+      this.activator &&
+      this.activator.addEventListener("click", this.toggle)
     this.activator && (this.activator.style.transition = "all 0.15s")
   },
 
