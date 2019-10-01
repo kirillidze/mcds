@@ -1,6 +1,6 @@
 {
   "name": "mcdstest",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Design system for mediacube services",
   "author": "mediacube",
   "main": "dist/system/system.js",
