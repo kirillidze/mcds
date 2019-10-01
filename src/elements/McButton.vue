@@ -402,6 +402,21 @@ $colors: $token-colors;
           }
         }
 
+        &-blur {
+          background-color: fade-out($value, 0.75);
+          color: $color-white;
+          padding: $space-xxs $space-xs;
+
+          &:hover,
+          &:focus {
+            background-color: fade-out($value, 0.8);
+          }
+
+          &:active {
+            background-color: fade-out($value, 0.9);
+          }
+        }
+
         &-invert {
           background-color: fade-out($value, 0.9);
           color: $value;
