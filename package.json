@@ -1,13 +1,13 @@
 {
-  "name": "mediacube-design-system",
-  "version": "0.0.1",
+  "name": "mcds",
+  "version": "1.0.2",
   "description": "Design system for mediacube services",
-  "author": "websecret <info@websecret.by>",
+  "author": "mediacube",
   "main": "dist/system/system.js",
   "files": [
     "dist/system"
   ],
-  "homepage": "https://vueds.com",
+  "homepage": "https://mediacube.co",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -25,7 +25,11 @@
     "styleguide:build": "vue-styleguidist build --config ./config/docs.config.js",
     "theo": "theo ./src/tokens/tokens.yml --transform web --format map.scss,scss,raw.json,json --dest ./src/assets/tokens",
     "theo:onchange": "onchange \"./src/tokens/*.yml\" -- npm run theo",
-    "test": "npm-run-all theo funit"
+    "test": "npm-run-all theo funit",
+    "release": "standard-version",
+    "release:patch": "npm run release -- --release-as patch",
+    "release:minor": "npm run release -- --release-as minor",
+    "release:major": "npm run release -- --release-as major"
   },
   "husky": {
     "hooks": {
