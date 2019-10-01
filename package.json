@@ -1,6 +1,6 @@
 {
   "name": "test",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Design system for mediacube services",
   "author": "mediacube",
   "main": "dist/system/system.js",
