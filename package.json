@@ -30,11 +30,12 @@
     "release:patch": "npm run release -- --release-as patch",
     "release:minor": "npm run release -- --release-as minor",
     "release:major": "npm run release -- --release-as major",
-    "publish1": "npm run build:system && npm publish"
+    "publish1": "npm run build:system && npm run release -- --release-as patch && npm publish"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged"
+      "pre-commit": "pretty-quick --staged",
+      "pre-push": "npm run publish1"
     }
   },
   "babel": {
