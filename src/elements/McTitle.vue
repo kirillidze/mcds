@@ -52,7 +52,7 @@ export default {
       default: "black",
     },
     /**
-     * Family: heading, semi-bold, bold
+     * Family: heading, semi-bold, bold, light
      */
     family: {
       type: String,
@@ -214,6 +214,11 @@ export default {
   &--family-semi-bold {
     font-family: $font-heading;
     font-weight: $weight-semi-bold;
+  }
+
+  &--family-light {
+    font-family: $font-heading;
+    font-weight: $weight-light;
   }
 
   &--family-text {
