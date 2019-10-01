@@ -1,6 +1,6 @@
 {
   "name": "mcds",
-  "version": "1.0.3",
+  "version": "1.0.8",
   "description": "Design system for mediacube services",
   "author": "mediacube",
   "main": "dist/system/system.js",
@@ -8,7 +8,7 @@
     "dist/system"
   ],
   "homepage": "https://mediacube.co",
-  "private": true,
+  "private": false,
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --inline --config ./build/webpack.dev.conf.js",
@@ -29,12 +29,12 @@
     "release": "standard-version",
     "release:patch": "npm run release -- --release-as patch",
     "release:minor": "npm run release -- --release-as minor",
-    "release:major": "npm run release -- --release-as major"
+    "release:major": "npm run release -- --release-as major",
+    "publish": "npm run build:system && npm publish"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged",
-      "pre-push": "npm run build:system"
+      "pre-commit": "pretty-quick --staged"
     }
   },
   "babel": {
