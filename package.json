@@ -1,14 +1,17 @@
 {
-  "name": "mediacube-design-system",
-  "version": "0.0.1",
+  "name": "mcds",
+  "version": "1.0.17",
   "description": "Design system for mediacube services",
-  "author": "websecret <info@websecret.by>",
+  "author": "mediacube",
   "main": "dist/system/system.js",
   "files": [
-    "dist/system"
+    "dist/system",
+    "src",
+    "build",
+    "config"
   ],
-  "homepage": "https://vueds.com",
-  "private": true,
+  "homepage": "https://mediacube.co",
+  "private": false,
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --inline --config ./build/webpack.dev.conf.js",
@@ -25,12 +28,17 @@
     "styleguide:build": "vue-styleguidist build --config ./config/docs.config.js",
     "theo": "theo ./src/tokens/tokens.yml --transform web --format map.scss,scss,raw.json,json --dest ./src/assets/tokens",
     "theo:onchange": "onchange \"./src/tokens/*.yml\" -- npm run theo",
-    "test": "npm-run-all theo funit"
+    "test": "npm-run-all theo funit",
+    "release": "standard-version",
+    "release:patch": "npm run release -- --release-as patch",
+    "release:minor": "npm run release -- --release-as minor",
+    "release:major": "npm run release -- --release-as major",
+    "publish1": "npm run release:patch && npm publish ."
   },
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged",
-      "pre-push": "npm run build:system"
+      "pre-push": "npm run publish1"
     }
   },
   "babel": {
