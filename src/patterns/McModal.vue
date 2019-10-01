@@ -127,7 +127,7 @@ export default {
   }
 
   &__header {
-    padding-bottom: 25px;
+    padding-bottom: 16px;
     position: relative;
     padding-right: 35px;
   }

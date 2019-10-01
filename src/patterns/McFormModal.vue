@@ -12,13 +12,14 @@
       <slot></slot>
     </form>
     <template v-if="visibleFooter" slot="footer">
+      123
       <mc-button
         v-if="!hideCancel"
         @click="$modal.hide(name)"
         size="middle"
         height="small"
         color="main"
-        variation="red-invert"
+        variation="gray-dark-invert"
       >
         {{ cancelText }}
       </mc-button>

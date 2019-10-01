@@ -38,6 +38,7 @@ export default {
   &__content {
     display: inline-flex;
     flex-direction: column;
+    width: 100%;
 
     > *:not(:first-child) {
       margin-top: $space-xxs;
