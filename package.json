@@ -30,7 +30,7 @@
     "release:patch": "npm run release -- --release-as patch",
     "release:minor": "npm run release -- --release-as minor",
     "release:major": "npm run release -- --release-as major",
-    "publish1": "npm run build:system && npm run release -- --release-as patch && npm publish"
+    "publish1": "npm run build:system && npm run release:patch && npm publish"
   },
   "husky": {
     "hooks": {
