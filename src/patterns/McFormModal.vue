@@ -12,7 +12,6 @@
       <slot></slot>
     </form>
     <template v-if="visibleFooter" slot="footer">
-      123
       <mc-button
         v-if="!hideCancel"
         @click="$modal.hide(name)"
