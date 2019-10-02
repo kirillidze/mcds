@@ -359,7 +359,7 @@ export default {
     -moz-appearance: textfield;
     appearance: textfield;
     transition: background-color $duration-quickly ease, border-color $duration-quickly ease;
-    color: $color-black;
+    color: $color-gray-dark;
 
     &:focus {
       outline: 0;
