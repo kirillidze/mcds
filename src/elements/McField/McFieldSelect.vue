@@ -228,6 +228,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
 
 .mc-field-select {
   $block-name: &;
+  margin-bottom: 16px;
 
   @include custom-scroll();
   font-family: $font-heading;
@@ -269,7 +270,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
     font-size: $size-m;
     line-height: $line-height-s;
     padding-left: $space-m;
-    color: $text-black;
+    color: $color-gray-dark;
 
     &--no-img {
       padding-left: 0;
@@ -467,6 +468,9 @@ $text-white: scale-color($color-white, $alpha: -10%);
             }
           }
         }
+        & #{$block-name}__avatar-text {
+          color: $color-gray-dark;
+        }
       }
 
       @each $col-g in $gray-scale {
@@ -533,12 +537,18 @@ $text-white: scale-color($color-white, $alpha: -10%);
       background: transparent;
       .multiselect {
         &__tags {
-          border-color: $color-outline-gray !important;
+          border-color: $color-hover-gray;
           background-color: $color-hover-gray;
         }
 
         &__placeholder {
           color: $color-gray-dark;
+        }
+
+        &__single {
+          & #{$block-name}__avatar-text {
+            color: $color-gray-dark;
+          }
         }
 
         &__select {

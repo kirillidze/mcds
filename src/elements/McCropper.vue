@@ -101,6 +101,16 @@ export default {
     &-center {
       display: none;
     }
+
+    &-canvas {
+      transform: none !important;
+      height: 100% !important;
+    }
+
+    &-hide {
+      transform: none !important;
+      height: 100% !important;
+    }
   }
 }
 </style>
