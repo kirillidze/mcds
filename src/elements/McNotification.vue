@@ -1,7 +1,7 @@
 <template>
   <div class="mc-notification" :class="classes">
     <div class="mc-notification__left">
-      <McSvgIcon :fill="background" name="baseline_warning"></McSvgIcon>
+      <McSvgIcon :fill="background" :name="icon" />
     </div>
     <div class="mc-notification__right">
       <slot></slot>
@@ -25,6 +25,13 @@ export default {
     background: {
       type: String,
       default: "orange",
+    },
+    /**
+     * Иконка
+     */
+    icon: {
+      type: String,
+      default: "warning",
     },
   },
 
@@ -95,7 +102,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McNotification >
+    <McNotification>
       <McTitle
         :ellipsis="false"
         size="s"
