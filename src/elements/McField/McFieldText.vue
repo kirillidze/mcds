@@ -421,6 +421,7 @@ export default {
   &--disabled {
     #{$block-name} {
       &__input {
+        color: $color-gray-dark;
         cursor: not-allowed;
         background-color: $color-hover-gray;
         border-color: $color-hover-gray;

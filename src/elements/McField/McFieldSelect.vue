@@ -455,9 +455,13 @@ $text-white: scale-color($color-white, $alpha: -10%);
         .multiselect--disabled {
           .multiselect {
             &__tags {
+              border-color: $color-hover-gray;
               background-color: fade-out($value, 0.6);
               @if $color != "white" {
                 border-color: transparent !important;
+              }
+              & #{$block-name}__avatar-text {
+                color: $color-gray-dark;
               }
             }
 
