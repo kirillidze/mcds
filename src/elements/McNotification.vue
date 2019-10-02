@@ -59,6 +59,18 @@ export default {
     justify-content: center;
   }
 
+  & .mc-title {
+    & a {
+      font-size: 13px;
+      line-height: 1;
+      text-decoration: none;
+      color: $color-blue;
+      &:hover {
+        color: darken($color-blue, 10%);
+      }
+    }
+  }
+
   &--background {
     @each $color, $value in $token-colors {
       &-#{$color} {
