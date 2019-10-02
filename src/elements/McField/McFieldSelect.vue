@@ -455,13 +455,9 @@ $text-white: scale-color($color-white, $alpha: -10%);
         .multiselect--disabled {
           .multiselect {
             &__tags {
-              border-color: $color-hover-gray;
               background-color: fade-out($value, 0.6);
               @if $color != "white" {
                 border-color: transparent !important;
-              }
-              & #{$block-name}__avatar-text {
-                color: $color-gray-dark;
               }
             }
 
@@ -471,6 +467,9 @@ $text-white: scale-color($color-white, $alpha: -10%);
               }
             }
           }
+        }
+        & #{$block-name}__avatar-text {
+          color: $color-gray-dark;
         }
       }
 
@@ -538,12 +537,18 @@ $text-white: scale-color($color-white, $alpha: -10%);
       background: transparent;
       .multiselect {
         &__tags {
-          border-color: $color-outline-gray !important;
+          border-color: $color-hover-gray;
           background-color: $color-hover-gray;
         }
 
         &__placeholder {
           color: $color-gray-dark;
+        }
+
+        &__single {
+          & #{$block-name}__avatar-text {
+            color: $color-gray-dark;
+          }
         }
 
         &__select {
