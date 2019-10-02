@@ -289,6 +289,7 @@ export default {
   $block-name: &;
 
   display: block;
+  margin-bottom: 16px;
 
   &__header {
     @include reset-text-indents();
