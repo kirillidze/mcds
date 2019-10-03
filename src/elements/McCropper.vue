@@ -103,12 +103,10 @@ export default {
     }
 
     &-canvas {
-      transform: none !important;
       height: 100% !important;
     }
 
     &-hide {
-      transform: none !important;
       height: 100% !important;
     }
   }
