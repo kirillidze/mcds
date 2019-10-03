@@ -1,6 +1,6 @@
 {
   "name": "mcds",
-  "version": "1.0.29",
+  "version": "1.0.32",
   "description": "Design system for mediacube services",
   "author": "mediacube",
   "main": "dist/system/system.js",
@@ -33,12 +33,11 @@
     "release:patch": "npm run release -- --release-as patch",
     "release:minor": "npm run release -- --release-as minor",
     "release:major": "npm run release -- --release-as major",
-    "publish1": "npm run release:patch && npm publish ."
+    "publish1": "npm run release:patch && npm publish . && git push"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged",
-      "pre-push": "npm run publish1"
+      "pre-commit": "pretty-quick --staged"
     }
   },
   "babel": {
