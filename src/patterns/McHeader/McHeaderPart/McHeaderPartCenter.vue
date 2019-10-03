@@ -35,7 +35,7 @@
             :href="menuMainItem.href"
             :to="menuMainItem.to"
             variation="black-flat"
-            :exact="$route.name.includes('index-index')"
+            :exact="$route.name.includes('index')"
           >
             <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
             {{ menuMainItem.name }}
