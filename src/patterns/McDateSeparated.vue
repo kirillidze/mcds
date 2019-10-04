@@ -148,7 +148,7 @@ export default {
       return result
     },
     months() {
-      this.$moment.locale("ru")
+      this.$moment.locale(this.lang)
       return this.$moment.months().map((item, i) => ({ name: _capitalize(item), value: i + 1 }))
     },
     years() {
@@ -223,7 +223,7 @@ export default {
 
 <docs>
     ```jsx
-    let test = {}
+    let test = `2011-07-11T00:00:00+03:00`
     <div>
         <McDateSeparated v-model="test" :placeholder="'test'"/>
     </div>
