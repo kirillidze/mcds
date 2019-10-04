@@ -86,6 +86,10 @@ export default {
       type: String,
       default: null,
     },
+    lang: {
+      type: String,
+      default: "ru",
+    },
   },
   computed: {
     errorText() {
@@ -148,7 +152,6 @@ export default {
       return result
     },
     months() {
-      this.$moment.locale(this.lang)
       return this.$moment.months().map((item, i) => ({ name: _capitalize(item), value: i + 1 }))
     },
     years() {
@@ -164,6 +167,9 @@ export default {
 
       return result
     },
+  },
+  created() {
+    this.$moment.locale(this.lang)
   },
   methods: {
     handleChange(value) {
