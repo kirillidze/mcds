@@ -148,6 +148,7 @@ export default {
       return result
     },
     months() {
+      this.$moment.locale("ru")
       return this.$moment.months().map((item, i) => ({ name: _capitalize(item), value: i + 1 }))
     },
     years() {
