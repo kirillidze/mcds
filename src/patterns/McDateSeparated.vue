@@ -169,7 +169,7 @@ export default {
     },
   },
   created() {
-    this.$moment.locale(this.lang).format("LLL")
+    this.$moment.locale(this.lang)
   },
   methods: {
     handleChange(value) {
