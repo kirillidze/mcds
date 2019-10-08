@@ -12,7 +12,7 @@
           </template>
           <template v-else>
             <McTitle :text-align="computedTextAlign" tagName="span">
-              Все данные загружены
+              {{ lang.all_loaded }}
             </McTitle>
           </template>
         </template>
@@ -23,7 +23,7 @@
       <McTableCell :size="size" :colspan="headers.length">
         <template v-if="!items.length">
           <McTitle text-align="center" tagName="span">
-            Нет данных
+            {{ lang.no_data }}
           </McTitle>
         </template>
       </McTableCell>
@@ -59,6 +59,10 @@ export default {
     textAlign: {
       type: String,
       default: "right",
+    },
+    lang: {
+      //type:,
+      required: false,
     },
     infinite: {
       type: Boolean,
