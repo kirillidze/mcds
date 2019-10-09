@@ -17,6 +17,7 @@
       :headers="headers"
       :infinite="infinite"
       :hasMore="hasMore"
+      :lang="lang"
       :container-element="containerElement"
       @load="handleLoad"
       :loading="loading"
@@ -108,6 +109,10 @@ export default {
     },
     tooltip: {
       type: [Boolean, Array],
+      required: false,
+    },
+    lang: {
+      //type:,
       required: false,
     },
     infinite: {
