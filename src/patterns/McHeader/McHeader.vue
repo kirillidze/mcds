@@ -38,6 +38,7 @@
         :menu-profile="menuProfile"
         :menu-langs="menuLangs"
         :user="user"
+        :sub-users="subUsers"
         :chatra-id="chatraId"
       />
       <McHeaderMobile v-if="menuMain && menuMain.length" :menu-main="menuMain" />
@@ -151,6 +152,14 @@ export default {
      */
     user: {
       type: Object,
+      default: null,
+    },
+    /**
+     *  Другие доступные пользователи
+     *
+     */
+    subUsers: {
+      type: Array,
       default: null,
     },
     /**
@@ -641,6 +650,7 @@ export default {
   let menuProfile = require('@/mocks/menuProfile').default;
   let menuLangs = require('@/mocks/menuLangs').default;
   let authUser = require('@/mocks/authUser').default;
+  let subUsers = require('@/mocks/subUsers').default;
   let searchResult = require('@/mocks/searchResult').default;
   let notifications = require('@/mocks/notifications').default;
   let search = null
@@ -660,6 +670,7 @@ export default {
             :menu-profile="menuProfile"
             :menu-langs="menuLangs"
             :user="authUser"
+            :sub-users="subUsers"
             :search-items="searchResult"
             search-placeholder="Начните вводить"
             chatra-id="dzDw7eBbL2ramxx25"
