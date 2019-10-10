@@ -63,6 +63,10 @@ export default {
     lang: {
       //type:,
       required: false,
+      default: {
+        all_loaded: "Все данные загружены",
+        no_data: "Нет данных",
+      },
     },
     infinite: {
       type: Boolean,
