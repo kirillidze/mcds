@@ -63,11 +63,6 @@ export default {
     lang: {
       //type:,
       required: false,
-      default() {
-        return {
-          all_loaded: "Все данные загружены",
-          no_data: "Нет данных",
-        }
       },
     },
     infinite: {
