@@ -63,7 +63,6 @@ export default {
     lang: {
       //type:,
       required: false,
-      },
     },
     infinite: {
       type: Boolean,

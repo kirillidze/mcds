@@ -275,6 +275,9 @@ export default {
     $route() {
       this.closeMenu()
     },
+    user() {
+      this.menuProfileIsOpen = false
+    },
   },
   computed: {
     filteredSubUsers() {
@@ -346,6 +349,9 @@ export default {
 
     .mc-preview {
       padding: $space-xs 0;
+      &__left {
+        margin-right: $space-xs;
+      }
     }
 
     .mc-avatar {
