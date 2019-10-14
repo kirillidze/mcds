@@ -1,7 +1,7 @@
 <template>
   <div class="mc-notification" :class="classes">
     <div class="mc-notification__left">
-      <McSvgIcon :fill="background" :name="icon" />
+      <McSvgIcon :name="icon" />
     </div>
     <div class="mc-notification__right">
       <slot></slot>
@@ -93,6 +93,10 @@ export default {
           width: 4px;
           background-color: $value;
         }
+
+        .mc-svg-icon {
+          color: $value;
+        }
       }
     }
   }
@@ -102,7 +106,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McNotification>
+    <McNotification background="red">
       <McTitle
         :ellipsis="false"
         size="s"
