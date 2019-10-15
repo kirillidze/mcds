@@ -15,6 +15,7 @@
       slot="append"
       size="s-compact"
       @click.prevent="handleToggleClick"
+      default-tag="div"
     >
       <McSvgIcon slot="icon-append" :name="type === 'password' ? 'visibility' : 'visibility_off'" />
     </McButton>

@@ -156,6 +156,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * Default tag
+     */
+    defaultTag: {
+      type: String,
+      default: "button",
+    },
   },
 
   computed: {
@@ -174,9 +181,6 @@ export default {
         "mc-button--uppercase": this.uppercase,
         "mc-button--shadow": this.shadow,
       }
-    },
-    defaultTag() {
-      return "button"
     },
     tag() {
       if (this.to) {
