@@ -204,6 +204,18 @@ export default {
     @at-root input:checked ~ &:before {
       background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj48cGF0aCBkPSJNNy45ODQgMTUuMDE3bDktOS0xLjQwNi0xLjQ1NC03LjU5NCA3LjU5NUw0LjQyIDguNTk0IDMuMDE4IDEwem05LTE0LjAxN3EuODQ0IDAgMS40My42MVQxOSAzLjAxNHYxMy45N3EwIC43OTctLjU4NiAxLjQwNi0uNTg2LjYxLTEuNDMuNjFIMy4wMTRxLS44NDMgMC0xLjQzLS42MVQxIDE2Ljk4NFYzLjAxNHEwLS43OTYuNTg1LTEuNDA0UTIuMTcgMSAzLjAxNSAxaDEzLjk3eiIgZmlsbD0iIzQyODVmNCIvPjwvc3ZnPg==");
     }
+
+    .mc-button {
+      display: inline;
+      white-space: normal;
+      vertical-align: top;
+      margin-left: 1px;
+
+      &__text {
+        white-space: normal;
+        display: inline;
+      }
+    }
   }
 
   &__input {
