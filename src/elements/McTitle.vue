@@ -138,7 +138,7 @@ export default {
 
   @each $line-height, $value in $token-line-heights {
     &--line-height-#{$line-height} {
-      font-size: $value;
+      line-height: $value;
     }
   }
 
