@@ -130,52 +130,16 @@ export default {
     }
   }
 
-  &--size-xs {
-    font-size: $size-xs;
+  @each $size, $value in $token-sizes {
+    &--size-#{$size} {
+      font-size: $value;
+    }
   }
 
-  &--size-s {
-    font-size: $size-s;
-  }
-
-  &--size-m {
-    font-size: $size-m;
-  }
-
-  &--size-l {
-    font-size: $size-l;
-  }
-
-  &--size-ll {
-    font-size: $size-ll;
-  }
-
-  &--size-xl {
-    font-size: $size-xl;
-  }
-
-  &--size-xxl {
-    font-size: $size-xxl;
-  }
-
-  &--size-xxxl {
-    font-size: $size-xxxl;
-  }
-
-  &--size-xxxxl {
-    font-size: $size-xxxxl;
-  }
-
-  &--line-height-m {
-    line-height: $line-height-m;
-  }
-
-  &--line-height-s {
-    line-height: $line-height-s;
-  }
-
-  &--line-height-xs {
-    line-height: $line-height-xs;
+  @each $line-height, $value in $token-line-heights {
+    &--line-height-#{$line-height} {
+      font-size: $value;
+    }
   }
 
   &--ellipsis {
