@@ -300,12 +300,13 @@ export default {
     checkOverflow(reservedPlace = 0) {
       this.getSizes()
       return (
-        this.headerCenterWidth >=
-        window.innerWidth - this.headerLeftWidth - this.headerRightWidth - reservedPlace
+        this.headerWidth <=
+        this.headerLeftWidth + this.headerCenterWidth + this.headerRightWidth + reservedPlace
       )
     },
 
     getSizes() {
+      this.headerWidth = this.$refs.header ? Math.floor(this.$refs.header.clientWidth) : 0
       this.headerLeftWidth = this.$refs.headerLeft
         ? Math.ceil(this.$refs.headerLeft.$el.clientWidth)
         : 0
@@ -341,17 +342,13 @@ export default {
       this.menuMainMutable = []
       this.menuHidden = []
       this.menuMainMutable = val
-      this.$nextTick(() => {
-        this.moveMenuItem()
-      })
+      this.$nextTick(() => this.moveMenuItem())
     },
 
     initMainMenu() {
       this.mmIsOn = false
       this.canUpdateMenuItem = true
-      this.$nextTick(() => {
-        this.moveMenuItem()
-      })
+      this.$nextTick(() => this.moveMenuItem())
     },
 
     destroyMainMenu() {
