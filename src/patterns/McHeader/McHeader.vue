@@ -55,7 +55,6 @@ import McHeaderPartRight from "./McHeaderPart/McHeaderPartRight"
 import McHeaderPartCenter from "./McHeaderPart/McHeaderPartCenter"
 import McHeaderMobile from "./McHeaderMobile/McHeaderMobile"
 import McHeaderNotifications from "./McHeaderNotifications/McHeaderNotifications"
-import tokens from "../../assets/tokens/tokens"
 export default {
   name: "McHeader",
   status: "ready",
@@ -226,6 +225,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Min width, при котором отображается центральное меню
+     *
+     */
+    mediaMinWidth: {
+      type: Number,
+      default: 1200,
+    },
   },
   data() {
     return {
@@ -239,10 +246,7 @@ export default {
       mmIsOn: false,
       mmIsOpen: false,
       windowWidth: 0,
-      mediaMinWidth: tokens.media_query_xl.match(/\d+/)[0],
-
-      isDebug: false,
-      counter: 0,
+      canUpdateMenuItem: true,
     }
   },
   computed: {
@@ -295,12 +299,10 @@ export default {
 
     checkOverflow(reservedPlace = 0) {
       this.getSizes()
-
-      let result =
-        this.headerWidth <
+      return (
+        this.headerWidth <=
         this.headerLeftWidth + this.headerCenterWidth + this.headerRightWidth + reservedPlace
-
-      return result
+      )
     },
 
     getSizes() {
@@ -317,55 +319,36 @@ export default {
     },
 
     moveMenuItem() {
-      if (this.isDebug) {
-        if (this.counter > 50) {
-          return
-        }
-      }
-
       if (this.menuMainMutable && this.menuMainMutable.length && this.checkOverflow()) {
-        if (this.isDebug) {
-          this.counter++
-          console.warn("hide")
-          this.debug()
-        }
-        let result = this.menuMainMutable.splice(-1, 1)
-        this.menuHidden = _concat(this.menuHidden, result)
-
-        this.$nextTick(() => {
-          this.moveMenuItem()
-        })
+        this.menuHidden = _concat(this.menuMainMutable.pop(), this.menuHidden)
+        this.canUpdateMenuItem &&
+          this.$nextTick(() => {
+            this.moveMenuItem()
+          })
       }
 
       if (this.menuHidden.length && !this.checkOverflow(this.menuHiddenItemWidth)) {
-        if (this.isDebug) {
-          this.counter++
-          console.error("show")
-          this.debug()
-        }
-        let result = this.menuHidden.splice(-1, 1)
-        this.menuMainMutable = _concat(this.menuMainMutable, result)
-
-        this.$nextTick(() => {
-          this.moveMenuItem()
-        })
+        this.menuMainMutable = _concat(this.menuMainMutable, this.menuHidden.splice(0, 1))
+        this.canUpdateMenuItem &&
+          this.$nextTick(() => {
+            this.moveMenuItem()
+          })
       }
+
+      this.canUpdateMenuItem = false
     },
 
     updateMainMenu(val) {
       this.menuMainMutable = []
       this.menuHidden = []
       this.menuMainMutable = val
-      this.$nextTick(() => {
-        this.moveMenuItem()
-      })
+      this.$nextTick(() => this.moveMenuItem())
     },
 
     initMainMenu() {
       this.mmIsOn = false
-      this.$nextTick(() => {
-        this.moveMenuItem()
-      })
+      this.canUpdateMenuItem = true
+      this.$nextTick(() => this.moveMenuItem())
     },
 
     destroyMainMenu() {
@@ -393,30 +376,6 @@ export default {
     },
     handleClickReject(id) {
       this.$emit("click-reject", id)
-    },
-
-    debug() {
-      console.log("windowWidth", this.windowWidth)
-      console.log("headerLeftWidth", this.headerLeftWidth)
-      console.log("headerCenterWidth", this.headerCenterWidth)
-      console.log("headerRightWidth", this.headerRightWidth)
-      console.log("reservedPlace", this.menuHiddenItemWidth)
-      console.log("headerWidth", this.headerWidth)
-      console.log(
-        "sum",
-        this.headerLeftWidth +
-          this.headerCenterWidth +
-          this.headerRightWidth +
-          this.menuHiddenItemWidth
-      )
-      console.log(
-        "delta",
-        this.headerWidth -
-          (this.headerLeftWidth +
-            this.headerCenterWidth +
-            this.headerRightWidth +
-            this.menuHiddenItemWidth)
-      )
     },
   },
 }
