@@ -1,52 +1,54 @@
 <template>
-  <div class="mc-wrap-collapse">
-    <mc-collapse @toggle="handleToggle">
-      <mc-grid-row slot="activator" justify="between" align="middle" :gutter-x="8" :wrap="false">
-        <mc-grid-col class="mc-wrap-collapse__header">
-          <slot name="head" />
+  <div class="mc-wrap-collapse" :class="classes">
+    <div class="mc-wrap-collapse__inner">
+      <mc-collapse @toggle="handleToggle">
+        <mc-grid-row slot="activator" justify="between" align="middle" :gutter-x="8" :wrap="false">
+          <mc-grid-col class="mc-wrap-collapse__header">
+            <slot name="head" />
 
-          <div class="mc-wrap-collapse__buttons" v-if="canDelete || isDraggable">
-            <mc-button
-              v-if="canDelete"
-              variation="gray-dark-flat"
-              size="m-compact"
-              @click.stop="handleDelete"
-            >
-              <mc-svg-icon slot="icon-append" name="delete" />
-            </mc-button>
-            <mc-button
-              v-if="isDraggable"
-              variation="gray-dark-flat"
-              size="m-compact"
-              @click.stop="handleDrag"
-            >
-              <mc-svg-icon name="drag" size="s" />
-            </mc-button>
-          </div>
-        </mc-grid-col>
-
-        <template v-if="$slots.body">
-          <mc-grid-col v-if="isWarning && !toggled">
-            <mc-svg-icon
-              v-if="isWarning && !toggled"
-              name="warning"
-              fill="rgb(244, 62, 62)"
-              size="s"
-            />
+            <div class="mc-wrap-collapse__buttons" v-if="canDelete || isDraggable">
+              <mc-button
+                v-if="canDelete"
+                variation="gray-dark-flat"
+                size="m-compact"
+                @click.stop="handleDelete"
+              >
+                <mc-svg-icon slot="icon-append" name="delete" />
+              </mc-button>
+              <mc-button
+                v-if="isDraggable"
+                variation="gray-dark-flat"
+                size="m-compact"
+                @click.stop="handleDrag"
+              >
+                <mc-svg-icon name="drag" size="s" />
+              </mc-button>
+            </div>
           </mc-grid-col>
-          <mc-grid-col style="display: flex;" v-if="!(isWarning && !toggled)">
-            <mc-svg-icon
-              class="mc-wrap-collapse__icon-arrow"
-              name="arrow_drop_down"
-              :fill="arrowColor"
-              size="s"
-            />
-          </mc-grid-col>
-        </template>
-      </mc-grid-row>
 
-      <slot name="body" slot="body" />
-    </mc-collapse>
+          <template v-if="$slots.body">
+            <mc-grid-col v-if="isWarning && !toggled">
+              <mc-svg-icon
+                v-if="isWarning && !toggled"
+                name="warning"
+                fill="rgb(244, 62, 62)"
+                size="s"
+              />
+            </mc-grid-col>
+            <mc-grid-col style="display: flex;" v-if="!(isWarning && !toggled)">
+              <mc-svg-icon
+                class="mc-wrap-collapse__icon-arrow"
+                name="arrow_drop_down"
+                :fill="arrowColor"
+                size="s"
+              />
+            </mc-grid-col>
+          </template>
+        </mc-grid-row>
+
+        <slot name="body" slot="body" />
+      </mc-collapse>
+    </div>
   </div>
 </template>
 
@@ -107,6 +109,14 @@ export default {
       this.$emit("drag")
     },
   },
+  computed: {
+    classes() {
+      return {
+        "mc-wrap-collapse--is-open": this.toggled,
+        "mc-wrap-collapse--is-empty": !this.$slots.body,
+      }
+    },
+  },
 }
 </script>
 
@@ -118,6 +128,11 @@ export default {
   border-radius: $radius-l;
   border: 1px solid $color-outline-gray;
   background-color: $color-white;
+
+  &__inner {
+    border: 1px solid transparent;
+    border-radius: 6px;
+  }
 
   &__header {
     position: relative;
@@ -188,6 +203,9 @@ export default {
     &--is-open {
       #{$block-name}__icon-arrow {
         transform: rotate(-180deg);
+        svg {
+          fill: $color-black !important;
+        }
       }
     }
   }
@@ -195,6 +213,23 @@ export default {
   .mc-grid-row {
     @media #{$media-query-m-down} {
       align-items: flex-start;
+    }
+  }
+
+  &:not(&--is-empty)#{$block-name}:not(&--is-open) {
+    &:hover,
+    &:focus {
+      border-color: $color-blue;
+
+      #{$block-name}__inner {
+        border-color: $color-blue;
+      }
+
+      #{$block-name}__icon-arrow {
+        svg {
+          fill: $color-blue !important;
+        }
+      }
     }
   }
 }
