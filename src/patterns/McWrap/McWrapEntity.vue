@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import McCard from "../../patterns/McCard"
+import McCard from "../McCard"
 import McButton from "../../elements/McButton"
 import McSvgIcon from "../../elements/McSvgIcon"
 
