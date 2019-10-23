@@ -4,7 +4,7 @@
       <McHeaderNavItem class="mc-header-part-right__chatra" v-if="chatraId">
         <McDropdown v-model="menuChatraIsOpen" position="right" :rotate-icon="false">
           <McButton slot="activator" variation="black-flat" size="m-compact" rounded>
-            <McSvgIcon slot="icon-append" name="live_help" />
+            <McSvgIcon slot="icon-append" name="chat" />
           </McButton>
 
           <McPanel>
