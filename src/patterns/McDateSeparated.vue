@@ -86,7 +86,7 @@ export default {
       default: null,
     },
     placeholder: {
-      type: Array,
+      type: Object,
       default: null,
     },
     lang: {
