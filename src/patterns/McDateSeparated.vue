@@ -199,6 +199,15 @@ export default {
 .mc-date-separated {
   $block-name: &;
 
+  .mc-field-select {
+    .multiselect__select {
+      width: 30px;
+    }
+    .multiselect__tags {
+      padding-right: 30px;
+    }
+  }
+
   &__header {
     @include reset-text-indents();
     font-family: $font-heading;
