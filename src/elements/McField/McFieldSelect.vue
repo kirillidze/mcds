@@ -270,7 +270,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
     font-size: $size-m;
     line-height: $line-height-s;
     padding-left: $space-m;
-    color: $color-gray-dark;
+    color: $color-black;
 
     &--no-img {
       padding-left: 0;
