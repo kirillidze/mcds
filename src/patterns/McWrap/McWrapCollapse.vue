@@ -20,6 +20,7 @@
                 variation="gray-dark-flat"
                 size="m-compact"
                 @click.stop="handleDrag"
+                v-drag
               >
                 <mc-svg-icon name="drag" size="s" />
               </mc-button>
@@ -53,6 +54,7 @@
 </template>
 
 <script>
+import { HandleDirective } from "vue-slicksort"
 import McCollapse from "../McCollapse"
 import McGridCol from "../McGrid/McGridCol"
 import McGridRow from "../McGrid/McGridRow"
@@ -70,6 +72,7 @@ export default {
   },
   status: "ready",
   release: "1.0.0",
+  directives: { drag: HandleDirective },
   data() {
     return {
       toggled: false,
