@@ -63,12 +63,10 @@ import McGridCol from "../McGrid/McGridCol"
 import McGridRow from "../McGrid/McGridRow"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
-import Spacing from "../../../docs/components/tokens/Spacing"
 
 export default {
   name: "McWrapCollapse",
   components: {
-    Spacing,
     McCollapse,
     McGridCol,
     McGridRow,
