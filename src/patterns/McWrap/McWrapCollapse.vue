@@ -140,6 +140,10 @@ export default {
     border-radius: 6px;
   }
 
+  &__activator {
+    position: relative;
+  }
+
   &__header {
     position: relative;
     display: flex;
