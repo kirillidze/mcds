@@ -143,7 +143,7 @@
 
       <McHeaderNavItem class="mc-header-part-right__langs" v-if="menuLangs && menuLangs.length">
         <McDropdown v-model="menuLangsIsOpen" position="right">
-          <McButton slot="activator" variation="black-flat">
+          <McButton slot="activator" variation="black-flat" @click="">
             {{ menuLangs[0].name }}
             <McSvgIcon slot="icon-append" name="arrow_drop_down" />
           </McButton>
@@ -157,8 +157,7 @@
               variation="black-flat"
               size="l"
               :href="menuLangsItem.href"
-              :to="menuLangsItem.to"
-              exact
+              :to="switchLocalePath(menuLangsItem.name.toLowerCase())"
             >
               {{ menuLangsItem.name }}
             </McButton>
