@@ -153,11 +153,12 @@
               v-for="(menuLangsItem, index) in menuLangs"
               :key="`menu-langs-item-${index}`"
               full-width
+              exact
               text-align="left"
               variation="black-flat"
               size="l"
               :href="menuLangsItem.href"
-              :to="switchLocalePath(menuLangsItem.name.toLowerCase())"
+              :to="menuLangsItem.to"
             >
               {{ menuLangsItem.name }}
             </McButton>
