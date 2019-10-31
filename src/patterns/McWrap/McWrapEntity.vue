@@ -8,7 +8,7 @@
         v-if="canEdit"
         variation="gray-dark-flat"
         size="m-compact"
-        @click.prevent="handleEdit"
+        @click.prevent.stop="handleEdit"
       >
         <mc-svg-icon slot="icon-append" name="create" />
       </mc-button>
@@ -17,7 +17,7 @@
         v-if="canDelete"
         variation="gray-dark-flat"
         size="m-compact"
-        @click.prevent="handleDelete"
+        @click.prevent.stop="handleDelete"
       >
         <mc-svg-icon slot="icon-append" name="delete" />
       </mc-button>
