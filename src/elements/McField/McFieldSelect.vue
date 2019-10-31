@@ -179,7 +179,7 @@ export default {
         if (this.value == null) return []
         let result = []
         for (let value of this.value) {
-          let option = this.options.find(o => o.value == value)
+          let option = this.options.find(o => o.value == value || o.value.id == value.id)
           if (option != null) result.push(option)
         }
         return result
