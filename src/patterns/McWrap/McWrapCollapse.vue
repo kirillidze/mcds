@@ -193,7 +193,6 @@ export default {
 
   .mc-collapse {
     position: relative;
-    z-index: 3;
     &__header {
       display: block;
       padding: 12px;
