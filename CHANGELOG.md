@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.91](https://github.com/MediaCubeCo/mcds/compare/v1.0.86...v1.0.91) (2019-11-01)
+
+### Bug Fixes
+
+- multiselect ([e2d4532](https://github.com/MediaCubeCo/mcds/commit/e2d4532))
+
 ### [1.0.90](https://github.com/MediaCubeCo/mcds/compare/v1.0.89...v1.0.90) (2019-10-31)
 
 ### Bug Fixes
