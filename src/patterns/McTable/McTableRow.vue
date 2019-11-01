@@ -1,5 +1,5 @@
 <template>
-  <tr
+  <div
     class="mc-table-row"
     :class="classes"
     :style="{ visibility: isVisible ? 'visible' : 'hidden' }"
@@ -25,7 +25,7 @@
         </slot>
       </McTableCell>
     </slot>
-  </tr>
+  </div>
 </template>
 
 <script>
