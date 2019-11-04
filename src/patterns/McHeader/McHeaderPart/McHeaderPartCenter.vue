@@ -35,7 +35,7 @@
             :href="menuMainItem.href"
             :to="menuMainItem.to"
             variation="black-flat"
-            :exact="$route.name.includes('index-index')"
+            :exact="$route ? $route.name.includes('index') : null"
           >
             <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
             {{ menuMainItem.name }}
@@ -267,6 +267,17 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+
+    @media #{$media-query-l-down} {
+      .mc-button {
+        &__text {
+          display: none !important;
+        }
+        .mc-svg-icon {
+          margin: 0;
+        }
+      }
+    }
   }
 
   &__search {

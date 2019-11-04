@@ -12,6 +12,7 @@ import VueMoment from "vue-moment"
 import VModal from "vue-js-modal"
 import VueAutosize from "vue-autosize"
 import WebFontLoader from "../src/utils/webFontLoader" // eslint-disable-line no-unused-vars
+import VueVirtualScroller from "vue-virtual-scroller"
 
 Vue.config.productionTip = false
 Vue.mixin(statusLabels)
@@ -19,6 +20,7 @@ Vue.use(VueLazyload)
 Vue.use(VueMoment)
 Vue.use(VModal)
 Vue.use(VueAutosize)
+Vue.use(VueVirtualScroller)
 
 document.addEventListener("DOMContentLoaded", () => {
   filterSearch.methods.init()

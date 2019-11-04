@@ -1,9 +1,5 @@
 <template>
-  <tr
-    class="mc-table-row"
-    :class="classes"
-    :style="{ visibility: isVisible ? 'visible' : 'hidden' }"
-  >
+  <div style="display: flex" :style="{ visibility: isVisible ? 'visible' : 'hidden' }">
     <slot>
       <McTableCell
         :checkable="index === 0 && checkable"
@@ -25,7 +21,7 @@
         </slot>
       </McTableCell>
     </slot>
-  </tr>
+  </div>
 </template>
 
 <script>

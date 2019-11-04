@@ -9,6 +9,7 @@
       <div class="mc-date-separated__cell">
         <McFieldSelect
           v-model="_valueDay"
+          :placeholder="placeholder.day"
           :options="days"
           :disabled="disabled"
           :open-direction="openDirection"
@@ -17,6 +18,7 @@
       <div class="mc-date-separated__cell">
         <McFieldSelect
           v-model="_valueMonth"
+          :placeholder="placeholder.month"
           :options="months"
           :disabled="disabled"
           :open-direction="openDirection"
@@ -25,6 +27,7 @@
       <div class="mc-date-separated__cell">
         <McFieldSelect
           v-model="_valueYear"
+          :placeholder="placeholder.year"
           :options="years"
           :disabled="disabled"
           :open-direction="openDirection"
@@ -83,8 +86,12 @@ export default {
       default: null,
     },
     placeholder: {
-      type: String,
+      type: Object,
       default: null,
+    },
+    lang: {
+      type: String,
+      default: "ru",
     },
   },
   computed: {
@@ -110,6 +117,7 @@ export default {
     },
     _valueDay: {
       get() {
+        if (!this.value) return
         return this._value.format("D")
       },
       set(val) {
@@ -118,6 +126,7 @@ export default {
     },
     _valueMonth: {
       get() {
+        if (!this.value) return
         return this._value.format("MM")
       },
       set(val) {
@@ -126,6 +135,7 @@ export default {
     },
     _valueYear: {
       get() {
+        if (!this.value) return
         return this._value.format("YYYY")
       },
       set(val) {
@@ -164,6 +174,9 @@ export default {
       return result
     },
   },
+  created() {
+    this.$moment.locale(this.lang)
+  },
   methods: {
     handleChange(value) {
       if (this.toFormat === "moment") {
@@ -185,6 +198,15 @@ export default {
 <style lang="scss">
 .mc-date-separated {
   $block-name: &;
+
+  .mc-field-select {
+    .multiselect__select {
+      width: 30px;
+    }
+    .multiselect__tags {
+      padding-right: 30px;
+    }
+  }
 
   &__header {
     @include reset-text-indents();
@@ -222,9 +244,14 @@ export default {
 
 <docs>
     ```jsx
-    let test = {}
+    let test = `2011-07-11T00:00:00+03:00`
+    let placeholder = {
+        day: 'день',
+        month: 'месяц',
+        year: 'год',
+    }
     <div>
-        <McDateSeparated v-model="test" :placeholder="'test'"/>
+        <McDateSeparated v-model="test" :placeholder="placeholder"/>
     </div>
     ```
 </docs>

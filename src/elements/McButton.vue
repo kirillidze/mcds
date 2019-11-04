@@ -156,6 +156,13 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * Default tag
+     */
+    defaultTag: {
+      type: String,
+      default: "button",
+    },
   },
 
   computed: {
@@ -174,9 +181,6 @@ export default {
         "mc-button--uppercase": this.uppercase,
         "mc-button--shadow": this.shadow,
       }
-    },
-    defaultTag() {
-      return "button"
     },
     tag() {
       if (this.to) {
@@ -399,6 +403,21 @@ $colors: $token-colors;
         &#{$block-name} {
           &--shadow {
             box-shadow: 0 3px 10px fade-out($value, 0.8);
+          }
+        }
+
+        &-blur {
+          background-color: fade-out($value, 0.75);
+          color: $color-white;
+          padding: $space-xxs $space-xs;
+
+          &:hover,
+          &:focus {
+            background-color: fade-out($value, 0.8);
+          }
+
+          &:active {
+            background-color: fade-out($value, 0.9);
           }
         }
 

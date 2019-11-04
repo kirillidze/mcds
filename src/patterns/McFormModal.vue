@@ -18,7 +18,7 @@
         size="middle"
         height="small"
         color="main"
-        variation="red-invert"
+        variation="gray-dark-invert"
       >
         {{ cancelText }}
       </mc-button>

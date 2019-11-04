@@ -179,7 +179,7 @@ export default {
         if (this.value == null) return []
         let result = []
         for (let value of this.value) {
-          let option = this.options.find(o => o.value == value)
+          let option = this.options.find(o => o.value == value || o.value.id == value.id)
           if (option != null) result.push(option)
         }
         return result
@@ -228,6 +228,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
 
 .mc-field-select {
   $block-name: &;
+  margin-bottom: 16px;
 
   @include custom-scroll();
   font-family: $font-heading;
@@ -269,7 +270,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
     font-size: $size-m;
     line-height: $line-height-s;
     padding-left: $space-m;
-    color: $text-black;
+    color: $color-black;
 
     &--no-img {
       padding-left: 0;
@@ -279,7 +280,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
   .multiselect {
     &__placeholder {
       @include ellipsis();
-      color: $text-black;
+      color: $color-gray-dark;
       font-size: $size-m;
       line-height: $line-height-s;
       margin-bottom: $space-xs;
@@ -467,6 +468,9 @@ $text-white: scale-color($color-white, $alpha: -10%);
             }
           }
         }
+        & #{$block-name}__avatar-text {
+          color: $color-gray-dark;
+        }
       }
 
       @each $col-g in $gray-scale {
@@ -533,12 +537,18 @@ $text-white: scale-color($color-white, $alpha: -10%);
       background: transparent;
       .multiselect {
         &__tags {
-          border-color: $color-outline-gray !important;
+          border-color: $color-hover-gray;
           background-color: $color-hover-gray;
         }
 
         &__placeholder {
           color: $color-gray-dark;
+        }
+
+        &__single {
+          & #{$block-name}__avatar-text {
+            color: $color-gray-dark;
+          }
         }
 
         &__select {

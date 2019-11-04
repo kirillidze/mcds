@@ -127,7 +127,7 @@ export default {
   }
 
   &__header {
-    padding-bottom: 25px;
+    padding-bottom: 16px;
     position: relative;
     padding-right: 35px;
   }
@@ -156,7 +156,7 @@ export default {
   &__control {
     display: flex;
     justify-content: flex-end;
-    padding-top: 25px;
+    padding-top: 24px;
     margin-left: -3px;
     margin-right: -3px;
 

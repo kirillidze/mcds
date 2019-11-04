@@ -1,7 +1,7 @@
 <template>
   <div class="mc-notification" :class="classes">
     <div class="mc-notification__left">
-      <McSvgIcon :fill="background" name="baseline_warning"></McSvgIcon>
+      <McSvgIcon :name="icon" />
     </div>
     <div class="mc-notification__right">
       <slot></slot>
@@ -25,6 +25,13 @@ export default {
     background: {
       type: String,
       default: "orange",
+    },
+    /**
+     * Иконка
+     */
+    icon: {
+      type: String,
+      default: "warning",
     },
   },
 
@@ -59,6 +66,18 @@ export default {
     justify-content: center;
   }
 
+  & .mc-title {
+    & a {
+      font-size: 13px;
+      line-height: 1;
+      text-decoration: none;
+      color: $color-blue;
+      &:hover {
+        color: darken($color-blue, 10%);
+      }
+    }
+  }
+
   &--background {
     @each $color, $value in $token-colors {
       &-#{$color} {
@@ -74,6 +93,10 @@ export default {
           width: 4px;
           background-color: $value;
         }
+
+        .mc-svg-icon {
+          color: $value;
+        }
       }
     }
   }
@@ -83,7 +106,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McNotification >
+    <McNotification background="red">
       <McTitle
         :ellipsis="false"
         size="s"

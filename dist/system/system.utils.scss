@@ -506,6 +506,18 @@ $spacing-ratio: $line-height-m;
   }
 }
 
+@mixin child-indent-bottom($space) {
+  > *:not(:last-child) {
+    margin-bottom: $space;
+  }
+}
+
+@mixin child-indent-right($space) {
+  > *:not(:last-child) {
+    margin-right: $space;
+  }
+}
+
 /* GLOBAL FUNCTIONS
 --------------------------------------------- */
 

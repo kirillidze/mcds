@@ -4,7 +4,7 @@
       <McHeaderNavItem class="mc-header-part-right__chatra" v-if="chatraId">
         <McDropdown v-model="menuChatraIsOpen" position="right" :rotate-icon="false">
           <McButton slot="activator" variation="black-flat" size="m-compact" rounded>
-            <McSvgIcon slot="icon-append" name="live_help" />
+            <McSvgIcon size="s" slot="icon-append" name="chat" />
           </McButton>
 
           <McPanel>
@@ -57,15 +57,66 @@
             <McAvatar slot="icon-prepend" :src="user ? user.avatar : null" size="m" rounded />
           </McButton>
           <McPanel>
-            <McPreview v-if="user">
-              <McAvatar :src="user.avatar" rounded slot="left" />
-              <McTitle :level="3" size="l" slot="top">
-                {{ user.first_name }} {{ user.last_name }}
-              </McTitle>
-              <McTitle color="gray" size="m" slot="bottom">
-                {{ user.email }}
-              </McTitle>
-            </McPreview>
+            <template v-if="user">
+              <McButton
+                class="mc-header-part-right__user"
+                full-width
+                text-align="left"
+                variation="black-flat"
+                size="l"
+                :is-active="true"
+              >
+                <McPreview>
+                  <McAvatar :src="user.avatar" rounded slot="left" />
+                  <McTitle color="blue" :level="3" size="l" slot="top">
+                    {{ user.first_name }} {{ user.last_name }}
+                  </McTitle>
+                  <McTitle v-if="user.email" color="gray" size="m" slot="bottom">
+                    {{ user.email }}
+                  </McTitle>
+                </McPreview>
+              </McButton>
+              <McButton
+                class="mc-header-part-right__user"
+                v-if="user.root_user"
+                full-width
+                text-align="left"
+                variation="black-flat"
+                size="l"
+                @click="typeof user.handler === 'function' ? user.handler() : ''"
+              >
+                <McPreview>
+                  <McAvatar :src="user.root_user.avatar" rounded slot="left" />
+                  <McTitle :level="3" size="l" slot="top">
+                    {{ user.root_user.first_name }} {{ user.root_user.last_name }}
+                  </McTitle>
+                  <McTitle color="gray" size="m" slot="bottom">
+                    {{ user.root_user.email }}
+                  </McTitle>
+                </McPreview>
+              </McButton>
+            </template>
+
+            <template v-if="subUsers && subUsers.length">
+              <McButton
+                class="mc-header-part-right__user"
+                v-for="(subUser, index) in filteredSubUsers"
+                :key="index"
+                full-width
+                text-align="left"
+                variation="black-flat"
+                size="l"
+                @click="typeof subUser.handler === 'function' ? subUser.handler(subUser.id) : ''"
+              >
+                <McPreview>
+                  <McAvatar :src="subUser.avatar" rounded slot="left" />
+                  <McTitle :level="3" size="l" slot="top">
+                    {{ subUser.first_name }} {{ subUser.last_name }}
+                  </McTitle>
+                </McPreview>
+              </McButton>
+            </template>
+
             <McSeparator v-if="user" indent-bottom="xs" indent-top="xs" />
             <McButton
               v-for="(menuProfileItem, index) in menuProfile"
@@ -92,7 +143,7 @@
 
       <McHeaderNavItem class="mc-header-part-right__langs" v-if="menuLangs && menuLangs.length">
         <McDropdown v-model="menuLangsIsOpen" position="right">
-          <McButton slot="activator" variation="black-flat">
+          <McButton slot="activator" variation="black-flat" @click="">
             {{ menuLangs[0].name }}
             <McSvgIcon slot="icon-append" name="arrow_drop_down" />
           </McButton>
@@ -102,12 +153,12 @@
               v-for="(menuLangsItem, index) in menuLangs"
               :key="`menu-langs-item-${index}`"
               full-width
+              exact
               text-align="left"
               variation="black-flat"
               size="l"
               :href="menuLangsItem.href"
               :to="menuLangsItem.to"
-              exact
             >
               {{ menuLangsItem.name }}
             </McButton>
@@ -185,6 +236,14 @@ export default {
       default: null,
     },
     /**
+     *  Другие доступные пользователи
+     *
+     */
+    subUsers: {
+      type: Array,
+      default: null,
+    },
+    /**
      *  Id чатры
      *
      */
@@ -215,6 +274,16 @@ export default {
   watch: {
     $route() {
       this.closeMenu()
+    },
+    user() {
+      this.menuProfileIsOpen = false
+    },
+  },
+  computed: {
+    filteredSubUsers() {
+      return this.subUsers.filter(s => {
+        return this.user.id !== s.id
+      })
     },
   },
   methods: {
@@ -274,6 +343,21 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   padding-left: $space-l;
+
+  &__user {
+    height: auto;
+
+    .mc-preview {
+      padding: $space-xs 0;
+      &__left {
+        margin-right: $space-xs;
+      }
+    }
+
+    .mc-avatar {
+      margin: 0 !important;
+    }
+  }
 
   &__burger {
     display: none;

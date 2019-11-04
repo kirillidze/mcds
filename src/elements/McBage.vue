@@ -68,6 +68,10 @@ export default {
     &--variation-#{$color} {
       background-color: $value;
 
+      @if $color == "hover-gray" {
+        color: $color-black;
+      }
+
       &-outline {
         background-color: $color-white;
         color: $color-black;

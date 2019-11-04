@@ -26,3 +26,21 @@ $token-colors: (
   "pinkish": $color_pinkish,
   "azure": $color_azure,
 );
+
+$token-sizes: (
+  "xs": $size-xs,
+  "s": $size-s,
+  "m": $size-m,
+  "l": $size-l,
+  "ll": $size-ll,
+  "xl": $size-xl,
+  "xxl": $size-xxl,
+  "xxxl": $size-xxxl,
+  "xxxxl": $size-xxxxl,
+);
+
+$token-line-heights: (
+  "xs": $line-height-xs,
+  "s": $line-height-s,
+  "m": $line-height-m,
+);
