@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <tbody class="mc-table-body">
     <McTableRow
       :size="size"
       v-for="(item, index) in items"
@@ -20,7 +20,7 @@
       />
       <slot name="link" slot="link" :item="item" />
     </McTableRow>
-  </div>
+  </tbody>
 </template>
 
 <script>
