@@ -1,6 +1,6 @@
 <template>
-  <component :is="tag" class="mc-table-cell" :style="styles" :class="classes">
-    <div class="mc-table-cell__inner">
+  <component :is="tag">
+    <div>
       <slot></slot>
     </div>
   </component>
@@ -14,7 +14,7 @@ export default {
   props: {
     tag: {
       type: String,
-      default: "td",
+      default: "div",
     },
     item: {
       type: Object,

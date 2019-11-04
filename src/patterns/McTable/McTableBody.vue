@@ -1,5 +1,5 @@
 <template>
-  <div class="mc-table-body">
+  <div>
     <McTableRow
       :size="size"
       v-for="(item, index) in items"

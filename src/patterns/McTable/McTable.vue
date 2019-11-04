@@ -1,5 +1,5 @@
 <template>
-  <RecycleScroller class="mc-table" :class="classes" :items="items" :item-size="60" key-field="id">
+  <RecycleScroller :items="items" :item-size="78" key-field="id">
     <McTableHead
       slot="before"
       :size="size"
@@ -27,8 +27,6 @@
     <template v-slot="{ item }">
       <McTableRow
         :size="size"
-        v-for="(item, index) in items"
-        :key="index"
         :item="item"
         :headers="headers"
         :checkable="checkable"
@@ -308,7 +306,7 @@ export default {
     price: item.agency_channels.filter( item => item.type === 2 ).length ? number(_minBy(item.agency_channels.filter(
     item => item.type === 2 ), 'total').total, 0) + ' $' : null,
     }
-    }).slice(0, 15);
+    });
 
     let sortBy = 'language';
     let sortDescending = true;
