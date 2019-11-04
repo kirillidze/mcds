@@ -1,5 +1,5 @@
 <template>
-  <tfoot class="mc-table-foot">
+  <div>
     <McTableRow v-if="items.length">
       <McTableCell :size="size" :item="headers[0]">
         <template v-if="infinite">
@@ -28,7 +28,7 @@
         </template>
       </McTableCell>
     </McTableRow>
-  </tfoot>
+  </div>
 </template>
 
 <script>

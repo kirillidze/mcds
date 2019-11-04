@@ -1,5 +1,5 @@
 <template>
-  <thead class="mc-table-head">
+  <div>
     <McTableRow :optimize-visibility="false">
       <McTableHeadCell
         :size="size"
@@ -15,7 +15,7 @@
         @click="() => handleCellClick(item)"
       />
     </McTableRow>
-  </thead>
+  </div>
 </template>
 
 <script>
