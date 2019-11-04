@@ -18,6 +18,10 @@ All notable changes to this project will be documented in this file. See [standa
 
 - multiselect ([e2d4532](https://github.com/MediaCubeCo/mcds/commit/e2d4532))
 
+### [1.0.18](https://github.com/MediaCubeCo/mcds/compare/v1.0.17...v1.0.18) (2019-10-01)
+
+### [1.0.17](https://github.com/MediaCubeCo/mcds/compare/v1.0.16...v1.0.17) (2019-10-01)
+
 ### [1.0.89](https://github.com/MediaCubeCo/mcds/compare/v1.0.88...v1.0.89) (2019-10-31)
 
 ### [1.0.88](https://github.com/MediaCubeCo/mcds/compare/v1.0.87...v1.0.88) (2019-10-31)
