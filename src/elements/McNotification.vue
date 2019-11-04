@@ -58,6 +58,10 @@ export default {
 
   &__left {
     margin-right: 8px;
+
+    .mc-svg-icon svg {
+      margin-top: 5px;
+    }
   }
 
   &__right {
