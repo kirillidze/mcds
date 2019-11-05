@@ -66,6 +66,7 @@
           v-on="listeners"
           @input="$event => handleInput($event.target.value)"
           :autocomplete="autocomplete"
+          :readonly="readOnly"
         />
       </div>
       <div class="mc-field-text__append">
@@ -206,6 +207,14 @@ export default {
     autocomplete: {
       type: String,
       default: "on",
+    },
+    /**
+     *  только чтение текста
+     *
+     */
+    readOnly: {
+      type: Boolean,
+      default: false,
     },
   },
 
