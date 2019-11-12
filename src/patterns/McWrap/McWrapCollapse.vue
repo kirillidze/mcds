@@ -21,6 +21,7 @@
                 size="m-compact"
                 @click.stop="handleDrag"
                 v-drag
+                style="cursor: move"
               >
                 <mc-svg-icon name="drag" size="s" />
               </mc-button>
