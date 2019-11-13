@@ -1,22 +1,97 @@
 <template>
   <section class="mc-table-card-header">
     <div class="mc-table-card-header__left">
-      <slot></slot>
+      <slot>
+        <mc-button
+          v-if="isCustom"
+          :to="backTo"
+          :exact="true"
+          variation="blue-link"
+          :uppercase="true"
+          size="s"
+        >
+          <mc-svg-icon slot="icon-prepend" name="keyboard_arrow_left" style="margin-right: 0" />
+          {{ buttonBackText }}
+        </mc-button>
+      </slot>
     </div>
     <div class="mc-table-card-header__right">
-      <slot name="right"></slot>
+      <slot name="right">
+        <mc-dropdown v-if="isCustom" v-model="editDropdown" position="right" :rotate-icon="false">
+          <mc-button
+            @click.prevent
+            href="#"
+            slot="activator"
+            text-align="left"
+            variation="blue-link"
+            size="s"
+            :uppercase="true"
+          >
+            {{ buttonEditText }}
+          </mc-button>
+          <mc-panel style="max-width: none;">
+            <mc-button
+              v-for="(link, _index) in editLinks"
+              :key="_index"
+              href="#"
+              @click="handleEditDropdownChange(_index)"
+              :full-width="true"
+              text-align="right"
+              variation="black-flat"
+            >
+              {{ link.name }}
+            </mc-button>
+          </mc-panel>
+        </mc-dropdown>
+      </slot>
     </div>
   </section>
 </template>
 
 <script>
+import McButton from "../../elements/McButton"
+import McSvgIcon from "../../elements/McSvgIcon"
+import McDropdown from "../../patterns/McDropdown"
+import McPanel from "../../patterns/McPanel"
 export default {
   name: "McTableCardHeader",
-  computed: {
-    classes() {
-      return {
-        // [`el-logo--type-${this.type}`]: this.type,
-      }
+  components: {
+    McButton,
+    McSvgIcon,
+    McDropdown,
+    McPanel,
+  },
+  props: {
+    isCustom: {
+      type: Boolean,
+      default: false,
+    },
+    buttonBackText: {
+      type: String,
+      default: "Back",
+    },
+    buttonEditText: {
+      type: String,
+      default: "Edit",
+    },
+    backTo: {
+      type: String,
+      default: "#",
+    },
+    editLinks: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  data() {
+    return {
+      editDropdown: false,
+    }
+  },
+  computed: {},
+  methods: {
+    handleEditDropdownChange(index) {
+      this.$emit("editButtonClicked", index)
     },
   },
 }
