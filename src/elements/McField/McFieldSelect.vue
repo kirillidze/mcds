@@ -228,7 +228,6 @@ $text-white: scale-color($color-white, $alpha: -10%);
 
 .mc-field-select {
   $block-name: &;
-  margin-bottom: 16px;
 
   @include custom-scroll();
   font-family: $font-heading;

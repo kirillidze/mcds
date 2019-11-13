@@ -550,8 +550,8 @@
     "media_query_xs_down": {
       "type": "...",
       "category": "media-query",
-      "value": "(min-width: 374px)",
-      "originalValue": "(min-width: 374px)",
+      "value": "(max-width: 374px)",
+      "originalValue": "(max-width: 374px)",
       "name": "media_query_xs_down"
     },
     "media_query_l": {

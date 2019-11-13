@@ -49,6 +49,12 @@ export default {
   status: "deprecated",
   release: "1.0.0",
   components: { McFieldSelect, McTitle },
+  data() {
+    return {
+      month: null,
+      year: null,
+    }
+  },
   props: {
     /**
      *  Заголовок
@@ -121,31 +127,49 @@ export default {
         return this._value.format("D")
       },
       set(val) {
+        if (val === "-") {
+          return this.emitInput(null)
+        }
         this.handleChange(this._value.clone().date(val))
       },
     },
     _valueMonth: {
       get() {
         if (!this.value) return
+        this.month = this._value.month() + 1
         return this._value.format("MM")
       },
       set(val) {
+        if (val === "-") {
+          return this.emitInput(null)
+        }
+        this.month = val
         this.handleChange(this._value.clone().month(val - 1))
       },
     },
     _valueYear: {
       get() {
         if (!this.value) return
+        this.year = this._value.year()
         return this._value.format("YYYY")
       },
       set(val) {
+        if (val === "-") {
+          return this.emitInput(null)
+        }
+        this.year = val
         this.handleChange(this._value.clone().year(val))
       },
     },
     days() {
-      let result = []
+      let result = [
+        {
+          name: "-",
+          value: "-",
+        },
+      ]
       let currentYear = this.year
-      let currentMonthNumber = this.month ? this.month : this.months[0].value
+      let currentMonthNumber = this.month ? this.months[this.month].value : this.months[1].value
       let days = this.$moment(`${currentYear}-${currentMonthNumber}`, "Y-M").daysInMonth()
 
       for (let i = 0; i < days; i++) {
@@ -158,10 +182,24 @@ export default {
       return result
     },
     months() {
-      return this.$moment.months().map((item, i) => ({ name: _capitalize(item), value: i + 1 }))
+      let result = [
+        {
+          name: "-",
+          value: "-",
+        },
+      ]
+      const months = this.$moment
+        .months()
+        .map((item, i) => ({ name: _capitalize(item), value: i + 1 }))
+      return [...result, ...months]
     },
     years() {
-      let result = []
+      let result = [
+        {
+          name: "-",
+          value: "-",
+        },
+      ]
       let currentYear = this.$moment().year() + 50
 
       for (let i = currentYear; i + 100 > currentYear; i--) {
