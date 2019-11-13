@@ -34,7 +34,7 @@
               v-for="(link, _index) in editLinks"
               :key="_index"
               href="#"
-              @click="handleEditDropdownChange(_index)"
+              @click="handleEditDropdownChange(link)"
               :full-width="true"
               text-align="right"
               variation="black-flat"
