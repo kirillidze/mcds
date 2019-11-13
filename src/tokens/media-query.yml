@@ -18,7 +18,7 @@ props:
     value: "(min-width: 1440px)"
 
   media_query_xs_down:
-    value: "(min-width: 374px)"
+    value: "(max-width: 374px)"
   media_query_s_down:
     value: "(max-width: 479px)"
   media_query_m_down:
