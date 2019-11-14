@@ -17,32 +17,35 @@
     </div>
     <div class="mc-table-card-header__right">
       <slot name="right">
-        <mc-dropdown v-if="isCustom" v-model="editDropdown" position="right" :rotate-icon="false">
-          <mc-button
-            @click.prevent
-            href="#"
-            slot="activator"
-            text-align="left"
-            variation="blue-link"
-            size="s"
-            :uppercase="true"
-          >
-            {{ buttonEditText }}
-          </mc-button>
-          <mc-panel style="max-width: none;">
+        <template v-if="isCustom">
+          <slot name="right-custom"></slot>
+          <mc-dropdown v-model="editDropdown" position="right" :rotate-icon="false">
             <mc-button
-              v-for="(link, _index) in editLinks"
-              :key="_index"
+              @click.prevent
               href="#"
-              @click="handleEditDropdownChange(link)"
-              :full-width="true"
-              text-align="right"
-              variation="black-flat"
+              slot="activator"
+              text-align="left"
+              variation="blue-link"
+              size="s"
+              :uppercase="true"
             >
-              {{ link.name }}
+              {{ buttonEditText }}
             </mc-button>
-          </mc-panel>
-        </mc-dropdown>
+            <mc-panel style="max-width: none;">
+              <mc-button
+                v-for="(link, _index) in editLinks"
+                :key="_index"
+                href="#"
+                @click="handleEditDropdownChange(link)"
+                :full-width="true"
+                text-align="right"
+                variation="black-flat"
+              >
+                {{ link.name }}
+              </mc-button>
+            </mc-panel>
+          </mc-dropdown>
+        </template>
       </slot>
     </div>
   </section>
