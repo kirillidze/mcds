@@ -1,7 +1,7 @@
 <template>
   <div class="mc-wrap-section">
     <div class="mc-wrap-section__head" v-if="$slots.left || $slots.right || title">
-      <div class="mc-wrap-section__left" v-if="$slots.left">
+      <div class="mc-wrap-section__left" v-if="$slots.left || title">
         <slot name="left">
           <McTitle size="l">
             {{ title }}
