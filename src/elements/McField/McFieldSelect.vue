@@ -46,7 +46,7 @@
         <span slot="noResult">Ничего не найдено</span>
       </multiselect>
     </div>
-    <div class="mc-field-select__footer">
+    <div class="mc-field-select__footer" v-if="errorText || helpText || $slots.footer">
       <McTitle tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
         {{ errorText }}
       </McTitle>
