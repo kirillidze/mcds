@@ -1,7 +1,7 @@
 <template>
   <div class="mc-wrap-section">
-    <div class="mc-wrap-section__head">
-      <div class="mc-wrap-section__left">
+    <div class="mc-wrap-section__head" v-if="$slots.left || $slots.right || title">
+      <div class="mc-wrap-section__left" v-if="$slots.left">
         <slot name="left">
           <McTitle size="l">
             {{ title }}
@@ -33,6 +33,7 @@ export default {
   props: {
     title: {
       type: String,
+      default: null,
     },
   },
 }
@@ -74,7 +75,7 @@ export default {
 </style>
 
 <docs>
-```jsx
+    ```jsx
     <div>
         <mc-wrap-section title="Заголовок">
             <mc-button slot="right" size="m" variation="blue-flat">
@@ -87,5 +88,5 @@ export default {
             </span>
         </mc-wrap-section>
     </div>
-```
+    ```
 </docs>
