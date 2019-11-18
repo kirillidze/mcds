@@ -145,14 +145,14 @@ export default {
           content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'/%3E%3C/svg%3E");
           display: block;
           position: absolute;
-          right: 0;
-          top: 9px;
+          right: 5px;
+          top: 10px;
           width: 16px;
           height: 16px;
           z-index: 2;
         }
         & .tabs-component-tab-a {
-          padding-right: 20px;
+          padding-right: 25px;
           z-index: 3;
           position: relative;
         }
