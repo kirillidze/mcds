@@ -1,6 +1,7 @@
 <template>
   <tabs
     class="mc-tabs"
+    :class="classes"
     :cache-lifetime="cacheLifetime"
     :options="{ useUrlFragment, defaultTabHash }"
     @changed="e => changedHandler(e)"
@@ -40,10 +41,21 @@ export default {
       type: Boolean,
       default: false,
     },
+    lastTabLink: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     McTab,
     Tabs,
+  },
+  computed: {
+    classes() {
+      return {
+        "mc-tabs--last-tab-link": this.lastTabLink,
+      }
+    },
   },
   methods: {
     changedHandler(e) {
@@ -124,15 +136,28 @@ export default {
     }
   }
 
-  .tabs-component-panels {
-  }
-
-  .tabs-component-panel {
-  }
-
-  &--size-m {
-  }
-  &--color-blue {
+  &--last-tab-link {
+    color: green;
+    & .tabs-component-tab {
+      position: relative;
+      &:last-child {
+        &:after {
+          content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'/%3E%3C/svg%3E");
+          display: block;
+          position: absolute;
+          right: 0;
+          top: 9px;
+          width: 16px;
+          height: 16px;
+          z-index: 2;
+        }
+        & .tabs-component-tab-a {
+          padding-right: 20px;
+          z-index: 3;
+          position: relative;
+        }
+      }
+    }
   }
 }
 </style>
@@ -143,7 +168,7 @@ export default {
         console.log(e.tab.id)
     }
     <div>
-        <mc-tabs @changed="e => changedHandler(e)">
+        <mc-tabs @changed="e => changedHandler(e)" last-tab-link>
             <mc-tab name="First tab" id="1">
                 First tab content
             </mc-tab>

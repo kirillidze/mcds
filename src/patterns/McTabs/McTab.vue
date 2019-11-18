@@ -28,7 +28,7 @@ export default {
 </script>
 
 <style lang="scss">
-.mc-tab {
+.tabs-component-panel {
   $block-name: &;
 }
 </style>
