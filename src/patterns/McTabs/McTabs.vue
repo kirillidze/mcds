@@ -137,7 +137,6 @@ export default {
   }
 
   &--last-tab-link {
-    color: green;
     & .tabs-component-tab {
       position: relative;
       &:last-child {
