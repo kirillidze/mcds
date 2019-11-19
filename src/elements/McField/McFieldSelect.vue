@@ -179,7 +179,17 @@ export default {
         if (this.value == null) return []
         let result = []
         for (let value of this.value) {
-          let option = this.options.find(o => o.value == value || o.value.id == value.id)
+          let option = this.options.find((o, index) => {
+            if (o.value.hasOwnProperty("id") && o.value.id == value.id) {
+              return true
+            }
+
+            if (o.value == value) {
+              return true
+            }
+
+            return false
+          })
           if (option != null) result.push(option)
         }
         return result
