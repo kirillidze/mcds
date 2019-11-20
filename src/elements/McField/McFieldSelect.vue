@@ -183,12 +183,7 @@ export default {
             if (o.value.hasOwnProperty("id") && o.value.id == value.id) {
               return true
             }
-
-            if (o.value == value) {
-              return true
-            }
-
-            return false
+            return o.value == value
           })
           if (option != null) result.push(option)
         }
