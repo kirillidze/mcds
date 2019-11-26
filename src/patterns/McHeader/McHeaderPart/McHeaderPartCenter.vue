@@ -35,7 +35,7 @@
             :href="menuMainItem.href"
             :to="menuMainItem.to"
             variation="black-flat"
-            :exact="$route ? $route.name.includes('index') : null"
+            :exact="!music ? $route.name.includes('index') : false"
           >
             <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
             {{ menuMainItem.name }}
@@ -175,6 +175,14 @@ export default {
     searchPlaceholder: {
       type: String,
       default: null,
+    },
+    /**
+     *  Использ. на music
+     *
+     */
+    music: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
