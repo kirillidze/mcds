@@ -19,7 +19,7 @@
     </div>
     <div class="mc-chat__comments" v-if="comments.length">
       <div class="mc-chat__comment" v-for="comment in sortedComments" :key="comment.key">
-        <McChatComment :comment="comment" />
+        <McChatComment :music="music" :comment="comment" />
       </div>
     </div>
   </div>
@@ -46,6 +46,10 @@ export default {
       default() {
         return []
       },
+    },
+    music: {
+      type: Boolean,
+      default: false,
     },
     avatar: {
       type: String,
