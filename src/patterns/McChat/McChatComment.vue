@@ -3,7 +3,7 @@
     <McAvatar
       class="mc-chat-comment__avatar"
       rounded
-      size="s"
+      size="xs"
       :src="comment.user ? comment.user.avatar : null"
       slot="left"
     />
@@ -36,6 +36,7 @@
       class="mc-chat-comment__content"
       tag-name="p"
       size="m"
+      line-height="s"
       :color="comment.color"
       v-html="filteredComment"
     />
