@@ -9,7 +9,7 @@
     />
 
     <McCell slot="top">
-      <McTitle slot="title" size="xs" uppercase>
+      <McTitle slot="title" size="xs">
         <McGridRow :gutter-x="10" justify="between" align="middle">
           <McGridCol :span="12">
             <McDate
