@@ -31,14 +31,18 @@
       </McTitle>
     </McCell>
 
-    <McTitle
-      class="mc-chat-comment__content"
-      slot="bottom"
-      tag-name="p"
-      size="m"
-      :color="comment.color"
-      v-html="filteredComment"
-    />
+    <template>
+      <McTitle
+        class="mc-chat-comment__content"
+        slot="bottom"
+        tag-name="p"
+        size="m"
+        :color="comment.color"
+        v-html="filteredComment"
+      />
+
+      <McSeparator indent-top="s" />
+    </template>
   </McPreview>
 </template>
 
@@ -46,6 +50,7 @@
 import McAvatar from "../../elements/McAvatar/McAvatar"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
+import McSeparator from "../../elements/McSeparator"
 import McFieldText from "../../elements/McField/McFieldText"
 import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
@@ -58,6 +63,7 @@ export default {
   components: {
     McPreview,
     McDate,
+    McSeparator,
     McTitle,
     McCell,
     McGridCol,
