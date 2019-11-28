@@ -31,10 +31,9 @@
       </McTitle>
     </McCell>
 
-    <template>
+    <template slot="bottom">
       <McTitle
         class="mc-chat-comment__content"
-        slot="bottom"
         tag-name="p"
         size="m"
         :color="comment.color"
