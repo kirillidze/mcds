@@ -41,7 +41,7 @@
         v-html="filteredComment"
       />
 
-      <McSeparator indent-top="s" />
+      <McSeparator v-if="music" indent-top="s" />
     </template>
   </McPreview>
 </template>
@@ -77,6 +77,10 @@ export default {
     comment: {
       type: Object,
       required: true,
+    },
+    music: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
