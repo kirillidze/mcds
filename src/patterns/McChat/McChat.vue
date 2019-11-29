@@ -20,6 +20,7 @@
     <div class="mc-chat__comments" v-if="comments.length">
       <div class="mc-chat__comment" v-for="comment in sortedComments" :key="comment.key">
         <McChatComment :comment="comment" />
+        <McSeparator v-if="music" />
       </div>
     </div>
   </div>
@@ -30,13 +31,14 @@ import McChatForm from "./McChatForm"
 import McChatComment from "./McChatComment"
 import McChatSource from "./McChatSource"
 import McTitle from "../../elements/McTitle"
+import McSeparator from "../../elements/McSeparator"
 
 import _sortBy from "lodash/sortBy"
 import _reverse from "lodash/reverse"
 
 export default {
   name: "McChat",
-  components: { McTitle, McChatSource, McChatComment, McChatForm },
+  components: { McTitle, McChatSource, McChatComment, McChatForm, McSeparator },
   props: {
     value: {
       type: String,
@@ -46,6 +48,10 @@ export default {
       default() {
         return []
       },
+    },
+    music: {
+      type: Boolean,
+      default: false,
     },
     avatar: {
       type: String,

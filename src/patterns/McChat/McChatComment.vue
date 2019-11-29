@@ -3,26 +3,26 @@
     <McAvatar
       class="mc-chat-comment__avatar"
       rounded
-      size="s"
+      size="xs"
       :src="comment.user ? comment.user.avatar : null"
       slot="left"
     />
 
     <McCell slot="top">
-      <McTitle slot="title" size="xs" uppercase>
-        <McGridRow :gutter-x="10" justify="between" align="middle" :wrap="false">
-          <McGridCol style="min-width: 30%">
-            <McTitle size="xs" uppercase>
-              {{ comment.user ? comment.user.name : "Системный комментарий" }}
-            </McTitle>
-          </McGridCol>
-          <McGridCol>
+      <McTitle slot="title" size="xs">
+        <McGridRow :gutter-x="10" justify="between" align="middle">
+          <McGridCol :span="12">
             <McDate
               :value="comment.date"
               date-size="xs"
               :default-icon="false"
               format="YYYY-MM-DD HH:mm"
             />
+          </McGridCol>
+          <McGridCol :span="12" style="min-width: 30%">
+            <McTitle size="s" line-height="s">
+              {{ comment.user ? comment.user.name : "Системный комментарий" }}
+            </McTitle>
           </McGridCol>
         </McGridRow>
       </McTitle>
@@ -32,10 +32,11 @@
     </McCell>
 
     <McTitle
-      class="mc-chat-comment__content"
       slot="bottom"
+      class="mc-chat-comment__content"
       tag-name="p"
       size="m"
+      line-height="s"
       :color="comment.color"
       v-html="filteredComment"
     />
@@ -95,10 +96,10 @@ export default {
 </style>
 
 <docs>
-    ```jsx
-    let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя', color: 'blue' }
-    <div>
-        <McChatComment :comment="comment" />
-    </div>
-    ```
+  ```jsx
+  let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя', color: 'blue' }
+  <div>
+    <McChatComment :comment="comment" />
+  </div>
+  ```
 </docs>

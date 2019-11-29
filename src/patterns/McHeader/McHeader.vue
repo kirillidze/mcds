@@ -26,6 +26,7 @@
         :searchable="searchable"
         :search-items="searchItems"
         :search-placeholder="searchPlaceholder"
+        :music="music"
         @change-hidden-menu="handleChangeHiddenMenu"
         @add-entity="handleAddEntity"
         @input="handleInput"
@@ -232,6 +233,14 @@ export default {
     mediaMinWidth: {
       type: Number,
       default: 1200,
+    },
+    /**
+     *  Использ. на music
+     *
+     */
+    music: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

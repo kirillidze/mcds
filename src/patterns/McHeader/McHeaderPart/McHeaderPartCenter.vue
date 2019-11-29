@@ -35,7 +35,7 @@
             :href="menuMainItem.href"
             :to="menuMainItem.to"
             variation="black-flat"
-            :exact="$route ? $route.name.includes('index') : null"
+            :exact="isExact"
           >
             <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
             {{ menuMainItem.name }}
@@ -176,6 +176,14 @@ export default {
       type: String,
       default: null,
     },
+    /**
+     *  Использ. на music
+     *
+     */
+    music: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -200,6 +208,14 @@ export default {
       return {
         ["mc-header-part-center--search-is-open"]: this.isSearchOpen,
       }
+    },
+    
+    isExact(){
+      if(this.music){
+          return false
+      }
+
+      return this.$route.name.includes('index') && !this.$route.name.includes('id')
     },
   },
 
