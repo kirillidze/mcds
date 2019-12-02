@@ -8,6 +8,14 @@
 
             <div class="mc-wrap-collapse__buttons" v-if="canDelete || isDraggable">
               <mc-button
+                v-if="download"
+                variation="gray-dark-flat"
+                size="m-compact"
+                @click.stop="handleDownload"
+              >
+                <mc-svg-icon slot="icon-append" name="get_app" />
+              </mc-button>
+              <mc-button
                 v-if="canDelete"
                 variation="gray-dark-flat"
                 size="m-compact"
@@ -101,11 +109,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    download: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     handleToggle() {
       this.$emit("toggle")
       this.toggled = !this.toggled
+    },
+    handleDownload() {
+      this.$emit("download")
     },
     handleDelete() {
       this.$emit("delete")
