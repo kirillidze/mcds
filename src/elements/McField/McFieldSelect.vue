@@ -354,6 +354,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
       span {
         @include ellipsis();
         flex: 1 1 auto;
+        overflow: visible;
       }
     }
 
