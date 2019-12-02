@@ -6,12 +6,13 @@
           <mc-grid-col class="mc-wrap-collapse__header">
             <slot name="head" />
 
-            <div class="mc-wrap-collapse__buttons" v-if="canDelete || isDraggable">
+            <div class="mc-wrap-collapse__buttons" v-if="canDelete || isDraggable || download">
               <mc-button
                 v-if="download"
                 variation="gray-dark-flat"
                 size="m-compact"
-                @click.stop="handleDownload"
+                target="_blank"
+                :href="download"
               >
                 <mc-svg-icon slot="icon-append" name="get_app" />
               </mc-button>
@@ -110,17 +111,14 @@ export default {
       default: false,
     },
     download: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: null,
     },
   },
   methods: {
     handleToggle() {
       this.$emit("toggle")
       this.toggled = !this.toggled
-    },
-    handleDownload() {
-      this.$emit("download")
     },
     handleDelete() {
       this.$emit("delete")
