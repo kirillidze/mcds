@@ -44,7 +44,13 @@
 
         <McHeaderNavItem v-if="menuHidden && menuHidden.length">
           <McDropdown position="right" v-model="menuHiddenIsOpen" :rotate-icon="false">
-            <McButton slot="activator" variation="black-flat" size="m-compact" rounded>
+            <McButton
+              slot="activator"
+              variation="black-flat"
+              size="m-compact"
+              rounded
+              :class="isHiddenActive"
+            >
               <McSvgIcon slot="icon-append" name="more_horiz" />
             </McButton>
 
@@ -190,6 +196,7 @@ export default {
       isSearchOpen: false,
       menuAdditionalIsOpen: false,
       menuHiddenIsOpen: false,
+      menuHiddenActive: false,
     }
   },
 
@@ -198,8 +205,15 @@ export default {
       if (val && val.length) {
         this.$nextTick(() => {
           this.$emit("change-hidden-menu", this.$refs.hiddenMenuItem[0].$el.offsetWidth)
+
+          this.computeMenuHiddenActive()
         })
       }
+    },
+    $route() {
+      this.$nextTick(() => {
+        this.computeMenuHiddenActive()
+      })
     },
   },
 
@@ -209,17 +223,29 @@ export default {
         ["mc-header-part-center--search-is-open"]: this.isSearchOpen,
       }
     },
-    
-    isExact(){
-      if(this.music){
-          return false
+    isHiddenActive() {
+      return {
+        ["mc-header-part-center--is-used"]: this.menuHiddenActive,
+      }
+    },
+    isExact() {
+      if (this.music) {
+        return false
       }
 
-      return this.$route.name.includes('index') && !this.$route.name.includes('id')
+      return this.$route.name.includes("index") && !this.$route.name.includes("id")
     },
   },
 
   methods: {
+    computeMenuHiddenActive() {
+      let x = this.$refs.hiddenMenuItem.find(item => {
+        return item.$el.className.split(" ").find(it => {
+          return it === "nuxt-link-exact-active"
+        })
+      })
+      this.menuHiddenActive = !!x
+    },
     emitInput(value) {
       this.$emit("input", value)
     },
