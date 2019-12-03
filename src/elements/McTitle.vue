@@ -209,7 +209,7 @@ export default {
   <div>
     <McTitle size="s" family="semi-bold" line-height="m">
       <McSvgIcon slot="icon-prepend" name="copyright"/>
-      Заголовок
+      Заголовок123123
     </McTitle>
 
     <br><br>
