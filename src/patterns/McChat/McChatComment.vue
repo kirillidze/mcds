@@ -31,7 +31,7 @@
       </McTitle>
     </McCell>
 
-    <tqmplate slot="bottom">
+    <template slot="bottom">
       <McTitle
         class="mc-chat-comment__content"
         tag-name="p"
@@ -44,7 +44,7 @@
       <McTitle size="m" line-height="s">
         {{ comment.reason }}
       </McTitle>
-    </tqmplate>
+    </template>
   </McPreview>
 </template>
 
