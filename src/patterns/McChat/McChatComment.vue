@@ -35,13 +35,19 @@
       <McTitle
         class="mc-chat-comment__content"
         tag-name="p"
-        size="m"
+        size="s"
         line-height="s"
         :color="comment.color"
         v-html="filteredComment"
       />
 
-      <McTitle size="m" line-height="s">
+      <McTitle
+        v-if="comment.reason"
+        size="s"
+        line-height="s"
+        style="padding-top: 8px;"
+        :ellipsis="false"
+      >
         {{ comment.reason }}
       </McTitle>
     </template>
