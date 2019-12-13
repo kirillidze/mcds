@@ -31,15 +31,20 @@
       </McTitle>
     </McCell>
 
-    <McTitle
-      slot="bottom"
-      class="mc-chat-comment__content"
-      tag-name="p"
-      size="m"
-      line-height="s"
-      :color="comment.color"
-      v-html="filteredComment"
-    />
+    <tqmplate slot="bottom">
+      <McTitle
+        class="mc-chat-comment__content"
+        tag-name="p"
+        size="m"
+        line-height="s"
+        :color="comment.color"
+        v-html="filteredComment"
+      />
+
+      <McTitle size="m" line-height="s">
+        {{ comment.reason }}
+      </McTitle>
+    </tqmplate>
   </McPreview>
 </template>
 
