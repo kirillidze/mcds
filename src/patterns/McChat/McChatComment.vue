@@ -31,15 +31,26 @@
       </McTitle>
     </McCell>
 
-    <McTitle
-      slot="bottom"
-      class="mc-chat-comment__content"
-      tag-name="p"
-      size="m"
-      line-height="s"
-      :color="comment.color"
-      v-html="filteredComment"
-    />
+    <template slot="bottom">
+      <McTitle
+        class="mc-chat-comment__content"
+        tag-name="p"
+        size="s"
+        line-height="s"
+        :color="comment.color"
+        v-html="filteredComment"
+      />
+
+      <McTitle
+        v-if="comment.reason"
+        size="s"
+        line-height="s"
+        style="padding-top: 8px;"
+        :ellipsis="false"
+      >
+        {{ comment.reason }}
+      </McTitle>
+    </template>
   </McPreview>
 </template>
 
