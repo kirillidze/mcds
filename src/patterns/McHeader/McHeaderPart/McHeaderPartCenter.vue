@@ -239,12 +239,14 @@ export default {
 
   methods: {
     computeMenuHiddenActive() {
-      let x = this.$refs.hiddenMenuItem.find(item => {
-        return item.$el.className.split(" ").find(it => {
-          return it === "nuxt-link-exact-active"
+      if (this.$refs.hiddenMenuItem) {
+        let x = this.$refs.hiddenMenuItem.find(item => {
+          return item.$el.className.split(" ").find(it => {
+            return it === "nuxt-link-exact-active"
+          })
         })
-      })
-      this.menuHiddenActive = !!x
+        this.menuHiddenActive = !!x
+      }
     },
     emitInput(value) {
       this.$emit("input", value)
