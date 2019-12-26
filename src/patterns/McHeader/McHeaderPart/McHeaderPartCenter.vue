@@ -313,12 +313,14 @@ export default {
     align-items: center;
 
     @media #{$media-query-l-down} {
-      .mc-button {
-        &__text {
-          display: none !important;
-        }
-        .mc-svg-icon {
-          margin: 0;
+      .mc-header-nav-item {
+        > a.mc-button {
+          .mc-button__text {
+            display: none !important;
+          }
+          .mc-svg-icon {
+            margin: 0;
+          }
         }
       }
     }
