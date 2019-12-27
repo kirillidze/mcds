@@ -233,7 +233,10 @@ export default {
         return false
       }
 
-      return this.$route.name.includes("index") && !this.$route.name.includes("id")
+      return (
+        (this.$route.name ? this.$route.name.includes("index") : false) &&
+        !this.$route.name.includes("id")
+      )
     },
   },
 
