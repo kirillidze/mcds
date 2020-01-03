@@ -72,7 +72,7 @@
       <div class="mc-field-text__append">
         <slot name="append" />
         <mc-button
-          v-if="copy"
+          v-if="copy123"
           variation="gray-dark-flat"
           size="s-compact"
           @click.prevent="handlerCopy(value)"
@@ -143,15 +143,6 @@ export default {
      *
      */
     disabled: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     *  Состояние копирования
-     *
-     */
-    copy: {
       type: Boolean,
       default: false,
     },
@@ -233,6 +224,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Состояние копирования
+     *
+     */
+    copy123: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -255,7 +255,7 @@ export default {
         "mc-field-text--date": this.isDate,
         "mc-field-text--disabled": this.disabled,
         "mc-field-text--gradient": this.gradient,
-        "mc-field-text--copy": this.copy,
+        "mc-field-text--copy": this.copy123,
       }
     },
 
