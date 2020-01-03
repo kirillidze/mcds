@@ -208,6 +208,16 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Состояние копирования
+     *
+     */
+    copy123: {
+      type: Boolean,
+      default: false,
+    },
+
     /**
      *  автокомплит введённого ранее текста: on, off
      *
@@ -221,15 +231,6 @@ export default {
      *
      */
     readOnly: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
-     *  Состояние копирования
-     *
-     */
-    copy123: {
       type: Boolean,
       default: false,
     },
