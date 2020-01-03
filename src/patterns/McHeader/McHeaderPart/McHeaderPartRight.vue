@@ -44,7 +44,7 @@
 
       <McHeaderNavItem
         class="mc-header-part-right__profile"
-        v-if="menuProfile && menuProfile.length"
+        v-if="menuProfile && menuProfile.length && user"
       >
         <McDropdown v-model="menuProfileIsOpen" position="right">
           <McButton
@@ -54,10 +54,10 @@
             dusk="menu-user-dropdown"
             rounded
           >
-            <McAvatar slot="icon-prepend" :src="user ? user.avatar : null" size="m" rounded />
+            <McAvatar slot="icon-prepend" :src="user.avatar" size="m" rounded />
           </McButton>
           <McPanel>
-            <template v-if="user">
+            <template>
               <McButton
                 class="mc-header-part-right__user"
                 full-width
@@ -117,7 +117,7 @@
               </McButton>
             </template>
 
-            <McSeparator v-if="user" indent-bottom="xs" indent-top="xs" />
+            <McSeparator indent-bottom="xs" indent-top="xs" />
             <McButton
               v-for="(menuProfileItem, index) in menuProfile"
               v-if="menuProfileItem.isVisible"
@@ -139,6 +139,17 @@
             </McButton>
           </McPanel>
         </McDropdown>
+      </McHeaderNavItem>
+      <McHeaderNavItem v-else-if="menuProfile && menuProfile.length && !user">
+        <McButton
+          v-for="menuProfileItem in menuProfile"
+          :href="menuProfileItem.href"
+          :to="menuProfileItem.to"
+          :variation="menuProfileItem.variation"
+          size="l"
+        >
+          {{ menuProfileItem.name }}
+        </McButton>
       </McHeaderNavItem>
 
       <McHeaderNavItem class="mc-header-part-right__langs" v-if="menuLangs && menuLangs.length">
