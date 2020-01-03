@@ -474,6 +474,7 @@ export default {
       &__input {
         color: $color_gray_dark;
         background-color: $color_hover_gray;
+        border-color: $color_hover_gray;
       }
     }
   }
