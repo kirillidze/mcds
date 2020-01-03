@@ -473,7 +473,7 @@ export default {
     #{$block-name} {
       &__input {
         color: $color_gray_dark;
-        background-color: $color_gray;
+        background-color: $color_outline_gray;
       }
     }
   }
