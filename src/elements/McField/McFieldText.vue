@@ -475,6 +475,7 @@ export default {
         color: $color_gray_dark;
         background-color: $color_hover_gray;
         border-color: $color_hover_gray;
+        padding-right: 56px;
       }
     }
   }
