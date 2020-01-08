@@ -142,7 +142,8 @@
       </McHeaderNavItem>
       <McHeaderNavItem v-else-if="menuProfile && menuProfile.length && !user">
         <McButton
-          v-for="menuProfileItem in menuProfile"
+          v-for="(menuProfileItem, index) in menuProfile"
+          :key="`menu-profile-item-${index}`"
           :href="menuProfileItem.href"
           :to="menuProfileItem.to"
           :variation="menuProfileItem.variation"
