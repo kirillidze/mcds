@@ -71,6 +71,14 @@
       </div>
       <div class="mc-field-text__append">
         <slot name="append" />
+        <mc-button
+          v-if="copy"
+          variation="gray-dark-flat"
+          size="s-compact"
+          @click.prevent="handlerCopy(value)"
+        >
+          <mc-svg-icon slot="icon-append" name="file_copy" fill="rgb(62, 132, 244)" />
+        </mc-button>
       </div>
     </div>
     <div class="mc-field-text__footer" v-if="errorText || helpText || $slots.footer">
@@ -200,6 +208,16 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Состояние копирования
+     *
+     */
+    copy: {
+      type: Boolean,
+      default: false,
+    },
+
     /**
      *  автокомплит введённого ранее текста: on, off
      *
@@ -238,6 +256,7 @@ export default {
         "mc-field-text--date": this.isDate,
         "mc-field-text--disabled": this.disabled,
         "mc-field-text--gradient": this.gradient,
+        "mc-field-text--copy": this.copy,
       }
     },
 
@@ -288,6 +307,9 @@ export default {
           return acc + $el.getBoundingClientRect().width
         }, 0)
       )
+    },
+    handlerCopy(value) {
+      this.$emit("handleCopy", value)
     },
   },
 }
@@ -443,6 +465,17 @@ export default {
         border: none;
         color: #fff;
         background-image: $gradient-input;
+      }
+    }
+  }
+
+  &--copy {
+    #{$block-name} {
+      &__input {
+        color: $color_gray_dark;
+        background-color: $color_hover_gray;
+        border-color: $color_hover_gray;
+        padding-right: 56px;
       }
     }
   }
