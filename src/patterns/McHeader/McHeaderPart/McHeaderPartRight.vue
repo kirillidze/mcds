@@ -4,7 +4,7 @@
       <McHeaderNavItem class="mc-header-part-right__chatra" v-if="chatraId">
         <McDropdown v-model="menuChatraIsOpen" position="right" :rotate-icon="false">
           <McButton slot="activator" variation="black-flat" size="m-compact" rounded>
-            <McSvgIcon size="s" slot="icon-append" name="chat" />
+            <McSvgIcon size="xs" slot="icon-append" name="chat" />
           </McButton>
 
           <McPanel>
@@ -140,14 +140,16 @@
           </McPanel>
         </McDropdown>
       </McHeaderNavItem>
-      <McHeaderNavItem v-else-if="menuProfile && menuProfile.length && !user">
+      <McHeaderNavItem
+        v-else-if="menuProfile && menuProfile.length && !user"
+        v-for="(menuProfileItem, index) in menuProfile"
+        :key="`menu-profile-item-${index}`"
+      >
         <McButton
-          v-for="(menuProfileItem, index) in menuProfile"
-          :key="`menu-profile-item-${index}`"
           :href="menuProfileItem.href"
           :to="menuProfileItem.to"
           :variation="menuProfileItem.variation"
-          size="l"
+          size="m"
         >
           {{ menuProfileItem.name }}
         </McButton>
