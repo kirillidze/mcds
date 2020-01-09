@@ -2,14 +2,7 @@
   <section class="mc-table-card-header">
     <div class="mc-table-card-header__left">
       <slot>
-        <mc-button
-          v-if="isCustom"
-          :to="backTo"
-          :exact="true"
-          variation="blue-link"
-          :uppercase="true"
-          size="s"
-        >
+        <mc-button :to="backTo" :exact="true" variation="blue-link" :uppercase="true" size="s">
           <mc-svg-icon slot="icon-prepend" name="keyboard_arrow_left" style="margin-right: 0" />
           {{ buttonBackText }}
         </mc-button>
