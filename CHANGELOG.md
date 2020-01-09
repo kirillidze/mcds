@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.158](https://github.com/MediaCubeCo/mcds/compare/v1.0.157...v1.0.158) (2020-01-09)
+
+### Bug Fixes
+
+- добавлен key для добавляющихся элементов ([5f5d842](https://github.com/MediaCubeCo/mcds/commit/5f5d842))
+
 ### [1.0.157](https://github.com/MediaCubeCo/mcds/compare/v1.0.156...v1.0.157) (2020-01-03)
 
 ### [1.0.156](https://github.com/MediaCubeCo/mcds/compare/v1.0.155...v1.0.156) (2020-01-03)
