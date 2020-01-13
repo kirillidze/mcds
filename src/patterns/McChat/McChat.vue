@@ -20,7 +20,7 @@
     <div class="mc-chat__comments" v-if="comments.length">
       <div class="mc-chat__comment" v-for="comment in sortedComments" :key="comment.key">
         <McChatComment :comment="comment" />
-        <McSeparator v-if="music" />
+        <McSeparator v-if="separator" />
       </div>
     </div>
   </div>
@@ -49,7 +49,7 @@ export default {
         return []
       },
     },
-    music: {
+    separator: {
       type: Boolean,
       default: false,
     },

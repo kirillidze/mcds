@@ -15,6 +15,7 @@
             <McDate
               :value="comment.date"
               date-size="xs"
+              color="666"
               :default-icon="false"
               format="YYYY-MM-DD HH:mm"
             />
