@@ -17,6 +17,14 @@
                 <mc-svg-icon slot="icon-append" name="get_app" />
               </mc-button>
               <mc-button
+                v-if="canEdit"
+                variation="gray-dark-flat"
+                size="m-compact"
+                @click.stop="handleEdit"
+              >
+                <mc-svg-icon slot="icon-append" name="create" />
+              </mc-button>
+              <mc-button
                 v-if="canDelete"
                 variation="gray-dark-flat"
                 size="m-compact"
@@ -110,6 +118,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    canEdit: {
+      type: Boolean,
+      default: false,
+    },
     download: {
       type: String,
       default: null,
@@ -122,6 +134,9 @@ export default {
     },
     handleDelete() {
       this.$emit("delete")
+    },
+    handleEdit() {
+      this.$emit("edit")
     },
     handleDrag() {
       this.$emit("drag")
