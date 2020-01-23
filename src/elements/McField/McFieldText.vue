@@ -35,6 +35,7 @@
           v-on="listeners"
           @input="$event => handleInput($event.target.value)"
           :autocomplete="autocomplete"
+          :maxlength="maxLength"
         ></textarea>
         <textarea-autosize
           v-else-if="isTextareaAutosize"
@@ -67,6 +68,7 @@
           @input="$event => handleInput($event.target.value)"
           :autocomplete="autocomplete"
           :readonly="readOnly"
+          :maxlength="maxLength"
         />
       </div>
       <div class="mc-field-text__append">
@@ -196,6 +198,15 @@ export default {
      *
      */
     maxHeight: {
+      type: Number,
+      default: null,
+    },
+
+    /**
+     *  Max length
+     *
+     */
+    maxLength: {
       type: Number,
       default: null,
     },
