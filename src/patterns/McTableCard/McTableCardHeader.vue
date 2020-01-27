@@ -10,6 +10,7 @@
     </div>
     <div class="mc-table-card-header__right">
       <slot name="right">
+        <slot name="download"></slot>
         <template v-if="isCustom">
           <slot name="right-custom"></slot>
           <mc-dropdown v-model="editDropdown" position="right" :rotate-icon="false">
