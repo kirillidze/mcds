@@ -84,7 +84,7 @@
           </mc-button>
         </div>
       </div>
-      <div class="mc-field-text__right">
+      <div class="mc-field-text__right" v-if="$slots.right">
         <slot name="right" />
       </div>
     </div>
