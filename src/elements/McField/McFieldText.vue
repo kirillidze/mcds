@@ -5,82 +5,87 @@
         <McTitle :ellipsis="false" v-if="title" :level="4">{{ title }}</McTitle>
       </slot>
     </label>
-    <div class="mc-field-text__main">
-      <div class="mc-field-text__prepend">
-        <slot name="prepend" />
+    <div class="mc-field-text__inner">
+      <div class="mc-field-text__main">
+        <div class="mc-field-text__prepend">
+          <slot name="prepend" />
+        </div>
+        <div class="mc-field-text__input-wrapper">
+          <flat-pickr
+            v-if="isDate"
+            class="mc-field-text__input"
+            :style="inputStyles"
+            :placeholder="placeholder"
+            :value="value"
+            :name="name"
+            ref="input"
+            :disabled="disabled"
+            :id="name"
+            v-on="listeners"
+            @input="value => handleInput(value)"
+          ></flat-pickr>
+          <textarea
+            v-else-if="isTextarea"
+            class="mc-field-text__input"
+            :style="inputStyles"
+            :placeholder="placeholder"
+            :value="value"
+            :disabled="disabled"
+            :name="name"
+            :id="name"
+            v-on="listeners"
+            @input="$event => handleInput($event.target.value)"
+            :autocomplete="autocomplete"
+            :maxlength="maxLength"
+          ></textarea>
+          <textarea-autosize
+            v-else-if="isTextareaAutosize"
+            class="mc-field-text__input"
+            :style="inputStyles"
+            :placeholder="placeholder"
+            :disabled="disabled"
+            :name="name"
+            :id="name"
+            v-on="listeners"
+            rows="1"
+            :min-height="minHeight"
+            :max-height="maxHeight"
+            @input="handleInput"
+            :value="value"
+            :autocomplete="autocomplete"
+          ></textarea-autosize>
+          <input
+            v-else
+            class="mc-field-text__input"
+            :style="inputStyles"
+            :disabled="disabled"
+            :type="type"
+            :placeholder="placeholder"
+            :value="value"
+            ref="input"
+            :name="name"
+            :id="name"
+            v-on="listeners"
+            @input="$event => handleInput($event.target.value)"
+            :autocomplete="autocomplete"
+            :readonly="readOnly"
+            :maxlength="maxLength"
+          />
+        </div>
+        <div class="mc-field-text__append">
+          <slot name="append" />
+          <mc-button
+            v-if="copy"
+            variation="gray-dark-flat"
+            size="s-compact"
+            @click.prevent="handlerCopy(value)"
+          >
+            <mc-svg-icon slot="icon-append" name="file_copy" fill="rgb(62, 132, 244)" />
+          </mc-button>
+        </div>
       </div>
-      <div class="mc-field-text__input-wrapper">
-        <flat-pickr
-          v-if="isDate"
-          class="mc-field-text__input"
-          :style="inputStyles"
-          :placeholder="placeholder"
-          :value="value"
-          :name="name"
-          ref="input"
-          :disabled="disabled"
-          :id="name"
-          v-on="listeners"
-          @input="value => handleInput(value)"
-        ></flat-pickr>
-        <textarea
-          v-else-if="isTextarea"
-          class="mc-field-text__input"
-          :style="inputStyles"
-          :placeholder="placeholder"
-          :value="value"
-          :disabled="disabled"
-          :name="name"
-          :id="name"
-          v-on="listeners"
-          @input="$event => handleInput($event.target.value)"
-          :autocomplete="autocomplete"
-          :maxlength="maxLength"
-        ></textarea>
-        <textarea-autosize
-          v-else-if="isTextareaAutosize"
-          class="mc-field-text__input"
-          :style="inputStyles"
-          :placeholder="placeholder"
-          :disabled="disabled"
-          :name="name"
-          :id="name"
-          v-on="listeners"
-          rows="1"
-          :min-height="minHeight"
-          :max-height="maxHeight"
-          @input="handleInput"
-          :value="value"
-          :autocomplete="autocomplete"
-        ></textarea-autosize>
-        <input
-          v-else
-          class="mc-field-text__input"
-          :style="inputStyles"
-          :disabled="disabled"
-          :type="type"
-          :placeholder="placeholder"
-          :value="value"
-          ref="input"
-          :name="name"
-          :id="name"
-          v-on="listeners"
-          @input="$event => handleInput($event.target.value)"
-          :autocomplete="autocomplete"
-          :readonly="readOnly"
-          :maxlength="maxLength"
-        />
-      </div>
-      <div class="mc-field-text__append">
-        <slot name="append" />
-        <mc-button
-          v-if="copy"
-          variation="gray-dark-flat"
-          size="s-compact"
-          @click.prevent="handlerCopy(value)"
-        >
-          <mc-svg-icon slot="icon-append" name="file_copy" fill="rgb(62, 132, 244)" />
-        </mc-button>
+      <div class="mc-field-text__right" v-if="$slots.right">
+        <slot name="right" />
       </div>
     </div>
     <div class="mc-field-text__footer" v-if="errorText || helpText || $slots.footer">
@@ -342,8 +347,18 @@ export default {
     }
   }
 
+  &__inner {
+    display: flex;
+    align-items: center;
+  }
+
+  &__right {
+    flex-shrink: 0;
+  }
+
   &__main {
     position: relative;
+    width: 100%;
   }
 
   &__prepend,
