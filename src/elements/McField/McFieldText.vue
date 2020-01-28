@@ -5,7 +5,7 @@
         <McTitle :ellipsis="false" v-if="title" :level="4">{{ title }}</McTitle>
       </slot>
     </label>
-    <div class="mc-field-text_inner">
+    <div class="mc-field-text__inner">
       <div class="mc-field-text__main">
         <div class="mc-field-text__prepend">
           <slot name="prepend" />
