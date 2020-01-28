@@ -358,6 +358,7 @@ export default {
 
   &__main {
     position: relative;
+    width: 100%;
   }
 
   &__prepend,
