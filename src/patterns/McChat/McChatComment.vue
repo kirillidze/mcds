@@ -22,7 +22,7 @@
           </McGridCol>
           <McGridCol :span="12" style="min-width: 30%">
             <McTitle size="s" line-height="s">
-              {{ comment.user ? comment.user.name : "Системный комментарий" }}
+              {{ computedName }}
             </McTitle>
           </McGridCol>
         </McGridRow>
@@ -56,6 +56,7 @@
 </template>
 
 <script>
+import _has from "lodash/has"
 import McAvatar from "../../elements/McAvatar/McAvatar"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
@@ -90,6 +91,9 @@ export default {
     filteredComment() {
       let nl2br = this.$options.filters.nl2br
       return nl2br ? nl2br(this.comment.content) : this.comment.content
+    },
+    computedName() {
+      return _has(this.comment, ["user", "name"]) ? this.comment.user.name : "Системный комментарий"
     },
   },
 }
