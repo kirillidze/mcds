@@ -6,7 +6,7 @@
     :adaptive="true"
     height="auto"
     width="100%"
-    :maxWidth="510"
+    :maxWidth="maxWidth"
     @before-open="event => $emit('beforeOpen', event)"
     @before-close="event => $emit('beforeClose', event)"
     @closed="event => $emit('closed', event)"
@@ -42,6 +42,10 @@ export default {
   props: {
     name: {
       type: String,
+    },
+    maxWidth: {
+      type: Number,
+      default: 510,
     },
     closeVisible: {
       type: Boolean,

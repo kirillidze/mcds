@@ -3,6 +3,7 @@
     class="p-form-modal"
     :class="classes"
     :name="name"
+    :max-width="maxWidth"
     :close-visible="closeVisible"
     @beforeOpen="event => $emit('beforeOpen', event)"
     @beforeClose="event => $emit('beforeClose', event)"
@@ -80,6 +81,10 @@ export default {
     closeVisible: {
       type: Boolean,
       default: true,
+    },
+    maxWidth: {
+      type: Number,
+      default: 510,
     },
   },
   computed: {
