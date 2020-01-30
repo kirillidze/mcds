@@ -24,7 +24,7 @@
       <div class="mc-modal__control" v-if="$slots.footer">
         <slot name="footer"></slot>
       </div>
-      <button type="button" class="mc-modal__btn-close" @click.prevent="close">
+      <button v-if="closeVisible" type="button" class="mc-modal__btn-close" @click.prevent="close">
         <McSvgIcon class="mc-modal__icon-close" width="24" height="24" name="clear" />
       </button>
     </div>
@@ -42,6 +42,10 @@ export default {
   props: {
     name: {
       type: String,
+    },
+    closeVisible: {
+      type: Boolean,
+      default: true,
     },
   },
   methods: {

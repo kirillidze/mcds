@@ -3,6 +3,7 @@
     class="p-form-modal"
     :class="classes"
     :name="name"
+    :close-visible="closeVisible"
     @beforeOpen="event => $emit('beforeOpen', event)"
     @beforeClose="event => $emit('beforeClose', event)"
     @opened="event => $emit('opened', event)"
@@ -75,6 +76,10 @@ export default {
     bottomPositioned: {
       type: Boolean,
       default: false,
+    },
+    closeVisible: {
+      type: Boolean,
+      default: true,
     },
   },
   computed: {
