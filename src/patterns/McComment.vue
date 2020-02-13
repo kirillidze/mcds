@@ -22,7 +22,12 @@
 </template>
 
 <script>
+import McTitle from "../elements/McTitle"
+import McDate from "../elements/McDate"
+import McAvatar from "../elements/McAvatar/McAvatar"
+import McPreview from "../patterns/McPreview"
 export default {
+  components: { McTitle, McAvatar, McPreview, McDate },
   props: {
     comment: {
       type: Object,
