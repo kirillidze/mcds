@@ -43,7 +43,9 @@ export default {
     },
     lastTabLink: {
       type: Array,
-      default: [],
+      default() {
+        return []
+      },
     },
   },
   components: {
