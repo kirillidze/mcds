@@ -42,8 +42,8 @@ export default {
       default: false,
     },
     lastTabLink: {
-      type: Number,
-      default: null,
+      type: Array,
+      default: [],
     },
   },
   components: {
@@ -52,9 +52,14 @@ export default {
   },
   computed: {
     classes() {
-      return {
-        [`mc-tabs--last-tab-link-${this.lastTabLink}`]: this.lastTabLink,
-      }
+      let result = {}
+      this.lastTabLink.forEach(item => {
+        result = {
+          ...result,
+          [`mc-tabs--last-tab-link-${item}`]: item,
+        }
+      })
+      return result
     },
   },
   methods: {
@@ -136,7 +141,7 @@ export default {
     }
   }
 
-  @each $title, $value in $token-colors {
+  @each $title, $value in $last-childs {
     &--last-tab-link-#{$title} {
       & .tabs-component-tab {
         position: relative;
