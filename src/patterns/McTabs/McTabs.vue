@@ -76,6 +76,14 @@ export default {
 </script>
 
 <style lang="scss">
+$last-childs: (
+  "1": 1,
+  "2": 2,
+  "3": 3,
+  "4": 4,
+  "5": 5,
+);
+
 .mc-tabs {
   $block-name: &;
 
