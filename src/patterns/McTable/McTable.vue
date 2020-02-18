@@ -177,13 +177,11 @@ export default {
       this.$emit("sort", { key: header.key, descending })
     },
     handleCheck({ item, value }) {
-      const val = item[this.checkBy]
-      const checkedItems = this.checkedItems.concat()
+      let checkedItems = [...this.checkedItems]
       if (value) {
-        checkedItems.push(val)
+        checkedItems.push(item)
       } else {
-        const index = checkedItems.indexOf(val)
-        checkedItems.splice(index, 1)
+        checkedItems = this.checkedItems.filter(i => i[this.checkBy] !== item[this.checkBy])
       }
       this.$emit("check", checkedItems)
     },
