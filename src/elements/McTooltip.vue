@@ -8,6 +8,9 @@
 import { VTooltip } from "v-tooltip"
 import McButton from "./McButton"
 import McSvgIcon from "./McSvgIcon"
+
+VTooltip.options.defaultBoundariesElement = "window"
+
 export default {
   name: "McTooltip",
   components: { McSvgIcon, McButton },
