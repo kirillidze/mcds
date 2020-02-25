@@ -140,6 +140,10 @@ export default {
       border-bottom: none;
     }
 
+    .mc-table-card {
+      z-index: $z-index-sticky + 1;
+    }
+
     .mc-table {
       &-head {
         .mc-table-cell {
@@ -169,9 +173,16 @@ export default {
           }
         }
 
-        &--link:hover {
-          .mc-table-cell:first-child {
-            background-color: rgb(244, 244, 244) !important;
+        &--link {
+          &.nuxt-link-active {
+            .mc-table-cell:first-child {
+              background-color: $color-lightest-blue;
+            }
+          }
+          &:hover {
+            .mc-table-cell:first-child {
+              background-color: rgb(244, 244, 244);
+            }
           }
         }
       }
