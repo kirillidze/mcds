@@ -344,7 +344,9 @@ export default {
           })
       }
 
-      this.canUpdateMenuItem = false
+      if (!this.checkOverflow(100)) {
+        this.canUpdateMenuItem = false
+      }
     },
 
     updateMainMenu(val) {
