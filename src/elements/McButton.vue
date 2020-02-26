@@ -512,6 +512,10 @@ $colors: $token-colors;
     }
   }
 
+  &--variation-toxic {
+    color: $color-black;
+  }
+
   &--uppercase {
     text-transform: uppercase;
   }
