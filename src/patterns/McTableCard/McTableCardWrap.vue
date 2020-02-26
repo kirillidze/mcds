@@ -141,7 +141,7 @@ export default {
     }
 
     .mc-table-card {
-      z-index: $z-index-sticky + 1;
+      z-index: 11;
     }
 
     .mc-table {
@@ -161,7 +161,7 @@ export default {
         .mc-table-cell:first-child {
           position: sticky !important;
           left: 0;
-          z-index: $z-index-sticky;
+          z-index: 10;
           background-color: $color-white;
           &::before {
             @include position(absolute, 0 -1px 0 100%);
