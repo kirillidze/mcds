@@ -1,5 +1,5 @@
 <template>
-  <div class="mc-table-card-wrap">
+  <div class="mc-table-card-wrap" :class="classes">
     <slot name="card"></slot>
     <div class="mc-table-card-wrap__inner" :class="innerClasses">
       <div class="mc-table-card-wrap__inner-2">
@@ -22,11 +22,23 @@ export default {
       type: String,
       default: "m",
     },
+    /** Добавляет горизонтальный скролл таблице
+     *
+     */
+    scrollable: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     innerClasses() {
       return {
         [`mc-table-card-wrap__inner--size-${this.titleSize}`]: this.titleSize,
+      }
+    },
+    classes() {
+      return {
+        ["mc-table-card-wrap--scrollable"]: this.scrollable,
       }
     },
   },
@@ -117,6 +129,60 @@ export default {
           border-right: none !important;
           &:not(:first-child) {
             display: none;
+          }
+        }
+      }
+    }
+  }
+
+  &--scrollable {
+    #{$block-name}__inner-2 {
+      border-bottom: none;
+    }
+
+    .mc-table-card {
+      z-index: 11;
+    }
+
+    .mc-table {
+      &-head {
+        .mc-table-cell {
+          position: relative;
+        }
+      }
+
+      &-foot {
+        .mc-table-cell {
+          border-bottom: 1px solid $color-outline-gray;
+        }
+      }
+
+      .mc-table-row {
+        .mc-table-cell:first-child {
+          position: sticky !important;
+          left: 0;
+          z-index: 10;
+          background-color: $color-white;
+          &::before {
+            @include position(absolute, 0 -1px 0 100%);
+            content: "";
+            display: block;
+            height: 100%;
+            width: 1px;
+            background-color: $color-outline-gray;
+          }
+        }
+
+        &--link {
+          &.nuxt-link-active {
+            .mc-table-cell:first-child {
+              background-color: $color-lightest-blue;
+            }
+          }
+          &:hover {
+            .mc-table-cell:first-child {
+              background-color: rgb(244, 244, 244);
+            }
           }
         }
       }
