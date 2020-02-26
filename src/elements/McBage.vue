@@ -80,7 +80,7 @@ export default {
     }
   }
 
-  &--variation-yellow {
+  &--variation-toxic {
     color: $color-black;
   }
 
