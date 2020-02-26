@@ -80,6 +80,10 @@ export default {
     }
   }
 
+  &--variation-yellow {
+    background-color: #e8f443;
+  }
+
   &--variation-transparent {
     background-color: transparent;
 
