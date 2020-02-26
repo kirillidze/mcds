@@ -81,7 +81,7 @@ export default {
   }
 
   &--variation-yellow {
-    background-color: #e8f443;
+    color: $color-black;
   }
 
   &--variation-transparent {
