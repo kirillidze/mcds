@@ -141,25 +141,13 @@ export default {
     }
 
     .mc-table-card {
-      z-index: 11;
+      z-index: 12;
     }
 
     .mc-table {
-      &-head {
-        .mc-table-cell {
-          position: relative;
-        }
-      }
-
-      &-foot {
-        .mc-table-cell {
-          border-bottom: 1px solid $color-outline-gray;
-        }
-      }
-
-      .mc-table-row {
-        .mc-table-cell:first-child {
-          position: sticky !important;
+      .mc-table-cell {
+        &:first-child {
+          position: sticky;
           left: 0;
           z-index: 10;
           background-color: $color-white;
@@ -172,16 +160,42 @@ export default {
             background-color: $color-outline-gray;
           }
         }
+      }
 
-        &--link {
-          &.nuxt-link-active {
-            .mc-table-cell:first-child {
-              background-color: $color-lightest-blue;
-            }
+      &-head {
+        .mc-table-cell {
+          position: sticky;
+          &:first-child {
+            left: 0;
           }
-          &:hover {
-            .mc-table-cell:first-child {
-              background-color: rgb(244, 244, 244);
+          top: 0;
+          left: auto;
+          right: auto;
+        }
+      }
+
+      &-foot {
+        .mc-table-cell {
+          border-bottom: 1px solid $color-outline-gray;
+        }
+      }
+
+      &-body {
+        .mc-table-row {
+          .mc-table-cell:first-child {
+            z-index: 9;
+          }
+
+          &--link {
+            &.nuxt-link-active {
+              .mc-table-cell:first-child {
+                background-color: $color-lightest-blue;
+              }
+            }
+            &:hover {
+              .mc-table-cell:first-child {
+                background-color: rgb(244, 244, 244);
+              }
             }
           }
         }
