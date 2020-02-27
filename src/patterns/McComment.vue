@@ -15,7 +15,7 @@
       />
     </div>
 
-    <div slot="bottom" class="mc-comment__text">
+    <div slot="bottom" class="mc-comment__text" v-if="comment.reason">
       <mc-title size="s" :ellipsis="false">{{ comment.reason }}</mc-title>
     </div>
   </mc-preview>
