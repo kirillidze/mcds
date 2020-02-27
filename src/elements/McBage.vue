@@ -80,6 +80,10 @@ export default {
     }
   }
 
+  &--variation-toxic {
+    color: $color-black;
+  }
+
   &--variation-transparent {
     background-color: transparent;
 
