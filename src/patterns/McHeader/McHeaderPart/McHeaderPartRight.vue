@@ -35,7 +35,10 @@
               :to="menuAppsItem.to"
               :is-active="menuAppsItem.isActive"
             >
-              <McSvgIcon slot="icon-prepend" :name="menuAppsItem.icon" size="m" />
+              <div slot="icon-prepend">
+                <McAvatar v-if="isCustomMenuApp" :src="menuAppsItem.icon" />
+                <McSvgIcon v-else slot="icon-prepend" :name="menuAppsItem.icon" size="m" />
+              </div>
               {{ menuAppsItem.name }}
             </McButton>
           </McPanel>
@@ -224,6 +227,14 @@ export default {
     menuApps: {
       type: Array,
       default: null,
+    },
+    /**
+     *  Если меню приложений кастомное
+     *
+     */
+    isCustomMenuApp: {
+      type: Boolean,
+      default: false,
     },
     /**
      *  Меню пользовательской панели

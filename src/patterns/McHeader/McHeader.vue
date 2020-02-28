@@ -34,6 +34,7 @@
       />
       <mc-header-part-right
         v-model="mmIsOpen"
+        :is-custom-menu-app="isCustomMenuApp"
         ref="headerRight"
         :menu-apps="menuApps"
         :menu-profile="menuProfile"
@@ -137,6 +138,14 @@ export default {
     menuApps: {
       type: Array,
       default: null,
+    },
+    /**
+     *  Если меню приложений кастомное
+     *
+     */
+    isCustomMenuApp: {
+      type: Boolean,
+      default: false,
     },
     /**
      *  Меню языков
