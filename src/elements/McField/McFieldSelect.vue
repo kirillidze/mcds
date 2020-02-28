@@ -442,6 +442,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
         &--active {
           .multiselect {
             &__tags {
+              background-color: transparent;
               @if $color != "white" {
                 border-color: $value;
               }
