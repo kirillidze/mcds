@@ -7,7 +7,7 @@
     <div v-if="counter" class="mc-chip__counter">
       {{ counter }}
     </div>
-    <button v-if="closable" class="mc-chip__button" v-on="$listeners">
+    <button v-if="closable" type="button" class="mc-chip__button" v-on="$listeners">
       <slot name="button">
         <McSvgIcon size="xxs" name="cancel" />
       </slot>
