@@ -3,7 +3,7 @@
     <McTableRow
       :size="size"
       v-for="(item, index) in items"
-      :key="index"
+      :key="item.id || index"
       :item="item"
       :headers="headers"
       :checkable="checkable"
