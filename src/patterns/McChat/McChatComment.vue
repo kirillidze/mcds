@@ -90,10 +90,17 @@ export default {
   computed: {
     filteredComment() {
       let nl2br = this.$options.filters.nl2br
-      return nl2br ? nl2br(this.comment.content) : this.comment.content
+      return nl2br ? nl2br(this.commentWithLinks) : this.commentWithLinks
     },
     computedName() {
       return _has(this.comment, ["user", "name"]) ? this.comment.user.name : "Системный комментарий"
+    },
+    commentWithLinks() {
+      const regExp = /((http|https):\/\/)?(([a-zA-Zа-яА-Я.-]*)\.([a-zA-Zа-яА-Я]*))/gi
+      return this.comment.content.replace(regExp, match => {
+        const url = /^http/.test(match) ? match : `http://${match}`
+        return `<a class="mc-chat-comment__link" href='${url}' target="_blank">${match.trim()}</a>`
+      })
     },
   },
 }
@@ -107,6 +114,22 @@ export default {
 
   &__avatar {
     margin-left: $space-xs;
+  }
+
+  &__content {
+    display: block;
+  }
+
+  &__link {
+    color: $color-blue;
+    &:hover,
+    &:focus {
+      color: darken($color-blue, 12%);
+    }
+
+    &:active {
+      color: darken($color-blue, 16%);
+    }
   }
 }
 </style>
