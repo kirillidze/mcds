@@ -37,7 +37,13 @@
             >
               <div slot="icon-prepend">
                 <McAvatar v-if="isCustomMenuApp" :src="menuAppsItem.icon" />
-                <McSvgIcon v-else slot="icon-prepend" :name="menuAppsItem.icon" size="m" />
+                <McSvgIcon
+                  v-else
+                  slot="icon-prepend"
+                  :name="menuAppsItem.icon"
+                  size="m"
+                  fill="#E01C42"
+                />
               </div>
               {{ menuAppsItem.name }}
             </McButton>
