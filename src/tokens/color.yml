@@ -68,6 +68,9 @@ props:
   color_azure:
     value: "hsla(206, 84%, 39%, 1)"
     category: color_scale
+  color_toxic:
+    value: "hsla(64, 89%, 61%, 1)"
+    category: color_scale
 
 global:
   type: color

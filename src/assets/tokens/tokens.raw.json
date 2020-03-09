@@ -99,6 +99,13 @@
       "originalValue": "hsla(263, 100%, 60%, 1)",
       "name": "color_purple"
     },
+    "color_toxic": {
+      "type": "color",
+      "category": "color_scale",
+      "value": "rgb(232, 244, 67)",
+      "originalValue": "hsla(64, 89%, 61%, 1)",
+      "name": "color_toxic"
+    },
     "color_outline_gray": {
       "type": "color",
       "category": "color_gray_scale",
