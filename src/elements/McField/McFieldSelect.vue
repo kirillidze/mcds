@@ -68,6 +68,11 @@ export default {
   components: { McAvatar, McTitle, Multiselect },
   status: "deprecated",
   release: "1.0.0",
+  data() {
+    return {
+      searchValue: null,
+    }
+  },
   props: {
     /**
      *  Заголовок поля:
@@ -172,6 +177,7 @@ export default {
         "mc-field-select--error": this.errorText,
         "mc-field-select--disabled": this.disabled,
         [`mc-field-select--bg-${this.backgroundColor}`]: this.backgroundColor,
+        "mc-field-select--is-empty-options-list": this.isEmptyOptionsList,
       }
     },
     _value() {
@@ -179,7 +185,7 @@ export default {
         if (this.value == null) return []
         let result = []
         for (let value of this.value) {
-          let option = this.options.find((o, index) => {
+          let option = this.options.find(o => {
             if (o.value.hasOwnProperty("id") && o.value.id == value.id) {
               return true
             }
@@ -189,12 +195,22 @@ export default {
         }
         return result
       }
-      return this.options.find(o => o.value == this.value)
+      return this.options.find(o => o.value === this.value)
     },
 
     errorText() {
-      if (this.errors == null || this.errors.length == 0) return null
+      if (this.errors == null || this.errors.length === 0) return null
       return this.errors.join(", ")
+    },
+    isEmptyOptionsList() {
+      if (this.hideSelected && !this.searchValue) {
+        if (this.multiple) {
+          return this.options.length === this._value.length
+        } else {
+          return this._value && this.options.length === 1
+        }
+      }
+      return false
     },
   },
   methods: {
@@ -215,6 +231,7 @@ export default {
     },
 
     handleSearchChange(value) {
+      this.searchValue = value
       this.$emit("search-change", value)
     },
 
@@ -533,6 +550,14 @@ $text-white: scale-color($color-white, $alpha: -10%);
     .multiselect {
       &__tags {
         border-color: $color-red !important;
+      }
+    }
+  }
+
+  &--is-empty-options-list {
+    .multiselect {
+      &__content-wrapper {
+        display: none !important;
       }
     }
   }
