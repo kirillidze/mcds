@@ -111,8 +111,9 @@ export default {
   flex-wrap: nowrap;
   align-items: center;
   flex: 0 0 auto;
-  padding: $space-xs;
   outline: none;
+  height: 40px;
+  width: 240px;
 
   &:hover,
   &:focus {
@@ -134,6 +135,9 @@ export default {
   &__img {
     display: inline-block;
     margin-right: $space-xs;
+    width: auto;
+    height: 100%;
+    object-fit: contain;
   }
 
   &__text {
