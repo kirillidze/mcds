@@ -34,7 +34,7 @@
             :id="name"
             :mode="mode"
             :masks="masks"
-            :value="value"
+            :value="_value"
             :color="color"
             :locale="locale"
             ref="input"
@@ -44,7 +44,7 @@
             :columns="columns"
             :popover="{ visibility: 'click' }"
             v-on="listeners"
-            @input="value => handleInput(value)"
+            @input="value => handleEmitDate(value)"
           />
 
           <textarea
@@ -160,6 +160,20 @@ export default {
     type: {
       type: String,
       default: "text",
+    },
+    /**
+     * `Формат принимаемой даты
+     */
+    fromFormat: {
+      type: String,
+      default: "YYYY-MM-DD",
+    },
+    /**
+     * `Формат отдаваемой даты
+     */
+    toFormat: {
+      type: String,
+      default: "YYYY-MM-DD",
     },
 
     /**
@@ -424,11 +438,24 @@ export default {
     listeners() {
       return _omit(this.$listeners, "input")
     },
+
+    _value: {
+      get() {
+        if (!this.value) return
+        return new Date(this.value)
+      },
+    },
   },
 
   methods: {
     handleInput(value) {
       this.$emit("input", value)
+    },
+
+    handleEmitDate(value) {
+      let newValue = this.$moment(value).format(this.toFormat)
+      console.log(newValue)
+      this.handleInput(newValue)
     },
 
     calculatePadding() {
@@ -758,7 +785,7 @@ export default {
 
         <br>
 
-        <McFieldText title="datePicker" name="date" type="date" placeholder="Дата">
+        <McFieldText title="datePicker" name="date" value="2019-12-06T00:00:00+00:00" to-format="YYYY-MM-DD HH:mm:ss" type="date" placeholder="Дата">
             <McButton
               variation="blue-link"
               slot="prepend"
