@@ -195,11 +195,11 @@ export default {
         }
         return result
       }
-      return this.options.find(o => o.value === this.value)
+      return this.options.find(o => o.value == this.value)
     },
 
     errorText() {
-      if (this.errors == null || this.errors.length === 0) return null
+      if (this.errors == null || this.errors.length == 0) return null
       return this.errors.join(", ")
     },
     isEmptyOptionsList() {
