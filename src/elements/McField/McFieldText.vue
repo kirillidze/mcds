@@ -32,7 +32,6 @@
             :name="name"
             :id="name"
             :mode="mode"
-            :attributes="attrs"
             :value="value"
             :color="color"
             :locale="locale"
