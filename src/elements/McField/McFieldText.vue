@@ -11,19 +11,41 @@
           <slot name="prepend" />
         </div>
         <div class="mc-field-text__input-wrapper">
-          <flat-pickr
-            v-if="isDate"
-            class="mc-field-text__input"
-            :style="inputStyles"
-            :placeholder="placeholder"
-            :value="value"
+          <calendar
+            v-if="isCalendar"
+            class="mc-field-text__date-picker"
+            title-position="left"
             :name="name"
-            ref="input"
-            :disabled="disabled"
             :id="name"
+            :attributes="attrs"
+            :locale="locale"
+            ref="input"
+            :first-day-of-week="2"
+            v-on="listeners"
+            :columns="columns"
+          />
+
+          <date-picker
+            v-else-if="isDate"
+            class="mc-field-text__date-picker"
+            title-position="left"
+            :name="name"
+            :id="name"
+            :mode="mode"
+            :attributes="attrs"
+            :value="value"
+            :color="color"
+            :locale="locale"
+            ref="input"
+            :first-day-of-week="2"
+            :is-inline="isInline"
+            :input-props="inputProps"
+            :columns="columns"
+            :popover="{ visibility: 'click' }"
             v-on="listeners"
             @input="value => handleInput(value)"
-          ></flat-pickr>
+          />
+
           <textarea
             v-else-if="isTextarea"
             class="mc-field-text__input"
@@ -54,6 +76,7 @@
             :value="value"
             :autocomplete="autocomplete"
           ></textarea-autosize>
+
           <input
             v-else
             class="mc-field-text__input"
@@ -105,6 +128,8 @@ import _omit from "lodash/omit"
 
 import tokens from "../../assets/tokens/tokens"
 import flatPickr from "vue-flatpickr-component"
+import Calendar from "v-calendar/lib/components/calendar.umd"
+import DatePicker from "v-calendar/lib/components/date-picker.umd"
 import TextareaAutosize from "vue-textarea-autosize/src/components/TextareaAutosize"
 
 import McTitle from "../McTitle"
@@ -114,7 +139,16 @@ import McTooltip from "../McTooltip"
 
 export default {
   name: "McFieldText",
-  components: { McTooltip, McButton, McSvgIcon, McTitle, flatPickr, TextareaAutosize },
+  components: {
+    McTooltip,
+    McButton,
+    McSvgIcon,
+    McTitle,
+    flatPickr,
+    Calendar,
+    DatePicker,
+    TextareaAutosize,
+  },
   status: "ready",
   release: "1.0.0",
   props: {
@@ -242,6 +276,52 @@ export default {
       type: String,
       default: "on",
     },
+
+    /**
+     *  Мод дейтпикера: single, range, multiple
+     *
+     */
+    mode: {
+      type: String,
+      default: "single",
+    },
+
+    /**
+     *  Язык дейтпикера
+     *
+     */
+    locale: {
+      type: String,
+      default: "ru",
+    },
+
+    /**
+     *  Цвет дейтпикера
+     *
+     */
+    color: {
+      type: String,
+      default: "blue",
+    },
+
+    /**
+     *  Колонки дейтпикера
+     *
+     */
+    columns: {
+      type: Number,
+      default: 1,
+    },
+
+    /**
+     *  Дейтпикер без инпута
+     *
+     */
+    isInline: {
+      type: Boolean,
+      default: false,
+    },
+
     /**
      *  только чтение текста
      *
@@ -256,6 +336,25 @@ export default {
     return {
       prependWidth: 0,
       appendWidth: 0,
+      attrs: [
+        {
+          key: "today",
+          highlight: true,
+          dates: new Date(),
+        },
+        {
+          key: "weekend",
+          contentClass: "weekend-day",
+          contentStyle: {
+            color: "gray",
+          },
+          dates: {
+            start: new Date("1/1/2000"),
+            end: new Date("1/1/2199"),
+            on: [{ weekdays: [1, 7] }],
+          },
+        },
+      ],
     }
   },
 
@@ -273,6 +372,7 @@ export default {
         "mc-field-text--disabled": this.disabled,
         "mc-field-text--gradient": this.gradient,
         "mc-field-text--copy": this.copy,
+        [`mc-field-text--color-${this.color}`]: this.color,
       }
     },
 
@@ -286,6 +386,26 @@ export default {
 
     isDate() {
       return this.type === "date"
+    },
+
+    isCalendar() {
+      return this.type === "calendar"
+    },
+
+    masks() {
+      return {
+        weekdays: "WW",
+        input: ["c YYYY-MM-DD"],
+      }
+    },
+
+    inputProps() {
+      return {
+        placeholder: this.placeholder,
+        disabled: this.disabled,
+        readonly: false,
+        style: `padding-left: ${this.inputStyles.paddingLeft}; padding-tight: ${this.inputStyles.paddingRight};`,
+      }
     },
 
     errorText() {
@@ -505,6 +625,59 @@ export default {
       }
     }
   }
+
+  &__date-picker,
+  .vc-container {
+    font-family: $font-heading !important;
+    font-weight: $weight-medium !important;
+    input {
+      transition: all 0.2s ease;
+      &:focus {
+        box-shadow: none;
+        border-color: $color-blue;
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .vc-title {
+      font-weight: $weight-medium !important;
+      &::first-letter {
+        text-transform: uppercase;
+      }
+    }
+    .vc-weekday {
+      font-weight: $weight-medium !important;
+      color: $color-black;
+    }
+    .vc-svg-icon {
+      width: 20px;
+      height: 20px;
+      color: $color-black;
+    }
+    .vc-arrows-container {
+      top: 2px;
+    }
+    .vc-highlight {
+      border-radius: 4px;
+      color: $color-blue;
+    }
+    .vc-day-content {
+      font-weight: $weight-medium !important;
+      border-radius: 4px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+    .vc-bg-blue-200 {
+      background-color: $color-lightest-blue;
+    }
+    .vc-text-blue-900 {
+      color: $color-blue;
+    }
+    .vc-bg-blue-600 {
+      background-color: $color-blue;
+    }
+  }
 }
 </style>
 
@@ -568,7 +741,45 @@ export default {
 
         <br>
 
-        <McFieldText title="Флэтпицкер" name="date" type="date" placeholder="Дата"></McFieldText>
+        <McFieldText title="Флэтпицкер" name="date" type="date" placeholder="Дата">
+            <McButton
+              variation="blue-link"
+              slot="prepend"
+              size="s-compact"
+            >
+                <McSvgIcon slot="icon-append" name="date_range" fill="#4285F4" />
+            </McButton>
+        </McFieldText>
+
+        <br>
+
+        <McFieldText title="Calendar" name="date" type="calendar" placeholder="Дата"></McFieldText>
+
+        <br>
+
+        <McFieldText title="datePicker" name="date" type="date" placeholder="Дата">
+            <McButton
+              variation="blue-link"
+              slot="prepend"
+              size="s-compact"
+            >
+                <McSvgIcon slot="icon-append" name="date_range" fill="#4285F4" />
+            </McButton>
+        </McFieldText>
+
+        <br>
+
+        <McFieldText title="datePicker" mode="range" name="date" type="date" placeholder="Дата">
+            <McButton
+              variation="blue-link"
+              slot="prepend"
+              size="s-compact"
+            >
+                <McSvgIcon slot="icon-append" name="date_range" fill="#4285F4" />
+            </McButton>
+        </McFieldText>
+
+        <br>
     </div>
     ```
 </docs>
