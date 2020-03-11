@@ -454,7 +454,6 @@ export default {
 
     handleEmitDate(value) {
       let newValue = this.$moment(value).format(this.toFormat)
-      console.log(newValue)
       this.handleInput(newValue)
     },
 
