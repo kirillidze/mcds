@@ -396,7 +396,7 @@ export default {
     masks() {
       return {
         weekdays: "WW",
-        input: ["c YYYY-MM-DD"],
+        input: ["L", "YYYY/MM/DD", "YYYY-MM-DD"],
       }
     },
 
