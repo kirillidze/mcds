@@ -71,7 +71,7 @@ export default {
       default: "left",
     },
   },
-  render(h, { props, slots }) {
+  render(h, { props, slots, data }) {
     return h(
       "component",
       {
@@ -84,6 +84,7 @@ export default {
           [`mc-title--color-${props.color}`]: props.color,
           [`mc-title--text-align-${props.textAlign}`]: props.textAlign,
           "mc-title--uppercase": props.uppercase,
+          [`${data.staticClass}`]: data.staticClass,
         },
         is: props.tagName || `h${props.level}`,
       },
