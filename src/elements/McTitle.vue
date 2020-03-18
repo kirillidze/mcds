@@ -1,16 +1,7 @@
-<template>
-  <component :is="tag" class="mc-title" :class="classObject">
-    <slot name="icon-prepend" />
-    <div class="mc-title__text">
-      <slot></slot>
-    </div>
-    <slot name="icon-append" />
-  </component>
-</template>
-
 <script>
 import McSvgIcon from "./McSvgIcon"
 export default {
+  functional: true,
   name: "McTitle",
   components: { McSvgIcon },
   status: "ready",
@@ -80,21 +71,34 @@ export default {
       default: "left",
     },
   },
-  computed: {
-    tag() {
-      return this.tagName ? this.tagName : `h${this.level}`
-    },
-    classObject() {
-      return {
-        [`mc-title--size-${this.size}`]: this.size,
-        [`mc-title--line-height-${this.lineHeight}`]: this.lineHeight,
-        [`mc-title--family-${this.family}`]: this.family,
-        ["mc-title--ellipsis"]: this.ellipsis,
-        [`mc-title--color-${this.color}`]: this.color,
-        [`mc-title--text-align-${this.textAlign}`]: this.textAlign,
-        "mc-title--uppercase": this.uppercase,
-      }
-    },
+  render(h, { props, slots }) {
+    return h(
+      "component",
+      {
+        class: {
+          "mc-title": true,
+          [`mc-title--size-${props.size}`]: props.size,
+          [`mc-title--line-height-${props.lineHeight}`]: props.lineHeight,
+          [`mc-title--family-${props.family}`]: props.family,
+          ["mc-title--ellipsis"]: props.ellipsis,
+          [`mc-title--color-${props.color}`]: props.color,
+          [`mc-title--text-align-${props.textAlign}`]: props.textAlign,
+          "mc-title--uppercase": props.uppercase,
+        },
+        is: props.tagName || `h${props.level}`,
+      },
+      [
+        slots()["icon-prepend"],
+        h(
+          "div",
+          {
+            class: "mc-title__text",
+          },
+          slots()["default"]
+        ),
+        slots()["icon-append"],
+      ]
+    )
   },
 }
 </script>

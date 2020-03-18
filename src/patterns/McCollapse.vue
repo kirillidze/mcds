@@ -95,6 +95,10 @@ export default {
     this.activator && (this.activator.style.transition = "all 0.15s")
   },
 
+  beforeDestroy() {
+    this.activator && this.activator.removeEventListener("click", this.toggle)
+  },
+
   methods: {
     open() {
       this.isCollapsed = true

@@ -188,6 +188,10 @@ export default {
     window.addEventListener("scroll", this.onScroll, true)
     window.addEventListener("resize", this.onScroll)
   },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.onScroll, true)
+    window.removeEventListener("resize", this.onScroll)
+  },
   computed: {
     canSubmit() {
       return !_isEqual(this.value, this.currentValues) && this.filterDeepCount

@@ -49,7 +49,7 @@ export default {
     window.addEventListener("scroll", this.handleScroll, true)
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll)
+    window.removeEventListener("scroll", this.handleScroll, true)
   },
 
   methods: {

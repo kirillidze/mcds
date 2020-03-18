@@ -124,6 +124,10 @@ export default {
       }
     }
   },
+  beforeDestroy() {
+    this.wrapper && this.wrapper.removeEventListener("scroll", this.checkVisibility)
+    this.wrapper && window.removeEventListener("resize", this.checkVisibility)
+  },
   watch: {
     $route() {
       this.setIsChildActive()
