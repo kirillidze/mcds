@@ -35,7 +35,7 @@
             :href="menuMainItem.href"
             :to="menuMainItem.to"
             variation="black-flat"
-            :exact="isExact"
+            :exact="enableExact || isExact"
           >
             <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
             {{ menuMainItem.name }}
@@ -65,7 +65,7 @@
                 size="l"
                 :href="menuHiddenItem.href"
                 :to="menuHiddenItem.to"
-                :exact="isExact"
+                :exact="enableExact || isExact"
               >
                 <McSvgIcon slot="icon-prepend" :name="menuHiddenItem.icon" />
                 {{ menuHiddenItem.name }}
@@ -187,7 +187,7 @@ export default {
      *  Использ. на music
      *
      */
-    music: {
+    enableExact: {
       type: Boolean,
       default: false,
     },
@@ -230,10 +230,6 @@ export default {
       }
     },
     isExact() {
-      if (this.music) {
-        return true
-      }
-
       return (
         (this.$route.name ? this.$route.name.includes("index") : false) &&
         !this.$route.name.includes("id")

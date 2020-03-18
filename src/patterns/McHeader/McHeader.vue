@@ -26,7 +26,7 @@
         :searchable="searchable"
         :search-items="searchItems"
         :search-placeholder="searchPlaceholder"
-        :music="music"
+        :enableExact="enableExact"
         @change-hidden-menu="handleChangeHiddenMenu"
         @add-entity="handleAddEntity"
         @input="handleInput"
@@ -244,10 +244,10 @@ export default {
       default: 1200,
     },
     /**
-     *  Использ. на music
+     *  Вклюсить exact
      *
      */
-    music: {
+    enableExact: {
       type: Boolean,
       default: false,
     },
