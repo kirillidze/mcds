@@ -65,6 +65,7 @@
                 size="l"
                 :href="menuHiddenItem.href"
                 :to="menuHiddenItem.to"
+                :exact="isExact"
               >
                 <McSvgIcon slot="icon-prepend" :name="menuHiddenItem.icon" />
                 {{ menuHiddenItem.name }}
@@ -230,7 +231,7 @@ export default {
     },
     isExact() {
       if (this.music) {
-        return false
+        return true
       }
 
       return (
