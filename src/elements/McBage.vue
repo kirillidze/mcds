@@ -1,13 +1,6 @@
-<template>
-  <section class="mc-bage" :class="classes">
-    <div class="mc-bage__text">
-      <slot></slot>
-    </div>
-  </section>
-</template>
-
 <script>
 export default {
+  functional: true,
   name: "McBage",
   props: {
     /**
@@ -35,14 +28,28 @@ export default {
       default: "transparent",
     },
   },
-  computed: {
-    classes() {
-      return {
-        [`mc-bage--variation-${this.variation}`]: this.variation,
-        [`mc-bage--size-${this.size}`]: this.size,
-        ["mc-bage--vertical-line"]: this.verticalLine,
-      }
-    },
+  render(h, { props, slots, data }) {
+    return h(
+      "section",
+      {
+        class: {
+          "mc-bage": true,
+          [`mc-bage--variation-${props.variation}`]: props.variation,
+          [`mc-bage--size-${props.size}`]: props.size,
+          ["mc-bage--vertical-line"]: props.verticalLine,
+          [`${data.staticClass}`]: data.staticClass,
+        },
+      },
+      [
+        h(
+          "div",
+          {
+            class: "mc-bage__text",
+          },
+          slots()["default"]
+        ),
+      ]
+    )
   },
 }
 </script>
