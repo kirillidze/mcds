@@ -67,12 +67,16 @@ export default {
 
   watch: {
     $route() {
-      this.closeDropdown()
+      this.value && this.closeDropdown()
     },
   },
 
   mounted() {
     this.activator.addEventListener("click", this.toggleDropdown)
+  },
+
+  beforeDestroy() {
+    this.activator.removeEventListener("click", this.toggleDropdown)
   },
 
   methods: {
@@ -81,7 +85,7 @@ export default {
     },
     handleClickOutside(e) {
       if (!this.value || !document.body.contains(e.target)) return
-      this.closeDropdown()
+      this.value && this.closeDropdown()
     },
     closeDropdown() {
       this.$emit("input", false)
