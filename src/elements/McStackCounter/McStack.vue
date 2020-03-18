@@ -3,8 +3,16 @@ import McAvatar from "../McAvatar/McAvatar"
 import McChip from "../McChip"
 import McStackCounter from "./McStackCounter"
 export default {
+  inject: {
+    components: {
+      default: {
+        McStackCounter,
+      },
+    },
+  },
+  functional: true,
   name: "McStack",
-  components: { McChip, McAvatar, McStackCounter },
+  components: { McChip, McAvatar },
   status: "ready",
   release: "1.0.0",
 
@@ -14,11 +22,19 @@ export default {
       default: null,
     },
   },
-  render(h) {
+  render(h, { props, slots, data, injections }) {
+    let items = slots()["default"]
+    const renderItems = items ? items.filter(i => i.tag !== null) : []
+    items = props.limit === null ? renderItems : renderItems.slice(0, props.limit)
+    const more = renderItems.length - items.length
+
     return h(
       "div",
       {
-        class: "mc-stack",
+        class: {
+          "mc-stack": true,
+          [`${data.staticClass}`]: data.staticClass,
+        },
       },
       [
         h(
@@ -26,33 +42,20 @@ export default {
           {
             class: "mc-stack__body",
           },
-          this.items
+          items
         ),
-        this.more > 0
-          ? h("McStackCounter", {
+        more > 0
+          ? h("component", {
+              is: injections.components.McStackCounter,
               class: "mc-stack__counter",
               props: {
-                count: this.more,
+                count: more,
                 type: "default",
               },
             })
           : null,
       ]
     )
-  },
-  computed: {
-    renderItems() {
-      let items = this.$slots["default"]
-      return items == null ? [] : items.filter(i => i.tag != null)
-    },
-    items() {
-      let items = this.renderItems
-      if (this.limit == null) return items
-      return items.slice(0, this.limit)
-    },
-    more() {
-      return this.renderItems.length - this.items.length
-    },
   },
 }
 </script>
