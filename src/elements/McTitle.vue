@@ -72,6 +72,10 @@ export default {
     },
   },
   render(h, { props, slots, data }) {
+    let content = slots()["default"]
+    if (data.domProps && data.domProps.innerHTML) {
+      content = data.domProps.innerHTML
+    }
     return h(
       "component",
       {
@@ -95,7 +99,7 @@ export default {
           {
             class: "mc-title__text",
           },
-          slots()["default"]
+          content
         ),
         slots()["icon-append"],
       ]
