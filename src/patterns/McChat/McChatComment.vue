@@ -40,6 +40,7 @@
         line-height="s"
         :color="comment.color"
         v-html="filteredComment"
+        :ellipsis="false"
       />
 
       <McTitle
