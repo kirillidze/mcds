@@ -397,6 +397,8 @@ export default {
 }
 .datepicker-popup {
   border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.175);
+  z-index: 12222;
   .cell {
     color: $color-black;
     width: 40px;
@@ -435,8 +437,6 @@ export default {
     border: none;
   }
   .mx-datepicker-popup {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.175);
-    z-index: 12222;
   }
   .mx-table {
     border-spacing: 8px;
