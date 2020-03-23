@@ -214,8 +214,14 @@ export default {
 
   data() {
     return {
-      prettyValue: new Date(this.value),
+      prettyValue: this.value ? new Date(this.value) : new Date(),
     }
+  },
+
+  watch: {
+    value() {
+      this.prettyValue = new Date(this.value)
+    },
   },
 
   computed: {
@@ -468,7 +474,7 @@ export default {
 <docs>
     ```jsx
     let text = null
-    let value = '2020-03-22'
+    let value = '2019-06-20T00:00:00+00:00'
     <div style="max-width: 700px">
 
         <mc-date-picker title="datePickerInlineRu" lang="ru" name="date" type="date" placeholder="Дата1" inline />
