@@ -214,7 +214,7 @@ export default {
 
   data() {
     return {
-      prettyValue: this.value,
+      prettyValue: new Date(this.value),
     }
   },
 
@@ -436,8 +436,6 @@ export default {
   .mx-datepicker-header {
     border: none;
   }
-  .mx-datepicker-popup {
-  }
   .mx-table {
     border-spacing: 8px;
   }
@@ -470,6 +468,7 @@ export default {
 <docs>
     ```jsx
     let text = null
+    let value = '2020-03-22'
     <div style="max-width: 700px">
 
         <mc-date-picker title="datePickerInlineRu" lang="ru" name="date" type="date" placeholder="Дата1" inline />
@@ -489,7 +488,8 @@ export default {
           format="MM/DD/YYYY"
           placeholder="Дата2"
           help-text="Вспомогательный текст"
-        >
+          v-model="value"
+        >'
             <template slot="header">
                 <mc-button variation="blue-invert">Сегодня</mc-button>
             </template>
