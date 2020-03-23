@@ -436,6 +436,7 @@ export default {
   }
   .mx-datepicker-popup {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.175);
+    z-index: 12222;
   }
   .mx-table {
     border-spacing: 8px;
