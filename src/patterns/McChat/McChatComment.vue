@@ -40,6 +40,7 @@
         line-height="s"
         :color="comment.color"
         v-html="filteredComment"
+        :ellipsis="false"
       />
 
       <McTitle
@@ -96,7 +97,7 @@ export default {
       return _has(this.comment, ["user", "name"]) ? this.comment.user.name : "Системный комментарий"
     },
     commentWithLinks() {
-      const regExp = /((http|https):\/\/)?(([a-zA-Zа-яА-Я.-]*)\.([a-zA-Zа-яА-Я]{2,}).*)/gi
+      const regExp = /((http|https):\/\/)?(([0-9a-zA-Zа-яА-Я.-]*)\.([a-zA-Zа-яА-Я]{2,}).*)/gi
       return this.comment.content.replace(regExp, match => {
         const url = /^http/.test(match) ? match : `http://${match}`
         return `<a class="mc-chat-comment__link" href='${url}' target="_blank">${match.trim()}</a>`
