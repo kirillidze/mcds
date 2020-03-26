@@ -18,9 +18,7 @@
       :infinite="infinite"
       :hasMore="hasMore"
       :lang="lang"
-      :container-element="containerElement"
       @load="handleLoad"
-      :loading="loading"
     />
 
     <McTableBody
@@ -31,7 +29,6 @@
       :checked-items="checkedItems"
       :check-by="checkBy"
       @check="handleCheck"
-      :container-element="containerElement"
     >
       <template v-for="header in headers" :slot="`cell-${header.key}`" slot-scope="row">
         <slot :name="`cell-${header.key}`" :item="row.item" />
@@ -125,10 +122,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
     hasMore: {
       type: Boolean,
       default: false,
@@ -155,15 +148,11 @@ export default {
       type: String,
       default: "m",
     },
-    containerElement: {
-      default: null,
-    },
   },
   computed: {
     classes() {
       return {
         ["mc-table--fixed"]: this.fixed,
-        ["mc-table--loading"]: this.loading,
         ["mc-table--compleate"]: !this.hasMore,
       }
     },
@@ -323,7 +312,6 @@ export default {
 
     <div>
         <McTable
-                :loading="true"
                 :headers="headers"
                 :items="bodyMapped"
                 :infinite="true"

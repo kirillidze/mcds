@@ -10,7 +10,7 @@
       :checked-items="checkedItems"
       :check-by="checkBy"
       @check="value => handleCheck(item, value)"
-      :container-element="containerElement"
+      ref="row"
     >
       <slot
         v-for="header in headers"
@@ -55,13 +55,52 @@ export default {
       type: String,
       default: "id",
     },
-    containerElement: {
-      default: null,
+  },
+  data() {
+    return {
+      observer: null,
+    }
+  },
+  mounted() {
+    this.createObserver()
+  },
+
+  beforeDestroy() {
+    this.observer.disconnect()
+  },
+
+  watch: {
+    items() {
+      this.updateVisibilityItems()
     },
   },
+
   methods: {
     handleCheck(item, value) {
       this.$emit("check", { item, value })
+    },
+    createObserver() {
+      this.observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.style.visibility = "visible"
+            } else {
+              entry.target.style.visibility = "hidden"
+            }
+          })
+        },
+        { threshold: 0.1 }
+      )
+      this.updateVisibilityItems()
+    },
+    updateVisibilityItems() {
+      let elements = []
+      elements = this.$refs.row.map(i => i.$el)
+
+      elements.forEach(element => {
+        this.observer.observe(element)
+      })
     },
   },
 }
