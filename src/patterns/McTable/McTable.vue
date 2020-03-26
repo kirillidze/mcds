@@ -19,6 +19,7 @@
       :hasMore="hasMore"
       :lang="lang"
       @load="handleLoad"
+      :loading="loading"
     />
 
     <McTableBody
@@ -119,6 +120,10 @@ export default {
       },
     },
     infinite: {
+      type: Boolean,
+      default: false,
+    },
+    loading: {
       type: Boolean,
       default: false,
     },

@@ -11,6 +11,13 @@ export default {
   name: "McTableLoader",
   components: { "pacman-loader": PacmanLoader },
 
+  props: {
+    loading: {
+      isVisible: false,
+      default: false,
+    },
+  },
+
   data() {
     return {
       observer: null,
@@ -25,13 +32,24 @@ export default {
     this.observer.disconnect()
   },
 
+  watch: {
+    loading(newValue) {
+      if (!newValue && this.isVisible) {
+        this.load()
+      }
+    },
+  },
+
   methods: {
     createObserver() {
       this.observer = new IntersectionObserver(
         entries => {
           const entry = entries[0]
           if (entry.isIntersecting) {
+            this.isVisible = true
             this.load()
+          } else {
+            this.isVisible = false
           }
         },
         { threshold: 0.1 }
