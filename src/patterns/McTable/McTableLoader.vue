@@ -13,7 +13,7 @@ export default {
 
   props: {
     loading: {
-      isVisible: false,
+      type: Boolean,
       default: false,
     },
   },
@@ -21,11 +21,13 @@ export default {
   data() {
     return {
       observer: null,
+      container: null,
     }
   },
 
   mounted() {
     this.createObserver()
+    this.container = window.document.getElementsByClassName("mc-table-card-wrap__inner")[0] || null
   },
 
   beforeDestroy() {
@@ -34,8 +36,8 @@ export default {
 
   watch: {
     loading(newValue) {
-      if (!newValue && this.isVisible) {
-        this.load()
+      if (!newValue && this.container) {
+        this.container.scrollTop = this.container.scrollTop - 10
       }
     },
   },
@@ -46,10 +48,7 @@ export default {
         entries => {
           const entry = entries[0]
           if (entry.isIntersecting) {
-            this.isVisible = true
             this.load()
-          } else {
-            this.isVisible = false
           }
         },
         { threshold: 0.1 }
