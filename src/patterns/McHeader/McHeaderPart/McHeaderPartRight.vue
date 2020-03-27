@@ -322,7 +322,7 @@ export default {
       this.$emit("input", !this.value)
     },
     closeMenu() {
-      this.$emit("input", false)
+      this.value && this.$emit("input", false)
     },
     initChatra() {
       let user = this.user

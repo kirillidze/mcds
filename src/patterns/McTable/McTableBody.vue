@@ -59,10 +59,12 @@ export default {
   data() {
     return {
       observer: null,
+      rows: null,
     }
   },
   mounted() {
     this.createObserver()
+    this.rows = this.$refs.row
   },
 
   beforeDestroy() {
@@ -70,8 +72,8 @@ export default {
   },
 
   watch: {
-    items() {
-      this.updateVisibilityItems()
+    rows(newValue, oldValue) {
+      oldValue && this.updateVisibilityItems()
     },
   },
 
@@ -90,17 +92,20 @@ export default {
             }
           })
         },
-        { threshold: 0.1 }
+        {
+          rootMargin: "300px",
+          threshold: 0.01,
+        }
       )
       this.updateVisibilityItems()
     },
     updateVisibilityItems() {
-      let elements = []
-      elements = this.$refs.row.map(i => i.$el)
-
-      elements.forEach(element => {
-        this.observer.observe(element)
-      })
+      if (this.$refs.row) {
+        const elements = this.$refs.row.map(i => i.$el)
+        elements.forEach(element => {
+          this.observer.observe(element)
+        })
+      }
     },
   },
 }
