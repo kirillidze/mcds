@@ -80,6 +80,10 @@ export default {
         innerHTML: data.domProps.innerHTML,
       }
     }
+    let style = {}
+    if (data.staticStyle) {
+      style = data.staticStyle
+    }
     return h(
       "component",
       {
@@ -94,6 +98,7 @@ export default {
           "mc-title--uppercase": props.uppercase,
           [`${data.staticClass}`]: data.staticClass,
         },
+        style,
         is: props.tagName || `h${props.level}`,
       },
       [
@@ -267,7 +272,7 @@ export default {
 
     <br><br>
 
-    <McTitle size="xxxxl" color="blue">
+    <McTitle  size="xxxxl" color="blue" >
       <McSvgIcon slot="icon-prepend" name="ready"/>
       Заголовок
     </McTitle>

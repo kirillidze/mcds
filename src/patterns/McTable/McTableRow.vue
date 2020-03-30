@@ -1,9 +1,5 @@
 <template>
-  <tr
-    class="mc-table-row"
-    :class="classes"
-    :style="{ visibility: isVisible ? 'visible' : 'hidden' }"
-  >
+  <tr class="mc-table-row" :class="classes">
     <slot>
       <McTableCell
         :checkable="index === 0 && checkable"
@@ -33,7 +29,7 @@ import _get from "lodash/get"
 import McTableCell from "./McTableCell"
 import McTitle from "../../elements/McTitle"
 import McFieldCheckbox from "../../elements/McField/McFieldCheckbox"
-import { findParentComponent, findChildrenComponents } from "../../utils/treeSearch"
+import { findChildrenComponents } from "../../utils/treeSearch"
 export default {
   name: "McTableRow",
   components: { McTitle, McTableCell, McFieldCheckbox },
@@ -82,10 +78,7 @@ export default {
   },
   data() {
     return {
-      isVisible: true,
       isChildActive: false,
-      offsetHeight: 0,
-      wrapper: null,
     }
   },
   computed: {
@@ -101,41 +94,10 @@ export default {
   },
   mounted() {
     this.setIsChildActive()
-    if (this.optimizeVisibility && this.containerElement) {
-      if (this.containerElement === "McTableCardWrap") {
-        this.wrapper = findParentComponent(this, "McTableCardWrap").$el.getElementsByClassName(
-          "mc-table-card-wrap__inner"
-        )[0]
-      }
-
-      if (this.containerElement === "McTableCardBody") {
-        this.wrapper = findParentComponent(this, "McTableCardBody").$el.querySelector(
-          ".mc-table-card-body__left .mc-table-card-body__inner-col"
-        )
-      }
-
-      if (this.wrapper) {
-        this.checkVisibility()
-        this.wrapper.addEventListener("scroll", this.checkVisibility)
-        window.addEventListener("resize", this.checkVisibility)
-        setInterval(() => {
-          this.offsetHeight = this.$el.offsetHeight
-        }, 250)
-      }
-    }
-  },
-  beforeDestroy() {
-    this.wrapper && this.wrapper.removeEventListener("scroll", this.checkVisibility)
-    this.wrapper && window.removeEventListener("resize", this.checkVisibility)
   },
   watch: {
     $route() {
       this.setIsChildActive()
-    },
-    offsetHeight(val, prevVal) {
-      if (val && !prevVal) {
-        this.checkVisibility()
-      }
     },
   },
   methods: {
@@ -150,15 +112,6 @@ export default {
       if (cellLinks.length > 0) {
         this.isChildActive = cellLinks[0].isTagActive
       }
-    },
-    checkVisibility() {
-      let el = this.$el
-      let wrapper = this.wrapper
-
-      let boxWrapper = wrapper.getBoundingClientRect()
-      let boxRow = el.getBoundingClientRect()
-
-      this.isVisible = boxRow.bottom > boxWrapper.top && boxRow.top < boxWrapper.bottom
     },
   },
 }

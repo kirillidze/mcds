@@ -4,11 +4,7 @@
       <McTableCell :size="size" :item="headers[0]">
         <template v-if="infinite">
           <template v-if="hasMore">
-            <McTableLoader
-              :loading="loading"
-              :container-element="containerElement"
-              @load="handleLoad"
-            />
+            <McTableLoader :loading="loading" @load="handleLoad" />
           </template>
           <template v-else>
             <McTitle :text-align="computedTextAlign" tagName="span">
@@ -71,9 +67,6 @@ export default {
     hasMore: {
       type: Boolean,
       default: false,
-    },
-    containerElement: {
-      default: null,
     },
     loading: {
       type: Boolean,

@@ -7,90 +7,54 @@
 <script>
 import "vue-loaders/dist/vue-loaders.css"
 import { PacmanLoader } from "vue-loaders"
-import { findParentComponent } from "../../utils/treeSearch"
 export default {
   name: "McTableLoader",
   components: { "pacman-loader": PacmanLoader },
 
   props: {
     loading: {
+      type: Boolean,
       default: false,
-    },
-    offsetTop: {
-      default: 0,
-    },
-    offsetRight: {
-      default: 0,
-    },
-    offsetBottom: {
-      default: 300,
-    },
-    offsetLeft: {
-      default: 0,
-    },
-    containerElement: {
-      default: null,
     },
   },
 
   data() {
     return {
-      visible: false,
+      observer: null,
       container: null,
     }
   },
 
   mounted() {
-    this.container = this.containerElement ? findParentComponent(this, this.containerElement) : null
-    this.handleScroll()
+    this.createObserver()
+    this.container = window.document.getElementsByClassName("mc-table-card-wrap__inner")[0] || null
   },
 
-  beforeMount() {
-    window.addEventListener("scroll", this.handleScroll, true)
-  },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll, true)
+    this.observer.disconnect()
+  },
+
+  watch: {
+    loading(newValue) {
+      if (!newValue && this.container) {
+        this.container.scrollTop = this.container.scrollTop - 10
+      }
+    },
   },
 
   methods: {
-    handleScroll() {
-      let el = this.$refs.el
-      let container = this.container
-
-      let height = container
-        ? this.container.$el.clientHeight
-        : window.innerHeight || document.documentElement.clientHeight
-      let width = container
-        ? this.container.$el.clientWidth
-        : window.innerWidth || document.documentElement.clientWidth
-      if (!el) return
-
-      let childrenPosition = el.getBoundingClientRect()
-      let parentPosition = container ? container.$el.getBoundingClientRect() : null
-
-      let top = parentPosition ? childrenPosition.top - parentPosition.top : childrenPosition.top
-      let left = parentPosition
-        ? childrenPosition.left - parentPosition.left
-        : childrenPosition.left
-      let right = parentPosition
-        ? childrenPosition.right - parentPosition.right
-        : childrenPosition.right
-      let bottom = parentPosition
-        ? childrenPosition.bottom - parentPosition.bottom
-        : childrenPosition.bottom
-
-      let isVisible =
-        top >= this.offsetTop &&
-        left >= this.offsetLeft &&
-        bottom - this.offsetBottom <= height &&
-        right - this.offsetRight <= width
-
-      isVisible && this.load()
-    },
-
-    handleClick() {
-      this.$emit("click")
-      this.load()
+    createObserver() {
+      this.observer = new IntersectionObserver(
+        entries => {
+          const entry = entries[0]
+          if (entry.isIntersecting) {
+            this.load()
+          }
+        },
+        { threshold: 0.1 }
+      )
+      const element = this.$refs.el
+      this.observer.observe(element)
     },
 
     load() {
