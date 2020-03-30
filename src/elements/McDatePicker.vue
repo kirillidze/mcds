@@ -235,6 +235,9 @@ export default {
     popupClass() {
       return {
         "datepicker-popup": true,
+        "datepicker-popup--en": this.lang === "en",
+        "datepicker-popup--es": this.lang === "es",
+        "datepicker-popup--ru": this.lang === "ru",
       }
     },
 
@@ -414,6 +417,29 @@ export default {
     border-width: 3px 0 0 3px;
   }
 
+  .not-current-month {
+    user-select: none;
+    pointer-events: none;
+    & div {
+      display: none;
+    }
+  }
+
+  &--es,
+  &--ru {
+    .mx-date-row .cell:nth-child(6),
+    .mx-date-row .cell:nth-child(7) {
+      color: $color-outline-gray;
+    }
+  }
+
+  &--en {
+    .mx-date-row .cell:nth-child(1),
+    .mx-date-row .cell:nth-child(7) {
+      color: $color-outline-gray;
+    }
+  }
+
   &--error {
     .mx-input {
       border-color: $color-red !important;
@@ -455,7 +481,7 @@ export default {
           placeholder="Дата2"
           help-text="Вспомогательный текст"
           v-model="value"
-        >'
+        >
             <template slot="header">
                 <mc-button variation="blue-invert">Сегодня</mc-button>
             </template>
