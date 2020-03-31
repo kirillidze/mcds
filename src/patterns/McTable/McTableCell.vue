@@ -1,14 +1,7 @@
-<template>
-  <component :is="tag" class="mc-table-cell" :style="styles" :class="classes">
-    <div class="mc-table-cell__inner">
-      <slot></slot>
-    </div>
-  </component>
-</template>
-
 <script>
 import tokens from "../../assets/tokens/tokens"
 export default {
+  functional: true,
   name: "McTableCell",
 
   props: {
@@ -30,20 +23,41 @@ export default {
     },
   },
 
-  computed: {
-    styles() {
-      if (!this.item) return
-      return {
-        width: this.item.width,
-        borderRight: this.item.hasBorder ? `1px solid ${tokens.color_outline_gray}` : null,
+  render(h, { props, slots, data }) {
+    let style = {}
+    if (props.item) {
+      style.width = props.item.width
+      style.borderRight = props.item.hasBorder ? `1px solid ${tokens.color_outline_gray}` : null
+    }
+
+    if (data.staticStyle) {
+      style = {
+        ...style,
+        ...data.staticStyle,
       }
-    },
-    classes() {
-      return {
-        [`mc-table-cell--size-${this.size}`]: this.size,
-        "mc-table-cell--checkable": this.checkable,
-      }
-    },
+    }
+    return h(
+      "component",
+      {
+        class: {
+          "mc-table-cell": true,
+          [`mc-table-cell--size-${props.size}`]: props.size,
+          "mc-table-cell--checkable": props.checkable,
+          [`${data.staticClass}`]: data.staticClass,
+        },
+        style,
+        is: props.tag,
+      },
+      [
+        h(
+          "div",
+          {
+            class: "mc-table-cell__inner",
+          },
+          slots()["default"]
+        ),
+      ]
+    )
   },
 }
 </script>
