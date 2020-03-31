@@ -115,9 +115,13 @@ export default {
         left: 0 !important;
         right: 0 !important;
         width: 100% !important;
+        height: 100vh !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
       }
-
       .mc-modal__inner {
+        overflow: auto;
         @media #{$media-query-xl-down} {
           margin: 0 !important;
           border-radius: 8px 8px 0 0;
