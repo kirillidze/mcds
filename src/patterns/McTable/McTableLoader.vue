@@ -37,7 +37,7 @@ export default {
   watch: {
     loading(newValue) {
       if (!newValue && this.container) {
-        this.container.scrollTop = this.container.scrollTop - 10
+        this.container.scrollTop = this.container.scrollTop - 60
       }
     },
   },
