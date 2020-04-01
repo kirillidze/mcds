@@ -47,6 +47,7 @@ export default {
         },
         style,
         is: props.tag,
+        attrs: data.attrs,
       },
       [
         h(
