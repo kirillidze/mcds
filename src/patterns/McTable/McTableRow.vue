@@ -29,7 +29,6 @@ import _get from "lodash/get"
 import McTableCell from "./McTableCell"
 import McTitle from "../../elements/McTitle"
 import McFieldCheckbox from "../../elements/McField/McFieldCheckbox"
-import { findChildrenComponents } from "../../utils/treeSearch"
 export default {
   name: "McTableRow",
   components: { McTitle, McTableCell, McFieldCheckbox },
@@ -108,9 +107,8 @@ export default {
       this.$emit("check", value)
     },
     setIsChildActive() {
-      let cellLinks = findChildrenComponents(this, "McTableCellLink")
-      if (cellLinks.length > 0) {
-        this.isChildActive = cellLinks[0].isTagActive
+      if (this.$slots.link) {
+        this.isChildActive = this.$slots.link[0].data.class["mc-table-cell-link--active"]
       }
     },
   },

@@ -1,10 +1,13 @@
-<template>
-  <component :is="tag" v-bind="tagBind" class="mc-table-cell-link" v-on="$listeners"> </component>
-</template>
-
 <script>
 export default {
+  functional: true,
   name: "McTableCellLink",
+  data() {
+    return {
+      isTagActive: false,
+      isLink: false,
+    }
+  },
   props: {
     /**
      *  Если нужна ссылка внутри приложения:
@@ -29,34 +32,40 @@ export default {
       default: true,
     },
   },
-  computed: {
-    isLink() {
-      return this.to || this.href
-    },
+  render(h, { props, data, listeners, parent }) {
+    let style = {}
+    if (data.staticStyle) {
+      style = data.staticStyle
+    }
 
-    tag() {
-      let link = this.nuxt ? "nuxt-link" : "router-link"
+    const link = props.nuxt ? "nuxt-link" : "router-link"
+    const tag = props.to ? link : "a"
 
-      return this.to ? link : "a"
-    },
+    const tagBind = {}
+    if (props.to) {
+      tagBind.to = props.to
+    } else if (props.href) {
+      tagBind.href = props.href
+    }
 
-    tagBind() {
-      const result = {}
-      if (this.to) {
-        result.to = this.to
-      } else if (this.href) {
-        result.href = this.href
-      }
+    let isTagActive = false
+    if (tag === "nuxt-link") {
+      isTagActive = parent.$router.resolve(props.to).route.path === parent.$route.path
+    }
 
-      return result
-    },
+    data.isLink = props.to || props.href
 
-    isTagActive() {
-      if (this.tag === "nuxt-link") {
-        return this.$router.resolve(this.to).route.path === this.$route.path
-      }
-      return false
-    },
+    return h("component", {
+      class: {
+        "mc-table-cell-link": true,
+        "mc-table-cell-link--active": isTagActive,
+        [`${data.staticClass}`]: data.staticClass,
+      },
+      style,
+      is: tag,
+      on: listeners,
+      attrs: tagBind,
+    })
   },
 }
 </script>
