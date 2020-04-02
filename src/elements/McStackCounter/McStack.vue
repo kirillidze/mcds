@@ -33,7 +33,8 @@ export default {
       {
         class: {
           "mc-stack": true,
-          [`${data.staticClass}`]: data.staticClass,
+          ...(data.staticClass || {}),
+          ...(data.class || {}),
         },
       },
       [

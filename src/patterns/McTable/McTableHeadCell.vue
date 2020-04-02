@@ -1,11 +1,5 @@
 <template>
-  <McTableCell
-    :size="size"
-    :item="item"
-    tag="th"
-    :class="classes"
-    @click.native="handleClick(item)"
-  >
+  <McTableCell :size="size" :item="item" tag="th" :class="classes" @click="handleClick(item)">
     <McTitle :text-align="textAlign" tagName="span">
       <McSvgIcon
         v-if="isSortable"

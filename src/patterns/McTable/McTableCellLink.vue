@@ -59,7 +59,8 @@ export default {
       class: {
         "mc-table-cell-link": true,
         "mc-table-cell-link--active": isTagActive,
-        [`${data.staticClass}`]: data.staticClass,
+        ...(data.staticClass || {}),
+        ...(data.class || {}),
       },
       style,
       is: tag,

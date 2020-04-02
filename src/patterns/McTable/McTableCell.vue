@@ -31,10 +31,7 @@ export default {
     }
 
     if (data.staticStyle) {
-      style = {
-        ...style,
-        ...data.staticStyle,
-      }
+      style = { ...style, ...data.staticStyle }
     }
     return h(
       "component",
@@ -43,7 +40,8 @@ export default {
           "mc-table-cell": true,
           [`mc-table-cell--size-${props.size}`]: props.size,
           "mc-table-cell--checkable": props.checkable,
-          [`${data.staticClass}`]: data.staticClass,
+          ...(data.staticClass || {}),
+          ...(data.class || {}),
         },
         style,
         is: props.tag,

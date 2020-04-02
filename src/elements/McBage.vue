@@ -37,7 +37,8 @@ export default {
           [`mc-bage--variation-${props.variation}`]: props.variation,
           [`mc-bage--size-${props.size}`]: props.size,
           ["mc-bage--vertical-line"]: props.verticalLine,
-          [`${data.staticClass}`]: data.staticClass,
+          ...(data.staticClass || {}),
+          ...(data.class || {}),
         },
       },
       [
