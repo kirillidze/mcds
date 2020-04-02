@@ -23,7 +23,7 @@ export default {
     },
   },
 
-  render(h, { props, slots, data }) {
+  render(h, { props, listeners, slots, data }) {
     let style = {}
     if (props.item) {
       style.width = props.item.width
@@ -46,6 +46,7 @@ export default {
         style,
         is: props.tag,
         attrs: data.attrs,
+        on: listeners,
       },
       [
         h(
