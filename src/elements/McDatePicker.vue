@@ -265,7 +265,7 @@ export default {
 
     handleEmitDate(value) {
       let newValue = value
-      if (!value.length) {
+      if (!value || !value.length) {
         newValue = this.$moment(value).format(this.toFormat)
       }
       this.handleInput(newValue)
@@ -420,9 +420,7 @@ export default {
   .not-current-month {
     user-select: none;
     pointer-events: none;
-    & div {
-      display: none;
-    }
+    color: $color-hover-gray !important;
   }
 
   &--es,

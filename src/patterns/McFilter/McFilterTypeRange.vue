@@ -8,9 +8,21 @@
       <div class="mc-filter-type-range__row">
         <McGridRow :gutter-x="6" :gutter-y="6">
           <McGridCol :span="6">
+            <mc-date-picker
+              v-if="filter.type === 'date'"
+              name="more"
+              type="date"
+              clearable
+              editable
+              :placeholder="tRangeMore"
+              v-model="value.more"
+              @input="value => handleInput('more', value)"
+              @keypress.enter="submit"
+            />
             <McFieldText
+              v-else
               :value="value.more || ''"
-              :type="filter.type === 'date' ? 'date' : 'text'"
+              type="text"
               :placeholder="tRangeMore"
               name="more"
               @input="value => handleInput('more', value)"
@@ -29,9 +41,21 @@
             </McFieldText>
           </McGridCol>
           <McGridCol :span="6">
+            <mc-date-picker
+              v-if="filter.type === 'date'"
+              name="less"
+              type="date"
+              clearable
+              editable
+              :placeholder="tRangeLess"
+              v-model="value.less"
+              @input="value => handleInput('less', value)"
+              @keypress.enter="submit"
+            />
             <McFieldText
+              v-else
               :value="value.less || ''"
-              :type="filter.type === 'date' ? 'date' : 'text'"
+              type="text"
               :placeholder="tRangeLess"
               name="less"
               @input="value => handleInput('less', value)"
@@ -69,6 +93,7 @@ import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
 import McCollapse from "../../patterns/McCollapse"
 import McFieldText from "../../elements/McField/McFieldText"
+import McDatePicker from "../../elements/McDatePicker"
 import McRangeSlider from "../../elements/McRangeSlider"
 import McChip from "../../elements/McChip"
 import McButton from "../../elements/McButton"
@@ -80,6 +105,7 @@ export default {
   name: "McFilterTypeRange",
   components: {
     McSvgIcon,
+    McDatePicker,
     McFilterRow,
     McButton,
     McChip,
