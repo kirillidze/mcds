@@ -24,25 +24,34 @@ export default {
   },
 
   render(h, { props, listeners, slots, data }) {
+    const classes = {
+      "mc-table-cell": true,
+      [`mc-table-cell--size-${props.size}`]: props.size,
+      "mc-table-cell--checkable": props.checkable,
+      ...(data.class || {}),
+    }
+
+    if (data.staticClass) {
+      const staticClasses = data.staticClass.split(" ")
+      staticClasses.forEach(c => {
+        if (c) {
+          classes[c] = true
+        }
+      })
+    }
+
     let style = {}
     if (props.item) {
       style.width = props.item.width
       style.borderRight = props.item.hasBorder ? `1px solid ${tokens.color_outline_gray}` : null
     }
-
     if (data.staticStyle) {
       style = { ...style, ...data.staticStyle }
     }
     return h(
       "component",
       {
-        class: {
-          "mc-table-cell": true,
-          [`mc-table-cell--size-${props.size}`]: props.size,
-          "mc-table-cell--checkable": props.checkable,
-          ...(data.staticClass || {}),
-          ...(data.class || {}),
-        },
+        class: classes,
         style,
         is: props.tag,
         attrs: data.attrs,

@@ -80,6 +80,26 @@ export default {
         innerHTML: data.domProps.innerHTML,
       }
     }
+    const classes = {
+      "mc-title": true,
+      [`mc-title--size-${props.size}`]: props.size,
+      [`mc-title--line-height-${props.lineHeight}`]: props.lineHeight,
+      [`mc-title--family-${props.family}`]: props.family,
+      ["mc-title--ellipsis"]: props.ellipsis,
+      [`mc-title--color-${props.color}`]: props.color,
+      [`mc-title--text-align-${props.textAlign}`]: props.textAlign,
+      "mc-title--uppercase": props.uppercase,
+      ...(data.class || {}),
+    }
+
+    if (data.staticClass) {
+      const staticClasses = data.staticClass.split(" ")
+      staticClasses.forEach(c => {
+        if (c) {
+          classes[c] = true
+        }
+      })
+    }
     let style = {}
     if (data.staticStyle) {
       style = data.staticStyle
@@ -87,18 +107,7 @@ export default {
     return h(
       "component",
       {
-        class: {
-          "mc-title": true,
-          [`mc-title--size-${props.size}`]: props.size,
-          [`mc-title--line-height-${props.lineHeight}`]: props.lineHeight,
-          [`mc-title--family-${props.family}`]: props.family,
-          ["mc-title--ellipsis"]: props.ellipsis,
-          [`mc-title--color-${props.color}`]: props.color,
-          [`mc-title--text-align-${props.textAlign}`]: props.textAlign,
-          "mc-title--uppercase": props.uppercase,
-          ...(data.staticClass || {}),
-          ...(data.class || {}),
-        },
+        class: classes,
         style,
         is: props.tagName || `h${props.level}`,
       },

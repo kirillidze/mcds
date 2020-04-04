@@ -28,14 +28,29 @@ export default {
     items = props.limit === null ? renderItems : renderItems.slice(0, props.limit)
     const more = renderItems.length - items.length
 
+    const classes = {
+      "mc-stack": true,
+      ...(data.class || {}),
+    }
+
+    if (data.staticClass) {
+      const staticClasses = data.staticClass.split(" ")
+      staticClasses.forEach(c => {
+        if (c) {
+          classes[c] = true
+        }
+      })
+    }
+    let style = {}
+    if (data.staticStyle) {
+      style = data.staticStyle
+    }
+
     return h(
       "div",
       {
-        class: {
-          "mc-stack": true,
-          ...(data.staticClass || {}),
-          ...(data.class || {}),
-        },
+        class: classes,
+        style,
       },
       [
         h(

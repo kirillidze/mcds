@@ -33,6 +33,20 @@ export default {
     },
   },
   render(h, { props, data, listeners, parent }) {
+    const classes = {
+      "mc-table-cell-link": true,
+      "mc-table-cell-link--active": isTagActive,
+      ...(data.class || {}),
+    }
+
+    if (data.staticClass) {
+      const staticClasses = data.staticClass.split(" ")
+      staticClasses.forEach(c => {
+        if (c) {
+          classes[c] = true
+        }
+      })
+    }
     let style = {}
     if (data.staticStyle) {
       style = data.staticStyle
@@ -56,12 +70,7 @@ export default {
     data.isLink = props.to || props.href
 
     return h("component", {
-      class: {
-        "mc-table-cell-link": true,
-        "mc-table-cell-link--active": isTagActive,
-        ...(data.staticClass || {}),
-        ...(data.class || {}),
-      },
+      class: classes,
       style,
       is: tag,
       on: listeners,

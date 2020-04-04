@@ -29,17 +29,31 @@ export default {
     },
   },
   render(h, { props, slots, data }) {
+    const classes = {
+      "mc-bage": true,
+      [`mc-bage--variation-${props.variation}`]: props.variation,
+      [`mc-bage--size-${props.size}`]: props.size,
+      ["mc-bage--vertical-line"]: props.verticalLine,
+      ...(data.class || {}),
+    }
+
+    if (data.staticClass) {
+      const staticClasses = data.staticClass.split(" ")
+      staticClasses.forEach(c => {
+        if (c) {
+          classes[c] = true
+        }
+      })
+    }
+    let style = {}
+    if (data.staticStyle) {
+      style = data.staticStyle
+    }
     return h(
       "section",
       {
-        class: {
-          "mc-bage": true,
-          [`mc-bage--variation-${props.variation}`]: props.variation,
-          [`mc-bage--size-${props.size}`]: props.size,
-          ["mc-bage--vertical-line"]: props.verticalLine,
-          ...(data.staticClass || {}),
-          ...(data.class || {}),
-        },
+        class: classes,
+        style,
       },
       [
         h(
