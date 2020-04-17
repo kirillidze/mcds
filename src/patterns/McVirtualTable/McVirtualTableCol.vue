@@ -1,27 +1,26 @@
 <template>
   <vxe-table-column class="mc-virtual-table-col" v-bind="attrs" v-on="$listeners">
-    <template v-slot="{ row }">
+    <template v-slot="{ row, rowIndex }">
       <slot :row="row">
         <mc-title :text-align="textAlign" :ellipsis="ellipsis" class="mc-virtual-table-col__title">
-          {{ row[defaultTitle] }}
+          {{ $attrs.type === "seq" ? rowIndex + 1 : row[defaultTitle] }}
         </mc-title>
       </slot>
     </template>
     <template v-slot:header="{ column }">
       <slot name="header" :column="column">
-        <mc-title :text-align="textAlign" :ellipsis="true" class="mc-virtual-table-col__title">
-          {{ column.title }}
+        <mc-title :text-align="textAlign" class="mc-virtual-table-col__title">
+          {{ $attrs.type === "seq" ? "#" : column.title }}
           <mc-svg-icon v-if="isSortable" slot="icon-prepend" :name="getSortIcon(column)" />
         </mc-title>
       </slot>
     </template>
-    <template v-slot:footer="{ columnIndex }">
-      <template v-if="!columnIndex">
-        <mc-title
-          v-if="!provideData.canShowLoader"
-          :ellipsis="true"
-          class="mc-virtual-table-col__title"
-        >
+    <template v-slot:footer="{ columnIndex, items }">
+      <mc-title v-if="items[columnIndex]" :text-align="textAlign">
+        {{ items[columnIndex] }}
+      </mc-title>
+      <template v-else-if="getVisibilityCommonInfo(columnIndex, items)">
+        <mc-title v-if="!provideData.canShowLoader" class="mc-virtual-table-col__title">
           {{ provideData.placeholders.all_loaded }}
         </mc-title>
         <span
@@ -79,6 +78,10 @@ export default {
     },
   },
   methods: {
+    getVisibilityCommonInfo(columnIndex, items) {
+      const index = items.indexOf(null)
+      return columnIndex === index
+    },
     getSortIcon(column) {
       if (!this.provideData.nativeSort && _has(this.$route, "query")) {
         if (this.$route.query.sort_by && column.property === this.$route.query.sort_by) {

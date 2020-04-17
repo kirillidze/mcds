@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import XEUtils from "xe-utils"
 import _throttle from "lodash/throttle"
 import _debounce from "lodash/debounce"
 import McTitle from "../../elements/McTitle"
@@ -185,10 +186,11 @@ export default {
     updateData() {
       this.$refs.xTable.updateData()
     },
-    footerMethod({ columns }) {
+    footerMethod({ columns, data }) {
       return [
-        columns.map((column, columnIndex) => {
-          if (columnIndex !== 0) return null
+        columns.map(column => {
+          if (column.type === "seq") return data.length
+          return null
         }),
       ]
     },
@@ -197,7 +199,7 @@ export default {
       if (isBottom && !this.$attrs.loading && this.hasMore && type === "body" && isY) {
         this.load()
       }
-    }, 500),
+    }, 200),
     load() {
       this.$emit("load")
     },
@@ -388,6 +390,7 @@ $vxe-table-header-background-color: $color-white;
             @sort-change="handleSorted"
             @cell-click="cellClickEvent"
         >
+            <mc-virtual-table-col type="seq" min-width="60" fixed="left" align="right" has-border />
             <mc-virtual-table-col type="checkbox" field="title" title="Канал" width="248" fixed="left">
                 <template v-slot="{ row }">
                     <mc-preview>
