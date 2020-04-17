@@ -12,7 +12,7 @@
     show-header-overflow="tooltip"
     show-overflow="tooltip"
     show-footer-overflow="tooltip"
-    :style="{ width: `${cardIsOpen ? firstColsWidth : 'auto'}` }"
+    :style="{ width: `${cardIsOpen ? `${firstColsWidth}px` : 'auto'}` }"
     :optimization="{ scrollX: { gt: 40 }, scrollY: { gt: 40 } }"
     :show-footer="canShowFooter"
     :footer-method="footerMethod"
@@ -30,6 +30,7 @@
 
 <script>
 import _throttle from "lodash/throttle"
+import _debounce from "lodash/debounce"
 import McTitle from "../../elements/McTitle"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
@@ -126,13 +127,14 @@ export default {
     return {
       observer: null,
       cardIsOpen: false,
-      firstColsWidth: "253px",
+      firstColsWidth: 253,
     }
   },
-  mounted() {
+  async mounted() {
     window.addEventListener("resize", this.onSizeChange)
-    this.loadData()
+    await this.loadData()
     !this.scrollable && this.createObserver()
+    await this.setFirstColsWidth()
   },
   beforeDestroy() {
     this.observer && this.observer.disconnect()
@@ -148,20 +150,7 @@ export default {
       },
       deep: true,
     },
-    async cardIsOpen(newVal) {
-      if (newVal) {
-        const columns = await this.$refs.xTable.getColumns()
-
-        const leftFixedColumnsWidth = columns.reduce((sum, curr) => {
-          if (curr.fixed === "left") {
-            return sum + Number(curr.width || curr.minWidth)
-          }
-          return sum
-        }, 0)
-        if (leftFixedColumnsWidth) {
-          this.firstColsWidth = `${leftFixedColumnsWidth + 5}px` // 5 - ширина скролла
-        }
-      }
+    async cardIsOpen() {
       this.updateData()
     },
   },
@@ -203,7 +192,7 @@ export default {
         }),
       ]
     },
-    handleScroll: _throttle(function({ scrollTop, $event, type, isY }) {
+    handleScroll: _debounce(function({ scrollTop, $event, type, isY }) {
       const isBottom = scrollTop === $event.target.scrollHeight - $event.target.clientHeight
       if (isBottom && !this.$attrs.loading && this.hasMore && type === "body" && isY) {
         this.load()
@@ -228,18 +217,30 @@ export default {
       const loader = this.$refs.xTable.$el.getElementsByClassName("mc-virtual-table-col__loader")
       loader.length && this.observer.observe(loader[0])
     },
+    async setFirstColsWidth() {
+      const columns = await this.$refs.xTable.getColumns()
+      const leftFixedColumnsWidth = columns.reduce((sum, curr) => {
+        if (curr.fixed === "left") {
+          return sum + Number(curr.width || curr.minWidth)
+        }
+        return sum
+      }, 0)
+      if (leftFixedColumnsWidth) {
+        this.firstColsWidth = leftFixedColumnsWidth + 5 // 5 - ширина скролла
+      }
+    },
   },
 }
 </script>
 
 <style lang="scss">
-@import "../../../node_modules/vxe-table/styles/variable.scss";
+@import "~vxe-table/styles/variable.scss";
 
 //override variables:
 $vxe-table-border-color: $color-outline-gray;
 $vxe-table-header-background-color: $color-white;
 
-@import "../../../node_modules/vxe-table/styles/modules.scss";
+@import "~vxe-table/styles/modules.scss";
 
 .mc-virtual-table {
   .vxe-header--row {
@@ -412,7 +413,7 @@ $vxe-table-header-background-color: $color-white;
                 </template>
             </mc-virtual-table-col>
 
-            <mc-virtual-table-col type="expand" fixed="left" min-width="5" has-border>
+            <mc-virtual-table-col type="seq" fixed="left" min-width="5" has-border>
                 <template v-slot="{ row }">
                     <mc-bage vertical-line variation="light-green" style="position: absolute; top: 0; left: 0; bottom: 0" />
                 </template>
@@ -420,14 +421,15 @@ $vxe-table-header-background-color: $color-white;
 
             <mc-virtual-table-col field="user" title="Пользователь" min-width="200">
                 <template v-slot="{ row }">
-                    <mc-title>Почтальон Печкин</mc-title>
+                    <mc-title v-if="row.id%2">Почтальон Печкин</mc-title>
+                    <mc-title v-else style="width: auto; max-width: 101%;">Клён кудрявый лист резной</mc-title>
                 </template>
             </mc-virtual-table-col>
 
             <mc-virtual-table-col
                 field="views_count"
                 title="Просмотры"
-                min-width="200"
+                min-width="130"
                 align="right"
                 sortable
                 :sortMethod="sortNameMethod"
