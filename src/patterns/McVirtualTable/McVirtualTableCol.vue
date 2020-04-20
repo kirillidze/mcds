@@ -6,6 +6,9 @@
           {{ $attrs.type === "seq" ? rowIndex + 1 : row[defaultTitle] }}
         </mc-title>
       </slot>
+      <div v-if="$scopedSlots.right" class="mc-virtual-table-col__right">
+        <slot name="right" :row="row" />
+      </div>
     </template>
     <template v-slot:header="{ column }">
       <slot name="header" :column="column">
@@ -111,12 +114,54 @@ export default {
     width: auto;
     max-width: 101%;
   }
+  &__right {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    @include position(absolute, 0 $space-xs 0 null);
+    background-color: $color-white;
+
+    &::before {
+      @include pseudo();
+      @include position(null, 0 100% 0 null);
+      width: $tappable-element-xs;
+      background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, $color-white);
+    }
+  }
 }
+
 .vxe-cell {
   &.c--tooltip,
   &.c--title {
     text-overflow: clip !important;
     white-space: normal !important;
+  }
+}
+.vxe-body--row {
+  transition: background-color 0s;
+  &.row--hover {
+    .mc-virtual-table-col__right {
+      background-color: #f5f7fa;
+      &::before {
+        background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #f5f7fa);
+      }
+    }
+    &.row--current {
+      .mc-virtual-table-col__right {
+        background-color: #d7effb;
+        &::before {
+          background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #d7effb);
+        }
+      }
+    }
+  }
+  &.row--current {
+    .mc-virtual-table-col__right {
+      background-color: #e6f7ff;
+      &::before {
+        background: linear-gradient(90deg, hsla(0, 0%, 100%, 0) 0, #e6f7ff);
+      }
+    }
   }
 }
 </style>

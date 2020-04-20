@@ -6,12 +6,12 @@
     v-bind="$attrs"
     v-on="$listeners"
     row-id="id"
-    stripe
     highlight-hover-row
     highlight-current-row
     show-header-overflow="tooltip"
     show-overflow="tooltip"
     show-footer-overflow="tooltip"
+    :class="classes"
     :style="{ width: `${cardIsOpen ? `${firstColsWidth}px` : 'auto'}` }"
     :optimization="{ scrollX: { gt: 40 }, scrollY: { gt: 40 } }"
     :show-footer="canShowFooter"
@@ -171,6 +171,11 @@ export default {
     tag() {
       return `vxe-${this.componentTag}`
     },
+    classes() {
+      return {
+        "mc-virtual-table--open-card": this.cardIsOpen,
+      }
+    },
   },
   methods: {
     onSizeChange: _throttle(function() {
@@ -245,6 +250,11 @@ $vxe-table-header-background-color: $color-white;
 @import "~vxe-table/styles/modules.scss";
 
 .mc-virtual-table {
+  &--open-card {
+    .vxe-table--body-wrapper {
+      overflow-x: hidden;
+    }
+  }
   .vxe-header--row {
     min-height: $size-xxl + 1;
   }
@@ -376,6 +386,7 @@ $vxe-table-header-background-color: $color-white;
             ref="table"
             height="500"
             scrollable
+            stripe
             border="outer"
             component-tag="grid"
             :items="bodyMapped"
@@ -413,6 +424,14 @@ $vxe-table-header-background-color: $color-white;
                         </mc-grid-row>
                         <mc-title size="m" slot="top"> {{ row.title }} </mc-title>
                     </mc-preview>
+                </template>
+                <template v-slot:right="{ row }">
+                    <mc-button style="margin-right: 4px;" variation="blue-link" size="s-compact">
+                        <mc-svg-icon slot="icon-append" name="create" size="xxs"/>
+                    </mc-button>
+                    <mc-button variation="blue-link" size="s-compact">
+                        <mc-svg-icon slot="icon-append" name="delete" size="xxs"/>
+                    </mc-button>
                 </template>
             </mc-virtual-table-col>
 
@@ -473,7 +492,7 @@ $vxe-table-header-background-color: $color-white;
                 </template>
             </mc-virtual-table-col>
 
-            <mc-virtual-table-col field="action" title="Действие" width="243">
+            <mc-virtual-table-col field="action" title="Действие" width="243" fixed="right">
                 <template v-slot="{ row }">
                     <mc-grid-row justify="right" :wrap="false" align="middle" :gutter-x="5">
                         <mc-grid-col>
