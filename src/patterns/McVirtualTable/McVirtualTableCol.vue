@@ -110,6 +110,9 @@ export default {
   &--border-top {
     border-top: 1px solid $color-outline-gray;
   }
+  &--border-bottom {
+    border-bottom: 1px solid $color-outline-gray;
+  }
   &__title {
     width: auto;
     max-width: 101%;

@@ -29,7 +29,6 @@
 </template>
 
 <script>
-import XEUtils from "xe-utils"
 import _throttle from "lodash/throttle"
 import _debounce from "lodash/debounce"
 import McTitle from "../../elements/McTitle"
@@ -251,7 +250,8 @@ $vxe-table-header-background-color: $color-white;
 
 .mc-virtual-table {
   &--open-card {
-    .vxe-table--body-wrapper {
+    .vxe-table--body-wrapper,
+    .vxe-table--footer-wrapper {
       overflow-x: hidden;
     }
   }
