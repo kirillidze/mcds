@@ -287,9 +287,16 @@ export default {
       }
     },
     handleClickOutside(e) {
-      if (!this.accordionIsClosed && document.body.contains(e.target)) {
+      if (
+        !this.accordionIsClosed &&
+        document.body.contains(e.target) &&
+        !e.path.some(this.hasDatePicker)
+      ) {
         this.$refs.accordion.handleToggle(true)
       }
+    },
+    hasDatePicker(item) {
+      return item.classList == "mx-datepicker-content"
     },
   },
 }

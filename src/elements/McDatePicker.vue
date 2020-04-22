@@ -339,6 +339,24 @@ export default {
     right: unset;
     left: 8px;
   }
+
+  &--error {
+    .mx-input {
+      border-color: $color-red !important;
+    }
+  }
+  &--disabled {
+    .mx-input {
+      color: $color-gray-dark;
+      cursor: not-allowed;
+      background-color: $color-hover-gray;
+      border-color: $color-hover-gray;
+      box-shadow: none;
+      &:hover {
+        border-color: $color-hover-gray;
+      }
+    }
+  }
 }
 .mx-calendar {
   width: 360px;
@@ -435,21 +453,6 @@ export default {
     .mx-date-row .cell:nth-child(1),
     .mx-date-row .cell:nth-child(7) {
       color: $color-outline-gray;
-    }
-  }
-
-  &--error {
-    .mx-input {
-      border-color: $color-red !important;
-    }
-  }
-
-  &--disabled {
-    .mx-input {
-      color: $color-gray-dark;
-      cursor: not-allowed;
-      background-color: $color-hover-gray;
-      border-color: $color-hover-gray;
     }
   }
 }
