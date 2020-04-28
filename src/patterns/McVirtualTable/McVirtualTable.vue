@@ -13,7 +13,7 @@
     show-footer-overflow="tooltip"
     :class="classes"
     :style="{ width: `${cardIsOpen ? `${firstColsWidth}px` : 'auto'}` }"
-    :optimization="{ scrollX: { gt: 40 }, scrollY: { gt: 40 } }"
+    :scroll-y="{ gt: 0 }"
     :show-footer="canShowFooter"
     :footer-method="footerMethod"
     :sort-config="{ remote: !nativeSort, showIcon: false, trigger: 'cell' }"
@@ -45,10 +45,12 @@ import McStack from "../../elements/McStackCounter/McStack"
 import McChip from "../../elements/McChip"
 import McAvatar from "../../elements/McAvatar/McAvatar"
 import McFieldText from "../../elements/McField/McFieldText"
+import McFieldSelect from "../../elements/McField/McFieldSelect"
 
 export default {
   name: "McVirtualTable",
   components: {
+    McFieldSelect,
     McFieldText,
     McAvatar,
     McChip,
@@ -345,7 +347,7 @@ $vxe-table-header-background-color: $color-white;
     }
 
     function handleCellClassName({rowIndex}) {
-        return rowIndex && "mc-virtual-table-col--border-top"
+        return "mc-virtual-table-col--border-bottom"
     }
     let loading = false
     function handleLoad() {
