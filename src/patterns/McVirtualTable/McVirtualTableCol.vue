@@ -13,8 +13,11 @@
     <template v-slot:header="{ column }">
       <slot name="header" :column="column">
         <mc-title :text-align="textAlign" class="mc-virtual-table-col__title">
-          {{ $attrs.type === "seq" ? "#" : column.title }}
           <mc-svg-icon v-if="isSortable" slot="icon-prepend" :name="getSortIcon(column)" />
+          {{ $attrs.type === "seq" ? "#" : column.title }}
+          <div slot="icon-append">
+            <slot name="header-append" />
+          </div>
         </mc-title>
       </slot>
     </template>
