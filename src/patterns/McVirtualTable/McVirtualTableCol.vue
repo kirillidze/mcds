@@ -59,13 +59,13 @@ export default {
   },
   computed: {
     attrs() {
-      const borderAttrs = {
-        "class-name": "mc-virtual-table-col--border-right",
-        "header-class-name": "mc-virtual-table-col--border-right",
+      const classes = {
+        "class-name": this.handleClassName,
+        "header-class-name": this.handleClassName,
         "footer-class-name": this.handleFooterClassName,
       }
       return {
-        ...(this.hasBorder && !this.provideData.cardIsOpen ? borderAttrs : {}),
+        ...classes,
         ...this.$attrs,
       }
     },
@@ -98,6 +98,16 @@ export default {
       if (!column.order) return "unfold_more"
       return column.order === "desc" ? "arrow_downward" : "arrow_upward"
     },
+    handleClassName() {
+      const classes = []
+      if (this.hasBorder && !this.provideData.cardIsOpen) {
+        classes.push("mc-virtual-table-col--border-right")
+      }
+      if (this.$attrs["show-overflow"] === false) {
+        classes.push("mc-virtual-table-col--overflow-visible")
+      }
+      return classes
+    },
     handleFooterClassName({ columnIndex }) {
       return !columnIndex && "mc-virtual-table-col--border-right"
     },
@@ -116,6 +126,12 @@ export default {
   &--border-bottom {
     border-bottom: 1px solid $color-outline-gray;
   }
+  &--overflow-visible {
+    .vxe-cell {
+      overflow: visible !important;
+    }
+  }
+
   &__title {
     width: auto;
     max-width: 101%;
