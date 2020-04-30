@@ -108,8 +108,10 @@ export default {
       }
       return classes
     },
-    handleFooterClassName({ columnIndex }) {
-      return !columnIndex && "mc-virtual-table-col--border-right"
+    handleFooterClassName() {
+      if (this.hasBorder && !this.provideData.cardIsOpen) {
+        return "mc-virtual-table-col--border-right"
+      }
     },
   },
 }

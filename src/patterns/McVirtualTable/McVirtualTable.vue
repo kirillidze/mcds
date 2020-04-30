@@ -196,6 +196,7 @@ export default {
       return [
         columns.map(column => {
           if (column.type === "seq") return data.length
+          if (column.type === "checkbox") return " "
           return null
         }),
       ]
