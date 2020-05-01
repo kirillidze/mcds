@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.277](https://github.com/MediaCubeCo/mcds/compare/v1.0.276...v1.0.277) (2020-05-01)
+
 ### [1.0.276](https://github.com/MediaCubeCo/mcds/compare/v1.0.275...v1.0.276) (2020-04-30)
 
 ### [1.0.275](https://github.com/MediaCubeCo/mcds/compare/v1.0.274...v1.0.275) (2020-04-30)
