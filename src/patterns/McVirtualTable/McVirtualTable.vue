@@ -6,6 +6,8 @@
     v-bind="$attrs"
     v-on="$listeners"
     row-id="id"
+    auto-resize
+    sync-resize
     highlight-hover-row
     highlight-current-row
     show-header-overflow="tooltip"
@@ -29,7 +31,6 @@
 </template>
 
 <script>
-import _throttle from "lodash/throttle"
 import _debounce from "lodash/debounce"
 import McTitle from "../../elements/McTitle"
 import McSvgIcon from "../../elements/McSvgIcon"
@@ -133,14 +134,12 @@ export default {
     }
   },
   async mounted() {
-    window.addEventListener("resize", this.onSizeChange)
     await this.loadData()
     !this.scrollable && this.createObserver()
     await this.setFirstColsWidth()
   },
   beforeDestroy() {
     this.observer && this.observer.disconnect()
-    window.removeEventListener("resize", this.onSizeChange)
   },
   watch: {
     canShowFooter(newValue) {
@@ -179,9 +178,6 @@ export default {
     },
   },
   methods: {
-    onSizeChange: _throttle(function() {
-      this.updateData()
-    }, 500),
     async loadData() {
       await this.$refs.xTable.loadData(this.items)
       !this.scrollable && this.setObserveElement()
