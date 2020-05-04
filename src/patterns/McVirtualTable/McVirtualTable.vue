@@ -69,7 +69,14 @@ export default {
   },
   provide() {
     const provideData = {}
-    const properties = ["canShowLoader", "cardIsOpen", "placeholders", "nativeSort"]
+    const properties = [
+      "canShowLoader",
+      "cardIsOpen",
+      "placeholders",
+      "nativeSort",
+      "sortedBy",
+      "sortedDescending",
+    ]
     properties.forEach(property => {
       Object.defineProperty(provideData, property, {
         enumerable: true,
@@ -124,6 +131,14 @@ export default {
           all_loaded: "All loaded",
         }
       },
+    },
+    sortedBy: {
+      type: String,
+      required: false,
+    },
+    sortedDescending: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

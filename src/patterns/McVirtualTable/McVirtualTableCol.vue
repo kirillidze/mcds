@@ -89,9 +89,9 @@ export default {
       return columnIndex === index
     },
     getSortIcon(column) {
-      if (!this.provideData.nativeSort && _has(this.$route, "query")) {
-        if (this.$route.query.sort_by && column.property === this.$route.query.sort_by) {
-          return this.$route.query.sort_direction === "desc" ? "arrow_downward" : "arrow_upward"
+      if (!this.provideData.nativeSort) {
+        if (this.provideData.sortedBy && column.property === this.provideData.sortedBy) {
+          return this.provideData.sortedDescending ? "arrow_downward" : "arrow_upward"
         }
         return "unfold_more"
       }
