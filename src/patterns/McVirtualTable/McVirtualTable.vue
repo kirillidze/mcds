@@ -18,7 +18,7 @@
     :scroll-y="{ gt: 0 }"
     :show-footer="canShowFooter"
     :footer-method="footerMethod"
-    :sort-config="{ remote: !nativeSort, showIcon: false, trigger: 'cell' }"
+    :sort-config="{ remote: !nativeSort, showIcon: false, trigger: 'cell', orders: sortOrders }"
     @scroll="handleScroll"
   >
     <slot />
@@ -139,6 +139,15 @@ export default {
     sortedDescending: {
       type: Boolean,
       default: false,
+    },
+    /**
+     *  Если нужен иной порядок сортировки
+     */
+    sortOrders: {
+      type: Array,
+      default() {
+        return ["asc", "desc", null]
+      },
     },
   },
   data() {
