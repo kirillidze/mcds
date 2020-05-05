@@ -138,9 +138,10 @@
                   </template>
                 </McTitle>
               </McButton>
+
+              <McSeparator indent-bottom="xs" indent-top="xs" />
             </template>
 
-            <McSeparator indent-bottom="xs" indent-top="xs" />
             <McButton
               v-for="(menuProfileItem, index) in menuProfile"
               v-if="menuProfileItem.isVisible"
