@@ -283,6 +283,7 @@ export default {
         await this.$refs.xTable.resetColumn()
       }
       await this.$refs.xTable.recalculate()
+      await this.$refs.xTable.syncData()
     },
   },
 }
