@@ -10,20 +10,23 @@
         <McTabs class="mc-filter__tabs" ref="tabs">
           <McTab :name="lang.all">
             <McAccordion ref="accordion">
-              <template v-for="(filter, _key) in filters">
+              <template v-for="(filter, _key) in filledFilter">
                 <McFilterTypeText
                   v-if="filter.type === 'text'"
-                  :key="_key"
+                  :lang="lang"
+                  :key="`filled_${_key}`"
                   :filter="filter"
                   :value="currentValues[filter.value] || ''"
                   :real-value="value[filter.value] || ''"
                   @input="value => handleInput(filter, value)"
                   @submit="submit"
                   @open="getOpenElems"
+                  @separate-filters="separateFilters"
                 />
                 <McFilterTypeRelation
                   v-else-if="filter.type === 'relation'"
-                  :key="_key"
+                  :lang="lang"
+                  :key="`filled_${_key}`"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
                   :real-value="value[filter.value] || {}"
@@ -34,10 +37,12 @@
                   :t-relation-exists="lang.not_empty"
                   :t-relation-not-exists="lang.empty"
                   @open="getOpenElems"
+                  @separate-filters="separateFilters"
                 />
                 <McFilterTypeRange
                   v-else-if="filter.type === 'number' || filter.type === 'date'"
-                  :key="_key"
+                  :lang="lang"
+                  :key="`filled_${_key}`"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
                   :real-value="value[filter.value] || {}"
@@ -46,6 +51,52 @@
                   :t-range-more="lang.more"
                   :t-range-less="lang.less"
                   @open="getOpenElems"
+                  @separate-filters="separateFilters"
+                />
+              </template>
+              <mc-separator v-if="computedFiltersLength" indent-top="xs" indent-bottom="xs" />
+              <template v-for="(filter, _key) in unfilledFilter">
+                <McFilterTypeText
+                  v-if="filter.type === 'text'"
+                  :lang="lang"
+                  :key="`unfilled_${_key}`"
+                  :filter="filter"
+                  :value="currentValues[filter.value] || ''"
+                  :real-value="value[filter.value] || ''"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                  @open="getOpenElems"
+                  @separate-filters="separateFilters"
+                />
+                <McFilterTypeRelation
+                  v-else-if="filter.type === 'relation'"
+                  :lang="lang"
+                  :key="`unfilled_${_key}`"
+                  :filter="filter"
+                  :value="currentValues[filter.value] || {}"
+                  :real-value="value[filter.value] || {}"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                  :t-relation-is="lang.this"
+                  :t-relation-not-is="lang.is_not"
+                  :t-relation-exists="lang.not_empty"
+                  :t-relation-not-exists="lang.empty"
+                  @open="getOpenElems"
+                  @separate-filters="separateFilters"
+                />
+                <McFilterTypeRange
+                  v-else-if="filter.type === 'number' || filter.type === 'date'"
+                  :lang="lang"
+                  :key="`unfilled_${_key}`"
+                  :filter="filter"
+                  :value="currentValues[filter.value] || {}"
+                  :real-value="value[filter.value] || {}"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                  :t-range-more="lang.more"
+                  :t-range-less="lang.less"
+                  @open="getOpenElems"
+                  @separate-filters="separateFilters"
                 />
               </template>
             </McAccordion>
@@ -181,7 +232,13 @@ export default {
       panel: null,
       header: null,
       body: null,
+      filterDetailOpen: false,
+      filledFilter: [],
+      unfilledFilter: [],
     }
+  },
+  created() {
+    this.separateFilters()
   },
   mounted() {
     this.panel = this.$refs.tabs.$el.querySelector(".tabs-component-panels")
@@ -218,6 +275,9 @@ export default {
     accordionIsClosed() {
       return this.$refs.accordion ? this.$refs.accordion.isClosed : true
     },
+    computedFiltersLength() {
+      return this.filledFilter.length && this.unfilledFilter.length
+    },
   },
   watch: {
     value: {
@@ -225,6 +285,9 @@ export default {
         this.currentValues = { ...val }
       },
       immediate: true,
+    },
+    filterDetailOpen: function(value) {
+      value || this.separateFilters()
     },
   },
   methods: {
@@ -257,35 +320,36 @@ export default {
     emitInput(value) {
       this.$emit("input", this.clearEmpty(value))
     },
-    getOpenElems(elem) {
-      this.header = elem.$refs.collapse.$el.querySelector(".mc-collapse__header")
-      this.body = elem.$refs.collapse.$children.find(
-        el => el.$options._componentTag === "McSlideUpDown"
-      ).$el
-
-      this.changePos()
+    getOpenElems(value) {
+      this.filterDetailOpen = value
+      // this.header = elem.$refs.collapse.$el.querySelector(".mc-collapse__header")
+      // this.body = elem.$refs.collapse.$children.find(
+      //   el => el.$options._componentTag === "McSlideUpDown"
+      // ).$el
+      //
+      // this.changePos()
     },
 
-    changePos() {
-      this.panelBox = this.panel.getBoundingClientRect()
-      let headerBox = this.header.getBoundingClientRect()
-
-      this.body.style.left = headerBox.left + "px"
-      this.body.style.width = headerBox.width + "px"
-
-      if (headerBox.bottom >= this.panelBox.top && headerBox.bottom <= this.panelBox.bottom) {
-        this.body.style.top = headerBox.bottom + "px"
-      } else if (headerBox.bottom < this.panelBox.top) {
-        this.body.style.top = this.panelBox.top + "px"
-      } else if (headerBox.bottom > this.panelBox.bottom) {
-        this.body.style.top = this.panelBox.bottom + "px"
-      }
-    },
-    onScroll() {
-      if (!this.accordionIsClosed) {
-        this.changePos()
-      }
-    },
+    // changePos() {
+    //   this.panelBox = this.panel.getBoundingClientRect()
+    //   let headerBox = this.header.getBoundingClientRect()
+    //
+    //   this.body.style.left = headerBox.left + "px"
+    //   this.body.style.width = headerBox.width + "px"
+    //
+    //   if (headerBox.bottom >= this.panelBox.top && headerBox.bottom <= this.panelBox.bottom) {
+    //     this.body.style.top = headerBox.bottom + "px"
+    //   } else if (headerBox.bottom < this.panelBox.top) {
+    //     this.body.style.top = this.panelBox.top + "px"
+    //   } else if (headerBox.bottom > this.panelBox.bottom) {
+    //     this.body.style.top = this.panelBox.bottom + "px"
+    //   }
+    // },
+    // onScroll() {
+    //   if (!this.accordionIsClosed) {
+    //     this.changePos()
+    //   }
+    // },
     handleClickOutside(e) {
       if (
         !this.accordionIsClosed &&
@@ -297,6 +361,17 @@ export default {
     },
     hasDatePicker(item) {
       return item.classList == "mx-datepicker-content"
+    },
+    separateFilters() {
+      this.filledFilter = []
+      this.unfilledFilter = []
+
+      let currentValues = Object.keys(this.currentValues)
+      this.filters.filter(filter => {
+        currentValues.includes(filter.value)
+          ? this.filledFilter.push(filter)
+          : this.unfilledFilter.push(filter)
+      })
     },
   },
 }
@@ -330,6 +405,11 @@ export default {
   &__content {
     position: relative;
     flex-grow: 1;
+
+    .mc-accordion {
+      display: flex;
+      flex-direction: column;
+    }
 
     .mc-collapse {
       position: relative;
@@ -471,25 +551,25 @@ export default {
     },
     {
     name: 'Страна1',
-    value: 'countries',
+    value: 'countries_1',
     type: 'relation',
-    values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
+    values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }, { name: 'Украина', value: 7 }, { name: 'Украина', value: 8 }, { name: 'Украина', value: 9 }, { name: 'Украина', value:  11}, { name: 'Украина', value: 12 }, { name: 'Украина', value: 13 }, { name: 'Украина', value: 14 }, { name: 'Украина', value: 15 }, { name: 'Украина', value: 16 }, { name: 'Украина', value: 26 }, { name: 'Украина', value: 36 }, { name: 'Украина', value: 46 }, { name: 'Украина', value: 56 }, { name: 'Украина', value: 66 }, { name: 'Украина', value: 76 }, { name: 'Украина', value: 86 }, { name: 'Украина', value: 96 }, { name: 'Украина', value: 116 }, { name: 'Украина', value: 126 }, { name: 'Украина', value: 136 }, { name: 'Украина', value: 146 }, { name: 'Украина', value: 156 }, { name: 'Украина', value: 166 }, { name: 'Украина', value: 176 }, { name: 'Украина', value: 186 }, { name: 'Украина', value: 196 }, { name: 'Украина', value: 226 }, { name: 'Украина', value: 216 }, { name: 'Украина', value: 236 }, { name: 'Украина', value: 246 }]
     },
     {
     name: 'Страна2',
-    value: 'countries',
+    value: 'countries_2',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
     {
     name: 'Страна3',
-    value: 'countries',
+    value: 'countries_3',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
     {
     name: 'Страна4',
-    value: 'countries',
+    value: 'countries_4',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
@@ -513,6 +593,7 @@ export default {
         later: "Позже",
         above: "Раньше",
         apply: "Применить",
+        save: "Сохранить",
         reset: "Сбросить",
         save_preset: "Сохранить пресет",
         filter: "Фильтр",

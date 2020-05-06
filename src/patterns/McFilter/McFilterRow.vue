@@ -8,7 +8,7 @@
     <div class="mc-filter-row__chip" v-if="$slots.chip">
       <slot name="chip"></slot>
     </div>
-    <McSvgIcon class="mc-filter-row__icon" size="xs" name="arrow_drop_down" />
+    <McSvgIcon class="mc-filter-row__icon" size="xs" name="chevron_right" />
   </mc-tappable>
 </template>
 

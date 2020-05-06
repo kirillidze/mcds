@@ -1,8 +1,8 @@
 <template>
-  <McCollapse @open="handleOpen" ref="collapse">
+  <McFilterSlider @open="handleOpen" ref="collapse" :back-title="filter.name" :lang="lang">
     <McFilterRow slot="activator">
       {{ filter.name }}
-      <McFilterDot slot="chip" v-if="chipCount" @click="e => emitInput(null, e)" />
+      <McFilterDot slot="chip" v-if="chipCount" @click="e => resetFilter(null, e)" />
     </McFilterRow>
     <div class="mc-filter-type-range__body" slot="body">
       <div class="mc-filter-type-range__row">
@@ -85,7 +85,7 @@
         />
       </div>
     </div>
-  </McCollapse>
+  </McFilterSlider>
 </template>
 
 <script>
@@ -101,6 +101,8 @@ import McFilterRow from "./McFilterRow"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McFilterDot from "./McFilterDot"
 
+import McFilterSlider from "./McFilterSlider"
+
 export default {
   name: "McFilterTypeRange",
   components: {
@@ -115,6 +117,7 @@ export default {
     McGridRow,
     McCollapse,
     McFilterDot,
+    McFilterSlider,
   },
   props: {
     value: {
@@ -137,6 +140,15 @@ export default {
       type: String,
       required: true,
     },
+    lang: {
+      type: Object,
+    },
+  },
+  data() {
+    return {
+      temporaryValue: {},
+      open: false,
+    }
   },
   computed: {
     chipCount() {
@@ -166,8 +178,8 @@ export default {
     },
   },
   methods: {
-    handleOpen() {
-      this.$emit("open", this)
+    handleOpen(value) {
+      this.$emit("open", value)
     },
     handleInput(type, value) {
       const currentValue = { ...this.value }
@@ -196,6 +208,31 @@ export default {
     },
     submit() {
       this.$emit("submit")
+    },
+
+    setTemporaryValue() {
+      this.temporaryValue = { ...this.value }
+    },
+
+    resetFilter(value, e) {
+      this.emitInput(value, e)
+      this.$emit("separate-filters")
+    },
+
+    /**
+     * Set temporary value to current value if user not push to save button
+     * return Void
+     * */
+    resetValue() {
+      this.emitInput(this.temporaryValue)
+    },
+
+    /**
+     * Set open field in filter component for separate filters method
+     * */
+    setGlobalOpen() {
+      this.open = !this.open
+      this.handleOpen(this.open)
     },
   },
 }
