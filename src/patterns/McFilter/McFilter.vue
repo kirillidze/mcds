@@ -120,7 +120,7 @@
                   />
                 </div>
                 <div class="mc-filter__preset-btn">
-                  <mc-button size="s" @click="emitInput(preset)">{{ lang.apply }}</mc-button>
+                  <mc-button size="s" @click="applyPreset(preset)">{{ lang.apply }}</mc-button>
                 </div>
               </div>
             </div>
@@ -344,6 +344,13 @@ export default {
         currentValues.includes(filter.value)
           ? this.filledFilter.push(filter)
           : this.unfilledFilter.push(filter)
+      })
+    },
+    applyPreset(preset) {
+      this.emitInput(preset)
+
+      this.$nextTick(() => {
+        this.separateFilters()
       })
     },
   },
