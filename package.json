@@ -1,6 +1,6 @@
 {
   "name": "mcds",
-  "version": "1.0.273",
+  "version": "1.0.285",
   "description": "Design system for mediacube services",
   "author": "mediacube",
   "main": "dist/system/system.js",
@@ -134,7 +134,7 @@
     "vue-textarea-autosize": "^1.0.4",
     "vue2-datepicker": "^3.4.1",
     "vuex": "^3.0.1",
-    "vxe-table": "^2.9.4",
+    "vxe-table": "^2.9.5",
     "webfontloader": "^1.6.28",
     "xe-utils": "^2.4.5"
   },

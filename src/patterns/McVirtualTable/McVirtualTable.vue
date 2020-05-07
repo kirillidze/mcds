@@ -1,35 +1,36 @@
 <template>
-  <component
-    class="mc-virtual-table"
-    ref="xTable"
-    :is="tag"
-    v-bind="$attrs"
-    v-on="$listeners"
-    row-id="id"
-    highlight-hover-row
-    highlight-current-row
-    show-header-overflow="tooltip"
-    show-overflow="tooltip"
-    show-footer-overflow="tooltip"
-    :class="classes"
-    :style="{ width: `${cardIsOpen ? `${firstColsWidth}px` : 'auto'}` }"
-    :scroll-y="{ gt: 0 }"
-    :show-footer="canShowFooter"
-    :footer-method="footerMethod"
-    :sort-config="{ remote: !nativeSort, showIcon: false, trigger: 'cell' }"
-    @scroll="handleScroll"
-  >
-    <slot />
-    <template v-slot:empty>
-      <mc-title text-align="center">
-        {{ placeholders.no_data }}
-      </mc-title>
-    </template>
-  </component>
+  <div :style="wrapperStyles">
+    <component
+      class="mc-virtual-table"
+      ref="xTable"
+      :is="tag"
+      v-bind="$attrs"
+      v-on="$listeners"
+      row-id="id"
+      highlight-hover-row
+      highlight-current-row
+      show-header-overflow="tooltip"
+      show-overflow="tooltip"
+      show-footer-overflow="tooltip"
+      auto-resize
+      :sync-resize="cardIsOpen"
+      :scroll-y="scrollY"
+      :show-footer="canShowFooter"
+      :footer-method="footerMethod"
+      :sort-config="{ remote: !nativeSort, showIcon: false, trigger: 'cell', orders: sortOrders }"
+      @scroll="handleScroll"
+    >
+      <slot />
+      <template v-slot:empty>
+        <mc-title text-align="center">
+          {{ placeholders.no_data }}
+        </mc-title>
+      </template>
+    </component>
+  </div>
 </template>
 
 <script>
-import _throttle from "lodash/throttle"
 import _debounce from "lodash/debounce"
 import McTitle from "../../elements/McTitle"
 import McSvgIcon from "../../elements/McSvgIcon"
@@ -68,7 +69,14 @@ export default {
   },
   provide() {
     const provideData = {}
-    const properties = ["canShowLoader", "cardIsOpen", "placeholders", "nativeSort"]
+    const properties = [
+      "canShowLoader",
+      "cardIsOpen",
+      "placeholders",
+      "nativeSort",
+      "sortedBy",
+      "sortedDescending",
+    ]
     properties.forEach(property => {
       Object.defineProperty(provideData, property, {
         enumerable: true,
@@ -124,6 +132,36 @@ export default {
         }
       },
     },
+    sortedBy: {
+      type: String,
+      required: false,
+    },
+    sortedDescending: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     *  Если нужен иной порядок сортировки
+     */
+    sortOrders: {
+      type: Array,
+      default() {
+        return ["asc", "desc", null]
+      },
+    },
+    /**
+     *  Параметры виртуального скролла:
+     *  `gt: 0 - всегда включён; -1 - всегда выключен;
+     *  число (строк), сверх которого включается виртуальный скролл`
+     */
+    scrollY: {
+      type: Object,
+      default() {
+        return {
+          gt: 0,
+        }
+      },
+    },
   },
   data() {
     return {
@@ -133,14 +171,12 @@ export default {
     }
   },
   async mounted() {
-    window.addEventListener("resize", this.onSizeChange)
     await this.loadData()
     !this.scrollable && this.createObserver()
     await this.setFirstColsWidth()
   },
   beforeDestroy() {
     this.observer && this.observer.disconnect()
-    window.removeEventListener("resize", this.onSizeChange)
   },
   watch: {
     canShowFooter(newValue) {
@@ -152,8 +188,8 @@ export default {
       },
       deep: true,
     },
-    async cardIsOpen() {
-      this.updateData()
+    cardIsOpen(newVal) {
+      this.toggleColumns(newVal)
     },
   },
   computed: {
@@ -172,16 +208,15 @@ export default {
     tag() {
       return `vxe-${this.componentTag}`
     },
-    classes() {
+    wrapperStyles() {
       return {
-        "mc-virtual-table--open-card": this.cardIsOpen,
+        width: this.cardIsOpen ? `${this.firstColsWidth}px` : "auto",
+        height: this.$attrs.height || "auto",
+        "max-height": this.$attrs["max-height"] || "none",
       }
     },
   },
   methods: {
-    onSizeChange: _throttle(function() {
-      this.updateData()
-    }, 500),
     async loadData() {
       await this.$refs.xTable.loadData(this.items)
       !this.scrollable && this.setObserveElement()
@@ -196,6 +231,7 @@ export default {
       return [
         columns.map(column => {
           if (column.type === "seq") return data.length
+          if (column.type === "checkbox") return " "
           return null
         }),
       ]
@@ -237,6 +273,18 @@ export default {
         this.firstColsWidth = leftFixedColumnsWidth + 5 // 5 - ширина скролла
       }
     },
+    async toggleColumns(val) {
+      if (val) {
+        const columns = await this.$refs.xTable.getColumns()
+        const hideColumns = columns.filter(col => col.fixed !== "left")
+        hideColumns.forEach(col => (col.visible = false))
+        await this.$refs.xTable.refreshColumn()
+      } else {
+        await this.$refs.xTable.resetColumn()
+      }
+      await this.$refs.xTable.recalculate()
+      await this.$refs.xTable.syncData()
+    },
   },
 }
 </script>
@@ -250,13 +298,13 @@ $vxe-table-header-background-color: $color-white;
 
 @import "~vxe-table/styles/modules.scss";
 
-.mc-virtual-table {
-  &--open-card {
-    .vxe-table--body-wrapper,
-    .vxe-table--footer-wrapper {
-      overflow-x: hidden;
-    }
+.vxe-table--tooltip-wrapper {
+  .vxe-table--tooltip-content {
+    white-space: normal;
   }
+}
+
+.mc-virtual-table {
   .vxe-header--row {
     min-height: $size-xxl + 1;
   }

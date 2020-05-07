@@ -3,7 +3,7 @@
     <McHeaderNav>
       <McHeaderNavItem class="mc-header-part-right__chatra" v-if="chatraId">
         <McDropdown v-model="menuChatraIsOpen" position="right" :rotate-icon="false">
-          <McButton slot="activator" variation="black-flat" size="m-compact" rounded>
+          <McButton slot="activator" variation="black-flat" size="m-compact">
             <McSvgIcon size="xs" slot="icon-append" name="chat" />
           </McButton>
 
@@ -18,7 +18,7 @@
         v-if="menuApps && menuApps.length && menuApps[0].isAuth !== null"
       >
         <McDropdown v-model="menuAppsIsOpen" position="right" :rotate-icon="false">
-          <McButton slot="activator" variation="black-flat" size="m-compact" rounded>
+          <McButton slot="activator" variation="black-flat" size="m-compact">
             <McSvgIcon slot="icon-append" name="apps" />
           </McButton>
 
@@ -26,22 +26,23 @@
             <McButton
               v-for="(menuAppsItem, index) in menuApps"
               v-if="menuAppsItem.isVisible"
+              class="mc-header-part-right__apps-btn"
               :key="`menu-apps-item-${index}`"
               full-width
               text-align="left"
               variation="black-flat"
-              size="xl"
+              size="l"
               :href="menuAppsItem.href"
               :to="menuAppsItem.to"
               :is-active="menuAppsItem.isActive"
             >
-              <div slot="icon-prepend">
+              <div slot="icon-prepend" class="mc-header-part-right__apps-icon">
                 <McAvatar v-if="isCustomMenuApp" :src="menuAppsItem.icon" />
                 <McSvgIcon
                   v-else
                   slot="icon-prepend"
                   :name="menuAppsItem.icon"
-                  size="m"
+                  size="xs"
                   fill="#E01C42"
                 />
               </div>
@@ -52,8 +53,8 @@
       </McHeaderNavItem>
 
       <McHeaderNavItem
-        class="mc-header-part-right__profile"
         v-if="menuProfile && menuProfile.length && user"
+        class="mc-header-part-right__profile"
       >
         <McDropdown v-model="menuProfileIsOpen" position="right">
           <McButton
@@ -67,24 +68,33 @@
           </McButton>
           <McPanel>
             <template>
-              <McButton
-                class="mc-header-part-right__user"
-                full-width
-                text-align="left"
-                variation="black-flat"
-                size="l"
-                :is-active="true"
-              >
-                <McPreview>
-                  <McAvatar :src="user.avatar" rounded slot="left" />
-                  <McTitle color="blue" :level="3" size="l" slot="top">
-                    {{ user.first_name }} {{ user.last_name }}
-                  </McTitle>
-                  <McTitle v-if="user.email" color="gray" size="m" slot="bottom">
-                    {{ user.email }}
-                  </McTitle>
-                </McPreview>
-              </McButton>
+              <div class="mc-header-part-right__user-card">
+                <McAvatar :src="user.avatar" size="l" rounded />
+                <McTitle text-align="center" color="blue" size="l" line-height="s">
+                  {{ user.first_name }}
+                </McTitle>
+                <McTitle
+                  v-if="user.last_name"
+                  text-align="center"
+                  color="blue"
+                  size="l"
+                  line-height="s"
+                >
+                  {{ user.last_name }}
+                </McTitle>
+                <McTitle
+                  v-if="user.email"
+                  text-align="center"
+                  color="gray"
+                  size="s"
+                  line-height="s"
+                >
+                  {{ user.email }}
+                </McTitle>
+              </div>
+
+              <McSeparator indent-bottom="xs" indent-top="xs" />
+
               <McButton
                 class="mc-header-part-right__user"
                 v-if="user.root_user"
@@ -97,7 +107,10 @@
                 <McPreview>
                   <McAvatar :src="user.root_user.avatar" rounded slot="left" />
                   <McTitle :level="3" size="l" slot="top">
-                    {{ user.root_user.first_name }} {{ user.root_user.last_name }}
+                    {{ user.root_user.first_name }}
+                    <template v-if="user.root_user.last_name">
+                      {{ user.root_user.last_name }}
+                    </template>
                   </McTitle>
                   <McTitle color="gray" size="m" slot="bottom">
                     {{ user.root_user.email }}
@@ -117,20 +130,23 @@
                 size="l"
                 @click="typeof subUser.handler === 'function' ? subUser.handler(subUser.id) : ''"
               >
-                <McPreview>
-                  <McAvatar :src="subUser.avatar" rounded slot="left" />
-                  <McTitle :level="3" size="l" slot="top">
-                    {{ subUser.first_name }} {{ subUser.last_name }}
-                  </McTitle>
-                </McPreview>
+                <McAvatar :src="subUser.avatar" rounded slot="icon-prepend" size="s" />
+                <McTitle line-height="s">
+                  {{ subUser.first_name }}
+                  <template v-if="subUser.last_name">
+                    {{ subUser.last_name }}
+                  </template>
+                </McTitle>
               </McButton>
+
+              <McSeparator indent-bottom="xs" indent-top="xs" />
             </template>
 
-            <McSeparator indent-bottom="xs" indent-top="xs" />
             <McButton
               v-for="(menuProfileItem, index) in menuProfile"
               v-if="menuProfileItem.isVisible"
               :key="`menu-profile-item-${index}`"
+              class="mc-header-part-right__user-menu"
               full-width
               text-align="left"
               :variation="menuProfileItem.variation"
@@ -143,7 +159,7 @@
               exact
               :dusk="menuProfileItem.dusk"
             >
-              <McSvgIcon slot="icon-prepend" :name="menuProfileItem.icon" size="xxs" />
+              <McSvgIcon slot="icon-prepend" :name="menuProfileItem.icon" size="xs" />
               {{ menuProfileItem.name }}
             </McButton>
           </McPanel>
@@ -166,7 +182,7 @@
 
       <McHeaderNavItem class="mc-header-part-right__langs" v-if="menuLangs && menuLangs.length">
         <McDropdown v-model="menuLangsIsOpen" position="right">
-          <McButton slot="activator" variation="black-flat" @click="">
+          <McButton slot="activator" variation="black-flat">
             {{ menuLangs[0].name }}
             <McSvgIcon slot="icon-append" name="arrow_drop_down" />
           </McButton>
@@ -190,7 +206,7 @@
       </McHeaderNavItem>
 
       <McHeaderNavItem class="mc-header-part-right__burger">
-        <McButton @click="handleToggleMenu" variation="black-flat" size="m-compact" rounded>
+        <McButton @click="handleToggleMenu" variation="black-flat" size="m-compact">
           <McSvgIcon slot="icon-prepend" :name="value ? 'close' : 'menu'" />
         </McButton>
       </McHeaderNavItem>
@@ -375,18 +391,35 @@ export default {
   flex-wrap: nowrap;
   padding-left: $space-l;
 
-  &__user {
-    height: auto;
+  &__apps {
+    &-btn {
+      padding: 0 $space-xs !important;
+    }
+    &-icon {
+      display: flex;
+      align-items: center;
+      > * {
+        margin-left: 0 !important;
+      }
+    }
+    .mc-panel {
+      min-width: $panel-s;
+    }
+  }
 
-    .mc-preview {
-      padding: $space-xs 0;
-      &__left {
-        margin-right: $space-xs;
+  &__user {
+    padding: 0 $space-xs !important;
+
+    &-card {
+      text-align: center;
+      padding: $space-s $space-xs;
+      .mc-avatar {
+        margin-bottom: $space-s;
       }
     }
 
-    .mc-avatar {
-      margin: 0 !important;
+    &-menu {
+      padding: 0 $space-xs !important;
     }
   }
 
@@ -414,6 +447,9 @@ export default {
       &__body {
         top: calc(100% + 5px);
       }
+    }
+    .mc-panel {
+      min-width: $panel-s;
     }
   }
 }

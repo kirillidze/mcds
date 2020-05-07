@@ -528,10 +528,6 @@ $colors: $token-colors;
     pointer-events: none;
   }
 
-  &--rounded {
-    border-radius: $radius-circle;
-  }
-
   &--radius {
     &-m {
       border-radius: $radius-m;
@@ -539,6 +535,10 @@ $colors: $token-colors;
     &-l {
       border-radius: $radius-l * 3;
     }
+  }
+
+  &--rounded {
+    border-radius: $radius-circle;
   }
 
   &--full-width {
