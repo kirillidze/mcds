@@ -1,41 +1,47 @@
 <template>
-  <McFilterSlider
-    @open="handleOpen"
+  <mc-filter-slider
     ref="collapse"
     class="mc-filter-type-relation"
-    :back-title="filter.name"
-    :lang="lang"
+    :open="open"
+    @open="handleOpen"
+    @clickToBack="resetValue"
   >
-    <McFilterRow slot="activator">
+    <mc-filter-row slot="activator">
       {{ filter.name }}
       <!--<McSvgIcon v-if="isAjax" name="search" />-->
-      <McFilterDot slot="chip" v-if="chipCount" @click="e => resetFilter(e)" />
-    </McFilterRow>
+      <mc-filter-dot slot="chip" v-if="chipCount" @click="e => resetFilter(e)" />
+    </mc-filter-row>
+    <template slot="head">
+      <mc-button variation="black-link">
+        <mc-svg-icon slot="icon-prepend" name="arrow_upward" size="xs" />
+        <mc-title :level="4" size="l">{{ filter.name }}</mc-title>
+      </mc-button>
+    </template>
     <div class="mc-filter-type-relation__body" slot="body">
       <div class="mc-filter-type-relation__row">
-        <McGridRow :gutter-x="6" :gutter-y="6">
-          <McGridCol v-for="selectType in selectTypes" :key="selectType">
-            <McButton
+        <mc-grid-row :gutter-x="6" :gutter-y="6">
+          <mc-grid-col v-for="selectType in selectTypes" :key="selectType">
+            <mc-button
               v-bind="buttonBind"
               :variation="selectType === type ? 'blue' : 'white'"
               @click.prevent="handleClick(selectType)"
             >
               {{ selectType === "is" ? tRelationIs : tRelationNotIs }}
-            </McButton>
-          </McGridCol>
-          <McGridCol v-for="v in [1, 0]" :key="v">
-            <McButton
+            </mc-button>
+          </mc-grid-col>
+          <mc-grid-col v-for="v in [1, 0]" :key="v">
+            <mc-button
               v-bind="buttonBind"
               :variation="(value.exists || []).indexOf(v) === -1 ? 'white' : 'blue'"
               @click.prevent="handleClick('exists', v)"
             >
               {{ v === 0 ? tRelationExists : tRelationNotExists }}
-            </McButton>
-          </McGridCol>
-        </McGridRow>
+            </mc-button>
+          </mc-grid-col>
+        </mc-grid-row>
       </div>
       <div class="mc-filter-type-relation__row">
-        <McFieldSelect
+        <mc-field-select
           v-if="selectTypes.indexOf(type) !== -1 || type === 'exists'"
           :options="computedOptions"
           @input="handleInput"
@@ -46,15 +52,15 @@
         />
       </div>
       <div class="mc-filter-type-relation__row">
-        <McGridRow :gutter-x="6" :gutter-y="6" v-if="!value.exists">
-          <McGridCol
+        <mc-grid-row :gutter-x="6" :gutter-y="6" v-if="!value.exists">
+          <mc-grid-col
             v-for="(chips, type) in value || {}"
             v-if="selectTypes.indexOf(type) !== -1"
             :key="type"
           >
-            <McGridRow :gutter-x="8" :gutter-y="8">
-              <McGridCol v-for="chip in chips" :key="type + '-' + filter.value + chip">
-                <McFilterTypeRelationChip
+            <mc-grid-row :gutter-x="8" :gutter-y="8">
+              <mc-grid-col v-for="chip in chips" :key="type + '-' + filter.value + chip">
+                <mc-filter-type-relation-chip
                   :type="type"
                   :value="chip"
                   :options="options"
@@ -62,13 +68,22 @@
                   :t-relation-not-is="tRelationNotIs"
                   @click="handleRelationChipClick(type, chip)"
                 />
-              </McGridCol>
-            </McGridRow>
-          </McGridCol>
-        </McGridRow>
+              </mc-grid-col>
+            </mc-grid-row>
+          </mc-grid-col>
+        </mc-grid-row>
       </div>
     </div>
-  </McFilterSlider>
+    <template slot="footer">
+      <mc-button
+        full-width
+        variation="light-green"
+        @click="handleOpen(!open)"
+        :disabled="canSave"
+        >{{ tSaveButton }}</mc-button
+      >
+    </template>
+  </mc-filter-slider>
 </template>
 
 <script>
@@ -85,8 +100,8 @@ import McFilterTypeRelationChip from "./McFilterTypeRelationChip"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McFilterRow from "./McFilterRow"
 import McFilterDot from "./McFilterDot"
-
 import McFilterSlider from "./McFilterSlider"
+import McTitle from "../../elements/McTitle"
 
 export default {
   name: "McFilterTypeRelation",
@@ -102,6 +117,7 @@ export default {
     McCollapse,
     McFilterDot,
     McFilterSlider,
+    McTitle,
   },
   props: {
     value: {
@@ -132,8 +148,8 @@ export default {
       type: String,
       required: true,
     },
-    lang: {
-      type: Object,
+    tSaveButton: {
+      type: String,
     },
   },
   data() {
@@ -179,9 +195,14 @@ export default {
     chipCount() {
       return Object.keys(this.value).reduce((acc, cur) => acc + this.value[cur].length, 0)
     },
+    canSave() {
+      let stringify = JSON.stringify
+      return stringify(this.temporaryValue) === stringify(this.value)
+    },
   },
   methods: {
     handleOpen(value) {
+      this.open = value
       this.$emit("open", value)
       this.loadAjaxOptions()
     },
@@ -248,26 +269,27 @@ export default {
     setTemporaryValue() {
       this.temporaryValue = { ...this.value }
     },
-
     resetFilter(e) {
       this.handleDotClick(e)
       this.$emit("separate-filters")
     },
-
     /**
      * Set temporary value to current value if user not push to save button
      * return Void
      * */
     resetValue() {
       this.emitInput(this.temporaryValue)
+      this.handleOpen(false)
     },
-
+  },
+  watch: {
     /**
-     * Set open field in filter component for separate filters method
+     * Set temporary value when user open filter type details
+     * params Boolean value
+     * return Void
      * */
-    setGlobalOpen() {
-      this.open = !this.open
-      this.handleOpen(this.open)
+    open: function(value) {
+      !value || this.setTemporaryValue()
     },
   },
 }

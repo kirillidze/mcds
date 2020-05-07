@@ -7,19 +7,14 @@
     </transition>
     <transition name="slide-right">
       <mc-panel v-if="open" class="slider">
-        <div class="slider__head">
-          <mc-button variation="black-link" @click="resetResult()">
-            <mc-svg-icon slot="icon-prepend" name="arrow_upward" size="xs" />
-            <mc-title :level="4" size="l">{{ backTitle }}</mc-title>
-          </mc-button>
+        <div class="slider__head" @click="clickToBack()">
+          <slot name="head" />
         </div>
         <div class="slider__body">
           <slot name="body" />
         </div>
         <div class="slider__footer">
-          <mc-button full-width variation="light-green" @click="toggleOpen()" :disabled="canSave">{{
-            lang.save
-          }}</mc-button>
+          <slot name="footer" />
         </div>
       </mc-panel>
     </transition>
@@ -36,12 +31,8 @@ import McGridCol from "../McGrid/McGridCol"
 export default {
   name: "McFilterSlider",
   props: {
-    backTitle: {
-      type: String,
-      default: "Views total",
-    },
-    lang: {
-      type: Object,
+    open: {
+      type: Boolean,
     },
   },
   components: {
@@ -52,50 +43,13 @@ export default {
     McGridRow,
     McGridCol,
   },
-  data() {
-    return {
-      open: false,
-    }
-  },
-  computed: {
-    bodySlotContext() {
-      return this.$slots.body[0].context
-    },
-    /**
-     * Checking for equals temporary value and current value
-     * return Boolean
-     * */
-    canSave() {
-      let stringify = JSON.stringify
-      return (
-        stringify(this.bodySlotContext.temporaryValue) === stringify(this.bodySlotContext.value)
-      )
-    },
-  },
   methods: {
     toggleOpen(value = null) {
-      this.open = value ? value : !this.open
+      this.$emit("open", value ? value : !this.open)
     },
-    /**
-     * Reset user filled values if their not push to save button
-     * return Void
-     * */
-    resetResult() {
-      this.bodySlotContext.resetValue()
 
-      this.toggleOpen()
-    },
-  },
-  watch: {
-    /**
-     * Set temporary value when user open filter type details
-     * params Boolean value
-     * return Void
-     * */
-    open: function(value) {
-      !value || this.bodySlotContext.setTemporaryValue()
-
-      this.bodySlotContext.setGlobalOpen()
+    clickToBack() {
+      this.$emit("clickToBack")
     },
   },
 }
@@ -133,6 +87,7 @@ export default {
     padding: $space-xs;
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   &__footer {

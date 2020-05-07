@@ -1,24 +1,43 @@
 <template>
-  <McFilterSlider
-    @open="handleOpen"
+  <mc-filter-slider
     class="mc-filter-type-text"
     ref="collapse"
-    :back-title="filter.name"
-    :lang="lang"
+    :open="open"
+    @open="handleOpen"
+    @clickToBack="resetValue"
   >
-    <McFilterRow slot="activator">
+    <mc-filter-row slot="activator">
       {{ filter.name }}
-      <McFilterDot
+      <mc-filter-dot
         slot="chip"
         v-if="value != null && value !== ''"
         @click="e => resetFilter(null, e)"
       />
-    </McFilterRow>
+    </mc-filter-row>
+    <template slot="head">
+      <mc-button variation="black-link">
+        <mc-svg-icon slot="icon-prepend" name="arrow_upward" size="xs" />
+        <mc-title :level="4" size="l">{{ filter.name }}</mc-title>
+      </mc-button>
+    </template>
     <div class="mc-filter-type-text__body" slot="body">
-      <McFieldText :name="filter.name" :value="value" @input="handleInput" @keypress.enter="submit">
-      </McFieldText>
+      <mc-field-text
+        :name="filter.name"
+        :value="value"
+        @input="handleInput"
+        @keypress.enter="handleOpen(!open)"
+      />
     </div>
-  </McFilterSlider>
+    <template slot="footer">
+      <mc-button
+        full-width
+        variation="light-green"
+        @click="handleOpen(!open)"
+        :disabled="canSave"
+        >{{ tSaveButton }}</mc-button
+      >
+    </template>
+  </mc-filter-slider>
 </template>
 
 <script>
@@ -29,8 +48,8 @@ import McButton from "../../elements/McButton"
 import McFilterRow from "./McFilterRow"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McFilterDot from "./McFilterDot"
-
 import McFilterSlider from "./McFilterSlider"
+import McTitle from "../../elements/McTitle"
 
 export default {
   name: "McFilterTypeText",
@@ -43,6 +62,7 @@ export default {
     McCollapse,
     McFilterDot,
     McFilterSlider,
+    McTitle,
   },
   props: {
     value: {
@@ -57,8 +77,8 @@ export default {
       type: Object,
       required: true,
     },
-    lang: {
-      type: Object,
+    tSaveButton: {
+      type: String,
     },
   },
   data() {
@@ -67,8 +87,15 @@ export default {
       open: false,
     }
   },
+  computed: {
+    canSave() {
+      let stringify = JSON.stringify
+      return stringify(this.temporaryValue) === stringify(this.value)
+    },
+  },
   methods: {
     handleOpen(value) {
+      this.open = value
       this.$emit("open", value)
     },
     handleInput(value, e) {
@@ -100,14 +127,17 @@ export default {
      * */
     resetValue() {
       this.emitInput(this.temporaryValue)
+      this.handleOpen(false)
     },
-
+  },
+  watch: {
     /**
-     * Set open field in filter component for separate filters method
+     * Set temporary value when user open filter type details
+     * params Boolean value
+     * return Void
      * */
-    setGlobalOpen() {
-      this.open = !this.open
-      this.handleOpen(this.open)
+    open: function(value) {
+      !value || this.setTemporaryValue()
     },
   },
 }

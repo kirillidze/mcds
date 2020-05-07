@@ -1,111 +1,111 @@
 <template>
   <div class="mc-filter" v-click-outside="handleClickOutside">
-    <McPanel class="mc-filter__panel">
+    <mc-panel class="mc-filter__panel">
       <div class="mc-filter__header">
-        <McTitle :level="4" size="l" class="mc-filter__title">
+        <mc-title :level="4" size="l" class="mc-filter__title">
           <slot name="title">{{ lang.filter }}</slot>
-        </McTitle>
+        </mc-title>
       </div>
       <div class="mc-filter__content">
-        <McTabs class="mc-filter__tabs" ref="tabs">
-          <McTab :name="lang.all">
-            <McAccordion ref="accordion">
+        <mc-tabs class="mc-filter__tabs" ref="tabs">
+          <mc-tab :name="lang.all">
+            <mc-accordion ref="accordion">
               <template v-for="(filter, _key) in filledFilter">
-                <McFilterTypeText
+                <mc-filter-type-text
                   v-if="filter.type === 'text'"
-                  :lang="lang"
                   :key="`filled_${_key}`"
                   :filter="filter"
                   :value="currentValues[filter.value] || ''"
                   :real-value="value[filter.value] || ''"
+                  :t-save-button="lang.save"
                   @input="value => handleInput(filter, value)"
                   @submit="submit"
-                  @open="getOpenElems"
+                  @open="setFilterOpen"
                   @separate-filters="separateFilters"
                 />
-                <McFilterTypeRelation
+                <mc-filter-type-relation
                   v-else-if="filter.type === 'relation'"
-                  :lang="lang"
                   :key="`filled_${_key}`"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
                   :real-value="value[filter.value] || {}"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
                   :t-relation-is="lang.this"
                   :t-relation-not-is="lang.is_not"
                   :t-relation-exists="lang.not_empty"
                   :t-relation-not-exists="lang.empty"
-                  @open="getOpenElems"
+                  :t-save-button="lang.save"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                  @open="setFilterOpen"
                   @separate-filters="separateFilters"
                 />
-                <McFilterTypeRange
+                <mc-filter-type-range
                   v-else-if="filter.type === 'number' || filter.type === 'date'"
-                  :lang="lang"
                   :key="`filled_${_key}`"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
                   :real-value="value[filter.value] || {}"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
                   :t-range-more="lang.more"
                   :t-range-less="lang.less"
-                  @open="getOpenElems"
+                  :t-save-button="lang.save"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                  @open="setFilterOpen"
                   @separate-filters="separateFilters"
                 />
               </template>
               <mc-separator v-if="computedFiltersLength" indent-top="xs" indent-bottom="xs" />
               <template v-for="(filter, _key) in unfilledFilter">
-                <McFilterTypeText
+                <mc-filter-type-text
                   v-if="filter.type === 'text'"
-                  :lang="lang"
                   :key="`unfilled_${_key}`"
                   :filter="filter"
                   :value="currentValues[filter.value] || ''"
                   :real-value="value[filter.value] || ''"
+                  :t-save-button="lang.save"
                   @input="value => handleInput(filter, value)"
                   @submit="submit"
-                  @open="getOpenElems"
+                  @open="setFilterOpen"
                   @separate-filters="separateFilters"
                 />
-                <McFilterTypeRelation
+                <mc-filter-type-relation
                   v-else-if="filter.type === 'relation'"
-                  :lang="lang"
                   :key="`unfilled_${_key}`"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
                   :real-value="value[filter.value] || {}"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
                   :t-relation-is="lang.this"
                   :t-relation-not-is="lang.is_not"
                   :t-relation-exists="lang.not_empty"
                   :t-relation-not-exists="lang.empty"
-                  @open="getOpenElems"
+                  :t-save-button="lang.save"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                  @open="setFilterOpen"
                   @separate-filters="separateFilters"
                 />
-                <McFilterTypeRange
+                <mc-filter-type-range
                   v-else-if="filter.type === 'number' || filter.type === 'date'"
-                  :lang="lang"
                   :key="`unfilled_${_key}`"
                   :filter="filter"
                   :value="currentValues[filter.value] || {}"
                   :real-value="value[filter.value] || {}"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
                   :t-range-more="lang.more"
                   :t-range-less="lang.less"
-                  @open="getOpenElems"
+                  :t-save-button="lang.save"
+                  @input="value => handleInput(filter, value)"
+                  @submit="submit"
+                  @open="setFilterOpen"
                   @separate-filters="separateFilters"
                 />
               </template>
-            </McAccordion>
-          </McTab>
-          <McTab :name="lang.presets">
+            </mc-accordion>
+          </mc-tab>
+          <mc-tab :name="lang.presets">
             <div class="mc-filter__preset-items">
               <div class="mc-filter__preset-item" v-for="(preset, index) in presets" :key="index">
                 <div class="mc-filter__preset-value">
-                  <McFilterPresetValue
+                  <mc-filter-preset-value
                     v-for="(presetValue, presetName) in preset"
                     :key="presetName"
                     :name="presetName"
@@ -120,47 +120,47 @@
                   />
                 </div>
                 <div class="mc-filter__preset-btn">
-                  <McButton size="s" @click="emitInput(preset)">{{ lang.apply }}</McButton>
+                  <mc-button size="s" @click="emitInput(preset)">{{ lang.apply }}</mc-button>
                 </div>
               </div>
             </div>
-          </McTab>
-        </McTabs>
+          </mc-tab>
+        </mc-tabs>
       </div>
       <div class="mc-filter__footer">
-        <McGridRow :gutter-x="6" :gutter-y="6">
-          <McGridCol>
-            <McTooltip size="s" placement="top" :content="lang.reset">
-              <McButton
+        <mc-grid-row :gutter-x="6" :gutter-y="6">
+          <mc-grid-col>
+            <mc-tooltip size="s" placement="top" :content="lang.reset">
+              <mc-button
                 :disabled="!Object.keys(currentValues).length && !Object.keys(value).length"
                 @click="reset"
                 variation="red-invert"
                 size="m-compact"
               >
-                <McSvgIcon slot="icon-append" name="backspace" />
-              </McButton>
-            </McTooltip>
-          </McGridCol>
-          <McGridCol>
-            <McTooltip size="s" placement="top" :content="lang.save_preset">
-              <McButton
+                <mc-svg-icon slot="icon-append" name="backspace" />
+              </mc-button>
+            </mc-tooltip>
+          </mc-grid-col>
+          <mc-grid-col>
+            <mc-tooltip size="s" placement="top" :content="lang.save_preset">
+              <mc-button
                 :disabled="!Object.keys(currentValues).length"
                 @click="savePreset"
                 variation="light-green-invert"
                 size="m-compact"
               >
-                <McSvgIcon slot="icon-append" name="save" />
-              </McButton>
-            </McTooltip>
-          </McGridCol>
-          <McGridCol stretch-self>
-            <McButton full-width :disabled="!canSubmit" @click="submit">
+                <mc-svg-icon slot="icon-append" name="save" />
+              </mc-button>
+            </mc-tooltip>
+          </mc-grid-col>
+          <mc-grid-col stretch-self>
+            <mc-button full-width :disabled="!canSubmit" @click="submit">
               <slot name="submit">{{ lang.apply }}</slot>
-            </McButton>
-          </McGridCol>
-        </McGridRow>
+            </mc-button>
+          </mc-grid-col>
+        </mc-grid-row>
       </div>
-    </McPanel>
+    </mc-panel>
   </div>
 </template>
 
@@ -320,36 +320,9 @@ export default {
     emitInput(value) {
       this.$emit("input", this.clearEmpty(value))
     },
-    getOpenElems(value) {
+    setFilterOpen(value) {
       this.filterDetailOpen = value
-      // this.header = elem.$refs.collapse.$el.querySelector(".mc-collapse__header")
-      // this.body = elem.$refs.collapse.$children.find(
-      //   el => el.$options._componentTag === "McSlideUpDown"
-      // ).$el
-      //
-      // this.changePos()
     },
-
-    // changePos() {
-    //   this.panelBox = this.panel.getBoundingClientRect()
-    //   let headerBox = this.header.getBoundingClientRect()
-    //
-    //   this.body.style.left = headerBox.left + "px"
-    //   this.body.style.width = headerBox.width + "px"
-    //
-    //   if (headerBox.bottom >= this.panelBox.top && headerBox.bottom <= this.panelBox.bottom) {
-    //     this.body.style.top = headerBox.bottom + "px"
-    //   } else if (headerBox.bottom < this.panelBox.top) {
-    //     this.body.style.top = this.panelBox.top + "px"
-    //   } else if (headerBox.bottom > this.panelBox.bottom) {
-    //     this.body.style.top = this.panelBox.bottom + "px"
-    //   }
-    // },
-    // onScroll() {
-    //   if (!this.accordionIsClosed) {
-    //     this.changePos()
-    //   }
-    // },
     handleClickOutside(e) {
       if (
         !this.accordionIsClosed &&
