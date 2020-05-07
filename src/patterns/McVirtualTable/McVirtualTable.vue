@@ -13,6 +13,7 @@
       show-overflow="tooltip"
       show-footer-overflow="tooltip"
       auto-resize
+      :class="classes"
       :sync-resize="cardIsOpen"
       :scroll-y="scrollY"
       :show-footer="canShowFooter"
@@ -208,6 +209,11 @@ export default {
     tag() {
       return `vxe-${this.componentTag}`
     },
+    classes() {
+      return {
+        "mc-virtual-table--open-card": this.cardIsOpen,
+      }
+    },
     wrapperStyles() {
       return {
         width: this.cardIsOpen ? `${this.firstColsWidth}px` : "auto",
@@ -305,6 +311,12 @@ $vxe-table-header-background-color: $color-white;
 }
 
 .mc-virtual-table {
+  &--open-card {
+    .vxe-table--body-wrapper,
+    .vxe-table--footer-wrapper {
+      overflow-x: hidden;
+    }
+  }
   .vxe-header--row {
     min-height: $size-xxl + 1;
   }
