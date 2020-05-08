@@ -217,8 +217,10 @@ export default {
     wrapperStyles() {
       return {
         width: this.cardIsOpen ? `${this.firstColsWidth}px` : "auto",
-        height: this.$attrs.height || "auto",
-        "max-height": this.$attrs["max-height"] || "none",
+        height: this.$attrs.height ? this.getFixedHeight(this.$attrs.height) : "auto",
+        "max-height": this.$attrs["max-height"]
+          ? this.getFixedHeight(this.$attrs["max-height"])
+          : "none",
       }
     },
   },
@@ -290,6 +292,9 @@ export default {
       }
       await this.$refs.xTable.recalculate()
       await this.$refs.xTable.syncData()
+    },
+    getFixedHeight(val) {
+      return !this.hasMore ? `calc(${val} - 1px)` : val
     },
   },
 }
