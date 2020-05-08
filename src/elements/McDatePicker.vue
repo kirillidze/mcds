@@ -25,7 +25,9 @@
           :clearable="clearable"
           :disabled="disabled"
           :inline="inline"
+          :append-to-body="appendToBody"
           :popup-class="popupClass"
+          :popup-style="popupStyle"
           @input="value => handleEmitDate(value)"
         >
           <div v-if="$slots.header" slot="header"><slot name="header" /></div>
@@ -40,9 +42,9 @@
       </div>
     </div>
     <div class="mc-date-picker__footer" v-if="errorText || helpText || $slots.bottom">
-      <mc-title tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
-        {{ errorText }}
-      </mc-title>
+      <mc-title tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">{{
+        errorText
+      }}</mc-title>
       <br v-if="errorText" />
       <slot name="bottom">
         <mc-title tag-name="div" :ellipsis="false" size="s" v-if="helpText">{{
@@ -77,6 +79,13 @@ export default {
     DatePicker,
   },
   props: {
+    /**
+     * Рендер компонента в тег
+     * */
+    appendToBody: {
+      type: Boolean,
+      default: true,
+    },
     /**
      *  Тип дейтпикера:	date|datetime|year|month|time|week
      *
@@ -209,6 +218,9 @@ export default {
     inline: {
       type: Boolean,
       default: false,
+    },
+    popupStyle: {
+      type: Object,
     },
   },
 
@@ -359,7 +371,7 @@ export default {
   }
 }
 .mx-calendar {
-  width: 360px;
+  width: 340px;
 }
 .mx-calendar-content {
   height: auto;
@@ -374,7 +386,7 @@ export default {
   .cell {
     color: $color-black;
     width: 40px;
-    height: 40px;
+    height: 33px;
     font-size: 16px;
     &:hover {
       background-color: $color-hover-gray;
