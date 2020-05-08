@@ -1,5 +1,5 @@
 <template>
-  <div class="mc-filter" v-click-outside="handleClickOutside">
+  <div class="mc-filter">
     <mc-panel class="mc-filter__panel">
       <div class="mc-filter__header">
         <mc-title :level="4" size="l" class="mc-filter__title">
@@ -9,97 +9,95 @@
       <div class="mc-filter__content">
         <mc-tabs class="mc-filter__tabs" ref="tabs">
           <mc-tab :name="lang.all">
-            <mc-accordion ref="accordion">
-              <template v-for="(filter, _key) in filledFilter">
-                <mc-filter-type-text
-                  v-if="filter.type === 'text'"
-                  :key="`filled_${_key}`"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || ''"
-                  :real-value="value[filter.value] || ''"
-                  :t-save-button="lang.save"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
-                  @open="setFilterOpen"
-                  @separate-filters="separateFilters"
-                />
-                <mc-filter-type-relation
-                  v-else-if="filter.type === 'relation'"
-                  :key="`filled_${_key}`"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || {}"
-                  :t-relation-is="lang.this"
-                  :t-relation-not-is="lang.is_not"
-                  :t-relation-exists="lang.not_empty"
-                  :t-relation-not-exists="lang.empty"
-                  :t-save-button="lang.save"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
-                  @open="setFilterOpen"
-                  @separate-filters="separateFilters"
-                />
-                <mc-filter-type-range
-                  v-else-if="filter.type === 'number' || filter.type === 'date'"
-                  :key="`filled_${_key}`"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || {}"
-                  :t-range-more="lang.more"
-                  :t-range-less="lang.less"
-                  :t-save-button="lang.save"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
-                  @open="setFilterOpen"
-                  @separate-filters="separateFilters"
-                />
-              </template>
-              <mc-separator v-if="computedFiltersLength" indent-top="xs" indent-bottom="xs" />
-              <template v-for="(filter, _key) in unfilledFilter">
-                <mc-filter-type-text
-                  v-if="filter.type === 'text'"
-                  :key="`unfilled_${_key}`"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || ''"
-                  :real-value="value[filter.value] || ''"
-                  :t-save-button="lang.save"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
-                  @open="setFilterOpen"
-                  @separate-filters="separateFilters"
-                />
-                <mc-filter-type-relation
-                  v-else-if="filter.type === 'relation'"
-                  :key="`unfilled_${_key}`"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || {}"
-                  :t-relation-is="lang.this"
-                  :t-relation-not-is="lang.is_not"
-                  :t-relation-exists="lang.not_empty"
-                  :t-relation-not-exists="lang.empty"
-                  :t-save-button="lang.save"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
-                  @open="setFilterOpen"
-                  @separate-filters="separateFilters"
-                />
-                <mc-filter-type-range
-                  v-else-if="filter.type === 'number' || filter.type === 'date'"
-                  :key="`unfilled_${_key}`"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || {}"
-                  :t-range-more="lang.more"
-                  :t-range-less="lang.less"
-                  :t-save-button="lang.save"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
-                  @open="setFilterOpen"
-                  @separate-filters="separateFilters"
-                />
-              </template>
-            </mc-accordion>
+            <template v-for="(filter, _key) in filledFilter">
+              <mc-filter-type-text
+                v-if="filter.type === 'text'"
+                :key="`filled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || ''"
+                :real-value="value[filter.value] || ''"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-relation
+                v-else-if="filter.type === 'relation'"
+                :key="`filled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-relation-is="lang.this"
+                :t-relation-not-is="lang.is_not"
+                :t-relation-exists="lang.not_empty"
+                :t-relation-not-exists="lang.empty"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-range
+                v-else-if="filter.type === 'number' || filter.type === 'date'"
+                :key="`filled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-range-more="lang.more"
+                :t-range-less="lang.less"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+            </template>
+            <mc-separator v-if="computedFiltersLength" indent-top="xs" indent-bottom="xs" />
+            <template v-for="(filter, _key) in unfilledFilter">
+              <mc-filter-type-text
+                v-if="filter.type === 'text'"
+                :key="`unfilled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || ''"
+                :real-value="value[filter.value] || ''"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-relation
+                v-else-if="filter.type === 'relation'"
+                :key="`unfilled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-relation-is="lang.this"
+                :t-relation-not-is="lang.is_not"
+                :t-relation-exists="lang.not_empty"
+                :t-relation-not-exists="lang.empty"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-range
+                v-else-if="filter.type === 'number' || filter.type === 'date'"
+                :key="`unfilled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-range-more="lang.more"
+                :t-range-less="lang.less"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+            </template>
           </mc-tab>
           <mc-tab :name="lang.presets">
             <div class="mc-filter__preset-items">
@@ -167,7 +165,6 @@
 <script>
 import _isEqual from "lodash/isEqual"
 import _cloneDeep from "lodash/cloneDeep"
-import VueClickOutside from "vue-click-outside"
 import McPanel from "../McPanel"
 import McTitle from "../../elements/McTitle"
 import McTabs from "../McTabs/McTabs"
@@ -177,12 +174,12 @@ import McFilterTypeText from "./McFilterTypeText"
 import McFilterTypeRange from "./McFilterTypeRange"
 import McButton from "../../elements/McButton"
 import McFilterPresetValue from "./McFilterPresetValue"
-import McAccordion from "../McAccordion"
 import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
 import McTooltip from "../../elements/McTooltip"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McDropdown from "../McDropdown"
+import McSeparator from "../../elements/McSeparator"
 
 export default {
   name: "McFilter",
@@ -191,7 +188,6 @@ export default {
     McTooltip,
     McGridCol,
     McGridRow,
-    McAccordion,
     McFilterPresetValue,
     McButton,
     McFilterTypeText,
@@ -202,9 +198,7 @@ export default {
     McTitle,
     McPanel,
     McDropdown,
-  },
-  directives: {
-    "click-outside": VueClickOutside,
+    McSeparator,
   },
   props: {
     value: {
@@ -242,12 +236,6 @@ export default {
   },
   mounted() {
     this.panel = this.$refs.tabs.$el.querySelector(".tabs-component-panels")
-    window.addEventListener("scroll", this.onScroll, true)
-    window.addEventListener("resize", this.onScroll)
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll, true)
-    window.removeEventListener("resize", this.onScroll)
   },
   computed: {
     canSubmit() {
@@ -272,9 +260,6 @@ export default {
 
       return accum
     },
-    accordionIsClosed() {
-      return this.$refs.accordion ? this.$refs.accordion.isClosed : true
-    },
     computedFiltersLength() {
       return this.filledFilter.length && this.unfilledFilter.length
     },
@@ -286,7 +271,7 @@ export default {
       },
       immediate: true,
     },
-    filterDetailOpen: function(value) {
+    filterDetailOpen(value) {
       value || this.separateFilters()
     },
   },
@@ -322,18 +307,6 @@ export default {
     },
     setFilterOpen(value) {
       this.filterDetailOpen = value
-    },
-    handleClickOutside(e) {
-      if (
-        !this.accordionIsClosed &&
-        document.body.contains(e.target) &&
-        !e.path.some(this.hasDatePicker)
-      ) {
-        this.$refs.accordion.handleToggle(true)
-      }
-    },
-    hasDatePicker(item) {
-      return item.classList == "mx-datepicker-content"
     },
     separateFilters() {
       this.filledFilter = []
@@ -385,33 +358,6 @@ export default {
   &__content {
     position: relative;
     flex-grow: 1;
-
-    .mc-accordion {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .mc-collapse {
-      position: relative;
-      &__body {
-        position: fixed;
-        padding: 0 $space-xs;
-        z-index: 100;
-        background-color: $color-white;
-        box-shadow: $shadow-m;
-        border-radius: $radius-m;
-      }
-      &__body-inner {
-        padding-top: $space-xs;
-        padding-bottom: $space-xs;
-      }
-      & .mc-collapse__header {
-        width: 100%;
-        & .mc-tappable.mc-filter-row {
-          width: 100%;
-        }
-      }
-    }
   }
 
   &__tabs {

@@ -21,6 +21,7 @@
               clearable
               editable
               :placeholder="tRangeMore"
+              :append-to-body="false"
               v-model="value.more"
               @input="value => handleInput('more', value)"
               @keypress.enter="handleOpen(!open)"
@@ -54,6 +55,8 @@
               clearable
               editable
               :placeholder="tRangeLess"
+              :popup-style="datepickerRightStyle"
+              :append-to-body="false"
               v-model="value.less"
               @input="value => handleInput('less', value)"
               @keypress.enter="handleOpen(!open)"
@@ -196,6 +199,9 @@ export default {
       let stringify = JSON.stringify
       return stringify(this.temporaryValue) === stringify(this.value)
     },
+    datepickerRightStyle() {
+      return { right: 0, left: "unset" }
+    },
   },
   methods: {
     handleOpen(value) {
@@ -253,7 +259,7 @@ export default {
      * params Boolean value
      * return Void
      * */
-    open: function(value) {
+    open(value) {
       !value || this.setTemporaryValue()
     },
   },

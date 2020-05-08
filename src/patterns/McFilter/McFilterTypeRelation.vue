@@ -288,7 +288,7 @@ export default {
      * params Boolean value
      * return Void
      * */
-    open: function(value) {
+    open(value) {
       !value || this.setTemporaryValue()
     },
   },
