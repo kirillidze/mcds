@@ -219,6 +219,10 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Стили для календаря датапикера
+     * */
     popupStyle: {
       type: Object,
     },

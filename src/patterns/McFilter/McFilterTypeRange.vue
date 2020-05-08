@@ -21,6 +21,7 @@
               clearable
               editable
               :placeholder="tRangeMore"
+              :popup-style="datepickerLeftStyle"
               :append-to-body="false"
               v-model="value.more"
               @input="value => handleInput('more', value)"
@@ -201,6 +202,9 @@ export default {
     },
     datepickerRightStyle() {
       return { right: 0, left: "unset" }
+    },
+    datepickerLeftStyle() {
+      return { left: 0 }
     },
   },
   methods: {
