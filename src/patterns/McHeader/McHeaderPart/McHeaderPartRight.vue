@@ -104,18 +104,13 @@
                 size="l"
                 @click="typeof user.handler === 'function' ? user.handler() : ''"
               >
-                <McPreview>
-                  <McAvatar :src="user.root_user.avatar" rounded slot="left" />
-                  <McTitle :level="3" size="l" slot="top">
-                    {{ user.root_user.first_name }}
-                    <template v-if="user.root_user.last_name">
-                      {{ user.root_user.last_name }}
-                    </template>
-                  </McTitle>
-                  <McTitle color="gray" size="m" slot="bottom">
-                    {{ user.root_user.email }}
-                  </McTitle>
-                </McPreview>
+                <McAvatar :src="user.root_user.avatar" rounded slot="icon-prepend" size="s" />
+                <McTitle line-height="s">
+                  {{ user.root_user.first_name }}
+                  <template v-if="user.root_user.last_name">
+                    {{ user.root_user.last_name }}
+                  </template>
+                </McTitle>
               </McButton>
             </template>
 
@@ -223,7 +218,6 @@ import McSvgIcon from "../../../elements/McSvgIcon"
 import McPanel from "../../McPanel"
 import McAvatar from "../../../elements/McAvatar/McAvatar"
 import McSeparator from "../../../elements/McSeparator"
-import McPreview from "../../McPreview"
 import McTitle from "../../../elements/McTitle"
 export default {
   name: "McHeaderPartRight",
@@ -231,7 +225,6 @@ export default {
   release: "0.0.1",
   components: {
     McTitle,
-    McPreview,
     McSeparator,
     McAvatar,
     McPanel,
@@ -409,7 +402,9 @@ export default {
 
   &__user {
     padding: 0 $space-xs !important;
-
+    .mc-avatar {
+      flex-shrink: 0;
+    }
     &-card {
       text-align: center;
       padding: $space-s $space-xs;
