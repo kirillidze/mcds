@@ -11781,10 +11781,10 @@ vuex@^3.0.1:
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.1.tgz#0c264bfe30cdbccf96ab9db3177d211828a5910e"
   integrity sha512-ER5moSbLZuNSMBFnEBVGhQ1uCBNJslH9W/Dw2W7GZN23UQA69uapP5GTT9Vm8Trc0PzBSVt6LzF3hGjmv41xcg==
 
-vxe-table@^2.9.2:
-  version "2.9.2"
-  resolved "https://registry.yarnpkg.com/vxe-table/-/vxe-table-2.9.2.tgz#12b042354611153caeaabadc26ff1a99f7c87e37"
-  integrity sha512-7nF6JPmyFwr3gDWsQt13AShJnkyoA5hypn2lhEU8I4f766UpYk6m2jxDjsjLppf153exdEXOTZzu9h9Lz3GLBw==
+vxe-table@^2.9.5:
+  version "2.9.6"
+  resolved "https://registry.yarnpkg.com/vxe-table/-/vxe-table-2.9.6.tgz#187f88d45642727db07886b4a08d0615cb69af57"
+  integrity sha512-iEfdgO9O6xr49+qPmvk4kUiPi4vLhtzfnnYSohk4LhW3hkhhiqu/uztNjCf9GcQNr3EOAZ/BNuFcMJkfZBJdtA==
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"

@@ -1,60 +1,109 @@
 <template>
-  <div class="mc-filter" v-click-outside="handleClickOutside">
-    <McPanel class="mc-filter__panel">
+  <div class="mc-filter">
+    <mc-panel class="mc-filter__panel">
       <div class="mc-filter__header">
-        <McTitle :level="4" size="l" class="mc-filter__title">
+        <mc-title :level="4" size="l" class="mc-filter__title">
           <slot name="title">{{ lang.filter }}</slot>
-        </McTitle>
+        </mc-title>
       </div>
       <div class="mc-filter__content">
-        <McTabs class="mc-filter__tabs" ref="tabs">
-          <McTab :name="lang.all">
-            <McAccordion ref="accordion">
-              <template v-for="(filter, _key) in filters">
-                <McFilterTypeText
-                  v-if="filter.type === 'text'"
-                  :key="_key"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || ''"
-                  :real-value="value[filter.value] || ''"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
-                  @open="getOpenElems"
-                />
-                <McFilterTypeRelation
-                  v-else-if="filter.type === 'relation'"
-                  :key="_key"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || {}"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
-                  :t-relation-is="lang.this"
-                  :t-relation-not-is="lang.is_not"
-                  :t-relation-exists="lang.not_empty"
-                  :t-relation-not-exists="lang.empty"
-                  @open="getOpenElems"
-                />
-                <McFilterTypeRange
-                  v-else-if="filter.type === 'number' || filter.type === 'date'"
-                  :key="_key"
-                  :filter="filter"
-                  :value="currentValues[filter.value] || {}"
-                  :real-value="value[filter.value] || {}"
-                  @input="value => handleInput(filter, value)"
-                  @submit="submit"
-                  :t-range-more="lang.more"
-                  :t-range-less="lang.less"
-                  @open="getOpenElems"
-                />
-              </template>
-            </McAccordion>
-          </McTab>
-          <McTab :name="lang.presets">
+        <mc-tabs class="mc-filter__tabs" ref="tabs">
+          <mc-tab :name="lang.all">
+            <template v-for="(filter, _key) in filledFilter">
+              <mc-filter-type-text
+                v-if="filter.type === 'text'"
+                :key="`filled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || ''"
+                :real-value="value[filter.value] || ''"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-relation
+                v-else-if="filter.type === 'relation'"
+                :key="`filled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-relation-is="lang.this"
+                :t-relation-not-is="lang.is_not"
+                :t-relation-exists="lang.not_empty"
+                :t-relation-not-exists="lang.empty"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-range
+                v-else-if="filter.type === 'number' || filter.type === 'date'"
+                :key="`filled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-range-more="lang.more"
+                :t-range-less="lang.less"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+            </template>
+            <mc-separator v-if="computedFiltersLength" indent-top="xs" indent-bottom="xs" />
+            <template v-for="(filter, _key) in unfilledFilter">
+              <mc-filter-type-text
+                v-if="filter.type === 'text'"
+                :key="`unfilled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || ''"
+                :real-value="value[filter.value] || ''"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-relation
+                v-else-if="filter.type === 'relation'"
+                :key="`unfilled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-relation-is="lang.this"
+                :t-relation-not-is="lang.is_not"
+                :t-relation-exists="lang.not_empty"
+                :t-relation-not-exists="lang.empty"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-range
+                v-else-if="filter.type === 'number' || filter.type === 'date'"
+                :key="`unfilled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-range-more="lang.more"
+                :t-range-less="lang.less"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+            </template>
+          </mc-tab>
+          <mc-tab :name="lang.presets">
             <div class="mc-filter__preset-items">
               <div class="mc-filter__preset-item" v-for="(preset, index) in presets" :key="index">
                 <div class="mc-filter__preset-value">
-                  <McFilterPresetValue
+                  <mc-filter-preset-value
                     v-for="(presetValue, presetName) in preset"
                     :key="presetName"
                     :name="presetName"
@@ -69,54 +118,53 @@
                   />
                 </div>
                 <div class="mc-filter__preset-btn">
-                  <McButton size="s" @click="emitInput(preset)">{{ lang.apply }}</McButton>
+                  <mc-button size="s" @click="applyPreset(preset)">{{ lang.apply }}</mc-button>
                 </div>
               </div>
             </div>
-          </McTab>
-        </McTabs>
+          </mc-tab>
+        </mc-tabs>
       </div>
       <div class="mc-filter__footer">
-        <McGridRow :gutter-x="6" :gutter-y="6">
-          <McGridCol>
-            <McTooltip size="s" placement="top" :content="lang.reset">
-              <McButton
+        <mc-grid-row :gutter-x="6" :gutter-y="6">
+          <mc-grid-col>
+            <mc-tooltip size="s" placement="top" :content="lang.reset">
+              <mc-button
                 :disabled="!Object.keys(currentValues).length && !Object.keys(value).length"
                 @click="reset"
                 variation="red-invert"
                 size="m-compact"
               >
-                <McSvgIcon slot="icon-append" name="backspace" />
-              </McButton>
-            </McTooltip>
-          </McGridCol>
-          <McGridCol>
-            <McTooltip size="s" placement="top" :content="lang.save_preset">
-              <McButton
+                <mc-svg-icon slot="icon-append" name="backspace" />
+              </mc-button>
+            </mc-tooltip>
+          </mc-grid-col>
+          <mc-grid-col>
+            <mc-tooltip size="s" placement="top" :content="lang.save_preset">
+              <mc-button
                 :disabled="!Object.keys(currentValues).length"
                 @click="savePreset"
                 variation="light-green-invert"
                 size="m-compact"
               >
-                <McSvgIcon slot="icon-append" name="save" />
-              </McButton>
-            </McTooltip>
-          </McGridCol>
-          <McGridCol stretch-self>
-            <McButton full-width :disabled="!canSubmit" @click="submit">
+                <mc-svg-icon slot="icon-append" name="save" />
+              </mc-button>
+            </mc-tooltip>
+          </mc-grid-col>
+          <mc-grid-col stretch-self>
+            <mc-button full-width :disabled="!canSubmit" @click="submit">
               <slot name="submit">{{ lang.apply }}</slot>
-            </McButton>
-          </McGridCol>
-        </McGridRow>
+            </mc-button>
+          </mc-grid-col>
+        </mc-grid-row>
       </div>
-    </McPanel>
+    </mc-panel>
   </div>
 </template>
 
 <script>
 import _isEqual from "lodash/isEqual"
 import _cloneDeep from "lodash/cloneDeep"
-import VueClickOutside from "vue-click-outside"
 import McPanel from "../McPanel"
 import McTitle from "../../elements/McTitle"
 import McTabs from "../McTabs/McTabs"
@@ -126,12 +174,12 @@ import McFilterTypeText from "./McFilterTypeText"
 import McFilterTypeRange from "./McFilterTypeRange"
 import McButton from "../../elements/McButton"
 import McFilterPresetValue from "./McFilterPresetValue"
-import McAccordion from "../McAccordion"
 import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
 import McTooltip from "../../elements/McTooltip"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McDropdown from "../McDropdown"
+import McSeparator from "../../elements/McSeparator"
 
 export default {
   name: "McFilter",
@@ -140,7 +188,6 @@ export default {
     McTooltip,
     McGridCol,
     McGridRow,
-    McAccordion,
     McFilterPresetValue,
     McButton,
     McFilterTypeText,
@@ -151,9 +198,7 @@ export default {
     McTitle,
     McPanel,
     McDropdown,
-  },
-  directives: {
-    "click-outside": VueClickOutside,
+    McSeparator,
   },
   props: {
     value: {
@@ -181,16 +226,16 @@ export default {
       panel: null,
       header: null,
       body: null,
+      filterDetailOpen: false,
+      filledFilter: [],
+      unfilledFilter: [],
     }
+  },
+  created() {
+    this.separateFilters()
   },
   mounted() {
     this.panel = this.$refs.tabs.$el.querySelector(".tabs-component-panels")
-    window.addEventListener("scroll", this.onScroll, true)
-    window.addEventListener("resize", this.onScroll)
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll, true)
-    window.removeEventListener("resize", this.onScroll)
   },
   computed: {
     canSubmit() {
@@ -215,8 +260,8 @@ export default {
 
       return accum
     },
-    accordionIsClosed() {
-      return this.$refs.accordion ? this.$refs.accordion.isClosed : true
+    computedFiltersLength() {
+      return this.filledFilter.length && this.unfilledFilter.length
     },
   },
   watch: {
@@ -225,6 +270,9 @@ export default {
         this.currentValues = { ...val }
       },
       immediate: true,
+    },
+    filterDetailOpen(value) {
+      value || this.separateFilters()
     },
   },
   methods: {
@@ -257,46 +305,26 @@ export default {
     emitInput(value) {
       this.$emit("input", this.clearEmpty(value))
     },
-    getOpenElems(elem) {
-      this.header = elem.$refs.collapse.$el.querySelector(".mc-collapse__header")
-      this.body = elem.$refs.collapse.$children.find(
-        el => el.$options._componentTag === "McSlideUpDown"
-      ).$el
-
-      this.changePos()
+    setFilterOpen(value) {
+      this.filterDetailOpen = value
     },
+    separateFilters() {
+      this.filledFilter = []
+      this.unfilledFilter = []
 
-    changePos() {
-      this.panelBox = this.panel.getBoundingClientRect()
-      let headerBox = this.header.getBoundingClientRect()
+      let currentValues = Object.keys(this.currentValues)
+      this.filters.filter(filter => {
+        currentValues.includes(filter.value)
+          ? this.filledFilter.push(filter)
+          : this.unfilledFilter.push(filter)
+      })
+    },
+    applyPreset(preset) {
+      this.emitInput(preset)
 
-      this.body.style.left = headerBox.left + "px"
-      this.body.style.width = headerBox.width + "px"
-
-      if (headerBox.bottom >= this.panelBox.top && headerBox.bottom <= this.panelBox.bottom) {
-        this.body.style.top = headerBox.bottom + "px"
-      } else if (headerBox.bottom < this.panelBox.top) {
-        this.body.style.top = this.panelBox.top + "px"
-      } else if (headerBox.bottom > this.panelBox.bottom) {
-        this.body.style.top = this.panelBox.bottom + "px"
-      }
-    },
-    onScroll() {
-      if (!this.accordionIsClosed) {
-        this.changePos()
-      }
-    },
-    handleClickOutside(e) {
-      if (
-        !this.accordionIsClosed &&
-        document.body.contains(e.target) &&
-        !e.path.some(this.hasDatePicker)
-      ) {
-        this.$refs.accordion.handleToggle(true)
-      }
-    },
-    hasDatePicker(item) {
-      return item.classList == "mx-datepicker-content"
+      this.$nextTick(() => {
+        this.separateFilters()
+      })
     },
   },
 }
@@ -330,28 +358,6 @@ export default {
   &__content {
     position: relative;
     flex-grow: 1;
-
-    .mc-collapse {
-      position: relative;
-      &__body {
-        position: fixed;
-        padding: 0 $space-xs;
-        z-index: 100;
-        background-color: $color-white;
-        box-shadow: $shadow-m;
-        border-radius: $radius-m;
-      }
-      &__body-inner {
-        padding-top: $space-xs;
-        padding-bottom: $space-xs;
-      }
-      & .mc-collapse__header {
-        width: 100%;
-        & .mc-tappable.mc-filter-row {
-          width: 100%;
-        }
-      }
-    }
   }
 
   &__tabs {
@@ -471,25 +477,25 @@ export default {
     },
     {
     name: 'Страна1',
-    value: 'countries',
+    value: 'countries_1',
     type: 'relation',
-    values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
+    values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }, { name: 'Украина', value: 7 }, { name: 'Украина', value: 8 }, { name: 'Украина', value: 9 }, { name: 'Украина', value:  11}, { name: 'Украина', value: 12 }, { name: 'Украина', value: 13 }, { name: 'Украина', value: 14 }, { name: 'Украина', value: 15 }, { name: 'Украина', value: 16 }, { name: 'Украина', value: 26 }, { name: 'Украина', value: 36 }, { name: 'Украина', value: 46 }, { name: 'Украина', value: 56 }, { name: 'Украина', value: 66 }, { name: 'Украина', value: 76 }, { name: 'Украина', value: 86 }, { name: 'Украина', value: 96 }, { name: 'Украина', value: 116 }, { name: 'Украина', value: 126 }, { name: 'Украина', value: 136 }, { name: 'Украина', value: 146 }, { name: 'Украина', value: 156 }, { name: 'Украина', value: 166 }, { name: 'Украина', value: 176 }, { name: 'Украина', value: 186 }, { name: 'Украина', value: 196 }, { name: 'Украина', value: 226 }, { name: 'Украина', value: 216 }, { name: 'Украина', value: 236 }, { name: 'Украина', value: 246 }]
     },
     {
     name: 'Страна2',
-    value: 'countries',
+    value: 'countries_2',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
     {
     name: 'Страна3',
-    value: 'countries',
+    value: 'countries_3',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
     {
     name: 'Страна4',
-    value: 'countries',
+    value: 'countries_4',
     type: 'relation',
     values: [{ name: 'Беларусь', value: 1 }, { name: 'Россия', value: 2 }, { name: 'Украина', value: 3 },{ name: 'Украина', value: 4 }, { name: 'Украина', value: 5 }, { name: 'Украина', value: 6 }]
     },
@@ -513,6 +519,7 @@ export default {
         later: "Позже",
         above: "Раньше",
         apply: "Применить",
+        save: "Сохранить",
         reset: "Сбросить",
         save_preset: "Сохранить пресет",
         filter: "Фильтр",

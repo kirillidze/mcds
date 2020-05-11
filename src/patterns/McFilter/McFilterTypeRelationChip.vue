@@ -32,7 +32,19 @@ export default {
   },
   computed: {
     option() {
-      return this.options.find(v => v.value === this.value)
+      return this.options.find(v => {
+        switch (v.value.constructor) {
+          case String:
+            return String(v.value) === String(this.value)
+          case Number:
+            return Number(v.value) === Number(this.value)
+          case Object:
+          case Array:
+            return JSON.stringify(v.value) === JSON.stringify(this.value)
+          default:
+            return v.value === this.value
+        }
+      })
     },
   },
   methods: {
