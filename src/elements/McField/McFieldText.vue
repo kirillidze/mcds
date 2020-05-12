@@ -7,7 +7,7 @@
     </label>
     <div class="mc-field-text__inner">
       <div class="mc-field-text__main">
-        <div class="mc-field-text__prepend">
+        <div class="mc-field-text__prepend" v-if="$slots.prepend">
           <slot name="prepend" />
         </div>
         <div class="mc-field-text__input-wrapper">
@@ -96,7 +96,7 @@
             :maxlength="maxLength"
           />
         </div>
-        <div class="mc-field-text__append">
+        <div class="mc-field-text__append" v-if="$slots.append">
           <slot name="append" />
           <mc-button
             v-if="copy"
