@@ -246,11 +246,15 @@ import McPanel from "../../McPanel"
 import McAvatar from "../../../elements/McAvatar/McAvatar"
 import McSeparator from "../../../elements/McSeparator"
 import McTitle from "../../../elements/McTitle"
+import McCell from "../../McCells/McCell"
+import McTooltip from "../../../elements/McTooltip"
 export default {
   name: "McHeaderPartRight",
   status: "ready",
   release: "0.0.1",
   components: {
+    McCell,
+    McTooltip,
     McTitle,
     McSeparator,
     McAvatar,
