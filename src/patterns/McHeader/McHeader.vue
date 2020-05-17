@@ -39,6 +39,7 @@
         :menu-apps="menuApps"
         :menu-profile="menuProfile"
         :menu-langs="menuLangs"
+        :user-info="userInfo"
         :user="user"
         :sub-users="subUsers"
         :chatra-id="chatraId"
@@ -250,6 +251,14 @@ export default {
     enableExact: {
       type: Boolean,
       default: false,
+    },
+    /**
+     *  Список информации о пользлвателе
+     *
+     */
+    userInfo: {
+      type: Array,
+      default: null,
     },
   },
   data() {
@@ -628,6 +637,7 @@ export default {
   let menuApps = require('@/mocks/menuApps').default;
   let menuProfile = require('@/mocks/menuProfile').default;
   let menuLangs = require('@/mocks/menuLangs').default;
+  let userInfo = require('@/mocks/userInfo').default;
   let authUser = require('@/mocks/authUser').default;
   let subUsers = require('@/mocks/subUsers').default;
   let searchResult = require('@/mocks/searchResult').default;
@@ -649,6 +659,7 @@ export default {
             :menu-profile="menuProfile"
             :menu-langs="menuLangs"
             :user="authUser"
+            :user-info="userInfo"
             :sub-users="subUsers"
             :search-items="searchResult"
             search-placeholder="Начните вводить"

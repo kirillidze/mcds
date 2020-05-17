@@ -137,6 +137,33 @@
               <McSeparator indent-bottom="xs" indent-top="xs" />
             </template>
 
+            <template v-if="userInfo && userInfo.length">
+              <div class="mc-header-part-right__user-info">
+                <template v-for="(info, index) in userInfo">
+                  <McCell :key="index" class="mc-header-part-right__info">
+                    <div class="mc-header-part-right__info-title" slot="title">
+                      <McTitle size="xs" line-height="s" uppercase>
+                        {{ info.title }}
+                      </McTitle>
+                      <McTooltip
+                        v-if="info.tooltip"
+                        size="s"
+                        placement="top"
+                        :content="info.tooltip"
+                      >
+                        <McSvgIcon size="xxs" name="info" fill="rgb(102, 102, 102)" />
+                      </McTooltip>
+                    </div>
+                    <McTitle color="light-green" size="l" line-height="s">
+                      {{ info.value }}
+                    </McTitle>
+                  </McCell>
+                  <McSeparator v-if="info.hasSeparator" />
+                </template>
+                <McSeparator />
+              </div>
+            </template>
+
             <McButton
               v-for="(menuProfileItem, index) in menuProfile"
               v-if="menuProfileItem.isVisible"
@@ -299,6 +326,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Список информации о пользлвателе
+     *
+     */
+    userInfo: {
+      type: Array,
+      default: null,
+    },
   },
   data() {
     return {
@@ -415,6 +450,23 @@ export default {
 
     &-menu {
       padding: 0 $space-xs !important;
+    }
+  }
+
+  &__user-info {
+    @include child-indent-bottom($space-s);
+    padding: $space-xs 0;
+    #{$block-name}__info {
+      padding: 0 $space-xs;
+      &-title {
+        display: flex;
+        align-items: center;
+        @include child-indent-right($space-xxs);
+        .mc-title {
+          width: auto;
+          margin-bottom: -$space-xxxs;
+        }
+      }
     }
   }
 
