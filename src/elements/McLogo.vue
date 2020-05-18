@@ -1,7 +1,7 @@
 <template>
   <component :is="tag" v-bind="tagBind" class="mc-logo" :class="classes">
-    <img :src="src" class="mc-logo__img" width="29" height="32" :alt="title" />
-    <span class="mc-logo__text">
+    <img v-if="src" :src="src" class="mc-logo__img" width="29" height="32" :alt="title" />
+    <span v-if="title" class="mc-logo__text">
       {{ title }}
     </span>
   </component>
