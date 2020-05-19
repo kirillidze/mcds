@@ -96,7 +96,7 @@
             :maxlength="maxLength"
           />
         </div>
-        <div class="mc-field-text__append" v-if="$slots.append">
+        <div class="mc-field-text__append" v-if="$slots.append || copy">
           <slot name="append" />
           <mc-button
             v-if="copy"
