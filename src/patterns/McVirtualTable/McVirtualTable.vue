@@ -381,6 +381,12 @@ $vxe-table-header-background-color: $color-white;
       }
     }
   }
+  &__context-menu {
+    width: 250px;
+    .vxe-context-menu--link {
+      width: 100%;
+    }
+  }
   .vxe-header--row {
     min-height: $size-xxl + 1;
   }
