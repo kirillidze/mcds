@@ -136,6 +136,7 @@
     "vuex": "^3.0.1",
     "vxe-table": "^2.9.5",
     "webfontloader": "^1.6.28",
+    "xe-clipboard": "^1.7.2",
     "xe-utils": "^2.4.5"
   },
   "devDependencies": {

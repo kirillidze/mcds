@@ -13,6 +13,7 @@
       show-overflow="tooltip"
       show-footer-overflow="tooltip"
       auto-resize
+      :context-menu="tableMenu"
       :class="classes"
       :sync-resize="cardIsOpen"
       :scroll-y="scrollY"
@@ -20,6 +21,7 @@
       :footer-method="footerMethod"
       :sort-config="{ remote: !nativeSort, showIcon: false, trigger: 'cell', orders: sortOrders }"
       @scroll="handleScroll"
+      @context-menu-click="contextMenuClickEvent"
     >
       <slot />
       <template v-slot:empty>
@@ -33,6 +35,7 @@
 
 <script>
 import _debounce from "lodash/debounce"
+import _XEClipboard from "xe-clipboard"
 import McTitle from "../../elements/McTitle"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
@@ -130,6 +133,11 @@ export default {
         return {
           no_data: "No data",
           all_loaded: "All loaded",
+          menu: {
+            copy: "Copy cell value",
+            open_in_new_tab: "Open in new tab",
+            open_in_new_window: "Open in new window",
+          },
         }
       },
     },
@@ -212,6 +220,7 @@ export default {
     classes() {
       return {
         "mc-virtual-table--open-card": this.cardIsOpen,
+        "mc-virtual-table--clickable": this.$listeners["cell-click"],
       }
     },
     wrapperStyles() {
@@ -222,6 +231,19 @@ export default {
           ? this.getFixedHeight(this.$attrs["max-height"])
           : "none",
       }
+    },
+    tableMenu() {
+      const menu = {
+        className: "mc-virtual-table__context-menu",
+        body: {
+          options: [
+            [{ code: "copy", name: this.placeholders.menu.copy }],
+            [{ code: "openInNewTab", name: this.placeholders.menu.open_in_new_tab }],
+            [{ code: "openInNewWindow", name: this.placeholders.menu.open_in_new_window }],
+          ],
+        },
+      }
+      return this.$listeners["cell-click"] ? menu : false
     },
   },
   methods: {
@@ -296,6 +318,36 @@ export default {
     getFixedHeight(val) {
       return !this.hasMore ? `calc(${val} - 1px)` : val
     },
+    contextMenuClickEvent({ menu, row, column }) {
+      switch (menu.code) {
+        case "copy":
+          if (row && column) {
+            if (_XEClipboard.copy(row[column.property].trim())) {
+              this.$emit("context-menu", "copied")
+            }
+          }
+          break
+        case "openInNewTab":
+          if (row && column) {
+            window.open(this.getUrl(row))
+          }
+          break
+        case "openInNewWindow":
+          if (row && column) {
+            const features = "toolbar=0,location=0,scrollbars=1,statusbar=1,menubar=0,resizable=1"
+            window.open(this.getUrl(row), "_blank", features)
+          }
+          break
+      }
+    },
+    getUrl(row) {
+      const regExp = /.+\/$/i
+      let pathName = window.location.pathname
+      if (!regExp.test(pathName)) {
+        pathName = `${pathName}/`
+      }
+      return `${window.location.origin}${pathName}${row.id}${window.location.search}`
+    },
   },
 }
 </script>
@@ -320,6 +372,13 @@ $vxe-table-header-background-color: $color-white;
     .vxe-table--body-wrapper,
     .vxe-table--footer-wrapper {
       overflow-x: hidden;
+    }
+  }
+  &--clickable {
+    .vxe-table--body {
+      .vxe-body--row {
+        cursor: pointer;
+      }
     }
   }
   .vxe-header--row {
