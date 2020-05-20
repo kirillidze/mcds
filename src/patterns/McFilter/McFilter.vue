@@ -239,26 +239,7 @@ export default {
   },
   computed: {
     canSubmit() {
-      return !_isEqual(this.value, this.currentValues) && this.filterDeepCount
-    },
-
-    filterDeepCount() {
-      const data = Object.values(_cloneDeep(this.currentValues))
-      let accum = 0
-
-      data.forEach(item => {
-        if (typeof item == "string") {
-          accum++
-        } else if (typeof item == "object") {
-          accum += Object.keys(item).length
-        } else {
-          Object.keys(item).forEach(i => {
-            accum += item[i].length
-          })
-        }
-      })
-
-      return accum
+      return !_isEqual(this.value, this.currentValues)
     },
     computedFiltersLength() {
       return this.filledFilter.length && this.unfilledFilter.length
