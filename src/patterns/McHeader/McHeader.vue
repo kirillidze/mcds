@@ -26,7 +26,6 @@
         :searchable="searchable"
         :search-items="searchItems"
         :search-placeholder="searchPlaceholder"
-        :enableExact="enableExact"
         @change-hidden-menu="handleChangeHiddenMenu"
         @add-entity="handleAddEntity"
         @input="handleInput"
@@ -243,14 +242,6 @@ export default {
     mediaMinWidth: {
       type: Number,
       default: 1200,
-    },
-    /**
-     *  Вклюсить exact
-     *
-     */
-    enableExact: {
-      type: Boolean,
-      default: false,
     },
     /**
      *  Список информации о пользлвателе

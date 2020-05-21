@@ -35,7 +35,7 @@
             :href="menuMainItem.href"
             :to="menuMainItem.to"
             variation="black-flat"
-            :exact="enableExact || isExact"
+            :exact="isExact"
           >
             <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
             {{ menuMainItem.name }}
@@ -65,7 +65,7 @@
                 size="l"
                 :href="menuHiddenItem.href"
                 :to="menuHiddenItem.to"
-                :exact="enableExact || isExact"
+                :exact="isExact"
               >
                 <McSvgIcon slot="icon-prepend" :name="menuHiddenItem.icon" />
                 {{ menuHiddenItem.name }}
@@ -182,14 +182,6 @@ export default {
     searchPlaceholder: {
       type: String,
       default: null,
-    },
-    /**
-     *  Использ. на music
-     *
-     */
-    enableExact: {
-      type: Boolean,
-      default: false,
     },
   },
   data() {
@@ -311,6 +303,13 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+
+    .mc-button {
+      &--is-active,
+      &.nuxt-link-active {
+        pointer-events: auto;
+      }
+    }
 
     @media #{$media-query-l-down} {
       .mc-header-nav-item {
