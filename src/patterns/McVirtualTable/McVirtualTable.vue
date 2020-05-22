@@ -268,8 +268,15 @@ export default {
     },
     handleScroll: _debounce(function({ scrollTop, $event, type, isY }) {
       const isBottom = scrollTop === $event.target.scrollHeight - $event.target.clientHeight
+      console.log("isBottom: ", isBottom)
+      console.log("$event: ", $event)
+      console.log("scrollTop: " + scrollTop)
+      console.log("dif height: ", $event.target.scrollHeight - $event.target.clientHeight)
+      console.log("type: " + type)
+      console.log("isY: ", isY)
       if (isBottom && !this.$attrs.loading && this.hasMore && type === "body" && isY) {
         this.load()
+        console.log("load emitted")
       }
     }, 200),
     load() {
