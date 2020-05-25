@@ -42,6 +42,8 @@
         :user="user"
         :sub-users="subUsers"
         :chatra-id="chatraId"
+        :userback-config="userbackConfig"
+        :logo-src="logoSrc"
       />
       <McHeaderMobile v-if="menuMain && menuMain.length" :menu-main="menuMain" />
     </div>
@@ -177,6 +179,14 @@ export default {
      */
     chatraId: {
       type: String,
+      default: null,
+    },
+    /**
+     *  Userback Config
+     *
+     */
+    userbackConfig: {
+      type: Object,
       default: null,
     },
     /**
@@ -629,6 +639,7 @@ export default {
   let menuProfile = require('@/mocks/menuProfile').default;
   let menuLangs = require('@/mocks/menuLangs').default;
   let userInfo = require('@/mocks/userInfo').default;
+  let userbackConfig = require('@/mocks/userbackConfig').default;
   let authUser = require('@/mocks/authUser').default;
   let subUsers = require('@/mocks/subUsers').default;
   let searchResult = require('@/mocks/searchResult').default;
@@ -653,6 +664,7 @@ export default {
             :user-info="userInfo"
             :sub-users="subUsers"
             :search-items="searchResult"
+            :userback-config="userbackConfig"
             search-placeholder="Начните вводить"
             chatra-id="dzDw7eBbL2ramxx25"
             searchable
