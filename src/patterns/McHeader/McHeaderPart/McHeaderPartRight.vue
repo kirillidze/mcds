@@ -382,6 +382,12 @@ export default {
     user() {
       this.menuProfileIsOpen = false
     },
+    userbackConfig: {
+      handler() {
+        this.setUserbackData()
+      },
+      deep: true,
+    },
   },
   computed: {
     filteredSubUsers() {
@@ -472,15 +478,7 @@ export default {
       })(document, window, "Chatra")
     },
     initUserback() {
-      window.Userback = window.Userback || {}
-      window.Userback.access_token = this.userbackConfig.token
-
-      window.Userback.widget_settings = this.computedUserbackSettings
-      window.Userback.categories = this.userbackConfig.categories
-      if (this.user) {
-        window.Userback.custom_data = this.computedUserbackCustomData
-      }
-
+      this.setUserbackData()
       ;(function(id) {
         if (document.getElementById(id)) {
           return
@@ -491,6 +489,15 @@ export default {
         const parent_node = document.head || document.body
         parent_node.appendChild(s)
       })("userback-sdk")
+    },
+    setUserbackData() {
+      window.Userback = window.Userback || {}
+      window.Userback.access_token = this.userbackConfig.token
+      window.Userback.widget_settings = this.computedUserbackSettings
+      window.Userback.categories = this.userbackConfig.categories
+      if (this.user) {
+        window.Userback.custom_data = this.computedUserbackCustomData
+      }
     },
     handleToggleUserback() {
       this.menuUserbackIsOpen ? window.Userback.close() : window.Userback.open()
