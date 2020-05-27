@@ -77,12 +77,12 @@ export default {
     layout() {
       if (this.active) {
         this.hidden = false
-        //this.$emit('open-start')
+        this.$emit("slide-open-start")
         if (this.initial) {
           this.setHeight("0px", () => this.el.scrollHeight + "px")
         }
       } else {
-        //this.$emit('close-start')
+        this.$emit("slide-close-start")
         this.setHeight(this.el.scrollHeight + "px", () => "0px")
       }
     },
@@ -114,14 +114,14 @@ export default {
     onTransitionEnd() {
       if (this.active) {
         this.style = {}
-        //this.$emit('open-end')
+        this.$emit("slide-open-end")
       } else {
         this.style = {
           height: "0",
           overflow: "hidden",
         }
         this.hidden = true
-        //this.$emit('close-end')
+        this.$emit("slide-close-end")
       }
     },
   },

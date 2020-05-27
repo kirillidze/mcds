@@ -1,6 +1,13 @@
 <template>
   <div class="mc-wrap-collapse" :class="classes">
-    <mc-collapse @toggle="handleToggle">
+    <mc-collapse
+      ref="mc-collapse"
+      @toggle="handleToggle"
+      @collapse-open-start="collapseOpenStart"
+      @collapse-open-end="collapseOpenEnd"
+      @collapse-close-start="collapseCloseStart"
+      @collapse-close-end="collapseCloseEnd"
+    >
       <div class="mc-wrap-collapse__activator" slot="activator">
         <mc-grid-row justify="between" align="middle" :gutter-x="8" :wrap="false">
           <mc-grid-col class="mc-wrap-collapse__header">
@@ -140,6 +147,18 @@ export default {
     },
     handleDrag() {
       this.$emit("drag")
+    },
+    collapseOpenStart() {
+      this.$emit("collapse-open-start")
+    },
+    collapseOpenEnd() {
+      this.$emit("collapse-open-end")
+    },
+    collapseCloseStart() {
+      this.$emit("collapse-close-start")
+    },
+    collapseCloseEnd() {
+      this.$emit("collapse-close-end")
     },
   },
   computed: {
