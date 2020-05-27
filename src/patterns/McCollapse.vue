@@ -10,16 +10,20 @@
         @click.prevent="toggle"
       ></a>
     </span>
-    <McSlideUpDown
+    <mc-slide-up-down
       v-if="!isDisabled"
       :active="isCollapsed"
       :duration="300"
       class="mc-collapse__body"
+      @slide-open-start="slideOpenStart"
+      @slide-open-end="slideOpenEnd"
+      @slide-close-start="slideCloseStart"
+      @slide-close-end="slideCloseEnd"
     >
       <div class="mc-collapse__body-inner">
         <slot name="body" />
       </div>
-    </McSlideUpDown>
+    </mc-slide-up-down>
   </section>
 </template>
 
@@ -108,6 +112,18 @@ export default {
     },
     toggle() {
       this.isCollapsed = !this.isCollapsed
+    },
+    slideOpenStart() {
+      this.$emit("collapse-open-start")
+    },
+    slideOpenEnd() {
+      this.$emit("collapse-open-end")
+    },
+    slideCloseStart() {
+      this.$emit("collapse-close-start")
+    },
+    slideCloseEnd() {
+      this.$emit("collapse-close-end")
     },
   },
 }
