@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import _has from "lodash/has"
 import McTitle from "../../elements/McTitle"
 import McSvgIcon from "../../elements/McSvgIcon"
 
@@ -85,6 +84,7 @@ export default {
   },
   methods: {
     getVisibilityCommonInfo(columnIndex, items) {
+      console.log(items)
       const index = items.indexOf(null)
       return columnIndex === index
     },

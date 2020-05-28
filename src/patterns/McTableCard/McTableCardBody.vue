@@ -89,11 +89,5 @@ export default {
       }
     }
   }
-
-  th.mc-table-cell {
-    &::before {
-      display: block;
-    }
-  }
 }
 </style>

@@ -475,6 +475,11 @@ $vxe-table-header-background-color: $color-white;
     const tablePlaceholders = {
         no_data: 'Данных вообще нет!',
         all_loaded: 'Всё уже загружено',
+        menu: {
+            copy: "Скопировать данные ячейки",
+            open_in_new_tab: "Открыть в новой вкладке",
+            open_in_new_window: "Открыть в новом окне",
+        },
     }
 
     function handleCellClassName({rowIndex}) {
@@ -535,7 +540,8 @@ $vxe-table-header-background-color: $color-white;
             @cell-click="cellClickEvent"
         >
             <mc-virtual-table-col type="seq" min-width="60" fixed="left" align="right" has-border />
-            <mc-virtual-table-col type="checkbox" field="title" title="Канал" width="248" fixed="left">
+            <mc-virtual-table-col :show-overflow="false" type="checkbox" fixed="left" width="25" />
+            <mc-virtual-table-col field="title" title="Канал" width="248" fixed="left">
                 <template v-slot="{ row }">
                     <mc-preview>
                         <mc-avatar-status slot="left" border-color="blue" dot-color="orange" lazy :src="row.avatar" size="s"/>
@@ -555,7 +561,7 @@ $vxe-table-header-background-color: $color-white;
                                 </mc-tooltip>
                             </mc-grid-col>
                         </mc-grid-row>
-                        <mc-title size="m" slot="top"> {{ row.title }} </mc-title>
+                        <mc-title slot="top"> {{ row.title }} </mc-title>
                     </mc-preview>
                 </template>
                 <template v-slot:right="{ row }">
