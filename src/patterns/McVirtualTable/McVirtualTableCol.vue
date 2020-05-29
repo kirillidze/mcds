@@ -84,7 +84,6 @@ export default {
   },
   methods: {
     getVisibilityCommonInfo(columnIndex, items) {
-      console.log(items)
       const index = items.indexOf(null)
       return columnIndex === index
     },
