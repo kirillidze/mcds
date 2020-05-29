@@ -480,11 +480,15 @@ export default {
     initUserback() {
       this.setUserbackData()
       ;(function(id) {
-        if (document.getElementById(id)) {
-          return
-        }
+        const script = document.getElementById(id)
+        script && script.remove()
+
+        const container = document.getElementsByClassName("userback-button-container")[0]
+        container && container.remove()
+
         const s = document.createElement("script")
         s.id = id
+        s.async = 1
         s.src = "https://static.userback.io/widget/v1.js"
         const parent_node = document.head || document.body
         parent_node.appendChild(s)
