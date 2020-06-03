@@ -1,5 +1,5 @@
 <template>
-  <component :is="type" class="mc-svg-icon" :class="classes" v-html="svg"></component>
+  <component :is="type" class="mc-svg-icon" :class="classes" v-html="svg" />
 </template>
 
 <script>
@@ -69,20 +69,6 @@ export default {
 }
 </script>
 
-<docs>
-  ```jsx
-  let icons = require('@/utils/load-icons').default;
-  <div style="display: flex; flex-wrap: wrap">
-    <div style="display: flex; flex-wrap: nowrap; margin: 5px; align-items: center; padding: 5px 10px; background-color: white; border-radius: 8px; border: 1px solid lightgray" v-for="(icon, index) in icons" :key="index">
-      <McSvgIcon style="flex: 0 0 auto" :name="icon" size="xs"/>
-      <div style="flex: 1 1 auto; margin-left: 10px">
-        {{ icon }}
-      </div>
-    </div>
-  </div>
-  ```
-</docs>
-
 <style lang="scss">
 .mc-svg-icon {
   @include reset();
@@ -124,3 +110,21 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  let icons = require('@/utils/load-icons').default;
+  <div style="display: flex; flex-wrap: wrap">
+    <div
+      style="display: flex; flex-wrap: nowrap; margin: 5px; align-items: center; padding: 5px 10px; background-color: white; border-radius: 8px; border: 1px solid lightgray"
+      v-for="(icon, index) in icons"
+      :key="index"
+    >
+      <mc-svg-icon style="flex: 0 0 auto" :name="icon" size="xs"/>
+      <div style="flex: 1 1 auto; margin-left: 10px">
+        {{ icon }}
+      </div>
+    </div>
+  </div>
+  ```
+</docs>

@@ -1,12 +1,14 @@
 <template>
   <section class="mc-cell">
     <div class="mc-cell__title">
+      <!-- @slot Слот заголовка -->
       <slot name="title">
-        <McTitle size="xs" uppercase>{{ title }}</McTitle>
+        <mc-title size="xs" uppercase>{{ title }}</mc-title>
       </slot>
     </div>
     <div class="mc-cell__content">
-      <slot></slot>
+      <!-- @slot Слот контента -->
+      <slot />
     </div>
   </section>
 </template>
@@ -50,44 +52,44 @@ export default {
 <docs>
     ```jsx
     <div>
-        <McCell title="Бюджет">
-            <McTitle tag-name="p" size="m">
+        <mc-cell title="Бюджет">
+            <mc-title tag-name="p">
                 30 000 $
-            </McTitle>
-        </McCell>
+            </mc-title>
+        </mc-cell>
 
         <br>
 
-        <McCell title="Бюджет">
-            <McTitle tag-name="p" size="m">
+        <mc-cell title="Бюджет">
+            <mc-title tag-name="p">
                 30 000 $
-            </McTitle>
-            <McTitle size="xs" uppercase>
+            </mc-title>
+            <mc-title size="xs" uppercase>
                 app/aug
-            </McTitle>
-        </McCell>
+            </mc-title>
+        </mc-cell>
 
         <br>
 
-        <McCell>
-            <McTitle uppercase slot="title" size="s">
+        <mc-cell>
+            <mc-title uppercase slot="title" size="s">
                 Имя Фамилия
-            </McTitle>
-            <McTitle tag-name="p" size="l">
+            </mc-title>
+            <mc-title tag-name="p" size="l">
                 MediaCube Network
-            </McTitle>
-        </McCell>
+            </mc-title>
+        </mc-cell>
 
         <br>
 
-        <McCell>
-            <McTitle uppercase color="blue" slot="title" size="m">
+        <mc-cell>
+            <mc-title uppercase color="blue" slot="title">
                 Имя Фамилия
-            </McTitle>
-            <McTitle tag-name="p" size="xl">
+            </mc-title>
+            <mc-title tag-name="p" size="xl">
                 MediaCube Network
-            </McTitle>
-        </McCell>
+            </mc-title>
+        </mc-cell>
     </div>
     ```
 </docs>

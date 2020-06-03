@@ -1,12 +1,12 @@
 <template>
   <div class="channel-chat-source">
-    <McDropdown v-model="isOpened">
-      <McButton slot="activator" variation="blue-link">
+    <mc-dropdown v-model="isOpened">
+      <mc-button slot="activator" variation="blue-link">
         {{ activeSource.name }}
-        <McSvgIcon name="arrow_drop_down" slot="icon-append" />
-      </McButton>
-      <McPanel>
-        <McButton
+        <mc-svg-icon name="arrow_drop_down" slot="icon-append" />
+      </mc-button>
+      <mc-panel>
+        <mc-button
           v-for="source in sources"
           :key="source.value"
           :is-active="source.value === activeSource.value"
@@ -15,12 +15,11 @@
           full-width
           text-align="left"
           variation="black-flat"
-          size="m"
         >
           {{ source.name }}
-        </McButton>
-      </McPanel>
-    </McDropdown>
+        </mc-button>
+      </mc-panel>
+    </mc-dropdown>
   </div>
 </template>
 
@@ -54,6 +53,10 @@ export default {
   methods: {
     handleChange(source) {
       this.isOpened = false
+      /**
+       * Событие селекта
+       * @property {Object}
+       */
       this.$emit("input", source)
     },
   },
@@ -64,3 +67,19 @@ export default {
 .channel-chat-source {
 }
 </style>
+
+<docs>
+  ```jsx
+  let sources = [
+  { name: 'Источник 1', value: '1' },
+  { name: 'Другой чат', value: '2' },
+  ]
+  let source = '1';
+  let handleSourceInput = s => {
+    alert(s.name);
+    console.log(s.value);
+    source = s.value;
+  };
+  <mc-chat-source :sources="sources" :value="source" @input="handleSourceInput" />
+  ```
+</docs>

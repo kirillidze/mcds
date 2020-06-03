@@ -1,10 +1,11 @@
 <template>
   <div class="mc-notification" :class="classes">
     <div class="mc-notification__left">
-      <McSvgIcon :name="icon" />
+      <mc-svg-icon :name="icon" />
     </div>
     <div class="mc-notification__right">
-      <slot></slot>
+      <!-- @slot Информация справа от иконки -->
+      <slot />
     </div>
   </div>
 </template>
@@ -51,13 +52,13 @@ export default {
 
   display: flex;
   width: 100%;
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: $space-xs 12px;
+  border-radius: $radius-m;
   position: relative;
   overflow: hidden;
 
   &__left {
-    margin-right: 8px;
+    margin-right: $space-xs;
 
     .mc-svg-icon svg {
       margin-top: 5px;
@@ -91,9 +92,7 @@ export default {
         &:before {
           content: "";
           display: block;
-          position: absolute;
-          left: 0;
-          top: 0;
+          @include position(absolute, 0 null null 0);
           height: 100%;
           width: 4px;
           background-color: $value;
@@ -111,15 +110,12 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McNotification background="red">
-      <McTitle
-        :ellipsis="false"
-        size="s"
-      >
+    <mc-notification background="red">
+      <mc-title :ellipsis="false" size="s">
         Аккаунт не подключен к системе. Так бывает, когда YouTube отзывает доступ в целях безопасности,
         или когда пользователь сам отозвал доступ к аккаунту. Чтобы все было, как и раньше, войдите в аккаунт повторно.
-      </McTitle>
-    </McNotification>
+      </mc-title>
+    </mc-notification>
   </div>
 
   ```

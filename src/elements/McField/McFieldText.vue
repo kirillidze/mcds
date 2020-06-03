@@ -1,102 +1,67 @@
 <template>
   <div class="mc-field-text" :class="classes">
     <label :for="name" class="mc-field-text__header">
+      <!-- @slot Слот заголовка -->
       <slot name="header">
-        <McTitle :ellipsis="false" v-if="title" :level="4">{{ title }}</McTitle>
+        <mc-title :ellipsis="false" v-if="title" :level="4">{{ title }}</mc-title>
       </slot>
     </label>
     <div class="mc-field-text__inner">
       <div class="mc-field-text__main">
         <div class="mc-field-text__prepend" v-if="$slots.prepend">
+          <!-- @slot Слот в начале инпута -->
           <slot name="prepend" />
         </div>
         <div class="mc-field-text__input-wrapper">
           <calendar
             v-if="isCalendar"
-            class="mc-field-text__date-picker"
-            title-position="left"
-            :name="name"
-            :id="name"
-            :attributes="attrs"
-            :locale="locale"
-            :masks="masks"
-            ref="input"
-            :first-day-of-week="2"
+            v-bind="datePickerAttrs"
             v-on="listeners"
-            :columns="columns"
+            :attributes="attrs"
           />
-
           <date-picker
             v-else-if="isDate"
-            class="mc-field-text__date-picker"
-            title-position="left"
-            :name="name"
-            :id="name"
+            v-bind="datePickerAttrs"
+            v-on="listeners"
             :mode="mode"
-            :masks="masks"
             :value="_value"
             :color="color"
-            :locale="locale"
-            ref="input"
-            :first-day-of-week="2"
             :is-inline="isInline"
             :input-props="inputProps"
-            :columns="columns"
             :popover="{ visibility: 'click' }"
-            v-on="listeners"
             @input="value => handleEmitDate(value)"
           />
 
           <textarea
             v-else-if="isTextarea"
-            class="mc-field-text__input"
-            :style="inputStyles"
-            :placeholder="placeholder"
-            :value="value"
-            :disabled="disabled"
-            :name="name"
-            :id="name"
+            v-bind="inputAttrs"
             v-on="listeners"
-            @input="$event => handleInput($event.target.value)"
-            :autocomplete="autocomplete"
             :maxlength="maxLength"
-          ></textarea>
+            @input="$event => handleInput($event.target.value)"
+          />
           <textarea-autosize
             v-else-if="isTextareaAutosize"
-            class="mc-field-text__input"
-            :style="inputStyles"
-            :placeholder="placeholder"
-            :disabled="disabled"
-            :name="name"
-            :id="name"
+            v-bind="inputAttrs"
             v-on="listeners"
             rows="1"
             :min-height="minHeight"
             :max-height="maxHeight"
             @input="handleInput"
-            :value="value"
-            :autocomplete="autocomplete"
-          ></textarea-autosize>
+          />
 
           <input
             v-else
-            class="mc-field-text__input"
-            :style="inputStyles"
-            :disabled="disabled"
+            v-bind="inputAttrs"
             :type="type"
-            :placeholder="placeholder"
-            :value="value"
             ref="input"
-            :name="name"
-            :id="name"
             v-on="listeners"
             @input="$event => handleInput($event.target.value)"
-            :autocomplete="autocomplete"
             :readonly="readOnly"
             :maxlength="maxLength"
           />
         </div>
         <div class="mc-field-text__append" v-if="$slots.append || copy">
+          <!-- @slot Слот в конце инпута -->
           <slot name="append" />
           <mc-button
             v-if="copy"
@@ -108,17 +73,21 @@
           </mc-button>
         </div>
       </div>
+      <!-- @slot Слот справа инпута -->
       <div class="mc-field-text__right" v-if="$slots.right">
         <slot name="right" />
       </div>
     </div>
     <div class="mc-field-text__footer" v-if="errorText || helpText || $slots.footer">
-      <McTitle tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
+      <mc-title tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
         {{ errorText }}
-      </McTitle>
+      </mc-title>
       <br v-if="errorText" />
+      <!-- @slot Слот доп. текста под инпутом -->
       <slot name="footer">
-        <McTitle tag-name="div" :ellipsis="false" size="s" v-if="helpText">{{ helpText }}</McTitle>
+        <mc-title tag-name="div" :ellipsis="false" size="s" v-if="helpText">{{
+          helpText
+        }}</mc-title>
       </slot>
     </div>
   </div>
@@ -407,6 +376,32 @@ export default {
       return this.type === "calendar"
     },
 
+    datePickerAttrs() {
+      return {
+        class: "mc-field-text__date-picker",
+        "title-position": "left",
+        name: this.name,
+        id: this.name,
+        locale: this.locale,
+        masks: this.masks,
+        ref: "input",
+        "first-day-of-week": 2,
+        columns: this.columns,
+      }
+    },
+    inputAttrs() {
+      return {
+        class: "mc-field-text__input",
+        style: this.inputStyles,
+        placeholder: this.placeholder,
+        value: this.value,
+        disabled: this.disabled,
+        name: this.name,
+        id: this.name,
+        autocomplete: this.autocomplete,
+      }
+    },
+
     masks() {
       return {
         weekdays: "WW",
@@ -424,7 +419,7 @@ export default {
     },
 
     errorText() {
-      if (this.errors == null || this.errors.length === 0) return null
+      if (this.errors === null || !this.errors.length) return null
       return this.errors.join(", ")
     },
 
@@ -449,11 +444,15 @@ export default {
 
   methods: {
     handleInput(value) {
+      /**
+       * Событие инпута
+       * @property {string}
+       */
       this.$emit("input", value)
     },
 
     handleEmitDate(value) {
-      let newValue = this.$moment(value).format(this.toFormat)
+      const newValue = this.$moment(value).format(this.toFormat)
       this.handleInput(newValue)
     },
 
@@ -466,12 +465,16 @@ export default {
       return (
         this.$slots[name] &&
         this.$slots[name].reduce((acc, cur) => {
-          const $el = cur.elm ? cur.elm : cur
+          const $el = cur.elm || cur
           return acc + $el.getBoundingClientRect().width
         }, 0)
       )
     },
     handlerCopy(value) {
+      /**
+       * Событие по кнопке копирования
+       * @property {string}
+       */
       this.$emit("handleCopy", value)
     },
   },
@@ -678,22 +681,21 @@ export default {
       color: $color-black;
     }
     .vc-svg-icon {
-      width: 20px;
-      height: 20px;
+      @include size($size-l);
       color: $color-black;
     }
     .vc-arrows-container {
-      top: 2px;
+      top: $space-xxxs;
     }
     .vc-highlight {
-      border-radius: 4px;
+      border-radius: $radius-m;
       color: $color-blue;
     }
     .vc-day-content {
       font-weight: $weight-medium !important;
-      border-radius: 4px;
-      margin-top: 4px;
-      margin-bottom: 4px;
+      border-radius: $radius-m;
+      margin-top: $space-xxs;
+      margin-bottom: $space-xxs;
     }
     .vc-bg-blue-200 {
       background-color: $color-lightest-blue;
@@ -717,13 +719,13 @@ export default {
                 name="login"
                 help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
         >
-            <McTitle :ellipsis="false" :level="4" slot="header">
+            <mc-title :ellipsis="false" :level="4" slot="header">
                 <McTooltip placement="right" slot="icon-append" size="s"
                            content="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube.">
                     <McSvgIcon name="help"/>
                 </McTooltip>
                 Электронная почта
-            </McTitle>
+            </mc-title>
             <McSvgIcon slot="prepend" name="face"/>
             <McSvgIcon slot="prepend" name="access_time"/>
             <McSvgIcon slot="append" name="attach_money"/>

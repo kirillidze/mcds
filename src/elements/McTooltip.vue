@@ -1,6 +1,7 @@
 <template>
   <div class="mc-tooltip-target" v-tooltip="{ content, placement, classes: tooltipClasses }">
-    <slot></slot>
+    <!-- @slot Слот для элемента, у которого будет всплывать тултип -->
+    <slot />
   </div>
 </template>
 
@@ -267,29 +268,20 @@ export default {
 
 <docs>
   ```jsx
-  <div>
-    <McTooltip color="black" placement="top" content="А если текста реально очень очень много, например как сейчас?">
-      <McButton>Тултип</McButton>
-    </McTooltip>
+  <div style="height: 250px">
+    <mc-tooltip color="black" placement="top" content="А если текста реально очень очень много, например как сейчас?">
+      <mc-button>Тултип</mc-button>
+    </mc-tooltip>
     <br>
     <br>
-    <McTooltip size="s" color="blue" content="А если текста реально очень очень много, например как сейчас?">
-      <McSvgIcon name="face"/>
-    </McTooltip>
+    <mc-tooltip size="s" color="blue" content="А если текста реально очень очень много, например как сейчас?">
+      <mc-svg-icon name="face" />
+    </mc-tooltip>
     <br>
     <br>
-    <McTooltip arrow-disabled color="white" placement="right" max-width="xl" content="Вывод экспресс платежей облагается комиссией в 1%. Это условие наших партнеров, и мы на этом не зарабатываем.Если вы не хотите платить комиссию – не снимайте кредитные средства со своего счета, пока они не перейдут в обычные средства.">
+    <mc-tooltip arrow-disabled color="white" placement="right" max-width="xl" content="Вывод экспресс платежей облагается комиссией в 1%. Это условие наших партнеров, и мы на этом не зарабатываем.Если вы не хотите платить комиссию – не снимайте кредитные средства со своего счета, пока они не перейдут в обычные средства.">
       Тултип
-    </McTooltip>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    </mc-tooltip>
   </div>
   ```
 </docs>

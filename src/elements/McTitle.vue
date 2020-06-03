@@ -229,63 +229,63 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McTitle size="s" family="semi-bold" line-height="m">
-      <McSvgIcon slot="icon-prepend" name="copyright"/>
+    <mc-title size="s" family="semi-bold" line-height="m">
+      <mc-svg-icon slot="icon-prepend" name="copyright"/>
       Заголовок123123
-    </McTitle>
+    </mc-title>
 
     <br><br>
 
-    <McTitle size="s">
-      <McSvgIcon slot="icon-prepend" name="ready"/>
+    <mc-title size="s">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
       Заголовок
-      <McSvgIcon slot="icon-append" name="error"/>
-    </McTitle>
+      <mc-svg-icon slot="icon-append" name="error"/>
+    </mc-title>
 
     <br><br>
 
-    <McTitle size="m">
-      <McSvgIcon slot="icon-prepend" name="ready"/>
+    <mc-title>
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
       Заголовок
-      <McSvgIcon slot="icon-append" name="error"/>
-    </McTitle>
+      <mc-svg-icon slot="icon-append" name="error"/>
+    </mc-title>
 
     <br><br>
 
-    <McTitle size="l">
-      <McSvgIcon slot="icon-prepend" name="ready"/>
+    <mc-title size="l">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
       Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
-      <McSvgIcon slot="icon-append" name="error"/>
-    </McTitle>
+      <mc-svg-icon slot="icon-append" name="error"/>
+    </mc-title>
 
     <br><br>
 
-    <McTitle :ellipsis="false" size="xl">
-      <McSvgIcon slot="icon-prepend" name="ready"/>
+    <mc-title :ellipsis="false" size="xl">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
       Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
-      <McSvgIcon slot="icon-append" name="error"/>
-    </McTitle>
+      <mc-svg-icon slot="icon-append" name="error"/>
+    </mc-title>
 
     <br><br>
 
-    <McTitle uppercase size="xxl">
-      <McSvgIcon slot="icon-prepend" name="ready"/>
+    <mc-title uppercase size="xxl">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
       Заголовок
-    </McTitle>
+    </mc-title>
 
     <br><br>
 
-    <McTitle size="xxxl">
-      <McSvgIcon slot="icon-prepend" name="ready"/>
+    <mc-title size="xxxl">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
       Заголовок
-    </McTitle>
+    </mc-title>
 
     <br><br>
 
-    <McTitle  size="xxxxl" color="blue" >
-      <McSvgIcon slot="icon-prepend" name="ready"/>
+    <mc-title  size="xxxxl" color="blue" >
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
       Заголовок
-    </McTitle>
+    </mc-title>
   </div>
   ```
 </docs>

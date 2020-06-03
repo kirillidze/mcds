@@ -75,7 +75,7 @@ export default {
       ) * 2}-c-k-no-mo-rj-c0xffffff/photo.jpg`
     },
     _src() {
-      return this.src ? this.src : this.defaultSrc
+      return this.src || this.defaultSrc
     },
   },
 }

@@ -8,7 +8,7 @@
         class="mc-collapse__link"
         href="#"
         @click.prevent="toggle"
-      ></a>
+      />
     </span>
     <mc-slide-up-down
       v-if="!isDisabled"

@@ -4,8 +4,8 @@
       <component :is="tag" :to="item.to" :href="item.href || '#'" class="mc-breadcrumbs__link">
         {{ item.title }}
       </component>
-      <div v-if="index === 0 && info" class="mc-breadcrumbs__info-wrapper">
-        <McButton
+      <div v-if="!index && info" class="mc-breadcrumbs__info-wrapper">
+        <mc-button
           v-if="item.info === null"
           variation="blue-link"
           rounded
@@ -13,14 +13,15 @@
           :loading="loading"
           @click="loadInfo"
         >
-          <McSvgIcon style="flex: 0 0 auto" name="reload" size="xs" />
-        </McButton>
+          <mc-svg-icon name="reload" size="xs" />
+        </mc-button>
 
         <span
           v-if="item.info !== undefined && item.info !== null"
           class="mc-breadcrumbs__info-total"
-          >({{ item.info }})</span
         >
+          ({{ item.info }})
+        </span>
       </div>
     </li>
   </ol>
@@ -81,6 +82,9 @@ export default {
 
   methods: {
     loadInfo() {
+      /**
+       * Событие подгрузки информации
+       */
       this.$emit("load-info")
     },
   },
@@ -163,6 +167,10 @@ $line-height: $line-height-s;
 
     & .mc-button__text {
       display: inherit;
+    }
+
+    .mc-svg-icon {
+      flex: 0 0 auto;
     }
   }
 

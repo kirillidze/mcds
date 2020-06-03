@@ -1,12 +1,14 @@
 <template>
-  <McGridRow class="mc-get-info" align="middle" :gutter-x="10">
-    <McGridCol v-if="total === null" class="mc-get-info__btn">
-      <slot></slot>
-    </McGridCol>
-    <McGridCol v-else class="mc-get-info__text">
-      <slot name="answer"></slot>
-    </McGridCol>
-  </McGridRow>
+  <mc-grid-row class="mc-get-info" align="middle" :gutter-x="10">
+    <mc-grid-col v-if="total === null" class="mc-get-info__btn">
+      <!-- @slot Слот по умолчанию -->
+      <slot />
+    </mc-grid-col>
+    <mc-grid-col v-else class="mc-get-info__text">
+      <!-- @slot Слот для отображаемой информации -->
+      <slot name="answer" />
+    </mc-grid-col>
+  </mc-grid-row>
 </template>
 
 <script>
@@ -15,7 +17,7 @@ import McGridRow from "../patterns/McGrid/McGridRow"
 import McGridCol from "../patterns/McGrid/McGridCol"
 export default {
   name: "McGetInfo",
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
   components: {
     McGridCol,
@@ -23,7 +25,10 @@ export default {
     McButton,
   },
   props: {
-    total: {},
+    total: {
+      type: [Object, Number, String],
+      default: null,
+    },
   },
 }
 </script>
@@ -55,19 +60,14 @@ export default {
 
     let total = null;
 
-    <McGetInfo :total="total" >
-        <McButton
-            size="s"
-            variation="blue-link"
-            @click.prevent="_ => total = 10"
-            uppercase
-        >
+    <mc-get-info :total="total" >
+        <mc-button size="s" variation="blue-link" uppercase @click.prevent="_ => total = 10">
             Button
-        </McButton>
+        </mc-button>
         <template slot="answer">
             {{ total }} items
         </template>
-    </McGetInfo>
+    </mc-get-info>
 
     ```
 </docs>

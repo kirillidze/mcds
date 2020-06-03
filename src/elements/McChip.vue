@@ -1,15 +1,17 @@
 <template>
   <section tabindex="0" class="mc-chip" :class="classes">
+    <!-- @slot Слот для иконки -->
     <slot name="icon" />
     <div class="mc-chip__title">
-      <slot></slot>
+      <slot />
     </div>
     <div v-if="counter" class="mc-chip__counter">
       {{ counter }}
     </div>
     <button v-if="closable" type="button" class="mc-chip__button" v-on="$listeners">
+      <!-- @slot Слот для пользовательской кнопки -->
       <slot name="button">
-        <McSvgIcon size="xxs" name="cancel" />
+        <mc-svg-icon size="xxs" name="cancel" />
       </slot>
     </button>
   </section>
@@ -209,11 +211,15 @@ export default {
     </McChip>
     <McChip :counter="15" variation="blue" closable @click="eventTest('close')">
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
-      Чипс c иконкой, кнопкой и счетчкиком
+      Чипс c иконкой, кнопкой и счетчиком
     </McChip>
     <McChip :counter="15">
       <McSvgIcon slot="icon" size="xxs" name="favorite" fill="red"/>
       Чипс cо счетчиком
+    </McChip>
+    <McChip variation="red" closable @click="eventTest('close')">
+      Чипс c пользовательской кнопкой
+      <McSvgIcon slot="button" size="xxs" name="create" fill="white"/>
     </McChip>
   </div>
   ```

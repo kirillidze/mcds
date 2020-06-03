@@ -1,7 +1,8 @@
 <template>
   <div class="mc-separator" :class="classes">
     <div class="mc-separator__wrapper">
-      <slot></slot>
+      <!-- @slot Слот для данных -->
+      <slot />
     </div>
   </div>
 </template>
@@ -13,6 +14,13 @@ export default {
   release: "1.0.0",
 
   props: {
+    /**
+     * Толщина
+     */
+    weight: {
+      type: String,
+      default: "xs",
+    },
     /**
      * Отступ сверху
      */
@@ -46,6 +54,7 @@ export default {
   computed: {
     classes() {
       return {
+        [`mc-separator--weight-${this.weight}`]: this.weight,
         [`mc-separator--indent-top-${this.indentTop}`]: this.indentTop,
         [`mc-separator--indent-bottom-${this.indentBottom}`]: this.indentBottom,
         [`mc-separator--indent-left-${this.indentLeft}`]: this.indentLeft,
@@ -68,11 +77,21 @@ $spaces: (
   "xxxs": $space_xxxs,
 );
 
+$weights: (
+  "s": $separator-s,
+  "xs": $separator-xs,
+);
+
 .mc-separator {
   $block-name: &;
 
   width: 100%;
-  height: $separator-xs;
+
+  @each $key, $value in $weights {
+    &--weight-#{$key} {
+      height: #{$value};
+    }
+  }
 
   &__wrapper {
     @include size(100%);
@@ -102,11 +121,11 @@ $spaces: (
 <docs>
   ```jsx
   <div>
-    <McSeparator indent-top="xs" indent-bottom="xs"/>
+    <mc-separator indent-top="xs" indent-bottom="xs"/>
   </div>
 
   <div>
-    <McSeparator indent-top="xl" indent-bottom="xl"/>
+    <mc-separator weight="s" indent-top="xl" indent-bottom="xl" indent-left="l" indent-right="l" />
   </div>
   ```
 </docs>

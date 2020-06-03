@@ -1,26 +1,33 @@
 <template>
-  <McFieldText
+  <mc-field-text
     :type="type"
     :value="value"
-    @input="handleInput"
     :title="title"
     :disabled="disabled"
     :name="name"
     :placeholder="placeholder"
     :errors="errors"
+    @input="handleInput"
   >
-    <McTitle v-if="title" slot="header" :ellipsis="titleEllipsis" :level="4">{{ title }}</McTitle>
-    <McButton
+    <!-- @slot Слот заголовка -->
+    <slot name="header" slot="header">
+      <mc-title v-if="title" :ellipsis="titleEllipsis" :level="4">{{ title }}</mc-title>
+    </slot>
+    <mc-button
       variation="gray-dark-link"
       slot="append"
       size="s-compact"
-      @click.prevent="handleToggleClick"
       default-tag="div"
+      @click.prevent="handleToggleClick"
     >
-      <McSvgIcon slot="icon-append" :name="type === 'password' ? 'visibility' : 'visibility_off'" />
-    </McButton>
+      <mc-svg-icon
+        slot="icon-append"
+        :name="type === 'password' ? 'visibility' : 'visibility_off'"
+      />
+    </mc-button>
+    <!-- @slot Слот доп. текста под инпутом -->
     <slot name="footer" slot="footer" />
-  </McFieldText>
+  </mc-field-text>
 </template>
 
 <script>
@@ -127,12 +134,27 @@ export default {
     ```jsx
     let text = 'lalala'
     <div style="max-width: 700px;">
-        <McFieldPassword
-                placeholder="Введите пароль"
-                v-model="text"
-                type="password"
-                name="password"
+        <mc-field-password
+            title="Заголовок"
+            placeholder="Введите пароль"
+            v-model="text"
+            type="password"
+            name="password"
         />
+        <mc-field-password
+            class="mt-s"
+            placeholder="Введите пароль"
+            v-model="text"
+            type="password"
+            name="password"
+        >
+            <mc-title slot="header" color="blue">
+                Хедер
+            </mc-title>
+            <mc-title slot="footer" color="red">
+                Футер
+            </mc-title>
+        </mc-field-password>
     </div>
     ```
 </docs>

@@ -1,8 +1,9 @@
 <template>
   <div class="mc-field-checkbox" :class="classes">
     <div class="mc-field-text__header">
+      <!-- @slot Слот заголовка -->
       <slot name="header">
-        <McTitle :ellipsis="false" v-if="title" :level="4">{{ title }}</McTitle>
+        <mc-title :ellipsis="false" v-if="title" :level="4">{{ title }}</mc-title>
       </slot>
     </div>
     <div class="mc-field-checkbox__input-wrap">
@@ -16,22 +17,24 @@
           @change="handleChange"
         />
         <span class="mc-field-checkbox__name-text">
+          <!-- @slot Слот для пользовательской подписи чекбокса -->
           <slot>
-            <McTitle tag-name="div" :ellipsis="false" v-if="mainText">
+            <mc-title tag-name="div" :ellipsis="false" v-if="mainText">
               {{ mainText }}
-            </McTitle>
+            </mc-title>
           </slot>
         </span>
       </label>
       <div class="mc-field-checkbox__footer">
-        <McTitle tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
+        <mc-title tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
           {{ errorText }}
-        </McTitle>
+        </mc-title>
         <br v-if="errorText" />
+        <!-- @slot Слот доп. текста под чекбоксом -->
         <slot name="footer">
-          <McTitle tag-name="div" :ellipsis="false" size="s" v-if="helpText">
+          <mc-title tag-name="div" :ellipsis="false" size="s" v-if="helpText">
             {{ helpText }}
-          </McTitle>
+          </mc-title>
         </slot>
       </div>
     </div>
@@ -151,6 +154,10 @@ export default {
       this.$emit("input", e.target.checked ? this.checkedValue : this.uncheckedValue)
     },
     emitInput(value) {
+      /**
+       * Событие инпута
+       * @property {boolean}
+       */
       this.$emit("input", value)
     },
   },

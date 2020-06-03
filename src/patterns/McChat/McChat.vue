@@ -1,13 +1,13 @@
 <template>
   <div class="mc-chat">
-    <McTitle v-if="!!title" size="s">
+    <mc-title v-if="!!title" size="s">
       {{ title }}
-    </McTitle>
+    </mc-title>
     <div class="mc-chat__source" v-if="sources.length">
-      <McChatSource :sources="sources" :value="source" @input="handleSourceInput" />
+      <mc-chat-source :sources="sources" :value="source" @input="handleSourceInput" />
     </div>
     <div class="mc-chat__form" v-if="showInput">
-      <McChatForm
+      <mc-chat-form
         :value="value"
         :loading="loading"
         :errors="errors"
@@ -19,8 +19,8 @@
     </div>
     <div class="mc-chat__comments" v-if="comments.length">
       <div class="mc-chat__comment" v-for="comment in sortedComments" :key="comment.key">
-        <McChatComment :comment="comment" />
-        <McSeparator v-if="separator" />
+        <mc-chat-comment :comment="comment" />
+        <mc-separator v-if="separator" />
       </div>
     </div>
   </div>
@@ -39,6 +39,8 @@ import _reverse from "lodash/reverse"
 export default {
   name: "McChat",
   components: { McTitle, McChatSource, McChatComment, McChatForm, McSeparator },
+  status: "ready",
+  release: "1.0.0",
   props: {
     value: {
       type: String,
@@ -98,12 +100,23 @@ export default {
 
   methods: {
     handleInput(value) {
+      /**
+       * Событие ввода
+       * @property {string}
+       */
       this.$emit("input", value)
     },
     handleSubmit() {
+      /**
+       * Событие по отправке
+       */
       this.$emit("submit")
     },
     handleSourceInput(value) {
+      /**
+       * Событие по выбору источника
+       * @property {Object}
+       */
       this.$emit("sourceInput", value)
     },
     handleSort(comment) {
@@ -153,14 +166,14 @@ export default {
     text = ''
     }
     <div>
-        <McChat
+        <mc-chat
             style="width: 500px"
             :value="text"
-            @input="input"
             :comments="comments"
-            @submit="submit"
             :sources="sources"
             :source="source"
+            @submit="submit"
+            @input="input"
             @sourceInput="sourceInput"
         />
     </div>

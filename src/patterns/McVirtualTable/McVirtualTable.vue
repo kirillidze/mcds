@@ -267,9 +267,9 @@ export default {
       ]
     },
     handleScroll: _debounce(function({ scrollTop, $event, type, isY }) {
-      const isBottom =
-        scrollTop === Math.ceil($event.target.scrollHeight - $event.target.clientHeight)
-      if (isBottom && !this.$attrs.loading && this.hasMore && type === "body" && isY) {
+      const bottomPos = Math.ceil($event.target.scrollHeight - $event.target.clientHeight)
+      const isLoadArea = scrollTop / bottomPos > 0.95
+      if (isLoadArea && !this.$attrs.loading && this.hasMore && type === "body" && isY) {
         this.load()
       }
     }, 200),

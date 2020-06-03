@@ -1,18 +1,17 @@
 <template>
   <section class="mc-cropper">
-    <VueCropper
+    <vue-cropper
       ref="cropper"
+      drag-mode="crop"
+      background
+      alt="Avatar"
       :aspect-ratio="1 / 1"
       :initialAspectRatio="1 / 1"
       :highlight="false"
       :guides="false"
       :view-mode="2"
-      drag-mode="crop"
-      :background="true"
       :src="imgSrc"
-      alt="Avatar"
-    >
-    </VueCropper>
+    />
   </section>
 </template>
 
@@ -21,7 +20,7 @@ import VueCropper from "vue-cropperjs"
 
 export default {
   name: "McCropper",
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
   components: {
     VueCropper,
@@ -32,7 +31,14 @@ export default {
     }
   },
   props: {
-    imgSrc: {},
+    /**
+     *  Путь к изображению
+     *
+     */
+    imgSrc: {
+      type: [String, Object],
+      default: null,
+    },
   },
   watch: {
     imgSrc(val) {
@@ -50,6 +56,10 @@ export default {
           maxHeight: 650,
         })
         .toBlob(blob => {
+          /**
+           * Событие по обрезке
+           * @property {blob}
+           */
           this.$emit("crop", blob)
         })
     },

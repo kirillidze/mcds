@@ -1,17 +1,20 @@
 <template>
   <component
-    :is="tag"
-    :class="classes"
     v-bind="tagBind"
     class="mc-button"
     v-on="$listeners"
+    :is="tag"
+    :class="classes"
     :exact="exact"
   >
+    <!-- @slot Слот для вставки в начало -->
     <slot name="icon-prepend" />
-    <btn-loader v-if="loading" class="mc-button__loader" color="inherit" size="19px"></btn-loader>
-    <span class="mc-button__text">
+    <btn-loader v-if="loading" class="mc-button__loader" color="inherit" size="19px" />
+    <span class="mc-button__text" v-if="$slots.default">
+      <!-- @slot Слот по умолчанию -->
       <slot />
     </span>
+    <!-- @slot Слот для вставки в конец -->
     <slot name="icon-append" />
   </component>
 </template>

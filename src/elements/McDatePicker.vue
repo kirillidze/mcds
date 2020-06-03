@@ -1,6 +1,7 @@
 <template>
   <div class="mc-date-picker" :class="classes">
     <label :for="name" class="mc-date-picker__header">
+      <!-- @slot Слот для заголовка над инпутом -->
       <slot name="title">
         <mc-title :ellipsis="false" v-if="title" :level="4">{{ title }}</mc-title>
       </slot>
@@ -31,11 +32,24 @@
           :popup-style="popupStyle"
           @input="value => handleEmitDate(value)"
         >
-          <div v-if="$slots.header" slot="header"><slot name="header" /></div>
-          <div v-if="$slots.sidebar" slot="sidebar"><slot name="sidebar" /></div>
-          <div v-if="$slots.input" slot="input"><slot name="input" /></div>
-          <div v-if="$slots.footer" slot="footer"><slot name="footer" /></div>
+          <div v-if="$slots.header" slot="header">
+            <!-- @slot Слот для вставки в хедер попапа календаря -->
+            <slot name="header" />
+          </div>
+          <div v-if="$slots.sidebar" slot="sidebar">
+            <!-- @slot Слот для вставки в сайдбар попапа календаря  -->
+            <slot name="sidebar" />
+          </div>
+          <div v-if="$slots.input" slot="input">
+            <!-- @slot Слот для вставки в инпут попапа календаря -->
+            <slot name="input" />
+          </div>
+          <div v-if="$slots.footer" slot="footer">
+            <!-- @slot Слот для вставки в футер попапа календаря -->
+            <slot name="footer" />
+          </div>
 
+          <!-- @slot Слот для вставки пользовательской иконки календаря -->
           <template slot="icon-calendar">
             <mc-svg-icon class="mc-date-picker__icon" name="date_range" fill="#4285F4" />
           </template>
@@ -43,14 +57,15 @@
       </div>
     </div>
     <div class="mc-date-picker__footer" v-if="errorText || helpText || $slots.bottom">
-      <mc-title tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">{{
-        errorText
-      }}</mc-title>
+      <mc-title tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
+        {{ errorText }}
+      </mc-title>
       <br v-if="errorText" />
+      <!-- @slot Слот для доп. текста под инпутом -->
       <slot name="bottom">
-        <mc-title tag-name="div" :ellipsis="false" size="s" v-if="helpText">{{
-          helpText
-        }}</mc-title>
+        <mc-title tag-name="div" :ellipsis="false" size="s" v-if="helpText">
+          {{ helpText }}
+        </mc-title>
       </slot>
     </div>
   </div>
@@ -72,6 +87,8 @@ import McTooltip from "./McTooltip"
 
 export default {
   name: "McDatePicker",
+  status: "ready",
+  release: "1.0.0",
   components: {
     McTooltip,
     McButton,
@@ -285,6 +302,10 @@ export default {
 
   methods: {
     handleInput(value) {
+      /**
+       * Событие инпута
+       * @property {string}
+       */
       this.$emit("input", value)
     },
 
@@ -340,7 +361,7 @@ export default {
   }
   .mx-input {
     font-size: $size-m;
-    height: 40px;
+    height: $tappable-element-m;
     padding: 6px 10px 6px 36px;
     cursor: pointer;
     &:hover {
@@ -353,8 +374,7 @@ export default {
   .mx-datepicker {
     width: 100%;
     svg {
-      width: 24px;
-      height: 24px;
+      @include size($tappable-element-xs);
     }
     &-inline {
       width: auto;
@@ -362,7 +382,7 @@ export default {
   }
   .mx-icon-calendar {
     right: unset;
-    left: 8px;
+    left: $space-xs;
   }
 
   &--error {
@@ -393,22 +413,22 @@ export default {
   display: block;
 }
 .datepicker-popup {
-  border-radius: 8px;
+  border-radius: $radius-l;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.175);
   z-index: 12222;
   .cell {
     color: $color-black;
-    width: 40px;
+    width: $tappable-element-m;
     height: 33px;
     font-size: 16px;
     &:hover {
       background-color: $color-hover-gray;
-      border-radius: 4px;
+      border-radius: $radius-m;
     }
   }
   .today,
   .active {
-    border-radius: 4px;
+    border-radius: $radius-m;
   }
   .today,
   .in-range {
@@ -420,7 +440,7 @@ export default {
     color: $color-black;
   }
   .mx-btn-text {
-    font-size: 20px;
+    font-size: $size-l;
     color: $color-black;
   }
   .mx-btn-current-year {
@@ -438,7 +458,7 @@ export default {
   }
   .mx-calendar-header-label {
     color: $color-black;
-    font-size: 20px;
+    font-size: $size-l;
   }
   .mx-calendar-decade-separator:after {
     content: "-";

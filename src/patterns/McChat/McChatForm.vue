@@ -1,7 +1,7 @@
 <template>
   <div class="mc-chat-form">
     <form @submit.prevent="handleSubmit">
-      <McFieldText
+      <mc-field-text
         name="chat-field"
         class="mc-chat-form__input"
         type="textarea-autosize"
@@ -13,8 +13,8 @@
         @keyup.ctrl.enter.native="handleSubmit"
         @keyup.shift.enter.native="handleSubmit"
       >
-        <McAvatar class="mc-chat-form__avatar" slot="prepend" rounded size="s" :src="avatar" />
-        <McButton
+        <mc-avatar class="mc-chat-form__avatar" slot="prepend" rounded size="s" :src="avatar" />
+        <mc-button
           class="mc-chat-form__btn"
           variation="blue-link"
           slot="append"
@@ -23,11 +23,11 @@
           :loading="loading"
           type="submit"
         >
-          <McSvgIcon slot="icon-append" name="send" />
-        </McButton>
-      </McFieldText>
+          <mc-svg-icon slot="icon-append" name="send" />
+        </mc-button>
+      </mc-field-text>
     </form>
-    <McSeparator indent-left="l" />
+    <mc-separator indent-left="l" />
   </div>
 </template>
 
@@ -68,9 +68,16 @@ export default {
 
   methods: {
     handleInput(value) {
+      /**
+       * Событие инпута
+       * @property {string}
+       */
       this.$emit("input", value)
     },
     handleSubmit() {
+      /**
+       * Событие по отправке
+       */
       this.$emit("submit")
     },
   },
@@ -104,7 +111,7 @@ export default {
     ```jsx
     let text = ''
     <div>
-        <McChatForm v-model="text" />
+        <mc-chat-form v-model="text" />
     </div>
     ```
 </docs>

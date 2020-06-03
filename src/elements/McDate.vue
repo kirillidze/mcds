@@ -1,13 +1,15 @@
 <template>
   <section class="mc-date">
+    <!-- @slot Слот для вставки в начало -->
     <slot name="prepend">
-      <McSvgIcon v-if="defaultIcon" name="event" :size="iconSize" />
+      <mc-svg-icon v-if="defaultIcon" name="event" :size="iconSize" />
     </slot>
     <time :datetime="momentDate" class="mc-date__time">
-      <McTitle :size="dateSize" :ellipsis="ellipsis" :uppercase="uppercase" :color="color">
+      <mc-title :size="dateSize" :ellipsis="ellipsis" :uppercase="uppercase" :color="color">
         {{ formattedDate }}
-      </McTitle>
+      </mc-title>
     </time>
+    <!-- @slot Слот для вставки в конец -->
     <slot name="append" />
   </section>
 </template>
@@ -18,7 +20,7 @@ import McTitle from "./McTitle"
 
 export default {
   name: "McDate",
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
 
   components: {
@@ -93,12 +95,12 @@ export default {
 
   computed: {
     momentDate() {
-      if (this.$moment == null) return null
-      let locale = this.$i18n ? this.$i18n.locale : "ru"
+      if (this.$moment === null) return null
+      const locale = this.$i18n ? this.$i18n.locale : "ru"
       return this.$moment(this.value).locale(locale)
     },
     formattedDate() {
-      if (this.momentDate == null) return this.value
+      if (this.momentDate === null) return this.value
       return this.momentDate.format(this.format)
     },
   },

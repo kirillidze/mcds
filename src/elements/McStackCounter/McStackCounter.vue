@@ -3,6 +3,10 @@
 </template>
 
 <script>
+/**
+ *  Используется исключительно
+ *  для mc-stack
+ */
 export default {
   name: "McStackCounter",
   status: "ready",
@@ -31,7 +35,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McStackCounter type="default" :count="10"/>
+    <mc-stack-counter type="default" :count="10"/>
   </div>
   ```
 </docs>

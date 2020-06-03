@@ -66,9 +66,9 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McProgress :percent="20" />
+    <mc-progress :percent="20" />
     <br>
-    <McProgress :percent="90" color="azure" />
+    <mc-progress :percent="90" color="azure" />
   </div>
   ```
 </docs>

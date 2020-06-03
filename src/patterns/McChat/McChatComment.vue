@@ -1,6 +1,6 @@
 <template>
-  <McPreview class="mc-chat-comment">
-    <McAvatar
+  <mc-preview class="mc-chat-comment">
+    <mc-avatar
       class="mc-chat-comment__avatar"
       rounded
       size="xs"
@@ -8,32 +8,32 @@
       slot="left"
     />
 
-    <McCell slot="top">
-      <McTitle slot="title" size="xs">
-        <McGridRow :gutter-x="10" justify="between" align="middle">
-          <McGridCol :span="12">
-            <McDate
+    <mc-cell slot="top">
+      <mc-title slot="title" size="xs">
+        <mc-grid-row :gutter-x="10" justify="between" align="middle">
+          <mc-grid-col :span="12">
+            <mc-date
               :value="comment.date"
               date-size="xs"
               color="666"
               :default-icon="false"
               format="YYYY-MM-DD HH:mm"
             />
-          </McGridCol>
-          <McGridCol :span="12" style="min-width: 30%">
-            <McTitle size="s" line-height="s">
+          </mc-grid-col>
+          <mc-grid-col :span="12" style="min-width: 30%">
+            <mc-title size="s" line-height="s">
               {{ computedName }}
-            </McTitle>
-          </McGridCol>
-        </McGridRow>
-      </McTitle>
-      <McTitle v-if="comment.by_user" size="xs" uppercase>
+            </mc-title>
+          </mc-grid-col>
+        </mc-grid-row>
+      </mc-title>
+      <mc-title v-if="comment.by_user" size="xs" uppercase>
         {{ comment.by_user.name }}
-      </McTitle>
-    </McCell>
+      </mc-title>
+    </mc-cell>
 
     <template slot="bottom">
-      <McTitle
+      <mc-title
         class="mc-chat-comment__content"
         tag-name="p"
         size="s"
@@ -43,17 +43,11 @@
         :ellipsis="false"
       />
 
-      <McTitle
-        v-if="comment.reason"
-        size="s"
-        line-height="s"
-        style="padding-top: 8px;"
-        :ellipsis="false"
-      >
+      <mc-title v-if="comment.reason" class="mt-xxs" size="s" line-height="s" :ellipsis="false">
         {{ comment.reason }}
-      </McTitle>
+      </mc-title>
     </template>
-  </McPreview>
+  </mc-preview>
 </template>
 
 <script>
@@ -70,6 +64,8 @@ import McDate from "../../elements/McDate"
 import McPreview from "../McPreview"
 export default {
   name: "McChatComment",
+  status: "ready",
+  release: "1.0.0",
   components: {
     McPreview,
     McDate,
@@ -137,9 +133,9 @@ export default {
 
 <docs>
   ```jsx
-  let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя', color: 'blue' }
+  let comment = { content: 'Статус (recruiting): Присвоено', date: '2018-10-19 20:30', user_name: 'Имя пользователя', changer_name: 'Имя изменившего пользователя', color: 'blue', reason: 'всё резонно' }
   <div>
-    <McChatComment :comment="comment" />
+    <mc-chat-comment :comment="comment" />
   </div>
   ```
 </docs>

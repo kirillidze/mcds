@@ -5,7 +5,8 @@
     :class="[rootClassName, classes]"
     @click.prevent="handleClick"
   >
-    <slot></slot>
+    <!-- @slot Слот контента -->
+    <slot />
   </component>
 </template>
 
@@ -165,70 +166,70 @@ export default {
 
 <docs>
   ```jsx
-  let eventTest = (val) => alert(val)
+  let eventTest = val => alert(val)
   <div>
-    <McCellBordered>
-      <McCell>
-        <McTitle color="gray-dark" slot="title" size="xs" uppercase>
+    <mc-cell-bordered>
+      <mc-cell>
+        <mc-title color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
-        </McTitle>
-        <McTitle tag-name="p" size="l">
+        </mc-title>
+        <mc-title tag-name="p" size="l">
           140 873 $
-        </McTitle>
-      </McCell>
-    </McCellBordered>
+        </mc-title>
+      </mc-cell>
+    </mc-cell-bordered>
 
     <br>
 
-    <McCellBordered border-color="red">
-      <McCell>
-        <McTitle color="gray-dark" slot="title" size="xs" uppercase>
+    <mc-cell-bordered border-color="red">
+      <mc-cell>
+        <mc-title color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
-        </McTitle>
-        <McTitle tag-name="p" size="l">
+        </mc-title>
+        <mc-title tag-name="p" size="l">
           140 873 $
-        </McTitle>
-      </McCell>
-    </McCellBordered>
+        </mc-title>
+      </mc-cell>
+    </mc-cell-bordered>
 
     <br>
 
-    <McCellBordered border-color="blue" @click>
-      <McCell>
-        <McTitle color="gray-dark" slot="title" size="xs" uppercase>
+    <mc-cell-bordered border-color="blue" @click="eventTest">
+      <mc-cell>
+        <mc-title color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
-        </McTitle>
-        <McTitle tag-name="p" size="l">
+        </mc-title>
+        <mc-title tag-name="p" size="l">
           140 873 $
-        </McTitle>
-      </McCell>
-    </McCellBordered>
+        </mc-title>
+      </mc-cell>
+    </mc-cell-bordered>
 
     <br>
 
-    <McCellBordered gradient border-color="orange" @click>
-      <McCell>
-        <McTitle color="gray-dark" slot="title" size="xs" uppercase>
+    <mc-cell-bordered gradient border-color="orange" @click="eventTest">
+      <mc-cell>
+        <mc-title color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
-        </McTitle>
-        <McTitle tag-name="p" size="l">
+        </mc-title>
+        <mc-title tag-name="p" size="l">
           140 873 $
-        </McTitle>
-      </McCell>
-    </McCellBordered>
+        </mc-title>
+      </mc-cell>
+    </mc-cell-bordered>
 
     <br>
 
-    <McCellBordered disabled border-color="dark-green" @click>
-      <McCell>
-        <McTitle color="gray-dark" slot="title" size="xs" uppercase>
+    <mc-cell-bordered disabled border-color="dark-green" @click="eventTest">
+      <mc-cell>
+        <mc-title color="gray-dark" slot="title" size="xs" uppercase>
           Доля организации
-        </McTitle>
-        <McTitle tag-name="p" size="l">
+        </mc-title>
+        <mc-title tag-name="p" size="l">
           140 873 $
-        </McTitle>
-      </McCell>
-    </McCellBordered>
+        </mc-title>
+      </mc-cell>
+    </mc-cell-bordered>
   </div>
   ```
 </docs>

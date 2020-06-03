@@ -119,27 +119,17 @@ export default {
 
 <docs>
   ```jsx
+  let categories = require('../../mocks/categories').default
   <div>
-    <McStack :limit="5">
-      <McAvatar rounded lazy size="s"/>
-      <McAvatar rounded lazy size="s"/>
-      <McAvatar rounded lazy size="s"/>
-      <McAvatar rounded lazy size="s"/>
-      <McAvatar rounded lazy size="s"/>
-      <McAvatar rounded lazy size="s"/>
-      <McAvatar rounded lazy size="s"/>
-      <McAvatar rounded lazy size="s"/>
-      <McAvatar rounded lazy size="s"/>
-    </McStack>
+    <mc-stack :limit="5">
+      <mc-avatar v-for="num in 9" :key="num" rounded lazy size="s" />
+    </mc-stack>
     <br>
-    <McStack :limit="4">
-      <McChip style="width: 150px;" variation="gray-dark-invert">Статусы в проектах</McChip>
-      <McChip style="width: 150px;" variation="gray-dark-invert">Экспорт канала</McChip>
-      <McChip style="width: 150px;" variation="gray-dark-invert">Администратор</McChip>
-      <McChip style="width: 150px;" variation="gray-dark-invert">Пользователь</McChip>
-      <McChip style="width: 150px;" variation="gray-dark-invert">Способы оплаты</McChip>
-      <McChip style="width: 150px;" variation="gray-dark-invert">Статусы в проектах</McChip>
-    </McStack>
+    <mc-stack :limit="2">
+      <mc-chip v-for="(category, index) in categories" :key="index" style="width: 150px;" variation="gray-dark-invert">
+        {{ category.title }}
+      </mc-chip>
+    </mc-stack>
   </div>
   ```
 </docs>

@@ -19,7 +19,7 @@ import "vue-slider-component/theme/default.css"
 
 export default {
   name: "McRangeSlider",
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
   components: {
     VueSlider,
@@ -67,7 +67,7 @@ export default {
       this.$emit("input", value)
     },
     tooltip(value) {
-      if (+value != value) return value
+      if (Number(value) !== value) return value
       return ("" + value).replace(/\B(?=(\d{3})+(?!\d))/g, " ")
     },
   },

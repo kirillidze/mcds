@@ -1,6 +1,9 @@
 <template>
   <label class="mc-field-toggle" :class="classes">
-    <span class="mc-field-toggle__text"> <slot></slot> </span>
+    <span class="mc-field-toggle__text">
+      <!-- @slot Слот для тайтла тогглера -->
+      <slot />
+    </span>
     <span class="mc-field-toggle__wrapper">
       <input
         class="mc-field-toggle__field"
@@ -17,7 +20,7 @@
 <script>
 export default {
   name: "McFieldToggle",
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
   props: {
     value: {
@@ -49,6 +52,10 @@ export default {
   },
   methods: {
     change(checked) {
+      /**
+       * Событие тоггла
+       * @property {boolean}
+       */
       this.$emit("input", checked ? this.checkedValue : this.uncheckedValue)
     },
   },
@@ -120,7 +127,7 @@ export default {
   ```jsx
   let toggler = null
   <div>
-    <McFieldToggle v-model="toggler">Тогглер</McFieldToggle>
+    <mc-field-toggle v-model="toggler">Тогглер</mc-field-toggle>
   </div>
   ```
 </docs>

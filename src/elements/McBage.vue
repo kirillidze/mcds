@@ -2,6 +2,8 @@
 export default {
   functional: true,
   name: "McBage",
+  status: "ready",
+  release: "1.0.0",
   props: {
     /**
      *  Вертикальная черта (в таблице, к примеру)

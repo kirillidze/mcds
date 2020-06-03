@@ -1,5 +1,5 @@
 <template>
-  <component :is="tag" v-bind="tagBind" class="mc-logo" :class="classes">
+  <component :is="tag" v-bind="tagBind" class="mc-logo">
     <img v-if="src" :src="src" class="mc-logo__img" width="29" height="32" :alt="title" />
     <span v-if="title" class="mc-logo__text">
       {{ title }}
@@ -54,12 +54,6 @@ export default {
   },
 
   computed: {
-    classes() {
-      return {
-        // [`el-logo--size-${this.size}`]: this.size,
-      }
-    },
-
     defaultTag() {
       return "div"
     },
@@ -152,10 +146,10 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McLogo @click.prevent href="javascript:void(0);" title="Network"/>
-    <McLogo @click.prevent href="javascript:void(0);" title="Stats"/>
-    <McLogo @click.prevent href="javascript:void(0);" title="Identity"/>
-    <McLogo @click.prevent href="javascript:void(0);" title="Studio"/>
+    <mc-logo @click.prevent href="javascript:void(0);" title="Network"/>
+    <mc-logo @click.prevent href="javascript:void(0);" title="Stats"/>
+    <mc-logo @click.prevent href="javascript:void(0);" title="Identity"/>
+    <mc-logo @click.prevent href="javascript:void(0);" title="Studio"/>
   </div>
   ```
 </docs>

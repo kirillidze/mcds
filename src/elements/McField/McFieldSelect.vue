@@ -1,8 +1,9 @@
 <template>
   <div class="mc-field-select" :class="classes">
     <div :for="name" class="mc-field-select__header">
+      <!-- @slot Слот заголовка -->
       <slot name="header">
-        <McTitle :ellipsis="false" v-if="title" :level="4">{{ title }}</McTitle>
+        <mc-title :ellipsis="false" v-if="title" :level="4">{{ title }}</mc-title>
       </slot>
     </div>
     <div class="mc-field-select__main">
@@ -21,38 +22,44 @@
         :tag-placeholder="''"
         :placeholder="placeholder"
         :disabled="disabled"
+        :internal-search="internalSearch"
         @input="handleChange"
         @tag="handleTag"
         @search-change="handleSearchChange"
-        :internal-search="internalSearch"
       >
-        <template slot="singleLabel" slot-scope="props">
+        <template slot="singleLabel" slot-scope="{ option }">
           <div v-if="avatar" class="mc-field-select__avatar-wrap">
             <div class="mc-field-select__avatar">
-              <McAvatar size="xs" :src="avatar" />
+              <mc-avatar size="xs" :src="avatar" />
             </div>
             <div class="mc-field-select__avatar-text">
-              {{ props.option ? props.option.name : this.placeholder }}
+              {{ option ? option.name : this.placeholder }}
             </div>
           </div>
           <template v-else>
             <div class="mc-field-select__avatar-wrap">
               <div class="mc-field-select__avatar-text mc-field-select__avatar-text--no-img">
-                {{ props.option ? props.option.name : this.placeholder }}
+                {{ option ? option.name : this.placeholder }}
               </div>
             </div>
           </template>
         </template>
-        <span slot="noResult">Ничего не найдено</span>
+        <!-- @slot Слот для текста, если ничего не найдено -->
+        <slot slot="noResult" name="noResult">
+          <span>Ничего не найдено</span>
+        </slot>
       </multiselect>
     </div>
     <div class="mc-field-select__footer" v-if="errorText || helpText || $slots.footer">
-      <McTitle tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
+      <mc-title tag-name="div" :ellipsis="false" color="red" size="s" v-if="errorText">
         {{ errorText }}
-      </McTitle>
+      </mc-title>
       <br v-if="errorText" />
+      <!-- @slot Слот доп. текста под инпутом -->
       <slot name="footer">
-        <McTitle tag-name="div" :ellipsis="false" size="s" v-if="helpText">{{ helpText }}</McTitle>
+        <mc-title tag-name="div" :ellipsis="false" size="s" v-if="helpText">{{
+          helpText
+        }}</mc-title>
       </slot>
     </div>
   </div>
@@ -66,7 +73,7 @@ import McAvatar from "../McAvatar/McAvatar"
 export default {
   name: "McFieldSelect",
   components: { McAvatar, McTitle, Multiselect },
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
   data() {
     return {
@@ -191,7 +198,7 @@ export default {
             }
             return o.value == value
           })
-          if (option != null) result.push(option)
+          if (option !== null) result.push(option)
         }
         return result
       }
@@ -199,7 +206,7 @@ export default {
     },
 
     errorText() {
-      if (this.errors == null || this.errors.length == 0) return null
+      if (this.errors === null || !this.errors.length) return null
       return this.errors.join(", ")
     },
     isEmptyOptionsList() {
@@ -215,8 +222,11 @@ export default {
   },
   methods: {
     handleChange(value) {
+      /**
+       * Истинное значение инпута
+       */
       this.$emit("original-input", value)
-      if (value != null) {
+      if (value !== null) {
         if (this.multiple) {
           value = value.map(v => v.value)
         } else {
@@ -227,15 +237,28 @@ export default {
     },
 
     handleTag(value) {
+      /**
+       * Событие по добавлению
+       * тега в инпут (по Enter)
+       * @property {string}
+       */
       this.$emit("tag", value)
     },
 
     handleSearchChange(value) {
       this.searchValue = value
+      /**
+       * Событие по вводу данных в инпут
+       * @property {string}
+       */
       this.$emit("search-change", value)
     },
 
     emitInput(value) {
+      /**
+       * Событие инпута (выбранное значение)
+       * @property {array, number}
+       */
       this.$emit("input", value)
     },
   },
@@ -407,9 +430,6 @@ $text-white: scale-color($color-white, $alpha: -10%);
       box-shadow: $shadow-l;
       overflow-y: auto;
       overflow-x: hidden;
-    }
-
-    &__element {
     }
 
     &__option {
@@ -603,11 +623,13 @@ $text-white: scale-color($color-white, $alpha: -10%);
   let categoriesModel3 = []
   let categoriesModel4 = 4
   <div style="max-width: 400px">
-    <McFieldSelect
+    <mc-field-select
             title="Multiple"
-            :allow-empty="true"
-            :multiple="true"
-            :hide-selected="true"
+            allow-empty
+            multiple
+            taggable
+            hide-selected
+            searchable
             v-model="categoriesModel"
             :options="categories.map(c => ({ name: c.title, value: c.id }))"
             placeholder="Multiple"
@@ -615,26 +637,26 @@ $text-white: scale-color($color-white, $alpha: -10%);
     />
 
     <br>
-    <McFieldSelect
+    <mc-field-select
             help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
             title="Single"
-            :allow-empty="true"
+            allow-empty
             :multiple="false"
             v-model="categoriesModel2"
             :options="categories.map(c => ({ name: c.title, value: c.id }))"
             placeholder="One"/>
 
     <br>
-    <McFieldSelect
+    <mc-field-select
             disabled
             title="Disabled"
-            :allow-empty="true"
+            allow-empty
             :multiple="false"
             v-model="categoriesModel3"
             :options="categories.map(c => ({ name: c.title, value: c.id }))"
             placeholder="One"/>
     <br>
-    <McFieldSelect
+    <mc-field-select
             background-color="azure"
             title="Цветной"
             avatar="https://yt3.ggpht.com/a/AGF-l79FVckie4j9WT-4cEW6iu3gPd4GivQf_XNSWg=s800-mo-c-c0xffffffff-rj-k-no"

@@ -1,6 +1,6 @@
 <template>
   <section class="mc-avatar-status" :class="classes">
-    <McAvatar :size="size" :src="src" :lazy="lazy" rounded />
+    <mc-avatar :size="size" :src="src" :lazy="lazy" rounded />
   </section>
 </template>
 
