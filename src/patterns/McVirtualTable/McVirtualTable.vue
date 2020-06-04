@@ -290,7 +290,7 @@ export default {
     },
     setObserveElement() {
       const loader = this.$refs.xTable.$el.getElementsByClassName("mc-virtual-table-col__loader")
-      loader.length && this.observer.observe(loader[0])
+      this.observer && loader.length && this.observer.observe(loader[0])
     },
     async setFirstColsWidth() {
       const columns = await this.$refs.xTable.getColumns()
