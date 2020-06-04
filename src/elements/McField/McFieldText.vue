@@ -124,14 +124,15 @@ export default {
   props: {
     /**
      *  Тип:
-     * `text, password, email и т.д.`
+     * `date, calendar, textarea, textarea-autosize и
+     * нативные как text, password, email и т.д.`
      */
     type: {
       type: String,
       default: "text",
     },
     /**
-     * `Формат принимаемой даты
+     * Формат принимаемой даты
      */
     fromFormat: {
       type: String,
@@ -714,99 +715,103 @@ export default {
     ```jsx
     let text = null
     <div style="max-width: 700px">
-        <McFieldText
-                placeholder="Введите сообщение"
-                name="login"
-                help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
+        <mc-field-text
+            placeholder="Введите сообщение"
+            name="login"
+            help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
         >
             <mc-title :ellipsis="false" :level="4" slot="header">
-                <McTooltip placement="right" slot="icon-append" size="s"
-                           content="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube.">
-                    <McSvgIcon name="help"/>
-                </McTooltip>
+                <mc-tooltip
+                    placement="right"
+                    slot="icon-append"
+                    size="s"
+                    content="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
+                >
+                    <mc-svg-icon name="help"/>
+                </mc-tooltip>
                 Электронная почта
             </mc-title>
-            <McSvgIcon slot="prepend" name="face"/>
-            <McSvgIcon slot="prepend" name="access_time"/>
-            <McSvgIcon slot="append" name="attach_money"/>
+            <mc-svg-icon slot="prepend" name="face"/>
+            <mc-svg-icon slot="prepend" name="access_time"/>
+            <mc-svg-icon slot="append" name="attach_money"/>
 
-            <McTooltip slot="append" size="s" content="Вывести все средства">
-                <McButton uppercase variation="gray-dark-invert" size="s">
+            <mc-tooltip slot="append" size="s" content="Вывести все средства">
+                <mc-button uppercase variation="gray-dark-invert" size="s">
                     Все
-                </McButton>
-            </McTooltip>
-            <McButton slot="append" uppercase variation="gray-dark-invert" size="s">
+                </mc-button>
+            </mc-tooltip>
+            <mc-button slot="append" uppercase variation="gray-dark-invert" size="s">
                 Фонды
-            </McButton>
-        </McFieldText>
+            </mc-button>
+        </mc-field-text>
 
         <br>
 
-        <McFieldText
-                placeholder="Disabled"
-                disabled
-                name="pass"
-                title="Заголовок"
-                help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
+        <mc-field-text
+            placeholder="Disabled"
+            disabled
+            name="pass"
+            title="Заголовок"
+            help-text="Используйте электронный адрес, указанный при регистрации аккаунта MediaCube."
         />
 
         <br>
 
-        <McFieldText
-                :errors="['Имя пользователя и пароль не совпадают', 'Поле обязательно для заполнения.']"
-                name="message"
-                type="textarea"
-                placeholder="Введите сообщение"
-                title="Textarea"
+        <mc-field-text
+            :errors="['Имя пользователя и пароль не совпадают', 'Поле обязательно для заполнения.']"
+            name="message"
+            type="textarea"
+            placeholder="Введите сообщение"
+            title="Textarea"
         >
-            <McButton
-                    variation="blue-link"
-                    slot="append"
-                    size="s-compact"
+            <mc-button
+                variation="blue-link"
+                slot="append"
+                size="s-compact"
             >
-                <McSvgIcon slot="icon-append" name="send"/>
-            </McButton>
-        </McFieldText>
+                <mc-svg-icon slot="icon-append" name="send"/>
+            </mc-button>
+        </mc-field-text>
 
         <br>
 
-        <McFieldText title="Флэтпицкер" name="date" type="date" placeholder="Дата">
-            <McButton
+        <mc-field-text title="Флэтпицкер" name="date" type="date" placeholder="Дата">
+            <mc-button
               variation="blue-link"
               slot="prepend"
               size="s-compact"
             >
-                <McSvgIcon slot="icon-append" name="date_range" fill="#4285F4" />
-            </McButton>
-        </McFieldText>
+                <mc-svg-icon slot="icon-append" name="date_range" fill="#4285F4" />
+            </mc-button>
+        </mc-field-text>
 
         <br>
 
-        <McFieldText title="Calendar" name="date" type="calendar" placeholder="Дата"></McFieldText>
+        <mc-field-text title="Calendar" name="date" type="calendar" placeholder="Дата"></mc-field-text>
 
         <br>
 
-        <McFieldText title="datePicker" name="date" value="2019-12-06T00:00:00+00:00" to-format="YYYY-MM-DD HH:mm:ss" type="date" placeholder="Дата">
-            <McButton
+        <mc-field-text title="datePicker" name="date" value="2019-12-06T00:00:00+00:00" to-format="YYYY-MM-DD HH:mm:ss" type="date" placeholder="Дата">
+            <mc-button
               variation="blue-link"
               slot="prepend"
               size="s-compact"
             >
-                <McSvgIcon slot="icon-append" name="date_range" fill="#4285F4" />
-            </McButton>
-        </McFieldText>
+                <mc-svg-icon slot="icon-append" name="date_range" fill="#4285F4" />
+            </mc-button>
+        </mc-field-text>
 
         <br>
 
-        <McFieldText title="datePicker" mode="range" name="date" type="date" placeholder="Дата">
-            <McButton
+        <mc-field-text title="datePicker" mode="range" name="date" type="date" placeholder="Дата">
+            <mc-button
               variation="blue-link"
               slot="prepend"
               size="s-compact"
             >
-                <McSvgIcon slot="icon-append" name="date_range" fill="#4285F4" />
-            </McButton>
-        </McFieldText>
+                <mc-svg-icon slot="icon-append" name="date_range" fill="#4285F4" />
+            </mc-button>
+        </mc-field-text>
 
         <br>
     </div>

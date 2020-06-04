@@ -7,6 +7,7 @@
     @changed="e => changedHandler(e)"
     ref="tabs"
   >
+    <!-- @slot для табов -->
     <slot />
   </tabs>
 </template>
@@ -17,8 +18,12 @@ import McTab from "./McTab"
 
 export default {
   name: "McTabs",
-  status: "deprecated",
+  status: "ready",
   release: "0.0.1",
+  components: {
+    McTab,
+    Tabs,
+  },
   props: {
     cacheLifetime: {
       default: 5,
@@ -29,11 +34,25 @@ export default {
     defaultTabHash: {
       default: null,
     },
+    /**
+     *  Размеры табов:
+     *  `xs, s, m, l и т.д.`
+     */
     size: {
       type: String,
       default: "m",
     },
+    /**
+     *  Цвет текста табов
+     */
     color: {
+      type: String,
+      default: "black",
+    },
+    /**
+     *  Цвет линии активного таба
+     */
+    accentColor: {
       type: String,
       default: "blue",
     },
@@ -41,31 +60,35 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Массив номеров табов (с конца)
+     *  для добавления ссылочной иконки
+     */
     lastTabLink: {
       type: Array,
-      default() {
-        return []
-      },
+      default: () => [],
     },
-  },
-  components: {
-    McTab,
-    Tabs,
   },
   computed: {
     classes() {
-      let result = {}
-      this.lastTabLink.forEach(item => {
-        result = {
-          ...result,
-          [`mc-tabs--last-tab-link-${item}`]: item,
-        }
+      const result = {
+        [`mc-tabs--color-${this.color}`]: this.color,
+        [`mc-tabs--accent-color-${this.accentColor}`]: this.accentColor,
+        [`mc-tabs--size-${this.size}`]: this.size,
+        [`mc-tabs--uppercase`]: this.uppercase,
+      }
+      this.lastTabLink.forEach(num => {
+        result[`mc-tabs--last-tab-link-${num}`] = num
       })
       return result
     },
   },
   methods: {
     changedHandler(e) {
+      /**
+       * Событие при смене таба
+       * @property {Object}
+       */
       this.$emit("changed", e)
     },
     getActiveTab() {
@@ -93,6 +116,42 @@ $last-childs: (
       @include position(absolute, auto 0 0 0);
       height: $separator-xs;
       background-color: $color-outline-gray;
+    }
+  }
+
+  @each $size, $value in $token-sizes {
+    &--size-#{$size} {
+      .tabs-component-tab-a {
+        font-size: $value;
+      }
+    }
+  }
+
+  &--color {
+    @each $color, $value in $token-colors {
+      &-#{$color} {
+        .tabs-component-tab-a {
+          color: $value;
+        }
+      }
+    }
+  }
+
+  &--accent-color {
+    @each $color, $value in $token-colors {
+      &-#{$color} {
+        .tabs-component-tab-a {
+          &::after {
+            background-color: $value;
+          }
+        }
+      }
+    }
+  }
+
+  &--uppercase {
+    .tabs-component-tabs {
+      text-transform: uppercase;
     }
   }
 
@@ -126,9 +185,7 @@ $last-childs: (
 
   .tabs-component-tab-a {
     display: inline-flex;
-    color: $color-black;
     font-family: $font-heading;
-    font-size: $size-m;
     line-height: $line-height-s;
     font-weight: $weight-medium;
     text-decoration: none;
@@ -136,7 +193,7 @@ $last-childs: (
 
     @include border();
 
-    &:after {
+    &::after {
       opacity: 0;
       position: absolute;
       left: 50%;
@@ -146,7 +203,6 @@ $last-childs: (
       content: "";
       display: block;
       z-index: 1;
-      background-color: $color-blue;
       transition: left 0.2s ease, right 0.2s ease, opacity 0.2s ease, color 0.2s ease;
     }
   }
@@ -159,11 +215,8 @@ $last-childs: (
           &:after {
             content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3Cpath d='M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z'/%3E%3C/svg%3E");
             display: block;
-            position: absolute;
-            right: 5px;
-            top: 10px;
-            width: 16px;
-            height: 16px;
+            @include position(absolute, 10px 5px null null);
+            @include size($tappable-element-xxs);
             z-index: 2;
           }
 
@@ -185,7 +238,7 @@ $last-childs: (
         console.log(e.tab.id)
     }
     <div>
-        <mc-tabs @changed="e => changedHandler(e)" last-tab-link>
+        <mc-tabs @changed="e => changedHandler(e)" :last-tab-link="[1, 2]">
             <mc-tab name="First tab" id="1">
                 First tab content
             </mc-tab>
@@ -193,6 +246,18 @@ $last-childs: (
                 Second tab content
             </mc-tab>
             <mc-tab name="Third tab" id="3">
+                Third tab content
+            </mc-tab>
+        </mc-tabs>
+        <br />
+        <mc-tabs @changed="e => changedHandler(e)" size="xs" color="red" accent-color="orange" uppercase>
+            <mc-tab name="First small tab" id="1">
+                First tab content
+            </mc-tab>
+            <mc-tab name="Second small tab" id="2">
+                Second tab content
+            </mc-tab>
+            <mc-tab name="Third small tab" id="3">
                 Third tab content
             </mc-tab>
         </mc-tabs>

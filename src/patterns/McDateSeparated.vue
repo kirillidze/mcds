@@ -1,13 +1,14 @@
 <template>
   <div class="mc-date-separated" :class="classes">
     <div class="mc-date-separated__header">
+      <!-- @slot Слот пользовательского заголовка -->
       <slot name="header">
-        <McTitle :ellipsis="false" v-if="title" :level="4">{{ title }}</McTitle>
+        <mc-title :ellipsis="false" v-if="title" :level="4">{{ title }}</mc-title>
       </slot>
     </div>
     <div class="mc-date-separated__grid">
       <div class="mc-date-separated__cell">
-        <McFieldSelect
+        <mc-field-select
           v-model="_valueDay"
           :placeholder="placeholder.day"
           :options="days"
@@ -16,7 +17,7 @@
         />
       </div>
       <div class="mc-date-separated__cell">
-        <McFieldSelect
+        <mc-field-select
           v-model="_valueMonth"
           :placeholder="placeholder.month"
           :options="months"
@@ -25,7 +26,7 @@
         />
       </div>
       <div class="mc-date-separated__cell">
-        <McFieldSelect
+        <mc-field-select
           v-model="_valueYear"
           :placeholder="placeholder.year"
           :options="years"
@@ -43,7 +44,11 @@ import _capitalize from "lodash/capitalize"
 
 import McFieldSelect from "../elements/McField/McFieldSelect"
 import McTitle from "../elements/McTitle"
-
+/**
+ *  Предпочтительно использовать
+ *  mc-field-text с типами date или calendar
+ *
+ */
 export default {
   name: "McDateSeparated",
   status: "deprecated",
@@ -102,7 +107,7 @@ export default {
   },
   computed: {
     errorText() {
-      if (this.errors == null || this.errors.length == 0) return null
+      if (this.errors === null || !this.errors.length) return null
       return this.errors.join(", ")
     },
     classes() {
@@ -224,9 +229,13 @@ export default {
       } else {
         value = value.format(this.toFormat)
       }
-      this.$emit("input", value)
+      this.emitInput(value)
     },
     emitInput(value) {
+      /**
+       * Событие инпута
+       * @property {string}
+       */
       this.$emit("input", value)
     },
   },
@@ -289,7 +298,7 @@ export default {
         year: 'год',
     }
     <div>
-        <McDateSeparated v-model="test" :placeholder="placeholder"/>
+        <mc-date-separated v-model="test" :placeholder="placeholder" />
     </div>
     ```
 </docs>

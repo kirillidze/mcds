@@ -6,6 +6,7 @@
     :id="computedId"
     role="tabpanel"
   >
+    <!-- @slot контента -->
     <slot />
   </section>
 </template>

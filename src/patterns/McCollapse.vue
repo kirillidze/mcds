@@ -2,6 +2,7 @@
   <section class="mc-collapse" :class="classes">
     <span class="mc-collapse__header" v-if="!isDisabled" tabindex="0" @keyup.esc="close">
       <component :is="tag" class="mc-collapse__icon" v-if="icon" size="s" name="arrow_drop_down" />
+      <!-- @slot Слот для элемента по которому будет меняться состояние компонента -->
       <slot name="activator" />
       <a
         v-if="border && $slots['body']"
@@ -21,6 +22,7 @@
       @slide-close-end="slideCloseEnd"
     >
       <div class="mc-collapse__body-inner">
+        <!-- @slot Слот контента -->
         <slot name="body" />
       </div>
     </mc-slide-up-down>
@@ -54,6 +56,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Иконка состояния коллапса
+     *
+     */
     icon: {
       type: Boolean,
       default: false,
@@ -82,12 +88,14 @@ export default {
 
   watch: {
     isCollapsed(value) {
+      /**
+       * Событие тоггла
+       * @property {Boolean}
+       */
       this.$emit("toggle", value)
       value ? this.$emit("open") : this.$emit("close")
-      let $parent = findParentComponent(this, "McAccordion")
-      if ($parent) {
-        $parent.$emit("toggle", { value, component: this })
-      }
+      const $parent = findParentComponent(this, "McAccordion")
+      $parent && $parent.$emit("toggle", { value, component: this })
     },
   },
 
@@ -114,15 +122,27 @@ export default {
       this.isCollapsed = !this.isCollapsed
     },
     slideOpenStart() {
+      /**
+       * Событие перед началом открытия
+       */
       this.$emit("collapse-open-start")
     },
     slideOpenEnd() {
+      /**
+       * Событие после открытия
+       */
       this.$emit("collapse-open-end")
     },
     slideCloseStart() {
+      /**
+       * Событие перед началом закрытия
+       */
       this.$emit("collapse-close-start")
     },
     slideCloseEnd() {
+      /**
+       * Событие после закрытия
+       */
       this.$emit("collapse-close-end")
     },
   },
@@ -160,8 +180,7 @@ export default {
   }
 
   &__icon {
-    width: 32px;
-    height: 32px;
+    @include size($tappable-element-s);
     transition: all $duration-quickly;
   }
 
@@ -176,19 +195,10 @@ export default {
         padding-right: $space-s;
       }
 
-      &__icon {
-      }
-
       &__body {
         #{$block-name} {
           &__header {
             padding-left: $space-xl;
-          }
-
-          &__body {
-          }
-
-          &__icon {
           }
         }
       }
@@ -232,57 +242,57 @@ export default {
 <docs>
     ```jsx
     <div>
-        <McCollapse>
+        <mc-collapse>
             <mc-button slot="activator">Заголовок</mc-button>
             <template slot="body">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                 facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
                 tempore unde!
             </template>
-        </McCollapse>
+        </mc-collapse>
 
         <br/>
         <br/>
         <br/>
 
-        <McCollapse :icon="true" :border="true">
+        <mc-collapse icon border>
             <div slot="activator">Заголовок</div>
             <template slot="body">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                 facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
                 tempore unde!
-                <McCollapse :icon="true" :border="true">
+                <mc-collapse icon border>
                     <div slot="activator">Заголовок без бадика</div>
-                </McCollapse>
-                <McCollapse :icon="true" :border="true">
+                </mc-collapse>
+                <mc-collapse icon border>
                     <div slot="activator">Заголовок</div>
                     <template slot="body">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                         facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
                         tempore unde!
-                        <McCollapse :icon="true" :border="true">
+                        <mc-collapse icon border>
                             <div slot="activator">Заголовок</div>
                             <template slot="body">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                                 facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
                                 tempore unde!
                             </template>
-                        </McCollapse>
-                        <McCollapse :icon="true" :border="true">
+                        </mc-collapse>
+                        <mc-collapse icon border>
                             <div slot="activator">Заголовок</div>
                             <template slot="body">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur cum delectus doloribus ducimus
                                 facilis nostrum quae velit. Architecto dolore esse, excepturi, illum modi nam optio quam quas quia
                                 tempore unde!
                             </template>
-                        </McCollapse>
-                        <McCollapse :icon="true" :border="true">
+                        </mc-collapse>
+                        <mc-collapse icon border>
                             <div slot="activator">Заголовок без бадика</div>
-                        </McCollapse>
+                        </mc-collapse>
                     </template>
-                </McCollapse>
+                </mc-collapse>
             </template>
-        </McCollapse>
+        </mc-collapse>
     </div>
     ```
 </docs>

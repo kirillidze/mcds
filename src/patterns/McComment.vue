@@ -27,6 +27,8 @@ import McDate from "../elements/McDate"
 import McAvatar from "../elements/McAvatar/McAvatar"
 import McPreview from "../patterns/McPreview"
 export default {
+  status: "ready",
+  release: "1.0.0",
   components: { McTitle, McAvatar, McPreview, McDate },
   props: {
     comment: {
@@ -52,7 +54,19 @@ export default {
     padding: $space-s;
     margin-top: $space-xs;
     background-color: $color-hover-gray;
-    border-radius: 0 8px 8px 8px;
+    border-radius: 0 $space-xs $space-xs $space-xs;
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  let comment = {
+    avatar: 'https://lorempixel.com/640/480/?64646',
+    name: 'Comment name',
+    reason: 'Comment reason',
+    date: '2018-10-19 20:30',
+  }
+  <mc-comment :comment="comment" />
+  ```
+</docs>

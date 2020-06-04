@@ -6,9 +6,11 @@
       tabindex="0"
       @keyup.esc="closeDropdown"
     >
+      <!-- @slot активатора переключения состояния -->
       <slot name="activator" />
     </div>
     <div class="mc-dropdown__body">
+      <!-- @slot контента -->
       <slot />
     </div>
   </div>
@@ -29,6 +31,9 @@ export default {
     "click-outside": VueClickOutside,
   },
   props: {
+    /**
+     * Состояние видимости контента
+     */
     value: {
       type: Boolean,
       default: false,
@@ -41,6 +46,9 @@ export default {
       type: String,
       default: "bottom",
     },
+    /**
+     * Необходимо ли вращение иконки
+     */
     rotateIcon: {
       type: Boolean,
       default: true,
@@ -81,6 +89,10 @@ export default {
 
   methods: {
     toggleDropdown() {
+      /**
+       * Событие по тогглу
+       * @property {Boolean}
+       */
       this.$emit("input", !this.value)
     },
     handleClickOutside(e) {
@@ -126,7 +138,6 @@ export default {
     #{$block-name} {
       &__body {
         bottom: 100%;
-        //transform: translateY(-10px);
       }
     }
   }
@@ -135,7 +146,6 @@ export default {
     #{$block-name} {
       &__body {
         top: 100%;
-        /*transform: translateY(10px);*/
       }
     }
   }
@@ -147,7 +157,6 @@ export default {
         visibility: visible;
         overflow: visible;
         opacity: 1;
-        /*transform: translateY(0);*/
       }
     }
 
@@ -185,70 +194,31 @@ export default {
 <docs>
   ```jsx
   let dropIsOpen = false
-  <div>
-    <McDropdown v-model="dropIsOpen">
-      <McButton slot="activator">
-        Владилен
-        <McSvgIcon slot="icon-append" name="arrow_drop_down" size="xs"/>
-      </McButton>
-      <McPanel>
-        <McButton
-                href="#"
-                @click.prevent
-                full-width
-                text-align="left"
-                variation="black-flat"
-                size="l"
-        >
-          <McSvgIcon slot="icon-prepend" name="account_circle" size="xxs"/>
+  <div style="height: 220px">
+    <mc-dropdown v-model="dropIsOpen">
+      <mc-button slot="activator">
+        Dropdown
+        <mc-svg-icon slot="icon-append" name="arrow_drop_down" size="xs"/>
+      </mc-button>
+      <mc-panel>
+        <mc-button href="#" full-width text-align="left" variation="black-flat" size="l" @click.prevent>
+          <mc-svg-icon slot="icon-prepend" name="account_circle" size="xxs"/>
           Профиль
-        </McButton>
-        <McButton
-                href="#"
-                @click.prevent
-                full-width
-                text-align="left"
-                variation="black-flat"
-                size="l"
-        >
-          <McSvgIcon slot="icon-prepend" name="swap_horizontal_circle" size="xxs"/>
+        </mc-button>
+        <mc-button href="#" full-width text-align="left" variation="black-flat" size="l" @click.prevent>
+          <mc-svg-icon slot="icon-prepend" name="swap_horizontal_circle" size="xxs"/>
           Транзакции
-        </McButton>
-        <McButton
-                href="#"
-                @click.prevent
-                full-width
-                text-align="left"
-                variation="black-flat"
-                size="l"
-        >
-          <McSvgIcon slot="icon-prepend" name="settings" size="xxs"/>
+        </mc-button>
+        <mc-button href="#" full-width text-align="left" variation="black-flat" size="l" @click.prevent>
+          <mc-svg-icon slot="icon-prepend" name="settings" size="xxs"/>
           Безопасность
-        </McButton>
-        <McButton
-                href="#"
-                @click.prevent
-                full-width
-                text-align="left"
-                variation="red-flat"
-                size="l"
-        >
-          <McSvgIcon slot="icon-prepend" name="exit_to_app" size="xxs"/>
+        </mc-button>
+        <mc-button href="#" full-width text-align="left" variation="red-flat" size="l" @click.prevent>
+          <mc-svg-icon slot="icon-prepend" name="exit_to_app" size="xxs"/>
           Выйти
-        </McButton>
-      </McPanel>
-    </McDropdown>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+        </mc-button>
+      </mc-panel>
+    </mc-dropdown>
   </div>
   ```
 </docs>
