@@ -29,13 +29,9 @@
       />
     </div>
     <template slot="footer">
-      <mc-button
-        full-width
-        variation="light-green"
-        @click="handleOpen(!open)"
-        :disabled="canSave"
-        >{{ tSaveButton }}</mc-button
-      >
+      <mc-button full-width variation="light-green" @click="handleOpen(!open)" :disabled="canSave">
+        {{ tSaveButton }}
+      </mc-button>
     </template>
   </mc-filter-slider>
 </template>
@@ -53,6 +49,8 @@ import McTitle from "../../elements/McTitle"
 
 export default {
   name: "McFilterTypeText",
+  status: "ready",
+  release: "1.0.0",
   components: {
     McSvgIcon,
     McFilterRow,
@@ -96,6 +94,10 @@ export default {
   methods: {
     handleOpen(value) {
       this.open = value
+      /**
+       * Событие открытия
+       * @property {Boolean}
+       */
       this.$emit("open", value)
     },
     handleInput(value, e) {
@@ -106,6 +108,10 @@ export default {
       }
     },
     emitInput(value) {
+      /**
+       * Событие инпута
+       * @property {String, Null}
+       */
       this.$emit("input", value)
     },
     submit() {
@@ -144,3 +150,25 @@ export default {
 </script>
 
 <style lang="scss"></style>
+
+<docs>
+  ```jsx
+  import * as filterMocks from '../../mocks/filterMocks'
+  let {value, filters, presets, lang} = filterMocks
+  const handleClick = e => alert(e.type)
+  <div style="position: relative; height: 300px; width: 300px; margin: 50px;">
+    <template v-for="(filter, _key) in filters">
+      <mc-filter-type-text
+        v-if="filter.type === 'text'"
+        :key="`filled_${_key}`"
+        :filter="filter"
+        :value="filter.value || {}"
+        :real-value="filter.value || {}"
+        :t-range-more="lang.more"
+        :t-range-less="lang.less"
+        :t-save-button="lang.save"
+      />
+    </template>
+  </div>
+  ```
+</docs>

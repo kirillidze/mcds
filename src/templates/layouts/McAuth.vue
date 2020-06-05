@@ -1,10 +1,11 @@
 <template>
-  <main class="mc-auth" :class="classes">
+  <main class="mc-auth">
     <div class="mc-auth__inner">
       <div class="mc-auth__content">
         <div class="mc-auth__left">
           <transition name="slide-fade">
-            <slot></slot>
+            <!-- @slot Слот контента -->
+            <slot />
           </transition>
         </div>
         <transition name="fade">
@@ -22,7 +23,8 @@
           ></div>
         </transition>
       </div>
-      <slot name="nav"></slot>
+      <!-- @slot Слот навигации -->
+      <slot name="nav" />
     </div>
   </main>
 </template>
@@ -30,11 +32,18 @@
 <script>
 import _shuffle from "lodash/shuffle"
 import _cloneDeep from "lodash/cloneDeep"
-
+import McTitle from "../../elements/McTitle"
+/**
+ * Раньше использовался
+ * на страницах авторизации/регистрации
+ */
 export default {
   name: "McAuth",
-  status: "ready",
+  status: "deprecated",
   release: "0.0.1",
+  components: {
+    McTitle,
+  },
   props: {
     /**
      * Изображения в правой колонке
@@ -72,13 +81,6 @@ export default {
       this.imagesMutable.splice(this.imagesMutable.length, 0, removed[0], removed[1])
       this.randomImage = `url(${this.imagesMutable[0]})`
       this.randomImageSecond = `url(${this.imagesMutable[1]})`
-    },
-  },
-  computed: {
-    classes() {
-      return {
-        //[`el-logo--type-${this.type}`]: this.type,
-      }
     },
   },
 }
@@ -186,7 +188,9 @@ $part-width-right: 37.5%;
 <docs>
   ```jsx
   <McAuth>
-    lorem
+    <mc-title :ellipsis="false" style="padding: 16px;">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad eligendi eum facere, impedit iure minima provident quia quo totam. Ad commodi harum illo itaque laboriosam, perferendis quis rerum sapiente! Aliquid facere sunt voluptates. Nostrum quia quos temporibus. A aliquid amet aperiam beatae cupiditate dolores ea enim eveniet explicabo facere fugiat id incidunt iure libero maiores, molestiae molestias mollitia nihil omnis perferendis quas quia quos repellendus similique sit sunt tempora ullam. Debitis dolor ipsum itaque molestias nam natus neque nostrum possimus repudiandae ullam? Distinctio error id laboriosam laborum, libero natus nisi omnis quia repellendus rerum sed, sint unde voluptas voluptatum!
+    </mc-title>
   </McAuth>
   ```
 </docs>

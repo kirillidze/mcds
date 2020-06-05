@@ -1,35 +1,32 @@
 <template>
   <section class="mc-header-part-right">
-    <McHeaderNav>
-      <McHeaderNavItem class="mc-header-part-right__chatra" v-if="chatraId">
-        <McDropdown v-model="menuChatraIsOpen" position="right" :rotate-icon="false">
-          <McButton slot="activator" variation="black-flat" size="m-compact">
-            <McSvgIcon size="xs" slot="icon-append" name="chat" />
-          </McButton>
+    <mc-header-nav>
+      <mc-header-nav-item class="mc-header-part-right__chatra" v-if="chatraId">
+        <mc-dropdown v-model="menuChatraIsOpen" position="right" :rotate-icon="false">
+          <mc-button slot="activator" variation="black-flat" size="m-compact">
+            <mc-svg-icon size="xs" slot="icon-append" name="chat" />
+          </mc-button>
 
-          <McPanel>
+          <mc-panel>
             <div id="chatra-container"></div>
-          </McPanel>
-        </McDropdown>
-      </McHeaderNavItem>
+          </mc-panel>
+        </mc-dropdown>
+      </mc-header-nav-item>
 
-      <McHeaderNavItem class="mc-header-part-right__userback" v-if="userbackConfig">
-        <McButton variation="black-flat" size="m-compact" @click="handleToggleUserback">
-          <McSvgIcon size="xs" slot="icon-append" name="bug_report" />
-        </McButton>
-      </McHeaderNavItem>
+      <mc-header-nav-item class="mc-header-part-right__userback" v-if="userbackConfig">
+        <mc-button variation="black-flat" size="m-compact" @click="handleToggleUserback">
+          <mc-svg-icon size="xs" slot="icon-append" name="bug_report" />
+        </mc-button>
+      </mc-header-nav-item>
 
-      <McHeaderNavItem
-        class="mc-header-part-right__apps"
-        v-if="menuApps && menuApps.length && menuApps[0].isAuth !== null"
-      >
-        <McDropdown v-model="menuAppsIsOpen" position="right" :rotate-icon="false">
-          <McButton slot="activator" variation="black-flat" size="m-compact">
-            <McSvgIcon slot="icon-append" name="apps" />
-          </McButton>
+      <mc-header-nav-item v-if="canShowApps" class="mc-header-part-right__apps">
+        <mc-dropdown v-model="menuAppsIsOpen" position="right" :rotate-icon="false">
+          <mc-button slot="activator" variation="black-flat" size="m-compact">
+            <mc-svg-icon slot="icon-append" name="apps" />
+          </mc-button>
 
-          <McPanel>
-            <McButton
+          <mc-panel>
+            <mc-button
               v-for="(menuAppsItem, index) in menuApps"
               v-if="menuAppsItem.isVisible"
               class="mc-header-part-right__apps-btn"
@@ -43,8 +40,8 @@
               :is-active="menuAppsItem.isActive"
             >
               <div slot="icon-prepend" class="mc-header-part-right__apps-icon">
-                <McAvatar v-if="isCustomMenuApp" :src="menuAppsItem.icon" />
-                <McSvgIcon
+                <mc-avatar v-if="isCustomMenuApp" :src="menuAppsItem.icon" />
+                <mc-svg-icon
                   v-else
                   slot="icon-prepend"
                   :name="menuAppsItem.icon"
@@ -53,33 +50,33 @@
                 />
               </div>
               {{ menuAppsItem.name }}
-            </McButton>
-          </McPanel>
-        </McDropdown>
-      </McHeaderNavItem>
+            </mc-button>
+          </mc-panel>
+        </mc-dropdown>
+      </mc-header-nav-item>
 
-      <McHeaderNavItem
+      <mc-header-nav-item
         v-if="menuProfile && menuProfile.length && user"
         class="mc-header-part-right__profile"
       >
-        <McDropdown v-model="menuProfileIsOpen" position="right">
-          <McButton
+        <mc-dropdown v-model="menuProfileIsOpen" position="right">
+          <mc-button
             slot="activator"
             variation="black-flat"
             size="l-compact"
             dusk="menu-user-dropdown"
             rounded
           >
-            <McAvatar slot="icon-prepend" :src="user.avatar" size="m" rounded />
-          </McButton>
-          <McPanel>
+            <mc-avatar slot="icon-prepend" :src="user.avatar" rounded />
+          </mc-button>
+          <mc-panel>
             <template>
               <div class="mc-header-part-right__user-card">
-                <McAvatar :src="user.avatar" size="l" rounded />
-                <McTitle text-align="center" color="blue" size="l" line-height="s">
+                <mc-avatar :src="user.avatar" size="l" rounded />
+                <mc-title text-align="center" color="blue" size="l" line-height="s">
                   {{ user.first_name }}
-                </McTitle>
-                <McTitle
+                </mc-title>
+                <mc-title
                   v-if="user.last_name"
                   text-align="center"
                   color="blue"
@@ -87,8 +84,8 @@
                   line-height="s"
                 >
                   {{ user.last_name }}
-                </McTitle>
-                <McTitle
+                </mc-title>
+                <mc-title
                   v-if="user.email"
                   text-align="center"
                   color="gray"
@@ -96,12 +93,12 @@
                   line-height="s"
                 >
                   {{ user.email }}
-                </McTitle>
+                </mc-title>
               </div>
 
-              <McSeparator indent-bottom="xs" indent-top="xs" />
+              <mc-separator indent-bottom="xs" indent-top="xs" />
 
-              <McButton
+              <mc-button
                 class="mc-header-part-right__user"
                 v-if="user.root_user"
                 full-width
@@ -110,18 +107,18 @@
                 size="l"
                 @click="typeof user.handler === 'function' ? user.handler() : ''"
               >
-                <McAvatar :src="user.root_user.avatar" rounded slot="icon-prepend" size="s" />
-                <McTitle line-height="s">
+                <mc-avatar :src="user.root_user.avatar" rounded slot="icon-prepend" size="s" />
+                <mc-title line-height="s">
                   {{ user.root_user.first_name }}
                   <template v-if="user.root_user.last_name">
                     {{ user.root_user.last_name }}
                   </template>
-                </McTitle>
-              </McButton>
+                </mc-title>
+              </mc-button>
             </template>
 
             <template v-if="subUsers && subUsers.length">
-              <McButton
+              <mc-button
                 class="mc-header-part-right__user"
                 v-for="(subUser, index) in filteredSubUsers"
                 :key="index"
@@ -131,46 +128,46 @@
                 size="l"
                 @click="typeof subUser.handler === 'function' ? subUser.handler(subUser.id) : ''"
               >
-                <McAvatar :src="subUser.avatar" rounded slot="icon-prepend" size="s" />
-                <McTitle line-height="s">
+                <mc-avatar :src="subUser.avatar" rounded slot="icon-prepend" size="s" />
+                <mc-title line-height="s">
                   {{ subUser.first_name }}
                   <template v-if="subUser.last_name">
                     {{ subUser.last_name }}
                   </template>
-                </McTitle>
-              </McButton>
+                </mc-title>
+              </mc-button>
 
-              <McSeparator indent-bottom="xs" indent-top="xs" />
+              <mc-separator indent-bottom="xs" indent-top="xs" />
             </template>
 
             <template v-if="userInfo && userInfo.length">
               <div class="mc-header-part-right__user-info">
                 <template v-for="(info, index) in userInfo">
-                  <McCell :key="index" class="mc-header-part-right__info">
+                  <mc-cell :key="index" class="mc-header-part-right__info">
                     <div class="mc-header-part-right__info-title" slot="title">
-                      <McTitle size="xs" line-height="s" uppercase>
+                      <mc-title size="xs" line-height="s" uppercase>
                         {{ info.title }}
-                      </McTitle>
-                      <McTooltip
+                      </mc-title>
+                      <mc-tooltip
                         v-if="info.tooltip"
                         size="s"
                         placement="top"
                         :content="info.tooltip"
                       >
-                        <McSvgIcon size="xxs" name="info" fill="rgb(102, 102, 102)" />
-                      </McTooltip>
+                        <mc-svg-icon size="xxs" name="info" fill="rgb(102, 102, 102)" />
+                      </mc-tooltip>
                     </div>
-                    <McTitle color="light-green" size="l" line-height="s">
+                    <mc-title color="light-green" size="l" line-height="s">
                       {{ info.value }}
-                    </McTitle>
-                  </McCell>
-                  <McSeparator v-if="info.hasSeparator" :key="`${index}-separator`" />
+                    </mc-title>
+                  </mc-cell>
+                  <mc-separator v-if="info.hasSeparator" :key="`${index}-separator`" />
                 </template>
-                <McSeparator />
+                <mc-separator />
               </div>
             </template>
 
-            <McButton
+            <mc-button
               v-for="(menuProfileItem, index) in menuProfile"
               v-if="menuProfileItem.isVisible"
               :key="`menu-profile-item-${index}`"
@@ -187,36 +184,37 @@
               exact
               :dusk="menuProfileItem.dusk"
             >
-              <McSvgIcon slot="icon-prepend" :name="menuProfileItem.icon" size="xs" />
+              <mc-svg-icon slot="icon-prepend" :name="menuProfileItem.icon" size="xs" />
               {{ menuProfileItem.name }}
-            </McButton>
-          </McPanel>
-        </McDropdown>
-      </McHeaderNavItem>
-      <McHeaderNavItem
-        v-else-if="menuProfile && menuProfile.length && !user"
-        v-for="(menuProfileItem, index) in menuProfile"
-        :key="`menu-profile-item-${index}`"
-      >
-        <McButton
-          :href="menuProfileItem.href"
-          :to="menuProfileItem.to"
-          :variation="menuProfileItem.variation"
-          size="m"
+            </mc-button>
+          </mc-panel>
+        </mc-dropdown>
+      </mc-header-nav-item>
+
+      <template v-else-if="menuProfile && menuProfile.length && !user">
+        <mc-header-nav-item
+          v-for="(menuProfileItem, index) in menuProfile"
+          :key="`menu-profile-item-${index}`"
         >
-          {{ menuProfileItem.name }}
-        </McButton>
-      </McHeaderNavItem>
+          <mc-button
+            :href="menuProfileItem.href"
+            :to="menuProfileItem.to"
+            :variation="menuProfileItem.variation"
+          >
+            {{ menuProfileItem.name }}
+          </mc-button>
+        </mc-header-nav-item>
+      </template>
 
-      <McHeaderNavItem class="mc-header-part-right__langs" v-if="menuLangs && menuLangs.length">
-        <McDropdown v-model="menuLangsIsOpen" position="right">
-          <McButton slot="activator" variation="black-flat">
+      <mc-header-nav-item class="mc-header-part-right__langs" v-if="menuLangs && menuLangs.length">
+        <mc-dropdown v-model="menuLangsIsOpen" position="right">
+          <mc-button slot="activator" variation="black-flat">
             {{ menuLangs[0].name }}
-            <McSvgIcon slot="icon-append" name="arrow_drop_down" />
-          </McButton>
+            <mc-svg-icon slot="icon-append" name="arrow_drop_down" />
+          </mc-button>
 
-          <McPanel>
-            <McButton
+          <mc-panel>
+            <mc-button
               v-for="(menuLangsItem, index) in menuLangs"
               :key="`menu-langs-item-${index}`"
               full-width
@@ -228,17 +226,17 @@
               :to="menuLangsItem.to"
             >
               {{ menuLangsItem.name }}
-            </McButton>
-          </McPanel>
-        </McDropdown>
-      </McHeaderNavItem>
+            </mc-button>
+          </mc-panel>
+        </mc-dropdown>
+      </mc-header-nav-item>
 
-      <McHeaderNavItem class="mc-header-part-right__burger">
-        <McButton @click="handleToggleMenu" variation="black-flat" size="m-compact">
-          <McSvgIcon slot="icon-prepend" :name="value ? 'close' : 'menu'" />
-        </McButton>
-      </McHeaderNavItem>
-    </McHeaderNav>
+      <mc-header-nav-item class="mc-header-part-right__burger">
+        <mc-button @click="handleToggleMenu" variation="black-flat" size="m-compact">
+          <mc-svg-icon slot="icon-prepend" :name="value ? 'close' : 'menu'" />
+        </mc-button>
+      </mc-header-nav-item>
+    </mc-header-nav>
   </section>
 </template>
 
@@ -431,6 +429,9 @@ export default {
       }
       return data
     },
+    canShowApps() {
+      return this.menuApps && this.menuApps.length && this.menuApps[0].isAuth !== null
+    },
   },
   methods: {
     handleToggleMenu() {
@@ -608,13 +609,16 @@ export default {
   let menuProfile = require('@/mocks/menuProfile').default;
   let menuLangs = require('@/mocks/menuLangs').default;
   let authUser = require('@/mocks/authUser').default;
+  let userbackConfig = require('@/mocks/userbackConfig').default;
+
   <div style="position: relative; z-index: 1000; display: flex; justify-content: flex-end">
-    <McHeaderPartRight
-            :menu-apps="menuApps"
-            :menu-profile="menuProfile"
-            :menu-langs="menuLangs"
-            :user="authUser"
-            chatra-id="dzDw7eBbL2ramxx25"
+    <mc-header-part-right
+      :menu-apps="menuApps"
+      :menu-profile="menuProfile"
+      :menu-langs="menuLangs"
+      :user="authUser"
+      :userback-config="userbackConfig"
+      chatra-id="dzDw7eBbL2ramxx25"
     />
   </div>
   ```

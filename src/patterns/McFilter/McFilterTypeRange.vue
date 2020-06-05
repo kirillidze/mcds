@@ -96,13 +96,9 @@
       </div>
     </div>
     <template slot="footer">
-      <mc-button
-        full-width
-        variation="light-green"
-        @click="handleOpen(!open)"
-        :disabled="canSave"
-        >{{ tSaveButton }}</mc-button
-      >
+      <mc-button full-width variation="light-green" :disabled="canSave" @click="handleOpen(!open)">
+        {{ tSaveButton }}
+      </mc-button>
     </template>
   </mc-filter-slider>
 </template>
@@ -124,6 +120,8 @@ import McFilterSlider from "./McFilterSlider"
 
 export default {
   name: "McFilterTypeRange",
+  status: "ready",
+  release: "1.0.0",
   components: {
     McSvgIcon,
     McDatePicker,
@@ -173,8 +171,8 @@ export default {
   computed: {
     chipCount() {
       let count = 0
-      if (this.value.more != null) count++
-      if (this.value.less != null) count++
+      if (this.value.more !== null) count++
+      if (this.value.less !== null) count++
       return count
     },
     canRange() {
@@ -214,7 +212,7 @@ export default {
     },
     handleInput(type, value) {
       const currentValue = { ...this.value }
-      currentValue[type] = this.filter.type === "date" ? value : value == null ? null : +value
+      currentValue[type] = this.filter.type === "date" ? value : value === null ? null : +value
       this.emitInput(currentValue)
     },
     clearValue(val) {
@@ -222,7 +220,7 @@ export default {
       const newVal = { ...val }
       Object.keys(newVal).forEach(type => {
         const value = newVal[type]
-        if (value != null && value !== "") {
+        if (value !== null && value !== "") {
           newVal[type] = this.filter.type === "date" ? value : +value
         } else {
           delete newVal[type]
@@ -284,3 +282,25 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  import * as filterMocks from '../../mocks/filterMocks'
+  let {value, filters, presets, lang} = filterMocks
+  const handleClick = e => alert(e.type)
+  <div style="position: relative; height: 300px; width: 300px; margin: 50px;">
+    <template v-for="(filter, _key) in filters">
+      <mc-filter-type-range
+        v-if="filter.type === 'number' || filter.type === 'date'"
+        :key="`filled_${_key}`"
+        :filter="filter"
+        :value="filter.value || {}"
+        :real-value="filter.value || {}"
+        :t-range-more="lang.more"
+        :t-range-less="lang.less"
+        :t-save-button="lang.save"
+      />
+    </template>
+  </div>
+  ```
+</docs>

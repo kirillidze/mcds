@@ -13,6 +13,9 @@
 
 <script>
 import Tab from "vue-tabs-component/src/components/Tab"
+/**
+ * Смотреть McTabs
+ */
 export default {
   name: "McTab",
   status: "ready",

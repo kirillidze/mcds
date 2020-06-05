@@ -1,15 +1,15 @@
 <template>
   <section class="mc-header-part-center" v-click-outside="closeSearch" :class="classes">
     <div class="mc-header-part-center__inner">
-      <McHeaderNav>
-        <McHeaderNavItem v-if="menuAdditional && menuAdditional.length">
-          <McDropdown v-model="menuAdditionalIsOpen" :rotate-icon="false">
-            <McButton slot="activator" variation="black-flat" size="m-compact" rounded>
-              <McSvgIcon slot="icon-append" name="add" />
-            </McButton>
+      <mc-header-nav>
+        <mc-header-nav-item v-if="menuAdditional && menuAdditional.length">
+          <mc-dropdown v-model="menuAdditionalIsOpen" :rotate-icon="false">
+            <mc-button slot="activator" variation="black-flat" size="m-compact" rounded>
+              <mc-svg-icon slot="icon-append" name="add" />
+            </mc-button>
 
-            <McPanel>
-              <McButton
+            <mc-panel>
+              <mc-button
                 v-for="(menuAdditionalItem, index) in menuAdditional"
                 :key="`menu-additional-item-${index}`"
                 :href="menuAdditionalItem.href"
@@ -21,41 +21,39 @@
                 size="l"
               >
                 {{ menuAdditionalItem.name }}
-              </McButton>
-            </McPanel>
-          </McDropdown>
-        </McHeaderNavItem>
+              </mc-button>
+            </mc-panel>
+          </mc-dropdown>
+        </mc-header-nav-item>
 
-        <McHeaderNavItem
-          v-if="menuMain && menuMain.length"
-          v-for="(menuMainItem, index) in menuMain"
-          :key="`menu-main-${index}`"
-        >
-          <McButton
-            :href="menuMainItem.href"
-            :to="menuMainItem.to"
-            variation="black-flat"
-            :exact="isExact"
-          >
-            <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
-            {{ menuMainItem.name }}
-          </McButton>
-        </McHeaderNavItem>
+        <template v-if="menuMain && menuMain.length">
+          <mc-header-nav-item v-for="(menuMainItem, index) in menuMain" :key="`menu-main-${index}`">
+            <mc-button
+              :href="menuMainItem.href"
+              :to="menuMainItem.to"
+              variation="black-flat"
+              :exact="isExact"
+            >
+              <mc-svg-icon slot="icon-prepend" :name="menuMainItem.icon" />
+              {{ menuMainItem.name }}
+            </mc-button>
+          </mc-header-nav-item>
+        </template>
 
-        <McHeaderNavItem v-if="menuHidden && menuHidden.length">
-          <McDropdown position="right" v-model="menuHiddenIsOpen" :rotate-icon="false">
-            <McButton
+        <mc-header-nav-item v-if="menuHidden && menuHidden.length">
+          <mc-dropdown position="right" v-model="menuHiddenIsOpen" :rotate-icon="false">
+            <mc-button
               slot="activator"
               variation="black-flat"
               size="m-compact"
               rounded
               :class="isHiddenActive"
             >
-              <McSvgIcon slot="icon-append" name="more_horiz" />
-            </McButton>
+              <mc-svg-icon slot="icon-append" name="more_horiz" />
+            </mc-button>
 
-            <McPanel>
-              <McButton
+            <mc-panel>
+              <mc-button
                 ref="hiddenMenuItem"
                 v-for="(menuHiddenItem, index) in menuHidden"
                 :key="`menu-hidden-item-${index}`"
@@ -67,26 +65,26 @@
                 :to="menuHiddenItem.to"
                 :exact="isExact"
               >
-                <McSvgIcon slot="icon-prepend" :name="menuHiddenItem.icon" />
+                <mc-svg-icon slot="icon-prepend" :name="menuHiddenItem.icon" />
                 {{ menuHiddenItem.name }}
-              </McButton>
-            </McPanel>
-          </McDropdown>
-        </McHeaderNavItem>
+              </mc-button>
+            </mc-panel>
+          </mc-dropdown>
+        </mc-header-nav-item>
 
-        <McHeaderNavItem v-if="searchable">
-          <McButton
+        <mc-header-nav-item v-if="searchable">
+          <mc-button
             variation="black-flat"
             size="m-compact"
             rounded
             @click.prevent="handleBtnSearchClick"
           >
-            <McSvgIcon slot="icon-append" name="search" />
-          </McButton>
-        </McHeaderNavItem>
-      </McHeaderNav>
+            <mc-svg-icon slot="icon-append" name="search" />
+          </mc-button>
+        </mc-header-nav-item>
+      </mc-header-nav>
 
-      <McHeaderSearch
+      <mc-header-search
         v-if="searchable"
         ref="inputSearch"
         class="mc-header-part-center__search"
@@ -102,6 +100,7 @@
 </template>
 
 <script>
+import _has from "lodash/has"
 import VueClickOutside from "vue-click-outside"
 import McHeaderSearch from "../McHeaderSearch/McHeaderSearch"
 import McHeaderNav from "../McHeaderNav/McHeaderNav"
@@ -198,7 +197,6 @@ export default {
       if (val && val.length) {
         this.$nextTick(() => {
           this.$emit("change-hidden-menu", this.$refs.hiddenMenuItem[0].$el.offsetWidth)
-
           this.computeMenuHiddenActive()
         })
       }
@@ -222,10 +220,9 @@ export default {
       }
     },
     isExact() {
-      return (
-        (this.$route.name ? this.$route.name.includes("index") : false) &&
-        !this.$route.name.includes("id")
-      )
+      if (!_has(this, "$route.name")) return false
+      const hasIndex = this.$route.name.includes("index")
+      return hasIndex && !this.$route.name.includes("id")
     },
   },
 
@@ -351,15 +348,15 @@ export default {
   let search = null
   let eventTest = (val) => alert(val)
   <div style="position: relative; z-index: 1000;">
-    <McHeaderPartCenter
-            v-model="search"
-            :menu-additional="menuAdditional"
-            :menu-main="menuMain"
-            :search-items="searchResult"
-            search-placeholder="Начните вводить"
-            searchable
-            @search-submit="eventTest('Search submit')"
-            @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
+    <mc-header-part-center
+        v-model="search"
+        :menu-additional="menuAdditional"
+        :menu-main="menuMain.slice(5)"
+        :search-items="searchResult"
+        search-placeholder="Начните вводить"
+        searchable
+        @search-submit="eventTest('Search submit')"
+        @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
     />
   </div>
   ```

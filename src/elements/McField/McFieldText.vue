@@ -85,9 +85,9 @@
       <br v-if="errorText" />
       <!-- @slot Слот доп. текста под инпутом -->
       <slot name="footer">
-        <mc-title tag-name="div" :ellipsis="false" size="s" v-if="helpText">{{
-          helpText
-        }}</mc-title>
+        <mc-title tag-name="div" :ellipsis="false" size="s" v-if="helpText">
+          {{ helpText }}
+        </mc-title>
       </slot>
     </div>
   </div>

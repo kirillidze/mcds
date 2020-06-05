@@ -83,6 +83,10 @@ export default {
       type: Object,
       required: true,
     },
+    defaultUserName: {
+      type: String,
+      default: "System comment",
+    },
   },
   computed: {
     filteredComment() {
@@ -90,7 +94,7 @@ export default {
       return nl2br ? nl2br(this.commentWithLinks) : this.commentWithLinks
     },
     computedName() {
-      return _has(this.comment, ["user", "name"]) ? this.comment.user.name : "Системный комментарий"
+      return _has(this.comment, ["user", "name"]) ? this.comment.user.name : this.defaultUserName
     },
     commentWithLinks() {
       const regExp = /((http|https):\/\/)?(([0-9a-zA-Zа-яА-Я.-]*)\.([a-zA-Zа-яА-Я]{2,}).*)/gi

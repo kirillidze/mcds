@@ -1,19 +1,29 @@
 <template>
-  <McChip variation="blue-invert" size="s" :closable="closable" @click="handleChipClick">
+  <mc-chip variation="blue-invert" size="s" :closable="closable" @click="handleChipClick">
     {{ text }}
-  </McChip>
+  </mc-chip>
 </template>
 <script>
 import McChip from "../../elements/McChip"
 
 export default {
   name: "McFilterChip",
+  status: "ready",
+  release: "1.0.0",
   components: { McChip },
   props: {
+    /**
+     *  Тип: text, relation, number, date
+     *
+     */
     type: {
       type: String,
       required: true,
     },
+    /**
+     *  relation: is, not_is, exist;
+     *  number or date: more, less.
+     */
     name: {
       type: String,
       required: true,
@@ -53,30 +63,54 @@ export default {
   },
   computed: {
     text() {
-      if (this.type === "text") {
-        return this.value
-      } else if (this.type === "relation") {
-        if (this.name === "is") {
-          return `${this.tRelationIs}: ${this.value.length}`
-        } else if (this.name === "not_is") {
-          return `${this.tRelationNotIs}: ${this.value.length}`
-        } else if (this.name === "exists") {
-          return this.value.indexOf(1) === -1 ? this.tRelationNotExists : this.tRelationExists
-        }
-      } else if (this.type === "number" || this.type === "date") {
-        if (this.name === "more") {
-          return `${this.tRangeMore} ${this.value}`
-        } else if (this.name === "less") {
-          return `${this.tRangeLess} ${this.value}`
-        }
+      switch (this.type) {
+        case "text":
+          return this.value
+        case "relation":
+          return this.getRelationValue(this.name)
+        case "number":
+        case "date":
+          return this.getRageValue(this.name)
+        default:
+          return "Unknown"
       }
-      return "Unknown"
     },
   },
   methods: {
+    getRelationValue(name) {
+      switch (name) {
+        case "is":
+          return `${this.tRelationIs}: ${this.value.length}`
+        case "not_is":
+          return `${this.tRelationNotIs}: ${this.value.length}`
+        case "exists":
+          return this.value.indexOf(1) === -1 ? this.tRelationNotExists : this.tRelationExists
+      }
+    },
+    getRageValue(name) {
+      switch (name) {
+        case "more":
+          return `${this.tRangeMore} ${this.value}`
+        case "less":
+          return `${this.tRangeLess} ${this.value}`
+      }
+    },
     handleChipClick() {
+      /**
+       * Событие по кнопке чипа
+       */
       this.$emit("click")
     },
   },
 }
 </script>
+
+<docs>
+  ```jsx
+    <div>
+      <mc-filter-chip type="text" value="123" />
+      <mc-filter-chip type="relation" name="is" :value="[1, 2, 3]" />
+      <mc-filter-chip type="number" name="more" value="123" closable />
+    </div>
+  ```
+</docs>

@@ -2,11 +2,11 @@
   <section class="mc-lines">
     <div class="mc-lines__title">
       <slot name="title">
-        <McTitle size="xs" uppercase>{{ title }}</McTitle>
+        <mc-title size="xs" uppercase>{{ title }}</mc-title>
       </slot>
     </div>
     <div class="mc-lines__content">
-      <slot></slot>
+      <slot />
     </div>
   </section>
 </template>

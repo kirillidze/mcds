@@ -1,8 +1,9 @@
 <template>
   <section class="mc-table-card-header">
     <div class="mc-table-card-header__left">
+      <!-- @slot Слот контента -->
       <slot>
-        <mc-button :to="backTo" :exact="true" variation="blue-link" :uppercase="true" size="s">
+        <mc-button :to="backTo" exact variation="blue-link" uppercase size="s">
           <mc-svg-icon slot="icon-prepend" name="keyboard_arrow_left" style="margin-right: 0" />
           {{ buttonBackText }}
         </mc-button>
@@ -10,18 +11,25 @@
     </div>
     <div class="mc-table-card-header__right">
       <slot name="right">
-        <slot name="download"></slot>
+        <!-- @slot download -->
+        <slot name="download" />
         <template v-if="isCustom">
-          <slot name="right-custom"></slot>
-          <mc-dropdown v-model="editDropdown" position="right" :rotate-icon="false">
+          <!-- @slot right-custom -->
+          <slot name="right-custom" />
+          <mc-dropdown
+            v-model="editDropdown"
+            class="mc-table-card-header__right-custom-dropdown"
+            position="right"
+            :rotate-icon="false"
+          >
             <mc-button
-              @click.prevent
-              href="#"
               slot="activator"
+              href="#"
               text-align="left"
               variation="blue-link"
               size="s"
-              :uppercase="true"
+              uppercase
+              @click.prevent
             >
               {{ buttonEditText }}
             </mc-button>
@@ -29,11 +37,10 @@
               <mc-button
                 v-for="(link, _index) in editLinks"
                 :key="_index"
-                href="#"
-                @click="handleEditDropdownChange(link)"
-                :full-width="true"
+                full-width
                 text-align="right"
                 variation="black-flat"
+                @click="() => handleEditDropdownChange(link)"
               >
                 {{ link.name }}
               </mc-button>
@@ -87,8 +94,13 @@ export default {
   },
   computed: {},
   methods: {
-    handleEditDropdownChange(index) {
-      this.$emit("editButtonClicked", index)
+    handleEditDropdownChange(link) {
+      /**
+       * Событие клику кнопки
+       * из списка редактирования
+       * @property {Object}
+       */
+      this.$emit("editButtonClicked", link)
     },
   },
 }
@@ -101,10 +113,7 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   background-color: $color-white;
-  padding-top: $space-xs;
-  padding-bottom: $space-xs;
-  padding-left: $space_xxs;
-  padding-right: $space_xxs;
+  padding: $space-xs $space-xxs;
   align-items: center;
   height: 100%;
   border-radius: 0 8px 0 0;
@@ -123,6 +132,11 @@ export default {
       margin-left: $space-m / 2;
       margin-right: $space-m / 2;
     }
+
+    &-custom-dropdown {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__left {
@@ -134,3 +148,41 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  const editLinks = [
+    { name: 'Профиль'},
+    { name: 'Транзакции'},
+    { name: 'Безопасность'},
+    { name: 'Выйти'},
+  ]
+  <div>
+    <div>
+      <mc-table-card-header>
+        <template>
+          <mc-button uppercase variation="blue-link">Назад</mc-button>
+        </template>
+        <template slot="right">
+          <mc-button uppercase variation="blue-link">Запросить владельца</mc-button>
+          <mc-button uppercase variation="blue-link">Запросить данные AI</mc-button>
+          <mc-button uppercase variation="blue-link">Редактировать</mc-button>
+        </template>
+      </mc-table-card-header>
+
+      <mc-table-card-header is-custom buttonEditText="Редактировать" :editLinks="editLinks">
+        <template>
+          <mc-button uppercase variation="blue-link">Назад</mc-button>
+        </template>
+        <mc-button size="m-compact" variation="blue-flat" slot="download">
+          <mc-svg-icon name="get_app" />
+        </mc-button>
+        <template slot="right-custom">
+          <mc-button uppercase variation="blue-link">Запросить владельца</mc-button>
+        </template>
+      </mc-table-card-header>
+    </div>
+
+  </div>
+  ```
+</docs>

@@ -11,8 +11,8 @@
       <div class="mc-wrap-collapse__activator" slot="activator">
         <mc-grid-row justify="between" align="middle" :gutter-x="8" :wrap="false">
           <mc-grid-col class="mc-wrap-collapse__header">
+            <!-- @slot Слот заголовка -->
             <slot name="head" />
-
             <div class="mc-wrap-collapse__buttons" v-if="canDelete || isDraggable || download">
               <mc-button
                 v-if="download"
@@ -71,9 +71,10 @@
             </mc-grid-col>
           </template>
         </mc-grid-row>
+        <!-- @slot Слот для нижней части заголовка -->
         <slot name="head-bottom" />
       </div>
-
+      <!-- @slot Слот контента -->
       <slot name="body" slot="body" />
     </mc-collapse>
   </div>
@@ -89,6 +90,8 @@ import McButton from "../../elements/McButton"
 
 export default {
   name: "McWrapCollapse",
+  status: "ready",
+  release: "1.0.0",
   components: {
     McCollapse,
     McGridCol,
@@ -96,8 +99,6 @@ export default {
     McSvgIcon,
     McButton,
   },
-  status: "ready",
-  release: "1.0.0",
   directives: { drag: HandleDirective },
   data() {
     return {
@@ -136,16 +137,29 @@ export default {
   },
   methods: {
     handleToggle() {
-      this.$emit("toggle")
+      /**
+       * Событие по тогглу
+       * @property {Boolean}
+       */
       this.toggled = !this.toggled
+      this.$emit("toggle", this.toggled)
     },
     handleDelete() {
+      /**
+       * Событие по удалению
+       */
       this.$emit("delete")
     },
     handleEdit() {
+      /**
+       * Событие по редактированию
+       */
       this.$emit("edit")
     },
     handleDrag() {
+      /**
+       * Событие по перемещению
+       */
       this.$emit("drag")
     },
     collapseOpenStart() {
@@ -285,7 +299,7 @@ export default {
 <docs>
     ```jsx
         <div>
-            <mc-wrap-collapse :can-delete="true" :is-draggable="true">
+            <mc-wrap-collapse can-delete is-draggable>
                  <span slot="head">
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda commodi culpa fugiat. Accusantium alias assumenda blanditiis dignissimos ducimus eius esse est excepturi fugiat, fugit illum itaque iure laborum maxime mollitia natus nemo odit officia officiis perferendis perspiciatis provident quos, reiciendis repellendus repudiandae saepe sunt suscipit, tempore tenetur voluptate voluptatibus!
                  </span>

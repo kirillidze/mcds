@@ -6,21 +6,20 @@
           <h4 class="mc-header-search-list__headline-title">
             {{ item.title }}
           </h4>
-          <McButton
+          <mc-button
+            exact
             variation="blue-flat"
-            size="m"
-            @click.native="handleClickSearchAll"
             :href="item.button.href"
             :to="item.button.to"
-            exact
+            @click.native="handleClickSearchAll"
           >
-            <McSvgIcon slot="icon-append" name="arrow_forward_ios" size="xxs" />
+            <mc-svg-icon slot="icon-append" name="arrow_forward_ios" size="xxs" />
             {{ item.button.name }}
-          </McButton>
+          </mc-button>
         </div>
       </div>
       <div class="mc-header-search-list__body">
-        <McHeaderSearchItem
+        <mc-header-search-item
           v-for="item in item.items"
           :item="item"
           :key="item.key"
@@ -111,9 +110,6 @@ export default {
     margin-bottom: 0;
     margin-right: $space-m;
   }
-
-  &__body {
-  }
 }
 </style>
 
@@ -121,7 +117,7 @@ export default {
   ```jsx
   let searchResult = require('@/mocks/searchResult').default;
   <div>
-    <McHeaderSearchList :items="searchResult"/>
+    <mc-header-search-list :items="searchResult"/>
   </div>
   ```
 </docs>

@@ -1,14 +1,16 @@
 <template>
   <mc-tappable class="mc-filter-row">
     <div class="mc-filter-row__name">
-      <McTitle>
-        <slot></slot>
-      </McTitle>
+      <mc-title>
+        <!-- @slot Слот заголовка -->
+        <slot />
+      </mc-title>
     </div>
     <div class="mc-filter-row__chip" v-if="$slots.chip">
-      <slot name="chip"></slot>
+      <!-- @slot Слот чипа -->
+      <slot name="chip" />
     </div>
-    <McSvgIcon class="mc-filter-row__icon" size="xs" name="chevron_right" />
+    <mc-svg-icon class="mc-filter-row__icon" size="xs" name="chevron_right" />
   </mc-tappable>
 </template>
 
@@ -32,9 +34,6 @@ export default {
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
-
-  &__name {
-  }
 
   &__chip {
     flex: 0 0 auto;
@@ -61,8 +60,11 @@ export default {
 
 <docs>
     ```jsx
-    <div>
-        
-    </div>
+    const handleClick = e => alert('row is clicked')
+    const handleChipClick = e => alert('chip is clicked')
+    <mc-filter-row @click.native="handleClick">
+        Title
+        <mc-filter-dot slot="chip" @click.stop="handleChipClick" />
+    </mc-filter-row>
     ```
 </docs>

@@ -1,6 +1,7 @@
 <template>
   <div class="mc-grid-col" :class="classes" :style="styles">
-    <slot></slot>
+    <!-- @slot Слот контента -->
+    <slot />
   </div>
 </template>
 

@@ -1,16 +1,16 @@
 <template>
-  <McChip
+  <mc-chip
     class="mc-filter-dot"
     variation="white-invert"
     size="s"
-    :closable="true"
+    closable
     @click="handleChipClick"
   >
     <template slot="button">
       <div class="mc-filter-dot__circle"></div>
-      <McSvgIcon size="xxs" name="cancel" />
+      <mc-svg-icon size="xxs" name="cancel" />
     </template>
-  </McChip>
+  </mc-chip>
 </template>
 
 <script>
@@ -18,10 +18,14 @@ import McChip from "../../elements/McChip"
 import McSvgIcon from "../../elements/McSvgIcon"
 
 export default {
-  name: "McFilterChip",
+  name: "McFilterDot",
   components: { McChip, McSvgIcon },
   methods: {
     handleChipClick(e) {
+      /**
+       * Событие сохранения пресета
+       * @property {Object}
+       */
       this.$emit("click", e)
     },
   },
@@ -64,3 +68,12 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  const handleClick = e => alert(e.type)
+  <div>
+    <mc-filter-dot @click="handleClick" />
+  </div>
+  ```
+</docs>

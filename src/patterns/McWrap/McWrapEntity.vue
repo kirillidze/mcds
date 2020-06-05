@@ -1,9 +1,10 @@
 <template>
   <mc-card class="mc-wrap-entity">
+    <!-- @slot Слот контента -->
     <slot />
     <div class="mc-wrap-entity__buttons">
+      <!-- @slot Слот для добавления кнопок в начало -->
       <slot name="button-prepend" />
-
       <mc-button
         v-if="canEdit"
         variation="gray-dark-flat"
@@ -21,7 +22,7 @@
       >
         <mc-svg-icon slot="icon-append" name="delete" />
       </mc-button>
-
+      <!-- @slot Слот для добавления кнопок в конец -->
       <slot name="button-append" />
     </div>
   </mc-card>
@@ -53,9 +54,15 @@ export default {
   },
   methods: {
     handleDelete() {
+      /**
+       * Событие по удалению
+       */
       this.$emit("delete")
     },
     handleEdit() {
+      /**
+       * Событие по редактированию
+       */
       this.$emit("edit")
     },
   },
@@ -111,7 +118,7 @@ export default {
 <docs>
     ```jsx
     <div>
-        <mc-wrap-entity :can-edit="true" :can-delete="true">
+        <mc-wrap-entity can-edit can-delete>
             <span>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam assumenda commodi culpa fugiat. Accusantium alias assumenda blanditiis dignissimos ducimus eius esse est excepturi fugiat, fugit illum itaque iure laborum maxime mollitia natus nemo odit officia officiis perferendis perspiciatis provident quos, reiciendis repellendus repudiandae saepe sunt suscipit, tempore tenetur voluptate voluptatibus!
             </span>

@@ -7,13 +7,8 @@
 <script>
 export default {
   name: "McFooter",
-  computed: {
-    classes() {
-      return {
-        // [`el-logo--type-${this.type}`]: this.type,
-      }
-    },
-  },
+  status: "deprecated",
+  release: "1.0.0",
 }
 </script>
 
@@ -22,3 +17,9 @@ export default {
   $block-name: &;
 }
 </style>
+
+<docs>
+  ```jsx
+  <mc-footer />
+  ```
+</docs>

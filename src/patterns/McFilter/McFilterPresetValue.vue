@@ -1,23 +1,23 @@
 <template>
-  <McGridRow
+  <mc-grid-row
+    v-if="filter"
+    class="mc-filter-preset-value"
     align="middle"
     :gutter-x="6"
     :gutter-y="6"
-    v-if="filter"
-    class="mc-filter-preset-value"
   >
-    <McGridCol class="mc-filter-preset-value__title">
-      <McTitle>{{ filter.name }}:</McTitle>
-    </McGridCol>
-    <McGridCol class="mc-filter-preset-value__chips">
-      <McGridRow :gutter-x="6" :gutter-y="6">
-        <McGridCol v-if="filter.type === 'text'">
-          <McFilterChip :type="filter.type" :name="value" :value="'' + value" :closable="false" />
-        </McGridCol>
-        <McGridCol v-else>
-          <McGridRow :gutter-x="6" :gutter-y="6">
-            <McGridCol v-for="(values, valueName) in value" :key="valueName">
-              <McFilterChip
+    <mc-grid-col class="mc-filter-preset-value__title">
+      <mc-title>{{ filter.name }}:</mc-title>
+    </mc-grid-col>
+    <mc-grid-col class="mc-filter-preset-value__chips">
+      <mc-grid-row :gutter-x="6" :gutter-y="6">
+        <mc-grid-col v-if="filter.type === 'text'">
+          <mc-filter-chip :type="filter.type" :name="value" :value="`${value}`" :closable="false" />
+        </mc-grid-col>
+        <mc-grid-col v-else>
+          <mc-grid-row :gutter-x="6" :gutter-y="6">
+            <mc-grid-col v-for="(values, valueName) in value" :key="valueName">
+              <mc-filter-chip
                 :type="filter.type"
                 :name="valueName"
                 :value="values"
@@ -29,12 +29,12 @@
                 :t-range-more="tRangeMore"
                 :t-range-less="tRangeLess"
               />
-            </McGridCol>
-          </McGridRow>
-        </McGridCol>
-      </McGridRow>
-    </McGridCol>
-  </McGridRow>
+            </mc-grid-col>
+          </mc-grid-row>
+        </mc-grid-col>
+      </mc-grid-row>
+    </mc-grid-col>
+  </mc-grid-row>
 </template>
 
 <script>
@@ -44,6 +44,8 @@ import McGridCol from "../McGrid/McGridCol"
 import McGridRow from "../McGrid/McGridRow"
 export default {
   name: "McFilterPresetValue",
+  status: "ready",
+  release: "1.0.0",
   components: { McGridRow, McGridCol, McFilterChip, McTitle },
   props: {
     name: {
@@ -98,3 +100,27 @@ export default {
   padding-bottom: $space-xxs;
 }
 </style>
+
+<docs>
+  ```jsx
+  import * as filterMocks from '../../mocks/filterMocks'
+  let {value, filters, presets, lang} = filterMocks
+  const handleClick = e => alert(e.type)
+
+  <div v-for="(preset, index) in presets" :key="index">
+    <mc-filter-preset-value
+        v-for="(presetValue, presetName) in preset"
+        :key="presetName"
+        :name="presetName"
+        :value="presetValue"
+        :filters="filters"
+        :t-relation-is="lang.this"
+        :t-relation-not-is="lang.is_not"
+        :t-relation-exists="lang.not_empty"
+        :t-relation-not-exists="lang.empty"
+        :t-range-more="lang.more"
+        :t-range-less="lang.less"
+    />
+  </div>
+  ```
+</docs>

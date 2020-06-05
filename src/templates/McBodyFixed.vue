@@ -1,24 +1,26 @@
 <template>
   <div class="mc-body-fixed">
     <div class="mc-body-fixed__top">
-      <slot name="top"></slot>
+      <!-- @slot Слот шапки -->
+      <slot name="top" />
     </div>
     <div class="mc-body-fixed__mid">
-      <slot></slot>
+      <!-- @slot Слот контента -->
+      <slot />
     </div>
   </div>
 </template>
 
 <script>
+/**
+ * Нужен для вписания контента
+ * в оставшееся свободное пространство страницы браузера.
+ * Чаще всего используется для таблиц.
+ */
 export default {
   name: "McBodyFixed",
-  computed: {
-    classes() {
-      return {
-        // [`el-logo--type-${this.type}`]: this.type,
-      }
-    },
-  },
+  status: "ready",
+  release: "1.0.0",
 }
 </script>
 

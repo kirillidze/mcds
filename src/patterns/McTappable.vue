@@ -1,6 +1,7 @@
 <template>
   <div class="mc-tappable">
-    <slot></slot>
+    <!-- @slot Слот контента -->
+    <slot />
   </div>
 </template>
 
@@ -58,17 +59,20 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McTappable>
-        <McPreview>
-            <McAvatar slot="left"/>
-            <McTitle size="l" slot="top">Татьяна Владимирова Татьяна Владимирова Татьяна Владимирова</McTitle>
-            <McTitle color="gray" size="m" slot="bottom">
-                <McSvgIcon fill="rgb(61, 143, 65)" slot="icon-prepend" name="ready"/>
+    <mc-tappable>
+        <mc-preview>
+            <mc-avatar slot="left"/>
+            <mc-title size="l" slot="top">Татьяна Владимирова Татьяна Владимирова Татьяна Владимирова</mc-title>
+            <mc-title color="gray" slot="bottom">
+                <mc-svg-icon fill="rgb(61, 143, 65)" slot="icon-prepend" name="ready"/>
                 ildar@mediacube.in
-            </McTitle>
-            <McAvatar size="xs" slot="right"/>
-        </McPreview>
-    </McTappable>
+            </mc-title>
+            <mc-avatar size="xs" slot="right"/>
+        </mc-preview>
+    </mc-tappable>
+      <mc-tappable>
+          <mc-title size="l">Lorem ipsum.</mc-title>
+      </mc-tappable>
   </div>
   ```
 </docs>

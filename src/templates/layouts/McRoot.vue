@@ -1,5 +1,6 @@
 <template>
   <div class="mc-root">
+    <!-- @slot Слот контента -->
     <slot />
   </div>
 </template>
@@ -8,11 +9,19 @@
 import "normalize.css/normalize.css"
 import "flatpickr/dist/flatpickr.css"
 import "vue-snotify/styles/material.css"
+import McTitle from "../../elements/McTitle"
 
+/**
+ * Это обязательный компонент, с него начинается любой layout,
+ * т.к. здесь находятся глобальные стили.
+ */
 export default {
   name: "McRoot",
   status: "ready",
   release: "0.0.1",
+  components: {
+    McTitle,
+  },
   beforeMount() {
     this.runResizeEvents()
     window.addEventListener("resize", this.runResizeEvents)
@@ -509,26 +518,33 @@ pre {
   ```jsx
     <div>
       <McRoot>
-        Это обязательный компонент, с него начинается любой layout, т.к. здесь находятся глобальные стили.
-        <br><br>
-        margin-bottom - mb
-        margin-top - mt
-        padding-bottom - pb
-        margin-top - pb
+        <div class="mb-s">
+          <mc-title size="l" color="blue">Variables:</mc-title>
+          <mc-title>xl - 56px</mc-title>
+          <mc-title>l - 48px</mc-title>
+          <mc-title>ml - 40px</mc-title>
+          <mc-title>m - 32px</mc-title>
+          <mc-title>sm - 24px</mc-title>
+          <mc-title>s - 16px</mc-title>
+          <mc-title>xs - 12px</mc-title>
+          <mc-title>xxs - 8px</mc-title>
+        </div>
 
-        xl - 56
-        l - 48
-        ml - 40
-        m - 32
-        sm - 24
-        s - 16
-        xs - 12
-        xxs - 8
+        <div class="mb-s">
+          <mc-title size="l" color="blue">Spaces:</mc-title>
+          <mc-title>margin-bottom - mb</mc-title>
+          <mc-title>margin-top - mt</mc-title>
+          <mc-title>padding-bottom - pb</mc-title>
+          <mc-title>margin-top - pb</mc-title>
+        </div>
 
-        hidden-m (>768)
-        hidden-l (>1024)
-        hidden-m-down (<768)
-        hidden-l-down (<1024)
+        <div>
+          <mc-title size="l" color="blue">Visibilities:</mc-title>
+          <mc-title>hidden-m (>768)</mc-title>
+          <mc-title>hidden-l (>1024)</mc-title>
+          <mc-title>hidden-m-down (<768)</mc-title>
+          <mc-title>hidden-l-down (<1024)</mc-title>
+        </div>
       </McRoot>
     </div>
   ```

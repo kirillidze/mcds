@@ -5,12 +5,12 @@
         {{ notification.title }} «{{ notification.name }}»
       </div>
       <div class="mc-header-notifications-item__controls">
-        <McButton @click="handleClickReject(notification.id)" variation="white-flat">
+        <mc-button @click="handleClickReject(notification.id)" variation="white-flat">
           {{ textReject }}
-        </McButton>
-        <McButton @click="handleClickAccept(notification.id)" variation="white">
+        </mc-button>
+        <mc-button @click="handleClickAccept(notification.id)" variation="white">
           {{ textAccept }}
-        </McButton>
+        </mc-button>
       </div>
     </div>
   </section>
@@ -49,19 +49,18 @@ export default {
       default: null,
     },
   },
-  computed: {
-    classes() {
-      return {
-        //[`el-logo--type-${this.type}`]: this.type,
-      }
-    },
-  },
 
   methods: {
     handleClickAccept(id) {
+      /**
+       * @property {Number}
+       */
       this.$emit("click-accept", id)
     },
     handleClickReject(id) {
+      /**
+       * @property {Number}
+       */
       this.$emit("click-reject", id)
     },
   },
@@ -108,12 +107,12 @@ export default {
   let notifications = require('@/mocks/notifications').default;
   let eventTest = (val) => alert(val)
   <div>
-    <McHeaderNotificationsItem
-            :notification="notifications[1]"
-            textAccept="Принять"
-            textReject="Отклонить"
-            @click-accept="(id) => eventTest('id: ' + id)"
-            @click-reject="(id) => eventTest('id: ' + id)"
+    <mc-header-notifications-item
+      :notification="notifications[1]"
+      textAccept="Принять"
+      textReject="Отклонить"
+      @click-accept="id => eventTest(`id: ${id}`)"
+      @click-reject="id => eventTest(`id: ${id}`)"
     />
   </div>
   ```

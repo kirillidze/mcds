@@ -1,6 +1,7 @@
 <template>
   <section class="mc-panel">
-    <slot></slot>
+    <!-- @slot Слот контента -->
+    <slot />
   </section>
 </template>
 
@@ -12,13 +13,6 @@ export default {
   components: { McSvgIcon, McButton },
   status: "ready",
   release: "0.0.1",
-  computed: {
-    classes() {
-      return {
-        //[`el-logo--type-${this.type}`]: this.type,
-      }
-    },
-  },
 }
 </script>
 
@@ -30,19 +24,13 @@ export default {
   border-radius: $radius-l;
   background-color: $color-white;
   padding: $space-xs;
-  max-width: $panel_m;
+  max-width: $panel-m;
 
   &:empty {
     display: none;
   }
 
   .mc-button {
-    &--size-s {
-    }
-
-    &--size-m {
-    }
-
     &--size-l {
       padding-left: $space_s;
       padding-right: $space_s;
@@ -68,138 +56,63 @@ export default {
     marginRight: tokens.space_s,
     marginBottom: tokens.space_s
   }
+  const buttons_1 = ['партнера', 'рекрутера', 'контракт']
+  const buttons_2 = [
+    {icon: 'account_circle', name: 'Профиль'},
+    {icon: 'swap_horizontal_circle', name: 'Транзакции'},
+    {icon: 'settings', name: 'Безопасность'},
+    {icon: 'exit_to_app', name: 'Выйти'},
+  ]
+  const buttons_3 = ['Stats', 'Network', 'Studio', 'Assist']
 
   <div style="display: flex; flex-wrap: wrap; align-items: flex-start;">
-
-    <McPanel :style="stylesPanel">
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="l"
+    <mc-panel :style="stylesPanel">
+      <mc-button
+        v-for="(btn, i) in buttons_1"
+        :key="i"
+        href="#"
+        @click.prevent
+        full-width
+        text-align="left"
+        variation="black-flat"
+        size="l"
       >
-        Добавить партнера
-      </McButton>
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="l"
-      >
-        Добавить рекрутера
-      </McButton>
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="l"
-      >
-        Добавить контракт
-      </McButton>
-    </McPanel>
+        Добавить {{ btn }}
+      </mc-button>
+    </mc-panel>
 
 
-    <McPanel :style="stylesPanel">
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="l"
+    <mc-panel :style="stylesPanel">
+      <mc-button
+        v-for="(btn, i) in buttons_2"
+        :key="i"
+        href="#"
+        full-width
+        text-align="left"
+        :variation="btn.icon === 'exit_to_app' ? 'red-flat' : 'black-flat'"
+        size="l"
+        @click.prevent
       >
-        <McSvgIcon slot="icon-prepend" name="account_circle" size="xxs"/>
-        Профиль
-      </McButton>
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="l"
-      >
-        <McSvgIcon slot="icon-prepend" name="swap_horizontal_circle" size="xxs"/>
-        Транзакции
-      </McButton>
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="l"
-      >
-        <McSvgIcon slot="icon-prepend" name="settings" size="xxs"/>
-        Безопасность
-      </McButton>
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="red-flat"
-              size="l"
-      >
-        <McSvgIcon slot="icon-prepend" name="exit_to_app" size="xxs"/>
-        Выйти
-      </McButton>
-    </McPanel>
+        <mc-svg-icon slot="icon-prepend" :name="btn.icon" size="xxs"/>
+        {{ btn.name }}
+      </mc-button>
+    </mc-panel>
 
-
-    <McPanel :style="stylesPanel">
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="xl"
+    <mc-panel :style="stylesPanel">
+      <mc-button
+        v-for="(btn, i) in buttons_3"
+        :key="i"
+        href="#"
+        full-width
+        text-align="left"
+        variation="black-flat"
+        size="xl"
+        @click.prevent
       >
-        <McSvgIcon slot="icon-prepend" name="mediacube" size="m"/>
-        MediaCube Stats
-      </McButton>
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="xl"
-      >
-        <McSvgIcon slot="icon-prepend" name="mediacube" size="m"/>
-        MediaCube Network
-      </McButton>
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="xl"
-      >
-        <McSvgIcon slot="icon-prepend" name="mediacube" size="m"/>
-        MediaCube Studio
-      </McButton>
-      <McButton
-              href="#"
-              @click.prevent
-              full-width
-              text-align="left"
-              variation="black-flat"
-              size="xl"
-      >
-        <McSvgIcon slot="icon-prepend" name="mediacube" size="m"/>
-        MediaCube Assist
-      </McButton>
-    </McPanel>
-
+        <mc-svg-icon slot="icon-prepend" name="mediacube" size="m"/>
+        MediaCube {{ btn }}
+      </mc-button>
+    </mc-panel>
   </div>
   ```
 </docs>

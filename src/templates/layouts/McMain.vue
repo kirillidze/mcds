@@ -2,15 +2,19 @@
   <div class="mc-main">
     <div class="mc-main__inner">
       <div class="mc-main__content">
+        <!-- @slot Слот хедера -->
         <slot name="header" />
         <main class="mc-main__main">
-          <slot></slot>
+          <!-- @slot Слот контента -->
+          <slot />
         </main>
       </div>
       <div class="mc-main__footer-wrapper">
+        <!-- @slot Слот футера -->
         <slot name="footer" />
       </div>
     </div>
+    <!-- @slot Слот includes -->
     <slot name="includes" />
   </div>
 </template>
@@ -38,7 +42,10 @@ import McContainer from "../../patterns/McContainer"
 import McBodyFixed from "../McBodyFixed"
 import McFooter from "../../patterns/McFooter"
 import McFieldSelect from "../../elements/McField/McFieldSelect"
-
+/**
+ * Используется для вёрстки основных страниц
+ * на проектах
+ */
 export default {
   name: "McMain",
   components: {
@@ -121,65 +128,6 @@ export default {
   let notifications = require('@/mocks/notifications').default;
   let search = null
   let eventTest = (val) => alert(val)
-  let headers = [
-    {
-      key: 'title',
-      title: 'Канал',
-      hasBorder: true,
-      width: '251px',
-      textAlign: 'left',
-    },
-    {
-      key: 'user',
-      title: 'Пользователь',
-      textAlign: 'left'
-    },
-    {
-      key: 'roles',
-      title: 'Роль',
-      textAlign: 'left',
-      width: '190px',
-    },
-    {
-      key: 'channels',
-      title: 'Канал',
-      textAlign: 'left',
-      width: '120px',
-    },
-    {
-      key: 'views_count',
-      title: 'Просмотры',
-      textAlign: 'left'
-    },
-    {
-      key: 'categories',
-      title: 'Жанр',
-      textAlign: 'left'
-    },
-    {
-      key: 'language',
-      title: 'Язык',
-    },
-    {
-      key: 'country',
-      title: 'Страна ауд.',
-    },
-    {
-      key: 'price',
-      title: 'Цена интегр.',
-    },
-    {
-      key: 'owner',
-      title: 'Владелец',
-      textAlign: 'left',
-      width: '200px',
-    },
-    {
-      key: 'action',
-      title: 'Действие',
-      width: '243px',
-    }
-  ]
   let body = require('../../mocks/tableInfusersBody').default;
   let bodyMapped = body.map((item, index) => {
   return {
@@ -244,8 +192,8 @@ export default {
   }
 
   <div>
-      <McMain>
-        <McHeader
+      <mc-main>
+        <mc-header
           slot="header"
           v-model="search"
           logo-title="Mediacube"
@@ -266,21 +214,21 @@ export default {
           searchable
           hasMobileMenu
           @search-submit="eventTest('Search submit')"
-          @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
-          @click-accept="(id) => eventTest('id: ' + id)"
-          @click-reject="(id) => eventTest('id: ' + id)"
+          @click-add-entity="(val) => eventTest(`itemValue: ${val.value}`)"
+          @click-accept="(id) => eventTest(`id: ${id}`)"
+          @click-reject="(id) => eventTest(`id: ${id}`)"
         />
-        <McBodyFixed>
+        <mc-body-fixed>
           <template slot="top">
-            <McTopLine>
+            <mc-top-line>
               <template>
-                <McButton>Фильтр</McButton>
+                <mc-button>Фильтр</mc-button>
               </template>
               <template slot="right">
-                <McButton variation="blue-link">Добавить контракт</McButton>
-                <McTitle tag="p" color="gray-dark">19 контрактов</McTitle>
+                <mc-button variation="blue-link">Добавить контракт</mc-button>
+                <mc-title tag="p" color="gray-dark">19 контрактов</mc-title>
               </template>
-            </McTopLine>
+            </mc-top-line>
           </template>
             <mc-virtual-table
               ref="table"
@@ -323,7 +271,7 @@ export default {
                         </mc-tooltip>
                       </mc-grid-col>
                     </mc-grid-row>
-                    <mc-title size="m" slot="top"> {{ row.title }} </mc-title>
+                    <mc-title slot="top"> {{ row.title }} </mc-title>
                   </mc-preview>
                 </template>
                 <template v-slot:right="{ row }">
@@ -406,8 +354,10 @@ export default {
                 </template>
               </mc-virtual-table-col>
             </mc-virtual-table>
-        </McBodyFixed>
-      </McMain>
+        </mc-body-fixed>
+        <mc-title slot="footer" class="mt-s mb-s">Footer content Footer content Footer content</mc-title>
+        <mc-title slot="includes">Includes content</mc-title>
+      </mc-main>
   </div>
   ```
 </docs>

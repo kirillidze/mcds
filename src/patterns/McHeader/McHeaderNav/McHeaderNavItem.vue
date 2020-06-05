@@ -1,6 +1,7 @@
 <template>
-  <div class="mc-header-nav-item" :class="classes">
-    <slot></slot>
+  <div class="mc-header-nav-item">
+    <!-- @slot Слот контента -->
+    <slot />
   </div>
 </template>
 
@@ -12,13 +13,6 @@ export default {
   components: { McSvgIcon, McButton },
   status: "ready",
   release: "0.0.1",
-  computed: {
-    classes() {
-      return {
-        //[`el-logo--type-${this.type}`]: this.type,
-      }
-    },
-  },
 }
 </script>
 
@@ -48,12 +42,12 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McHeaderNavItem>
-      <McButton href="javascript:void(0);" variation="black-flat">
-        <McSvgIcon slot="icon-prepend" name="public" />
+    <mc-header-nav-item>
+      <mc-button href="javascript:void(0);" variation="black-flat">
+        <mc-svg-icon slot="icon-prepend" name="public" />
         Пункт меню
-      </McButton>
-    </McHeaderNavItem>
+      </mc-button>
+    </mc-header-nav-item>
   </div>
   ```
 </docs>

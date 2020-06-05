@@ -8,7 +8,6 @@
   >
     <mc-filter-row slot="activator">
       {{ filter.name }}
-      <!--<McSvgIcon v-if="isAjax" name="search" />-->
       <mc-filter-dot slot="chip" v-if="chipCount" @click="e => resetFilter(e)" />
     </mc-filter-row>
     <template slot="head">
@@ -45,7 +44,7 @@
           v-if="selectTypes.indexOf(type) !== -1 || type === 'exists'"
           :options="computedOptions"
           @input="handleInput"
-          :allow-empty="true"
+          allow-empty
           :internal-search="!isAjax"
           @search-change="handleSearchChange"
           :disabled="value.hasOwnProperty('exists')"
@@ -75,13 +74,9 @@
       </div>
     </div>
     <template slot="footer">
-      <mc-button
-        full-width
-        variation="light-green"
-        @click="handleOpen(!open)"
-        :disabled="canSave"
-        >{{ tSaveButton }}</mc-button
-      >
+      <mc-button full-width variation="light-green" @click="handleOpen(!open)" :disabled="canSave">
+        {{ tSaveButton }}
+      </mc-button>
     </template>
   </mc-filter-slider>
 </template>
@@ -105,6 +100,8 @@ import McTitle from "../../elements/McTitle"
 
 export default {
   name: "McFilterTypeRelation",
+  status: "ready",
+  release: "1.0.0",
   components: {
     McFilterRow,
     McSvgIcon,
@@ -305,3 +302,25 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  import * as filterMocks from '../../mocks/filterMocks'
+  let {value, filters, presets, lang} = filterMocks
+  const handleClick = e => alert(e.type)
+  <div style="position: relative; height: 300px; width: 300px; margin: 50px;">
+    <template v-for="(filter, _key) in filters">
+      <mc-filter-type-relation
+          v-if="filter.type === 'relation'"
+          :key="`filled_${_key}`"
+          :filter="filter"
+          :value="filter.value || {}"
+          :real-value="filter.value || {}"
+          :t-range-more="lang.more"
+          :t-range-less="lang.less"
+          :t-save-button="lang.save"
+      />
+    </template>
+  </div>
+  ```
+</docs>

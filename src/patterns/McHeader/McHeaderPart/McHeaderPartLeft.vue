@@ -1,6 +1,6 @@
 <template>
   <section class="mc-header-part-left">
-    <McLogo :title="logoTitle" :src="logoSrc" :href="logoHref" :to="logoTo" />
+    <mc-logo :title="logoTitle" :src="logoSrc" :href="logoHref" :to="logoTo" />
   </section>
 </template>
 
@@ -61,11 +61,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McHeaderPartLeft
-            logo-title="Mediacube"
-            logo-src="/icons/mediacube.svg"
-            logo-href="javascript:void(0);"
-    />
+    <mc-header-part-left logo-title="Mediacube" logo-src="/icons/mediacube.svg" logo-href="javascript:void(0);" />
   </div>
   ```
 </docs>

@@ -12,7 +12,7 @@
           @keyup.esc="closeSearch"
         />
       </div>
-      <McButton
+      <mc-button
         variation="black-flat"
         size="m-compact"
         rounded
@@ -20,9 +20,9 @@
         type="submit"
         class="mc-header-search__submit-btn"
       >
-        <McSvgIcon slot="icon-append" name="search" />
-      </McButton>
-      <McButton
+        <mc-svg-icon slot="icon-append" name="search" />
+      </mc-button>
+      <mc-button
         variation="black-flat"
         size="m-compact"
         rounded
@@ -31,14 +31,14 @@
         class="mc-header-search__close-btn"
         @click.prevent="closeSearch"
       >
-        <McSvgIcon slot="icon-append" name="close" />
-      </McButton>
+        <mc-svg-icon slot="icon-append" name="close" />
+      </mc-button>
     </div>
     <div class="mc-header-search__drop" v-if="searchItems">
-      <McHeaderSearchList
+      <mc-header-search-list
+        :items="searchItems"
         @click-search-item="closeSearch"
         @click-search-all="closeSearch"
-        :items="searchItems"
       />
     </div>
   </form>
@@ -81,7 +81,7 @@ export default {
 
   computed: {
     _value() {
-      return this.value == null ? "" : this.value
+      return this.value === null ? "" : this.value
     },
     classes() {
       return {
@@ -119,9 +119,6 @@ export default {
   $block-name: &;
 
   @include position(absolute, 0);
-
-  &__field {
-  }
 
   &__input-wrap {
     position: relative;
@@ -210,12 +207,12 @@ export default {
   let search = null
   let eventTest = (val) => alert(val)
   <div style="position: relative;">
-    <McHeaderSearch
-            style="position: relative"
-            v-model="search"
-            placeholder="Начните вводить"
-            @search-submit="eventTest('Search submit')"
-            @search-close="eventTest('reset')"
+    <mc-header-search
+      style="position: relative"
+      v-model="search"
+      placeholder="Начните вводить"
+      @search-submit="eventTest('Search submit')"
+      @search-close="eventTest('reset')"
     />
   </div>
   ```

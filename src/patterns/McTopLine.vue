@@ -2,10 +2,12 @@
   <section class="mc-top-line" :class="classes">
     <div class="mc-top-line__inner">
       <div class="mc-top-line__left">
-        <slot name="left"></slot>
+        <!-- @slot Слот слева -->
+        <slot name="left" />
       </div>
       <div class="mc-top-line__right">
-        <slot name="right"></slot>
+        <!-- @slot Слот справа -->
+        <slot name="right" />
       </div>
     </div>
   </section>
@@ -68,7 +70,7 @@ export default {
     background-color: $color-white;
     font-family: $font-heading;
     font-weight: $weight-medium;
-    padding: 8px;
+    padding: $space-xs;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -112,185 +114,108 @@ export default {
   ```jsx
   let dropIsOpen = false
   let dropIsOpen2 = false
+  const breadcrumbsItems = [
+    {title: 'Рейтинг каналов', href: 'javascript:void(0)'},
+    {title: 'Ed Sheeran', href: 'javascript:void(0)'},
+    {title: 'Владилен', href: 'javascript:void(0)'},
+  ]
   <div>
   </div>
 
   <div>
-    <McTopLine>
+    <mc-top-line>
       <template slot="left">
-        <McBreadcrumbs active="Dashboard" :nuxt="false" :items="[
-          {title: 'Рейтинг каналов', href: 'javascript:void(0)'},
-          {title: 'Ed Sheeran', href: 'javascript:void(0)'},
-          {title: 'Владилен', href: 'javascript:void(0)'},
-        ]"/>
+        <mc-breadcrumbs active="Dashboard" :nuxt="false" :items="breadcrumbsItems"/>
       </template>
       <template slot="right">
-        <McButton variation="black-flat" size="m-compact">
-          <McSvgIcon slot="icon-append" name="delete"/>
-        </McButton>
-        <McButton variation="blue-link" size="m-compact">
+        <mc-button variation="black-flat" size="m-compact">
+          <mc-svg-icon slot="icon-append" name="create"/>
+        </mc-button>
+        <mc-button variation="blue-link" size="m-compact">
           Ссылка
-        </McButton>
-        <McButton variation="black-flat" size="m-compact">
-          <McSvgIcon slot="icon-append" name="delete"/>
-        </McButton>
-        <McButton variation="black-flat" size="m-compact">
-          <McSvgIcon slot="icon-append" name="delete"/>
-        </McButton>
+        </mc-button>
+        <mc-button variation="black-flat" size="m-compact">
+          <mc-svg-icon slot="icon-append" name="delete"/>
+        </mc-button>
+        <mc-button variation="black-flat" size="m-compact">
+          <mc-svg-icon slot="icon-append" name="add"/>
+        </mc-button>
       </template>
-    </McTopLine>
+    </mc-top-line>
 
-    <McTopLine border>
+    <mc-top-line border>
       <template slot="left">
-        <McBreadcrumbs active="Dashboard" :nuxt="false" :items="[
-          {title: 'Рейтинг каналов', href: 'javascript:void(0)'},
-          {title: 'Ed Sheeran', href: 'javascript:void(0)'},
-          {title: 'Владилен', href: 'javascript:void(0)'},
-        ]"/>
+        <mc-breadcrumbs active="Dashboard" :nuxt="false" :items="breadcrumbsItems"/>
       </template>
       <template slot="right">
-        <McButton variation="black-flat" size="l-compact">
-          <McSvgIcon slot="icon-append" name="delete"/>
-        </McButton>
-        <McButton variation="blue-link" size="m-compact">
+        <mc-button variation="black-flat" size="l-compact">
+          <mc-svg-icon slot="icon-append" name="create"/>
+        </mc-button>
+        <mc-button variation="blue-link" size="m-compact">
           Ссылка
-        </McButton>
-        <McButton variation="black-flat" size="l-compact">
-          <McSvgIcon slot="icon-append" name="delete"/>
-        </McButton>
-        <McButton variation="black-flat" size="l-compact">
-          <McSvgIcon slot="icon-append" name="delete"/>
-        </McButton>
+        </mc-button>
+        <mc-button variation="black-flat" size="l-compact">
+          <mc-svg-icon slot="icon-append" name="delete"/>
+        </mc-button>
+        <mc-button variation="black-flat" size="l-compact">
+          <mc-svg-icon slot="icon-append" name="add"/>
+        </mc-button>
       </template>
-    </McTopLine>
+    </mc-top-line>
 
-    <McTopLine border>
+    <mc-top-line border>
       <template slot="left">
-        <McDropdown v-model="dropIsOpen">
-          <McButton
-                  slot="activator"
-                  variation="black-flat"
-                  size="l"
-          >
-            <McAvatar slot="icon-prepend" rounded size="s"></McAvatar>
+        <mc-dropdown v-model="dropIsOpen">
+          <mc-button slot="activator" variation="black-flat" size="l">
+            <mc-avatar slot="icon-prepend" rounded size="s" />
             Владилен
-          </McButton>
-          <McPanel>
-            <McButton
-                    href="#"
-                    @click.prevent
-                    full-width
-                    text-align="left"
-                    variation="black-flat"
-                    size="l"
-            >
-              <McSvgIcon slot="icon-prepend" name="account_circle" size="xxs"/>
+          </mc-button>
+          <mc-panel>
+            <mc-button href="#" full-width text-align="left" variation="black-flat" size="l" @click.prevent>
+              <mc-svg-icon slot="icon-prepend" name="account_circle" size="xxs"/>
               Профиль
-            </McButton>
-            <McButton
-                    href="#"
-                    @click.prevent
-                    full-width
-                    text-align="left"
-                    variation="black-flat"
-                    size="l"
-            >
-              <McSvgIcon slot="icon-prepend" name="swap_horizontal_circle" size="xxs"/>
+            </mc-button>
+            <mc-button href="#" full-width text-align="left" variation="black-flat" size="l" @click.prevent>
+              <mc-svg-icon slot="icon-prepend" name="swap_horizontal_circle" size="xxs"/>
               Транзакции
-            </McButton>
-            <McButton
-                    href="#"
-                    @click.prevent
-                    full-width
-                    text-align="left"
-                    variation="black-flat"
-                    size="l"
-            >
-              <McSvgIcon slot="icon-prepend" name="settings" size="xxs"/>
+            </mc-button>
+            <mc-button href="#" full-width text-align="left" variation="black-flat" size="l" @click.prevent>
+              <mc-svg-icon slot="icon-prepend" name="settings" size="xxs"/>
               Безопасность
-            </McButton>
-            <McButton
-                    href="#"
-                    @click.prevent
-                    full-width
-                    text-align="left"
-                    variation="red-flat"
-                    size="l"
-            >
-              <McSvgIcon slot="icon-prepend" name="exit_to_app" size="xxs"/>
+            </mc-button>
+            <mc-button href="#" full-width text-align="left" variation="red-flat" size="l" @click.prevent>
+              <mc-svg-icon slot="icon-prepend" name="exit_to_app" size="xxs"/>
               Выйти
-            </McButton>
-          </McPanel>
-        </McDropdown>
+            </mc-button>
+          </mc-panel>
+        </mc-dropdown>
       </template>
       <template slot="right">
-        <McDropdown v-model="dropIsOpen2" position="right" :rotate-icon="false">
-          <McButton slot="activator"
-                    variation="black-flat"
-                    size="m-compact"
-          >
-            <McSvgIcon slot="icon-append" name="sort_list"/>
-          </McButton>
-          <McPanel>
-            <McButton
-                    href="#"
-                    @click.prevent
-                    full-width
-                    text-align="right"
-                    variation="black-flat"
-                    size="l"
-            >
-              Профиль
-            </McButton>
-            <McButton
-                    href="#"
-                    @click.prevent
-                    full-width
-                    text-align="right"
-                    variation="black-flat"
-                    size="l"
-            >
+        <mc-dropdown v-model="dropIsOpen2" position="right" :rotate-icon="false">
+          <mc-button slot="activator" variation="black-flat" size="m-compact">
+            <mc-svg-icon slot="icon-append" name="sort_list"/>
+          </mc-button>
+          <mc-panel>
+            <mc-button href="#" full-width text-align="right" variation="black-flat" size="l" @click.prevent>
+            Профиль
+            </mc-button>
+            <mc-button href="#" full-width text-align="right" variation="black-flat" size="l" @click.prevent>
               Транзакции
-            </McButton>
-            <McButton
-                    href="#"
-                    @click.prevent
-                    full-width
-                    text-align="right"
-                    variation="black-flat"
-                    size="l"
-            >
+            </mc-button>
+            <mc-button href="#" full-width text-align="right" variation="black-flat" size="l" @click.prevent>
               Безопасность
-            </McButton>
-            <McButton
-                    href="#"
-                    @click.prevent
-                    full-width
-                    text-align="right"
-                    variation="red-flat"
-                    size="l"
-            >
+            </mc-button>
+            <mc-button href="#" full-width text-align="right" variation="red-flat" size="l" @click.prevent>
               Выйти
-            </McButton>
-          </McPanel>
-        </McDropdown>
+            </mc-button>
+          </mc-panel>
+        </mc-dropdown>
 
-
-        <McButton variation="black-flat" size="m-compact">
-          <McSvgIcon slot="icon-append" name="filter_list"/>
-        </McButton>
+        <mc-button variation="black-flat" size="m-compact">
+          <mc-svg-icon slot="icon-append" name="filter_list"/>
+        </mc-button>
       </template>
-    </McTopLine>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    </mc-top-line>
   </div>
   ```
 </docs>

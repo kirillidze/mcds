@@ -1,18 +1,22 @@
 <template>
   <section class="mc-preview">
     <div class="mc-preview__left">
-      <slot name="left"></slot>
+      <!-- @slot Слот слева -->
+      <slot name="left" />
     </div>
     <div class="mc-preview__center">
       <div class="mc-preview__top">
-        <slot name="top"></slot>
+        <!-- @slot Слот сверху -->
+        <slot name="top" />
       </div>
       <div class="mc-preview__bottom">
-        <slot name="bottom"></slot>
+        <!-- @slot Слот внизу -->
+        <slot name="bottom" />
       </div>
     </div>
     <div class="mc-preview__right">
-      <slot name="right"></slot>
+      <!-- @slot Слот справа -->
+      <slot name="right" />
     </div>
   </section>
 </template>
@@ -81,56 +85,58 @@ export default {
 <docs>
   ```jsx
   <div style="max-width: 400px;">
-    <McPreview>
-        <McAvatar slot="left"/>
-        <McTitle size="l" slot="top">Татьяна Владимирова Татьяна Владимирова Татьяна Владимирова</McTitle>
-        <McTitle color="gray" size="m" slot="bottom">
-            <McSvgIcon fill="rgb(61, 143, 65)" slot="icon-prepend" name="ready"/>
+    <mc-preview>
+        <mc-avatar slot="left"/>
+        <mc-title size="l" slot="top">Татьяна Владимирова Татьяна Владимирова Татьяна Владимирова</mc-title>
+        <mc-title color="gray" slot="bottom">
+            <mc-svg-icon fill="rgb(61, 143, 65)" slot="icon-prepend" name="ready"/>
             ildar@mediacube.in
-        </McTitle>
-        <McAvatar size="xs" slot="right"/>
-    </McPreview>
+        </mc-title>
+        <mc-avatar size="xs" slot="right"/>
+    </mc-preview>
 
       <br>
 
-    <McPreview>
-        <McAvatar slot="left"/>
-        <McTitle :ellipsis="false" size="l" slot="top">Татьяна Владимирова Татьяна Владимирова Татьяна Владимирова</McTitle>
-        <McTitle color="gray" size="m" slot="bottom">
-            <McSvgIcon fill="rgb(61, 143, 65)" slot="icon-prepend" name="ready"/>
+    <mc-preview>
+        <mc-avatar slot="left"/>
+        <mc-title :ellipsis="false" size="l" slot="top">
+            Татьяна Владимирова Татьяна Владимирова Татьяна Владимирова
+        </mc-title>
+        <mc-title color="gray" slot="bottom">
+            <mc-svg-icon fill="rgb(61, 143, 65)" slot="icon-prepend" name="ready"/>
             ildar@mediacube.in
-        </McTitle>
-        <McAvatar size="xs" slot="right"/>
-    </McPreview>
+        </mc-title>
+        <mc-avatar size="xs" slot="right"/>
+    </mc-preview>
       
       <br>
       
-    <McPreview>
-        <McAvatar size="s" slot="left"/>
-        <McTitle size="m" slot="top">Татьяна Владимирова</McTitle>
-        <McTitle uppercase color="gray" size="xs" slot="bottom">
+    <mc-preview>
+        <mc-avatar size="s" slot="left"/>
+        <mc-title slot="top">Татьяна Владимирова</mc-title>
+        <mc-title uppercase color="gray" size="xs" slot="bottom">
             Татьяна Владимирова
-        </McTitle>
-        <McAvatar rounded size="xs" slot="right"/>
-    </McPreview>
+        </mc-title>
+        <mc-avatar rounded size="xs" slot="right"/>
+    </mc-preview>
 
       <br>
 
-    <McPreview>
-        <McAvatar size="s" slot="left"/>
-        <McTitle size="m" slot="top">Татьяна Владимирова</McTitle>
-        <McAvatar size="s" slot="right"/>
-    </McPreview>
+    <mc-preview>
+        <mc-avatar size="s" slot="left"/>
+        <mc-title slot="top">Татьяна Владимирова</mc-title>
+        <mc-avatar size="s" slot="right"/>
+    </mc-preview>
 
       <br>
 
-    <McPreview>
-        <McAvatar size="s" slot="left"/>
-        <McTitle size="m" slot="top">Татьяна Владимирова</McTitle>
-        <McTitle uppercase color="gray" size="xs" slot="bottom">
+    <mc-preview>
+        <mc-avatar size="s" slot="left"/>
+        <mc-title slot="top">Татьяна Владимирова</mc-title>
+        <mc-title uppercase color="gray" size="xs" slot="bottom">
             Татьяна Владимирова
-        </McTitle>
-    </McPreview>
+        </mc-title>
+    </mc-preview>
   </div>
   ```
 </docs>

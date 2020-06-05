@@ -1,7 +1,7 @@
 <template>
   <div ref="header" class="mc-header" :class="classes">
     <div class="mc-header__notifications">
-      <McHeaderNotifications
+      <mc-header-notifications
         :notifications-text-accept="notificationsTextAccept"
         :notifications-text-reject="notificationsTextReject"
         :notifications="notifications"
@@ -45,7 +45,7 @@
         :userback-config="userbackConfig"
         :logo-src="logoSrc"
       />
-      <McHeaderMobile v-if="menuMain && menuMain.length" :menu-main="menuMain" />
+      <mc-header-mobile v-if="menuMain && menuMain.length" :menu-main="menuMain" />
     </div>
   </div>
 </template>
@@ -415,10 +415,7 @@ export default {
 .mc-header {
   $block-name: &;
 
-  position: sticky;
-  top: 0;
-  right: 0;
-  left: 0;
+  @include position(sticky, 0 0 null 0);
   font-family: $font-heading;
   margin-left: $space-s;
   margin-right: $space-s;
@@ -501,10 +498,7 @@ export default {
 
     #{$block-name} {
       &__notifications {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        @include position(fixed, null 0 0 0);
         z-index: 10000;
         margin-left: 0;
         margin-right: 0;
@@ -647,32 +641,32 @@ export default {
   let search = null
   let eventTest = (val) => alert(val)
   <div>
-    <McHeader
-            v-model="search"
-            logo-title="Mediacube"
-            logo-src="/icons/mediacube.svg"
-            logo-href="javascript:void(0);"
-            :notifications="notifications"
-            notifications-text-accept="Принять"
-            notifications-text-reject="Отклонить"
-            :menu-additional="menuAdditional"
-            :menu-main="menuMain"
-            :menu-apps="menuApps"
-            :menu-profile="menuProfile"
-            :menu-langs="menuLangs"
-            :user="authUser"
-            :user-info="userInfo"
-            :sub-users="subUsers"
-            :search-items="searchResult"
-            :userback-config="userbackConfig"
-            search-placeholder="Начните вводить"
-            chatra-id="dzDw7eBbL2ramxx25"
-            searchable
-            hasMobileMenu
-            @search-submit="eventTest('Search submit')"
-            @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
-            @click-accept="(id) => eventTest('id: ' + id)"
-            @click-reject="(id) => eventTest('id: ' + id)"
+    <mc-header
+        v-model="search"
+        logo-title="Mediacube"
+        logo-src="/icons/mediacube.svg"
+        logo-href="javascript:void(0);"
+        :notifications="notifications"
+        notifications-text-accept="Принять"
+        notifications-text-reject="Отклонить"
+        :menu-additional="menuAdditional"
+        :menu-main="menuMain"
+        :menu-apps="menuApps"
+        :menu-profile="menuProfile"
+        :menu-langs="menuLangs"
+        :user="authUser"
+        :user-info="userInfo"
+        :sub-users="subUsers"
+        :search-items="searchResult"
+        :userback-config="userbackConfig"
+        search-placeholder="Начните вводить"
+        chatra-id="dzDw7eBbL2ramxx25"
+        searchable
+        hasMobileMenu
+        @search-submit="eventTest('Search submit')"
+        @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
+        @click-accept="(id) => eventTest('id: ' + id)"
+        @click-reject="(id) => eventTest('id: ' + id)"
     />
   </div>
   ```

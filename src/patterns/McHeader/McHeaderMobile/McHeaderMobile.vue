@@ -1,25 +1,23 @@
 <template>
-  <nav class="mc-header-mobile" :class="classes">
+  <nav class="mc-header-mobile">
     <mc-panel>
-      <McHeaderNav :inline="false">
-        <McHeaderNavItem
-          v-if="menuMain && menuMain.length"
-          v-for="(menuMainItem, index) in menuMain"
-          :key="`menu-main-${index}`"
-        >
-          <McButton
-            full-width
-            text-align="left"
-            :href="menuMainItem.href"
-            :to="menuMainItem.to"
-            variation="black-flat"
-            size="l"
-          >
-            <McSvgIcon slot="icon-prepend" size="xxs" :name="menuMainItem.icon" />
-            {{ menuMainItem.name }}
-          </McButton>
-        </McHeaderNavItem>
-      </McHeaderNav>
+      <mc-header-nav :inline="false">
+        <template v-if="menuMain && menuMain.length">
+          <mc-header-nav-item v-for="(menuMainItem, index) in menuMain" :key="`menu-main-${index}`">
+            <mc-button
+              full-width
+              text-align="left"
+              :href="menuMainItem.href"
+              :to="menuMainItem.to"
+              variation="black-flat"
+              size="l"
+            >
+              <mc-svg-icon slot="icon-prepend" size="xxs" :name="menuMainItem.icon" />
+              {{ menuMainItem.name }}
+            </mc-button>
+          </mc-header-nav-item>
+        </template>
+      </mc-header-nav>
     </mc-panel>
   </nav>
 </template>
@@ -43,13 +41,6 @@ export default {
     menuMain: {
       type: Array,
       default: null,
-    },
-  },
-  computed: {
-    classes() {
-      return {
-        //["mc-header-mobile--inline"]: this.inline,
-      }
     },
   },
 }

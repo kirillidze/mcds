@@ -5,7 +5,7 @@
       v-for="notification in notifications"
       :key="notification.id"
     >
-      <McHeaderNotificationItem
+      <mc-header-notifications-item
         @click-accept="handleClickAccept"
         @click-reject="handleClickReject"
         :text-accept="notificationsTextAccept"
@@ -17,13 +17,13 @@
 </template>
 
 <script>
-import McHeaderNotificationItem from "../McHeaderNotifications/McHeaderNotificationsItem"
+import McHeaderNotificationsItem from "../McHeaderNotifications/McHeaderNotificationsItem"
 export default {
   name: "McHeaderNotifications",
   status: "ready",
   release: "0.0.1",
   components: {
-    McHeaderNotificationItem,
+    McHeaderNotificationsItem,
   },
   props: {
     /**
@@ -51,19 +51,18 @@ export default {
       default: null,
     },
   },
-  computed: {
-    classes() {
-      return {
-        //[`el-logo--type-${this.type}`]: this.type,
-      }
-    },
-  },
 
   methods: {
     handleClickAccept(id) {
+      /**
+       * @property {Number}
+       */
       this.$emit("click-accept", id)
     },
     handleClickReject(id) {
+      /**
+       * @property {Number}
+       */
       this.$emit("click-reject", id)
     },
   },
@@ -89,12 +88,12 @@ export default {
   let notifications = require('@/mocks/notifications').default;
   let eventTest = (val) => alert(val)
   <div>
-    <McHeaderNotifications
-            :notifications="notifications"
-            notifications-text-accept="Принять"
-            notifications-text-reject="Отклонить"
-            @click-accept="(id) => eventTest('id: ' + id)"
-            @click-reject="(id) => eventTest('id: ' + id)"
+    <mc-header-notifications
+      :notifications="notifications"
+      notifications-text-accept="Принять"
+      notifications-text-reject="Отклонить"
+      @click-accept="id => eventTest(`id: ${id}`)"
+      @click-reject="id => eventTest(`id: ${id}`)"
     />
   </div>
   ```

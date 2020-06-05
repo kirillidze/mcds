@@ -10,18 +10,20 @@
     @opened="event => $emit('opened', event)"
     @closed="event => $emit('closed', event)"
   >
-    <slot name="title" slot="title"></slot>
+    <!-- @slot Слот заголовка -->
+    <slot name="title" slot="title" />
     <form @submit.prevent="handleSubmit">
-      <slot></slot>
+      <!-- @slot Слот контента -->
+      <slot />
     </form>
     <template v-if="visibleFooter" slot="footer">
       <mc-button
         v-if="!hideCancel"
-        @click="$modal.hide(name)"
         size="middle"
         height="small"
         color="main"
         variation="gray-dark-invert"
+        @click="$modal.hide(name)"
       >
         {{ cancelText }}
       </mc-button>
@@ -30,9 +32,9 @@
         size="middle"
         height="small"
         width="middle"
-        @click.prevent="handleSubmit"
         :loading="loading"
         :disabled="submitDisabled"
+        @click.prevent="handleSubmit"
       >
         {{ submitText }}
       </mc-button>
@@ -46,7 +48,7 @@ import McModal from "./McModal"
 export default {
   name: "McFormModal",
   components: { McModal, McButton },
-  status: "deprecated",
+  status: "ready",
   release: "1.0.0",
   props: {
     name: {
@@ -134,10 +136,10 @@ export default {
 
 <docs>
   ```jsx
-  <McButton @click.prevent="$modal.show('testFormModal')">Open</McButton>
-  <McFormModal name="testFormModal" cancel-text="Отмена" bottom-positioned submit-text="Сохранить">
+  <mc-button @click.prevent="$modal.show('testFormModal')">Open</mc-button>
+  <mc-form-modal name="testFormModal" cancel-text="Отмена" bottom-positioned submit-text="Сохранить">
     <template slot="title">Заголовок</template>
     Контент
-  </McFormModal>
+  </mc-form-modal>
   ```
 </docs>

@@ -23,6 +23,7 @@
       @scroll="handleScroll"
       @context-menu-click="contextMenuClickEvent"
     >
+      <!-- @slot Слот очерних mc-virtual-table-col -->
       <slot />
       <template v-slot:empty>
         <mc-title text-align="center">
@@ -54,6 +55,8 @@ import McFieldSelect from "../../elements/McField/McFieldSelect"
 
 export default {
   name: "McVirtualTable",
+  status: "ready",
+  release: "1.1.0",
   components: {
     McFieldSelect,
     McFieldText,
@@ -274,6 +277,10 @@ export default {
       }
     }, 200),
     load() {
+      /**
+       * Событие по подгрузке данных
+       * (infinity-loading)
+       */
       this.$emit("load")
     },
     createObserver() {
@@ -324,6 +331,10 @@ export default {
         case "copy":
           if (row && column) {
             if (_XEClipboard.copy(row[column.property].trim())) {
+              /**
+               * Событие по копированию ячейки
+               * из контекстного меню
+               */
               this.$emit("context-menu", "copied")
             }
           }

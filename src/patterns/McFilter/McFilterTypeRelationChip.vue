@@ -1,12 +1,14 @@
 <template>
-  <McChip v-if="option" variation="blue-invert" size="s" :closable="true" @click="handleChipClick">
+  <mc-chip v-if="option" variation="blue-invert" size="s" closable @click="handleChipClick">
     {{ type === "is" ? tRelationIs : tRelationNotIs }} {{ option.name }}
-  </McChip>
+  </mc-chip>
 </template>
 <script>
 import McChip from "../../elements/McChip"
 export default {
   name: "McFilterTypeRelationChip",
+  status: "ready",
+  release: "1.0.0",
   components: { McChip },
   props: {
     type: {

@@ -2,18 +2,22 @@
   <div>
     <transition name="slide-left">
       <div v-if="!open" @click="toggleOpen()">
+        <!-- @slot Слот активатора -->
         <slot name="activator" />
       </div>
     </transition>
     <transition name="slide-right">
       <mc-panel v-if="open" class="slider">
         <div class="slider__head" @click="clickToBack()">
+          <!-- @slot Слот заголовка -->
           <slot name="head" />
         </div>
         <div class="slider__body">
+          <!-- @slot Слот контента -->
           <slot name="body" />
         </div>
         <div class="slider__footer">
+          <!-- @slot Слот футера -->
           <slot name="footer" />
         </div>
       </mc-panel>
@@ -30,6 +34,8 @@ import McGridCol from "../McGrid/McGridCol"
 
 export default {
   name: "McFilterSlider",
+  status: "ready",
+  release: "1.0.0",
   props: {
     open: {
       type: Boolean,
@@ -45,10 +51,17 @@ export default {
   },
   methods: {
     toggleOpen(value = null) {
-      this.$emit("open", value ? value : !this.open)
+      /**
+       * Событие открытия
+       * @property {Boolean}
+       */
+      this.$emit("open", value || !this.open)
     },
 
     clickToBack() {
+      /**
+       * Событие возвращения назад
+       */
       this.$emit("clickToBack")
     },
   },
@@ -62,11 +75,7 @@ export default {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  @include position(absolute, 0);
   z-index: 101;
   margin: -48px -8px -58px;
   min-height: 500px;
@@ -114,7 +123,7 @@ export default {
 
 .slide-left-enter-active,
 .slide-left-leave-active {
-  transition: all 0.3s ease;
+  transition: all $duration-standart ease;
   opacity: 1;
 }
 
@@ -126,3 +135,25 @@ export default {
   z-index: -100;
 }
 </style>
+
+<docs>
+  ```jsx
+  let open = true
+  const handleOpen = val => {
+  open = val
+  }
+  const handleBack = e => alert('back')
+  <div style="position: relative; height: 400px; width: 300px; margin: 50px">
+    <mc-filter-slider
+      :open="open"
+      @open="handleOpen"
+      @clickToBack="handleBack"
+    >
+      <div slot="activator">Activator</div>
+      <div slot="head">Header</div>
+      <div slot="body">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam blanditiis ea earum et ex explicabo facilis fugit harum hic in modi mollitia, optio quas rem temporibus? Animi consequatur obcaecati veniam.</div>
+      <div slot="footer">Footer</div>
+    </mc-filter-slider>
+  </div>
+  ```
+</docs>

@@ -1,21 +1,25 @@
 <template>
   <vxe-table-column class="mc-virtual-table-col" v-bind="attrs" v-on="$listeners">
     <template v-slot="{ row, rowIndex }">
+      <!-- @slot Слот для mc-virtual-table-col -->
       <slot :row="row">
         <mc-title :text-align="textAlign" :ellipsis="ellipsis" class="mc-virtual-table-col__title">
           {{ $attrs.type === "seq" ? rowIndex + 1 : row[defaultTitle] }}
         </mc-title>
       </slot>
       <div v-if="$scopedSlots.right" class="mc-virtual-table-col__right">
+        <!-- @slot Слот справа в ячейке (абсолютно спозиционированный, с бэкграундом) -->
         <slot name="right" :row="row" />
       </div>
     </template>
     <template v-slot:header="{ column }">
+      <!-- @slot Слот заголовка столбца -->
       <slot name="header" :column="column">
         <mc-title :text-align="textAlign" class="mc-virtual-table-col__title">
           <mc-svg-icon v-if="isSortable" slot="icon-prepend" :name="getSortIcon(column)" />
           {{ $attrs.type === "seq" ? "#" : column.title }}
           <div slot="icon-append">
+            <!-- @slot Слот для вставки в начало перед заголовком столбца -->
             <slot name="header-append" />
           </div>
         </mc-title>
@@ -43,8 +47,13 @@
 import McTitle from "../../elements/McTitle"
 import McSvgIcon from "../../elements/McSvgIcon"
 
+/**
+ * Смотреть mc-virtual-table
+ */
 export default {
   name: "McVirtualTableCol",
+  status: "ready",
+  release: "1.1.0",
   components: {
     McTitle,
     McSvgIcon,

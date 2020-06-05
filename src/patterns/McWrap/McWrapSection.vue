@@ -2,16 +2,17 @@
   <div class="mc-wrap-section">
     <div class="mc-wrap-section__head" v-if="$slots.left || $slots.right || title">
       <div class="mc-wrap-section__left" v-if="$slots.left || title">
+        <!-- @slot Слот левой части -->
         <slot name="left">
-          <McTitle size="l">
-            {{ title }}
-          </McTitle>
+          <mc-title size="l">{{ title }}</mc-title>
         </slot>
       </div>
       <div class="mc-wrap-section__right" v-if="$slots.right">
+        <!-- @slot Слот правой части -->
         <slot name="right" />
       </div>
     </div>
+    <!-- @slot Слот контента -->
     <slot />
   </div>
 </template>
@@ -78,7 +79,7 @@ export default {
     ```jsx
     <div>
         <mc-wrap-section title="Заголовок">
-            <mc-button slot="right" size="m" variation="blue-flat">
+            <mc-button slot="right" variation="blue-flat">
                 Добавить
                 <mc-svg-icon slot="icon-prepend" name="add" fill="rgb(62, 132, 244)"/>
             </mc-button>
