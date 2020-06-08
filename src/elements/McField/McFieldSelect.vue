@@ -44,6 +44,17 @@
             </div>
           </template>
         </template>
+        <template v-if="optionsTooltip" slot="option" slot-scope="{ option }">
+          <mc-tooltip
+            max-width="m"
+            class="options-tooltip-target"
+            color="black"
+            placement="top"
+            :content="option.name"
+          >
+            <span>{{ option.name }}</span>
+          </mc-tooltip>
+        </template>
         <!-- @slot Слот для текста, если ничего не найдено -->
         <slot slot="noResult" name="noResult">
           <span>Ничего не найдено</span>
@@ -69,10 +80,11 @@
 import Multiselect from "vue-multiselect"
 import "vue-multiselect/dist/vue-multiselect.min.css"
 import McTitle from "../McTitle"
+import McTooltip from "../McTooltip"
 import McAvatar from "../McAvatar/McAvatar"
 export default {
   name: "McFieldSelect",
-  components: { McAvatar, McTitle, Multiselect },
+  components: { McAvatar, McTitle, McTooltip, Multiselect },
   status: "ready",
   release: "1.0.0",
   data() {
@@ -176,6 +188,11 @@ export default {
     name: {
       type: String,
       default: null,
+    },
+
+    optionsTooltip: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -611,6 +628,12 @@ $text-white: scale-color($color-white, $alpha: -10%);
         }
       }
     }
+  }
+
+  .options-tooltip-target {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>
