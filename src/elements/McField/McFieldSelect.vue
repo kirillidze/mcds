@@ -143,7 +143,10 @@ export default {
       type: String,
       default: "",
     },
-
+    /**
+     * Направление открытия списка:
+     * `above (top), below (bottom), auto`
+     */
     openDirection: {
       type: String,
       default: "bottom",
@@ -432,6 +435,13 @@ $text-white: scale-color($color-white, $alpha: -10%);
       overflow-x: hidden;
     }
 
+    &--above {
+      .multiselect__content-wrapper {
+        bottom: calc(100% + #{$space-xs});
+        top: auto;
+      }
+    }
+
     &__option {
       min-height: $tappable-element-l;
       display: flex;
@@ -634,6 +644,7 @@ $text-white: scale-color($color-white, $alpha: -10%);
             :options="categories.map(c => ({ name: c.title, value: c.id }))"
             placeholder="Multiple"
             :errors="['Имя пользователя и пароль не совпадают', 'Поле обязательно для заполнения.']"
+            open-direction="auto"
     />
 
     <br>
