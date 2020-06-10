@@ -30,6 +30,8 @@ import McPanel from "../McPanel"
 import McSvgIcon from "../../elements/McSvgIcon"
 export default {
   name: "McChatSource",
+  status: "ready",
+  release: "1.0.0",
   components: { McSvgIcon, McPanel, McButton, McDropdown },
   props: {
     value: {

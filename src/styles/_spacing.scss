@@ -43,3 +43,23 @@ $spacing-ratio: $line-height-m;
     margin-right: 0;
   }
 }
+
+@mixin child-indent-bottom($space) {
+  > *:not(:last-child) {
+    margin-bottom: $space;
+  }
+}
+
+@mixin child-indent-right($space) {
+  > *:not(:last-child) {
+    margin-right: $space;
+  }
+}
+
+@mixin indent-top($space: $space-xs, $indent-type: "margin") {
+  #{$indent-type}-top: $space;
+}
+
+@mixin indent-bottom($size: "middle", $indent-type: "margin") {
+  #{$indent-type}-bottom: $space;
+}

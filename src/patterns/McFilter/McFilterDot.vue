@@ -19,6 +19,8 @@ import McSvgIcon from "../../elements/McSvgIcon"
 
 export default {
   name: "McFilterDot",
+  status: "ready",
+  release: "1.0.0",
   components: { McChip, McSvgIcon },
   methods: {
     handleChipClick(e) {

@@ -59,6 +59,8 @@ import McDropdown from "../../patterns/McDropdown"
 import McPanel from "../../patterns/McPanel"
 export default {
   name: "McTableCardHeader",
+  status: "ready",
+  release: "1.0.0",
   components: {
     McButton,
     McSvgIcon,

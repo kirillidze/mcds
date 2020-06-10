@@ -40,6 +40,8 @@ import McSeparator from "../../elements/McSeparator"
 
 export default {
   name: "McChatForm",
+  status: "ready",
+  release: "1.0.0",
   components: { McSeparator, McFieldText, McButton, McSvgIcon, McAvatar },
   props: {
     value: {
