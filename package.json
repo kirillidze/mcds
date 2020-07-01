@@ -1,6 +1,6 @@
 {
   "name": "mcds",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "description": "Design system for mediacube services",
   "author": "mediacube",
   "main": "dist/system/system.js",
@@ -188,6 +188,7 @@
     "sass-resources-loader": "^2.0.0",
     "semver": "^5.6.0",
     "shelljs": "^0.8.3",
+    "standard-version": "^8.0.0",
     "style-loader": "^0.23.1",
     "terser-webpack-plugin": "^1.1.0",
     "theo": "^8.0.1",
