@@ -5,6 +5,7 @@
     :name="name"
     :max-width="maxWidth"
     :close-visible="closeVisible"
+    :click-to-close="clickToClose"
     @beforeOpen="event => $emit('beforeOpen', event)"
     @beforeClose="event => $emit('beforeClose', event)"
     @opened="event => $emit('opened', event)"
@@ -87,6 +88,14 @@ export default {
     maxWidth: {
       type: Number,
       default: 510,
+    },
+    /**
+     *  Нужно ли закрывать попап
+     *  кликом вне окна
+     */
+    clickToClose: {
+      type: Boolean,
+      default: true,
     },
   },
   computed: {
