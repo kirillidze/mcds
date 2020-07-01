@@ -535,7 +535,7 @@ pre {
           <mc-title>margin-bottom - mb</mc-title>
           <mc-title>margin-top - mt</mc-title>
           <mc-title>padding-bottom - pb</mc-title>
-          <mc-title>margin-top - pb</mc-title>
+          <mc-title>padding-bottom - pb</mc-title>
         </div>
 
         <div>

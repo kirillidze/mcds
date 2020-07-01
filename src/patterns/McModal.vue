@@ -7,6 +7,7 @@
     height="auto"
     width="100%"
     :maxWidth="maxWidth"
+    :click-to-close="clickToClose"
     @before-open="handleBeforeOpen"
     @before-close="handleBeforeClose"
     @closed="handleClosed"
@@ -51,6 +52,14 @@ export default {
       default: 510,
     },
     closeVisible: {
+      type: Boolean,
+      default: true,
+    },
+    /**
+     *  Нужно ли закрывать попап
+     *  кликом вне окна
+     */
+    clickToClose: {
       type: Boolean,
       default: true,
     },
