@@ -44,6 +44,8 @@
         :chatra-id="chatraId"
         :userback-config="userbackConfig"
         :logo-src="logoSrc"
+        @toggle-menu-app="handleToggleMenuApp"
+        @toggle-menu-profile="handleToggleMenuProfile"
       />
       <mc-header-mobile v-if="menuMain && menuMain.length" :menu-main="menuMain" />
     </div>
@@ -406,6 +408,22 @@ export default {
     },
     handleClickReject(id) {
       this.$emit("click-reject", id)
+    },
+    handleToggleMenuApp(val) {
+      /**
+       * Событие тоггла
+       * меню приложений
+       * @property {Boolean}
+       */
+      this.$emit("toggle-menu-app", val)
+    },
+    handleToggleMenuProfile(val) {
+      /**
+       * Событие тоггла
+       * меню профиля
+       * @property {Boolean}
+       */
+      this.$emit("toggle-menu-profile", val)
     },
   },
 }

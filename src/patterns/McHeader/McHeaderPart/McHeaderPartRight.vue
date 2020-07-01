@@ -20,7 +20,12 @@
       </mc-header-nav-item>
 
       <mc-header-nav-item v-if="canShowApps" class="mc-header-part-right__apps">
-        <mc-dropdown v-model="menuAppsIsOpen" position="right" :rotate-icon="false">
+        <mc-dropdown
+          v-model="menuAppsIsOpen"
+          position="right"
+          :rotate-icon="false"
+          @input="handleToggleMenuApp"
+        >
           <mc-button slot="activator" variation="black-flat" size="m-compact">
             <mc-svg-icon slot="icon-append" name="apps" />
           </mc-button>
@@ -59,7 +64,7 @@
         v-if="menuProfile && menuProfile.length && user"
         class="mc-header-part-right__profile"
       >
-        <mc-dropdown v-model="menuProfileIsOpen" position="right">
+        <mc-dropdown v-model="menuProfileIsOpen" position="right" @input="handleToggleMenuProfile">
           <mc-button
             slot="activator"
             variation="black-flat"
@@ -434,12 +439,34 @@ export default {
     },
   },
   methods: {
+    handleToggleMenuApp(val) {
+      /**
+       * Событие тоггла
+       * меню приложений
+       * @property {Boolean}
+       */
+      this.$emit("toggle-menu-app", val)
+    },
+    handleToggleMenuProfile(val) {
+      /**
+       * Событие тоггла
+       * меню профиля
+       * @property {Boolean}
+       */
+      this.$emit("toggle-menu-profile", val)
+    },
     handleToggleMenu() {
+      /**
+       * Событие тоггла
+       * бургера
+       * @property {Boolean}
+       */
       this.$emit("input", !this.value)
     },
     closeMenu() {
       this.value && this.$emit("input", false)
     },
+
     initChatra() {
       let user = this.user
       let chatraId = this.chatraId
