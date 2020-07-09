@@ -1,7 +1,7 @@
 <template>
   <vue-slider
     :class="classes"
-    :value="value"
+    :value="newValue"
     @change="handleInput"
     :dot-size="18"
     :interval="step"
@@ -53,6 +53,11 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  data() {
+    return {
+      newValue: this.value,
+    }
   },
   computed: {
     classes() {

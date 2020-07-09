@@ -171,8 +171,8 @@ export default {
   computed: {
     chipCount() {
       let count = 0
-      if (this.value.more !== null) count++
-      if (this.value.less !== null) count++
+      if ("more" in this.value && this.value.more !== null) count++
+      if ("less" in this.value && this.value.less !== null) count++
       return count
     },
     canRange() {
