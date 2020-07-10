@@ -249,6 +249,7 @@ export default {
     value: {
       handler(val) {
         this.currentValues = { ...val }
+        this.separateFilters()
       },
       immediate: true,
     },
