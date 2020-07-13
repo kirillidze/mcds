@@ -17,8 +17,5 @@ jobs:
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /home/dev/htdocs/mcds
-          git pull origin master
-          npm rebuild node-sass 
-          npm run build:app
-          npm run build:docs
+          whoami
+          
