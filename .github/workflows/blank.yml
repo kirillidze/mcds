@@ -17,6 +17,10 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /home/dev/htdocs/mcds
-          ls -la
+          git pull origin master
+          npm rebuild node-sass
+          npm install 
+          npm run build:app
+          npm run build:docs
         debug: true  
           
