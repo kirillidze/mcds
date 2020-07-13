@@ -11,13 +11,14 @@ jobs:
     - name: execute ssh deplot
       uses: appleboy/ssh-action@master
       with:
+        script_stop: true
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
         port: ${{ secrets.PORT }}
         script: |
-          cd /home/dev/htdocs/mcds &&
-          git pull origin master &&
-          npm rebuild node-sass &&
-          npm run build:app &&
+          cd /home/dev/htdocs/mcds
+          git pull origin master
+          npm rebuild node-sass 
+          npm run build:app
           npm run build:docs
