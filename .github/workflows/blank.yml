@@ -8,14 +8,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: execute ssh deplot
+    - name: execute script
       uses: appleboy/ssh-action@master
       with:
-        script_stop: true
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
-        script: |
-          whoami
+        script: whoami
           
