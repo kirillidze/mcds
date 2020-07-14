@@ -16,6 +16,7 @@
         <template v-if="isCustom">
           <!-- @slot right-custom -->
           <slot name="right-custom" />
+
           <mc-dropdown
             v-model="editDropdown"
             class="mc-table-card-header__right-custom-dropdown"
