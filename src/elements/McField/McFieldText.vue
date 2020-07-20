@@ -596,7 +596,7 @@ export default {
   &--error {
     #{$block-name} {
       &__input {
-        border-color: $color-red;
+        border-color: $color-red !important;
       }
     }
   }
