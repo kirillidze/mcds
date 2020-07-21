@@ -425,7 +425,6 @@ export default {
       const user = this.user
       const data = {
         user_id: user.id,
-        email: user.email || "",
         name: user.name,
       }
       if (this.user.company) {
@@ -529,6 +528,7 @@ export default {
       window.Userback.categories = this.userbackConfig.categories
       if (this.user) {
         window.Userback.custom_data = this.computedUserbackCustomData
+        window.Userback.email = this.user.email || ""
       }
     },
     handleToggleUserback() {
