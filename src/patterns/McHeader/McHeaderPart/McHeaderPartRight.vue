@@ -409,8 +409,8 @@ export default {
         logo: this.logoSrc,
         name_field: false, // не выводим так как будем передавать в кастомных даннных.
         name_field_mandatory: false, // не выводим так как будем передавать в кастомных даннных.
-        email_field: true, // не выводим так как будем передавать в кастомных даннных.
-        email_field_mandatory: true, // не выводим так как будем передавать в кастомных даннных.
+        email_field: true, //  выводим так как будем передавать в кастомных даннных.
+        email_field_mandatory: true, //  выводим так как будем передавать в кастомных даннных.
         comment_field: true,
         comment_field_mandatory: true,
         display_category: false,
