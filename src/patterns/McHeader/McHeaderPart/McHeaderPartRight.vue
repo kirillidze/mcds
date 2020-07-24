@@ -409,8 +409,8 @@ export default {
         logo: this.logoSrc,
         name_field: false, // не выводим так как будем передавать в кастомных даннных.
         name_field_mandatory: false, // не выводим так как будем передавать в кастомных даннных.
-        email_field: false, // не выводим так как будем передавать в кастомных даннных.
-        email_field_mandatory: false, // не выводим так как будем передавать в кастомных даннных.
+        email_field: true, // не выводим так как будем передавать в кастомных даннных.
+        email_field_mandatory: true, // не выводим так как будем передавать в кастомных даннных.
         comment_field: true,
         comment_field_mandatory: true,
         display_category: false,
@@ -425,6 +425,7 @@ export default {
       const user = this.user
       const data = {
         user_id: user.id,
+        email: user.email || "",
         name: user.name,
       }
       if (this.user.company) {
