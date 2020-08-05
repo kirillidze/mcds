@@ -135,6 +135,15 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     *  Кастомная иконка
+     *
+     */
+    iconPurple: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classes() {
@@ -142,6 +151,7 @@ export default {
         "mc-field-checkbox--error": this.errors,
         "mc-field-checkbox--disabled": this.disabled,
         "mc-field-checkbox--empty": !this.mainText && !this.$slots.default,
+        "mc-field-checkbox--icon-purple": this.iconPurple,
       }
     },
     errorText() {
@@ -255,6 +265,15 @@ export default {
       &__name {
         padding: 0;
         margin: 0;
+      }
+    }
+  }
+  &--icon-purple {
+    input {
+      &:checked + .mc-field-checkbox__name-text {
+        &:before {
+          background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAyNC4yLjMsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgd2lkdGg9IjIwcHgiIGhlaWdodD0iMjBweCIgdmVyc2lvbj0iMS4xIiBpZD0i0KHQu9C+0LlfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNCAyNCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjQgMjQ7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQoJLnN0MHtmaWxsOm5vbmU7fQ0KCS5zdDF7ZmlsbDojNTUwMEZGO30NCjwvc3R5bGU+DQo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMCwwaDI0djI0SDBWMHoiLz4NCjxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0yMC40LDEuMkgzLjZjLTEuMywwLTIuNCwxLjEtMi40LDIuNHYxNi44YzAsMS4zLDEuMSwyLjQsMi40LDIuNGgxNi44YzEuMywwLDIuNC0xLjEsMi40LTIuNFYzLjYNCglDMjIuOCwyLjMsMjEuNywxLjIsMjAuNCwxLjJ6IE05LjYsMThsLTYtNmwxLjctMS43bDQuMyw0LjNsOS4xLTkuMWwxLjcsMS43TDkuNiwxOHoiLz4NCjwvc3ZnPg0K");
+        }
       }
     }
   }
