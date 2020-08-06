@@ -525,6 +525,15 @@ $colors: $token-colors;
   &--variation-toxic {
     color: $color-black;
   }
+  &--variation-light-effect {
+    background-color: $color-secondary-purple;
+    color: $color-white;
+    &.mc-button--disabled {
+      color: $color-dark-gray !important;
+      background-color: $color-secondary-gray !important;
+      border-color: $color-secondary-gray !important;
+    }
+  }
 
   &--uppercase {
     text-transform: uppercase;
@@ -544,6 +553,9 @@ $colors: $token-colors;
     }
     &-l {
       border-radius: $radius-l * 3;
+    }
+    &-xl {
+      border-radius: $radius-xl;
     }
   }
 
@@ -615,6 +627,7 @@ $colors: $token-colors;
     'white',
     'white-flat',
     'blue-link',
+    'light-effect',
   ]
 
   <div style="text-align: center">
