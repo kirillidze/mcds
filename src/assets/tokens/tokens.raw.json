@@ -22,12 +22,26 @@
       "originalValue": "hsla({!gray}, 13%, 1)",
       "name": "color_black"
     },
+    "color_secondary_purple": {
+      "type": "color",
+      "category": "color_purple_scale",
+      "value": "rgb(85, 0, 255)",
+      "originalValue": "hsla(260, 100%, 50%, 1)",
+      "name": "color_secondary_purple"
+    },
     "color_orange": {
       "type": "color",
       "category": "color_scale",
       "value": "rgb(250, 175, 0)",
       "originalValue": "hsla(42, 100%, 49%, 1)",
       "name": "color_orange"
+    },
+    "color_secondary_gray": {
+      "type": "color",
+      "category": "color_gray_scale",
+      "value": "rgb(221, 224, 233)",
+      "originalValue": "hsla(224, 20%, 89%, 1)",
+      "name": "color_secondary_gray"
     },
     "color_pinkish": {
       "type": "color",
@@ -94,10 +108,17 @@
     },
     "color_purple": {
       "type": "color",
-      "category": "color_scale",
+      "category": "color_purple_scale",
       "value": "rgb(129, 51, 255)",
       "originalValue": "hsla(263, 100%, 60%, 1)",
       "name": "color_purple"
+    },
+    "color_deep_gray": {
+      "type": "color",
+      "category": "color_gray_scale",
+      "value": "rgb(146, 157, 181)",
+      "originalValue": "hsla(221, 19%, 64%, 1)",
+      "name": "color_deep_gray"
     },
     "color_toxic": {
       "type": "color",

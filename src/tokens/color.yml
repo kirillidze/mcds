@@ -32,6 +32,12 @@ props:
   color_black:
     value: "hsla({!gray}, 13%, 1)"
     category: color_gray_scale
+  color_secondary_gray:
+    value: "hsla(224, 20%, 89%, 1)"
+    category: color_gray_scale
+  color_deep_gray:
+    value: "hsla(221, 19%, 64%, 1)"
+    category: color_gray_scale
 
   color_lightest_blue:
     value: "hsla(213, 100%, 94%, 1)"
@@ -50,6 +56,13 @@ props:
     value: "hsla({!green}, 38%, 1)"
     category: color_green_scale
 
+  color_purple:
+    value: "hsla(263, 100%, 60%, 1)"
+    category: color_purple_scale
+  color_secondary_purple:
+    value: "hsla(260, 100%, 50%, 1)"
+    category: color_purple_scale
+
   color_orange:
     value: "hsla(42, 100%, 49%, 1)"
     category: color_scale
@@ -58,9 +71,6 @@ props:
     category: color_scale
   color_ultraviolet:
     value: "hsla(285, 97%, 55%, 1)"
-    category: color_scale
-  color_purple:
-    value: "hsla(263, 100%, 60%, 1)"
     category: color_scale
   color_pinkish:
     value: "hsla(333, 83%, 69%, 1)"
