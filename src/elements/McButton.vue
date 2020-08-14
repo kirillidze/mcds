@@ -529,7 +529,7 @@ $colors: $token-colors;
     background-color: $color-secondary-purple;
     color: $color-white;
     &.mc-button--disabled {
-      color: $color-dark-gray !important;
+      color: $color-deep-gray !important;
       background-color: $color-secondary-gray !important;
       border-color: $color-secondary-gray !important;
     }
