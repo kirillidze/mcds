@@ -100,7 +100,6 @@
 </template>
 
 <script>
-import _has from "lodash/has"
 import VueClickOutside from "vue-click-outside"
 import McHeaderSearch from "../McHeaderSearch/McHeaderSearch"
 import McHeaderNav from "../McHeaderNav/McHeaderNav"
@@ -220,7 +219,7 @@ export default {
       }
     },
     isExact() {
-      if (!_has(this, "$route.name")) return false
+      if (!this.$route.name) return false
       const hasIndex = this.$route.name.includes("index")
       return hasIndex && !this.$route.name.includes("id")
     },
