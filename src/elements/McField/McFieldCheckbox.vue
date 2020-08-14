@@ -262,8 +262,6 @@ export default {
         &__name-text {
           &:before {
             background-color: $color-secondary-gray;
-            width: 14px;
-            height: 14px;
           }
         }
       }
