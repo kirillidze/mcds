@@ -24,7 +24,6 @@ import "vue-loaders/dist/vue-loaders.css"
 import { BallClipRotateMultipleLoader } from "vue-loaders"
 import McSvgIcon from "./McSvgIcon"
 import McTitle from "./McTitle"
-import { FluentRevealEffect } from "fluent-reveal-effect"
 export default {
   name: "McButton",
   status: "ready",
@@ -167,13 +166,6 @@ export default {
       type: String,
       default: "button",
     },
-  },
-  mounted() {
-    FluentRevealEffect.applyEffect(".mc-button--variation-light-effect", {
-      lightColor: "rgba(255,255,255,0.5)",
-      gradientSize: 150,
-      clickEffect: true,
-    })
   },
   computed: {
     classes() {
@@ -528,6 +520,7 @@ $colors: $token-colors;
   &--variation-light-effect {
     background-color: $color-secondary-purple;
     color: $color-white;
+    border: 0;
     &.mc-button--disabled {
       color: $color-deep-gray !important;
       background-color: $color-secondary-gray !important;
@@ -627,7 +620,6 @@ $colors: $token-colors;
     'white',
     'white-flat',
     'blue-link',
-    'light-effect',
   ]
 
   <div style="text-align: center">
