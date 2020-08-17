@@ -102,12 +102,22 @@ export default {
 <style lang="scss">
 .light-effect {
   padding: 5px;
+  @media #{$media-query-s-down} {
+    padding: 0;
+  }
   &__container {
     display: inline-block;
     margin: 5px;
+    @media #{$media-query-s-down} {
+      display: block;
+      margin: 0;
+    }
     .mc-button {
       &--variation-light-effect {
         margin: 2px;
+        @media #{$media-query-s-down} {
+          margin: 0;
+        }
       }
     }
   }
