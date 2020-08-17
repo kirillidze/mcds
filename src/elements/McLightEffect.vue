@@ -36,7 +36,7 @@ export default {
      */
     lightColor: {
       type: String,
-      default: "rgba(255,255,255,0.6)",
+      default: "rgba(255,255,255,0.7)",
     },
 
     /**
@@ -101,20 +101,21 @@ export default {
 </script>
 <style lang="scss">
 .light-effect {
-  padding: 5px;
+  padding: 10px;
   @media #{$media-query-s-down} {
     padding: 0;
   }
   &__container {
     display: inline-block;
-    margin: 5px;
+    padding: 2px;
+    background-color: $color-secondary-purple;
     @media #{$media-query-s-down} {
       display: block;
       margin: 0;
+      padding: 0;
     }
     .mc-button {
       &--variation-light-effect {
-        margin: 2px;
         @media #{$media-query-s-down} {
           margin: 0;
         }
@@ -138,7 +139,7 @@ export default {
 <docs>
     ```jsx
 
-    <div style="text-align: center; background-color:#282828; padding: 20px">
+    <div style="text-align: center; padding: 20px">
        <mc-light-effect>
            <McButton variation="light-effect" size="m">
                <McSvgIcon slot="icon-prepend" name="people"/>
