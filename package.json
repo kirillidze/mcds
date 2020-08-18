@@ -1,6 +1,6 @@
 {
   "name": "mcds",
-  "version": "1.1.36",
+  "version": "1.1.37",
   "description": "Design system for mediacube services",
   "author": "mediacube",
   "main": "dist/system/system.js",
