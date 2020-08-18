@@ -34,12 +34,21 @@ export default {
       type: String,
       default: "warning",
     },
+    /**
+     *  Дизайн:
+     *  `default,new`
+     */
+    variation: {
+      type: String,
+      default: "default",
+    },
   },
 
   computed: {
     classes() {
       return {
         [`mc-notification--background-${this.background}`]: this.background,
+        [`mc-notification--variation-${this.variation}`]: this.variation,
       }
     },
   },
@@ -100,6 +109,22 @@ export default {
 
         .mc-svg-icon {
           color: $value;
+        }
+      }
+    }
+  }
+  &.mc-notification {
+    &--variation-new {
+      padding-top: 16px;
+      padding-bottom: 16px;
+      border-radius: 12px;
+      &:before {
+        width: 12px;
+      }
+      .mc-notification {
+        &__left {
+          margin-left: 12px;
+          margin-right: 12px;
         }
       }
     }
