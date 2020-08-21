@@ -58,17 +58,12 @@ export default {
 <style lang="scss">
 .mc-notification {
   $block-name: &;
-
   display: flex;
   width: 100%;
-  padding: $space-xs 12px;
-  border-radius: $radius-m;
   position: relative;
   overflow: hidden;
-
+  padding: $space-xs 12px;
   &__left {
-    margin-right: $space-xs;
-
     .mc-svg-icon svg {
       margin-top: 5px;
     }
@@ -97,13 +92,11 @@ export default {
     @each $color, $value in $token-colors {
       &-#{$color} {
         background-color: rgba($value, 0.1);
-
         &:before {
           content: "";
           display: block;
           @include position(absolute, 0 null null 0);
           height: 100%;
-          width: 4px;
           background-color: $value;
         }
 
@@ -114,6 +107,17 @@ export default {
     }
   }
   &.mc-notification {
+    &--variation-default {
+      border-radius: $radius-m;
+      &:before {
+        width: 4px;
+      }
+      .mc-notification {
+        &__left {
+          margin-right: $space-xs;
+        }
+      }
+    }
     &--variation-new {
       padding-top: 16px;
       padding-bottom: 16px;
