@@ -252,6 +252,14 @@ export default {
     popupStyle: {
       type: Object,
     },
+
+    /**
+     * Кастомный datepicker
+     */
+    custom: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -271,6 +279,7 @@ export default {
       return {
         "mc-date-picker--error": this.errorText,
         "mc-date-picker--disabled": this.disabled,
+        "mc-date-picker--custom": this.custom,
       }
     },
 
@@ -402,6 +411,39 @@ export default {
       }
     }
   }
+
+  &.mc-date-picker--custom {
+    .mx-calendar {
+      &-header {
+        margin-bottom: 8px;
+      }
+    }
+    .mx-icon {
+      &-double-right {
+        &:before {
+          display: none;
+        }
+      }
+      &-double-left {
+        &:before {
+          display: none;
+        }
+      }
+    }
+    .mx-table-month {
+      td {
+        height: auto;
+        padding: 26px 19px;
+      }
+    }
+    .mx-datepicker {
+      &-range {
+        .mx-calendar {
+          border-left: 0;
+        }
+      }
+    }
+  }
 }
 .mx-calendar {
   width: 340px;
@@ -514,6 +556,13 @@ export default {
         <br>
 
         <mc-date-picker title="datePickerInlineYear" lang="ru" name="date" type="year" placeholder="Дата1" inline />
+
+        <br>
+
+
+        <br>
+
+        <mc-date-picker title="Custom datepicker" custom range lang="ru" name="date" type="month" placeholder="Дата1" inline />
 
         <br>
 
