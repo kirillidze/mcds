@@ -264,16 +264,27 @@ export default {
 
   data() {
     return {
-      prettyValue: this.value ? new Date(this.value) : new Date(),
+      // prettyValue: this.value ? new Date(this.value) : new Date(),
+      prettyValue: null,
     }
   },
-
   watch: {
     value() {
-      this.prettyValue = new Date(this.value)
+      if (!this.range) {
+        this.prettyValue = new Date(this.value)
+      }
     },
   },
-
+  mounted() {
+    if (this.range) {
+      const arrValues = this.value
+        ? this.value.map(item => new Date(item))
+        : [new Date(), new Date()]
+      this.prettyValue = arrValues
+    } else {
+      this.prettyValue = this.value ? new Date(this.value) : new Date()
+    }
+  },
   computed: {
     classes() {
       return {
@@ -282,7 +293,6 @@ export default {
         "mc-date-picker--custom": this.custom,
       }
     },
-
     popupClass() {
       return {
         "datepicker-popup": true,
@@ -549,6 +559,7 @@ export default {
     ```jsx
     let text = null
     let value = '2019-06-20T00:00:00+00:00'
+    let test = [`2020, 1, 8`,`2020, 10, 8`]
     <div style="max-width: 700px">
 
         <mc-date-picker :disabled-date="date => date < new Date()" title="datePickerInlineRu" lang="ru" name="date" type="date" placeholder="Дата1" inline />
@@ -562,7 +573,16 @@ export default {
 
         <br>
 
-        <mc-date-picker title="Custom datepicker" custom range lang="ru" name="date" type="month" placeholder="Дата1" inline />
+        <mc-date-picker title="Custom datepicker"
+                        custom
+                        range
+                        lang="ru"
+                        name="date"
+                        type="month"
+                        placeholder="Дата1"
+                        inline
+                        v-model="test"
+        />
 
         <br>
 
