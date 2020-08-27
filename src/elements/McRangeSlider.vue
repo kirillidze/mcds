@@ -10,6 +10,7 @@
     :disabled="disabled"
     :lazy="lazy"
     :tooltip-formatter="tooltip"
+    :tooltip-placement="computedTooltipPlacement"
   />
 </template>
 
@@ -53,6 +54,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    tooltipPlacement: {
+      type: String,
+      default: "top",
+    },
   },
   data() {
     return {
@@ -65,6 +70,12 @@ export default {
         "mc-range-slider": true,
         [`mc-range-slider--color-${this.color}`]: this.color,
       }
+    },
+    computedTooltipPlacement() {
+      if (this.tooltipPlacement === "horizontal") {
+        return ["right", "left"]
+      }
+      return "top"
     },
   },
   methods: {
@@ -103,6 +114,9 @@ export default {
       }
     }
   }
+  .vue-slider-dot-focus {
+    z-index: 6;
+  }
 }
 </style>
 
@@ -114,6 +128,6 @@ export default {
     <br>
     <McRangeSlider :min="0" :max="100" v-model="value" :step="2" color="light-green"/>
     <br>
-    <McRangeSlider :min="0" :max="10000" v-model="value2" :step="100"/>
+    <McRangeSlider :min="0" :max="1000000000000" v-model="value2" :step="10000"/>
     ```
 </docs>

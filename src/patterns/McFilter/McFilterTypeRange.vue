@@ -90,6 +90,7 @@
           v-if="canRange"
           :min="filter.min"
           :max="filter.max"
+          :tooltip-placement="filter.tooltipPlacement"
           :step="filter.step || 1"
           v-model="rangeValue"
         />
