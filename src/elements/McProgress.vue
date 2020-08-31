@@ -15,7 +15,7 @@ export default {
      *
      */
     percent: {
-      type: Number,
+      type: [Number, String],
       default: 0,
     },
     /**
@@ -66,7 +66,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <mc-progress :percent="20" />
+    <mc-progress :percent="`50`" />
     <br>
     <mc-progress :percent="90" color="azure" />
   </div>
