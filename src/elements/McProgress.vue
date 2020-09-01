@@ -1,6 +1,6 @@
 <template>
   <div class="mc-progress">
-    <div class="mc-progress__line" :class="classes" :style="{ width: `${percent}%` }"></div>
+    <div class="mc-progress__line" :class="classes" :style="{ width: `${computedPercent}%` }"></div>
   </div>
 </template>
 
@@ -27,12 +27,14 @@ export default {
       default: null,
     },
   },
-
   computed: {
     classes() {
       return {
         [`mc-progress__line--color-${this.color}`]: this.color,
       }
+    },
+    computedPercent() {
+      return Number(this.percent)
     },
   },
 }
@@ -66,7 +68,7 @@ export default {
 <docs>
   ```jsx
   <div>
-    <mc-progress :percent="`50`" />
+    <mc-progress :percent="'50.23'" />
     <br>
     <mc-progress :percent="90" color="azure" />
   </div>
