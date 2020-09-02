@@ -371,6 +371,7 @@ export default {
     },
 
     updateMainMenu(val) {
+      this.canUpdateMenuItem = true
       this.menuMainMutable = []
       this.menuHidden = []
       this.menuMainMutable = val
