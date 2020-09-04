@@ -381,6 +381,7 @@ export default {
   watch: {
     $route() {
       this.closeMenu()
+      this.initChatra()
     },
     user() {
       this.menuProfileIsOpen = false
@@ -397,6 +398,9 @@ export default {
       return this.subUsers.filter(s => {
         return this.user.id !== s.id
       })
+    },
+    locale() {
+      return this.$i18n ? this.$i18n.locale : "en"
     },
     computedUserbackSettings() {
       return {
@@ -477,6 +481,7 @@ export default {
         startHidden: false,
         chatWidth: 380,
         chatHeight: 500,
+        language: this.locale,
       }
 
       if (user) {
