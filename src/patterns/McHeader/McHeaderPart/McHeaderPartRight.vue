@@ -621,6 +621,13 @@ export default {
   &__profile {
     div.mc-dropdown {
       &__body {
+        @include custom-scroll();
+        .mc-panel {
+          @media #{$media-query-m} {
+            max-height: calc(100vh - 193px);
+            overflow-y: auto;
+          }
+        }
         top: calc(100% + 5px);
       }
     }
