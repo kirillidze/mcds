@@ -21,21 +21,10 @@
       <slot />
     </form>
     <template v-if="visibleFooter" slot="footer">
-      <mc-button
-        v-if="!hideCancel"
-        size="middle"
-        height="small"
-        color="main"
-        :variation="btnLeftVariation"
-        @click="$modal.hide(name)"
-      >
+      <mc-button v-if="!hideCancel" :variation="btnLeftVariation" @click="$modal.hide(name)">
         {{ cancelText }}
       </mc-button>
       <mc-button
-        design="button"
-        size="middle"
-        height="small"
-        width="middle"
         :variation="btnRightVariation"
         :loading="loading"
         :disabled="submitDisabled"
@@ -162,7 +151,7 @@ export default {
         overflow: auto;
         @media #{$media-query-xl-down} {
           margin: 0 !important;
-          border-radius: 8px 8px 0 0;
+          border-radius: $space-xs $space-xs 0 0;
         }
       }
     }
