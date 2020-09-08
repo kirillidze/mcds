@@ -1,6 +1,7 @@
 <template>
   <modal
     class="mc-modal"
+    :class="classes"
     :name="name"
     scrollable
     adaptive
@@ -28,6 +29,14 @@
         <!-- @slot Слот футера -->
         <slot name="footer" />
       </div>
+      <button
+        v-if="arrowVisible"
+        type="button"
+        class="mc-modal__btn-back"
+        @click.prevent="handleBack"
+      >
+        <mc-svg-icon name="keyboard_backspace" class="mc-modal__icon-back" />
+      </button>
       <button v-if="closeVisible" type="button" class="mc-modal__btn-close" @click.prevent="close">
         <mc-svg-icon class="mc-modal__icon-close" width="24" height="24" name="clear" />
       </button>
@@ -63,6 +72,28 @@ export default {
       type: Boolean,
       default: true,
     },
+    /**
+     *  Стрелка в хедере
+     */
+    arrowVisible: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     *  Кастомное модальное окно
+     */
+    secondaryModal: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    classes() {
+      return {
+        "mc-modal--arrow-visible": this.arrowVisible,
+        "mc-modal--secondary": this.secondaryModal,
+      }
+    },
   },
   methods: {
     handleBeforeOpen(event) {
@@ -96,6 +127,9 @@ export default {
     close() {
       this.$modal.hide(this.name)
     },
+    handleBack(event) {
+      this.$emit("back", event)
+    },
   },
 }
 </script>
@@ -107,12 +141,21 @@ export default {
 
 .mc-modal {
   $block-name: &;
+  $border-color: #dee1e9;
+  $box-shadow-color: #20008c28;
 
   padding: 12px 0;
 
   &__btn-close {
     @include reset-btn();
     @include position(absolute, 17px 15px null null);
+    @include interplay-link();
+    padding: 5px;
+    z-index: 1;
+  }
+  &__btn-back {
+    @include reset-btn();
+    @include position(absolute, 15px null null 15px);
     @include interplay-link();
     padding: 5px;
     z-index: 1;
@@ -135,6 +178,47 @@ export default {
   &.overlay-fade-leave-active {
     .mc-modal__inner {
       transform: translate3d(0, -20px, 0);
+    }
+  }
+
+  &.mc-modal--arrow-visible {
+    .mc-modal {
+      &__header {
+        padding-left: 35px;
+      }
+    }
+  }
+
+  &.mc-modal--secondary {
+    .mc-modal {
+      &__inner {
+        border-radius: 32px;
+        box-shadow: 0px 15px 30px $box-shadow-color;
+        padding: 32px;
+      }
+      &__btn-close,
+      &__btn-back {
+        top: 27px;
+      }
+      &__btn-close {
+        right: 32px;
+      }
+      &__btn-back {
+        left: 32px;
+      }
+      &__header {
+        padding-bottom: 9px;
+        border-bottom: 2px solid $border-color;
+        margin-bottom: 32px;
+      }
+      &__control {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .mc-button {
+          border-radius: 12px;
+        }
+      }
     }
   }
 
