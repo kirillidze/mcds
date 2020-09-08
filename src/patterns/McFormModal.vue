@@ -6,10 +6,13 @@
     :max-width="maxWidth"
     :close-visible="closeVisible"
     :click-to-close="clickToClose"
+    :arrow-visible="arrowVisible"
+    :secondary-modal="secondaryModal"
     @beforeOpen="event => $emit('beforeOpen', event)"
     @beforeClose="event => $emit('beforeClose', event)"
     @opened="event => $emit('opened', event)"
     @closed="event => $emit('closed', event)"
+    @back="event => $emit('handleBack', event)"
   >
     <!-- @slot Слот заголовка -->
     <slot name="title" slot="title" />
@@ -23,7 +26,7 @@
         size="middle"
         height="small"
         color="main"
-        variation="gray-dark-invert"
+        :variation="btnLeftVariation"
         @click="$modal.hide(name)"
       >
         {{ cancelText }}
@@ -33,6 +36,7 @@
         size="middle"
         height="small"
         width="middle"
+        :variation="btnRightVariation"
         :loading="loading"
         :disabled="submitDisabled"
         @click.prevent="handleSubmit"
@@ -48,7 +52,10 @@ import McButton from "../elements/McButton"
 import McModal from "./McModal"
 export default {
   name: "McFormModal",
-  components: { McModal, McButton },
+  components: {
+    McModal,
+    McButton,
+  },
   status: "ready",
   release: "1.0.0",
   props: {
@@ -97,12 +104,32 @@ export default {
       type: Boolean,
       default: true,
     },
+    /**
+     *  Кастомное модальное окно
+     */
+    secondaryModal: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     *  Стрелка в хедере
+     */
+    arrowVisible: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     classes() {
       return {
         "p-form-modal--bottom-positioned": this.bottomPositioned,
       }
+    },
+    btnRightVariation() {
+      return this.secondaryModal ? "light-effect" : "blue"
+    },
+    btnLeftVariation() {
+      return this.secondaryModal ? "secondary-purple-link" : "gray-dark-invert"
     },
   },
   methods: {
