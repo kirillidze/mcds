@@ -116,6 +116,7 @@ export default {
 <style lang="scss">
 .mc-avatar-wrapper {
   display: inline-block;
+  @include reset-text-indents();
   .mc-avatar {
     $block-name: &;
 
