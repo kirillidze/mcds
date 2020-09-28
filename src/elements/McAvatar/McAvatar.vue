@@ -1,6 +1,6 @@
 <template>
-  <div class="mc-avatar" :class="classes">
-    <figure class="mc-avatar__figure" :class="figureClasses">
+  <div class="mc-avatar-wrapper" :class="classes">
+    <figure class="mc-avatar" :class="figureClasses">
       <img
         v-if="lazy"
         v-lazy="{ src: _src, error: defaultSrc, attempt: 1 }"
@@ -80,13 +80,13 @@ export default {
   computed: {
     figureClasses() {
       return {
-        [`mc-avatar__figure--size-${this.size}`]: this.size,
-        "mc-avatar__figure--rounded": this.rounded,
+        [`mc-avatar--size-${this.size}`]: this.size,
+        "mc-avatar--rounded": this.rounded,
       }
     },
     classes() {
       return {
-        "mc-avatar--edit": this.editAvatar,
+        "mc-avatar-wrapper--edit": this.editAvatar,
       }
     },
     sizeInPx() {
@@ -114,9 +114,9 @@ export default {
 </script>
 
 <style lang="scss">
-.mc-avatar {
+.mc-avatar-wrapper {
   display: inline-block;
-  &__figure {
+  .mc-avatar {
     $block-name: &;
 
     @include reset();
@@ -156,7 +156,7 @@ export default {
       border-radius: 50%;
     }
   }
-  &.mc-avatar--edit {
+  &.mc-avatar-wrapper--edit {
     position: relative;
     .mc-avatar {
       &__icon-wrapper {
@@ -191,7 +191,7 @@ export default {
     <McAvatar size="s" rounded/>
     <McAvatar size="m" rounded/>
     <McAvatar size="l" rounded/>
-    <McAvatar size="xl" rounded lazy edit-avatar />
+    <McAvatar size="xl" rounded lazy edit-avatar oauth-app/>
 
   </div>
   ```
