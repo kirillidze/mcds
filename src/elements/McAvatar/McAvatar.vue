@@ -115,7 +115,7 @@ export default {
 
 <style lang="scss">
 .mc-avatar-wrapper {
-  display: inline-block;
+  display: inline-flex;
   .mc-avatar {
     $block-name: &;
 
