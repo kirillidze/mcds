@@ -167,10 +167,11 @@ export default {
         align-items: center;
         justify-content: center;
         position: absolute;
-        right: 0;
-        bottom: 0;
+        right: 5px;
+        bottom: 10px;
         border-radius: 50%;
         cursor: pointer;
+        box-shadow: 0px 9px 36px #2859de1a;
       }
     }
   }
