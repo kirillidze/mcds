@@ -69,7 +69,7 @@
             size="s-compact"
             @click.prevent="handlerCopy(value)"
           >
-            <mc-svg-icon slot="icon-append" name="file_copy" fill="rgb(62, 132, 244)" />
+            <mc-svg-icon slot="icon-append" :name="iconCopy" fill="rgb(62, 132, 244)" />
           </mc-button>
         </div>
       </div>
@@ -314,6 +314,14 @@ export default {
     readOnly: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Иконка для копирования
+     */
+    iconCopy: {
+      type: String,
+      default: "file_copy",
     },
   },
 

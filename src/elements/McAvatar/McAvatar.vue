@@ -193,7 +193,7 @@ export default {
     <McAvatar size="s" rounded/>
     <McAvatar size="m" rounded/>
     <McAvatar size="l" rounded/>
-    <McAvatar size="xl" rounded lazy edit-avatar oauth-app/>
+    <McAvatar size="xl" rounded lazy/>
 
   </div>
   ```
