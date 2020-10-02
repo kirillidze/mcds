@@ -29,6 +29,13 @@
       "originalValue": "hsla(260, 100%, 50%, 1)",
       "name": "color_secondary_purple"
     },
+    "color_dark_blue": {
+      "type": "color",
+      "category": "color_blue_scale",
+      "value": "rgb(0, 26, 80)",
+      "originalValue": "rgb(0, 26, 80)",
+      "name": "color_dark_blue"
+    },
     "color_orange": {
       "type": "color",
       "category": "color_scale",

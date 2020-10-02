@@ -282,7 +282,7 @@ export default {
 
     <br><br>
 
-    <mc-title  size="xxxxl" color="blue" >
+    <mc-title  size="xxxxl" color="dark-blue">
       <mc-svg-icon slot="icon-prepend" name="ready"/>
       Заголовок
     </mc-title>
