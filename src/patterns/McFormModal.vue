@@ -134,7 +134,7 @@ export default {
   },
   methods: {
     handleSubmit() {
-      if (this.loading) return
+      if (this.loading || this.submitDisabled) return
       this.$emit("submit")
     },
   },
