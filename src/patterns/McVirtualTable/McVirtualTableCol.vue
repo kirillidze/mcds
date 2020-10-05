@@ -128,13 +128,13 @@ export default {
 <style lang="scss">
 .mc-virtual-table-col {
   &--border-right {
-    border-right: 1px solid $color-outline-gray;
+    border-right: 1px solid $color-secondary-gray;
   }
   &--border-top {
-    border-top: 1px solid $color-outline-gray;
+    border-top: 1px solid $color-secondary-gray;
   }
   &--border-bottom {
-    border-bottom: 1px solid $color-outline-gray;
+    border-bottom: 1px solid $color-secondary-gray;
   }
   &--overflow-visible {
     .vxe-cell {

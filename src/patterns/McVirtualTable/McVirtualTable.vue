@@ -368,7 +368,7 @@ export default {
 @import "~vxe-table/styles/variable.scss";
 
 //override variables:
-$vxe-table-border-color: $color-outline-gray;
+$vxe-table-border-color: $color-secondary-gray;
 $vxe-table-header-background-color: $color-white;
 
 @import "~vxe-table/styles/modules.scss";
@@ -443,6 +443,14 @@ $vxe-table-header-background-color: $color-white;
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #c1c1c1;
+  }
+
+  .mc-title,
+  .mc-stack-counter,
+  .mc-chip {
+    color: $color-dark-blue;
+    font-size: 13px;
+    line-height: 16px;
   }
 }
 </style>
