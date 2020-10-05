@@ -66,8 +66,8 @@ export default {
   &__top {
     background-color: $color-white;
     flex-shrink: 0;
-    margin-left: $space-s;
-    margin-right: $space-s;
+    /*<!--margin-left: $space-s;-->*/
+    /*<!--margin-right: $space-s;-->*/
   }
 
   &__mid {
@@ -75,9 +75,9 @@ export default {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    margin-left: $space-s;
-    margin-right: $space-s;
-    margin-bottom: $space-s;
+    /*<!--margin-left: $space-s;-->*/
+    /*<!--margin-right: $space-s;-->*/
+    /*<!--margin-bottom: $space-s;-->*/
   }
 }
 </style>

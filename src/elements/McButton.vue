@@ -526,16 +526,6 @@ $colors: $token-colors;
   &--variation-toxic {
     color: $color-black;
   }
-  &--variation-light-effect {
-    background-color: $color-secondary-purple;
-    color: $color-white;
-    border: 0;
-    &.mc-button--disabled {
-      color: $color-deep-gray !important;
-      background-color: $color-secondary-gray !important;
-      border-color: $color-secondary-gray !important;
-    }
-  }
 
   &--uppercase {
     text-transform: uppercase;
@@ -558,6 +548,18 @@ $colors: $token-colors;
     }
     &-xl {
       border-radius: $radius-xl;
+    }
+  }
+
+  &--variation-light-effect {
+    background-color: $color-secondary-purple;
+    color: $color-white;
+    border: 0;
+    border-radius: 12px;
+    &.mc-button--disabled {
+      color: $color-deep-gray !important;
+      background-color: $color-secondary-gray !important;
+      border-color: $color-secondary-gray !important;
     }
   }
 
