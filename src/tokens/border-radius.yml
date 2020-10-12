@@ -6,6 +6,8 @@
 props:
   radius_xxxxl:
     value: "60px"
+  radius_xxl:
+    value: "12px"
   radius_xl:
     value: "10px"
   radius_l:

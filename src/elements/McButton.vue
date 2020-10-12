@@ -549,6 +549,9 @@ $colors: $token-colors;
     &-xl {
       border-radius: $radius-xl;
     }
+    &-xxl {
+      border-radius: $radius-xxl;
+    }
   }
 
   &--variation-light-effect {
@@ -632,6 +635,7 @@ $colors: $token-colors;
     'white-flat',
     'blue-link',
     'light-effect',
+    'ezzy-red',
   ]
 
   <div style="text-align: center">
@@ -644,7 +648,7 @@ $colors: $token-colors;
         Активная
       </McButton>
 
-      <McButton :variation="variation" size="s">
+      <McButton :variation="variation" size="s" radius="xxl">
         <McSvgIcon slot="icon-prepend" name="people"/>
         Маленькая
       </McButton>

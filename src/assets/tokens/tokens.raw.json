@@ -50,6 +50,13 @@
       "originalValue": "hsla(224, 20%, 89%, 1)",
       "name": "color_secondary_gray"
     },
+    "color_light_red": {
+      "type": "color",
+      "category": "color_scale",
+      "value": "rgb(240, 36, 124)",
+      "originalValue": "rgb(240, 36, 124)",
+      "name": "color_light_red"
+    },
     "color_pinkish": {
       "type": "color",
       "category": "color_scale",
@@ -651,6 +658,13 @@
       "value": "60px",
       "originalValue": "60px",
       "name": "radius_xxxxl"
+    },
+    "radius_xxl": {
+      "type": "number",
+      "category": "border-radius",
+      "value": "12px",
+      "originalValue": "12px",
+      "name": "radius_xxl"
     },
     "radius_xl": {
       "type": "number",
