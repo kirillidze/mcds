@@ -73,6 +73,9 @@ props:
   color_red:
     value: "hsla(0, 89%, 60%, 1)"
     category: color_scale
+  color_light_red:
+    value: "rgb(240, 36, 124)"
+    category: color_scale
   color_ultraviolet:
     value: "hsla(285, 97%, 55%, 1)"
     category: color_scale

@@ -632,6 +632,7 @@ $colors: $token-colors;
     'white-flat',
     'blue-link',
     'light-effect',
+    'ezzy-red',
   ]
 
   <div style="text-align: center">
