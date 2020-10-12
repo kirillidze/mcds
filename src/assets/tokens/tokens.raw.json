@@ -659,6 +659,13 @@
       "originalValue": "60px",
       "name": "radius_xxxxl"
     },
+    "radius_xxl": {
+      "type": "number",
+      "category": "border-radius",
+      "value": "12px",
+      "originalValue": "12px",
+      "name": "radius_xxl"
+    },
     "radius_xl": {
       "type": "number",
       "category": "border-radius",
