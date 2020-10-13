@@ -125,7 +125,6 @@ export default {
     display: inline-block;
     border-radius: $radius-m;
     overflow: hidden;
-    background-color: $color-hover-gray;
 
     img {
       width: 100%;
