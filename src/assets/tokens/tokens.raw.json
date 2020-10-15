@@ -232,6 +232,13 @@
       "originalValue": "28px",
       "name": "size_ll"
     },
+    "size_mm": {
+      "type": "number",
+      "category": "font-size",
+      "value": "19px",
+      "originalValue": "19px",
+      "name": "size_mm"
+    },
     "font_heading": {
       "type": "...",
       "category": "font",
