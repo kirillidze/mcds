@@ -482,6 +482,7 @@ export default {
         chatWidth: 380,
         chatHeight: 500,
         language: this.locale,
+        disableChatOpenHash: true,
       }
 
       if (user) {
