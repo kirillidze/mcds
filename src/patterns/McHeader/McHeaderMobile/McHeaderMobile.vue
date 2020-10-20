@@ -11,6 +11,7 @@
               :to="menuMainItem.to"
               variation="black-flat"
               size="l"
+              :exact="isExact"
             >
               <mc-svg-icon slot="icon-prepend" size="xxs" :name="menuMainItem.icon" />
               {{ menuMainItem.name }}
@@ -41,6 +42,13 @@ export default {
     menuMain: {
       type: Array,
       default: null,
+    },
+  },
+  computed: {
+    isExact() {
+      if (!this.$route || !this.$route.name) return false
+      const hasIndex = this.$route.name.includes("index")
+      return hasIndex && !this.$route.name.includes("id")
     },
   },
 }
