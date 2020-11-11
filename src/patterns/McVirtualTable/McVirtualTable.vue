@@ -2,8 +2,10 @@
   <div :style="wrapperStyles">
     <component
       class="mc-virtual-table"
+      id="vxe-table"
       ref="xTable"
       :is="tag"
+      column-key
       v-bind="$attrs"
       v-on="$listeners"
       row-id="id"
@@ -37,6 +39,7 @@
 <script>
 import _debounce from "lodash/debounce"
 import _XEClipboard from "xe-clipboard"
+import Sortable from "sortablejs"
 import McTitle from "../../elements/McTitle"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McButton from "../../elements/McButton"
@@ -174,21 +177,33 @@ export default {
         }
       },
     },
+    /**
+     *  Drag and drop колонок
+     */
+    dragColumns: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
       observer: null,
       cardIsOpen: false,
       firstColsWidth: 253,
+      sortable: null,
+      table: {},
     }
   },
   async mounted() {
     await this.loadData()
     !this.scrollable && this.createObserver()
     await this.setFirstColsWidth()
+    this.dragColumns && this.columnDrop()
+    this.table = this.$refs.xTable
   },
   beforeDestroy() {
     this.observer && this.observer.disconnect()
+    this.sortable && this.sortable.destroy()
   },
   watch: {
     canShowFooter(newValue) {
@@ -276,6 +291,23 @@ export default {
         this.load()
       }
     }, 200),
+    columnDrop() {
+      this.$nextTick(() => {
+        let xTable = this.$refs.xTable
+        this.sortable = Sortable.create(
+          xTable.$el.querySelector(".body--wrapper>.vxe-table--header .vxe-header--row"),
+          {
+            handle: ".vxe-header--column",
+            onEnd: ({ newIndex, oldIndex }) => {
+              let tableColumn = xTable.getColumns()
+              let currRow = tableColumn.splice(oldIndex, 1)[0]
+              tableColumn.splice(newIndex, 0, currRow)
+              xTable.loadColumn(tableColumn)
+            },
+          }
+        )
+      })
+    },
     load() {
       /**
        * Событие по подгрузке данных
