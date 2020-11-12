@@ -1,7 +1,7 @@
 <template>
   <mc-dropdown class="mc-virtual-table-col-switcher" v-model="dropIsOpen" :position="position">
     <mc-button variation="black-flat" size="m-compact" slot="activator">
-      <mc-svg-icon slot="icon-append" :name="icon" />
+      <mc-svg-icon slot="icon-append" :name="icon" fill="rgb(102, 102, 102)" />
     </mc-button>
     <mc-panel>
       <div class="mc-virtual-table-col-switcher__body">
@@ -19,9 +19,9 @@
       </div>
       <mc-separator />
       <div class="mc-virtual-table-col-switcher__footer">
-        <mc-button size="l" variation="light-green" @click="handleSave" text-align="center"
-          >Save</mc-button
-        >
+        <mc-button size="l" variation="light-green" @click="handleSave" text-align="center">{{
+          applyText
+        }}</mc-button>
       </div>
     </mc-panel>
   </mc-dropdown>
@@ -32,6 +32,8 @@ import McTopLine from "../McTopLine"
 import McFieldCheckbox from "../../elements/McField/McFieldCheckbox"
 import McPanel from "../McPanel"
 import McDropdown from "../McDropdown"
+import McButton from "../../elements/McButton"
+import McSvgIcon from "../../elements/McSvgIcon"
 
 export default {
   name: "McVirtualTableColSwitcher",
@@ -41,11 +43,13 @@ export default {
     McFieldCheckbox,
     McPanel,
     McDropdown,
+    McButton,
+    McSvgIcon,
   },
   props: {
     table: {
       type: Object,
-      default: () => {},
+      required: true,
     },
     position: {
       type: String,
@@ -60,8 +64,12 @@ export default {
       default: () => [],
     },
     userId: {
-      type: String,
+      type: [String, Number],
       default: null,
+    },
+    applyText: {
+      type: String,
+      required: true,
     },
   },
   data() {
@@ -73,11 +81,11 @@ export default {
         : [],
     }
   },
-  mounted() {
-    setTimeout(() => {
+  watch: {
+    table() {
       this.columns = this.table.getColumns()
       this.hasId && this.initTableColumns()
-    }, 0)
+    },
   },
   computed: {
     visiblePanelColumns() {
@@ -126,8 +134,11 @@ export default {
 </script>
 <style lang="scss">
 .mc-virtual-table-col-switcher {
+  @include custom-scroll();
   &__body {
     padding-bottom: 8px;
+    max-height: 500px;
+    overflow-y: auto;
   }
 
   &__footer {
