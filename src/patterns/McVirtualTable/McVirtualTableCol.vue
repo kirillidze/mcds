@@ -23,6 +23,12 @@
             <slot name="header-append" />
           </div>
         </mc-title>
+        <mc-svg-icon
+          v-if="draggable"
+          name="drag"
+          fill="gray"
+          class="mc-virtual-table-col__drag-icon"
+        />
       </slot>
     </template>
     <template v-slot:footer="{ columnIndex, items }">
@@ -61,6 +67,10 @@ export default {
   inject: ["provideData"],
   props: {
     hasBorder: {
+      type: Boolean,
+      default: false,
+    },
+    draggable: {
       type: Boolean,
       default: false,
     },
@@ -114,6 +124,9 @@ export default {
       if (this.$attrs["show-overflow"] === false) {
         classes.push("mc-virtual-table-col--overflow-visible")
       }
+      if (this.draggable && !this.provideData.cardIsOpen) {
+        classes.push("mc-virtual-table-col--draggable")
+      }
       return classes
     },
     handleFooterClassName() {
@@ -139,6 +152,16 @@ export default {
   &--overflow-visible {
     .vxe-cell {
       overflow: visible !important;
+    }
+  }
+  &--draggable {
+    cursor: pointer;
+    .mc-virtual-table-col__drag-icon {
+      @include position(absolute, 50% 5px null null);
+      transform: translateY(-50%);
+    }
+    .vxe-cell--title {
+      margin-right: $space-m;
     }
   }
 
