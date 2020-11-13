@@ -71,6 +71,10 @@ export default {
       type: String,
       required: true,
     },
+    cardIsOpen: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -85,6 +89,12 @@ export default {
     table() {
       this.columns = this.table.getColumns()
       this.hasId && this.initTableColumns()
+    },
+    cardIsOpen(val) {
+      !val &&
+        this.$nextTick(() => {
+          this.initTableColumns()
+        })
     },
   },
   computed: {
@@ -121,13 +131,15 @@ export default {
       this.table.refreshColumn()
       this.dropIsOpen = false
     },
-    initTableColumns() {
+    async initTableColumns() {
       const [currentUserColumns] = this.usersTableColumns.filter(
         column => column.id === this.userId
       )
       this.columns.map(column => {
         currentUserColumns.hiddenColumns.includes(column.property) && this.table.hideColumn(column)
       })
+      await this.table.refreshColumn()
+      await this.table.syncData()
     },
   },
 }
