@@ -93,7 +93,8 @@ export default {
     cardIsOpen(val) {
       !val &&
         this.$nextTick(() => {
-          this.initTableColumns()
+          this.usersTableColumns = JSON.parse(localStorage.getItem("usersTableColumns"))
+          this.hasId && this.initTableColumns()
         })
     },
   },
