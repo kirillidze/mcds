@@ -94,7 +94,7 @@ export default {
       !val &&
         this.$nextTick(() => {
           this.usersTableColumns = JSON.parse(localStorage.getItem("usersTableColumns"))
-          this.initTableColumns()
+          this.hasId && this.initTableColumns()
         })
     },
   },
