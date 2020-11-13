@@ -49,7 +49,7 @@ export default {
   props: {
     table: {
       type: Object,
-      required: true,
+      default: () => {},
     },
     position: {
       type: String,
