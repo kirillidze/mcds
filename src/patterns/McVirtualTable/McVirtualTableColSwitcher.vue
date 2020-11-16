@@ -67,6 +67,10 @@ export default {
       type: [String, Number],
       default: null,
     },
+    projectId: {
+      type: [String, Number],
+      default: null,
+    },
     applyText: {
       type: String,
       required: true,
@@ -88,13 +92,13 @@ export default {
   watch: {
     table() {
       this.columns = this.table.getColumns()
-      this.hasId && this.initTableColumns()
+      this.isProjectCreated && this.initTableColumns()
     },
     cardIsOpen(val) {
       !val &&
         this.$nextTick(() => {
           this.usersTableColumns = JSON.parse(localStorage.getItem("usersTableColumns"))
-          this.hasId && this.initTableColumns()
+          this.isProjectCreated && this.initTableColumns()
         })
     },
   },
@@ -102,8 +106,10 @@ export default {
     visiblePanelColumns() {
       return this.columns.filter(column => !this.hiddenPanelColumns.includes(column.property))
     },
-    hasId() {
-      return this.usersTableColumns.some(column => column.id === this.userId)
+    isProjectCreated() {
+      return !!this.usersTableColumns.filter(
+        column => column.id === this.userId && column.projectId === this.projectId
+      ).length
     },
   },
   methods: {
@@ -113,28 +119,32 @@ export default {
     handleSave() {
       const data = {
         id: this.userId,
+        projectId: this.projectId,
         hiddenColumns: [],
       }
+
       const computedUserTableColumns = this.usersTableColumns.map(column => {
-        if (column.id === data.id) {
+        if (column.id === data.id && column.projectId === data.projectId) {
           return {
             ...data,
           }
         }
         return column
       })
-      const localStorageArray = this.hasId ? computedUserTableColumns : this.usersTableColumns
+      const localStorageArray = this.isProjectCreated
+        ? computedUserTableColumns
+        : this.usersTableColumns
       this.columns.map(item => {
         !item.visible && data.hiddenColumns.push(item.property)
       })
-      !this.hasId && this.usersTableColumns.push(data)
+      !this.isProjectCreated && this.usersTableColumns.push(data)
       localStorage.setItem("usersTableColumns", JSON.stringify(localStorageArray))
       this.table.refreshColumn()
       this.dropIsOpen = false
     },
     async initTableColumns() {
       const [currentUserColumns] = this.usersTableColumns.filter(
-        column => column.id === this.userId
+        column => column.id === this.userId && column.projectId === this.projectId
       )
       this.columns.map(column => {
         currentUserColumns.hiddenColumns.includes(column.property) && this.table.hideColumn(column)
