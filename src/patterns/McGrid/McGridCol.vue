@@ -8,7 +8,7 @@
 <script>
 import _upperFirst from "lodash/upperFirst"
 const values = ["span", "order", "offset", "push", "pull"]
-const sizes = ["s", "m", "l", "xl", "xxl"]
+const sizes = ["xs", "s", "m", "l", "xl", "xxl"]
 const props = {}
 
 values.forEach(value => {
@@ -152,6 +152,10 @@ export default {
   }
 
   @include generate-col("");
+
+  @media #{$media-query-xs} {
+    @include generate-col("-xs");
+  }
 
   @media #{$media-query-s} {
     @include generate-col("-s");
