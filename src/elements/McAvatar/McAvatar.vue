@@ -140,11 +140,6 @@ export default {
       height: 100%;
       object-fit: cover;
     }
-    @each $radius, $value in $token-border-radius {
-      &--radius-#{$radius} {
-        border-radius: $value;
-      }
-    }
     &--size-xs {
       @include size($avatar-xs);
     }
