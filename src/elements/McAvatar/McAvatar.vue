@@ -140,7 +140,11 @@ export default {
       height: 100%;
       object-fit: cover;
     }
-
+    @each $radius, $value in $token-border-radius {
+      &--radius-#{$radius} {
+        border-radius: $value;
+      }
+    }
     &--size-xs {
       @include size($avatar-xs);
     }
@@ -160,15 +164,13 @@ export default {
     &--size-xl {
       @include size($avatar-xl);
     }
-
-    &--rounded {
-      border-radius: 50%;
-    }
-
     @each $radius, $value in $token-border-radius {
       &--radius-#{$radius} {
         border-radius: $value;
       }
+    }
+    &--rounded {
+      border-radius: 50%;
     }
   }
   &.mc-avatar-wrapper--edit {
