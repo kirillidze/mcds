@@ -89,7 +89,7 @@ export default {
     figureClasses() {
       return {
         [`mc-avatar--size-${this.size}`]: this.size,
-        [`mc-avatar--radius-${this.radius}`]: this.radius,
+        [`mc-avatar--radius-${this.radius}`]: this.radius && !this.rounded,
         "mc-avatar--rounded": this.rounded,
       }
     },
