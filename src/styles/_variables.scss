@@ -50,3 +50,13 @@ $token-line-heights: (
   "s": $line-height-s,
   "m": $line-height-m,
 );
+
+$token-border-radius: (
+  "s": $radius-s,
+  "m": $radius-m,
+  "l": $radius-l,
+  "xl": $radius-xl,
+  "xxl": $radius-xxl,
+  "xxxxl": $radius-xxxxl,
+  "circle": $radius-circle,
+);

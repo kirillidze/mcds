@@ -51,6 +51,14 @@ export default {
       default: false,
     },
     /**
+     *  Радиус
+     *  `s, m, l, и т.д.`
+     */
+    radius: {
+      type: String,
+      default: "m",
+    },
+    /**
      *  Круглая
      *
      */
@@ -81,6 +89,7 @@ export default {
     figureClasses() {
       return {
         [`mc-avatar--size-${this.size}`]: this.size,
+        [`mc-avatar--radius-${this.radius}`]: this.radius,
         "mc-avatar--rounded": this.rounded,
       }
     },
@@ -154,6 +163,12 @@ export default {
 
     &--rounded {
       border-radius: 50%;
+    }
+
+    @each $radius, $value in $token-border-radius {
+      &--radius-#{$radius} {
+        border-radius: $value;
+      }
     }
   }
   &.mc-avatar-wrapper--edit {
