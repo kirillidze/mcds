@@ -57,6 +57,14 @@ All notable changes to this project will be documented in this file. See [standa
 - th.table-cell in McTableCardBody ([d5623c4](https://github.com/MediaCubeCo/mcds/commit/d5623c4d4332299898e640914993ed7f0faf23ed))
 - добавлен key для добавляющихся элементов ([5f5d842](https://github.com/MediaCubeCo/mcds/commit/5f5d842d7bbaa8f01e8757524e933ba6f1230570))
 
+### [1.1.72](https://github.com/MediaCubeCo/mcds/compare/v1.1.71...v1.1.72) (2020-12-03)
+
+### [1.1.71](https://github.com/MediaCubeCo/mcds/compare/v1.1.70...v1.1.71) (2020-11-27)
+
+### [1.1.70](https://github.com/MediaCubeCo/mcds/compare/v1.1.69...v1.1.70) (2020-11-16)
+
+### [1.1.69](https://github.com/MediaCubeCo/mcds/compare/v1.1.68...v1.1.69) (2020-11-16)
+
 ### [1.1.68](https://github.com/MediaCubeCo/mcds/compare/v1.1.67...v1.1.68) (2020-11-13)
 
 ### [1.1.67](https://github.com/MediaCubeCo/mcds/compare/v1.1.66...v1.1.67) (2020-11-13)

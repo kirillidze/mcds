@@ -1,5 +1,5 @@
 <template>
-  <mc-card class="mc-wrap-entity">
+  <mc-card :class="classes">
     <!-- @slot Слот контента -->
     <slot />
     <div class="mc-wrap-entity__buttons">
@@ -50,6 +50,17 @@ export default {
     canDelete: {
       type: Boolean,
       default: true,
+    },
+  },
+  computed: {
+    hasActions() {
+      return this.canEdit || this.canDelete
+    },
+    classes() {
+      return {
+        "mc-wrap-entity": true,
+        "mc-wrap-entity--has-actions": this.hasActions,
+      }
     },
   },
   methods: {
@@ -106,10 +117,12 @@ export default {
     }
   }
 
-  &:hover,
-  &:focus {
-    #{$block-name}__buttons {
-      display: flex;
+  &--has-actions {
+    &:hover,
+    &:focus {
+      #{$block-name}__buttons {
+        display: flex;
+      }
     }
   }
 }

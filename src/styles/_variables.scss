@@ -47,6 +47,21 @@ $token-sizes: (
 
 $token-line-heights: (
   "xs": $line-height-xs,
+  "sss": $line-height-sss,
+  "ss": $line-height-ss,
   "s": $line-height-s,
+  "mmm": $line-height-mmm,
+  "mm": $line-height-mm,
   "m": $line-height-m,
+);
+
+$token-border-radius: (
+  "s": $radius-s,
+  "m": $radius-m,
+  "l": $radius-l,
+  "xl": $radius-xl,
+  "xxl": $radius-xxl,
+  "xxxl": $radius-xxxl,
+  "xxxxl": $radius-xxxxl,
+  "circle": $radius-circle,
 );
