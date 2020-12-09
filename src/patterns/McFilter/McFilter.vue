@@ -8,7 +8,7 @@
         </mc-title>
       </div>
       <div class="mc-filter__content">
-        <mc-tabs class="mc-filter__tabs" ref="tabs">
+        <mc-tabs class="mc-filter__tabs" ref="tabs" :accentColor="accentColor">
           <mc-tab :name="lang.all">
             <template v-for="(filter, _key) in filledFilter">
               <mc-filter-type-text
@@ -214,6 +214,10 @@ export default {
     },
     lang: {
       required: false,
+    },
+    accentColor: {
+      type: String,
+      default: "blue",
     },
     presets: {
       type: Array,
