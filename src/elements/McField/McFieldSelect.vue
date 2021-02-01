@@ -57,7 +57,7 @@
         </template>
         <!-- @slot Слот для текста, если ничего не найдено -->
         <slot slot="noResult" name="noResult">
-          <span>Ничего не найдено</span>
+          <span>{{ tSearchEmpty }}</span>
         </slot>
       </multiselect>
     </div>
@@ -196,6 +196,10 @@ export default {
     optionsTooltip: {
       type: Boolean,
       default: false,
+    },
+    tSearchEmpty: {
+      type: String,
+      default: "Ничего не найдено",
     },
   },
   computed: {

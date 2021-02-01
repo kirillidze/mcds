@@ -53,6 +53,35 @@
                 @open="setFilterOpen"
                 @separate-filters="separateFilters"
               />
+              <mc-filter-type-selection
+                v-else-if="filter.type === 'selection'"
+                :key="`filled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-range-more="lang.more"
+                :t-range-less="lang.less"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-double-range
+                v-else-if="filter.type === 'double-range'"
+                :key="`filled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || []"
+                :real-value="value[filter.value] || []"
+                :t-range-more="lang.more"
+                :t-range-less="lang.less"
+                :t-save-button="lang.save"
+                :t-search-empty="lang.search_empty"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
             </template>
             <mc-separator v-if="computedFiltersLength" indent-top="xs" indent-bottom="xs" />
             <template v-for="(filter, _key) in unfilledFilter">
@@ -93,6 +122,35 @@
                 :t-range-more="lang.from"
                 :t-range-less="lang.to"
                 :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-selection
+                v-else-if="filter.type === 'selection'"
+                :key="`unfilled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || {}"
+                :real-value="value[filter.value] || {}"
+                :t-range-more="lang.more"
+                :t-range-less="lang.less"
+                :t-save-button="lang.save"
+                @input="value => handleInput(filter, value)"
+                @submit="submit"
+                @open="setFilterOpen"
+                @separate-filters="separateFilters"
+              />
+              <mc-filter-type-double-range
+                v-else-if="filter.type === 'double-range'"
+                :key="`unfilled_${_key}`"
+                :filter="filter"
+                :value="currentValues[filter.value] || []"
+                :real-value="value[filter.value] || []"
+                :t-range-more="lang.more"
+                :t-range-less="lang.less"
+                :t-save-button="lang.save"
+                :t-search-empty="lang.search_empty"
                 @input="value => handleInput(filter, value)"
                 @submit="submit"
                 @open="setFilterOpen"
@@ -181,12 +239,16 @@ import McTooltip from "../../elements/McTooltip"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McDropdown from "../McDropdown"
 import McSeparator from "../../elements/McSeparator"
+import McFilterTypeSelection from "./McFilterTypeSelection"
+import McFilterTypeDoubleRange from "./McFilterTypeDoubleRange"
 
 export default {
   name: "McFilter",
   status: "ready",
   release: "1.0.0",
   components: {
+    McFilterTypeDoubleRange,
+    McFilterTypeSelection,
     McSvgIcon,
     McTooltip,
     McGridCol,
