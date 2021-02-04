@@ -4,7 +4,7 @@
     :open="open"
     @open="handleOpen"
     @clickToBack="resetValue"
-    class="mc-filter-type-double-range"
+    class="mc-filter-type-multiple-range"
   >
     <mc-filter-row slot="activator">
       {{ filter.name }}
@@ -37,7 +37,7 @@
               size="xxs"
               name="cancel"
               fill="blue"
-              class="mc-filter-type-double-range__close"
+              class="mc-filter-type-multiple-range__close"
               @click.native="handleClose(item)"
             />
           </mc-grid-col>
@@ -89,7 +89,6 @@ import McFilterDot from "./McFilterDot"
 import McButton from "../../elements/McButton"
 import McSvgIcon from "../../elements/McSvgIcon"
 import McFieldText from "../../elements/McField/McFieldText"
-import McPanel from "../McPanel"
 import McFieldSelect from "../../elements/McField/McFieldSelect"
 import McGridRow from "../McGrid/McGridRow"
 import McGridCol from "../McGrid/McGridCol"
@@ -105,7 +104,6 @@ export default {
     McGridCol,
     McGridRow,
     McFieldSelect,
-    McPanel,
     McFieldText,
     McSvgIcon,
     McButton,
@@ -238,10 +236,7 @@ export default {
 </script>
 
 <style lang="scss">
-.mc-filter-type-double-range {
-  &__panel {
-    max-width: 100%;
-  }
+.mc-filter-type-multiple-range {
   &__close {
     display: block;
     cursor: pointer;
