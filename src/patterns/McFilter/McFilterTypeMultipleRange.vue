@@ -60,12 +60,14 @@
             />
           </mc-grid-col>
         </mc-grid-row>
-        <mc-range-slider
-          :min="filter.min"
-          :max="filter.max"
-          :value="[item.from || filter.min, item.to || filter.max]"
-          @input="value => handleInput('range', index, value)"
-        />
+        <div class="mc-filter-type-multiple-range__slider">
+          <mc-range-slider
+            :min="filter.min"
+            :max="filter.max"
+            :value="[item.from || filter.min, item.to || filter.max]"
+            @input="value => handleInput('range', index, value)"
+          />
+        </div>
         <mc-separator indent-top="s" indent-bottom="s" v-if="index !== filteredArr.length - 1" />
       </div>
     </div>
@@ -240,6 +242,10 @@ export default {
   &__close {
     display: block;
     cursor: pointer;
+  }
+  &__slider {
+    padding-left: $space-xs;
+    padding-right: $space-xs;
   }
 }
 </style>

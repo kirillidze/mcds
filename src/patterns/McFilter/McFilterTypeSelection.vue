@@ -20,7 +20,9 @@
           <mc-field-text v-model="rangeValue" name="range" />
         </mc-grid-col>
       </mc-grid-row>
-      <mc-range-slider :min="filter.min" :max="filter.max" v-model="computedRangeValue" />
+      <div class="mc-filter-type-selection__slider">
+        <mc-range-slider :min="filter.min" :max="filter.max" v-model="computedRangeValue" />
+      </div>
     </div>
     <template slot="footer">
       <mc-button full-width variation="light-green" @click="handleSave">
@@ -88,7 +90,7 @@ export default {
       open: false,
       prettyValue: null,
       compareValue: null,
-      rangeValue: this.filter.min,
+      rangeValue: null,
     }
   },
   watch: {
@@ -159,3 +161,11 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+.mc-filter-type-selection {
+  &__slider {
+    padding-left: $space-xs;
+    padding-right: $space-xs;
+  }
+}
+</style>
