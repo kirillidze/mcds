@@ -64,6 +64,11 @@ export default {
       newValue: this.value,
     }
   },
+  watch: {
+    value(newValue) {
+      this.newValue = newValue
+    },
+  },
   computed: {
     classes() {
       return {

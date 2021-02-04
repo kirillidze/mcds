@@ -149,6 +149,49 @@ const filters = [
       { name: "Украина", value: 6 },
     ],
   },
+  {
+    name: "Пол",
+    value: "sex",
+    type: "selection",
+    values: [{ name: "Мужской", value: "male" }, { name: "Женский", value: "female" }],
+    min: 0,
+    max: 100,
+  },
+  {
+    name: "Возраст",
+    value: "age",
+    type: "selection",
+    values: [
+      {
+        name: "От 17 до 20",
+        value: {
+          from: 17,
+          to: 20,
+        },
+      },
+      {
+        name: "От 25 до 30",
+        value: {
+          from: 25,
+          to: 30,
+        },
+      },
+    ],
+    min: 0,
+    max: 100,
+  },
+  {
+    name: "Main country split",
+    value: "country",
+    type: "multiple-range",
+    values: [
+      { name: "Russia", value: "RU" },
+      { name: "Belarus", value: "BLR" },
+      { name: "Poland", value: "PL" },
+    ],
+    min: 0,
+    max: 100,
+  },
 ]
 
 const presets = [
@@ -179,6 +222,7 @@ const lang = {
   filter: "Фильтр",
   all: "Все",
   presets: "Пресеты",
+  search_empty: "No results",
 }
 
 export { value, filters, presets, lang }
