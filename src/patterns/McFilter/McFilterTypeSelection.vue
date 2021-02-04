@@ -20,7 +20,7 @@
           <mc-field-text v-model="rangeValue" name="range" />
         </mc-grid-col>
       </mc-grid-row>
-      <mc-range-slider :min="filter.min" :max="filter.max" :value="computedRangeValue" />
+      <mc-range-slider :min="filter.min" :max="filter.max" v-model="computedRangeValue" />
     </div>
     <template slot="footer">
       <mc-button full-width variation="light-green" @click="handleSave">
@@ -106,13 +106,11 @@ export default {
       return [
         {
           name: this.tRangeMore,
-          type: "more",
-          value: 1,
+          value: ">=",
         },
         {
           name: this.tRangeLess,
-          type: "less",
-          value: 2,
+          value: "<=",
         },
       ]
     },
@@ -132,17 +130,17 @@ export default {
     },
     handleSave() {
       const data = {
-        value: this.prettyValue,
+        type: this.prettyValue,
         operator: this.compareValue,
-        operatorValue: Number(this.rangeValue),
+        value: Number(this.rangeValue),
       }
       this.emitInput(data)
       this.handleOpen(!this.open)
     },
     setData() {
-      this.prettyValue = this.value.value || this.filter.values[0].value
+      this.prettyValue = this.value.type || this.filter.values[0].value
       this.compareValue = this.value.operator || this.computedOptions[0].value
-      this.rangeValue = this.value.operatorValue || this.filter.min
+      this.rangeValue = this.value.value || this.filter.min
     },
     resetFilter(val, e) {
       this.emitInput(val, e)

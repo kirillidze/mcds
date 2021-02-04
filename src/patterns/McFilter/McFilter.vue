@@ -67,8 +67,8 @@
                 @open="setFilterOpen"
                 @separate-filters="separateFilters"
               />
-              <mc-filter-type-double-range
-                v-else-if="filter.type === 'double-range'"
+              <mc-filter-type-multiple-range
+                v-else-if="filter.type === 'multiple-range'"
                 :key="`filled_${_key}`"
                 :filter="filter"
                 :value="currentValues[filter.value] || []"
@@ -141,8 +141,8 @@
                 @open="setFilterOpen"
                 @separate-filters="separateFilters"
               />
-              <mc-filter-type-double-range
-                v-else-if="filter.type === 'double-range'"
+              <mc-filter-type-multiple-range
+                v-else-if="filter.type === 'multiple-range'"
                 :key="`unfilled_${_key}`"
                 :filter="filter"
                 :value="currentValues[filter.value] || []"
@@ -240,14 +240,14 @@ import McSvgIcon from "../../elements/McSvgIcon"
 import McDropdown from "../McDropdown"
 import McSeparator from "../../elements/McSeparator"
 import McFilterTypeSelection from "./McFilterTypeSelection"
-import McFilterTypeDoubleRange from "./McFilterTypeDoubleRange"
+import McFilterTypeMultipleRange from "./McFilterTypeMultipleRange"
 
 export default {
   name: "McFilter",
   status: "ready",
   release: "1.0.0",
   components: {
-    McFilterTypeDoubleRange,
+    McFilterTypeMultipleRange,
     McFilterTypeSelection,
     McSvgIcon,
     McTooltip,

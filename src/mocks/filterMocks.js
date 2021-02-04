@@ -153,10 +153,29 @@ const filters = [
     name: "Пол",
     value: "sex",
     type: "selection",
+    values: [{ name: "Мужской", value: "male" }, { name: "Женский", value: "female" }],
+    min: 0,
+    max: 100,
+  },
+  {
+    name: "Возраст",
+    value: "age",
+    type: "selection",
     values: [
-      { name: "All", value: 1 },
-      { name: "Мужской", value: 2 },
-      { name: "Женский", value: 3 },
+      {
+        name: "От 17 до 20",
+        value: {
+          from: 17,
+          to: 20,
+        },
+      },
+      {
+        name: "От 25 до 30",
+        value: {
+          from: 25,
+          to: 30,
+        },
+      },
     ],
     min: 0,
     max: 100,
@@ -164,11 +183,11 @@ const filters = [
   {
     name: "Main country split",
     value: "country",
-    type: "double-range",
+    type: "multiple-range",
     values: [
-      { name: "Russia", value: 1 },
-      { name: "Belarus", value: 2 },
-      { name: "Poland", value: 3 },
+      { name: "Russia", value: "RU" },
+      { name: "Belarus", value: "BLR" },
+      { name: "Poland", value: "PL" },
     ],
     min: 0,
     max: 100,

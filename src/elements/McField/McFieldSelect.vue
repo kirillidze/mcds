@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import _isEqual from "lodash/isEqual"
+
 import Multiselect from "vue-multiselect"
 import "vue-multiselect/dist/vue-multiselect.min.css"
 import McTitle from "../McTitle"
@@ -226,7 +228,12 @@ export default {
         }
         return result
       }
-      return this.options.find(o => o.value == this.value)
+      return this.options.find(o => {
+        if (typeof o.value === "object" || typeof this.value === "object") {
+          return _isEqual(o.value, this.value)
+        }
+        return o.value == this.value
+      })
     },
 
     errorText() {

@@ -19,7 +19,7 @@
     <div slot="body">
       <mc-field-select
         v-model="searchValue"
-        :options="filter.values"
+        :options="selectedArr"
         :t-search-empty="tSearchEmpty"
         :disabled="filteredArr.length === 2"
         @original-input="handleChange"
@@ -29,7 +29,7 @@
         <mc-grid-row align="middle" justify="between" class="mb-s" :gutter-x="8">
           <mc-grid-col>
             <mc-title size="s">
-              {{ item.name }}
+              {{ getName(item.value) }}
             </mc-title>
           </mc-grid-col>
           <mc-grid-col>
@@ -38,7 +38,7 @@
               name="cancel"
               fill="blue"
               class="mc-filter-type-double-range__close"
-              @click.native="handleClose(item.value)"
+              @click.native="handleClose(item)"
             />
           </mc-grid-col>
         </mc-grid-row>
@@ -47,23 +47,23 @@
             <mc-field-text
               :placeholder="tRangeMore"
               name="more"
-              :value="item.more || null"
-              @input="value => handleInput('more', index, value)"
+              :value="item.from || null"
+              @input="value => handleInput('from', index, value)"
             />
           </mc-grid-col>
           <mc-grid-col :span="6">
             <mc-field-text
               :placeholder="tRangeLess"
               name="less"
-              :value="item.less || null"
-              @input="value => handleInput('less', index, value)"
+              :value="item.to || null"
+              @input="value => handleInput('to', index, value)"
             />
           </mc-grid-col>
         </mc-grid-row>
         <mc-range-slider
           :min="filter.min"
           :max="filter.max"
-          :value="[item.more || filter.min, item.less || filter.max]"
+          :value="[item.from || filter.min, item.to || filter.max]"
           @input="value => handleInput('range', index, value)"
         />
         <mc-separator indent-top="s" indent-bottom="s" v-if="index !== filteredArr.length - 1" />
@@ -97,7 +97,7 @@ import McTitle from "../../elements/McTitle"
 import McRangeSlider from "../../elements/McRangeSlider"
 import McSeparator from "../../elements/McSeparator"
 export default {
-  name: "McFilterTypeDoubleRange",
+  name: "McFilterTypeMultipleRange",
   components: {
     McSeparator,
     McRangeSlider,
@@ -148,6 +148,7 @@ export default {
       rangeValues: {},
       filteredArr: [],
       temporaryValue: [],
+      selectedArr: [],
     }
   },
   computed: {
@@ -161,10 +162,10 @@ export default {
         this.setTemporaryValue()
         this.filteredArr = []
         this.searchValue = ""
+        this.selectedArr = this.filteredSelectedArr()
         const hasValue = this.value && this.value.length
         if (hasValue) {
           this.filteredArr = this.value
-          this.searchValue = this.value[this.value.length - 1].value
         }
       }
     },
@@ -182,23 +183,22 @@ export default {
       this.handleOpen(!this.open)
     },
     handleChange(val) {
-      const hasValue = this.filteredArr.some(item => item.value === val.value)
-      if (hasValue) {
-        return
-      }
-      this.filteredArr.push(val)
+      this.selectedArr = this.selectedArr.filter(item => item.value !== val.value)
+      this.filteredArr.push({ value: val.value })
       this.emitInput(this.filteredArr)
     },
-    handleClose(value) {
-      this.filteredArr = this.filteredArr.filter(item => item.value !== value)
+    handleClose(elem) {
+      const [currentClosableItem] = this.filter.values.filter(item => item.value === elem.value)
+      this.selectedArr.push(currentClosableItem)
+      this.filteredArr = this.filteredArr.filter(item => item.value !== elem.value)
       this.searchValue = ""
       this.emitInput(this.filteredArr)
     },
     handleInput(type, index, value) {
       const currentValue = { ...this.value[index] }
       if (type === "range") {
-        currentValue["more"] = value[0]
-        currentValue["less"] = value[1]
+        currentValue["from"] = value[0]
+        currentValue["to"] = value[1]
       } else {
         currentValue[type] = +value
       }
@@ -211,6 +211,21 @@ export default {
     resetFilter(val, e) {
       this.emitInput(val, e)
       this.$emit("separate-filters")
+    },
+    getName(val) {
+      const [currentFilterItem] = this.filter.values.filter(item => item.value === val)
+      return currentFilterItem.name
+    },
+    filteredSelectedArr() {
+      if (this.value && this.value.length) {
+        const filteredArrValues = this.value.map(item => {
+          return item.value
+        })
+        return this.filter.values.filter((item, i) => {
+          return filteredArrValues.indexOf(this.filter.values[i].value) === -1
+        })
+      }
+      return this.filter.values
     },
     emitInput(value, e) {
       this.$emit("input", value)
