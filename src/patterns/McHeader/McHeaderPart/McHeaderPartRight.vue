@@ -659,6 +659,14 @@ export default {
       }
     }
     &-activator {
+      .mc-svg-icon {
+        @include position(absolute, null 5px 0 null);
+      }
+      svg {
+        background-color: $color-white;
+        border: 1px solid transparent;
+        border-radius: 50%;
+      }
     }
     .mc-panel {
       min-width: $panel-s;
