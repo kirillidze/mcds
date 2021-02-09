@@ -64,8 +64,14 @@
         v-if="menuProfile && menuProfile.length && user"
         class="mc-header-part-right__profile"
       >
-        <mc-dropdown v-model="menuProfileIsOpen" position="right" @input="handleToggleMenuProfile">
+        <mc-dropdown
+          v-model="menuProfileIsOpen"
+          :rotateIcon="false"
+          position="right"
+          @input="handleToggleMenuProfile"
+        >
           <mc-button
+            class="mc-header-part-right__profile-activator"
             slot="activator"
             variation="black-flat"
             size="l-compact"
@@ -73,6 +79,7 @@
             rounded
           >
             <mc-avatar slot="icon-prepend" :src="user.avatar" rounded />
+            <mc-svg-icon v-bind="confirmedEmailIconProps" />
           </mc-button>
           <mc-panel>
             <template>
@@ -91,12 +98,7 @@
                   {{ user.last_name }}
                 </mc-title>
                 <div v-if="user.email" class="mc-header-part-right__user-email">
-                  <mc-svg-icon
-                    slot="icon-prepend"
-                    size="xxs"
-                    :fill="user.is_confirmed ? 'rgb(113, 193, 116)' : 'rgb(244, 62, 62)'"
-                    :name="user.is_confirmed ? 'check_circle' : 'error'"
-                  />
+                  <mc-svg-icon v-bind="confirmedEmailIconProps" />
                   <mc-title :color="user.is_confirmed ? 'gray' : 'red'" size="s" line-height="s">
                     {{ user.email }}
                   </mc-title>
@@ -404,6 +406,14 @@ export default {
     locale() {
       return this.$i18n ? this.$i18n.locale : "en"
     },
+    confirmedEmailIconProps() {
+      return {
+        slot: "icon-prepend",
+        size: "xxs",
+        fill: this.user.is_confirmed ? "rgb(113, 193, 116)" : "rgb(244, 62, 62)",
+        name: this.user.is_confirmed ? "check_circle" : "error",
+      }
+    },
     computedUserbackSettings() {
       return {
         language: _has(this.userbackConfig, "settings.lang")
@@ -647,6 +657,8 @@ export default {
         }
         top: calc(100% + 5px);
       }
+    }
+    &-activator {
     }
     .mc-panel {
       min-width: $panel-s;
