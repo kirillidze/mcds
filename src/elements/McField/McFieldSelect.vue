@@ -57,7 +57,7 @@
         </template>
         <!-- @slot Слот для текста, если ничего не найдено -->
         <slot slot="noResult" name="noResult">
-          <span>Ничего не найдено</span>
+          <span>{{ tSearchEmpty }}</span>
         </slot>
       </multiselect>
     </div>
@@ -77,6 +77,8 @@
 </template>
 
 <script>
+import _isEqual from "lodash/isEqual"
+
 import Multiselect from "vue-multiselect"
 import "vue-multiselect/dist/vue-multiselect.min.css"
 import McTitle from "../McTitle"
@@ -197,6 +199,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    tSearchEmpty: {
+      type: String,
+      default: "Ничего не найдено",
+    },
   },
   computed: {
     classes() {
@@ -222,7 +228,12 @@ export default {
         }
         return result
       }
-      return this.options.find(o => o.value == this.value)
+      return this.options.find(o => {
+        if (typeof o.value === "object" || typeof this.value === "object") {
+          return _isEqual(o.value, this.value)
+        }
+        return o.value == this.value
+      })
     },
 
     errorText() {
