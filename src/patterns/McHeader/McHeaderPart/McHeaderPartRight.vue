@@ -90,15 +90,17 @@
                 >
                   {{ user.last_name }}
                 </mc-title>
-                <mc-title
-                  v-if="user.email"
-                  text-align="center"
-                  color="gray"
-                  size="s"
-                  line-height="s"
-                >
-                  {{ user.email }}
-                </mc-title>
+                <div v-if="user.email" class="mc-header-part-right__user-email">
+                  <mc-svg-icon
+                    slot="icon-prepend"
+                    size="xxs"
+                    :fill="user.is_confirmed ? 'rgb(113, 193, 116)' : 'rgb(244, 62, 62)'"
+                    :name="user.is_confirmed ? 'check_circle' : 'error'"
+                  />
+                  <mc-title :color="user.is_confirmed ? 'gray' : 'red'" size="s" line-height="s">
+                    {{ user.email }}
+                  </mc-title>
+                </div>
               </div>
 
               <mc-separator indent-bottom="xs" indent-top="xs" />
@@ -580,6 +582,15 @@ export default {
       padding: $space-s $space-xs;
       .mc-avatar {
         margin-bottom: $space-s;
+      }
+    }
+    &-email {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include child-indent-right($space-xs);
+      .mc-title {
+        width: auto;
       }
     }
 
