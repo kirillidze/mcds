@@ -11,13 +11,26 @@
       </mc-button>
     </template>
     <div slot="body">
-      <mc-field-select class="mb-s" :options="filter.values" v-model="prettyValue" />
+      <mc-field-select
+        class="mb-s"
+        :options="filter.values"
+        v-model="prettyValue"
+        @original-input="handleChange"
+      />
       <mc-grid-row :gutter-x="8" class="mb-xs">
         <mc-grid-col :span="6">
-          <mc-field-select :options="computedOptions" v-model="compareValue" />
+          <mc-field-select
+            :options="computedOptions"
+            v-model="compareValue"
+            @input="value => handleInput('operator', value)"
+          />
         </mc-grid-col>
         <mc-grid-col :span="6">
-          <mc-field-text v-model="rangeValue" name="range" />
+          <mc-field-text
+            v-model="rangeValue"
+            name="range"
+            @input="value => handleInput('value', value)"
+          />
         </mc-grid-col>
       </mc-grid-row>
       <div class="mc-filter-type-selection__slider">
@@ -25,7 +38,7 @@
       </div>
     </div>
     <template slot="footer">
-      <mc-button full-width variation="light-green" @click="handleSave">
+      <mc-button full-width variation="light-green" @click="handleSave" :disabled="canSave">
         {{ tSaveButton }}
       </mc-button>
     </template>
@@ -91,11 +104,13 @@ export default {
       prettyValue: null,
       compareValue: null,
       rangeValue: null,
+      temporaryValue: {},
     }
   },
   watch: {
     open(newValue) {
       if (newValue) {
+        this.setTemporaryValue()
         this.setData()
       }
     },
@@ -116,6 +131,11 @@ export default {
         },
       ]
     },
+    canSave() {
+      let stringify = JSON.stringify
+      const hasValue = Object.keys(this.value).length
+      return hasValue ? stringify(this.temporaryValue) === stringify(this.value) : false
+    },
     computedRangeValue: {
       get() {
         return Number(this.rangeValue)
@@ -130,6 +150,9 @@ export default {
       this.open = value
       this.$emit("open", value)
     },
+    handleChange() {
+      this.$emit("input", { type: this.prettyValue })
+    },
     handleSave() {
       const data = {
         type: this.prettyValue,
@@ -138,6 +161,14 @@ export default {
       }
       this.emitInput(data)
       this.handleOpen(!this.open)
+    },
+    handleInput(type, value) {
+      const currentValue = { ...this.value }
+      currentValue[type] = type === "value" ? +value : value
+      this.emitInput(currentValue)
+    },
+    setTemporaryValue() {
+      this.temporaryValue = { ...this.value }
     },
     setData() {
       this.prettyValue = this.value.type || this.filter.values[0].value
@@ -149,7 +180,7 @@ export default {
       this.$emit("separate-filters")
     },
     resetValue() {
-      !this.hasFilteredValues && this.emitInput({})
+      this.emitInput(this.temporaryValue)
       this.handleOpen(false)
     },
     emitInput(value, e) {
