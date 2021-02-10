@@ -72,12 +72,7 @@
       </div>
     </div>
     <template slot="footer">
-      <mc-button
-        full-width
-        variation="light-green"
-        @click="handleSave"
-        :disabled="!filteredArr.length"
-      >
+      <mc-button full-width variation="light-green" @click="handleSave" :disabled="canSave">
         {{ tSaveButton }}
       </mc-button>
     </template>
@@ -155,6 +150,10 @@ export default {
     hasFilteredValues() {
       return Object.keys(this.value).length
     },
+    canSave() {
+      let stringify = JSON.stringify
+      return stringify(this.temporaryValue) === stringify(this.value)
+    },
   },
   watch: {
     open(newValue) {
@@ -165,7 +164,7 @@ export default {
         this.selectedArr = this.filteredSelectedArr()
         const hasValue = this.value && this.value.length
         if (hasValue) {
-          this.filteredArr = this.value
+          this.filteredArr = [...this.value]
         }
       }
     },
