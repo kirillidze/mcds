@@ -141,6 +141,7 @@ export default {
         return Number(this.rangeValue)
       },
       set(value) {
+        this.handleInput("value", value)
         this.rangeValue = value
       },
     },
