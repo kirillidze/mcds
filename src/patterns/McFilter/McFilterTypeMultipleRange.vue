@@ -47,6 +47,7 @@
             <mc-field-text
               :placeholder="tRangeMore"
               name="more"
+              type="number"
               :value="item.from || null"
               @input="value => handleInput('from', index, value)"
             />
@@ -55,6 +56,7 @@
             <mc-field-text
               :placeholder="tRangeLess"
               name="less"
+              type="number"
               :value="item.to || null"
               @input="value => handleInput('to', index, value)"
             />
@@ -195,11 +197,16 @@ export default {
     },
     handleInput(type, index, value) {
       const currentValue = { ...this.value[index] }
-      if (type === "range") {
-        currentValue["from"] = value[0]
-        currentValue["to"] = value[1]
-      } else {
-        currentValue[type] = +value
+      switch (true) {
+        case type === "range":
+          currentValue["from"] = value[0]
+          currentValue["to"] = value[1]
+          break
+        case (type === "from" || type === "to") && Number(value) > this.filter.max:
+          currentValue[type] = this.filter.max
+          break
+        default:
+          currentValue[type] = +value
       }
       this.filteredArr[index] = currentValue
       this.emitInput(this.filteredArr)

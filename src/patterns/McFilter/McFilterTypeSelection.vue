@@ -29,6 +29,7 @@
           <mc-field-text
             v-model="rangeValue"
             name="range"
+            type="number"
             @input="value => handleInput('value', value)"
           />
         </mc-grid-col>
@@ -112,6 +113,11 @@ export default {
       if (newValue) {
         this.setTemporaryValue()
         this.setData()
+      }
+    },
+    rangeValue(val) {
+      if (Number(val) > this.filter.max) {
+        this.rangeValue = this.filter.max
       }
     },
   },
