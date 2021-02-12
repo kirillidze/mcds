@@ -58,7 +58,7 @@ const filters = [
     name: "Просмотры",
     value: "views_count",
     type: "number",
-    min: 0,
+    min: 10,
     max: 10000,
     step: 10,
   },
@@ -154,7 +154,7 @@ const filters = [
     value: "sex",
     type: "selection",
     values: [{ name: "Мужской", value: "male" }, { name: "Женский", value: "female" }],
-    min: 0,
+    min: 1,
     max: 100,
   },
   {
@@ -177,7 +177,7 @@ const filters = [
         },
       },
     ],
-    min: 0,
+    min: 1,
     max: 100,
   },
   {
@@ -189,7 +189,7 @@ const filters = [
       { name: "Belarus", value: "BLR" },
       { name: "Poland", value: "PL" },
     ],
-    min: 0,
+    min: 10,
     max: 100,
   },
 ]

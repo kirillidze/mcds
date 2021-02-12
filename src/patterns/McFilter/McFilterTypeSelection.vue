@@ -115,9 +115,9 @@ export default {
         this.setData()
       }
     },
-    rangeValue(val) {
-      if (Number(val) > this.filter.max) {
-        this.rangeValue = this.filter.max
+    rangeValue(val, oldValue) {
+      if (val && (val > this.filter.max || val < this.filter.min)) {
+        this.rangeValue = oldValue
       }
     },
   },
@@ -140,7 +140,9 @@ export default {
     canSave() {
       let stringify = JSON.stringify
       const hasValue = Object.keys(this.value).length
-      return hasValue ? stringify(this.temporaryValue) === stringify(this.value) : false
+      return hasValue
+        ? stringify(this.temporaryValue) === stringify(this.value) || !this.rangeValue
+        : false
     },
     computedRangeValue: {
       get() {
@@ -164,7 +166,7 @@ export default {
       const data = {
         type: this.prettyValue,
         operator: this.compareValue,
-        value: Number(this.rangeValue),
+        value: +this.rangeValue,
       }
       this.emitInput(data)
       this.handleOpen(!this.open)

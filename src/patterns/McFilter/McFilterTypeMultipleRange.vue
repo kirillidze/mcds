@@ -154,7 +154,9 @@ export default {
     },
     canSave() {
       let stringify = JSON.stringify
-      return stringify(this.temporaryValue) === stringify(this.value)
+      const disabled =
+        this.filteredArr.filter(item => item.from || item.to).length !== this.filteredArr.length
+      return stringify(this.temporaryValue) === stringify(this.value) || disabled
     },
   },
   watch: {
@@ -203,7 +205,10 @@ export default {
           currentValue["to"] = value[1]
           break
         case (type === "from" || type === "to") && Number(value) > this.filter.max:
-          currentValue[type] = this.filter.max
+          currentValue[type] = this.value[index][type]
+          break
+        case !Number(value):
+          delete currentValue[type]
           break
         default:
           currentValue[type] = +value
