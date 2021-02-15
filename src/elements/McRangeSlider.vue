@@ -2,6 +2,7 @@
   <vue-slider
     :class="classes"
     :value="newValue"
+    @dragging="handleInput"
     @change="handleInput"
     :dot-size="18"
     :interval="step"

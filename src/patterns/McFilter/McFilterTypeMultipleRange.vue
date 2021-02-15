@@ -47,6 +47,7 @@
             <mc-field-text
               :placeholder="tRangeMore"
               name="more"
+              type="number"
               :value="item.from || null"
               @input="value => handleInput('from', index, value)"
             />
@@ -55,6 +56,7 @@
             <mc-field-text
               :placeholder="tRangeLess"
               name="less"
+              type="number"
               :value="item.to || null"
               @input="value => handleInput('to', index, value)"
             />
@@ -72,12 +74,7 @@
       </div>
     </div>
     <template slot="footer">
-      <mc-button
-        full-width
-        variation="light-green"
-        @click="handleSave"
-        :disabled="!filteredArr.length"
-      >
+      <mc-button full-width variation="light-green" @click="handleSave" :disabled="canSave">
         {{ tSaveButton }}
       </mc-button>
     </template>
@@ -155,6 +152,12 @@ export default {
     hasFilteredValues() {
       return Object.keys(this.value).length
     },
+    canSave() {
+      let stringify = JSON.stringify
+      const disabled =
+        this.filteredArr.filter(item => item.from || item.to).length !== this.filteredArr.length
+      return stringify(this.temporaryValue) === stringify(this.value) || disabled
+    },
   },
   watch: {
     open(newValue) {
@@ -165,7 +168,7 @@ export default {
         this.selectedArr = this.filteredSelectedArr()
         const hasValue = this.value && this.value.length
         if (hasValue) {
-          this.filteredArr = this.value
+          this.filteredArr = [...this.value]
         }
       }
     },
@@ -196,11 +199,19 @@ export default {
     },
     handleInput(type, index, value) {
       const currentValue = { ...this.value[index] }
-      if (type === "range") {
-        currentValue["from"] = value[0]
-        currentValue["to"] = value[1]
-      } else {
-        currentValue[type] = +value
+      switch (true) {
+        case type === "range":
+          currentValue["from"] = value[0]
+          currentValue["to"] = value[1]
+          break
+        case (type === "from" || type === "to") && Number(value) > this.filter.max:
+          currentValue[type] = this.value[index][type]
+          break
+        case !Number(value):
+          delete currentValue[type]
+          break
+        default:
+          currentValue[type] = +value
       }
       this.filteredArr[index] = currentValue
       this.emitInput(this.filteredArr)
