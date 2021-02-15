@@ -12595,10 +12595,10 @@ vuex@^3.0.1:
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.1.tgz#0c264bfe30cdbccf96ab9db3177d211828a5910e"
   integrity sha512-ER5moSbLZuNSMBFnEBVGhQ1uCBNJslH9W/Dw2W7GZN23UQA69uapP5GTT9Vm8Trc0PzBSVt6LzF3hGjmv41xcg==
 
-vxe-table@^2.9.5:
-  version "2.9.6"
-  resolved "https://registry.yarnpkg.com/vxe-table/-/vxe-table-2.9.6.tgz#187f88d45642727db07886b4a08d0615cb69af57"
-  integrity sha512-iEfdgO9O6xr49+qPmvk4kUiPi4vLhtzfnnYSohk4LhW3hkhhiqu/uztNjCf9GcQNr3EOAZ/BNuFcMJkfZBJdtA==
+vxe-table@2.9.17:
+  version "2.9.17"
+  resolved "https://registry.yarnpkg.com/vxe-table/-/vxe-table-2.9.17.tgz#4bc75211496236dece6c6128099fb3b78a8821eb"
+  integrity sha512-ywqKRfES5z5dBsFAynraRAOjEBDMEDEILVn8UtUYfepq5//opKwvAbUiXpN6YfbNW/eTN7yIpEY5C2uibmHMNg==
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"
@@ -12977,10 +12977,10 @@ xe-clipboard@^1.7.2:
   resolved "https://registry.yarnpkg.com/xe-clipboard/-/xe-clipboard-1.7.2.tgz#f2ee0f66c8ece5a84670b6e5543e52b52aedede8"
   integrity sha512-boycMsOlKQH6O1dEHwvReCCY6Rnht8Dqd9twQGOxPQvgWAcJIMEK2bE0qCjGQE1mYSaX8NvNSqwDluerrNHkTA==
 
-xe-utils@^2.4.5:
-  version "2.4.5"
-  resolved "https://registry.yarnpkg.com/xe-utils/-/xe-utils-2.4.5.tgz#e549e4c682f69fc611e2a8cbf676fe32e4266c6e"
-  integrity sha512-zhj98p1Wc0vaiBlWV/ChtwbQOoTEadJSVRsH5JxEh69p8fdznoBT66U3RqKbntEZQEye1GHeTrFTH4OQ+/VGqg==
+xe-utils@2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/xe-utils/-/xe-utils-2.7.2.tgz#568c7fe7895b4762ff9d6aeb0be669608f64f2f5"
+  integrity sha512-zk88vpzs2Aztxo2g9M2D7tlCYlkSUO8hk3dyGZn3fE/q7i0EjHvMHo3eaITFD/mAiAo4EgwkXivXmqE/cefyUg==
 
 xml-name-validator@^3.0.0:
   version "3.0.0"

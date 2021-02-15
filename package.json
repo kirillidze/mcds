@@ -138,10 +138,10 @@
     "vue-textarea-autosize": "^1.0.4",
     "vue2-datepicker": "^3.4.1",
     "vuex": "^3.0.1",
-    "vxe-table": "^2.9.5",
+    "vxe-table": "2.9.17",
     "webfontloader": "^1.6.28",
     "xe-clipboard": "^1.7.2",
-    "xe-utils": "^2.4.5"
+    "xe-utils": "2.7.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.5",
