@@ -44,10 +44,11 @@
           <mc-dropdown position="right" v-model="menuHiddenIsOpen" :rotate-icon="false">
             <mc-button
               slot="activator"
+              :class="menuHiddenClasses"
+              class="mc-header-part-center__menu-hidden"
               variation="black-flat"
               size="m-compact"
               rounded
-              :class="isHiddenActive"
             >
               <mc-svg-icon slot="icon-append" name="more_horiz" />
             </mc-button>
@@ -196,14 +197,8 @@ export default {
       if (val && val.length) {
         this.$nextTick(() => {
           this.$emit("change-hidden-menu", this.$refs.hiddenMenuItem[0].$el.offsetWidth)
-          this.computeMenuHiddenActive()
         })
       }
-    },
-    $route() {
-      this.$nextTick(() => {
-        this.computeMenuHiddenActive()
-      })
     },
   },
 
@@ -213,9 +208,11 @@ export default {
         ["mc-header-part-center--search-is-open"]: this.isSearchOpen,
       }
     },
-    isHiddenActive() {
+    menuHiddenClasses() {
+      if (!this.$route || !this.$route.name) return ""
+      const hasExactRoute = this.menuHidden.some(i => new RegExp(i.to).test(this.$route.path))
       return {
-        ["mc-header-part-center--is-used"]: this.menuHiddenActive,
+        ["mc-header-part-center__menu-hidden--is-active"]: hasExactRoute,
       }
     },
     isExact() {
@@ -226,16 +223,6 @@ export default {
   },
 
   methods: {
-    computeMenuHiddenActive() {
-      if (this.$refs.hiddenMenuItem) {
-        let x = this.$refs.hiddenMenuItem.find(item => {
-          return item.$el.className.split(" ").find(it => {
-            return it === "nuxt-link-exact-active"
-          })
-        })
-        this.menuHiddenActive = !!x
-      }
-    },
     emitInput(value) {
       this.$emit("input", value)
     },
