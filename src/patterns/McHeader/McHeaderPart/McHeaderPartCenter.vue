@@ -32,7 +32,7 @@
               :href="menuMainItem.href"
               :to="menuMainItem.to"
               variation="black-flat"
-              :exact="isExact"
+              :exact="checkMainMenuLinkExact(menuMainItem)"
             >
               <mc-svg-icon slot="icon-prepend" :name="menuMainItem.icon" />
               {{ menuMainItem.name }}
@@ -266,6 +266,9 @@ export default {
     },
     setInputBlur(name) {
       this.$refs[name] && this.$refs[name].getInput().blur()
+    },
+    checkMainMenuLinkExact(link) {
+      return link.hasOwnProperty("exact") ? link.exact : this.isExact
     },
   },
 }
