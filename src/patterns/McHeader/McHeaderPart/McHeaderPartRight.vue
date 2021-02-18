@@ -190,7 +190,7 @@
               @click="
                 typeof menuProfileItem.handler === 'function' ? menuProfileItem.handler() : ''
               "
-              exact
+              :exact="menuProfileItem.exact"
               :dusk="menuProfileItem.dusk"
             >
               <mc-svg-icon slot="icon-prepend" :name="menuProfileItem.icon" size="xs" />
