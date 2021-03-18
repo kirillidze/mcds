@@ -1,6 +1,9 @@
 <template>
   <section class="mc-header-part-right">
     <mc-header-nav>
+      <mc-header-nav-item v-if="$slots['right-prepend']">
+        <slot name="right-prepend" />
+      </mc-header-nav-item>
       <mc-header-nav-item class="mc-header-part-right__chatra" v-if="chatraId">
         <mc-dropdown v-model="menuChatraIsOpen" position="right" :rotate-icon="false">
           <mc-button slot="activator" variation="black-flat" size="m-compact" @click.stop.native>

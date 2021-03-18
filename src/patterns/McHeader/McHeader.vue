@@ -46,7 +46,9 @@
         :logo-src="logoSrc"
         @toggle-menu-app="handleToggleMenuApp"
         @toggle-menu-profile="handleToggleMenuProfile"
-      />
+      >
+        <slot v-if="$slots['right-prepend']" name="right-prepend" slot="right-prepend" />
+      </mc-header-part-right>
       <mc-header-mobile v-if="menuMain && menuMain.length" :menu-main="menuMain" />
     </div>
   </div>
