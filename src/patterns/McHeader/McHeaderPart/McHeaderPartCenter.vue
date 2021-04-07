@@ -64,7 +64,7 @@
                 size="l"
                 :href="menuHiddenItem.href"
                 :to="menuHiddenItem.to"
-                :exact="isExact"
+                :exact="checkMainMenuLinkExact(menuHiddenItem)"
               >
                 <mc-svg-icon slot="icon-prepend" :name="menuHiddenItem.icon" />
                 {{ menuHiddenItem.name }}
