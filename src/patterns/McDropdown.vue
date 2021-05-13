@@ -53,6 +53,13 @@ export default {
       type: Boolean,
       default: true,
     },
+    /**
+     * Отключить слежение за роутом
+     */
+    disabledWatcherRoute: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
@@ -75,7 +82,7 @@ export default {
 
   watch: {
     $route() {
-      this.value && this.closeDropdown()
+      this.value && !this.disabledWatcherRoute && this.closeDropdown()
     },
   },
 
