@@ -1,5 +1,5 @@
 <template>
-  <component :is="type" class="mc-svg-icon" :class="classes" v-html="svg"></component>
+  <component :is="type" class="mc-svg-icon" :class="classes" v-html="svg" />
 </template>
 
 <script>
@@ -20,8 +20,8 @@ export default {
      * Название
      */
     name: {
+      type: String,
       required: true,
-      default: "settings",
     },
     /**
      * Цвет заливки
@@ -54,7 +54,9 @@ export default {
   watch: {
     name: {
       handler(val) {
+        // console.log(val)
         this.svg = req("./" + val + ".svg").replace(/^<svg /, `<svg style="fill: ${this.fill}"`)
+        // console.log(this.svg)
       },
       immediate: true,
     },
@@ -68,15 +70,6 @@ export default {
   },
 }
 </script>
-
-<docs>
-  ```jsx
-  let icons = require('@/utils/load-icons').default;
-  <div>
-    <McSvgIcon v-for="(icon, index) in icons" :key="index" :name="icon" size="m"/>
-  </div>
-  ```
-</docs>
 
 <style lang="scss">
 .mc-svg-icon {
@@ -119,3 +112,21 @@ export default {
   }
 }
 </style>
+
+<docs>
+  ```jsx
+  let icons = require('@/utils/load-icons').default;
+  <div style="display: flex; flex-wrap: wrap">
+    <div
+      style="display: flex; flex-wrap: nowrap; margin: 5px; align-items: center; padding: 5px 10px; background-color: white; border-radius: 8px; border: 1px solid lightgray"
+      v-for="(icon, index) in icons"
+      :key="index"
+    >
+      <mc-svg-icon style="flex: 0 0 auto" :name="icon" size="xs"/>
+      <div style="flex: 1 1 auto; margin-left: 10px">
+        {{ icon }}
+      </div>
+    </div>
+  </div>
+  ```
+</docs>

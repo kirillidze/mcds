@@ -1,44 +1,122 @@
-<template>
-  <component :is="tag" class="mc-title" :class="classObject">
-    <slot></slot>
-  </component>
-</template>
-
 <script>
+import McSvgIcon from "./McSvgIcon"
 export default {
+  functional: true,
   name: "McTitle",
+  components: { McSvgIcon },
   status: "ready",
   release: "1.0.0",
   props: {
+    /**
+     * Уровень: `h1`, `h2` и т.д.
+     */
     level: {
       type: Number,
       default: 2,
     },
+    /**
+     * Размер: `xs`, `s` и т.д.
+     */
     size: {
       type: String,
       default: "m",
     },
-    font: {
+    /**
+     * Размер: `xs`, `s`, `m`
+     */
+    lineHeight: {
+      type: String,
+      default: "xs",
+    },
+    /**
+     * В одну строку с точками в конце, если не вмещается
+     */
+    ellipsis: {
+      type: Boolean,
+      default: true,
+    },
+    /**
+     * Цвет
+     */
+    color: {
+      type: String,
+      default: "black",
+    },
+    /**
+     * Family: heading, semi-bold, bold, light
+     */
+    family: {
       type: String,
       default: "heading",
     },
-    ellipsis: {
+    /**
+     * Если нужен другой тэг
+     */
+    tagName: {
+      type: String,
+    },
+    /**
+     * Uppercase
+     */
+    uppercase: {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Позиция текста:
+     *  `left, center, right`
+     */
+    textAlign: {
+      type: String,
+      default: "left",
+    },
   },
-
-  computed: {
-    tag() {
-      return "h" + this.level
-    },
-    classObject() {
-      return {
-        [`mc-title--size-${this.size}`]: this.size,
-        [`mc-title--font-${this.font}`]: this.font,
-        ["mc-title--ellipsis"]: this.ellipsis,
+  render(h, { props, slots, data }) {
+    const contentOptions = {
+      class: "mc-title__text",
+    }
+    if (data.domProps && data.domProps.innerHTML) {
+      contentOptions.domProps = {
+        innerHTML: data.domProps.innerHTML,
       }
-    },
+    }
+    const classes = {
+      "mc-title": true,
+      [`mc-title--size-${props.size}`]: props.size,
+      [`mc-title--line-height-${props.lineHeight}`]: props.lineHeight,
+      [`mc-title--family-${props.family}`]: props.family,
+      ["mc-title--ellipsis"]: props.ellipsis,
+      [`mc-title--color-${props.color}`]: props.color,
+      [`mc-title--text-align-${props.textAlign}`]: props.textAlign,
+      "mc-title--uppercase": props.uppercase,
+      ...(data.class || {}),
+    }
+
+    if (data.staticClass) {
+      const staticClasses = data.staticClass.split(" ")
+      staticClasses.forEach(c => {
+        if (c) {
+          classes[c] = true
+        }
+      })
+    }
+    let style = {}
+    if (data.staticStyle) {
+      style = data.staticStyle
+    }
+    return h(
+      "component",
+      {
+        class: classes,
+        style,
+        is: props.tagName || `h${props.level}`,
+      },
+      [
+        slots()["icon-prepend"],
+        h("div", contentOptions, slots()["default"]),
+        slots()["icon-append"],
+      ]
+    )
   },
 }
 </script>
@@ -46,50 +124,104 @@ export default {
 <style lang="scss">
 .mc-title {
   $block-name: &;
-
   margin-top: 0;
   margin-bottom: 0;
-  font-family: $font-heading;
-  line-height: $line-height-s;
+  display: inline-flex;
+  max-width: 100%;
+  width: 100%;
+  text-decoration: none;
 
-  &--size-xs {
-    font-size: $size-xs;
+  &__text {
+    padding-bottom: 1px; // fix overflow
+    margin-bottom: -1px; // fix overflow
   }
 
-  &--size-s {
-    font-size: $size-s;
+  .mc-svg-icon {
+    font-size: inherit;
+    width: 1em;
+    height: 1em;
   }
 
-  &--size-m {
-    font-size: $size-m;
+  > .mc-svg-icon,
+  .mc-tooltip-target {
+    &:first-child {
+      margin-right: 0.3em;
+    }
+    &:last-child {
+      margin-left: 0.3em;
+    }
   }
 
-  &--size-l {
-    font-size: $size-l;
-    font-weight: $weight-medium;
+  @each $size, $value in $token-sizes {
+    &--size-#{$size} {
+      font-size: $value;
+    }
   }
 
-  &--size-xl {
-    font-size: $size-xl;
-  }
-
-  &--size-xxl {
-    font-size: $size-xxl;
-  }
-
-  &--size-xxxl {
-    font-size: $size-xxxl;
-  }
-
-  &--size-xxxxl {
-    font-size: $size-xxxxl;
+  @each $line-height, $value in $token-line-heights {
+    &--line-height-#{$line-height} {
+      line-height: $value;
+    }
   }
 
   &--ellipsis {
-    @include ellipsis();
+    align-items: center;
+
+    #{$block-name} {
+      &__text {
+        @include ellipsis($display: inline-block);
+        @include layout-flex-fix();
+      }
+    }
   }
 
-  &--font-heading {
+  &--uppercase {
+    text-transform: uppercase;
+  }
+
+  &--color {
+    @each $color, $value in $token-colors {
+      &-#{$color} {
+        color: $value;
+      }
+    }
+  }
+
+  &--family-heading {
+    font-family: $font-heading;
+    font-weight: $weight-medium;
+  }
+
+  &--family-bold {
+    font-family: $font-heading;
+    font-weight: $weight-bold;
+  }
+
+  &--family-semi-bold {
+    font-family: $font-heading;
+    font-weight: $weight-semi-bold;
+  }
+
+  &--family-light {
+    font-family: $font-heading;
+    font-weight: $weight-light;
+  }
+
+  &--family-text {
+    font-family: $font-heading;
+    font-weight: $weight-medium;
+  }
+
+  &--text-align {
+    &-left {
+      justify-content: flex-start;
+    }
+    &-center {
+      justify-content: center;
+    }
+    &-right {
+      justify-content: flex-end;
+    }
   }
 }
 </style>
@@ -97,14 +229,63 @@ export default {
 <docs>
   ```jsx
   <div>
-    <McTitle size="xs">Заголовок</McTitle>
-    <McTitle size="s">Заголовок</McTitle>
-    <McTitle size="m">Заголовок</McTitle>
-    <McTitle size="l">Заголовок</McTitle>
-    <McTitle size="xl">Заголовок</McTitle>
-    <McTitle size="xxl">Заголовок</McTitle>
-    <McTitle size="xxxl">Заголовок</McTitle>
-    <McTitle size="xxxxl">Заголовок</McTitle>
+    <mc-title size="s" family="semi-bold" line-height="m">
+      <mc-svg-icon slot="icon-prepend" name="copyright"/>
+      Заголовок123123
+    </mc-title>
+
+    <br><br>
+
+    <mc-title size="s">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
+      Заголовок
+      <mc-svg-icon slot="icon-append" name="error"/>
+    </mc-title>
+
+    <br><br>
+
+    <mc-title>
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
+      Заголовок
+      <mc-svg-icon slot="icon-append" name="error"/>
+    </mc-title>
+
+    <br><br>
+
+    <mc-title size="l">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
+      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
+      <mc-svg-icon slot="icon-append" name="error"/>
+    </mc-title>
+
+    <br><br>
+
+    <mc-title :ellipsis="false" size="xl">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
+      Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок Заголовок
+      <mc-svg-icon slot="icon-append" name="error"/>
+    </mc-title>
+
+    <br><br>
+
+    <mc-title uppercase size="xxl">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
+      Заголовок
+    </mc-title>
+
+    <br><br>
+
+    <mc-title size="xxxl">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
+      Заголовок
+    </mc-title>
+
+    <br><br>
+
+    <mc-title  size="xxxxl" color="dark-blue">
+      <mc-svg-icon slot="icon-prepend" name="ready"/>
+      Заголовок
+    </mc-title>
   </div>
   ```
 </docs>

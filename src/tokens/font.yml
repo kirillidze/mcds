@@ -6,10 +6,6 @@
 props:
   font_heading:
     value: "'Montserrat', sans-serif"
-  font_heading_secondary:
-    value: "'Roboto Slab', serif"
-  font_text:
-    value: "'Roboto', sans-serif"
   weight_bold:
     value: "700"
   weight_semi_bold:

@@ -12,18 +12,18 @@
           @keyup.esc="closeSearch"
         />
       </div>
-      <McButton
-        variation="gray-darkest-flat"
+      <mc-button
+        variation="black-flat"
         size="m-compact"
         rounded
         tabindex="-1"
         type="submit"
         class="mc-header-search__submit-btn"
       >
-        <McSvgIcon slot="icon-append" name="search" />
-      </McButton>
-      <McButton
-        variation="gray-darkest-flat"
+        <mc-svg-icon slot="icon-append" name="search" />
+      </mc-button>
+      <mc-button
+        variation="black-flat"
         size="m-compact"
         rounded
         tabindex="-1"
@@ -31,14 +31,14 @@
         class="mc-header-search__close-btn"
         @click.prevent="closeSearch"
       >
-        <McSvgIcon slot="icon-append" name="close" />
-      </McButton>
+        <mc-svg-icon slot="icon-append" name="close" />
+      </mc-button>
     </div>
     <div class="mc-header-search__drop" v-if="searchItems">
-      <McHeaderSearchList
+      <mc-header-search-list
+        :items="searchItems"
         @click-search-item="closeSearch"
         @click-search-all="closeSearch"
-        :items="searchItems"
       />
     </div>
   </form>
@@ -81,7 +81,7 @@ export default {
 
   computed: {
     _value() {
-      return this.value == null ? "" : this.value
+      return this.value === null ? "" : this.value
     },
     classes() {
       return {
@@ -120,9 +120,6 @@ export default {
 
   @include position(absolute, 0);
 
-  &__field {
-  }
-
   &__input-wrap {
     position: relative;
   }
@@ -135,12 +132,12 @@ export default {
     width: 100%;
     outline: none;
     padding: $space-xxs $space-l;
-    color: $color-text;
+    color: $color-black;
     font-size: $size-m;
     font-weight: $weight-medium;
     line-height: $line-height-s;
     appearance: textfield;
-    border: 1px solid $color-border;
+    border: 1px solid $color-outline-gray;
     background-color: $color-white;
     border-radius: $radius-m;
     height: $tappable-element-l;
@@ -156,7 +153,7 @@ export default {
 
     @include input-placeholder() {
       font-weight: $weight-medium;
-      color: $color-gray-lighten;
+      color: $color-outline-gray;
     }
   }
 
@@ -184,8 +181,8 @@ export default {
     border-bottom-left-radius: $radius-m;
     background-color: $color-white;
     box-shadow: $shadow-m;
-    border: 1px solid $color-border;
-    border-top-color: $color-border;
+    border: 1px solid $color-outline-gray;
+    border-top-color: $color-outline-gray;
     max-height: 75vmin;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
@@ -197,7 +194,7 @@ export default {
         box-shadow: $shadow-m;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
-        border-bottom-color: $color-border;
+        border-bottom-color: $color-outline-gray;
       }
     }
   }
@@ -210,12 +207,12 @@ export default {
   let search = null
   let eventTest = (val) => alert(val)
   <div style="position: relative;">
-    <McHeaderSearch
-            style="position: relative"
-            v-model="search"
-            placeholder="Начните вводить"
-            @search-submit="eventTest('Search submit')"
-            @search-close="eventTest('reset')"
+    <mc-header-search
+      style="position: relative"
+      v-model="search"
+      placeholder="Начните вводить"
+      @search-submit="eventTest('Search submit')"
+      @search-close="eventTest('reset')"
     />
   </div>
   ```

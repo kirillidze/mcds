@@ -1,9 +1,16 @@
 <template>
-  <div class="mc-dropdown" :class="dropdownClasses" v-click-outside="closeDropdown">
-    <div class="mc-dropdown__toggler" tabindex="0" @keyup.esc="closeDropdown">
+  <div class="mc-dropdown" :class="dropdownClasses" v-click-outside="handleClickOutside">
+    <div
+      class="mc-dropdown__toggler"
+      :class="togglerClasses"
+      tabindex="0"
+      @keyup.esc="closeDropdown"
+    >
+      <!-- @slot активатора переключения состояния -->
       <slot name="activator" />
     </div>
     <div class="mc-dropdown__body">
+      <!-- @slot контента -->
       <slot />
     </div>
   </div>
@@ -24,6 +31,9 @@ export default {
     "click-outside": VueClickOutside,
   },
   props: {
+    /**
+     * Состояние видимости контента
+     */
     value: {
       type: Boolean,
       default: false,
@@ -32,13 +42,37 @@ export default {
       type: String,
       default: "left",
     },
+    listPosition: {
+      type: String,
+      default: "bottom",
+    },
+    /**
+     * Необходимо ли вращение иконки
+     */
+    rotateIcon: {
+      type: Boolean,
+      default: true,
+    },
+    /**
+     * Отключить слежение за роутом
+     */
+    disabledWatcherRoute: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   computed: {
     dropdownClasses() {
       return {
         [`mc-dropdown--position-${this.position}`]: this.position,
+        [`mc-dropdown--list-position-${this.listPosition}`]: this.listPosition,
         ["mc-dropdown--is-open"]: this.value,
+      }
+    },
+    togglerClasses() {
+      return {
+        ["mc-dropdown__toggler--rotate-icon"]: this.rotateIcon,
       }
     },
     activator() {
@@ -48,7 +82,7 @@ export default {
 
   watch: {
     $route() {
-      this.closeDropdown()
+      this.value && !this.disabledWatcherRoute && this.closeDropdown()
     },
   },
 
@@ -56,9 +90,21 @@ export default {
     this.activator.addEventListener("click", this.toggleDropdown)
   },
 
+  beforeDestroy() {
+    this.activator.removeEventListener("click", this.toggleDropdown)
+  },
+
   methods: {
     toggleDropdown() {
+      /**
+       * Событие по тогглу
+       * @property {Boolean}
+       */
       this.$emit("input", !this.value)
+    },
+    handleClickOutside(e) {
+      if (!this.value || !document.body.contains(e.target)) return
+      this.value && this.closeDropdown()
     },
     closeDropdown() {
       this.$emit("input", false)
@@ -76,12 +122,14 @@ export default {
 
   &__toggler {
     outline: none;
+    .mc-svg-icon {
+      transition: all $duration-quickly;
+    }
   }
 
   &__body {
     position: absolute;
     z-index: $z_index_dropdown;
-    top: 100%;
     left: 0;
     height: 0;
     overflow: hidden;
@@ -90,8 +138,23 @@ export default {
     background-color: transparent;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
     transition: opacity $duration-quickly, transform $duration-quickly;
+  }
+
+  &--list-position-top {
+    #{$block-name} {
+      &__body {
+        bottom: 100%;
+      }
+    }
+  }
+
+  &--list-position-bottom {
+    #{$block-name} {
+      &__body {
+        top: 100%;
+      }
+    }
   }
 
   &--is-open {
@@ -101,7 +164,16 @@ export default {
         visibility: visible;
         overflow: visible;
         opacity: 1;
-        transform: translateY(0);
+      }
+    }
+
+    #{$block-name} {
+      &__toggler--rotate-icon {
+        > .mc-button {
+          .mc-svg-icon {
+            transform: rotate(180deg);
+          }
+        }
       }
     }
   }
@@ -129,56 +201,31 @@ export default {
 <docs>
   ```jsx
   let dropIsOpen = false
-  <div>
-    <McDropdown v-model="dropIsOpen">
-      <McButton slot="activator">Владилен</McButton>
-      <McPanel>
-        <McButton
-                href="#"
-                @click.prevent
-                full-width
-                text-align="left"
-                variation="gray-darkest-flat"
-                size="l"
-        >
-          <McSvgIcon slot="icon-prepend" name="account_circle" size="xxs"/>
+  <div style="height: 220px">
+    <mc-dropdown v-model="dropIsOpen">
+      <mc-button slot="activator">
+        Dropdown
+        <mc-svg-icon slot="icon-append" name="arrow_drop_down" size="xs"/>
+      </mc-button>
+      <mc-panel>
+        <mc-button href="#" full-width text-align="left" variation="black-flat" size="l" @click.prevent>
+          <mc-svg-icon slot="icon-prepend" name="account_circle" size="xxs"/>
           Профиль
-        </McButton>
-        <McButton
-                href="#"
-                @click.prevent
-                full-width
-                text-align="left"
-                variation="gray-darkest-flat"
-                size="l"
-        >
-          <McSvgIcon slot="icon-prepend" name="swap_horizontal_circle" size="xxs"/>
+        </mc-button>
+        <mc-button href="#" full-width text-align="left" variation="black-flat" size="l" @click.prevent>
+          <mc-svg-icon slot="icon-prepend" name="swap_horizontal_circle" size="xxs"/>
           Транзакции
-        </McButton>
-        <McButton
-                href="#"
-                @click.prevent
-                full-width
-                text-align="left"
-                variation="gray-darkest-flat"
-                size="l"
-        >
-          <McSvgIcon slot="icon-prepend" name="settings" size="xxs"/>
+        </mc-button>
+        <mc-button href="#" full-width text-align="left" variation="black-flat" size="l" @click.prevent>
+          <mc-svg-icon slot="icon-prepend" name="settings" size="xxs"/>
           Безопасность
-        </McButton>
-        <McButton
-                href="#"
-                @click.prevent
-                full-width
-                text-align="left"
-                variation="danger-flat"
-                size="l"
-        >
-          <McSvgIcon slot="icon-prepend" name="exit_to_app" size="xxs"/>
+        </mc-button>
+        <mc-button href="#" full-width text-align="left" variation="red-flat" size="l" @click.prevent>
+          <mc-svg-icon slot="icon-prepend" name="exit_to_app" size="xxs"/>
           Выйти
-        </McButton>
-      </McPanel>
-    </McDropdown>
+        </mc-button>
+      </mc-panel>
+    </mc-dropdown>
   </div>
   ```
 </docs>

@@ -6,21 +6,20 @@
           <h4 class="mc-header-search-list__headline-title">
             {{ item.title }}
           </h4>
-          <McButton
-            variation="primary-flat"
-            size="m"
-            @click.native="handleClickSearchAll"
+          <mc-button
+            exact
+            variation="blue-flat"
             :href="item.button.href"
             :to="item.button.to"
-            exact
+            @click.native="handleClickSearchAll"
           >
-            <McSvgIcon slot="icon-append" name="arrow_forward_ios" size="xxs" />
+            <mc-svg-icon slot="icon-append" name="arrow_forward_ios" size="xxs" />
             {{ item.button.name }}
-          </McButton>
+          </mc-button>
         </div>
       </div>
       <div class="mc-header-search-list__body">
-        <McHeaderSearchItem
+        <mc-header-search-item
           v-for="item in item.items"
           :item="item"
           :key="item.key"
@@ -71,7 +70,7 @@ export default {
 
   &__item {
     &:not(:last-child) {
-      border-bottom: 2px solid $color-border;
+      border-bottom: 1px solid $color-outline-gray;
       padding-bottom: $space_xs;
       margin-bottom: $space_xs;
     }
@@ -103,16 +102,13 @@ export default {
     @include ellipsis();
 
     font-family: $font_heading;
-    color: $color-gray-darken;
+    color: $color-gray-dark;
     font-size: $size-m;
     font-weight: $weight-medium;
     line-height: $line-height-s;
     margin-top: 0;
     margin-bottom: 0;
     margin-right: $space-m;
-  }
-
-  &__body {
   }
 }
 </style>
@@ -121,7 +117,7 @@ export default {
   ```jsx
   let searchResult = require('@/mocks/searchResult').default;
   <div>
-    <McHeaderSearchList :items="searchResult"/>
+    <mc-header-search-list :items="searchResult"/>
   </div>
   ```
 </docs>

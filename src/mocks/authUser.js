@@ -1,8 +1,8 @@
 export default {
   id: 4,
   uid: "a87ff679a2f3e71d9181a67b7542122c",
-  first_name: "Ильдар",
-  last_name: "Хабибуллин",
+  first_name: "Татьяна",
+  last_name: "Владимирова",
   name: "MediaCube Network",
   email: "info@mediacube.network",
   is_confirmed: true,

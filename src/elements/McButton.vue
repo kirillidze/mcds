@@ -1,17 +1,20 @@
 <template>
   <component
-    :is="tag"
-    :class="classes"
     v-bind="tagBind"
     class="mc-button"
     v-on="$listeners"
+    :is="tag"
+    :class="classes"
     :exact="exact"
   >
+    <!-- @slot Слот для вставки в начало -->
     <slot name="icon-prepend" />
-    <btn-loader class="mc-button__loader" color="inherit" size="19px"></btn-loader>
-    <span class="mc-button__text">
+    <btn-loader v-if="loading" class="mc-button__loader" color="inherit" size="19px" />
+    <span class="mc-button__text" v-if="$slots.default">
+      <!-- @slot Слот по умолчанию -->
       <slot />
     </span>
+    <!-- @slot Слот для вставки в конец -->
     <slot name="icon-append" />
   </component>
 </template>
@@ -20,11 +23,15 @@
 import "vue-loaders/dist/vue-loaders.css"
 import { BallClipRotateMultipleLoader } from "vue-loaders"
 import McSvgIcon from "./McSvgIcon"
+import McTitle from "./McTitle"
+import { FluentRevealEffect } from "fluent-reveal-effect"
+
 export default {
   name: "McButton",
   status: "ready",
-  release: "0.0.1",
+  release: "1.0.0",
   components: {
+    McTitle,
     McSvgIcon,
     "btn-loader": BallClipRotateMultipleLoader,
   },
@@ -77,11 +84,11 @@ export default {
     },
     /**
      *  Дизайн:
-     *  `primary, secondary, primary-outline, primary-invert, primary-flat и т.д.`
+     *  `blue, red, blue-outline, blue-invert, blue-flat и т.д.`
      */
     variation: {
       type: String,
-      default: "primary",
+      default: "blue",
     },
     /**
      *  Размеры:
@@ -90,6 +97,22 @@ export default {
     size: {
       type: String,
       default: "m",
+    },
+    /**
+     *  Радиус:
+     *  `s, m, l, и т.д.`
+     */
+    radius: {
+      type: String,
+      default: "m",
+    },
+    /**
+     *  Тень
+     *
+     */
+    shadow: {
+      type: Boolean,
+      default: false,
     },
     /**
      *  Круглая
@@ -131,24 +154,44 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * Uppercase
+     */
+    uppercase: {
+      type: Boolean,
+      default: false,
+    },
+    /**
+     * Default tag
+     */
+    defaultTag: {
+      type: String,
+      default: "button",
+    },
   },
-
+  mounted() {
+    FluentRevealEffect.applyEffect(".mc-button--variation-light-effect", {
+      lightColor: "rgba(255,255,255,0.5)",
+      gradientSize: 150,
+      clickEffect: true,
+    })
+  },
   computed: {
     classes() {
       return {
         [`mc-button--variation-${this.variation}`]: this.variation,
         [`mc-button--size-${this.size}`]: this.size,
         [`mc-button--text-align-${this.textAlign}`]: this.textAlign,
+        [`mc-button--radius-${this.radius}`]: this.radius,
 
         "mc-button--loading": this.loading,
         "mc-button--is-active": this.isActive,
         "mc-button--disabled": this.disabled,
         "mc-button--rounded": this.rounded,
         "mc-button--full-width": this.fullWidth,
+        "mc-button--uppercase": this.uppercase,
+        "mc-button--shadow": this.shadow,
       }
-    },
-    defaultTag() {
-      return "button"
     },
     tag() {
       if (this.to) {
@@ -182,14 +225,7 @@ export default {
 </script>
 
 <style lang="scss">
-$colors: (
-  "primary": $color-primary,
-  "secondary": $color-secondary,
-  "danger": $color-danger,
-  "soft-green-dark": $color-soft-green-dark,
-  "gray-darkest": $color-gray-darkest,
-  "white": $color-white,
-);
+$colors: $token-colors;
 
 .mc-button {
   $block-name: &;
@@ -220,8 +256,7 @@ $colors: (
   flex-wrap: nowrap;
   max-width: 100%;
   align-items: center;
-  color: $color-text;
-  -webkit-appearance: none;
+  color: $color-black;
   -webkit-appearance: none;
   -webkit-text-fill-color: currentColor;
 
@@ -234,7 +269,7 @@ $colors: (
   }
 
   &__text {
-    @include ellipsis($display: inline-flex);
+    @include ellipsis($display: inline-block);
     @include layout-flex-fix();
 
     &:empty {
@@ -376,6 +411,27 @@ $colors: (
           background-color: darken($value, 15%);
         }
 
+        &#{$block-name} {
+          &--shadow {
+            box-shadow: 0 3px 10px fade-out($value, 0.8);
+          }
+        }
+
+        &-blur {
+          background-color: fade-out($value, 0.75);
+          color: $color-white;
+          padding: $space-xxs $space-xs;
+
+          &:hover,
+          &:focus {
+            background-color: fade-out($value, 0.8);
+          }
+
+          &:active {
+            background-color: fade-out($value, 0.9);
+          }
+        }
+
         &-invert {
           background-color: fade-out($value, 0.9);
           color: $value;
@@ -387,6 +443,12 @@ $colors: (
 
           &:active {
             background-color: fade-out($value, 0.75);
+          }
+
+          &#{$block-name} {
+            &--shadow {
+              box-shadow: 0 3px 10px fade-out($value, 0.8);
+            }
           }
         }
 
@@ -404,6 +466,12 @@ $colors: (
             border-color: darken($value, 15%);
             background-color: darken($value, 15%);
           }
+
+          &#{$block-name} {
+            &--shadow {
+              box-shadow: 0 3px 10px fade-out($value, 0.8);
+            }
+          }
         }
 
         &-flat {
@@ -417,17 +485,85 @@ $colors: (
           &:active {
             background-color: fade-out($value, 0.85);
           }
+
+          &#{$block-name} {
+            &--shadow {
+              box-shadow: 0 3px 10px fade-out($value, 0.8);
+            }
+          }
+        }
+
+        &-link {
+          color: $value;
+          padding: 0;
+          height: auto;
+          width: auto;
+          border: none;
+          user-select: text;
+
+          &:hover,
+          &:focus {
+            color: darken($value, 12%);
+          }
+
+          &:active {
+            color: darken($value, 16%);
+          }
+
+          &#{$block-name} {
+            &--disabled {
+              opacity: $opacity-disabled;
+              background-color: transparent !important;
+              color: $value !important;
+              border-color: transparent !important;
+            }
+          }
         }
       }
     }
   }
 
+  &--variation-toxic {
+    color: $color-black;
+  }
+
+  &--uppercase {
+    text-transform: uppercase;
+  }
+
   &--is-active,
   &.nuxt-link-active {
-    color: $color-primary;
+    color: $color-blue;
     background-color: transparent;
     border-color: transparent;
     pointer-events: none;
+  }
+
+  &--radius {
+    &-m {
+      border-radius: $radius-m;
+    }
+    &-l {
+      border-radius: $radius-l * 3;
+    }
+    &-xl {
+      border-radius: $radius-xl;
+    }
+    &-xxl {
+      border-radius: $radius-xxl;
+    }
+  }
+
+  &--variation-light-effect {
+    background-color: $color-secondary-purple;
+    color: $color-white;
+    border: 0;
+    border-radius: 12px;
+    &.mc-button--disabled {
+      color: $color-deep-gray !important;
+      background-color: $color-secondary-gray !important;
+      border-color: $color-secondary-gray !important;
+    }
   }
 
   &--rounded {
@@ -481,9 +617,9 @@ $colors: (
   }
 
   &--disabled {
-    background-color: $color-gray-lighten !important;
+    background-color: $color-outline-gray !important;
     color: $color-white !important;
-    border-color: $color-gray-lighten !important;
+    border-color: $color-outline-gray !important;
   }
 }
 </style>
@@ -491,19 +627,30 @@ $colors: (
 <docs>
   ```jsx
   let variations = [
-    'primary',
-    'soft-green-dark-invert',
-    'danger-outline',
-    'gray-darkest-flat',
+    'blue',
+    'dark-green-invert',
+    'red-outline',
+    'black-flat',
     'white',
     'white-flat',
+    'blue-link',
+    'light-effect',
+    'ezzy-red',
   ]
 
   <div style="text-align: center">
     <div v-for="(variation, index) in variations" :key="index">
+
+      <McTitle style="margin-bottom: 20px;" size="l">{{ variation }}</McTitle> <br>
+
       <McButton :variation="variation" class="mc-button--is-active" size="s">
         <McSvgIcon slot="icon-prepend" name="assessment"/>
         Активная
+      </McButton>
+
+      <McButton :variation="variation" size="s" radius="xxl">
+        <McSvgIcon slot="icon-prepend" name="people"/>
+        Маленькая
       </McButton>
 
       <McButton :variation="variation" size="s">
@@ -530,6 +677,11 @@ $colors: (
         <McSvgIcon slot="icon-append" name="copyright"/>
       </McButton>
 
+      <McButton uppercase shadow radius="l" :variation="variation" size="l">
+        <McSvgIcon fill="#3d8f41" slot="icon-prepend" name="add"/>
+        Добавить
+      </McButton>
+
       <McButton :variation="variation" size="l-compact">
         <McSvgIcon slot="icon-append" name="delete"/>
       </McButton>
@@ -546,7 +698,7 @@ $colors: (
       <br><br>
     </div>
 
-    <McButton variation="gray-darkest-invert" size="m" full-width>
+    <McButton variation="gray-dark-invert" size="m" full-width>
       <McSvgIcon slot="icon-prepend" name="assessment"/>
       На всю ширину родителя
       <McSvgIcon slot="icon-append" name="add"/>

@@ -1,25 +1,34 @@
 <template>
   <div class="mc-date-separated" :class="classes">
+    <div class="mc-date-separated__header">
+      <!-- @slot Слот пользовательского заголовка -->
+      <slot name="header">
+        <mc-title :ellipsis="false" v-if="title" :level="4">{{ title }}</mc-title>
+      </slot>
+    </div>
     <div class="mc-date-separated__grid">
       <div class="mc-date-separated__cell">
-        <McFieldSelect
+        <mc-field-select
           v-model="_valueDay"
+          :placeholder="placeholder.day"
           :options="days"
           :disabled="disabled"
           :open-direction="openDirection"
         />
       </div>
       <div class="mc-date-separated__cell">
-        <McFieldSelect
+        <mc-field-select
           v-model="_valueMonth"
+          :placeholder="placeholder.month"
           :options="months"
           :disabled="disabled"
           :open-direction="openDirection"
         />
       </div>
       <div class="mc-date-separated__cell">
-        <McFieldSelect
+        <mc-field-select
           v-model="_valueYear"
+          :placeholder="placeholder.year"
           :options="years"
           :disabled="disabled"
           :open-direction="openDirection"
@@ -33,14 +42,33 @@
 <script>
 import _capitalize from "lodash/capitalize"
 
-import McFieldSelect from "../elements/McFieldSelect"
-
+import McFieldSelect from "../elements/McField/McFieldSelect"
+import McTitle from "../elements/McTitle"
+/**
+ *  Предпочтительно использовать
+ *  mc-field-text с типами date или calendar
+ *
+ */
 export default {
   name: "McDateSeparated",
   status: "deprecated",
   release: "1.0.0",
-  components: { McFieldSelect },
+  components: { McFieldSelect, McTitle },
+  data() {
+    return {
+      month: null,
+      year: null,
+    }
+  },
   props: {
+    /**
+     *  Заголовок
+     *
+     */
+    title: {
+      type: String,
+      default: null,
+    },
     fromFormat: {
       type: String,
       default: "YYYY-MM-DD",
@@ -69,13 +97,17 @@ export default {
       default: null,
     },
     placeholder: {
-      type: String,
+      type: Object,
       default: null,
+    },
+    lang: {
+      type: String,
+      default: "ru",
     },
   },
   computed: {
     errorText() {
-      if (this.errors == null || this.errors.length == 0) return null
+      if (this.errors === null || !this.errors.length) return null
       return this.errors.join(", ")
     },
     classes() {
@@ -96,32 +128,53 @@ export default {
     },
     _valueDay: {
       get() {
+        if (!this.value) return
         return this._value.format("D")
       },
       set(val) {
+        if (val === "-") {
+          return this.emitInput(null)
+        }
         this.handleChange(this._value.clone().date(val))
       },
     },
     _valueMonth: {
       get() {
+        if (!this.value) return
+        this.month = this._value.month() + 1
         return this._value.format("MM")
       },
       set(val) {
+        if (val === "-") {
+          return this.emitInput(null)
+        }
+        this.month = val
         this.handleChange(this._value.clone().month(val - 1))
       },
     },
     _valueYear: {
       get() {
+        if (!this.value) return
+        this.year = this._value.year()
         return this._value.format("YYYY")
       },
       set(val) {
+        if (val === "-") {
+          return this.emitInput(null)
+        }
+        this.year = val
         this.handleChange(this._value.clone().year(val))
       },
     },
     days() {
-      let result = []
+      let result = [
+        {
+          name: "-",
+          value: "-",
+        },
+      ]
       let currentYear = this.year
-      let currentMonthNumber = this.month ? this.month : this.months[0].value
+      let currentMonthNumber = this.month ? this.months[this.month].value : this.months[1].value
       let days = this.$moment(`${currentYear}-${currentMonthNumber}`, "Y-M").daysInMonth()
 
       for (let i = 0; i < days; i++) {
@@ -134,10 +187,24 @@ export default {
       return result
     },
     months() {
-      return this.$moment.months().map((item, i) => ({ name: _capitalize(item), value: i + 1 }))
+      let result = [
+        {
+          name: "-",
+          value: "-",
+        },
+      ]
+      const months = this.$moment
+        .months()
+        .map((item, i) => ({ name: _capitalize(item), value: i + 1 }))
+      return [...result, ...months]
     },
     years() {
-      let result = []
+      let result = [
+        {
+          name: "-",
+          value: "-",
+        },
+      ]
       let currentYear = this.$moment().year() + 50
 
       for (let i = currentYear; i + 100 > currentYear; i--) {
@@ -150,6 +217,9 @@ export default {
       return result
     },
   },
+  created() {
+    this.$moment.locale(this.lang)
+  },
   methods: {
     handleChange(value) {
       if (this.toFormat === "moment") {
@@ -159,9 +229,13 @@ export default {
       } else {
         value = value.format(this.toFormat)
       }
-      this.$emit("input", value)
+      this.emitInput(value)
     },
     emitInput(value) {
+      /**
+       * Событие инпута
+       * @property {string}
+       */
       this.$emit("input", value)
     },
   },
@@ -171,6 +245,26 @@ export default {
 <style lang="scss">
 .mc-date-separated {
   $block-name: &;
+
+  .mc-field-select {
+    .multiselect__select {
+      width: 30px;
+    }
+    .multiselect__tags {
+      padding-right: 30px;
+    }
+  }
+
+  &__header {
+    @include reset-text-indents();
+    font-family: $font-heading;
+    display: block;
+    margin-bottom: $space-xs;
+
+    &:empty {
+      display: none;
+    }
+  }
 
   &__grid {
     margin-left: -4px;
@@ -197,9 +291,14 @@ export default {
 
 <docs>
     ```jsx
-    let test = {}
+    let test = `2011-07-11T00:00:00+03:00`
+    let placeholder = {
+        day: 'день',
+        month: 'месяц',
+        year: 'год',
+    }
     <div>
-        <McDateSeparated v-model="test" :placeholder="'test'" open-direction="above"/>
+        <mc-date-separated v-model="test" :placeholder="placeholder" />
     </div>
     ```
 </docs>

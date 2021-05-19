@@ -1,15 +1,15 @@
 <template>
   <section class="mc-header-part-center" v-click-outside="closeSearch" :class="classes">
     <div class="mc-header-part-center__inner">
-      <McHeaderNav>
-        <McHeaderNavItem v-if="menuAdditional && menuAdditional.length">
-          <McDropdown v-model="menuAdditionalIsOpen">
-            <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
-              <McSvgIcon slot="icon-append" name="add" />
-            </McButton>
+      <mc-header-nav>
+        <mc-header-nav-item v-if="menuAdditional && menuAdditional.length">
+          <mc-dropdown v-model="menuAdditionalIsOpen" :rotate-icon="false">
+            <mc-button slot="activator" variation="black-flat" size="m-compact" rounded>
+              <mc-svg-icon slot="icon-append" name="add" />
+            </mc-button>
 
-            <McPanel>
-              <McButton
+            <mc-panel>
+              <mc-button
                 v-for="(menuAdditionalItem, index) in menuAdditional"
                 :key="`menu-additional-item-${index}`"
                 :href="menuAdditionalItem.href"
@@ -17,64 +17,75 @@
                 @click.prevent="handleClickAdd(menuAdditionalItem)"
                 full-width
                 text-align="left"
-                variation="gray-darkest-flat"
+                variation="black-flat"
                 size="l"
               >
                 {{ menuAdditionalItem.name }}
-              </McButton>
-            </McPanel>
-          </McDropdown>
-        </McHeaderNavItem>
+              </mc-button>
+            </mc-panel>
+          </mc-dropdown>
+        </mc-header-nav-item>
 
-        <McHeaderNavItem
-          v-if="menuMain && menuMain.length"
-          v-for="(menuMainItem, index) in menuMain"
-          :key="`menu-main-${index}`"
-        >
-          <McButton :href="menuMainItem.href" :to="menuMainItem.to" variation="gray-darkest-flat">
-            <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
-            {{ menuMainItem.name }}
-          </McButton>
-        </McHeaderNavItem>
+        <template v-if="menuMain && menuMain.length">
+          <mc-header-nav-item v-for="(menuMainItem, index) in menuMain" :key="`menu-main-${index}`">
+            <mc-button
+              :href="menuMainItem.href"
+              :to="menuMainItem.to"
+              variation="black-flat"
+              :exact="checkMainMenuLinkExact(menuMainItem)"
+            >
+              <mc-svg-icon slot="icon-prepend" :name="menuMainItem.icon" />
+              {{ menuMainItem.name }}
+            </mc-button>
+          </mc-header-nav-item>
+        </template>
 
-        <McHeaderNavItem v-if="menuHidden && menuHidden.length">
-          <McDropdown position="right" v-model="menuHiddenIsOpen">
-            <McButton slot="activator" variation="gray-darkest-flat" size="m-compact" rounded>
-              <McSvgIcon slot="icon-append" name="more_horiz" />
-            </McButton>
+        <mc-header-nav-item v-if="menuHidden && menuHidden.length">
+          <mc-dropdown position="right" v-model="menuHiddenIsOpen" :rotate-icon="false">
+            <mc-button
+              slot="activator"
+              :class="menuHiddenClasses"
+              class="mc-header-part-center__menu-hidden"
+              variation="black-flat"
+              size="m-compact"
+              rounded
+            >
+              <mc-svg-icon slot="icon-append" name="more_horiz" />
+            </mc-button>
 
-            <McPanel>
-              <McButton
+            <mc-panel>
+              <mc-button
                 ref="hiddenMenuItem"
                 v-for="(menuHiddenItem, index) in menuHidden"
                 :key="`menu-hidden-item-${index}`"
                 full-width
                 text-align="left"
-                variation="gray-darkest-flat"
+                variation="black-flat"
                 size="l"
                 :href="menuHiddenItem.href"
                 :to="menuHiddenItem.to"
+                :exact="checkMainMenuLinkExact(menuHiddenItem)"
               >
-                <McSvgIcon slot="icon-prepend" :name="menuHiddenItem.icon" />
+                <mc-svg-icon slot="icon-prepend" :name="menuHiddenItem.icon" />
                 {{ menuHiddenItem.name }}
-              </McButton>
-            </McPanel>
-          </McDropdown>
-        </McHeaderNavItem>
+              </mc-button>
+            </mc-panel>
+          </mc-dropdown>
+        </mc-header-nav-item>
 
-        <McHeaderNavItem v-if="searchable">
-          <McButton
-            variation="gray-darkest-flat"
+        <mc-header-nav-item v-if="searchable">
+          <mc-button
+            variation="black-flat"
             size="m-compact"
             rounded
             @click.prevent="handleBtnSearchClick"
           >
-            <McSvgIcon slot="icon-append" name="search" />
-          </McButton>
-        </McHeaderNavItem>
-      </McHeaderNav>
+            <mc-svg-icon slot="icon-append" name="search" />
+          </mc-button>
+        </mc-header-nav-item>
+      </mc-header-nav>
 
-      <McHeaderSearch
+      <mc-header-search
         v-if="searchable"
         ref="inputSearch"
         class="mc-header-part-center__search"
@@ -177,6 +188,7 @@ export default {
       isSearchOpen: false,
       menuAdditionalIsOpen: false,
       menuHiddenIsOpen: false,
+      menuHiddenActive: false,
     }
   },
 
@@ -195,6 +207,18 @@ export default {
       return {
         ["mc-header-part-center--search-is-open"]: this.isSearchOpen,
       }
+    },
+    menuHiddenClasses() {
+      if (!this.$route || !this.$route.name) return ""
+      const hasExactRoute = this.menuHidden.some(i => new RegExp(i.to).test(this.$route.path))
+      return {
+        ["mc-header-part-center__menu-hidden--is-active"]: hasExactRoute,
+      }
+    },
+    isExact() {
+      if (!this.$route || !this.$route.name) return false
+      const hasIndex = this.$route.name.includes("index")
+      return hasIndex && !this.$route.name.includes("id")
     },
   },
 
@@ -219,9 +243,11 @@ export default {
     },
 
     closeSearch() {
-      this.isSearchOpen = false
-      this.emitInput(null)
-      this.setInputBlur("inputSearch")
+      if (this.isSearchOpen) {
+        this.isSearchOpen = false
+        this.emitInput(null)
+        this.setInputBlur("inputSearch")
+      }
     },
 
     openSearch() {
@@ -240,6 +266,9 @@ export default {
     },
     setInputBlur(name) {
       this.$refs[name] && this.$refs[name].getInput().blur()
+    },
+    checkMainMenuLinkExact(link) {
+      return link.hasOwnProperty("exact") ? link.exact : this.isExact
     },
   },
 }
@@ -260,6 +289,26 @@ export default {
     display: flex;
     flex-wrap: nowrap;
     align-items: center;
+
+    .mc-button {
+      &--is-active,
+      &.nuxt-link-active {
+        pointer-events: auto;
+      }
+    }
+
+    @media #{$media-query-l-down} {
+      .mc-header-nav-item {
+        > a.mc-button {
+          .mc-button__text {
+            display: none !important;
+          }
+          .mc-svg-icon {
+            margin: 0;
+          }
+        }
+      }
+    }
   }
 
   &__search {
@@ -288,15 +337,15 @@ export default {
   let search = null
   let eventTest = (val) => alert(val)
   <div style="position: relative; z-index: 1000;">
-    <McHeaderPartCenter
-            v-model="search"
-            :menu-additional="menuAdditional"
-            :menu-main="menuMain"
-            :search-items="searchResult"
-            search-placeholder="Начните вводить"
-            searchable
-            @search-submit="eventTest('Search submit')"
-            @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
+    <mc-header-part-center
+        v-model="search"
+        :menu-additional="menuAdditional"
+        :menu-main="menuMain.slice(5)"
+        :search-items="searchResult"
+        search-placeholder="Начните вводить"
+        searchable
+        @search-submit="eventTest('Search submit')"
+        @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
     />
   </div>
   ```

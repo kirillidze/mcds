@@ -1,7 +1,7 @@
 <template>
   <div ref="header" class="mc-header" :class="classes">
     <div class="mc-header__notifications">
-      <McHeaderNotifications
+      <mc-header-notifications
         :notifications-text-accept="notificationsTextAccept"
         :notifications-text-reject="notificationsTextReject"
         :notifications="notifications"
@@ -33,14 +33,23 @@
       />
       <mc-header-part-right
         v-model="mmIsOpen"
+        :is-custom-menu-app="isCustomMenuApp"
         ref="headerRight"
         :menu-apps="menuApps"
         :menu-profile="menuProfile"
         :menu-langs="menuLangs"
+        :user-info="userInfo"
         :user="user"
+        :sub-users="subUsers"
         :chatra-id="chatraId"
-      />
-      <McHeaderMobile v-if="menuMain && menuMain.length" :menu-main="menuMain" />
+        :userback-config="userbackConfig"
+        :logo-src="logoSrc"
+        @toggle-menu-app="handleToggleMenuApp"
+        @toggle-menu-profile="handleToggleMenuProfile"
+      >
+        <slot v-if="$slots['right-prepend']" name="right-prepend" slot="right-prepend" />
+      </mc-header-part-right>
+      <mc-header-mobile v-if="menuMain && menuMain.length" :menu-main="menuMain" />
     </div>
   </div>
 </template>
@@ -54,7 +63,6 @@ import McHeaderPartRight from "./McHeaderPart/McHeaderPartRight"
 import McHeaderPartCenter from "./McHeaderPart/McHeaderPartCenter"
 import McHeaderMobile from "./McHeaderMobile/McHeaderMobile"
 import McHeaderNotifications from "./McHeaderNotifications/McHeaderNotifications"
-import tokens from "../../assets/tokens/tokens"
 export default {
   name: "McHeader",
   status: "ready",
@@ -138,6 +146,14 @@ export default {
       default: null,
     },
     /**
+     *  Если меню приложений кастомное
+     *
+     */
+    isCustomMenuApp: {
+      type: Boolean,
+      default: false,
+    },
+    /**
      *  Меню языков
      *
      */
@@ -154,11 +170,27 @@ export default {
       default: null,
     },
     /**
+     *  Другие доступные пользователи
+     *
+     */
+    subUsers: {
+      type: Array,
+      default: null,
+    },
+    /**
      *  Id чатры
      *
      */
     chatraId: {
       type: String,
+      default: null,
+    },
+    /**
+     *  Userback Config
+     *
+     */
+    userbackConfig: {
+      type: Object,
       default: null,
     },
     /**
@@ -217,6 +249,22 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     *  Min width, при котором отображается центральное меню
+     *
+     */
+    mediaMinWidth: {
+      type: Number,
+      default: 1200,
+    },
+    /**
+     *  Список информации о пользлвателе
+     *
+     */
+    userInfo: {
+      type: Array,
+      default: null,
+    },
   },
   data() {
     return {
@@ -230,10 +278,7 @@ export default {
       mmIsOn: false,
       mmIsOpen: false,
       windowWidth: 0,
-      mediaMinWidth: tokens.media_query_xl.match(/\d+/)[0],
-
-      isDebug: false,
-      counter: 0,
+      canUpdateMenuItem: true,
     }
   },
   computed: {
@@ -286,12 +331,10 @@ export default {
 
     checkOverflow(reservedPlace = 0) {
       this.getSizes()
-
-      let result =
-        this.headerWidth <
+      return (
+        this.headerWidth <=
         this.headerLeftWidth + this.headerCenterWidth + this.headerRightWidth + reservedPlace
-
-      return result
+      )
     },
 
     getSizes() {
@@ -308,55 +351,39 @@ export default {
     },
 
     moveMenuItem() {
-      if (this.isDebug) {
-        if (this.counter > 50) {
-          return
-        }
-      }
-
       if (this.menuMainMutable && this.menuMainMutable.length && this.checkOverflow()) {
-        if (this.isDebug) {
-          this.counter++
-          console.warn("hide")
-          this.debug()
-        }
-        let result = this.menuMainMutable.splice(-1, 1)
-        this.menuHidden = _concat(this.menuHidden, result)
-
-        this.$nextTick(() => {
-          this.moveMenuItem()
-        })
+        this.menuHidden = _concat(this.menuMainMutable.pop(), this.menuHidden)
+        this.canUpdateMenuItem &&
+          this.$nextTick(() => {
+            this.moveMenuItem()
+          })
       }
 
       if (this.menuHidden.length && !this.checkOverflow(this.menuHiddenItemWidth)) {
-        if (this.isDebug) {
-          this.counter++
-          console.error("show")
-          this.debug()
-        }
-        let result = this.menuHidden.splice(-1, 1)
-        this.menuMainMutable = _concat(this.menuMainMutable, result)
+        this.menuMainMutable = _concat(this.menuMainMutable, this.menuHidden.splice(0, 1))
+        this.canUpdateMenuItem &&
+          this.$nextTick(() => {
+            this.moveMenuItem()
+          })
+      }
 
-        this.$nextTick(() => {
-          this.moveMenuItem()
-        })
+      if (!this.checkOverflow(100)) {
+        this.canUpdateMenuItem = false
       }
     },
 
     updateMainMenu(val) {
+      this.canUpdateMenuItem = true
       this.menuMainMutable = []
       this.menuHidden = []
       this.menuMainMutable = val
-      this.$nextTick(() => {
-        this.moveMenuItem()
-      })
+      this.$nextTick(() => this.moveMenuItem())
     },
 
     initMainMenu() {
       this.mmIsOn = false
-      this.$nextTick(() => {
-        this.moveMenuItem()
-      })
+      this.canUpdateMenuItem = true
+      this.$nextTick(() => this.moveMenuItem())
     },
 
     destroyMainMenu() {
@@ -385,29 +412,21 @@ export default {
     handleClickReject(id) {
       this.$emit("click-reject", id)
     },
-
-    debug() {
-      console.log("windowWidth", this.windowWidth)
-      console.log("headerLeftWidth", this.headerLeftWidth)
-      console.log("headerCenterWidth", this.headerCenterWidth)
-      console.log("headerRightWidth", this.headerRightWidth)
-      console.log("reservedPlace", this.menuHiddenItemWidth)
-      console.log("headerWidth", this.headerWidth)
-      console.log(
-        "sum",
-        this.headerLeftWidth +
-          this.headerCenterWidth +
-          this.headerRightWidth +
-          this.menuHiddenItemWidth
-      )
-      console.log(
-        "delta",
-        this.headerWidth -
-          (this.headerLeftWidth +
-            this.headerCenterWidth +
-            this.headerRightWidth +
-            this.menuHiddenItemWidth)
-      )
+    handleToggleMenuApp(val) {
+      /**
+       * Событие тоггла
+       * меню приложений
+       * @property {Boolean}
+       */
+      this.$emit("toggle-menu-app", val)
+    },
+    handleToggleMenuProfile(val) {
+      /**
+       * Событие тоггла
+       * меню профиля
+       * @property {Boolean}
+       */
+      this.$emit("toggle-menu-profile", val)
     },
   },
 }
@@ -417,10 +436,7 @@ export default {
 .mc-header {
   $block-name: &;
 
-  position: sticky;
-  top: 0;
-  right: 0;
-  left: 0;
+  @include position(sticky, 0 0 null 0);
   font-family: $font-heading;
   margin-left: $space-s;
   margin-right: $space-s;
@@ -431,7 +447,7 @@ export default {
     @include position(absolute, 0);
     @include pseudo();
     top: auto;
-    border-bottom: 2px solid $color-border;
+    border-bottom: 1px solid $color-outline-gray;
     margin-left: -$space-s;
     margin-right: -$space-s;
   }
@@ -503,10 +519,7 @@ export default {
 
     #{$block-name} {
       &__notifications {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        @include position(fixed, null 0 0 0);
         z-index: 10000;
         margin-left: 0;
         margin-right: 0;
@@ -640,35 +653,41 @@ export default {
   let menuApps = require('@/mocks/menuApps').default;
   let menuProfile = require('@/mocks/menuProfile').default;
   let menuLangs = require('@/mocks/menuLangs').default;
+  let userInfo = require('@/mocks/userInfo').default;
+  let userbackConfig = require('@/mocks/userbackConfig').default;
   let authUser = require('@/mocks/authUser').default;
+  let subUsers = require('@/mocks/subUsers').default;
   let searchResult = require('@/mocks/searchResult').default;
   let notifications = require('@/mocks/notifications').default;
   let search = null
   let eventTest = (val) => alert(val)
   <div>
-    <McHeader
-            v-model="search"
-            logo-title="Mediacube"
-            logo-src="/icons/mediacube.svg"
-            logo-href="javascript:void(0);"
-            :notifications="notifications"
-            notifications-text-accept="Принять"
-            notifications-text-reject="Отклонить"
-            :menu-additional="menuAdditional"
-            :menu-main="menuMain"
-            :menu-apps="menuApps"
-            :menu-profile="menuProfile"
-            :menu-langs="menuLangs"
-            :user="authUser"
-            :search-items="searchResult"
-            search-placeholder="Начните вводить"
-            chatra-id="dzDw7eBbL2ramxx25"
-            searchable
-            hasMobileMenu
-            @search-submit="eventTest('Search submit')"
-            @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
-            @click-accept="(id) => eventTest('id: ' + id)"
-            @click-reject="(id) => eventTest('id: ' + id)"
+    <mc-header
+        v-model="search"
+        logo-title="Mediacube"
+        logo-src="/icons/mediacube.svg"
+        logo-href="javascript:void(0);"
+        :notifications="notifications"
+        notifications-text-accept="Принять"
+        notifications-text-reject="Отклонить"
+        :menu-additional="menuAdditional"
+        :menu-main="menuMain"
+        :menu-apps="menuApps"
+        :menu-profile="menuProfile"
+        :menu-langs="menuLangs"
+        :user="authUser"
+        :user-info="userInfo"
+        :sub-users="subUsers"
+        :search-items="searchResult"
+        :userback-config="userbackConfig"
+        search-placeholder="Начните вводить"
+        chatra-id="dzDw7eBbL2ramxx25"
+        searchable
+        hasMobileMenu
+        @search-submit="eventTest('Search submit')"
+        @click-add-entity="(val) => eventTest('itemValue: ' + val.value)"
+        @click-accept="(id) => eventTest('id: ' + id)"
+        @click-reject="(id) => eventTest('id: ' + id)"
     />
   </div>
   ```

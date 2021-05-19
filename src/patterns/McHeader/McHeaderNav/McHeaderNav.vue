@@ -1,6 +1,7 @@
 <template>
   <nav class="mc-header-nav" :class="classes">
-    <slot></slot>
+    <!-- @slot Слот контента -->
+    <slot />
   </nav>
 </template>
 
@@ -52,18 +53,16 @@ export default {
   ```jsx
   let menuMain = require('@/mocks/menuMain').default;
   <div>
-    <McHeaderNav>
-      <McHeaderNavItem
-              v-if="menuMain && menuMain.length"
-              v-for="(menuMainItem, index) in menuMain"
-              :key="`menu-main-${index}`"
-      >
-        <McButton :href="menuMainItem.href" :to="menuMainItem.to" variation="gray-darkest-flat">
-          <McSvgIcon slot="icon-prepend" :name="menuMainItem.icon" />
-          {{ menuMainItem.name }}
-        </McButton>
-      </McHeaderNavItem>
-    </McHeaderNav>
+    <mc-header-nav>
+      <template v-if="menuMain && menuMain.length">
+        <mc-header-nav-item v-for="(menuMainItem, index) in menuMain" :key="`menu-main-${index}`">
+          <mc-button :href="menuMainItem.href" :to="menuMainItem.to" variation="black-flat">
+            <mc-svg-icon slot="icon-prepend" :name="menuMainItem.icon" />
+            {{ menuMainItem.name }}
+          </mc-button>
+        </mc-header-nav-item>
+      </template>
+    </mc-header-nav>
   </div>
   ```
 </docs>

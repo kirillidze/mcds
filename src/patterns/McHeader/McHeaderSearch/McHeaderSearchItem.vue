@@ -1,15 +1,15 @@
 <template>
-  <McButton
+  <mc-button
     class="mc-header-search-item"
     :href="item.href"
     :to="item.to"
     text-align="left"
-    variation="gray-darkest-flat"
+    variation="black-flat"
     size="l"
     full-width
     @click.native="handleClick"
   >
-    <McAvatar
+    <mc-avatar
       class="mc-header-search-item__avatar"
       slot="icon-prepend"
       :src="item.avatar"
@@ -17,13 +17,13 @@
       rounded
     />
     {{ item.name }}
-  </McButton>
+  </mc-button>
 </template>
 
 <script>
 import McButton from "../../../elements/McButton"
 import McSvgIcon from "../../../elements/McSvgIcon"
-import McAvatar from "../../../elements/McAvatar"
+import McAvatar from "../../../elements/McAvatar/McAvatar"
 export default {
   name: "McHeaderSearchItem",
   components: { McAvatar, McSvgIcon, McButton },
@@ -65,9 +65,7 @@ export default {
   let searchResult = require('@/mocks/searchResult').default;
   let eventTest = (val) => alert(val)
   <div>
-    <McHeaderSearchItem
-            :item="searchResult[0].items[0]"
-    />
+    <mc-header-search-item :item="searchResult[0].items[0]" />
   </div>
   ```
 </docs>

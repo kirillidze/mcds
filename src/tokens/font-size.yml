@@ -12,8 +12,12 @@ props:
     value: "48px"
   size_xl:
     value: "34px"
+  size_ll:
+    value: "28px"
   size_l:
     value: "20px"
+  size_mm:
+    value: "19px"
   size_m:
     value: "16px"
   size_s:
